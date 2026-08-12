@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IAN 620: Text Mining and Natural Language Processing. Course overview, Python/NLP environment setup, and fourteen-module learning path at UNC Greensboro.">
+  <title>IAN 620: Text Mining and Natural Language Processing</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --text-color: #e2e8f0;
+      --section-bg: #1e293b;
+      --section-alt-bg: #172033;
+      --border-color: #334155;
+      --header-color: #38bdf8;
+      --accent-color: #6366f1;
+      --accent-hover: #4f46e5;
+      --success-color: #34d399;
+      --warning-color: #fbbf24;
+      --danger-color: #f87171;
+      --uncg-blue: #0c2340;
+      --uncg-gold: #cf9b2f;
+      --muted-color: #94a3b8;
+      --code-bg: #0b1120;
+      --hero-bg: linear-gradient(135deg, #07182d 0%, #0c2340 52%, #26365e 100%);
+      --hero-text: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.24);
+      --card-hover: rgba(56, 189, 248, 0.08);
+      --phase-one: #38bdf8;
+      --phase-two: #a78bfa;
+      --phase-three: #34d399;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f1f5f9;
+      --text-color: #1e293b;
+      --section-bg: #ffffff;
+      --section-alt-bg: #f8fafc;
+      --border-color: #d7e0eb;
+      --header-color: #1d4ed8;
+      --accent-color: #4f46e5;
+      --accent-hover: #4338ca;
+      --success-color: #047857;
+      --warning-color: #b45309;
+      --danger-color: #b91c1c;
+      --muted-color: #64748b;
+      --code-bg: #f8fafc;
+      --hero-bg: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 55%, #fef3c7 100%);
+      --hero-text: #13243a;
+      --shadow-color: rgba(15, 23, 42, 0.12);
+      --card-hover: rgba(37, 99, 235, 0.06);
+      --phase-one: #2563eb;
+      --phase-two: #7c3aed;
+      --phase-three: #047857;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      transition: background-color .3s, color .3s;
+    }
+
+    body, p, li, td, th, label, small { color: var(--text-color); }
+    a { color: var(--header-color); }
+    a:hover { color: var(--accent-color); }
+    h1, h2, h3, h4, h5, h6 { color: var(--header-color); font-weight: 700; }
+    code, pre { font-family: "Source Code Pro", monospace; }
+
+    .skip-link {
+      position: absolute;
+      top: -5rem;
+      left: .75rem;
+      z-index: 3000;
+      padding: .65rem .9rem;
+      border-radius: .5rem;
+      border: 2px solid var(--accent-color);
+      background: var(--section-bg);
+      color: var(--text-color);
+      text-decoration: none;
+    }
+    .skip-link:focus { top: .75rem; }
+    :focus-visible { outline: 3px solid var(--uncg-gold); outline-offset: 3px; }
+
+    .nav-container {
+      position: sticky;
+      top: 0;
+      z-index: 1050;
+      background: var(--section-bg);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 12px var(--shadow-color);
+    }
+
+    .nav-menu {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      color: var(--header-color);
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: .75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--uncg-blue), var(--accent-color));
+      border: 2px solid var(--uncg-gold);
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+
+    .nav-links-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: .18rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link,
+    .theme-toggle-btn,
+    .mobile-menu-btn {
+      border: 0;
+      background: transparent;
+      color: var(--text-color);
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: .6rem;
+      padding: .55rem .74rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .theme-toggle-btn:hover,
+    .theme-toggle-btn:focus-visible,
+    .mobile-menu-btn:hover,
+    .mobile-menu-btn:focus-visible {
+      color: #fff;
+      background: var(--accent-color);
+    }
+
+    .mobile-menu-btn { display: none; }
+
+    .dropdown { position: relative; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: calc(100% + .25rem);
+      left: 0;
+      width: min(370px, 88vw);
+      max-height: 70vh;
+      overflow-y: auto;
+      padding: .45rem;
+      border: 1px solid var(--border-color);
+      border-radius: .8rem;
+      background: var(--section-bg);
+      box-shadow: 0 14px 34px var(--shadow-color);
+    }
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content,
+    .dropdown.open .dropdown-content { display: block; }
+
+    .dropdown-link {
+      display: grid;
+      grid-template-columns: 31px 1fr;
+      align-items: center;
+      gap: .65rem;
+      padding: .64rem .68rem;
+      border-radius: .55rem;
+      color: var(--text-color);
+      text-decoration: none;
+      line-height: 1.25;
+    }
+    .dropdown-link:hover,
+    .dropdown-link:focus-visible { background: var(--accent-color); color: #fff; }
+    .dropdown-link small { color: inherit; opacity: .78; }
+
+    .module-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: .77rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--uncg-blue), var(--accent-color));
+      border: 1px solid rgba(255,255,255,.22);
+    }
+
+    .hero-section {
+      color: var(--hero-text);
+      background: var(--hero-bg);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-section::before,
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(1px);
+      opacity: .28;
+      pointer-events: none;
+    }
+    .hero-section::before {
+      width: 430px;
+      height: 430px;
+      right: -140px;
+      top: -180px;
+      background: radial-gradient(circle, #38bdf8 0%, transparent 68%);
+    }
+    .hero-section::after {
+      width: 380px;
+      height: 380px;
+      left: -170px;
+      bottom: -210px;
+      background: radial-gradient(circle, #a78bfa 0%, transparent 68%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 5.2rem 0 4.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-section h1,
+    .hero-section p,
+    .hero-section strong,
+    .hero-section span,
+    .hero-section small { color: var(--hero-text) !important; }
+
+    .course-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .42rem .78rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      font-weight: 700;
+      font-size: .88rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-section h1 {
+      max-width: 900px;
+      margin: 0 0 1rem;
+      font-size: clamp(2.45rem, 5vw, 4.85rem);
+      line-height: 1.03;
+      letter-spacing: -.04em;
+      font-weight: 800;
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      font-size: clamp(1.04rem, 1.8vw, 1.3rem);
+      opacity: .9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-course {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .72rem 1rem;
+      border-radius: .72rem;
+      border: 1px solid rgba(255,255,255,.24);
+      background: rgba(255,255,255,.08);
+      color: var(--hero-text) !important;
+      text-decoration: none;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+      transition: transform .18s ease, background .18s ease;
+    }
+    .btn-course:hover { transform: translateY(-2px); background: rgba(255,255,255,.16); }
+    .btn-course.primary { background: var(--accent-color); border-color: var(--accent-color); color: #fff !important; }
+    .btn-course.primary:hover { background: var(--accent-hover); }
+
+    .hero-panel {
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 1.1rem;
+      padding: 1.25rem;
+      background: rgba(4, 15, 31, .42);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.18);
+    }
+    [data-theme="light"] .hero-panel { background: rgba(255,255,255,.56); }
+    .hero-panel h2 { color: var(--hero-text) !important; font-size: 1.05rem; margin-bottom: 1rem; }
+
+    .path-row {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: .75rem;
+      align-items: start;
+      padding: .8rem 0;
+      border-top: 1px solid rgba(255,255,255,.14);
+    }
+    .path-row:first-of-type { border-top: 0; padding-top: 0; }
+    .path-icon {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: .72rem;
+      background: rgba(255,255,255,.12);
+      color: var(--hero-text);
+    }
+
+    .section-wrap { padding: 4.6rem 0; }
+    .section-wrap.alt { background: var(--section-alt-bg); border-block: 1px solid var(--border-color); }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 1.8rem;
+    }
+    .section-heading h2 { margin: 0; font-size: clamp(1.85rem, 3vw, 2.7rem); }
+    .section-heading p { max-width: 720px; margin: .5rem 0 0; color: var(--muted-color); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--accent-color);
+      margin-bottom: .55rem;
+    }
+
+    .surface-card {
+      height: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.3rem;
+      background: var(--section-bg);
+      box-shadow: 0 8px 24px var(--shadow-color);
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: 1.2rem;
+    }
+
+    .course-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: .75rem;
+    }
+    .fact-card {
+      border: 1px solid var(--border-color);
+      border-radius: .8rem;
+      padding: 1rem;
+      background: var(--section-alt-bg);
+    }
+    .fact-card i { color: var(--accent-color); margin-bottom: .6rem; }
+    .fact-card strong { display: block; font-size: 1rem; }
+    .fact-card small { color: var(--muted-color); }
+
+    .setup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+    .setup-option h3 { margin-bottom: .25rem; }
+    .setup-label {
+      display: inline-block;
+      margin-bottom: .7rem;
+      padding: .25rem .55rem;
+      border-radius: 999px;
+      background: rgba(52,211,153,.12);
+      border: 1px solid rgba(52,211,153,.35);
+      color: var(--success-color);
+      font-size: .75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .setup-label.alt {
+      background: rgba(99,102,241,.12);
+      border-color: rgba(99,102,241,.35);
+      color: var(--accent-color);
+    }
+
+    .steps { display: grid; gap: .72rem; margin-top: 1rem; }
+    .step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: .75rem;
+      align-items: start;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--accent-color);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .resource-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: 1rem;
+    }
+    .resource-link,
+    .module-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .58rem .78rem;
+      border-radius: .62rem;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      background: var(--section-alt-bg);
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .resource-link:hover,
+    .module-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-color);
+      background: var(--card-hover);
+      color: var(--header-color);
+    }
+
+    .notebook-callout {
+      margin-top: 1.2rem;
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--uncg-gold);
+      border-radius: .85rem;
+      padding: 1rem 1.1rem;
+      background: var(--section-bg);
+    }
+
+    .learning-map {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .85rem;
+      margin-bottom: 1.35rem;
+    }
+    .phase-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      border-radius: .9rem;
+      padding: 1.05rem;
+      background: var(--section-bg);
+    }
+    .phase-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--phase-color);
+    }
+    .phase-card.phase-1 { --phase-color: var(--phase-one); }
+    .phase-card.phase-2 { --phase-color: var(--phase-two); }
+    .phase-card.phase-3 { --phase-color: var(--phase-three); }
+    .phase-card span { color: var(--muted-color); font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .phase-card h3 { margin: .25rem 0 .35rem; font-size: 1.05rem; }
+    .phase-card p { margin: 0; font-size: .92rem; color: var(--muted-color); }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .module-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 278px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      background: var(--section-bg);
+      box-shadow: 0 7px 20px var(--shadow-color);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .module-card:hover { transform: translateY(-4px); border-color: var(--accent-color); background: var(--card-hover); }
+    .module-card::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -55px;
+      top: -55px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,.2), transparent 68%);
+    }
+
+    .module-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .85rem;
+    }
+    .module-card-number {
+      min-width: 42px;
+      height: 42px;
+      padding: 0 .6rem;
+      border-radius: .75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--uncg-blue), var(--accent-color));
+      border: 1px solid rgba(255,255,255,.16);
+      font-weight: 800;
+    }
+    .phase-chip {
+      padding: .27rem .55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      color: var(--muted-color);
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .module-card h3 { margin: 0 0 .5rem; font-size: 1.15rem; line-height: 1.3; }
+    .module-card p { color: var(--muted-color); font-size: .93rem; margin-bottom: 1.1rem; }
+    .module-card .module-link { margin-top: auto; align-self: flex-start; }
+
+    .expect-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .9rem;
+    }
+    .expect-card {
+      border: 1px solid var(--border-color);
+      border-radius: .9rem;
+      padding: 1rem;
+      background: var(--section-bg);
+    }
+    .expect-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: .7rem;
+      border-radius: .72rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--accent-color);
+    }
+    .expect-card h3 { font-size: 1rem; margin-bottom: .35rem; }
+    .expect-card p { margin: 0; color: var(--muted-color); font-size: .9rem; }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.1rem;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      background: var(--section-bg);
+      box-shadow: 0 8px 24px var(--shadow-color);
+    }
+    .contact-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--uncg-blue), var(--accent-color));
+      border: 2px solid var(--uncg-gold);
+      font-size: 1.35rem;
+    }
+    .contact-card h3 { margin: 0; }
+    .contact-card p { margin: .15rem 0 0; color: var(--muted-color); }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: var(--section-bg);
+      padding: 1.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-inner p { margin: 0; color: var(--muted-color); font-size: .9rem; }
+
+    .back-to-top {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--section-bg);
+      color: var(--text-color);
+      box-shadow: 0 8px 20px var(--shadow-color);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1040;
+      cursor: pointer;
+    }
+    .back-to-top.show { display: inline-flex; }
+    .back-to-top:hover { background: var(--accent-color); color: #fff; }
+
+    @media (max-width: 1100px) {
+      .modules-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .expect-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+
+    @media (max-width: 900px) {
+      .mobile-menu-btn { display: inline-flex; }
+      .nav-menu { flex-wrap: wrap; padding: .72rem 0; }
+      .nav-links-list {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: .55rem;
+        border-top: 1px solid var(--border-color);
+      }
+      .nav-links-list.active { display: flex; }
+      .nav-links-list > li { width: 100%; }
+      .nav-link, .theme-toggle-btn { width: 100%; justify-content: flex-start; }
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-top: .35rem;
+        box-shadow: none;
+      }
+      .dropdown:not(.open) .dropdown-content { display: none; }
+      .dropdown.open .dropdown-content { display: block; }
+      .hero-inner, .overview-grid { grid-template-columns: 1fr; }
+      .hero-inner { padding: 4rem 0; }
+      .hero-panel { max-width: 720px; }
+      .learning-map { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .section-wrap { padding: 3.5rem 0; }
+      .section-heading { display: block; }
+      .setup-grid, .modules-grid, .course-facts, .expect-grid { grid-template-columns: 1fr; }
+      .contact-card { grid-template-columns: auto 1fr; }
+      .contact-card .resource-link { grid-column: 1 / -1; justify-content: center; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn-course { justify-content: center; }
+    }
+  
+
+    .objective-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .objective-card, .policy-card, .grade-card, .project-card {
+      background: var(--section-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 30px var(--shadow-color);
+    }
+    .objective-card { display: flex; gap: .85rem; align-items: flex-start; }
+    .objective-card i { color: var(--success-color); margin-top: .3rem; }
+    .objective-card p { margin: 0; color: var(--muted-color); }
+
+    .tool-chip-wrap { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.2rem; }
+    .tool-chip {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .5rem .72rem; border-radius: 999px;
+      background: var(--code-bg); border: 1px solid var(--border-color);
+      font-size: .84rem; font-weight: 600; color: var(--text-color);
+    }
+    .tool-chip i { color: var(--header-color); }
+
+    .schedule-wrap { overflow-x: auto; border: 1px solid var(--border-color); border-radius: 16px; background: var(--section-bg); box-shadow: 0 10px 30px var(--shadow-color); }
+    .course-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+    .course-table caption { text-align: left; padding: 1rem 1.15rem; font-weight: 700; color: var(--header-color); caption-side: top; }
+    .course-table th, .course-table td { padding: .85rem 1rem; border-top: 1px solid var(--border-color); vertical-align: top; }
+    .course-table th { background: var(--section-alt-bg); color: var(--header-color); font-size: .88rem; }
+    .course-table td:first-child { font-weight: 800; color: var(--uncg-gold); width: 64px; text-align: center; }
+    .course-table td:nth-child(2) { font-weight: 700; width: 240px; }
+    .course-table td:nth-child(3) { color: var(--muted-color); }
+
+    .grading-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 1.25rem; align-items: start; }
+    .grade-bar-row { display: grid; grid-template-columns: 190px 1fr 56px; gap: .8rem; align-items: center; margin: .8rem 0; }
+    .grade-bar-row strong { font-size: .9rem; }
+    .grade-track { height: 11px; border-radius: 999px; background: var(--border-color); overflow: hidden; }
+    .grade-fill { height: 100%; background: linear-gradient(90deg, var(--header-color), var(--accent-color)); border-radius: 999px; }
+    .grade-bar-row span { text-align: right; font-weight: 800; color: var(--header-color); }
+
+    .scale-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; margin-top: .8rem; }
+    .scale-item { padding: .7rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--section-alt-bg); text-align: center; }
+    .scale-item strong { display: block; color: var(--header-color); }
+    .scale-item small { color: var(--muted-color); }
+
+    .policy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .policy-card h3 { display: flex; gap: .55rem; align-items: center; font-size: 1.03rem; }
+    .policy-card h3 i { color: var(--uncg-gold); }
+    .policy-card p { margin-bottom: 0; color: var(--muted-color); }
+
+    .presentation-banner {
+      margin-top: 1.4rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;
+      border: 1px solid var(--border-color); border-radius: 16px; padding: 1.2rem 1.3rem;
+      background: linear-gradient(135deg, rgba(56,189,248,.08), rgba(167,139,250,.08));
+    }
+    .presentation-banner .presentation-icon {
+      width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
+      background: var(--code-bg); border: 1px solid var(--border-color); color: var(--uncg-gold);
+    }
+    .presentation-banner h3 { margin: 0 0 .2rem; }
+    .presentation-banner p { margin: 0; color: var(--muted-color); }
+    .presentation-week { font-weight: 800; color: var(--header-color); white-space: nowrap; }
+
+    @media (max-width: 900px) {
+      .objective-grid, .grading-grid, .policy-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .scale-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grade-bar-row { grid-template-columns: 1fr 48px; }
+      .grade-track { grid-column: 1 / -1; }
+      .presentation-banner { grid-template-columns: auto 1fr; }
+      .presentation-week { grid-column: 1 / -1; }
+    }
+
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav class="nav-container" aria-label="Primary navigation">
+  <div class="container">
+    <div class="nav-menu">
+      <a href="index.html" class="nav-logo" aria-label="IAN 620 home">
+        <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-language"></i></span>
+        <span>IAN 620 · NLP</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation menu"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links-list" id="nav-links">
+        <li><a class="nav-link" href="#overview"><i class="fa-solid fa-circle-info"></i> Overview</a></li>
+        <li><a class="nav-link" href="#setup"><i class="fa-solid fa-laptop-code"></i> Setup</a></li>
+        <li class="dropdown" id="modules-dropdown">
+          <a class="nav-link" href="#modules" id="modules-toggle" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-layer-group"></i> Modules <i class="fa-solid fa-chevron-down fa-xs"></i></a>
+          <div class="dropdown-content" aria-label="Course modules">
+            <a class="dropdown-link" href="module1.html"><span class="module-number">1</span><span><strong>Introduction to Text Mining & NLP</strong><br><small>NLP applications</small></span></a>
+            <a class="dropdown-link" href="module2.html"><span class="module-number">2</span><span><strong>Text Collection & Preprocessing</strong><br><small>APIs</small></span></a>
+            <a class="dropdown-link" href="module3.html"><span class="module-number">3</span><span><strong>Linguistic Analysis</strong><br><small>Part-of-speech tagging</small></span></a>
+            <a class="dropdown-link" href="module4.html"><span class="module-number">4</span><span><strong>Text Representation</strong><br><small>Bag-of-Words</small></span></a>
+            <a class="dropdown-link" href="module5.html"><span class="module-number">5</span><span><strong>Text Classification</strong><br><small>Naive Bayes</small></span></a>
+            <a class="dropdown-link" href="module6.html"><span class="module-number">6</span><span><strong>Model Evaluation</strong><br><small>Accuracy</small></span></a>
+            <a class="dropdown-link" href="module7.html"><span class="module-number">7</span><span><strong>Sentiment & Opinion Mining</strong><br><small>Lexicon-based and supervised sentiment methods for reviews</small></span></a>
+            <a class="dropdown-link" href="module8.html"><span class="module-number">8</span><span><strong>Topic Modeling & Clustering</strong><br><small>K-means</small></span></a>
+            <a class="dropdown-link" href="module9.html"><span class="module-number">9</span><span><strong>Information Extraction</strong><br><small>Named entities</small></span></a>
+            <a class="dropdown-link" href="module10.html"><span class="module-number">10</span><span><strong>Word Embeddings</strong><br><small>Distributional semantics</small></span></a>
+            <a class="dropdown-link" href="module11.html"><span class="module-number">11</span><span><strong>Deep Learning for NLP</strong><br><small>Neural networks</small></span></a>
+            <a class="dropdown-link" href="module12.html"><span class="module-number">12</span><span><strong>Transformers & Modern NLP</strong><br><small>Attention</small></span></a>
+            <a class="dropdown-link" href="module13.html"><span class="module-number">13</span><span><strong>Introduction to Generative AI & LLMs</strong><br><small>Foundation models</small></span></a>
+            <a class="dropdown-link" href="module14.html"><span class="module-number">14</span><span><strong>LLM Applications & Responsible AI</strong><br><small>Embeddings</small></span></a>
+          </div>
+        </li>
+        <li><a class="nav-link" href="#syllabus"><i class="fa-solid fa-file-lines"></i> Syllabus</a></li>
+        <li><a class="nav-link" href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        <li><button class="theme-toggle-btn" id="theme-toggle" type="button" aria-label="Switch color theme"></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero-section">
+  <div class="container hero-inner">
+    <div>
+      <span class="course-badge"><i class="fa-solid fa-graduation-cap"></i> UNCG · Informatics &amp; Analytics · Fall 2026</span>
+      <h1>IAN 620<br>Text Mining &amp; Natural Language Processing</h1>
+      <p class="hero-subtitle">A graduate-level journey from <strong>raw text to modern language models</strong> — preprocessing, linguistic analysis, TF–IDF, classification, sentiment, topic modeling, information extraction, embeddings, deep learning, transformers, Generative AI, and RAG.</p>
+      <div class="hero-actions">
+        <a class="btn-course primary" href="#modules"><i class="fa-solid fa-compass"></i> Explore Modules</a>
+        <a class="btn-course" href="#setup"><i class="fa-solid fa-screwdriver-wrench"></i> Set Up NLP Tools</a>
+        <a class="btn-course" href="#syllabus"><i class="fa-solid fa-file-lines"></i> View Syllabus</a>
+      </div>
+    </div>
+    <aside class="hero-panel" aria-label="Course learning path">
+      <h2><i class="fa-solid fa-route me-2"></i>Learning Path</h2>
+      <div class="path-row"><span class="path-icon"><i class="fa-solid fa-broom-ball"></i></span><div><strong>Text Foundations</strong><br><small>Modules 1–4 · Collect, clean, annotate, and represent text.</small></div></div>
+      <div class="path-row"><span class="path-icon"><i class="fa-solid fa-chart-simple"></i></span><div><strong>Classical NLP</strong><br><small>Modules 5–9 · Classify, evaluate, analyze sentiment, discover topics, and extract information.</small></div></div>
+      <div class="path-row"><span class="path-icon"><i class="fa-solid fa-brain"></i></span><div><strong>Neural &amp; Generative NLP</strong><br><small>Modules 10–14 · Embeddings, deep learning, transformers, LLMs, RAG, and responsible AI.</small></div></div>
+    </aside>
+  </div>
+</header>
+
+<main id="main-content">
+  <section id="overview" class="section-wrap">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow"><i class="fa-solid fa-circle-info"></i> Course Overview</span><h2>Extract knowledge from unstructured text</h2><p>IAN 620 develops an end-to-end NLP workflow in Python, moving from raw text collection to modern language-model applications while emphasizing evaluation, reproducibility, and responsible use.</p></div></div>
+      <div class="overview-grid">
+        <article class="surface-card">
+          <h3>Course Purpose</h3>
+          <p>This graduate-level course introduces methods for extracting knowledge from unstructured text. Students learn text collection, preprocessing, linguistic analysis, document representation, classification, sentiment analysis, topic modeling, information extraction, word embeddings, deep learning, and transformer models.</p>
+          <p>The final instructional weeks introduce Generative AI, large language models (LLMs), prompt engineering, embeddings, retrieval-augmented generation (RAG), and responsible use of generative systems.</p>
+          <p class="mb-0">The course emphasizes practical Python programming and applied analysis of real-world text datasets.</p>
+        </article>
+        <aside class="course-facts" aria-label="Course facts">
+          <div class="fact-card"><i class="fa-solid fa-clock fa-xl"></i><strong>3 credit hours</strong><small>Graduate-level course in the Informatics &amp; Analytics Program.</small></div>
+          <div class="fact-card"><i class="fa-solid fa-laptop-house fa-xl"></i><strong>Fully asynchronous</strong><small>Weekly learning and submissions are managed through Canvas.</small></div>
+          <div class="fact-card"><i class="fa-brands fa-python fa-xl"></i><strong>Python-centered</strong><small>Hands-on notebooks and scripts throughout the course.</small></div>
+          <div class="fact-card"><i class="fa-solid fa-shield-heart fa-xl"></i><strong>Responsible AI</strong><small>Accuracy, bias, privacy, hallucination, copyright, and ethical deployment.</small></div>
+        </aside>
+      </div>
+
+      <div class="section-heading" style="margin-top:2.4rem"><div><span class="eyebrow"><i class="fa-solid fa-bullseye"></i> Learning Objectives</span><h2>What students will be able to do</h2></div></div>
+      <div class="objective-grid">
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Explain foundational concepts and applications of text mining and NLP.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Collect, clean, tokenize, normalize, and linguistically annotate text data.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Represent text using Bag-of-Words, TF–IDF, n-grams, and embeddings.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Build and evaluate machine-learning models for text classification and sentiment analysis.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Apply topic modeling, clustering, named entity recognition, and information extraction.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Explain neural sequence models, attention, transformers, and pretrained language models.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Use Generative AI and LLM tools for prompting, semantic search, and basic RAG applications.</p></div>
+        <div class="objective-card"><i class="fa-solid fa-circle-check"></i><p>Evaluate NLP systems for accuracy, bias, privacy, hallucination, and responsible use.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="setup" class="section-wrap alt">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow"><i class="fa-solid fa-laptop-code"></i> Technology &amp; Setup</span><h2>Prepare your NLP workspace</h2><p>Students need Python 3.x and either a local notebook environment or Google Colab. The course will progressively introduce the libraries required for classical NLP, machine learning, deep learning, transformers, and embeddings.</p></div></div>
+      <div class="setup-grid">
+        <article class="surface-card setup-option">
+          <span class="setup-label"><i class="fa-solid fa-cloud me-1"></i> Easiest Start</span>
+          <h3>Option 1 · Google Colab</h3>
+          <p>Use a browser-based notebook when you want minimal setup. Colab is especially convenient for later deep-learning and transformer demonstrations.</p>
+          <ol><li>Open Google Colab.</li><li>Create a new Python notebook.</li><li>Install course packages in notebook cells when needed.</li><li>Save a copy of each assignment notebook before submitting through Canvas.</li></ol>
+          <a class="resource-link" href="https://colab.research.google.com/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Google Colab</a>
+        </article>
+        <article class="surface-card setup-option">
+          <span class="setup-label"><i class="fa-solid fa-computer me-1"></i> Local Workflow</span>
+          <h3>Option 2 · Python / Anaconda + Jupyter</h3>
+          <p>Use a local environment if you prefer full control of packages and files. Anaconda provides Python, Jupyter, NumPy, Pandas, and many common scientific packages.</p>
+          <ol><li>Install Anaconda or Python 3.x.</li><li>Launch Jupyter Notebook or JupyterLab.</li><li>Create a dedicated environment for IAN 620 if desired.</li><li>Install NLP libraries as they are introduced.</li></ol>
+          <a class="resource-link" href="https://www.anaconda.com/download" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Anaconda Download</a>
+        </article>
+      </div>
+      <article class="surface-card" style="margin-top:1.2rem">
+        <h3>Core Technology Stack</h3>
+        <p>Current versions of the following tools are used across the semester. Not every package is required in Week 1.</p>
+        <div class="tool-chip-wrap">
+          <span class="tool-chip"><i class="fa-brands fa-python"></i> Python 3.x</span><span class="tool-chip">Jupyter / Colab</span><span class="tool-chip">pandas</span><span class="tool-chip">NumPy</span><span class="tool-chip">NLTK</span><span class="tool-chip">spaCy</span><span class="tool-chip">BeautifulSoup</span><span class="tool-chip">scikit-learn</span><span class="tool-chip">SciPy</span><span class="tool-chip">Matplotlib</span><span class="tool-chip">Gensim</span><span class="tool-chip">PyTorch / TensorFlow</span><span class="tool-chip">Hugging Face Transformers</span><span class="tool-chip">sentence-transformers</span>
+        </div>
+        <div class="notice" style="margin-top:1rem"><strong>Two lab modes:</strong> Browser labs use packages that run reliably in Pyodide, including NLTK, pandas, NumPy, SciPy, scikit-learn, Matplotlib, and BeautifulSoup. Trained spaCy pipelines, PyTorch models, Hugging Face Transformers, Gensim pretrained vectors, and sentence-transformers are presented as Jupyter/Colab labs where model downloads and native dependencies are more reliable.</div><p style="margin-top:1rem"><strong>Prerequisites:</strong> Basic Python programming, introductory statistics, and familiarity with data analysis.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="modules" class="section-wrap">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow"><i class="fa-solid fa-layer-group"></i> Course Modules</span><h2>14 instructional modules</h2><p>The learning sequence moves from text fundamentals to classical NLP, neural representations, transformers, and responsible Generative AI applications.</p></div></div>
+      <div class="modules-grid">
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">01</span><span class="phase-chip">Foundations</span></div>
+          <h3>Introduction to Text Mining & NLP</h3>
+          <p>NLP applications, workflow, corpora, structured vs. unstructured text, Python environment, and responsible collection.</p>
+          <a class="module-link" href="module1.html">Open Module 1 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">02</span><span class="phase-chip">Foundations</span></div>
+          <h3>Text Collection & Preprocessing</h3>
+          <p>APIs, web text, regex, normalization, tokenization, stop words, stemming, lemmatization, and reproducible pipelines.</p>
+          <a class="module-link" href="module2.html">Open Module 2 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">03</span><span class="phase-chip">Foundations</span></div>
+          <h3>Linguistic Analysis</h3>
+          <p>Part-of-speech tagging, chunking, dependency parsing, and named entity recognition with NLTK and spaCy.</p>
+          <a class="module-link" href="module3.html">Open Module 3 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">04</span><span class="phase-chip">Foundations</span></div>
+          <h3>Text Representation</h3>
+          <p>Bag-of-Words, document-term matrices, n-grams, TF–IDF, cosine similarity, and feature engineering.</p>
+          <a class="module-link" href="module4.html">Open Module 4 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">05</span><span class="phase-chip">Classical NLP</span></div>
+          <h3>Text Classification</h3>
+          <p>Naive Bayes, logistic regression, support vector machines, pipelines, train/test splits, and cross-validation.</p>
+          <a class="module-link" href="module5.html">Open Module 5 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">06</span><span class="phase-chip">Classical NLP</span></div>
+          <h3>Model Evaluation</h3>
+          <p>Accuracy, precision, recall, F1, confusion matrices, class imbalance, error analysis, and interpretation.</p>
+          <a class="module-link" href="module6.html">Open Module 6 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">07</span><span class="phase-chip">Classical NLP</span></div>
+          <h3>Sentiment & Opinion Mining</h3>
+          <p>Lexicon-based and supervised sentiment methods for reviews, surveys, and social-media text.</p>
+          <a class="module-link" href="module7.html">Open Module 7 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">08</span><span class="phase-chip">Classical NLP</span></div>
+          <h3>Topic Modeling & Clustering</h3>
+          <p>K-means, hierarchical clustering, LDA, NMF, and principled topic interpretation.</p>
+          <a class="module-link" href="module8.html">Open Module 8 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">09</span><span class="phase-chip">Classical NLP</span></div>
+          <h3>Information Extraction</h3>
+          <p>Named entities, relations, keywords, patterns, document retrieval, and domain-specific extraction pipelines.</p>
+          <a class="module-link" href="module9.html">Open Module 9 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">10</span><span class="phase-chip">Representation Learning</span></div>
+          <h3>Word Embeddings</h3>
+          <p>Distributional semantics, Word2Vec, GloVe, FastText, contextual meaning, similarity, and evaluation.</p>
+          <a class="module-link" href="module10.html">Open Module 10 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">11</span><span class="phase-chip">Representation Learning</span></div>
+          <h3>Deep Learning for NLP</h3>
+          <p>Neural networks, RNNs, LSTMs, GRUs, sequence classification, and limitations of recurrent models.</p>
+          <a class="module-link" href="module11.html">Open Module 11 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">12</span><span class="phase-chip">Representation Learning</span></div>
+          <h3>Transformers & Modern NLP</h3>
+          <p>Attention, transformer architecture, BERT-style models, transfer learning, fine-tuning, summarization, and QA.</p>
+          <a class="module-link" href="module12.html">Open Module 12 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">13</span><span class="phase-chip">Generative AI</span></div>
+          <h3>Introduction to Generative AI & LLMs</h3>
+          <p>Foundation models, autoregressive generation, tokens, context windows, prompting, APIs, evaluation, and limitations.</p>
+          <a class="module-link" href="module13.html">Open Module 13 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+        <article class="module-card">
+          <div class="module-card-top"><span class="module-card-number">14</span><span class="phase-chip">Generative AI</span></div>
+          <h3>LLM Applications & Responsible AI</h3>
+          <p>Embeddings, vector search, RAG, basic agents, hallucination mitigation, privacy, bias, copyright, and responsible deployment.</p>
+          <a class="module-link" href="module14.html">Open Module 14 <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+      </div>
+      <div class="presentation-banner">
+        <span class="presentation-icon"><i class="fa-solid fa-person-chalkboard"></i></span>
+        <div><h3>Final Project Presentations</h3><p>Presentation and demonstration of an end-to-end NLP or introductory Generative AI application.</p></div>
+        <span class="presentation-week">Week 15</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="syllabus" class="section-wrap alt">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow"><i class="fa-solid fa-calendar-days"></i> Course Schedule</span><h2>Fall 2026 learning sequence</h2><p>Each week combines conceptual learning with applied Python work and interpretation of text-analysis results.</p></div></div>
+      <div class="schedule-wrap">
+        <table class="course-table"><caption>IAN 620 weekly schedule</caption><thead><tr><th>Week</th><th>Topic</th><th>Learning Focus &amp; Activities</th></tr></thead><tbody>
+          <tr><td>1</td><td>Introduction to Text Mining & NLP</td><td>NLP applications, workflow, corpora, structured vs. unstructured text, Python environment, and responsible collection.</td></tr>
+          <tr><td>2</td><td>Text Collection & Preprocessing</td><td>APIs, web text, regex, normalization, tokenization, stop words, stemming, lemmatization, and reproducible pipelines.</td></tr>
+          <tr><td>3</td><td>Linguistic Analysis</td><td>Part-of-speech tagging, chunking, dependency parsing, and named entity recognition with NLTK and spaCy.</td></tr>
+          <tr><td>4</td><td>Text Representation</td><td>Bag-of-Words, document-term matrices, n-grams, TF–IDF, cosine similarity, and feature engineering.</td></tr>
+          <tr><td>5</td><td>Text Classification</td><td>Naive Bayes, logistic regression, support vector machines, pipelines, train/test splits, and cross-validation.</td></tr>
+          <tr><td>6</td><td>Model Evaluation</td><td>Accuracy, precision, recall, F1, confusion matrices, class imbalance, error analysis, and interpretation.</td></tr>
+          <tr><td>7</td><td>Sentiment & Opinion Mining</td><td>Lexicon-based and supervised sentiment methods for reviews, surveys, and social-media text.</td></tr>
+          <tr><td>8</td><td>Topic Modeling & Clustering</td><td>K-means, hierarchical clustering, LDA, NMF, and principled topic interpretation.</td></tr>
+          <tr><td>9</td><td>Information Extraction</td><td>Named entities, relations, keywords, patterns, document retrieval, and domain-specific extraction pipelines.</td></tr>
+          <tr><td>10</td><td>Word Embeddings</td><td>Distributional semantics, Word2Vec, GloVe, FastText, contextual meaning, similarity, and evaluation.</td></tr>
+          <tr><td>11</td><td>Deep Learning for NLP</td><td>Neural networks, RNNs, LSTMs, GRUs, sequence classification, and limitations of recurrent models.</td></tr>
+          <tr><td>12</td><td>Transformers & Modern NLP</td><td>Attention, transformer architecture, BERT-style models, transfer learning, fine-tuning, summarization, and QA.</td></tr>
+          <tr><td>13</td><td>Introduction to Generative AI & LLMs</td><td>Foundation models, autoregressive generation, tokens, context windows, prompting, APIs, evaluation, and limitations.</td></tr>
+          <tr><td>14</td><td>LLM Applications & Responsible AI</td><td>Embeddings, vector search, RAG, basic agents, hallucination mitigation, privacy, bias, copyright, and responsible deployment.</td></tr>
+          <tr><td>15</td><td>Final Project Presentations</td><td>Presentation and demonstration of an end-to-end NLP or introductory Generative AI application.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="section-heading" style="margin-top:2.8rem"><div><span class="eyebrow"><i class="fa-solid fa-chart-pie"></i> Grading &amp; Evaluation</span><h2>How course performance is evaluated</h2></div></div>
+      <div class="grading-grid">
+        <article class="grade-card">
+          <h3>Course Weights</h3>
+          <div class="grade-bar-row"><strong>Programming Assignments</strong><div class="grade-track"><div class="grade-fill" style="width:30%"></div></div><span>30%</span></div>
+          <div class="grade-bar-row"><strong>Quizzes &amp; Discussions</strong><div class="grade-track"><div class="grade-fill" style="width:15%"></div></div><span>15%</span></div>
+          <div class="grade-bar-row"><strong>Midterm Exam</strong><div class="grade-track"><div class="grade-fill" style="width:20%"></div></div><span>20%</span></div>
+          <div class="grade-bar-row"><strong>Final Project Report &amp; Code</strong><div class="grade-track"><div class="grade-fill" style="width:25%"></div></div><span>25%</span></div>
+          <div class="grade-bar-row"><strong>Final Presentation</strong><div class="grade-track"><div class="grade-fill" style="width:10%"></div></div><span>10%</span></div>
+        </article>
+        <article class="grade-card">
+          <h3>Grading Scale</h3>
+          <div class="scale-grid">
+            <div class="scale-item"><strong>A</strong><small>94–100%</small></div><div class="scale-item"><strong>A−</strong><small>90–&lt;94%</small></div><div class="scale-item"><strong>B+</strong><small>87–&lt;90%</small></div><div class="scale-item"><strong>B</strong><small>84–&lt;87%</small></div><div class="scale-item"><strong>B−</strong><small>80–&lt;84%</small></div><div class="scale-item"><strong>C+</strong><small>77–&lt;80%</small></div><div class="scale-item"><strong>C</strong><small>74–&lt;77%</small></div><div class="scale-item"><strong>C−</strong><small>70–&lt;74%</small></div><div class="scale-item"><strong>D</strong><small>64–&lt;70%</small></div><div class="scale-item"><strong>F</strong><small>&lt;64%</small></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-heading" style="margin-top:2.8rem"><div><span class="eyebrow"><i class="fa-solid fa-folder-open"></i> Assignments &amp; Final Project</span><h2>Reproducible analysis and responsible NLP practice</h2></div></div>
+      <article class="project-card">
+        <p>Programming assignments require executable Python notebooks or scripts with documentation, interpretation, and citations where appropriate. Assignments may address preprocessing, TF–IDF, classification, sentiment, topic modeling, information extraction, embeddings, transformers, and LLM applications. Code that does not execute may receive substantially reduced credit.</p>
+        <p class="mb-0">The final project requires an end-to-end NLP application using an approved dataset. Deliverables include a short proposal, reproducible code, a written report, and a presentation. Example projects include review analysis, document classification, topic discovery, semantic search, information extraction, summarization, or a basic RAG prototype. Projects must include evaluation, limitations, and responsible-AI considerations.</p>
+      </article>
+
+      <div class="section-heading" style="margin-top:2.8rem"><div><span class="eyebrow"><i class="fa-solid fa-scale-balanced"></i> Course Policies</span><h2>Key expectations</h2></div></div>
+      <div class="policy-grid">
+        <article class="policy-card"><h3><i class="fa-solid fa-user-check"></i> Participation</h3><p>Students are expected to complete weekly Canvas modules, readings, videos, discussions, quizzes, and assignments. Regular participation is the online equivalent of attendance.</p></article>
+        <article class="policy-card"><h3><i class="fa-solid fa-calendar-xmark"></i> Late Work</h3><p>Work submitted within seven calendar days after the deadline may receive a 25% deduction. Work more than seven days late is normally not accepted. Documented emergencies should be communicated promptly.</p></article>
+        <article class="policy-card"><h3><i class="fa-solid fa-shield-halved"></i> Academic Integrity &amp; AI Use</h3><p>All submitted work must comply with the UNCG Academic Integrity Policy and include the pledge: “I have abided by the UNCG Academic Integrity Policy on this assignment.” Generative AI may be used only when explicitly permitted; permitted use must be disclosed and cited, including the tool, purpose, prompts or workflow, and the student’s verification process. Students remain responsible for accuracy, originality, security, and ethical use.</p></article>
+        <article class="policy-card"><h3><i class="fa-solid fa-lock"></i> Data &amp; Privacy</h3><p>Do not upload confidential, personally identifiable, proprietary, or protected data to public NLP or Generative AI services. Course datasets must be used only for authorized educational purposes.</p></article>
+        <article class="policy-card"><h3><i class="fa-solid fa-universal-access"></i> Accessibility &amp; Support</h3><p>Students needing accommodations should contact the Office of Accessibility Resources and Services at (336) 334-5440 or oars.uncg.edu. Academic support, library services, the Writing Center, IT support, counseling, and wellness resources are available through UNCG.</p></article>
+        <article class="policy-card"><h3><i class="fa-solid fa-comments"></i> Communication</h3><p>Use university email and include IAN 620 in the subject line. Allow 24–48 hours for responses on business days and check Canvas announcements regularly.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrap" aria-labelledby="materials-heading">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow"><i class="fa-solid fa-book"></i> Required Materials</span><h2 id="materials-heading">Suggested texts and readings</h2></div></div>
+      <div class="setup-grid">
+        <article class="surface-card"><h3>Speech and Language Processing</h3><p>Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, 3rd edition draft.</p></article>
+        <article class="surface-card"><h3>Natural Language Processing with Python</h3><p>Steven Bird, Ewan Klein, and Edward Loper, <em>Natural Language Processing with Python</em>.</p></article>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted-color)">Additional readings will be posted in Canvas. Selected cloud APIs may be demonstrated, but paid accounts are not required unless announced in advance.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section-wrap alt">
+    <div class="container">
+      <div class="section-heading"><div><span class="eyebrow"><i class="fa-solid fa-envelope"></i> Instructor &amp; Course Information</span><h2>Ali Noori</h2></div></div>
+      <div class="contact-card">
+        <span class="contact-avatar" aria-hidden="true"><i class="fa-solid fa-user-graduate"></i></span>
+        <div><h3>Ali Noori</h3><p>Informatics and Analytics Program · Department of Information, Library, and Research Sciences · University of North Carolina at Greensboro</p><p style="margin:0;color:var(--muted-color)">Office Hours: By appointment via Microsoft Teams · Platform: Canvas · Format: Fully asynchronous online</p></div>
+        <a class="resource-link" href="mailto:a_noori@uncg.edu"><i class="fa-solid fa-envelope"></i> a_noori@uncg.edu</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container footer-inner"><p>&copy; 2026 Ali Noori / UNCG. All rights reserved.</p><p>IAN 620 · Text Mining and Natural Language Processing · Last Updated: July 2026</p></div></footer>
+<button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+  (() => {
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const modulesDropdown = document.getElementById('modules-dropdown');
+    const modulesToggle = document.getElementById('modules-toggle');
+    const backToTop = document.getElementById('back-to-top');
+
+    function updateThemeButton(theme) {
+      const isDark = theme === 'dark';
+      themeToggle.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i> Light' : '<i class="fa-solid fa-moon"></i> Dark';
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    const savedTheme = localStorage.getItem('ian620-theme');
+    const initialTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+    root.setAttribute('data-theme', initialTheme);
+    updateThemeButton(initialTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('ian620-theme', nextTheme);
+      updateThemeButton(nextTheme);
+    });
+
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('active');
+      mobileToggle.setAttribute('aria-expanded', String(isOpen));
+      mobileToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    modulesToggle.addEventListener('click', (event) => {
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        event.preventDefault();
+        const open = modulesDropdown.classList.toggle('open');
+        modulesToggle.setAttribute('aria-expanded', String(open));
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!modulesDropdown.contains(event.target)) { modulesDropdown.classList.remove('open'); modulesToggle.setAttribute('aria-expanded', 'false'); }
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      if (window.matchMedia('(max-width: 900px)').matches && !link.closest('.dropdown-content')) {
+        navLinks.classList.remove('active'); mobileToggle.setAttribute('aria-expanded', 'false'); mobileToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      }
+    }));
+
+    window.addEventListener('scroll', () => { backToTop.classList.toggle('show', window.scrollY > 650); });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  })();
+</script>
+</body>
+</html>
