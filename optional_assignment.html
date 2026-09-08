@@ -1,122 +1,539 @@
-<div style="max-width: 1000px; margin: 0 auto; font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.6;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Header -->
-    <div style="background: #17365d; color: white; padding: 28px 30px; border-radius: 10px;">
-        <h1 style="margin: 0; font-size: 30px;">COVID-19 Vaccine Tweet Sentiment Classification</h1>
-        <p style="margin: 10px 0 0 0; font-size: 17px;">
-            In-Class NLP Activity: TF-IDF, POS Tagging, Named Entity Recognition, and Machine Learning
+<title>Optional NLP Assignment</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: #f4f6f9;
+        color: #1f2937;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.65;
+    }
+
+    .page {
+        max-width: 1050px;
+        margin: 0 auto;
+        padding: 35px 22px 70px;
+    }
+
+    /* ==============================
+       HEADER
+       ============================== */
+
+    .hero {
+        background: linear-gradient(135deg, #17365d, #234f7d);
+        color: white;
+        padding: 34px 38px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+        box-shadow: 0 5px 18px rgba(0,0,0,.08);
+    }
+
+    .hero h1 {
+        margin: 0;
+        font-size: 32px;
+        line-height: 1.25;
+    }
+
+    .hero p {
+        margin: 12px 0 0;
+        font-size: 17px;
+        color: #e5edf7;
+    }
+
+    /* ==============================
+       CONTENT SECTIONS
+       ============================== */
+
+    .section {
+        background: white;
+        padding: 28px 32px;
+        margin: 24px 0;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0,0,0,.035);
+    }
+
+    h2 {
+        color: #17365d;
+        margin-top: 0;
+        padding-bottom: 9px;
+        border-bottom: 2px solid #e1e7ef;
+        font-size: 24px;
+    }
+
+    h3 {
+        color: #294f77;
+        margin-top: 26px;
+    }
+
+    p {
+        margin-top: 10px;
+    }
+
+    li {
+        margin: 6px 0;
+    }
+
+    /* ==============================
+       INFO BOXES
+       ============================== */
+
+    .info {
+        background: #eef5fb;
+        border-left: 5px solid #2f6690;
+        padding: 16px 18px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+
+    .warning {
+        background: #fff8e8;
+        border-left: 5px solid #d69e2e;
+        padding: 16px 18px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+
+    .question-box {
+        background: #f8fafc;
+        border: 1px solid #dce3eb;
+        border-radius: 7px;
+        padding: 17px 20px;
+        margin-top: 20px;
+    }
+
+    /* ==============================
+       BUTTONS
+       ============================== */
+
+    .center {
+        text-align: center;
+    }
+
+    .main-button {
+        display: inline-block;
+        background: #17365d;
+        color: white;
+        text-decoration: none;
+        padding: 13px 25px;
+        border-radius: 7px;
+        font-weight: bold;
+        margin: 12px 0;
+        transition: .2s ease;
+    }
+
+    .main-button:hover {
+        background: #244f7d;
+        transform: translateY(-1px);
+    }
+
+    /* ==============================
+       TABLE
+       ============================== */
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 18px 0;
+    }
+
+    th {
+        background: #17365d;
+        color: white;
+        text-align: left;
+        padding: 11px;
+    }
+
+    td {
+        padding: 10px 11px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    tr:nth-child(even) {
+        background: #f8fafc;
+    }
+
+
+    /* =========================================================
+       VS CODE STYLE CODE WINDOW
+       ========================================================= */
+
+    .code-window {
+        margin: 20px 0;
+        border-radius: 9px;
+        overflow: hidden;
+        background: #1e1e1e;
+        border: 1px solid #343434;
+        box-shadow: 0 4px 14px rgba(0,0,0,.12);
+    }
+
+    .code-header {
+        height: 42px;
+        background: #252526;
+        border-bottom: 1px solid #3a3a3a;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 12px 0 14px;
+    }
+
+    .code-left {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+    }
+
+    .window-dots {
+        display: flex;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+    }
+
+    .dot-red {
+        background: #ff5f56;
+    }
+
+    .dot-yellow {
+        background: #ffbd2e;
+    }
+
+    .dot-green {
+        background: #27c93f;
+    }
+
+    .code-language {
+        font-family: Consolas, "Courier New", monospace;
+        color: #c8c8c8;
+        font-size: 12px;
+    }
+
+    .copy-btn {
+        background: #333333;
+        color: #dedede;
+        border: 1px solid #4c4c4c;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: .15s ease;
+    }
+
+    .copy-btn:hover {
+        background: #444444;
+        color: white;
+    }
+
+    .copy-btn.copied {
+        background: #235b34;
+        border-color: #367447;
+        color: #d7f7df;
+    }
+
+    .code-window pre {
+        margin: 0;
+        padding: 19px 20px;
+        overflow-x: auto;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        font-family: Consolas, Monaco, "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.65;
+        tab-size: 4;
+    }
+
+    .code-window code {
+        font-family: inherit;
+        color: inherit;
+        white-space: pre;
+    }
+
+    /*
+       Simple VS Code-like Python colors.
+       These classes are optional when manually highlighting code.
+    */
+
+    .kw {
+        color: #569cd6;
+    }
+
+    .func {
+        color: #dcdcaa;
+    }
+
+    .str {
+        color: #ce9178;
+    }
+
+    .comment {
+        color: #6a9955;
+    }
+
+    .num {
+        color: #b5cea8;
+    }
+
+    .class-name {
+        color: #4ec9b0;
+    }
+
+    .var {
+        color: #9cdcfe;
+    }
+
+    /* ==============================
+       FLOW
+       ============================== */
+
+    .flow {
+        background: #f5f7fa;
+        border: 1px solid #e0e6ed;
+        border-radius: 7px;
+        text-align: center;
+        padding: 18px;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #294f77;
+        font-family: Consolas, monospace;
+    }
+
+    /* ==============================
+       INLINE CODE
+       ============================== */
+
+    p code,
+    li code,
+    td code {
+        background: #edf1f5;
+        color: #b42318;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-family: Consolas, monospace;
+        font-size: .93em;
+    }
+
+    /* ==============================
+       RESPONSIVE
+       ============================== */
+
+    @media (max-width: 700px) {
+
+        .page {
+            padding: 18px 12px 50px;
+        }
+
+        .hero {
+            padding: 25px 22px;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+        }
+
+        .section {
+            padding: 22px 18px;
+        }
+
+        .code-window pre {
+            font-size: 12.5px;
+        }
+
+        table {
+            font-size: 14px;
+        }
+    }
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- ======================================================
+         HEADER
+         ====================================================== -->
+
+    <div class="hero">
+        <h1>COVID-19 Vaccine Tweet Sentiment Classification</h1>
+        <p>
+            Optional NLP Assignment: TF-IDF, POS Tagging,
+            Named Entity Recognition, and Machine Learning
         </p>
     </div>
 
-    <!-- Overview -->
-    <div style="margin-top: 28px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Activity Overview
-        </h2>
+
+    <!-- ======================================================
+         OVERVIEW
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Assignment Overview</h2>
 
         <p>
-            In this activity, you will work with a real dataset containing tweets about
-            COVID-19 vaccines. Each tweet has already been labeled as
-            <strong>negative, neutral, or positive</strong>.
+            In this optional activity, you will work with a real dataset
+            containing tweets about COVID-19 vaccines.
         </p>
 
         <p>
-            Your goal is to build a machine learning model that predicts the sentiment
-            of a tweet. You will also investigate whether linguistic information from
+            Each tweet has already been assigned a sentiment label.
+            Your goal is to build a machine learning model that predicts
+            whether a tweet is negative, neutral, or positive.
+        </p>
+
+        <p>
+            You will also investigate whether linguistic features from
             <strong>Part-of-Speech tagging (POS)</strong> and
-            <strong>Named Entity Recognition (NER)</strong> can improve the model.
+            <strong>Named Entity Recognition (NER)</strong>
+            can improve sentiment classification.
         </p>
 
-        <div style="background: #eef4fb; border-left: 5px solid #2f6690; padding: 15px 18px; margin: 20px 0;">
-            <strong>Main Question:</strong><br>
-            Does adding POS and NER information improve sentiment classification compared
-            with using TF-IDF text features alone?
+        <div class="info">
+            <strong>Main Question</strong><br>
+            Does adding POS and NER information improve sentiment
+            classification compared with using TF-IDF alone?
         </div>
+
     </div>
 
-    <!-- Learning goals -->
-    <div style="margin-top: 30px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Learning Goals
-        </h2>
 
-        <p>By the end of this activity, you should be able to:</p>
+    <!-- ======================================================
+         LEARNING GOALS
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Learning Goals</h2>
+
+        <p>By completing this activity, you will practice:</p>
 
         <ul>
-            <li>Load and explore a real text dataset.</li>
-            <li>Clean social media text.</li>
-            <li>Apply POS tagging with spaCy.</li>
-            <li>Apply Named Entity Recognition with spaCy.</li>
-            <li>Convert text into TF-IDF features.</li>
-            <li>Train a Logistic Regression classifier.</li>
-            <li>Evaluate a multi-class classification model.</li>
-            <li>Compare different types of NLP features.</li>
+            <li>Loading and exploring a real text dataset</li>
+            <li>Cleaning social media text</li>
+            <li>Part-of-Speech tagging</li>
+            <li>Named Entity Recognition</li>
+            <li>TF-IDF text representation</li>
+            <li>Logistic Regression</li>
+            <li>Model evaluation</li>
+            <li>Comparing different NLP feature sets</li>
         </ul>
+
     </div>
 
-    <!-- Dataset -->
-    <div style="margin-top: 30px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 1: Download the Dataset
-        </h2>
+
+    <!-- ======================================================
+         DATASET
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 1: Download the Dataset</h2>
 
         <p>
-            We will use the <strong>COVID-19 Vaccine Tweets with Sentiment Annotation</strong>
+            We will use the
+            <strong>COVID-19 Vaccine Tweets with Sentiment Annotation</strong>
             dataset from Kaggle.
         </p>
 
-        <div style="text-align: center; margin: 25px 0;">
-            <a href="https://www.kaggle.com/datasets/datasciencetool/covid19-vaccine-tweets-with-sentiment-annotation"
-               target="_blank"
-               rel="noopener"
-               style="display: inline-block; background: #17365d; color: white; text-decoration: none;
-                      padding: 13px 24px; border-radius: 6px; font-weight: bold;">
-                Open Dataset on Kaggle
+        <div class="center">
+
+            <a
+                class="main-button"
+                href="https://www.kaggle.com/datasets/datasciencetool/covid19-vaccine-tweets-with-sentiment-annotation"
+                target="_blank"
+                rel="noopener">
+                Download Dataset from Kaggle
             </a>
+
         </div>
 
         <ol>
-            <li>Open the Kaggle link above.</li>
-            <li>Sign in to Kaggle if requested.</li>
+            <li>Open the Kaggle dataset.</li>
+            <li>Sign in to Kaggle if required.</li>
             <li>Click <strong>Download</strong>.</li>
-            <li>Extract the downloaded ZIP file if necessary.</li>
+            <li>Extract the ZIP file if needed.</li>
             <li>Locate the CSV file.</li>
-            <li>Create a new Google Colab or Jupyter Notebook.</li>
+            <li>Create a Google Colab or Jupyter Notebook.</li>
             <li>Upload the CSV file to your notebook environment.</li>
         </ol>
 
-        <p>The file we will use is:</p>
+        <p>The CSV file used in this assignment is:</p>
 
-        <pre style="background: #f5f7fa; border: 1px solid #d9dee7; padding: 14px; border-radius: 6px; overflow-x: auto;"><code>covid-19_vaccine_tweets_with_sentiment.csv</code></pre>
+        <div class="code-window">
+
+            <div class="code-header">
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <span class="code-language">File name</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+            </div>
+
+<pre><code>covid-19_vaccine_tweets_with_sentiment.csv</code></pre>
+
+        </div>
+
     </div>
 
-    <!-- Dataset columns -->
-    <div style="margin-top: 30px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Understanding the Dataset
-        </h2>
 
-        <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+    <!-- ======================================================
+         DATASET STRUCTURE
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Understanding the Dataset</h2>
+
+        <table>
+
             <thead>
-                <tr style="background: #17365d; color: white;">
-                    <th style="padding: 10px; text-align: left;">Column</th>
-                    <th style="padding: 10px; text-align: left;">Description</th>
+                <tr>
+                    <th>Column</th>
+                    <th>Description</th>
                 </tr>
             </thead>
+
             <tbody>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><code>tweet_id</code></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Unique identifier for the tweet</td>
-                </tr>
+
                 <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><code>label</code></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Sentiment category</td>
+                    <td><code>tweet_id</code></td>
+                    <td>Unique identifier for the tweet</td>
                 </tr>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><code>tweet_text</code></td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Text of the tweet</td>
+
+                <tr>
+                    <td><code>label</code></td>
+                    <td>Sentiment category</td>
                 </tr>
+
+                <tr>
+                    <td><code>tweet_text</code></td>
+                    <td>Text of the tweet</td>
+                </tr>
+
             </tbody>
+
         </table>
 
         <p><strong>Sentiment labels:</strong></p>
@@ -127,26 +544,75 @@
             <li><strong>3 = Positive</strong></li>
         </ul>
 
-        <div style="background: #fff7e6; border-left: 5px solid #d69e2e; padding: 14px 18px;">
-            <strong>Important:</strong> We will use <code>tweet_text</code> to predict
-            <code>label</code>. Do not use <code>tweet_id</code> as a machine learning feature.
+        <div class="warning">
+            <strong>Important:</strong>
+            <code>tweet_text</code> will be used to predict
+            <code>label</code>. Do not use <code>tweet_id</code>
+            as a machine learning feature.
         </div>
+
     </div>
 
-    <!-- Setup -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 2: Set Up Your Notebook
-        </h2>
 
-        <p>If you are using Google Colab, run the following cell:</p>
+    <!-- ======================================================
+         SETUP
+         ====================================================== -->
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>!pip install -q spacy scikit-learn
+    <div class="section">
+
+        <h2>Part 2: Set Up Your Notebook</h2>
+
+        <p>
+            If you are using Google Colab, install spaCy and its English model.
+        </p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>!pip install -q spacy scikit-learn
 !python -m spacy download en_core_web_sm</code></pre>
+
+        </div>
+
 
         <p>Import the libraries:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>import pandas as pd
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import re
@@ -160,38 +626,147 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
 nlp = spacy.load("en_core_web_sm")</code></pre>
+
+        </div>
+
     </div>
 
-    <!-- Load data -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 3: Load and Explore the Dataset
-        </h2>
+
+    <!-- ======================================================
+         LOAD DATA
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 3: Load and Explore the Dataset</h2>
 
         <p>Load the CSV file:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df = pd.read_csv(
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>df = pd.read_csv(
     "covid-19_vaccine_tweets_with_sentiment.csv",
     encoding="cp1252"
 )
 
 df.head()</code></pre>
 
+        </div>
+
+
         <p>Check the size of the dataset:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df.shape</code></pre>
 
-        <p>Check the columns and data types:</p>
+        <div class="code-window">
+            <div class="code-header">
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df.info()</code></pre>
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
 
-        <p>Check the sentiment distribution:</p>
+                    <span class="code-language">Python</span>
+                </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df["label"].value_counts().sort_index()</code></pre>
+                <button class="copy-btn">Copy</button>
+            </div>
+
+<pre><code>df.shape</code></pre>
+
+        </div>
+
+
+        <p>Check the dataset information:</p>
+
+
+        <div class="code-window">
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+            </div>
+
+<pre><code>df.info()</code></pre>
+
+        </div>
+
+
+        <p>Examine the sentiment distribution:</p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>df["label"].value_counts().sort_index()</code></pre>
+
+        </div>
+
 
         <p>Create readable sentiment names:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>label_names = {
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>label_names = {
     1: "Negative",
     2: "Neutral",
     3: "Positive"
@@ -201,41 +776,115 @@ df["sentiment"] = df["label"].map(label_names)
 
 df["sentiment"].value_counts()</code></pre>
 
-        <p>Create a simple chart:</p>
+        </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df["sentiment"].value_counts().plot(kind="bar")
+
+        <p>Create a simple visualization:</p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>df["sentiment"].value_counts().plot(kind="bar")
 
 plt.title("Sentiment Distribution")
 plt.xlabel("Sentiment")
 plt.ylabel("Number of Tweets")
 plt.show()</code></pre>
 
-        <h3 style="color: #294f77;">Questions</h3>
+        </div>
 
-        <ol>
-            <li>How many tweets are in the dataset?</li>
-            <li>How many tweets belong to each sentiment?</li>
-            <li>Is the dataset balanced?</li>
-            <li>Which sentiment appears most often?</li>
-            <li>Why could class imbalance affect a machine learning model?</li>
-        </ol>
+
+        <div class="question-box">
+
+            <h3>Questions</h3>
+
+            <ol>
+                <li>How many tweets are in the dataset?</li>
+                <li>How many tweets belong to each sentiment?</li>
+                <li>Is the dataset balanced?</li>
+                <li>Which sentiment appears most often?</li>
+                <li>Why could class imbalance affect a machine learning model?</li>
+            </ol>
+
+        </div>
+
     </div>
 
-    <!-- Examine text -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 4: Examine the Tweets
-        </h2>
+
+    <!-- ======================================================
+         VIEW TWEETS
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 4: Examine the Tweets</h2>
 
         <p>Display several tweets:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>for text in df["tweet_text"].head(5):
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>for text in df["tweet_text"].head(5):
     print(text)
     print("-" * 70)</code></pre>
 
-        <p>Now look at examples from each sentiment:</p>
+        </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>for label in [1, 2, 3]:
+
+        <p>Compare examples from each sentiment:</p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>for label in [1, 2, 3]:
 
     print("\n", label_names[label])
     print("=" * 70)
@@ -246,33 +895,44 @@ plt.show()</code></pre>
         print(tweet)
         print()</code></pre>
 
-        <h3 style="color: #294f77;">Think About</h3>
+        </div>
 
-        <p>As you read the tweets, look for:</p>
-
-        <ul>
-            <li>positive or negative words</li>
-            <li>adjectives</li>
-            <li>verbs</li>
-            <li>hashtags</li>
-            <li>organizations</li>
-            <li>vaccine names</li>
-            <li>countries and cities</li>
-        </ul>
     </div>
 
-    <!-- Cleaning -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 5: Clean the Tweet Text
-        </h2>
+
+    <!-- ======================================================
+         CLEANING
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 5: Clean the Tweet Text</h2>
 
         <p>
-            Tweets often contain URLs, user mentions, hashtags, and extra spaces.
+            Tweets may contain URLs, user mentions, hashtags, and extra spaces.
             We will perform simple cleaning before training the model.
         </p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>def clean_tweet(text):
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>def clean_tweet(text):
 
     # Remove URLs
     text = re.sub(r"http\S+|www\S+", "", text)
@@ -293,86 +953,131 @@ df["clean_text"] = df["tweet_text"].apply(clean_tweet)
 
 df[["tweet_text", "clean_text"]].head()</code></pre>
 
-        <div style="background: #eef4fb; border-left: 5px solid #2f6690; padding: 14px 18px; margin-top: 18px;">
-            <strong>Why are we not removing every stop word?</strong><br>
-            Words such as <code>not</code>, <code>no</code>, and <code>never</code>
-            can be very important for sentiment.
         </div>
+
+
+        <div class="info">
+            <strong>Think about this:</strong>
+            We are not automatically removing every stop word.
+            Words such as <code>not</code>, <code>no</code>, and
+            <code>never</code> may be important for sentiment.
+        </div>
+
     </div>
 
-    <!-- POS -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 6: Part-of-Speech Tagging
-        </h2>
+
+    <!-- ======================================================
+         POS
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 6: Part-of-Speech Tagging</h2>
 
         <p>
-            Part-of-Speech tagging identifies the grammatical role of each word.
+            POS tagging identifies the grammatical role of each word.
         </p>
 
-        <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+
+        <table>
+
             <thead>
-                <tr style="background: #17365d; color: white;">
-                    <th style="padding: 10px;">POS</th>
-                    <th style="padding: 10px;">Meaning</th>
-                    <th style="padding: 10px;">Example</th>
+                <tr>
+                    <th>POS</th>
+                    <th>Meaning</th>
+                    <th>Example</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">NOUN</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Noun</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">vaccine</td>
+                    <td>NOUN</td>
+                    <td>Noun</td>
+                    <td>vaccine</td>
                 </tr>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">PROPN</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Proper noun</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Pfizer</td>
-                </tr>
+
                 <tr>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">VERB</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Verb</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">protects</td>
+                    <td>PROPN</td>
+                    <td>Proper noun</td>
+                    <td>Pfizer</td>
                 </tr>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">ADJ</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Adjective</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">effective</td>
-                </tr>
+
                 <tr>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">ADV</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Adverb</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">quickly</td>
+                    <td>VERB</td>
+                    <td>Verb</td>
+                    <td>protects</td>
                 </tr>
+
+                <tr>
+                    <td>ADJ</td>
+                    <td>Adjective</td>
+                    <td>effective</td>
+                </tr>
+
+                <tr>
+                    <td>ADV</td>
+                    <td>Adverb</td>
+                    <td>quickly</td>
+                </tr>
+
             </tbody>
+
         </table>
 
-        <p>Try POS tagging on one tweet first:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>sample = df.loc[0, "clean_text"]
+        <p>Try POS tagging on one tweet:</p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>sample = df.loc[0, "clean_text"]
 
 doc = nlp(sample)
 
 for token in doc:
     print(token.text, token.pos_)</code></pre>
 
-        <h3 style="color: #294f77;">Your Task</h3>
+        </div>
 
-        <p>
-            For every tweet, create the following numerical features:
-        </p>
 
-        <ul>
-            <li><code>noun_count</code></li>
-            <li><code>proper_noun_count</code></li>
-            <li><code>verb_count</code></li>
-            <li><code>adj_count</code></li>
-            <li><code>adv_count</code></li>
-        </ul>
+        <h3>Create POS Features</h3>
 
-        <p>Use this starter function:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>def get_pos_features(text):
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>def get_pos_features(text):
 
     doc = nlp(text)
 
@@ -391,93 +1096,109 @@ df = pd.concat([df, pos_features], axis=1)
 
 df.head()</code></pre>
 
-        <h3 style="color: #294f77;">Explore</h3>
+        </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df.groupby("sentiment")[[
+
+        <p>Compare average POS counts:</p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>df.groupby("sentiment")[[
     "noun_count",
     "verb_count",
     "adj_count",
     "adv_count"
 ]].mean()</code></pre>
 
-        <p>
-            Do positive, neutral, and negative tweets use different amounts of
-            adjectives or adverbs?
-        </p>
+        </div>
+
     </div>
 
-    <!-- NER -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 7: Named Entity Recognition
-        </h2>
+
+    <!-- ======================================================
+         NER
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 7: Named Entity Recognition</h2>
 
         <p>
-            Named Entity Recognition identifies names and real-world entities in text.
+            Named Entity Recognition identifies names and real-world
+            entities in text.
         </p>
 
-        <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
-            <thead>
-                <tr style="background: #17365d; color: white;">
-                    <th style="padding: 10px;">Entity</th>
-                    <th style="padding: 10px;">Meaning</th>
-                    <th style="padding: 10px;">Example</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">PERSON</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Person</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">A person's name</td>
-                </tr>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">ORG</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Organization</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Pfizer</td>
-                </tr>
-                <tr>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">GPE</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Country, city, or state</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">India</td>
-                </tr>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">DATE</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Date or time period</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">March 2021</td>
-                </tr>
-                <tr>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">PRODUCT</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Product</td>
-                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Product name</td>
-                </tr>
-            </tbody>
-        </table>
 
         <p>Try NER on one tweet:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>sample = df.loc[0, "clean_text"]
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>sample = df.loc[0, "clean_text"]
 
 doc = nlp(sample)
 
 for ent in doc.ents:
     print(ent.text, ent.label_)</code></pre>
 
-        <h3 style="color: #294f77;">Your Task</h3>
+        </div>
 
-        <p>Create these NER features:</p>
 
-        <ul>
-            <li><code>person_count</code></li>
-            <li><code>org_count</code></li>
-            <li><code>gpe_count</code></li>
-            <li><code>date_count</code></li>
-            <li><code>product_count</code></li>
-            <li><code>entity_count</code></li>
-        </ul>
+        <h3>Create NER Features</h3>
 
-        <p>Starter code:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>def get_ner_features(text):
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>def get_ner_features(text):
 
     doc = nlp(text)
 
@@ -496,19 +1217,44 @@ ner_features = df["clean_text"].apply(get_ner_features)
 df = pd.concat([df, ner_features], axis=1)
 
 df.head()</code></pre>
+
+        </div>
+
     </div>
 
-    <!-- split -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 8: Create Training and Testing Data
-        </h2>
+
+    <!-- ======================================================
+         SPLIT
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 8: Training and Testing Data</h2>
 
         <p>
-            We will keep 80% of the tweets for training and 20% for testing.
+            We will use 80% of the tweets for training and 20% for testing.
         </p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>train_df, test_df = train_test_split(
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>train_df, test_df = train_test_split(
     df,
     test_size=0.20,
     random_state=42,
@@ -518,30 +1264,51 @@ df.head()</code></pre>
 print("Training:", train_df.shape)
 print("Testing:", test_df.shape)</code></pre>
 
-        <div style="background: #eef4fb; border-left: 5px solid #2f6690; padding: 14px 18px;">
-            <strong>Why use <code>stratify</code>?</strong><br>
-            It helps keep approximately the same proportion of negative, neutral,
-            and positive tweets in both the training and testing datasets.
         </div>
+
+
+        <div class="info">
+            <strong>Why use stratify?</strong><br>
+            It helps maintain approximately the same proportion of
+            negative, neutral, and positive tweets in the training and
+            testing datasets.
+        </div>
+
     </div>
 
-    <!-- model 1 -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 9: Model 1 — TF-IDF
-        </h2>
 
-        <p>
-            Our first model uses the actual words in the tweets.
-        </p>
+    <!-- ======================================================
+         MODEL 1
+         ====================================================== -->
 
-        <div style="background: #f5f7fa; text-align: center; padding: 18px; margin: 18px 0; border-radius: 6px;">
-            <strong>Tweet → TF-IDF → Logistic Regression → Sentiment</strong>
+    <div class="section">
+
+        <h2>Part 9: Model 1 — TF-IDF</h2>
+
+        <div class="flow">
+            Tweet → TF-IDF → Logistic Regression → Sentiment
         </div>
 
-        <p>Create TF-IDF features:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>tfidf = TfidfVectorizer(
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>tfidf = TfidfVectorizer(
     max_features=5000,
     ngram_range=(1, 2)
 )
@@ -552,9 +1319,31 @@ X_test_tfidf = tfidf.transform(test_df["clean_text"])
 y_train = train_df["label"]
 y_test = test_df["label"]</code></pre>
 
-        <p>Train Logistic Regression:</p>
+        </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>model1 = LogisticRegression(
+
+        <p>Train the model:</p>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>model1 = LogisticRegression(
     max_iter=1000,
     class_weight="balanced"
 )
@@ -563,9 +1352,31 @@ model1.fit(X_train_tfidf, y_train)
 
 pred1 = model1.predict(X_test_tfidf)</code></pre>
 
+        </div>
+
+
         <p>Evaluate the model:</p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Accuracy:", accuracy_score(y_test, pred1))
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>print("Accuracy:", accuracy_score(y_test, pred1))
 
 print(
     classification_report(
@@ -575,30 +1386,43 @@ print(
     )
 )</code></pre>
 
-        <h3 style="color: #294f77;">Record Your Results</h3>
+        </div>
 
-        <ul>
-            <li>Accuracy = __________</li>
-            <li>Negative F1-score = __________</li>
-            <li>Neutral F1-score = __________</li>
-            <li>Positive F1-score = __________</li>
-        </ul>
     </div>
 
-    <!-- Model 2 -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 10: Model 2 — POS + NER
-        </h2>
 
-        <p>
-            The second model will ignore the actual words and use only the
-            linguistic features that you extracted.
-        </p>
+    <!-- ======================================================
+         MODEL 2
+         ====================================================== -->
 
-        <p>Select the linguistic features:</p>
+    <div class="section">
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>linguistic_features = [
+        <h2>Part 10: Model 2 — POS + NER</h2>
+
+        <div class="flow">
+            Tweet → POS + NER → Linguistic Features → Logistic Regression
+        </div>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>linguistic_features = [
     "noun_count",
     "proper_noun_count",
     "verb_count",
@@ -615,20 +1439,37 @@ print(
 X_train_ling = train_df[linguistic_features]
 X_test_ling = test_df[linguistic_features]</code></pre>
 
-        <p>Train the second model:</p>
+        </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>model2 = LogisticRegression(
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>model2 = LogisticRegression(
     max_iter=1000,
     class_weight="balanced"
 )
 
 model2.fit(X_train_ling, y_train)
 
-pred2 = model2.predict(X_test_ling)</code></pre>
+pred2 = model2.predict(X_test_ling)
 
-        <p>Evaluate:</p>
-
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Accuracy:", accuracy_score(y_test, pred2))
+print("Accuracy:", accuracy_score(y_test, pred2))
 
 print(
     classification_report(
@@ -638,42 +1479,51 @@ print(
     )
 )</code></pre>
 
-        <h3 style="color: #294f77;">Question</h3>
-
-        <p>
-            How does the POS + NER model compare with the TF-IDF model?
-        </p>
-    </div>
-
-    <!-- Model 3 -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 11: Model 3 — Combine TF-IDF + POS + NER
-        </h2>
-
-        <p>
-            Now combine the text features and linguistic features.
-        </p>
-
-        <div style="background: #f5f7fa; text-align: center; padding: 18px; margin: 18px 0; border-radius: 6px;">
-            <strong>TF-IDF + POS + NER → Logistic Regression → Sentiment</strong>
         </div>
 
-        <p>Import the required tools:</p>
+    </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>from scipy.sparse import hstack, csr_matrix
-from sklearn.preprocessing import StandardScaler</code></pre>
 
-        <p>Scale the numerical linguistic features:</p>
+    <!-- ======================================================
+         MODEL 3
+         ====================================================== -->
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>scaler = StandardScaler()
+    <div class="section">
+
+        <h2>Part 11: Model 3 — TF-IDF + POS + NER</h2>
+
+        <div class="flow">
+            TF-IDF + POS + NER → Combined Features → Logistic Regression
+        </div>
+
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>from scipy.sparse import hstack, csr_matrix
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
 
 train_ling_scaled = scaler.fit_transform(X_train_ling)
-test_ling_scaled = scaler.transform(X_test_ling)</code></pre>
+test_ling_scaled = scaler.transform(X_test_ling)
 
-        <p>Combine the features:</p>
-
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>X_train_combined = hstack([
+X_train_combined = hstack([
     X_train_tfidf,
     csr_matrix(train_ling_scaled)
 ])
@@ -683,20 +1533,37 @@ X_test_combined = hstack([
     csr_matrix(test_ling_scaled)
 ])</code></pre>
 
-        <p>Train Model 3:</p>
+        </div>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>model3 = LogisticRegression(
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>model3 = LogisticRegression(
     max_iter=1000,
     class_weight="balanced"
 )
 
 model3.fit(X_train_combined, y_train)
 
-pred3 = model3.predict(X_test_combined)</code></pre>
+pred3 = model3.predict(X_test_combined)
 
-        <p>Evaluate:</p>
-
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Accuracy:", accuracy_score(y_test, pred3))
+print("Accuracy:", accuracy_score(y_test, pred3))
 
 print(
     classification_report(
@@ -705,100 +1572,161 @@ print(
         target_names=["Negative", "Neutral", "Positive"]
     )
 )</code></pre>
+
+        </div>
+
     </div>
 
-    <!-- Compare -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 12: Compare the Models
-        </h2>
 
-        <p>Create a simple comparison:</p>
+    <!-- ======================================================
+         COMPARISON
+         ====================================================== -->
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Model 1 - TF-IDF:", accuracy_score(y_test, pred1))
-print("Model 2 - POS + NER:", accuracy_score(y_test, pred2))
-print("Model 3 - Combined:", accuracy_score(y_test, pred3))</code></pre>
+    <div class="section">
 
-        <p>Complete the table:</p>
+        <h2>Part 12: Compare the Models</h2>
 
-        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>print("Model 1 - TF-IDF:",
+      accuracy_score(y_test, pred1))
+
+print("Model 2 - POS + NER:",
+      accuracy_score(y_test, pred2))
+
+print("Model 3 - Combined:",
+      accuracy_score(y_test, pred3))</code></pre>
+
+        </div>
+
+
+        <table>
+
             <thead>
-                <tr style="background: #17365d; color: white;">
-                    <th style="padding: 10px; text-align: left;">Model</th>
-                    <th style="padding: 10px;">Accuracy</th>
-                    <th style="padding: 10px;">Negative F1</th>
-                    <th style="padding: 10px;">Neutral F1</th>
-                    <th style="padding: 10px;">Positive F1</th>
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Negative F1</th>
+                    <th>Neutral F1</th>
+                    <th>Positive F1</th>
                 </tr>
             </thead>
+
             <tbody>
+
                 <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">TF-IDF</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td>TF-IDF</td>
+                    <td>________</td>
+                    <td>________</td>
+                    <td>________</td>
+                    <td>________</td>
                 </tr>
-                <tr style="background: #f7f9fc;">
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">POS + NER</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                </tr>
+
                 <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">TF-IDF + POS + NER</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td>POS + NER</td>
+                    <td>________</td>
+                    <td>________</td>
+                    <td>________</td>
+                    <td>________</td>
                 </tr>
+
+                <tr>
+                    <td>TF-IDF + POS + NER</td>
+                    <td>________</td>
+                    <td>________</td>
+                    <td>________</td>
+                    <td>________</td>
+                </tr>
+
             </tbody>
+
         </table>
+
     </div>
 
-    <!-- Questions -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 13: Analysis Questions
-        </h2>
 
-        <p>Answer the following questions in Markdown cells in your notebook.</p>
+    <!-- ======================================================
+         QUESTIONS
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 13: Analysis Questions</h2>
+
+        <p>
+            Answer these questions in Markdown cells in your notebook.
+        </p>
 
         <ol>
             <li>Which model produced the highest accuracy?</li>
             <li>Which model produced the best F1-score for negative tweets?</li>
-            <li>Was TF-IDF more useful than POS and NER features alone?</li>
+            <li>Was TF-IDF more useful than POS and NER alone?</li>
             <li>Did adding POS and NER improve the TF-IDF model?</li>
-            <li>Why might adjectives and adverbs be useful for sentiment analysis?</li>
-            <li>Why might named entities be useful when analyzing vaccine-related tweets?</li>
-            <li>Which sentiment was easiest for the model to predict?</li>
+            <li>Why might adjectives and adverbs help predict sentiment?</li>
+            <li>Why might named entities be useful for vaccine-related tweets?</li>
+            <li>Which sentiment was easiest to predict?</li>
             <li>Which sentiment was most difficult to predict?</li>
-            <li>How could class imbalance affect your results?</li>
+            <li>How could class imbalance affect the results?</li>
         </ol>
+
     </div>
 
-    <!-- Test own examples -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Part 14: Try Your Own Tweets
-        </h2>
+
+    <!-- ======================================================
+         OWN EXAMPLES
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Part 14: Try Your Own Examples</h2>
 
         <p>
-            Create three short vaccine-related sentences:
+            Write three new vaccine-related sentences:
         </p>
 
         <ul>
-            <li>one that you expect to be negative</li>
-            <li>one that you expect to be neutral</li>
-            <li>one that you expect to be positive</li>
+            <li>one negative</li>
+            <li>one neutral</li>
+            <li>one positive</li>
         </ul>
 
-        <p>
-            Use <strong>Model 1</strong> first because it only requires text.
-        </p>
 
-        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>new_tweets = [
+        <div class="code-window">
+
+            <div class="code-header">
+
+                <div class="code-left">
+                    <div class="window-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+
+                    <span class="code-language">Python</span>
+                </div>
+
+                <button class="copy-btn">Copy</button>
+
+            </div>
+
+<pre><code>new_tweets = [
     "Write your first sentence here",
     "Write your second sentence here",
     "Write your third sentence here"
@@ -809,20 +1737,23 @@ new_tfidf = tfidf.transform(new_tweets)
 predictions = model1.predict(new_tfidf)
 
 for text, prediction in zip(new_tweets, predictions):
+
     print(text)
     print("Prediction:", label_names[prediction])
     print("-" * 60)</code></pre>
 
-        <p>
-            Were the model's predictions what you expected? Explain any incorrect predictions.
-        </p>
+        </div>
+
     </div>
 
-    <!-- Final -->
-    <div style="margin-top: 35px;">
-        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
-            Final Reflection
-        </h2>
+
+    <!-- ======================================================
+         FINAL
+         ====================================================== -->
+
+    <div class="section">
+
+        <h2>Final Reflection</h2>
 
         <p>
             Write a short paragraph describing what you learned from this activity.
@@ -834,35 +1765,87 @@ for text, prediction in zip(new_tweets, predictions):
             <li>TF-IDF</li>
             <li>POS tagging</li>
             <li>Named Entity Recognition</li>
-            <li>sentiment classification</li>
-            <li>model evaluation</li>
-            <li>class imbalance</li>
-            <li>whether linguistic features improved the model</li>
+            <li>Sentiment classification</li>
+            <li>Model evaluation</li>
+            <li>Class imbalance</li>
+            <li>Whether linguistic features improved the model</li>
         </ul>
+
+        <div class="info">
+            <strong>Optional Assignment:</strong>
+            This activity is intended to provide additional practice with
+            linguistic feature extraction and machine learning for text data.
+        </div>
+
     </div>
 
-    <!-- Completion -->
-    <div style="background: #eef4fb; border: 1px solid #c8d7e8; border-radius: 8px;
-                padding: 20px; margin-top: 35px; margin-bottom: 25px;">
-        <h2 style="color: #17365d; margin-top: 0;">Before You Finish</h2>
-
-        <p>Make sure your notebook contains:</p>
-
-        <ul style="margin-bottom: 0;">
-            <li>Dataset exploration</li>
-            <li>Sentiment distribution</li>
-            <li>Cleaned text</li>
-            <li>POS features</li>
-            <li>NER features</li>
-            <li>TF-IDF model</li>
-            <li>POS + NER model</li>
-            <li>Combined model</li>
-            <li>Evaluation results</li>
-            <li>Model comparison</li>
-            <li>Answers to the analysis questions</li>
-            <li>Three new test sentences</li>
-            <li>Final reflection</li>
-        </ul>
-    </div>
 
 </div>
+
+
+<!-- =========================================================
+     COPY BUTTON JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+document.querySelectorAll(".copy-btn").forEach(button => {
+
+    button.addEventListener("click", async () => {
+
+        const codeWindow = button.closest(".code-window");
+        const code = codeWindow.querySelector("code").innerText;
+
+        try {
+
+            await navigator.clipboard.writeText(code);
+
+            const originalText = button.innerText;
+
+            button.innerText = "✓ Copied!";
+            button.classList.add("copied");
+
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.classList.remove("copied");
+            }, 1500);
+
+        } catch (error) {
+
+            /*
+              Fallback for browsers where navigator.clipboard
+              is unavailable.
+            */
+
+            const textarea = document.createElement("textarea");
+
+            textarea.value = code;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+
+            document.body.appendChild(textarea);
+
+            textarea.select();
+
+            document.execCommand("copy");
+
+            document.body.removeChild(textarea);
+
+            button.innerText = "✓ Copied!";
+            button.classList.add("copied");
+
+            setTimeout(() => {
+                button.innerText = "Copy";
+                button.classList.remove("copied");
+            }, 1500);
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
