@@ -1,0 +1,868 @@
+<div style="max-width: 1000px; margin: 0 auto; font-family: Arial, Helvetica, sans-serif; color: #1f2937; line-height: 1.6;">
+
+    <!-- Header -->
+    <div style="background: #17365d; color: white; padding: 28px 30px; border-radius: 10px;">
+        <h1 style="margin: 0; font-size: 30px;">COVID-19 Vaccine Tweet Sentiment Classification</h1>
+        <p style="margin: 10px 0 0 0; font-size: 17px;">
+            In-Class NLP Activity: TF-IDF, POS Tagging, Named Entity Recognition, and Machine Learning
+        </p>
+    </div>
+
+    <!-- Overview -->
+    <div style="margin-top: 28px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Activity Overview
+        </h2>
+
+        <p>
+            In this activity, you will work with a real dataset containing tweets about
+            COVID-19 vaccines. Each tweet has already been labeled as
+            <strong>negative, neutral, or positive</strong>.
+        </p>
+
+        <p>
+            Your goal is to build a machine learning model that predicts the sentiment
+            of a tweet. You will also investigate whether linguistic information from
+            <strong>Part-of-Speech tagging (POS)</strong> and
+            <strong>Named Entity Recognition (NER)</strong> can improve the model.
+        </p>
+
+        <div style="background: #eef4fb; border-left: 5px solid #2f6690; padding: 15px 18px; margin: 20px 0;">
+            <strong>Main Question:</strong><br>
+            Does adding POS and NER information improve sentiment classification compared
+            with using TF-IDF text features alone?
+        </div>
+    </div>
+
+    <!-- Learning goals -->
+    <div style="margin-top: 30px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Learning Goals
+        </h2>
+
+        <p>By the end of this activity, you should be able to:</p>
+
+        <ul>
+            <li>Load and explore a real text dataset.</li>
+            <li>Clean social media text.</li>
+            <li>Apply POS tagging with spaCy.</li>
+            <li>Apply Named Entity Recognition with spaCy.</li>
+            <li>Convert text into TF-IDF features.</li>
+            <li>Train a Logistic Regression classifier.</li>
+            <li>Evaluate a multi-class classification model.</li>
+            <li>Compare different types of NLP features.</li>
+        </ul>
+    </div>
+
+    <!-- Dataset -->
+    <div style="margin-top: 30px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 1: Download the Dataset
+        </h2>
+
+        <p>
+            We will use the <strong>COVID-19 Vaccine Tweets with Sentiment Annotation</strong>
+            dataset from Kaggle.
+        </p>
+
+        <div style="text-align: center; margin: 25px 0;">
+            <a href="https://www.kaggle.com/datasets/datasciencetool/covid19-vaccine-tweets-with-sentiment-annotation"
+               target="_blank"
+               rel="noopener"
+               style="display: inline-block; background: #17365d; color: white; text-decoration: none;
+                      padding: 13px 24px; border-radius: 6px; font-weight: bold;">
+                Open Dataset on Kaggle
+            </a>
+        </div>
+
+        <ol>
+            <li>Open the Kaggle link above.</li>
+            <li>Sign in to Kaggle if requested.</li>
+            <li>Click <strong>Download</strong>.</li>
+            <li>Extract the downloaded ZIP file if necessary.</li>
+            <li>Locate the CSV file.</li>
+            <li>Create a new Google Colab or Jupyter Notebook.</li>
+            <li>Upload the CSV file to your notebook environment.</li>
+        </ol>
+
+        <p>The file we will use is:</p>
+
+        <pre style="background: #f5f7fa; border: 1px solid #d9dee7; padding: 14px; border-radius: 6px; overflow-x: auto;"><code>covid-19_vaccine_tweets_with_sentiment.csv</code></pre>
+    </div>
+
+    <!-- Dataset columns -->
+    <div style="margin-top: 30px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Understanding the Dataset
+        </h2>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+            <thead>
+                <tr style="background: #17365d; color: white;">
+                    <th style="padding: 10px; text-align: left;">Column</th>
+                    <th style="padding: 10px; text-align: left;">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><code>tweet_id</code></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Unique identifier for the tweet</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><code>label</code></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Sentiment category</td>
+                </tr>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><code>tweet_text</code></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Text of the tweet</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Sentiment labels:</strong></p>
+
+        <ul>
+            <li><strong>1 = Negative</strong></li>
+            <li><strong>2 = Neutral</strong></li>
+            <li><strong>3 = Positive</strong></li>
+        </ul>
+
+        <div style="background: #fff7e6; border-left: 5px solid #d69e2e; padding: 14px 18px;">
+            <strong>Important:</strong> We will use <code>tweet_text</code> to predict
+            <code>label</code>. Do not use <code>tweet_id</code> as a machine learning feature.
+        </div>
+    </div>
+
+    <!-- Setup -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 2: Set Up Your Notebook
+        </h2>
+
+        <p>If you are using Google Colab, run the following cell:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>!pip install -q spacy scikit-learn
+!python -m spacy download en_core_web_sm</code></pre>
+
+        <p>Import the libraries:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import re
+import spacy
+
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+
+nlp = spacy.load("en_core_web_sm")</code></pre>
+    </div>
+
+    <!-- Load data -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 3: Load and Explore the Dataset
+        </h2>
+
+        <p>Load the CSV file:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df = pd.read_csv(
+    "covid-19_vaccine_tweets_with_sentiment.csv",
+    encoding="cp1252"
+)
+
+df.head()</code></pre>
+
+        <p>Check the size of the dataset:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df.shape</code></pre>
+
+        <p>Check the columns and data types:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df.info()</code></pre>
+
+        <p>Check the sentiment distribution:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df["label"].value_counts().sort_index()</code></pre>
+
+        <p>Create readable sentiment names:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>label_names = {
+    1: "Negative",
+    2: "Neutral",
+    3: "Positive"
+}
+
+df["sentiment"] = df["label"].map(label_names)
+
+df["sentiment"].value_counts()</code></pre>
+
+        <p>Create a simple chart:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df["sentiment"].value_counts().plot(kind="bar")
+
+plt.title("Sentiment Distribution")
+plt.xlabel("Sentiment")
+plt.ylabel("Number of Tweets")
+plt.show()</code></pre>
+
+        <h3 style="color: #294f77;">Questions</h3>
+
+        <ol>
+            <li>How many tweets are in the dataset?</li>
+            <li>How many tweets belong to each sentiment?</li>
+            <li>Is the dataset balanced?</li>
+            <li>Which sentiment appears most often?</li>
+            <li>Why could class imbalance affect a machine learning model?</li>
+        </ol>
+    </div>
+
+    <!-- Examine text -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 4: Examine the Tweets
+        </h2>
+
+        <p>Display several tweets:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>for text in df["tweet_text"].head(5):
+    print(text)
+    print("-" * 70)</code></pre>
+
+        <p>Now look at examples from each sentiment:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>for label in [1, 2, 3]:
+
+    print("\n", label_names[label])
+    print("=" * 70)
+
+    examples = df[df["label"] == label]["tweet_text"].head(3)
+
+    for tweet in examples:
+        print(tweet)
+        print()</code></pre>
+
+        <h3 style="color: #294f77;">Think About</h3>
+
+        <p>As you read the tweets, look for:</p>
+
+        <ul>
+            <li>positive or negative words</li>
+            <li>adjectives</li>
+            <li>verbs</li>
+            <li>hashtags</li>
+            <li>organizations</li>
+            <li>vaccine names</li>
+            <li>countries and cities</li>
+        </ul>
+    </div>
+
+    <!-- Cleaning -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 5: Clean the Tweet Text
+        </h2>
+
+        <p>
+            Tweets often contain URLs, user mentions, hashtags, and extra spaces.
+            We will perform simple cleaning before training the model.
+        </p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>def clean_tweet(text):
+
+    # Remove URLs
+    text = re.sub(r"http\S+|www\S+", "", text)
+
+    # Remove user mentions
+    text = re.sub(r"@\w+", "", text)
+
+    # Keep hashtag words but remove #
+    text = text.replace("#", "")
+
+    # Remove extra spaces
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
+
+
+df["clean_text"] = df["tweet_text"].apply(clean_tweet)
+
+df[["tweet_text", "clean_text"]].head()</code></pre>
+
+        <div style="background: #eef4fb; border-left: 5px solid #2f6690; padding: 14px 18px; margin-top: 18px;">
+            <strong>Why are we not removing every stop word?</strong><br>
+            Words such as <code>not</code>, <code>no</code>, and <code>never</code>
+            can be very important for sentiment.
+        </div>
+    </div>
+
+    <!-- POS -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 6: Part-of-Speech Tagging
+        </h2>
+
+        <p>
+            Part-of-Speech tagging identifies the grammatical role of each word.
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+            <thead>
+                <tr style="background: #17365d; color: white;">
+                    <th style="padding: 10px;">POS</th>
+                    <th style="padding: 10px;">Meaning</th>
+                    <th style="padding: 10px;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">NOUN</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Noun</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">vaccine</td>
+                </tr>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">PROPN</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Proper noun</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Pfizer</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">VERB</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Verb</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">protects</td>
+                </tr>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">ADJ</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Adjective</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">effective</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">ADV</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Adverb</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">quickly</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Try POS tagging on one tweet first:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>sample = df.loc[0, "clean_text"]
+
+doc = nlp(sample)
+
+for token in doc:
+    print(token.text, token.pos_)</code></pre>
+
+        <h3 style="color: #294f77;">Your Task</h3>
+
+        <p>
+            For every tweet, create the following numerical features:
+        </p>
+
+        <ul>
+            <li><code>noun_count</code></li>
+            <li><code>proper_noun_count</code></li>
+            <li><code>verb_count</code></li>
+            <li><code>adj_count</code></li>
+            <li><code>adv_count</code></li>
+        </ul>
+
+        <p>Use this starter function:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>def get_pos_features(text):
+
+    doc = nlp(text)
+
+    return pd.Series({
+        "noun_count": sum(token.pos_ == "NOUN" for token in doc),
+        "proper_noun_count": sum(token.pos_ == "PROPN" for token in doc),
+        "verb_count": sum(token.pos_ == "VERB" for token in doc),
+        "adj_count": sum(token.pos_ == "ADJ" for token in doc),
+        "adv_count": sum(token.pos_ == "ADV" for token in doc)
+    })
+
+
+pos_features = df["clean_text"].apply(get_pos_features)
+
+df = pd.concat([df, pos_features], axis=1)
+
+df.head()</code></pre>
+
+        <h3 style="color: #294f77;">Explore</h3>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>df.groupby("sentiment")[[
+    "noun_count",
+    "verb_count",
+    "adj_count",
+    "adv_count"
+]].mean()</code></pre>
+
+        <p>
+            Do positive, neutral, and negative tweets use different amounts of
+            adjectives or adverbs?
+        </p>
+    </div>
+
+    <!-- NER -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 7: Named Entity Recognition
+        </h2>
+
+        <p>
+            Named Entity Recognition identifies names and real-world entities in text.
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+            <thead>
+                <tr style="background: #17365d; color: white;">
+                    <th style="padding: 10px;">Entity</th>
+                    <th style="padding: 10px;">Meaning</th>
+                    <th style="padding: 10px;">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">PERSON</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Person</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">A person's name</td>
+                </tr>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">ORG</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Organization</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Pfizer</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">GPE</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Country, city, or state</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">India</td>
+                </tr>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">DATE</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Date or time period</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">March 2021</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">PRODUCT</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Product</td>
+                    <td style="padding: 9px; border-bottom: 1px solid #ddd;">Product name</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Try NER on one tweet:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>sample = df.loc[0, "clean_text"]
+
+doc = nlp(sample)
+
+for ent in doc.ents:
+    print(ent.text, ent.label_)</code></pre>
+
+        <h3 style="color: #294f77;">Your Task</h3>
+
+        <p>Create these NER features:</p>
+
+        <ul>
+            <li><code>person_count</code></li>
+            <li><code>org_count</code></li>
+            <li><code>gpe_count</code></li>
+            <li><code>date_count</code></li>
+            <li><code>product_count</code></li>
+            <li><code>entity_count</code></li>
+        </ul>
+
+        <p>Starter code:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>def get_ner_features(text):
+
+    doc = nlp(text)
+
+    return pd.Series({
+        "person_count": sum(ent.label_ == "PERSON" for ent in doc.ents),
+        "org_count": sum(ent.label_ == "ORG" for ent in doc.ents),
+        "gpe_count": sum(ent.label_ == "GPE" for ent in doc.ents),
+        "date_count": sum(ent.label_ == "DATE" for ent in doc.ents),
+        "product_count": sum(ent.label_ == "PRODUCT" for ent in doc.ents),
+        "entity_count": len(doc.ents)
+    })
+
+
+ner_features = df["clean_text"].apply(get_ner_features)
+
+df = pd.concat([df, ner_features], axis=1)
+
+df.head()</code></pre>
+    </div>
+
+    <!-- split -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 8: Create Training and Testing Data
+        </h2>
+
+        <p>
+            We will keep 80% of the tweets for training and 20% for testing.
+        </p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>train_df, test_df = train_test_split(
+    df,
+    test_size=0.20,
+    random_state=42,
+    stratify=df["label"]
+)
+
+print("Training:", train_df.shape)
+print("Testing:", test_df.shape)</code></pre>
+
+        <div style="background: #eef4fb; border-left: 5px solid #2f6690; padding: 14px 18px;">
+            <strong>Why use <code>stratify</code>?</strong><br>
+            It helps keep approximately the same proportion of negative, neutral,
+            and positive tweets in both the training and testing datasets.
+        </div>
+    </div>
+
+    <!-- model 1 -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 9: Model 1 — TF-IDF
+        </h2>
+
+        <p>
+            Our first model uses the actual words in the tweets.
+        </p>
+
+        <div style="background: #f5f7fa; text-align: center; padding: 18px; margin: 18px 0; border-radius: 6px;">
+            <strong>Tweet → TF-IDF → Logistic Regression → Sentiment</strong>
+        </div>
+
+        <p>Create TF-IDF features:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>tfidf = TfidfVectorizer(
+    max_features=5000,
+    ngram_range=(1, 2)
+)
+
+X_train_tfidf = tfidf.fit_transform(train_df["clean_text"])
+X_test_tfidf = tfidf.transform(test_df["clean_text"])
+
+y_train = train_df["label"]
+y_test = test_df["label"]</code></pre>
+
+        <p>Train Logistic Regression:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>model1 = LogisticRegression(
+    max_iter=1000,
+    class_weight="balanced"
+)
+
+model1.fit(X_train_tfidf, y_train)
+
+pred1 = model1.predict(X_test_tfidf)</code></pre>
+
+        <p>Evaluate the model:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Accuracy:", accuracy_score(y_test, pred1))
+
+print(
+    classification_report(
+        y_test,
+        pred1,
+        target_names=["Negative", "Neutral", "Positive"]
+    )
+)</code></pre>
+
+        <h3 style="color: #294f77;">Record Your Results</h3>
+
+        <ul>
+            <li>Accuracy = __________</li>
+            <li>Negative F1-score = __________</li>
+            <li>Neutral F1-score = __________</li>
+            <li>Positive F1-score = __________</li>
+        </ul>
+    </div>
+
+    <!-- Model 2 -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 10: Model 2 — POS + NER
+        </h2>
+
+        <p>
+            The second model will ignore the actual words and use only the
+            linguistic features that you extracted.
+        </p>
+
+        <p>Select the linguistic features:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>linguistic_features = [
+    "noun_count",
+    "proper_noun_count",
+    "verb_count",
+    "adj_count",
+    "adv_count",
+    "person_count",
+    "org_count",
+    "gpe_count",
+    "date_count",
+    "product_count",
+    "entity_count"
+]
+
+X_train_ling = train_df[linguistic_features]
+X_test_ling = test_df[linguistic_features]</code></pre>
+
+        <p>Train the second model:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>model2 = LogisticRegression(
+    max_iter=1000,
+    class_weight="balanced"
+)
+
+model2.fit(X_train_ling, y_train)
+
+pred2 = model2.predict(X_test_ling)</code></pre>
+
+        <p>Evaluate:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Accuracy:", accuracy_score(y_test, pred2))
+
+print(
+    classification_report(
+        y_test,
+        pred2,
+        target_names=["Negative", "Neutral", "Positive"]
+    )
+)</code></pre>
+
+        <h3 style="color: #294f77;">Question</h3>
+
+        <p>
+            How does the POS + NER model compare with the TF-IDF model?
+        </p>
+    </div>
+
+    <!-- Model 3 -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 11: Model 3 — Combine TF-IDF + POS + NER
+        </h2>
+
+        <p>
+            Now combine the text features and linguistic features.
+        </p>
+
+        <div style="background: #f5f7fa; text-align: center; padding: 18px; margin: 18px 0; border-radius: 6px;">
+            <strong>TF-IDF + POS + NER → Logistic Regression → Sentiment</strong>
+        </div>
+
+        <p>Import the required tools:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>from scipy.sparse import hstack, csr_matrix
+from sklearn.preprocessing import StandardScaler</code></pre>
+
+        <p>Scale the numerical linguistic features:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>scaler = StandardScaler()
+
+train_ling_scaled = scaler.fit_transform(X_train_ling)
+test_ling_scaled = scaler.transform(X_test_ling)</code></pre>
+
+        <p>Combine the features:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>X_train_combined = hstack([
+    X_train_tfidf,
+    csr_matrix(train_ling_scaled)
+])
+
+X_test_combined = hstack([
+    X_test_tfidf,
+    csr_matrix(test_ling_scaled)
+])</code></pre>
+
+        <p>Train Model 3:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>model3 = LogisticRegression(
+    max_iter=1000,
+    class_weight="balanced"
+)
+
+model3.fit(X_train_combined, y_train)
+
+pred3 = model3.predict(X_test_combined)</code></pre>
+
+        <p>Evaluate:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Accuracy:", accuracy_score(y_test, pred3))
+
+print(
+    classification_report(
+        y_test,
+        pred3,
+        target_names=["Negative", "Neutral", "Positive"]
+    )
+)</code></pre>
+    </div>
+
+    <!-- Compare -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 12: Compare the Models
+        </h2>
+
+        <p>Create a simple comparison:</p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>print("Model 1 - TF-IDF:", accuracy_score(y_test, pred1))
+print("Model 2 - POS + NER:", accuracy_score(y_test, pred2))
+print("Model 3 - Combined:", accuracy_score(y_test, pred3))</code></pre>
+
+        <p>Complete the table:</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background: #17365d; color: white;">
+                    <th style="padding: 10px; text-align: left;">Model</th>
+                    <th style="padding: 10px;">Accuracy</th>
+                    <th style="padding: 10px;">Negative F1</th>
+                    <th style="padding: 10px;">Neutral F1</th>
+                    <th style="padding: 10px;">Positive F1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">TF-IDF</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                </tr>
+                <tr style="background: #f7f9fc;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">POS + NER</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">TF-IDF + POS + NER</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">________</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Questions -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 13: Analysis Questions
+        </h2>
+
+        <p>Answer the following questions in Markdown cells in your notebook.</p>
+
+        <ol>
+            <li>Which model produced the highest accuracy?</li>
+            <li>Which model produced the best F1-score for negative tweets?</li>
+            <li>Was TF-IDF more useful than POS and NER features alone?</li>
+            <li>Did adding POS and NER improve the TF-IDF model?</li>
+            <li>Why might adjectives and adverbs be useful for sentiment analysis?</li>
+            <li>Why might named entities be useful when analyzing vaccine-related tweets?</li>
+            <li>Which sentiment was easiest for the model to predict?</li>
+            <li>Which sentiment was most difficult to predict?</li>
+            <li>How could class imbalance affect your results?</li>
+        </ol>
+    </div>
+
+    <!-- Test own examples -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Part 14: Try Your Own Tweets
+        </h2>
+
+        <p>
+            Create three short vaccine-related sentences:
+        </p>
+
+        <ul>
+            <li>one that you expect to be negative</li>
+            <li>one that you expect to be neutral</li>
+            <li>one that you expect to be positive</li>
+        </ul>
+
+        <p>
+            Use <strong>Model 1</strong> first because it only requires text.
+        </p>
+
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>new_tweets = [
+    "Write your first sentence here",
+    "Write your second sentence here",
+    "Write your third sentence here"
+]
+
+new_tfidf = tfidf.transform(new_tweets)
+
+predictions = model1.predict(new_tfidf)
+
+for text, prediction in zip(new_tweets, predictions):
+    print(text)
+    print("Prediction:", label_names[prediction])
+    print("-" * 60)</code></pre>
+
+        <p>
+            Were the model's predictions what you expected? Explain any incorrect predictions.
+        </p>
+    </div>
+
+    <!-- Final -->
+    <div style="margin-top: 35px;">
+        <h2 style="color: #17365d; border-bottom: 2px solid #d7dee8; padding-bottom: 8px;">
+            Final Reflection
+        </h2>
+
+        <p>
+            Write a short paragraph describing what you learned from this activity.
+        </p>
+
+        <p>Your response should discuss:</p>
+
+        <ul>
+            <li>TF-IDF</li>
+            <li>POS tagging</li>
+            <li>Named Entity Recognition</li>
+            <li>sentiment classification</li>
+            <li>model evaluation</li>
+            <li>class imbalance</li>
+            <li>whether linguistic features improved the model</li>
+        </ul>
+    </div>
+
+    <!-- Completion -->
+    <div style="background: #eef4fb; border: 1px solid #c8d7e8; border-radius: 8px;
+                padding: 20px; margin-top: 35px; margin-bottom: 25px;">
+        <h2 style="color: #17365d; margin-top: 0;">Before You Finish</h2>
+
+        <p>Make sure your notebook contains:</p>
+
+        <ul style="margin-bottom: 0;">
+            <li>Dataset exploration</li>
+            <li>Sentiment distribution</li>
+            <li>Cleaned text</li>
+            <li>POS features</li>
+            <li>NER features</li>
+            <li>TF-IDF model</li>
+            <li>POS + NER model</li>
+            <li>Combined model</li>
+            <li>Evaluation results</li>
+            <li>Model comparison</li>
+            <li>Answers to the analysis questions</li>
+            <li>Three new test sentences</li>
+            <li>Final reflection</li>
+        </ul>
+    </div>
+
+</div>
