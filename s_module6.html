@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>IAN 620 · Module 6 · Transformers and Modern NLP</title>
+<style>
+
+    :root {
+      --bg:#e8eff6; --canvas:#f8fbff; --panel:#ffffff; --panel2:#f2f6fb; --ink:#0c1526; --muted:#5f6f87;
+      --line:#d7e1ee; --line2:#c9d7e6; --accent:#1f5f9f; --accent2:#0f6fb8; --good:#0f7a3d; --warn:#b45309;
+      --danger:#b42318; --code:#1e1e1e; --codeHead:#34495f; --codeInk:#dbeafe; --shadow:0 18px 45px rgba(19, 40, 68, .12);
+      --slideW:min(1160px, calc(100vw - 300px)); --slideH:625px; --topH:86px; --bottomH:154px;
+    }
+    body.dark {
+      --bg:#101b2c; --canvas:#0b1220; --panel:#121c2e; --panel2:#18263b; --ink:#eff6ff; --muted:#a9b6c9;
+      --line:#2c3e57; --line2:#40546f; --accent:#66a7ff; --accent2:#3aa7e0; --good:#4ade80; --code:#111827; --codeHead:#26364c; --codeInk:#e5edff; --shadow:0 18px 55px rgba(0,0,0,.35);
+    }
+    * { box-sizing:border-box; }
+    html, body { margin:0; min-height:100%; }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); overflow-x:hidden; padding-bottom:var(--bottomH); }
+    button, select, input { font:inherit; }
+    button { user-select:none; }
+    a { color:var(--accent); }
+    code { font-family:"Cascadia Code","Consolas","SFMono-Regular",monospace; }
+    .topbar { height:var(--topH); position:sticky; top:0; z-index:30; display:flex; align-items:center; gap:12px; padding:12px 18px; background:rgba(255,255,255,.94); border-bottom:1px solid var(--line); box-shadow:0 1px 0 rgba(15,23,42,.03); backdrop-filter:blur(14px); }
+    body.dark .topbar { background:rgba(11,18,32,.94); }
+    .brand { width:40px; height:40px; flex:0 0 40px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg,#0b4f96,#2f78bf); color:#fff; font-weight:900; letter-spacing:.02em; box-shadow:0 8px 18px rgba(31,95,159,.25); }
+    .title-wrap { min-width:240px; flex:1; line-height:1.15; }
+    .mod-title { font-size:18px; font-weight:900; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .course { font-size:13px; font-weight:600; color:var(--muted); margin-top:3px; }
+    .status { display:flex; align-items:center; gap:8px; white-space:nowrap; }
+    .ready { color:var(--good); font-weight:800; font-size:13px; }
+    .progress-pill { display:flex; align-items:center; gap:10px; padding:10px 14px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .progress-label { font-weight:900; }
+    .progress-pct { font-weight:900; color:var(--accent); }
+    .status small { color:var(--muted); font-weight:700; }
+    .progress-shell { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    .progress-bar { height:100%; width:0; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+    .top-actions { display:flex; gap:8px; align-items:center; }
+    .top-actions button, .narration-controls button, .nav-button, .slide-jump select, .drawer button, .modal button, .copy-code, .check-btn { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:10px; padding:9px 12px; cursor:pointer; font-weight:800; box-shadow:0 1px 0 rgba(15,23,42,.04); }
+    .top-actions button:hover, .narration-controls button:hover, .nav-button:hover, .copy-code:hover { border-color:var(--accent); color:var(--accent); }
+    .top-actions button.primary, .narration-controls button.primary { background:#1764a6; color:#fff; border-color:#1764a6; }
+    .deck { min-height:calc(100vh - var(--topH) - var(--bottomH)); display:flex; align-items:center; justify-content:center; padding:22px 16px; background:var(--bg); }
+    .slide { display:none; width:var(--slideW); max-width:1160px; min-height:var(--slideH); background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:54px 58px 46px; position:relative; overflow:hidden; }
+    .slide.active { display:block; animation:fade .16s ease-out; }
+    @keyframes fade { from { opacity:.45; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    .slide::after { content:"IAN 620 · Module 6 · Slide " attr(data-slide); position:absolute; right:24px; bottom:14px; color:#8291a8; font-size:12px; font-weight:900; letter-spacing:.02em; }
+    .slide-kicker { color:var(--accent); font-size:13px; font-weight:900; text-transform:uppercase; letter-spacing:.12em; margin-bottom:10px; }
+    h1 { margin:0 0 20px; font-size:42px; line-height:1.05; letter-spacing:-.04em; color:var(--ink); max-width:980px; }
+    h2 { margin:0 0 14px; font-size:28px; line-height:1.15; letter-spacing:-.02em; }
+    h3 { margin:0 0 8px; font-size:20px; line-height:1.2; }
+    p, li { font-size:20px; line-height:1.55; color:var(--muted); }
+    .lead { font-size:27px; line-height:1.35; color:#52637b; margin:0 0 18px; max-width:930px; }
+    body.dark .lead { color:#cbd7e8; }
+    .explain { max-width:980px; margin:12px 0; }
+    .slide-body { position:relative; z-index:1; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .pill-row span, mark { display:inline-block; background:#e7f1ff; color:#0c5596; border-radius:8px; padding:5px 9px; font-weight:800; }
+    body.dark .pill-row span, body.dark mark { background:#17385c; color:#a9d2ff; }
+    .hero-layout { display:grid; grid-template-columns:1.1fr .9fr; gap:34px; align-items:center; }
+    .visual-card, .mini-card, .callout, .sentence-box, .formula, .block-diagram, .context-window, .big-quote { border:1px solid var(--line); background:var(--panel2); border-radius:16px; padding:20px; }
+    .visual-card { min-height:260px; display:flex; flex-direction:column; justify-content:center; box-shadow:0 12px 28px rgba(15,23,42,.06); }
+    .viz-title { font-size:13px; color:var(--accent); font-weight:900; text-transform:uppercase; letter-spacing:.12em; margin-bottom:12px; }
+    .mini-flow { display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-weight:900; color:var(--ink); }
+    .mini-flow span { background:var(--panel); border:1px solid var(--line); padding:10px 12px; border-radius:10px; }
+    .layer-stack { margin-top:20px; display:grid; gap:9px; }
+    .layer-stack div { background:linear-gradient(135deg,#e9f2ff,#ffffff); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-weight:900; text-align:center; color:#1d4f86; }
+    body.dark .layer-stack div { background:#16263d; color:#bfdcff; }
+    .callout { margin-top:18px; border-left:6px solid var(--accent); }
+    .callout p, .callout { color:var(--muted); font-size:19px; line-height:1.45; }
+    .callout.soft { background:#f7fbff; }
+    body.dark .callout.soft { background:#142238; }
+    .card-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .card-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .mini-card { min-height:140px; }
+    .mini-card h3 { color:var(--ink); }
+    .mini-card p { font-size:18px; margin:0; }
+    .compare-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .compare-grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+    .split.wide { grid-template-columns:1.05fr .95fr; }
+    .flow { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+    .flow-item { background:var(--panel2); border:1px solid var(--line); border-radius:14px; padding:12px 14px; text-align:center; font-weight:800; min-width:120px; }
+    .arrow { font-weight:900; color:var(--accent); }
+    .timeline { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .timeline.wide { grid-template-columns:repeat(5,minmax(0,1fr)); }
+    .timeline div, .steps div { background:var(--panel2); border:1px solid var(--line); border-radius:14px; padding:16px; }
+    .timeline b, .steps b { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#dcecff; color:#0c5596; margin-right:8px; }
+    .steps { display:grid; gap:12px; }
+    .steps div { display:flex; gap:12px; align-items:flex-start; }
+    .steps span { font-size:19px; color:var(--muted); }
+    .sentence-box { background:#fbfdff; }
+    body.dark .sentence-box { background:#142238; }
+    .sentence-box p { font-size:26px; color:var(--ink); }
+    .sentence-box.compact p { font-size:23px; }
+    .token { display:inline-block; padding:8px 12px; margin:5px; border-radius:10px; background:#edf4ff; border:1px solid #d4e6fb; font-weight:900; color:#154a83; }
+    .token.active { background:#dcecff; color:#0a4c91; }
+    .token.target { background:#fff1c7; color:#7a4b00; }
+    /* VS Code-style Python examples */
+    .code-card {
+      margin-top:16px; border:1px solid #2b2b2b; border-radius:12px; overflow:hidden;
+      background:#1e1e1e; box-shadow:0 16px 34px rgba(0,0,0,.18);
+    }
+    .code-card.small-code pre { max-height:280px; }
+    .code-head {
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      background:#252526; color:#d4d4d4; padding:0 10px 0 14px; min-height:42px;
+      border-bottom:1px solid #3c3c3c; font-size:13px; font-weight:800;
+    }
+    .code-head span:first-child { display:flex; align-items:center; gap:9px; }
+    .code-head span:first-child::before {
+      content:""; width:44px; height:12px; flex:0 0 44px;
+      background:radial-gradient(circle at 6px 6px,#ff5f57 0 5px,transparent 5.5px),
+                 radial-gradient(circle at 22px 6px,#ffbd2e 0 5px,transparent 5.5px),
+                 radial-gradient(circle at 38px 6px,#28c840 0 5px,transparent 5.5px);
+    }
+    .copy-code {
+      padding:6px 10px; border-color:#3c3c3c; background:#0e639c; color:#fff; font-size:12px;
+      border-radius:7px; box-shadow:none;
+    }
+    .copy-code:hover { background:#1177bb; color:#fff; border-color:#1177bb; }
+    .copy-code.copied { background:#16825d; border-color:#16825d; color:#fff; }
+    pre {
+      margin:0; padding:0; overflow:auto; max-height:430px; background:#1e1e1e;
+      font-family:"Cascadia Code","Consolas","SFMono-Regular",monospace;
+    }
+    pre code {
+      display:block; color:#d4d4d4; font-size:15px; line-height:1.58; tab-size:4;
+      font-family:"Cascadia Code","Consolas","SFMono-Regular",monospace;
+    }
+    pre code .code-line { display:flex; min-height:1.58em; }
+    pre code .ln {
+      flex:0 0 44px; padding-right:14px; color:#858585; text-align:right; user-select:none;
+      background:#1e1e1e; border-right:1px solid rgba(255,255,255,.04);
+    }
+    pre code .src { display:block; padding-left:16px; padding-right:18px; white-space:pre; }
+    pre code .kw { color:#569cd6; }
+    pre code .fn { color:#dcdcaa; }
+    pre code .str { color:#ce9178; }
+    pre code .com { color:#6a9955; font-style:italic; }
+    pre code .num { color:#b5cea8; }
+    pre code .builtin { color:#4ec9b0; }
+    .mini-code {
+      border:1px solid #3c3c3c; border-radius:8px; padding:12px 14px; background:#1e1e1e;
+      color:#d4d4d4; font-family:"Cascadia Code","Consolas",monospace; font-size:15px;
+    }
+    .code-note { padding:10px 14px; background:#252526; color:#b9c6d8; font-size:14px; border-top:1px solid #3c3c3c; }
+    .output-box {
+      border-top:1px solid #3c3c3c; background:#0c0c0c; color:#cccccc; padding:12px 14px; white-space:pre-wrap;
+      font-family:"Cascadia Code","Consolas",monospace; font-size:14px;
+    }
+    .output-box::before { content:"TERMINAL\A"; white-space:pre; display:block; color:#9cdcfe; font-weight:800; margin-bottom:5px; }
+    .formula { font-family:"Cascadia Code","Consolas",monospace; font-size:26px; color:var(--ink); text-align:center; }
+    .block-diagram { display:grid; gap:10px; text-align:center; font-weight:900; color:var(--ink); }
+    .block-diagram > div:not(.heads):not(.arrow-down):not(.plus-line) { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
+    .block-diagram.strong { gap:7px; }
+    .arrow-down { color:var(--accent); font-size:24px; }
+    .plus-line { color:var(--muted); font-size:16px; }
+    .focus { border-color:#7db5ec !important; background:#e8f3ff !important; color:#0b4f96 !important; }
+    body.dark .focus { background:#16365d !important; color:#bddcff !important; }
+    .heads { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .heads span { background:#e7f1ff; border:1px solid #c9ddf4; color:#174f84; border-radius:10px; padding:8px; }
+    body.dark .heads span { background:#17385c; border-color:#294a70; color:#cfe7ff; }
+    .attention-demo, .attention-scene, .multihead, .beam-wrap, .context-window { margin-top:14px; }
+    .bars { display:grid; gap:8px; }
+    .bars div { background:#e7f1ff; border-radius:10px; padding:8px 10px; font-weight:800; color:#174f84; }
+    .heat-table, .clean-table, .mask-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); }
+    .heat-table th, .heat-table td, .clean-table th, .clean-table td, .mask-table th, .mask-table td { padding:10px 12px; border-bottom:1px solid var(--line); border-right:1px solid var(--line); font-size:16px; text-align:left; color:var(--ink); }
+    .heat-table th, .clean-table th, .mask-table th { background:var(--panel2); color:var(--accent); font-weight:900; }
+    .heat-table tr:last-child td, .clean-table tr:last-child td, .mask-table tr:last-child td { border-bottom:0; }
+    .heat-table td:last-child, .clean-table td:last-child, .mask-table td:last-child, .heat-table th:last-child, .clean-table th:last-child, .mask-table th:last-child { border-right:0; }
+    .h1 { background:#eef7ff; } .h2 { background:#dceeff; } .h3 { background:#c5e2ff; } .h4 { background:#9ccfff; } .h5 { background:#63b3ed; color:#042f4f !important; font-weight:900; }
+    .small-note { font-size:13px; color:var(--muted); font-weight:700; }
+    .small { font-size:15px; }
+    .choice-list { display:grid; grid-template-columns:1fr auto 1.2fr; gap:8px 10px; align-items:center; }
+    .choice-list span { background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:9px 10px; font-weight:800; }
+    .choice-list b { color:var(--accent); }
+    .quiz-list { display:grid; gap:12px; }
+    .check-btn.done { background:#e8f8ef; color:#0f7a3d; border-color:#9adab4; }
+    .answer-panel { background:var(--panel2); border:1px solid var(--line); border-radius:14px; padding:16px; margin-top:14px; }
+    .bottom { position:fixed; left:0; right:0; bottom:0; z-index:28; height:var(--bottomH); background:rgba(255,255,255,.96); border-top:1px solid var(--line); padding:8px 16px 10px; box-shadow:0 -8px 24px rgba(15,23,42,.08); backdrop-filter:blur(14px); }
+    body.dark .bottom { background:rgba(11,18,32,.96); }
+    .narration-controls { max-width:1320px; margin:0 auto 7px; display:flex; gap:8px; align-items:center; }
+    .narration-controls button, .narration-controls select { font-size:13px; padding:7px 10px; border-radius:8px; }
+    .narration-controls select { border:1px solid var(--line); background:var(--panel); color:var(--ink); font-weight:800; }
+    .bottom-main { max-width:1500px; margin:0 auto; display:grid; grid-template-columns:84px minmax(520px,1fr) 280px 70px; gap:12px; align-items:center; }
+    .nav-button { height:44px; font-size:18px; }
+    .audio-zone { min-width:0; }
+    .caption-strip { height:34px; background:#151b24; color:#f8fafc; border-radius:8px; padding:8px 12px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-weight:800; font-size:13px; margin-bottom:6px; }
+    .caption-strip.off { color:#94a3b8; }
+    .audio-card { height:56px; border:1px solid var(--line); border-radius:10px; background:var(--panel2); display:grid; grid-template-columns:1fr minmax(260px,420px) 48px; gap:12px; align-items:center; padding:8px; }
+    .audio-ready { font-size:13px; font-weight:900; color:var(--ink); }
+    .audio-ready::before { content:""; display:inline-block; width:10px; height:10px; border-radius:50%; background:#8fa7c2; margin-right:8px; }
+    audio { width:100%; height:32px; }
+    .play-mini { border:1px solid var(--line); background:var(--panel); color:var(--accent); border-radius:8px; padding:5px 8px; cursor:pointer; font-size:12px; font-weight:800; }
+    .slide-jump { display:grid; gap:6px; align-items:center; }
+    .slide-jump select { width:100%; max-width:280px; padding:10px; }
+    .mini-progress { height:7px; background:#d7e4f1; border-radius:99px; overflow:hidden; }
+    .mini-progress span { display:block; height:100%; width:0; background:#1764a6; }
+    .counter { text-align:right; color:var(--muted); font-size:12px; font-weight:900; }
+    .caption-panel, .drawer, .modal { position:fixed; z-index:50; background:var(--panel); border:1px solid var(--line); box-shadow:var(--shadow); display:none; }
+    .caption-panel.open, .drawer.open, .modal.open { display:block; }
+    .transcript-panel {
+      position:fixed; right:16px; bottom:calc(var(--bottomH) + 14px); z-index:52;
+      width:min(500px, calc(100vw - 32px)); max-height:min(400px, calc(100vh - var(--topH) - var(--bottomH) - 34px));
+      display:none; flex-direction:column; overflow:hidden; background:var(--panel); border:1px solid var(--line);
+      border-radius:16px; box-shadow:0 24px 60px rgba(15,23,42,.22);
+    }
+    .transcript-panel.open { display:flex; }
+    .transcript-head { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:13px 14px; border-bottom:1px solid var(--line); background:var(--panel2); }
+    .transcript-head h3 { margin:0; font-size:16px; line-height:1.25; color:var(--ink); }
+    .transcript-head button { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:10px; padding:8px 12px; cursor:pointer; font-weight:800; }
+    .transcript-body { padding:16px; overflow:auto; }
+    .transcript-body p { margin:0; font-size:15px; line-height:1.55; color:var(--muted); white-space:pre-wrap; }
+    .transcript-source { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); font-weight:700; }
+    .drawer { top:86px; right:18px; width:min(390px,calc(100vw - 36px)); max-height:calc(100vh - 190px); overflow:auto; border-radius:16px; padding:18px; }
+    .drawer-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:10px; }
+    .drawer-head h2, .drawer-head h3 { margin:0; }
+    .module-links { display:grid; gap:8px; }
+    .module-links a { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--line); border-radius:12px; color:var(--ink); text-decoration:none; background:var(--panel2); }
+    .module-links a.current { border-color:var(--accent); background:#e8f3ff; }
+    body.dark .module-links a.current { background:#172f50; }
+    .module-links strong { color:var(--accent); white-space:nowrap; }
+    .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:45; display:none; }
+    .backdrop.open { display:block; }
+    .modal { left:50%; top:50%; transform:translate(-50%,-50%); width:min(1000px,calc(100vw - 40px)); max-height:82vh; overflow:auto; border-radius:18px; padding:20px; }
+    .manifest-table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-top:12px; }
+    .manifest-table th,.manifest-table td { padding:10px 12px; border-bottom:1px solid var(--line); font-size:14px; text-align:left; }
+    .manifest-table th { background:var(--panel2); color:var(--accent); text-transform:uppercase; letter-spacing:.04em; }
+    .manifest-table tr:last-child td { border-bottom:0; }
+    .manifest-table code { font-size:13px; }
+    hr { border:0; border-top:1px solid var(--line); margin:18px 0; }
+    @media (max-width: 1180px) {
+      :root { --slideW:calc(100vw - 32px); --slideH:auto; --bottomH:210px; }
+      .topbar { height:auto; flex-wrap:wrap; }
+      .status { order:3; width:100%; }
+      .top-actions { order:4; width:100%; flex-wrap:wrap; }
+      .deck { min-height:auto; align-items:flex-start; }
+      .slide { min-height:auto; padding:32px 24px; }
+      .hero-layout, .split, .split.wide, .card-grid, .card-grid.three, .compare-grid, .compare-grid.three, .timeline, .timeline.wide { grid-template-columns:1fr; }
+      h1 { font-size:34px; }
+      .lead { font-size:22px; }
+      p, li { font-size:18px; }
+      .bottom { height:var(--bottomH); }
+      .bottom-main { grid-template-columns:1fr; }
+      .audio-card { grid-template-columns:1fr; height:auto; }
+      .nav-button { width:100%; }
+      .slide-jump { grid-template-columns:1fr; }
+      .flow { flex-direction:column; align-items:stretch; }
+      .arrow { transform:rotate(90deg); text-align:center; }
+    }
+    @media (max-width: 760px) {
+      .transcript-panel { left:10px; right:10px; bottom:calc(var(--bottomH) + 10px); width:auto; max-height:48vh; }
+      .transcript-head h3 { font-size:14px; }
+      .transcript-body p { font-size:14px; }
+    }
+    @media print { .topbar,.bottom,.drawer,.caption-panel,.modal,.backdrop,.transcript-panel { display:none !important; } body { padding:0; background:#fff; } .deck { display:block; padding:0; } .slide { display:block !important; min-height:auto; box-shadow:none; page-break-after:always; width:100%; max-width:none; border:0; border-radius:0; } }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+<div class="brand">NLP</div>
+<div class="title-wrap">
+<div class="mod-title">IAN 620 · Module 6</div>
+<div class="course">Transformers and Modern NLP</div>
+</div>
+<div class="status">
+<span class="ready">Python ready</span>
+<div class="progress-pill"><span class="progress-label">Progress</span><span class="progress-pct" id="progressPct">0%</span><small id="statusText">NLP 1/76</small></div>
+<div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+<div class="top-actions">
+<button id="themeBtn">Dark mode</button>
+<button onclick="toggleFullscreen()">Fullscreen</button>
+<button class="primary" onclick="runSlide()">Run slide ▶</button>
+<button onclick="toggleDrawer()">☰ Course Modules</button>
+</div>
+</header>
+<main class="deck" id="deck">
+<section class="slide" data-audio="audio/M6/M_slide_01.mp3" data-caption="caption/M6/M_slide_01.vtt" data-file="M_slide_01" data-slide="1" data-transcript="Module 6 introduces Transformers and modern NLP. The focus is practical. We will learn how text becomes model input, how attention creates context-aware representations, how pretrained models are organized, and how to choose and use those models responsibly in Python.">
+<div class="slide-kicker">IAN 620 · Module 6</div>
+<h1>Transformers and Modern NLP</h1>
+<div class="slide-body">
+<div class="hero-layout">
+<div>
+<p class="lead">A practical introduction to the architecture behind modern NLP systems.</p>
+<p class="explain">This module explains how text becomes tokens, how tokens become vectors, how attention updates those vectors, and how pretrained Transformer models are selected and used in Python.</p>
+<div class="pill-row"><span>Tokenization</span><span>Attention</span><span>Pretrained Models</span><span>Hugging Face</span><span>VS Code Ready</span></div>
+</div>
+<div aria-label="Transformer module diagram" class="visual-card transformer-visual">
+<div class="viz-title">Modern NLP pipeline</div>
+<div class="mini-flow"><span>Text</span><b>→</b><span>Tokens</span><b>→</b><span>Embeddings</span><b>→</b><span>Attention</span><b>→</b><span>Model Output</span></div>
+<div class="layer-stack"><div>Input</div><div>Transformer Block</div><div>Transformer Block</div><div>Task Head / Generation</div></div>
+</div>
+</div>
+<div class="callout soft">The goal is not to turn this module into a deep-learning theory course. The goal is to understand enough architecture to use modern NLP models carefully and explain what each major component is doing.</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_02.mp3" data-caption="caption/M6/M_slide_02.vtt" data-file="M_slide_02" data-slide="2" data-transcript="The course now moves from classic NLP and machine learning toward modern Transformer-based NLP. This module connects previous vector ideas to modern pretrained models.">
+<div class="slide-kicker">Course position</div>
+<h1>Where Module 6 fits in IAN 620</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Module 1<br/>Intro NLP</div><div class="arrow">→</div><div class="flow-item">Module 2<br/>Preprocessing</div><div class="arrow">→</div><div class="flow-item">Module 3<br/>Linguistic analysis</div><div class="arrow">→</div><div class="flow-item">Module 4<br/>Embeddings</div><div class="arrow">→</div><div class="flow-item">Module 5<br/>Classification</div><div class="arrow">→</div><div class="flow-item"><strong>Module 6<br/>Transformers</strong></div><div class="arrow">→</div><div class="flow-item">Module 7<br/>RAG</div></div>
+<p class="explain">Module 4 gave us vectors and similarity. Module 5 used classic machine learning for classification. Module 6 explains why modern models can create contextual representations and generate language.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_03.mp3" data-caption="caption/M6/M_slide_03.vtt" data-file="M_slide_03" data-slide="3" data-transcript="This module is organized around six concepts: input processing, attention, Transformer blocks, model families, pretrained model selection, and practical Python workflows. The slides connect architecture to code so that each concept can be tested in VS Code, Jupyter, or Colab.">
+<div class="slide-kicker">Concept map</div>
+<h1>What this module covers</h1>
+<div class="slide-body">
+<div class="card-grid three">
+<div class="mini-card"><h3>Input processing</h3><p>Text is converted into tokens, token IDs, attention masks, and embedding vectors.</p></div>
+<div class="mini-card"><h3>Attention</h3><p>Each token can use information from other tokens instead of being represented in isolation.</p></div>
+<div class="mini-card"><h3>Transformer blocks</h3><p>Attention, feed-forward layers, residual connections, and normalization are stacked repeatedly.</p></div>
+<div class="mini-card"><h3>Model families</h3><p>Encoder-only, decoder-only, and encoder-decoder models serve different NLP tasks.</p></div>
+<div class="mini-card"><h3>Pretrained models</h3><p>Model selection depends on task, model card, domain, size, hardware, license, and evaluation evidence.</p></div>
+<div class="mini-card"><h3>Python workflow</h3><p>Copy-ready VS Code examples use <code>transformers</code>, <code>sentence-transformers</code>, and PyTorch-style layers.</p></div>
+</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_04.mp3" data-caption="caption/M6/M_slide_04.vtt" data-file="M_slide_04" data-slide="4" data-transcript="The module is organized as a path. We begin with motivation, then input processing, then attention, then complete models, and finally hands-on pretrained model use.">
+<div class="slide-kicker">Module roadmap</div>
+<h1>A gradual path from text to modern models</h1>
+<div class="slide-body"><div class="timeline">
+<div><b>1</b><span>Why Transformers?</span></div>
+<div><b>2</b><span>Tokenization</span></div>
+<div><b>3</b><span>Embeddings + position</span></div>
+<div><b>4</b><span>Attention layer</span></div>
+<div><b>5</b><span>Transformer blocks</span></div>
+<div><b>6</b><span>Model families</span></div>
+<div><b>7</b><span>Pretrained model choice</span></div>
+<div><b>8</b><span>Python examples</span></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_05.mp3" data-caption="caption/M6/M_slide_05.vtt" data-file="M_slide_05" data-slide="5" data-transcript="Older methods are still valuable, but Transformers became powerful because they allow text representations to depend strongly on surrounding context.">
+<div class="slide-kicker">Motivation</div>
+<h1>Why did NLP need Transformers?</h1>
+<div class="slide-body"><div class="split"><div>
+<h3>Earlier methods were useful</h3>
+<ul>
+<li>Bag-of-Words and TF-IDF are simple and interpretable.</li>
+<li>Word2Vec and GloVe give dense word vectors.</li>
+<li>Classic classifiers can solve many text classification tasks.</li>
+</ul>
+</div><div>
+<h3>But language needs context</h3>
+<ul>
+<li>The same word can mean different things.</li>
+<li>Important words may be far apart.</li>
+<li>Generation requires predicting one token after another.</li>
+</ul>
+</div></div>
+<div class="callout">Transformers became important because they handle context more directly through attention.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_06.mp3" data-caption="caption/M6/M_slide_06.vtt" data-file="M_slide_06" data-slide="6" data-transcript="This example makes the reason for contextual embeddings clear. A Transformer can represent the word bank differently when the sentence is about finance versus geography.">
+<div class="slide-kicker">Example</div>
+<h1>The same word can have different meanings</h1>
+<div class="slide-body"><div class="sentence-box">
+<p>The customer went to the <mark>bank</mark> to deposit a check.</p>
+<p>The child sat near the river <mark>bank</mark>.</p>
+</div>
+<div class="card-grid"><article class="mini-card"><h3>Static embedding idea</h3><p>The word bank has one general vector learned from many contexts.</p></article><article class="mini-card"><h3>Contextual embedding idea</h3><p>The representation of bank changes depending on surrounding words.</p></article><article class="mini-card"><h3>Transformer advantage</h3><p>Attention lets the model use nearby and far-away context to shape each token representation.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_07.mp3" data-caption="caption/M6/M_slide_07.vtt" data-file="M_slide_07" data-slide="7" data-transcript="Bag-of-Words can be useful for many tasks, but it does not directly represent word order or grammatical roles. Transformers work with ordered token sequences.">
+<div class="slide-kicker">Classic NLP limit</div>
+<h1>Bag-of-Words ignores order</h1>
+<div class="slide-body"><div class="split"><div>
+<h3>Sentence A</h3>
+<p class="big-quote">The dog chased the cat.</p>
+<h3>Sentence B</h3>
+<p class="big-quote">The cat chased the dog.</p>
+</div><div>
+<h3>Bag-of-Words view</h3>
+<p>Both sentences contain almost the same words.</p>
+<p>But the meaning is different because the roles and order changed.</p>
+<div class="callout soft">Transformers keep sequence information and let words interact with each other.</div>
+</div></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_08.mp3" data-caption="caption/M6/M_slide_08.vtt" data-file="M_slide_08" data-slide="8" data-transcript="RNNs and LSTMs were important for sequence learning, but they read text step by step. Transformers made it easier to model broad context and train efficiently in parallel.">
+<div class="slide-kicker">Before Transformers</div>
+<h1>RNNs and LSTMs processed text step by step</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Token 1</div><div class="arrow">→</div><div class="flow-item">Token 2</div><div class="arrow">→</div><div class="flow-item">Token 3</div><div class="arrow">→</div><div class="flow-item">Token 4</div><div class="arrow">→</div><div class="flow-item">Token 5</div></div>
+<p class="explain">RNN-style models read sequences in order. This helped with sequence modeling, but long-distance relationships and parallel processing were difficult.</p>
+<div class="card-grid"><article class="mini-card"><h3>Strength</h3><p>They model sequence order more naturally than Bag-of-Words.</p></article><article class="mini-card"><h3>Challenge</h3><p>Information from early tokens can weaken over long sequences.</p></article><article class="mini-card"><h3>Speed issue</h3><p>Many steps depend on previous steps, so training is harder to parallelize.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_09.mp3" data-caption="caption/M6/M_slide_09.vtt" data-file="M_slide_09" data-slide="9" data-transcript="The core idea is that every token can look at other tokens. Attention controls how much information flows from one token to another.">
+<div class="slide-kicker">Big idea</div>
+<h1>A Transformer lets tokens look at other tokens</h1>
+<div class="slide-body"><div class="attention-demo">
+<div class="token">The</div><div class="token">student</div><div class="token active">submitted</div><div class="token">the</div><div class="token target">assignment</div>
+</div>
+<div class="beam-wrap">
+<div class="beam strong"></div><div class="beam medium"></div><div class="beam weak"></div>
+</div>
+<p class="explain">When the model builds a representation for one token, it can assign different levels of attention to other tokens in the same sentence.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_10.mp3" data-caption="caption/M6/M_slide_10.vtt" data-file="M_slide_10" data-slide="10" data-transcript="This pipeline is the mental model for the whole module. Text must be converted to tokens and vectors before the Transformer block can do anything useful.">
+<div class="slide-kicker">Mental model</div>
+<h1>A Transformer is not just one layer</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Text</div><div class="arrow">→</div><div class="flow-item">Tokenizer</div><div class="arrow">→</div><div class="flow-item">Token IDs</div><div class="arrow">→</div><div class="flow-item">Embeddings + position</div><div class="arrow">→</div><div class="flow-item">Attention blocks</div><div class="arrow">→</div><div class="flow-item">Task head or generator</div></div>
+<p class="explain">It is easy to jump straight to model names. Keep this pipeline in mind first. Every pretrained Transformer still needs tokenization, model inputs, and task-specific output handling.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_11.mp3" data-caption="caption/M6/M_slide_11.vtt" data-file="M_slide_11" data-slide="11" data-transcript="Tokenizer choice matters because the model was trained with a particular tokenizer. We should use the matching tokenizer for the chosen pretrained model.">
+<div class="slide-kicker">Tokenization</div>
+<h1>Transformer tokenization is more than splitting words</h1>
+<div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Word tokenization</h3><p>Splits text mostly by words and punctuation.</p></article><article class="mini-card"><h3>Character tokenization</h3><p>Splits text into individual characters.</p></article><article class="mini-card"><h3>Subword tokenization</h3><p>Splits text into common pieces so unknown words can still be represented.</p></article><article class="mini-card"><h3>Tokenizer vocabulary</h3><p>Maps each token or subword to a numeric ID the model understands.</p></article></div>
+<div class="callout">Modern Transformer models usually use subword tokenization.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_12.mp3" data-caption="caption/M6/M_slide_12.vtt" data-file="M_slide_12" data-slide="12" data-transcript="Subword tokenization helps models handle large vocabularies without needing a separate token for every possible word.">
+<div class="slide-kicker">Subwords</div>
+<h1>Why subword tokenization helps</h1>
+<div class="slide-body"><div class="compare-grid">
+<div><h3>Word-level</h3><p><code>unbelievable</code></p><p>One full token. If rare, it may be hard to handle.</p></div>
+<div><h3>Subword-level</h3><p><code>un</code> · <code>believ</code> · <code>able</code></p><p>The model can build meaning from useful pieces.</p></div>
+</div>
+<p class="explain">Subword tokenization helps with rare words, names, technical terms, spelling variants, and words the model did not often see as full words.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_13.mp3" data-caption="caption/M6/M_slide_13.vtt" data-file="M_slide_13" data-slide="13" data-transcript="There are multiple subword tokenization algorithms. For practical use, the most important rule is to load the tokenizer that belongs to the pretrained model.">
+<div class="slide-kicker">Tokenizer families</div>
+<h1>BPE, WordPiece, and SentencePiece</h1>
+<div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>BPE</h3><p>Byte-Pair Encoding merges frequent character or byte patterns into larger pieces.</p></article><article class="mini-card"><h3>WordPiece</h3><p>Used by many BERT-style tokenizers; learns useful word pieces.</p></article><article class="mini-card"><h3>SentencePiece</h3><p>Often used by multilingual and modern models; can tokenize raw text without pre-splitting words.</p></article></div>
+<div class="callout soft">Key point: do not memorize every tokenization algorithm. The tokenizer and model must match.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_14.mp3" data-caption="caption/M6/M_slide_14.vtt" data-file="M_slide_14" data-slide="14" data-transcript="Special tokens help the model organize input. They are part of the tokenizer and must be handled correctly.">
+<div class="slide-kicker">Special tokens</div>
+<h1>Models use tokens that are not ordinary words</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Token</th><th>Common purpose</th></tr></thead>
+<tbody>
+<tr><td><code>[CLS]</code></td><td>Often used as a sequence-level representation in BERT-style classification.</td></tr>
+<tr><td><code>[SEP]</code></td><td>Separates sentences or marks the end of a segment.</td></tr>
+<tr><td><code>[PAD]</code></td><td>Fills shorter sequences so a batch can have equal length.</td></tr>
+<tr><td><code>[MASK]</code></td><td>Used by masked language models during training or fill-mask tasks.</td></tr>
+</tbody></table>
+<p class="small-note">Different model families may use different special-token conventions.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_15.mp3" data-caption="caption/M6/M_slide_15.vtt" data-file="M_slide_15" data-slide="15" data-transcript="The attention mask is especially important when padding is present. It tells the model which positions should count as real input.">
+<div class="slide-kicker">Model input</div>
+<h1>Token IDs and attention masks</h1>
+<div class="slide-body"><div class="split"><div>
+<h3>Token IDs</h3>
+<p>Each token becomes an integer from the model vocabulary.</p>
+<pre class="mini-code">[101, 19081, 2024, 3928, 102]</pre>
+</div><div>
+<h3>Attention mask</h3>
+<p>Shows which positions are real tokens and which are padding.</p>
+<pre class="mini-code">[1, 1, 1, 1, 1]</pre>
+</div></div>
+<div class="callout">The model does not receive English text directly. It receives tensors.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_16.mp3" data-caption="caption/M6/M_slide_16.vtt" data-file="M_slide_16" data-slide="16" data-transcript="This code loads a tokenizer. The AutoTokenizer class is a practical shortcut because it knows which tokenizer implementation belongs to the model name.">
+<div class="slide-kicker">Code setup</div>
+<h1>Install libraries and load a tokenizer</h1>
+<div class="slide-body"><div class="code-card" data-output="Packages install. If torch is already installed, pip may report that requirements are already satisfied.">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Install the main libraries</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code># Run this once in a notebook or terminal
+# In VS Code terminal, remove the leading !
+!pip install transformers torch sentence-transformers accelerate</code></pre>
+<p class="code-note">Use the exclamation mark only inside a Jupyter notebook cell. In a VS Code terminal, type pip install directly.</p>
+<div class="output-box" hidden=""></div>
+</div>
+<div class="code-card" data-output="['transformers', 'changed', 'modern', 'nl', '##p', '.']">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Load a BERT tokenizer</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+text = "Transformers changed modern NLP."
+print(tokenizer.tokenize(text))</code></pre>
+<p class="code-note">AutoTokenizer chooses the correct tokenizer class from the model name.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_17.mp3" data-caption="caption/M6/M_slide_17.vtt" data-file="M_slide_17" data-slide="17" data-transcript="This slide shows the exact IDs and special tokens, making tokenization concrete instead of abstract.">
+<div class="slide-kicker">Code</div>
+<h1>Inspect token IDs and decoded tokens</h1>
+<div class="slide-body"><div class="code-card" data-output="[101, 19081, 2904, 2715, 17953, 2361, 1012, 102]
+['[CLS]', 'transformers', 'changed', 'modern', 'nl', '##p', '.', '[SEP]']">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Token IDs and tokens</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+text = "Transformers changed modern NLP."
+encoded = tokenizer(text)
+
+print(encoded["input_ids"])
+print(tokenizer.convert_ids_to_tokens(encoded["input_ids"]))</code></pre>
+<p class="code-note">This shows the conversion from text to numbers and back to token labels.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_18.mp3" data-caption="caption/M6/M_slide_18.vtt" data-file="M_slide_18" data-slide="18" data-transcript="Padding and truncation are routine when using Transformers in Python. The attention mask tells the model which padded positions to ignore.">
+<div class="slide-kicker">Code</div>
+<h1>Padding and truncation for batches</h1>
+<div class="slide-body"><div class="code-card" data-output="dict_keys(['input_ids', 'token_type_ids', 'attention_mask'])
+torch.Size([2, 13])
+tensor([[1, 1, 1, ..., 0, 0],
+        [1, 1, 1, ..., 1, 1]])">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Prepare a batch</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+texts = [
+    "Short sentence.",
+    "This sentence is a little longer than the first one."
+]
+
+batch = tokenizer(
+    texts,
+    padding=True,
+    truncation=True,
+    return_tensors="pt"
+)
+
+print(batch.keys())
+print(batch["input_ids"].shape)
+print(batch["attention_mask"])</code></pre>
+<p class="code-note">Batches need equal-length tensors, so padding is common.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_19.mp3" data-caption="caption/M6/M_slide_19.vtt" data-file="M_slide_19" data-slide="19" data-transcript="The token ID is not meaningful by itself. It becomes useful after the model maps it to a dense vector.">
+<div class="slide-kicker">Embeddings</div>
+<h1>From token IDs to vectors</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Token ID</div><div class="arrow">→</div><div class="flow-item">Embedding lookup table</div><div class="arrow">→</div><div class="flow-item">Dense vector</div><div class="arrow">→</div><div class="flow-item">Transformer layers</div></div>
+<p class="explain">A token ID is just a number. The model first looks up a learned vector for that token. Then attention layers update the vector using context.</p>
+<div class="matrix small-matrix">
+<div>token ID 19081</div><div>→</div><div>[0.12, -0.44, 0.09, ...]</div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_20.mp3" data-caption="caption/M6/M_slide_20.vtt" data-file="M_slide_20" data-slide="20" data-transcript="A Transformer starts with token embeddings but then changes them through attention. The final token vector reflects the sentence context.">
+<div class="slide-kicker">Contextual representation</div>
+<h1>The vector changes after attention</h1>
+<div class="slide-body"><div class="split"><div>
+<h3>Before Transformer layers</h3>
+<p>The token receives an initial embedding from the lookup table.</p>
+<pre class="mini-code">bank → base vector</pre>
+</div><div>
+<h3>After Transformer layers</h3>
+<p>The representation has absorbed information from surrounding tokens.</p>
+<pre class="mini-code">bank in finance sentence → contextual vector A
+bank in river sentence → contextual vector B</pre>
+</div></div>
+<div class="callout">This is why Transformer-based representations are called contextual.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_21.mp3" data-caption="caption/M6/M_slide_21.vtt" data-file="M_slide_21" data-slide="21" data-transcript="Without position information, the model would have difficulty distinguishing the order of words. Transformers add position information to token embeddings.">
+<div class="slide-kicker">Position</div>
+<h1>Transformers need position information</h1>
+<div class="slide-body"><div class="sentence-box compact">
+<p><strong>A:</strong> The student submitted the assignment.</p>
+<p><strong>B:</strong> The assignment submitted the student.</p>
+</div>
+<p class="explain">Attention compares tokens, but the model also needs to know where tokens appear in the sequence. Position information is added to token embeddings.</p>
+<div class="flow"><div class="flow-item">Token embedding</div><div class="arrow">→</div><div class="flow-item">+</div><div class="arrow">→</div><div class="flow-item">Position information</div><div class="arrow">→</div><div class="flow-item">=</div><div class="arrow">→</div><div class="flow-item">Transformer input</div></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_22.mp3" data-caption="caption/M6/M_slide_22.vtt" data-file="M_slide_22" data-slide="22" data-transcript="Attention is a weighting mechanism. It helps the model decide which other tokens are most useful for representing the current token.">
+<div class="slide-kicker">Attention intuition</div>
+<h1>Attention answers: what should this token listen to?</h1>
+<div class="slide-body"><div class="attention-scene">
+<div class="row"><span>The</span><span>animal</span><span>did not cross</span><span>the street</span><span>because</span><span class="focus">it</span><span>was tired</span></div>
+<div class="bars">
+<label>animal</label><meter value="0.85"></meter>
+<label>street</label><meter value="0.18"></meter>
+<label>tired</label><meter value="0.65"></meter>
+</div>
+</div>
+<p class="explain">When representing <strong>it</strong>, the model may place high attention on words that help resolve what <strong>it</strong> refers to.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_23.mp3" data-caption="caption/M6/M_slide_23.vtt" data-file="M_slide_23" data-slide="23" data-transcript="Query, Key, and Value sound technical, but they can be explained as looking for information, matching available information, and passing useful information forward.">
+<div class="slide-kicker">Q, K, V</div>
+<h1>Query, Key, and Value in plain language</h1>
+<div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Query</h3><p>What information is the current token looking for?</p></article><article class="mini-card"><h3>Key</h3><p>What information does each token offer for matching?</p></article><article class="mini-card"><h3>Value</h3><p>What information should be passed forward if this token is useful?</p></article></div>
+<div class="callout soft">A token uses its Query to compare against other tokens’ Keys. The resulting attention weights are used to combine their Values.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_24.mp3" data-caption="caption/M6/M_slide_24.vtt" data-file="M_slide_24" data-slide="24" data-transcript="Attention is added after token embeddings and position information. The layer receives one vector per token, creates interactions among tokens, and returns updated vectors. The output shape remains compatible with the input, but the meaning changes because each token vector now includes information from related tokens. The PyTorch example shows how a multi-head attention layer is added in code.">
+<div class="slide-kicker">Adding the attention layer</div>
+<h1>Where attention fits in the model</h1>
+<div class="slide-body">
+<div class="split wide">
+<div>
+<div class="block-diagram strong">
+<div>Token IDs</div>
+<div class="arrow-down">↓</div>
+<div>Token embeddings</div>
+<div class="plus-line">+ positional information</div>
+<div class="arrow-down">↓</div>
+<div class="focus">X = one vector per token</div>
+<div class="arrow-down">↓</div>
+<div class="focus">Multi-head self-attention</div>
+<div class="arrow-down">↓</div>
+<div>Updated contextual vectors</div>
+</div>
+</div>
+<div>
+<h3>The layer does not replace embeddings</h3>
+<p>Embeddings are the starting vectors. The attention layer receives those vectors and updates them by mixing information across tokens.</p>
+<h3>The shape usually stays compatible</h3>
+<p>If the input is <code>sequence length × hidden size</code>, the attention output is usually the same general shape. This lets the next layer continue processing the sequence.</p>
+<h3>The meaning changes</h3>
+<p>Before attention, a token vector mostly represents the token and position. After attention, the vector also contains information from related tokens in the same sentence or passage.</p>
+</div>
+</div>
+<div class="code-card small-code" data-output="Input shape: torch.Size([1, 4, 8])
+Attention output shape: torch.Size([1, 4, 8])
+Attention weights shape: torch.Size([1, 4, 4])">
+<div class="code-head"><span>Python · PyTorch attention layer</span><button class="copy-code">Copy</button></div>
+<pre><code>import torch
+from torch import nn
+
+# batch_size = 1, sequence_length = 4, hidden_size = 8
+x = torch.randn(1, 4, 8)
+
+attention = nn.MultiheadAttention(
+    embed_dim=8,
+    num_heads=2,
+    batch_first=True
+)
+
+# In self-attention, query, key, and value all come from x.
+attention_output, attention_weights = attention(x, x, x)
+
+print("Input shape:", x.shape)
+print("Attention output shape:", attention_output.shape)
+print("Attention weights shape:", attention_weights.shape)</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_25.mp3" data-caption="caption/M6/M_slide_25.vtt" data-file="M_slide_25" data-slide="25" data-transcript="Inside the attention layer, the same input vectors are passed through three learned linear projections. These projections create Queries, Keys, and Values. The model learns these projection weights during training.">
+<div class="slide-kicker">Inside the attention layer</div>
+<h1>The model learns three projections: Q, K, and V</h1>
+<div class="slide-body">
+<div class="block-diagram">
+<div>Input token vectors: X</div>
+<div class="heads"><span>Wq → Q</span><span>Wk → K</span><span>Wv → V</span><span>learned weights</span></div>
+<div>Q compares with K → attention weights</div>
+<div>weights combine V → contextual output</div>
+</div>
+<div class="split">
+<div><h3>What is learned?</h3><p>The matrices Wq, Wk, and Wv are learned during pretraining. They decide how to transform each token vector into a Query, Key, and Value.</p></div>
+<div><h3>Why three views?</h3><p>The same token needs three roles: what it is looking for, how it can be matched, and what information it can contribute.</p></div>
+</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_26.mp3" data-caption="caption/M6/M_slide_26.vtt" data-file="M_slide_26" data-slide="26" data-transcript="The attention layer is easier to understand as a five step process. First create Q, K, and V. Then compare queries with keys. Then normalize scores into weights. Then use the weights to blend values. Finally project the result back into the model dimension.">
+<div class="slide-kicker">Attention layer steps</div>
+<h1>Attention is a five-step calculation</h1>
+<div class="slide-body">
+<div class="steps">
+<div><b>1</b><span>Create Q, K, and V from the input vectors.</span></div>
+<div><b>2</b><span>Compare each Query with every Key to get relevance scores.</span></div>
+<div><b>3</b><span>Scale the scores and apply softmax so they become weights.</span></div>
+<div><b>4</b><span>Use the weights to blend the Value vectors.</span></div>
+<div><b>5</b><span>Project the blended result back to the model dimension.</span></div>
+</div>
+<div class="callout soft">The layer is learned, but the data flow is systematic: project → compare → normalize → blend → project.</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_27.mp3" data-caption="caption/M6/M_slide_27.vtt" data-file="M_slide_27" data-slide="27" data-transcript="Attention is inserted inside a Transformer block. In a real model, the attention output is not used alone. It is combined with the original input using a residual connection, normalized, passed through a feed-forward layer, and normalized again.">
+<div class="slide-kicker">Where attention sits</div>
+<h1>The attention layer is one part of a Transformer block</h1>
+<div class="slide-body">
+<div class="block-diagram">
+<div>Input vectors X</div>
+<div>Multi-head self-attention</div>
+<div>Add residual connection: X + attention output</div>
+<div>Layer normalization</div>
+<div>Feed-forward network</div>
+<div>Add residual connection + layer normalization</div>
+<div>Output vectors for the next block</div>
+</div>
+<p class="explain">This is why a Transformer is not simply “an attention layer.” Attention is the central mechanism, but the full block also uses residual connections, normalization, and feed-forward layers.</p>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_28.mp3" data-caption="caption/M6/M_slide_28.vtt" data-file="M_slide_28" data-slide="28" data-transcript="An attention matrix helps make attention visible. Larger values mean more information is being taken from that column token.">
+<div class="slide-kicker">Attention matrix</div>
+<h1>Each row shows what one token attends to</h1>
+<div class="slide-body"><table class="heat-table">
+<thead><tr><th></th><th>The</th><th>student</th><th>submitted</th><th>assignment</th></tr></thead>
+<tbody>
+<tr><th>The</th><td class="h2">.20</td><td class="h1">.10</td><td class="h2">.20</td><td class="h5">.50</td></tr>
+<tr><th>student</th><td class="h1">.05</td><td class="h5">.55</td><td class="h3">.25</td><td class="h2">.15</td></tr>
+<tr><th>submitted</th><td class="h1">.05</td><td class="h4">.35</td><td class="h4">.35</td><td class="h3">.25</td></tr>
+<tr><th>assignment</th><td class="h1">.05</td><td class="h2">.15</td><td class="h4">.35</td><td class="h4">.45</td></tr>
+</tbody></table>
+<p class="explain">Rows usually represent the token being updated. Columns represent tokens it is attending to.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_29.mp3" data-caption="caption/M6/M_slide_29.vtt" data-file="M_slide_29" data-slide="29" data-transcript="The formula is less intimidating if we read it in parts: compare, scale, normalize, then combine values.">
+<div class="slide-kicker">Attention formula</div>
+<h1>Scaled dot-product attention</h1>
+<div class="slide-body"><div class="formula">Attention(Q, K, V) = softmax(QK<sup>T</sup> / √d<sub>k</sub>) V</div>
+<div class="card-grid"><article class="mini-card"><h3>QKᵀ</h3><p>Compares each query with each key.</p></article><article class="mini-card"><h3>√dₖ</h3><p>Scales the scores so they are numerically stable.</p></article><article class="mini-card"><h3>softmax</h3><p>Turns scores into weights that sum to 1.</p></article><article class="mini-card"><h3>× V</h3><p>Combines the value vectors using those weights.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_30.mp3" data-caption="caption/M6/M_slide_30.vtt" data-file="M_slide_30" data-slide="30" data-transcript="This simple PyTorch example implements the core attention computation without hiding the main steps.">
+<div class="slide-kicker">Code</div>
+<h1>Attention from scratch with small tensors</h1>
+<div class="slide-body"><div class="code-card" data-output="Scores: 3 x 3 matrix
+Attention weights: rows sum to 1
+Context vectors: one updated vector per token">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Toy scaled dot-product attention</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>import torch
+import math
+
+# Three tokens, four features per token
+Q = torch.tensor([[1.0, 0.0, 1.0, 0.0],
+                  [0.0, 1.0, 0.0, 1.0],
+                  [1.0, 1.0, 0.0, 0.0]])
+K = Q.clone()
+V = torch.tensor([[1.0, 0.0],
+                  [0.0, 1.0],
+                  [1.0, 1.0]])
+
+scores = Q @ K.T / math.sqrt(Q.shape[-1])
+weights = torch.softmax(scores, dim=-1)
+context = weights @ V
+
+print("Scores:\n", scores)
+print("Attention weights:\n", weights)
+print("Context vectors:\n", context)</code></pre>
+<p class="code-note">This is not a full Transformer, but it shows the core attention math.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_31.mp3" data-caption="caption/M6/M_slide_31.vtt" data-file="M_slide_31" data-slide="31" data-transcript="Self-attention means the Queries, Keys, and Values all come from the same input sequence. Cross-attention is different: the decoder asks questions using its Queries, but it attends to Keys and Values from encoder outputs.">
+<div class="slide-kicker">Self-attention</div>
+<h1>Why it is called self-attention</h1>
+<div class="slide-body"><div class="split">
+<div>
+<h3>Self-attention</h3>
+<div class="flow"><div class="flow-item">Sentence tokens</div><div class="arrow">→</div><div class="flow-item">Q, K, V from the same sentence</div><div class="arrow">→</div><div class="flow-item">Contextual token vectors</div></div>
+<p>Q, K, and V all come from the same input sequence.</p>
+</div>
+<div>
+<h3>Cross-attention</h3>
+<div class="flow"><div class="flow-item">Decoder tokens</div><div class="arrow">→</div><div class="flow-item">Attend to encoder outputs</div><div class="arrow">→</div><div class="flow-item">Generated output</div></div>
+<p>Queries come from one sequence, while Keys and Values come from another sequence.</p>
+</div>
+</div>
+<div class="callout">Encoder layers use self-attention. Encoder-decoder models also use cross-attention.</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_32.mp3" data-caption="caption/M6/M_slide_32.vtt" data-file="M_slide_32" data-slide="32" data-transcript="Multi-head attention repeats the attention idea several times with different learned projections, then combines the results.">
+<div class="slide-kicker">Multi-head attention</div>
+<h1>One attention pattern is not enough</h1>
+<div class="slide-body"><div class="multihead">
+<div>Input vectors</div>
+<div class="heads"><span>Head 1</span><span>Head 2</span><span>Head 3</span><span>Head 4</span></div>
+<div>Concatenate + project</div>
+<div>Output vectors</div>
+</div>
+<p class="explain">Multiple heads let the model learn several attention patterns in parallel. We should not assume each head has a simple human label, but they can capture different relationships.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_33.mp3" data-caption="caption/M6/M_slide_33.vtt" data-file="M_slide_33" data-slide="33" data-transcript="The important point is that the output has the same sequence length and embedding dimension. Attention updates the vectors; it does not remove tokens.">
+<div class="slide-kicker">Code</div>
+<h1>Use a PyTorch MultiheadAttention layer</h1>
+<div class="slide-body"><div class="code-card" data-output="Input shape: torch.Size([1, 5, 8])
+Output shape: torch.Size([1, 5, 8])
+Attention weights shape: torch.Size([1, 5, 5])">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Multi-head attention layer</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>import torch
+import torch.nn as nn
+
+batch_size = 1
+sequence_length = 5
+embedding_dim = 8
+num_heads = 2
+
+x = torch.randn(batch_size, sequence_length, embedding_dim)
+
+attention = nn.MultiheadAttention(
+    embed_dim=embedding_dim,
+    num_heads=num_heads,
+    batch_first=True
+)
+
+output, attention_weights = attention(x, x, x)
+
+print("Input shape:", x.shape)
+print("Output shape:", output.shape)
+print("Attention weights shape:", attention_weights.shape)</code></pre>
+<p class="code-note">For self-attention, we pass x three times: as query, key, and value.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_34.mp3" data-caption="caption/M6/M_slide_34.vtt" data-file="M_slide_34" data-slide="34" data-transcript="Attention is only part of a Transformer layer. The residual connection and layer normalization help information flow through many layers.">
+<div class="slide-kicker">Add &amp; Norm</div>
+<h1>A Transformer layer also uses residual connections</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Input x</div><div class="arrow">→</div><div class="flow-item">Attention output</div><div class="arrow">→</div><div class="flow-item">x + attention output</div><div class="arrow">→</div><div class="flow-item">LayerNorm</div><div class="arrow">→</div><div class="flow-item">Next sublayer</div></div>
+<div class="card-grid"><article class="mini-card"><h3>Residual connection</h3><p>Keeps the original information available by adding the input back.</p></article><article class="mini-card"><h3>Layer normalization</h3><p>Stabilizes values inside the network during training and inference.</p></article><article class="mini-card"><h3>Why it matters</h3><p>Deep Transformer stacks would be harder to train without these stabilizing steps.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_35.mp3" data-caption="caption/M6/M_slide_35.vtt" data-file="M_slide_35" data-slide="35" data-transcript="The attention sublayer lets tokens interact. The feed-forward sublayer processes each updated token vector through a neural network.">
+<div class="slide-kicker">Feed-forward network</div>
+<h1>Each token also passes through a small neural network</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Contextual vector</div><div class="arrow">→</div><div class="flow-item">Linear layer</div><div class="arrow">→</div><div class="flow-item">Activation</div><div class="arrow">→</div><div class="flow-item">Linear layer</div><div class="arrow">→</div><div class="flow-item">Updated vector</div></div>
+<p class="explain">After attention mixes information across tokens, the feed-forward network transforms each token vector independently.</p>
+<div class="split"><div><div class="callout">Attention: mixes information across positions.</div></div><div><div class="callout soft">Feed-forward: transforms each position’s vector.</div></div></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_36.mp3" data-caption="caption/M6/M_slide_36.vtt" data-file="M_slide_36" data-slide="36" data-transcript="This code directly answers how attention is added as a layer. We start with vectors, apply attention, add and normalize, apply a feed-forward network, then add and normalize again.">
+<div class="slide-kicker">Code</div>
+<h1>Build the pieces of an encoder layer</h1>
+<div class="slide-body"><div class="code-card" data-output="torch.Size([1, 5, 8])">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Attention + Add &amp; Norm + Feed-forward</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>import torch
+import torch.nn as nn
+
+batch_size = 1
+seq_len = 5
+d_model = 8
+num_heads = 2
+
+x = torch.randn(batch_size, seq_len, d_model)
+
+attention = nn.MultiheadAttention(d_model, num_heads, batch_first=True)
+norm1 = nn.LayerNorm(d_model)
+norm2 = nn.LayerNorm(d_model)
+
+ffn = nn.Sequential(
+    nn.Linear(d_model, 32),
+    nn.ReLU(),
+    nn.Linear(32, d_model)
+)
+
+attn_out, attn_weights = attention(x, x, x)
+x = norm1(x + attn_out)
+
+ffn_out = ffn(x)
+x = norm2(x + ffn_out)
+
+print(x.shape)</code></pre>
+<p class="code-note">This mirrors the structure of one simplified Transformer encoder layer.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_37.mp3" data-caption="caption/M6/M_slide_37.vtt" data-file="M_slide_37" data-slide="37" data-transcript="The Transformer block is the repeated structure that powers many model families. Each block updates the token representations.">
+<div class="slide-kicker">Transformer block</div>
+<h1>The repeated building block</h1>
+<div class="slide-body"><div class="block-diagram">
+<div>Input vectors</div>
+<div>Multi-head self-attention</div>
+<div>Add + LayerNorm</div>
+<div>Feed-forward network</div>
+<div>Add + LayerNorm</div>
+<div>Output vectors</div>
+</div>
+<p class="explain">A full model stacks this block many times. Larger models usually have more layers, wider vectors, and more attention heads.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_38.mp3" data-caption="caption/M6/M_slide_38.vtt" data-file="M_slide_38" data-slide="38" data-transcript="This example uses a built-in PyTorch layer to show that Transformer layers preserve the sequence shape while updating vectors.">
+<div class="slide-kicker">Code</div>
+<h1>Use PyTorch built-in TransformerEncoderLayer</h1>
+<div class="slide-body"><div class="code-card" data-output="torch.Size([2, 10, 64])">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Built-in encoder layer</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>import torch
+import torch.nn as nn
+
+layer = nn.TransformerEncoderLayer(
+    d_model=64,
+    nhead=4,
+    dim_feedforward=256,
+    batch_first=True
+)
+
+x = torch.randn(2, 10, 64)   # batch, sequence length, vector size
+output = layer(x)
+
+print(output.shape)</code></pre>
+<p class="code-note">In real work, pretrained models are usually used, but this layer shows the architecture clearly.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_39.mp3" data-caption="caption/M6/M_slide_39.vtt" data-file="M_slide_39" data-slide="39" data-transcript="Encoder-only models read the input and create contextual representations. They are common for understanding-oriented tasks.">
+<div class="slide-kicker">Encoder stack</div>
+<h1>Encoder-only models are strong for understanding</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Tokens</div><div class="arrow">→</div><div class="flow-item">Embeddings</div><div class="arrow">→</div><div class="flow-item">Encoder layer 1</div><div class="arrow">→</div><div class="flow-item">Encoder layer 2</div><div class="arrow">→</div><div class="flow-item">Encoder layer 3</div><div class="arrow">→</div><div class="flow-item">Contextual representations</div></div>
+<div class="card-grid"><article class="mini-card"><h3>Common model family</h3><p>BERT-style models.</p></article><article class="mini-card"><h3>Best for</h3><p>Classification, NER, feature extraction, sentence embeddings, retrieval embeddings.</p></article><article class="mini-card"><h3>Not designed primarily for</h3><p>Open-ended next-token generation like chat.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_40.mp3" data-caption="caption/M6/M_slide_40.vtt" data-file="M_slide_40" data-slide="40" data-transcript="Decoder-only models are designed for autoregressive generation. They predict the next token, append it, and continue.">
+<div class="slide-kicker">Decoder stack</div>
+<h1>Decoder-only models generate text token by token</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Prompt tokens</div><div class="arrow">→</div><div class="flow-item">Decoder layer</div><div class="arrow">→</div><div class="flow-item">Predict next token</div><div class="arrow">→</div><div class="flow-item">Append token</div><div class="arrow">→</div><div class="flow-item">Repeat</div></div>
+<div class="callout">This is the basic idea behind GPT-style text generation.</div>
+<p class="explain">The model predicts the next token based on the previous tokens it is allowed to see.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_41.mp3" data-caption="caption/M6/M_slide_41.vtt" data-file="M_slide_41" data-slide="41" data-transcript="Masked attention is important for generation. The model should not see the answer token before it predicts it.">
+<div class="slide-kicker">Masked attention</div>
+<h1>The decoder cannot look into the future</h1>
+<div class="slide-body"><table class="mask-table">
+<tr><th></th><th>The</th><th>cat</th><th>sat</th><th>on</th></tr>
+<tr><th>The</th><td>✓</td><td>×</td><td>×</td><td>×</td></tr>
+<tr><th>cat</th><td>✓</td><td>✓</td><td>×</td><td>×</td></tr>
+<tr><th>sat</th><td>✓</td><td>✓</td><td>✓</td><td>×</td></tr>
+<tr><th>on</th><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+</table>
+<p class="explain">Masked or causal attention prevents the model from using future tokens during next-token prediction.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_42.mp3" data-caption="caption/M6/M_slide_42.vtt" data-file="M_slide_42" data-slide="42" data-transcript="Encoder-decoder models combine understanding and generation. The encoder reads the input, and the decoder generates an output sequence.">
+<div class="slide-kicker">Encoder–decoder</div>
+<h1>Some models read input and generate output</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Input text</div><div class="arrow">→</div><div class="flow-item">Encoder</div><div class="arrow">→</div><div class="flow-item">Cross-attention</div><div class="arrow">→</div><div class="flow-item">Decoder</div><div class="arrow">→</div><div class="flow-item">Output text</div></div>
+<div class="card-grid"><article class="mini-card"><h3>Common models</h3><p>T5 and BART-style models.</p></article><article class="mini-card"><h3>Good for</h3><p>Translation, summarization, text-to-text transformation.</p></article><article class="mini-card"><h3>Key idea</h3><p>The decoder generates while attending to the encoder representation of the input.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_43.mp3" data-caption="caption/M6/M_slide_43.vtt" data-file="M_slide_43" data-slide="43" data-transcript="The model family should match the task. Do not begin with a famous model name. Begin with the desired input and output behavior.">
+<div class="slide-kicker">Three families</div>
+<h1>Choose architecture before choosing a model name</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Family</th><th>Example</th><th>Best fit</th></tr></thead>
+<tbody>
+<tr><td>Encoder-only</td><td>BERT, RoBERTa, DistilBERT</td><td>classification, NER, embeddings, retrieval</td></tr>
+<tr><td>Decoder-only</td><td>GPT-style, Llama-style, Mistral-style</td><td>generation, chat, completion, instruction following</td></tr>
+<tr><td>Encoder–decoder</td><td>T5, BART</td><td>summarization, translation, text-to-text tasks</td></tr>
+</tbody></table>
+<div class="callout">Model selection starts with the task.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_44.mp3" data-caption="caption/M6/M_slide_44.vtt" data-file="M_slide_44" data-slide="44" data-transcript="BERT-style models use bidirectional context and are excellent for many NLP understanding tasks.">
+<div class="slide-kicker">BERT-style models</div>
+<h1>Encoder-only understanding models</h1>
+<div class="slide-body"><div class="sentence-box compact"><p>The student submitted the <mark>[MASK]</mark>.</p></div>
+<p class="explain">BERT-style models were trained to use surrounding context. They are strong for understanding text and creating representations.</p>
+<div class="card-grid"><article class="mini-card"><h3>Classification</h3><p>Predict one label for a text.</p></article><article class="mini-card"><h3>Token classification</h3><p>Label each token, such as NER.</p></article><article class="mini-card"><h3>Feature extraction</h3><p>Use hidden states as contextual embeddings.</p></article><article class="mini-card"><h3>Sentence embeddings</h3><p>Often adapted through Sentence Transformers for semantic similarity.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_45.mp3" data-caption="caption/M6/M_slide_45.vtt" data-file="M_slide_45" data-slide="45" data-transcript="GPT-style models generate text by predicting the next token. They are powerful, but they are not a replacement for a database or verified source system.">
+<div class="slide-kicker">GPT-style models</div>
+<h1>Decoder-only generation models</h1>
+<div class="slide-body"><div class="sentence-box compact"><p>Natural language processing is</p><p class="ghost">→ useful for analyzing text data...</p></div>
+<p class="explain">GPT-style models are trained to continue text. Chat models add instruction tuning and conversation formatting on top of this generation ability.</p>
+<div class="card-grid"><article class="mini-card"><h3>Completion</h3><p>Continue a prompt.</p></article><article class="mini-card"><h3>Chat</h3><p>Follow instructions in conversational format.</p></article><article class="mini-card"><h3>Reasoning over context</h3><p>Use provided context, examples, or retrieved passages.</p></article><article class="mini-card"><h3>Not a database</h3><p>The model does not automatically know private or current documents.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_46.mp3" data-caption="caption/M6/M_slide_46.vtt" data-file="M_slide_46" data-slide="46" data-transcript="Encoder-decoder models are useful when the input and output are both text sequences, such as translation or summarization.">
+<div class="slide-kicker">T5 and BART-style models</div>
+<h1>Text-to-text models</h1>
+<div class="slide-body"><div class="split"><div>
+<h3>Input</h3>
+<p class="big-quote">summarize: Long article text...</p>
+</div><div>
+<h3>Output</h3>
+<p class="big-quote">A shorter summary...</p>
+</div></div>
+<p class="explain">Encoder-decoder models are natural when the task is to transform one text sequence into another text sequence.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_47.mp3" data-caption="caption/M6/M_slide_47.vtt" data-file="M_slide_47" data-slide="47" data-transcript="Pretrained means the model has already learned broad language patterns. In a course setting, we usually load and adapt pretrained models rather than train from scratch.">
+<div class="slide-kicker">Pretrained models</div>
+<h1>What does pretrained mean?</h1>
+<div class="slide-body"><div class="timeline wide">
+<div><b>1</b><span>Pretraining on large text collections</span></div>
+<div><b>2</b><span>Optional fine-tuning for a task/domain</span></div>
+<div><b>3</b><span>Inference on new text</span></div>
+</div>
+<p class="explain">Pretraining gives the model general language patterns. Fine-tuning adapts it. Inference uses it.</p>
+<div class="callout soft">Most class projects should use pretrained models first, not train Transformers from scratch.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_48.mp3" data-caption="caption/M6/M_slide_48.vtt" data-file="M_slide_48" data-slide="48" data-transcript="There are too many pretrained model repositories to memorize. Public model hubs contain millions of repositories, and the exact count changes constantly. The important skill is model selection: task, architecture, domain fit, model size, license, and evaluation evidence.">
+<div class="slide-kicker">Pretrained model ecosystem</div>
+<h1>There are too many pretrained models to memorize</h1>
+<div class="slide-body">
+<div class="split wide">
+<div>
+<p class="lead">Public model hubs contain millions of model repositories, and the number changes every day.</p>
+<p class="explain">The practical skill is not memorizing a count. The practical skill is knowing how to filter models by task, architecture, domain, size, license, and evaluation evidence.</p>
+<div class="callout soft">Use current hub search and model cards when choosing a model. Counts, rankings, and available checkpoints change quickly.</div>
+</div>
+<div class="visual-card">
+<div class="viz-title">Model selection starts with the job</div>
+<div class="choice-list">
+<span>Classification</span><b>→</b><span>encoder or task model</span>
+<span>Generation</span><b>→</b><span>decoder/chat model</span>
+<span>Summarization</span><b>→</b><span>encoder-decoder or LLM</span>
+<span>Semantic search</span><b>→</b><span>embedding model</span>
+<span>RAG reranking</span><b>→</b><span>cross-encoder reranker</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_49.mp3" data-caption="caption/M6/M_slide_49.vtt" data-file="M_slide_49" data-slide="49" data-transcript="Pretrained models come in different practical categories. Some are base checkpoints for feature extraction or fine-tuning. Some are already fine-tuned for a task. Some are instruction tuned for chat. Some create embeddings. Some rerank retrieved passages. Some are designed for domains such as medicine, law, finance, or scientific text.">
+<div class="slide-kicker">Pretrained model landscape</div>
