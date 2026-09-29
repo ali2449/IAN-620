@@ -532,48 +532,7 @@
     body.cc-off .transcript-panel { bottom:118px; }
   }
 </style>
-<style id="ian620-auto-hide-footer">
-  /* Auto-hide teaching controls: subtitle stays visible; controls appear on hover/focus. */
-  @media (min-width: 900px) {
-    :root { --footerCollapsed: 56px; --footerExpanded: 152px; --footerExpandedShort: 144px; }
-    body { padding-bottom:0; overflow:hidden; }
-    .deck { height:calc(100vh - 52px - var(--footerCollapsed)); min-height:0; padding:14px 0 12px; align-items:center; overflow:hidden; }
-    body.cc-off .deck { height:calc(100vh - 52px - 34px); }
-    .slide { height:100%; min-height:0; max-height:none; overflow-y:auto; overflow-x:hidden; scrollbar-width:thin; }
 
-    .bottom { height:var(--footerCollapsed) !important; overflow:hidden; align-items:start; padding:7px 14px 8px !important; transition:height .18s ease, box-shadow .18s ease, background .18s ease; box-shadow:0 -10px 32px rgba(15,23,42,.10); }
-    .bottom:hover, .bottom:focus-within, .bottom.force-open { height:var(--footerExpanded) !important; box-shadow:0 -18px 46px rgba(15,23,42,.16); }
-    .bottom::before { content:""; position:absolute; left:0; right:0; top:-16px; height:16px; pointer-events:auto; }
-
-    .bottom .footer-left, .bottom .footer-right, .bottom .narration-controls, .bottom .audio-player, .bottom .bottom-nav { transition:opacity .14s ease, transform .14s ease, max-height .14s ease, visibility .14s ease; }
-    .bottom:not(:hover):not(:focus-within):not(.force-open) { display:grid; grid-template-columns:1fr; gap:0; }
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right,
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav { opacity:0; visibility:hidden; transform:translateY(8px); max-height:0; pointer-events:none; overflow:hidden; }
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block { grid-column:1 / -1; display:block; min-width:0; width:100%; align-self:center; }
-    .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip { width:min(1120px, calc(100vw - 96px)); margin:0 auto; height:40px; min-height:40px; display:flex; align-items:center; justify-content:center; border-radius:10px; box-shadow:0 6px 18px rgba(15,23,42,.12); }
-
-    body.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) { height:34px !important; padding:6px 14px !important; }
-    body.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block::after { content:"Hover here for narration controls"; display:block; width:max-content; max-width:calc(100vw - 80px); margin:0 auto; padding:4px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel2); color:var(--muted); font-size:12px; font-weight:800; }
-
-    .bottom:hover .footer-left, .bottom:hover .footer-right, .bottom:hover .narration-controls, .bottom:hover .audio-player, .bottom:hover .bottom-nav,
-    .bottom:focus-within .footer-left, .bottom:focus-within .footer-right, .bottom:focus-within .narration-controls, .bottom:focus-within .audio-player, .bottom:focus-within .bottom-nav,
-    .bottom.force-open .footer-left, .bottom.force-open .footer-right, .bottom.force-open .narration-controls, .bottom.force-open .audio-player, .bottom.force-open .bottom-nav { opacity:1; visibility:visible; transform:none; max-height:120px; pointer-events:auto; }
-    .bottom:hover .caption-strip, .bottom:focus-within .caption-strip, .bottom.force-open .caption-strip { width:auto; margin:0; box-shadow:none; }
-    .transcript-panel { bottom:calc(var(--footerExpanded) + 14px) !important; }
-
-    @media (max-height: 900px) {
-      :root { --footerCollapsed: 52px; --footerExpanded: var(--footerExpandedShort); }
-      .deck { height:calc(100vh - 50px - var(--footerCollapsed)); padding:10px 0; }
-      body.cc-off .deck { height:calc(100vh - 50px - 32px); }
-      .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip { height:38px; min-height:38px; }
-      .bottom:hover, .bottom:focus-within, .bottom.force-open { height:var(--footerExpandedShort) !important; }
-      .transcript-panel { bottom:calc(var(--footerExpandedShort) + 12px) !important; }
-    }
-  }
-</style>
 <style id="ian620-default-display-fix">
 body.cc-off .caption-strip{display:none!important}
 body:not(.auto-hide) .deck{height:calc(100vh - 50px - 148px)!important;min-height:0!important;padding:10px 0!important;overflow:hidden!important}
@@ -595,6 +554,62 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .a
 body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{height:148px!important;display:grid!important;grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px!important;gap:12px!important;align-items:center!important;padding:7px 14px 9px!important;background:var(--panel)!important;border-top:1px solid var(--line)!important;box-shadow:0 -18px 46px rgba(15,23,42,.16)!important}
 body.auto-hide.cc-off .bottom:hover,body.auto-hide.cc-off .bottom:focus-within,body.auto-hide.cc-off .bottom.force-open{height:108px!important}
 @media(max-width:1380px) and (min-width:900px){body:not(.auto-hide) .bottom,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open),body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{grid-template-columns:90px minmax(520px,1fr) minmax(270px,320px) 70px!important;gap:10px!important}}
+</style>
+<style id="ian620-footer-state-final-fix">
+body:not(.auto-hide) .bottom,
+body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) {
+  height:148px !important;
+  display:grid !important;
+  grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px !important;
+  gap:12px !important;
+  align-items:center !important;
+  padding:7px 14px 9px !important;
+  overflow:visible !important;
+  background:var(--panel) !important;
+  border-top:1px solid var(--line) !important;
+  box-shadow:none !important;
+}
+body:not(.auto-hide).cc-off .bottom,
+body:not(.auto-hide).cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) { height:108px !important; }
+body:not(.auto-hide) .footer-left,
+body:not(.auto-hide) .footer-right,
+body:not(.auto-hide) .narration-controls,
+body:not(.auto-hide) .audio-player,
+body:not(.auto-hide) .bottom-nav,
+body:not(.auto-hide) .caption-strip {
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  max-height:none !important;
+  pointer-events:auto !important;
+}
+body:not(.auto-hide) .footer-left,
+body:not(.auto-hide) .footer-right,
+body:not(.auto-hide) .narration-controls,
+body:not(.auto-hide) .audio-player { display:flex !important; }
+body:not(.auto-hide) .audio-block,
+body:not(.auto-hide) .bottom-nav { display:grid !important; }
+body:not(.auto-hide) .caption-strip { display:flex !important; }
+body.cc-off .caption-strip { display:none !important; }
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) {
+  height:52px !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:0 !important;
+  overflow:hidden !important;
+}
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) {
+  height:18px !important;
+  background:transparent !important;
+  border-top:0 !important;
+  box-shadow:none !important;
+}
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip,
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav,
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right { display:none !important; }
 </style>
 </head>
 <body>
