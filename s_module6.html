@@ -1875,16 +1875,17 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   const total = slides.length;
   let current = Number(localStorage.getItem('ian620_module6_slide') || '0');
   current = Math.max(0, Math.min(current, total - 1));
-  // Default display state for Module 6.
-  if (localStorage.getItem('ian620_module6_defaults_v4') !== 'done') {
-    localStorage.setItem('ian620_module6_autohide', 'off');
-    localStorage.setItem('ian620_module6_cc', 'open');
-    localStorage.setItem('ian620_module6_narration', 'on');
-    localStorage.setItem('ian620_module6_defaults_v4', 'done');
+  // Presentation defaults are reset each time the page is opened.
+  // Students can change them during the current session.
+  let autoHide = false;
+  let ccOpen = true;
+  let narrationMode = true;
+  if (localStorage.getItem('ian620_module6_defaults_v5') !== 'done') {
+    localStorage.removeItem('ian620_module6_autohide');
+    localStorage.removeItem('ian620_module6_cc');
+    localStorage.removeItem('ian620_module6_narration');
+    localStorage.setItem('ian620_module6_defaults_v5', 'done');
   }
-  let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';
-  let ccOpen = localStorage.getItem('ian620_module6_cc') !== 'closed';
-  let narrationMode = localStorage.getItem('ian620_module6_narration') !== 'off';
 
   const audio = document.getElementById('audio');
   const themeBtn = document.getElementById('themeBtn');
@@ -1908,12 +1909,18 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
       ccBtn.setAttribute('aria-pressed', ccOpen ? 'true' : 'false');
       ccBtn.classList.toggle('primary', ccOpen);
     }
-    if (captionStrip && !ccOpen) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }
+    if (narrationBtn) {
+      narrationBtn.textContent = narrationMode ? 'Narration On' : 'Narration Off';
+      narrationBtn.setAttribute('aria-pressed', narrationMode ? 'true' : 'false');
+    }
+    if (captionStrip) {
+      captionStrip.classList.toggle('off', !ccOpen);
+      if (!ccOpen) captionStrip.textContent = '';
+    }
   }
 
   function toggleAutoHide() {
     autoHide = !autoHide;
-    localStorage.setItem('ian620_module6_autohide', autoHide ? 'on' : 'off');
     syncDisplayState();
   }
   window.toggleAutoHide = toggleAutoHide;
@@ -2176,30 +2183,20 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   function startNarration() {
     audio.playbackRate = Number(speedSelect.value || '1');
     audio.play().catch(() => {});
-    ccOpen = true;
-    localStorage.setItem('ian620_module6_cc','open');
-    ccBtn.textContent = 'CC On';
-    ccBtn.setAttribute('aria-pressed','true');
-    ccBtn.classList.add('primary');
-    document.body.classList.remove('cc-off');
+    syncDisplayState();
     updateCaptionText(slides[current]);
   }
   window.startNarration = startNarration;
 
   function toggleNarrationMode() {
     narrationMode = !narrationMode;
-    localStorage.setItem('ian620_module6_narration', narrationMode ? 'on' : 'off');
-    narrationBtn.textContent = narrationMode ? 'Narration On' : 'Narration Off';
+    syncDisplayState();
   }
   window.toggleNarrationMode = toggleNarrationMode;
 
   function toggleCaptions() {
     ccOpen = !ccOpen;
-    localStorage.setItem('ian620_module6_cc', ccOpen ? 'open' : 'closed');
     syncDisplayState();
-    if (!ccOpen && captionStrip) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }
-    ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
-    ccBtn.classList.toggle('primary', ccOpen);
     updateCaptionText(slides[current]);
   }
   window.toggleCaptions = toggleCaptions;
