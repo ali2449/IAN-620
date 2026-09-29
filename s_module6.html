@@ -633,7 +633,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div>
 </header>
 <main class="deck" id="deck">
-<section class="slide" data-audio="audio/M6/M_slide_01.mp3" data-caption="caption/M6/M_slide_01.vtt" data-file="M_slide_01" data-slide="1" data-transcript="Module 6 introduces Transformers and modern NLP. The focus is practical. We will learn how text becomes model input, how attention creates context-aware representations, how pretrained models are organized, and how to choose and use those models responsibly in Python.">
+<section class="slide" data-audio="audio/M_slide_01.mp3" data-caption="captions/M_slide_01.vtt" data-file="M_slide_01" data-slide="1" data-transcript="Module 6 introduces Transformers and modern NLP. The focus is practical. We will learn how text becomes model input, how attention creates context-aware representations, how pretrained models are organized, and how to choose and use those models responsibly in Python.">
 <div class="slide-kicker">IAN 620 · Module 6</div>
 <h1>Transformers and Modern NLP</h1>
 <div class="slide-body">
@@ -653,13 +653,13 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 <div class="callout soft">Module scope: foundational Transformer architecture, pretrained model selection, and practical Python workflows for modern NLP.</div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_02.mp3" data-caption="caption/M6/M_slide_02.vtt" data-file="M_slide_02" data-slide="2" data-transcript="The course now moves from classic NLP and machine learning toward modern Transformer-based NLP. This module connects previous vector ideas to modern pretrained models.">
+<section class="slide" data-audio="audio/M_slide_02.mp3" data-caption="captions/M_slide_02.vtt" data-file="M_slide_02" data-slide="2" data-transcript="The course now moves from classic NLP and machine learning toward modern Transformer-based NLP. This module connects previous vector ideas to modern pretrained models.">
 <div class="slide-kicker">Course position</div>
 <h1>Where Module 6 fits in IAN 620</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Module 1<br/>Intro NLP</div><div class="arrow">→</div><div class="flow-item">Module 2<br/>Preprocessing</div><div class="arrow">→</div><div class="flow-item">Module 3<br/>Linguistic analysis</div><div class="arrow">→</div><div class="flow-item">Module 4<br/>Embeddings</div><div class="arrow">→</div><div class="flow-item">Module 5<br/>Classification</div><div class="arrow">→</div><div class="flow-item"><strong>Module 6<br/>Transformers</strong></div><div class="arrow">→</div><div class="flow-item">Module 7<br/>RAG</div></div>
 <p class="explain">Module 4 gave us vectors and similarity. Module 5 used classic machine learning for classification. Module 6 explains why modern models can create contextual representations and generate language.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_03.mp3" data-caption="caption/M6/M_slide_03.vtt" data-file="M_slide_03" data-slide="3" data-transcript="This module is organized around six concepts: input processing, attention, Transformer blocks, model families, pretrained model selection, and practical Python workflows. The slides connect architecture to code so that each concept can be tested in VS Code, Jupyter, or Colab.">
+<section class="slide" data-audio="audio/M_slide_03.mp3" data-caption="captions/M_slide_03.vtt" data-file="M_slide_03" data-slide="3" data-transcript="This module is organized around six concepts: input processing, attention, Transformer blocks, model families, pretrained model selection, and practical Python workflows. The slides connect architecture to code so that each concept can be tested in VS Code, Jupyter, or Colab.">
 <div class="slide-kicker">Concept map</div>
 <h1>What this module covers</h1>
 <div class="slide-body">
@@ -673,7 +673,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_04.mp3" data-caption="caption/M6/M_slide_04.vtt" data-file="M_slide_04" data-slide="4" data-transcript="The module is organized as a path. We begin with motivation, then input processing, then attention, then complete models, and finally hands-on pretrained model use.">
+<section class="slide" data-audio="audio/M_slide_04.mp3" data-caption="captions/M_slide_04.vtt" data-file="M_slide_04" data-slide="4" data-transcript="The module is organized as a path. We begin with motivation, then input processing, then attention, then complete models, and finally hands-on pretrained model use.">
 <div class="slide-kicker">Module roadmap</div>
 <h1>A gradual path from text to modern models</h1>
 <div class="slide-body"><div class="timeline">
@@ -687,7 +687,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 <div><b>8</b><span>Python examples</span></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_05.mp3" data-caption="caption/M6/M_slide_05.vtt" data-file="M_slide_05" data-slide="5" data-transcript="Older methods are still valuable, but Transformers became powerful because they allow text representations to depend strongly on surrounding context.">
+<section class="slide" data-audio="audio/M_slide_05.mp3" data-caption="captions/M_slide_05.vtt" data-file="M_slide_05" data-slide="5" data-transcript="Older methods are still valuable, but Transformers became powerful because they allow text representations to depend strongly on surrounding context.">
 <div class="slide-kicker">Motivation</div>
 <h1>Why did NLP need Transformers?</h1>
 <div class="slide-body"><div class="split"><div>
@@ -707,7 +707,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div></div>
 <div class="callout">Transformers became important because they handle context more directly through attention.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_06.mp3" data-caption="caption/M6/M_slide_06.vtt" data-file="M_slide_06" data-slide="6" data-transcript="This example makes the reason for contextual embeddings clear. A Transformer can represent the word bank differently when the sentence is about finance versus geography.">
+<section class="slide" data-audio="audio/M_slide_06.mp3" data-caption="captions/M_slide_06.vtt" data-file="M_slide_06" data-slide="6" data-transcript="This example makes the reason for contextual embeddings clear. A Transformer can represent the word bank differently when the sentence is about finance versus geography.">
 <div class="slide-kicker">Example</div>
 <h1>The same word can have different meanings</h1>
 <div class="slide-body"><div class="sentence-box">
@@ -716,7 +716,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div>
 <div class="card-grid"><article class="mini-card"><h3>Static embedding idea</h3><p>The word bank has one general vector learned from many contexts.</p></article><article class="mini-card"><h3>Contextual embedding idea</h3><p>The representation of bank changes depending on surrounding words.</p></article><article class="mini-card"><h3>Transformer advantage</h3><p>Attention lets the model use nearby and far-away context to shape each token representation.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_07.mp3" data-caption="caption/M6/M_slide_07.vtt" data-file="M_slide_07" data-slide="7" data-transcript="Bag-of-Words can be useful for many tasks, but it does not directly represent word order or grammatical roles. Transformers work with ordered token sequences.">
+<section class="slide" data-audio="audio/M_slide_07.mp3" data-caption="captions/M_slide_07.vtt" data-file="M_slide_07" data-slide="7" data-transcript="Bag-of-Words can be useful for many tasks, but it does not directly represent word order or grammatical roles. Transformers work with ordered token sequences.">
 <div class="slide-kicker">Classic NLP limit</div>
 <h1>Bag-of-Words ignores order</h1>
 <div class="slide-body"><div class="split"><div>
@@ -731,14 +731,14 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 <div class="callout soft">Transformers keep sequence information and let words interact with each other.</div>
 </div></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_08.mp3" data-caption="caption/M6/M_slide_08.vtt" data-file="M_slide_08" data-slide="8" data-transcript="RNNs and LSTMs were important for sequence learning, but they read text step by step. Transformers made it easier to model broad context and train efficiently in parallel.">
+<section class="slide" data-audio="audio/M_slide_08.mp3" data-caption="captions/M_slide_08.vtt" data-file="M_slide_08" data-slide="8" data-transcript="RNNs and LSTMs were important for sequence learning, but they read text step by step. Transformers made it easier to model broad context and train efficiently in parallel.">
 <div class="slide-kicker">Before Transformers</div>
 <h1>RNNs and LSTMs processed text step by step</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Token 1</div><div class="arrow">→</div><div class="flow-item">Token 2</div><div class="arrow">→</div><div class="flow-item">Token 3</div><div class="arrow">→</div><div class="flow-item">Token 4</div><div class="arrow">→</div><div class="flow-item">Token 5</div></div>
 <p class="explain">RNN-style models read sequences in order. This helped with sequence modeling, but long-distance relationships and parallel processing were difficult.</p>
 <div class="card-grid"><article class="mini-card"><h3>Strength</h3><p>They model sequence order more naturally than Bag-of-Words.</p></article><article class="mini-card"><h3>Challenge</h3><p>Information from early tokens can weaken over long sequences.</p></article><article class="mini-card"><h3>Speed issue</h3><p>Many steps depend on previous steps, so training is harder to parallelize.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_09.mp3" data-caption="caption/M6/M_slide_09.vtt" data-file="M_slide_09" data-slide="9" data-transcript="The core idea is that every token can look at other tokens. Attention controls how much information flows from one token to another.">
+<section class="slide" data-audio="audio/M_slide_09.mp3" data-caption="captions/M_slide_09.vtt" data-file="M_slide_09" data-slide="9" data-transcript="The core idea is that every token can look at other tokens. Attention controls how much information flows from one token to another.">
 <div class="slide-kicker">Big idea</div>
 <h1>A Transformer lets tokens look at other tokens</h1>
 <div class="slide-body"><div class="attention-demo">
@@ -749,19 +749,19 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div>
 <p class="explain">When the model builds a representation for one token, it can assign different levels of attention to other tokens in the same sentence.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_10.mp3" data-caption="caption/M6/M_slide_10.vtt" data-file="M_slide_10" data-slide="10" data-transcript="This pipeline is the mental model for the whole module. Text must be converted to tokens and vectors before the Transformer block can do anything useful.">
+<section class="slide" data-audio="audio/M_slide_10.mp3" data-caption="captions/M_slide_10.vtt" data-file="M_slide_10" data-slide="10" data-transcript="This pipeline is the mental model for the whole module. Text must be converted to tokens and vectors before the Transformer block can do anything useful.">
 <div class="slide-kicker">Mental model</div>
 <h1>A Transformer is not just one layer</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Text</div><div class="arrow">→</div><div class="flow-item">Tokenizer</div><div class="arrow">→</div><div class="flow-item">Token IDs</div><div class="arrow">→</div><div class="flow-item">Embeddings + position</div><div class="arrow">→</div><div class="flow-item">Attention blocks</div><div class="arrow">→</div><div class="flow-item">Task head or generator</div></div>
 <p class="explain">It is easy to jump straight to model names. Keep this pipeline in mind first. Every pretrained Transformer still needs tokenization, model inputs, and task-specific output handling.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_11.mp3" data-caption="caption/M6/M_slide_11.vtt" data-file="M_slide_11" data-slide="11" data-transcript="Tokenizer choice matters because the model was trained with a particular tokenizer. We should use the matching tokenizer for the chosen pretrained model.">
+<section class="slide" data-audio="audio/M_slide_11.mp3" data-caption="captions/M_slide_11.vtt" data-file="M_slide_11" data-slide="11" data-transcript="Tokenizer choice matters because the model was trained with a particular tokenizer. We should use the matching tokenizer for the chosen pretrained model.">
 <div class="slide-kicker">Tokenization</div>
 <h1>Transformer tokenization is more than splitting words</h1>
 <div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Word tokenization</h3><p>Splits text mostly by words and punctuation.</p></article><article class="mini-card"><h3>Character tokenization</h3><p>Splits text into individual characters.</p></article><article class="mini-card"><h3>Subword tokenization</h3><p>Splits text into common pieces so unknown words can still be represented.</p></article><article class="mini-card"><h3>Tokenizer vocabulary</h3><p>Maps each token or subword to a numeric ID the model understands.</p></article></div>
 <div class="callout">Modern Transformer models usually use subword tokenization.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_12.mp3" data-caption="caption/M6/M_slide_12.vtt" data-file="M_slide_12" data-slide="12" data-transcript="Subword tokenization helps models handle large vocabularies without needing a separate token for every possible word.">
+<section class="slide" data-audio="audio/M_slide_12.mp3" data-caption="captions/M_slide_12.vtt" data-file="M_slide_12" data-slide="12" data-transcript="Subword tokenization helps models handle large vocabularies without needing a separate token for every possible word.">
 <div class="slide-kicker">Subwords</div>
 <h1>Why subword tokenization helps</h1>
 <div class="slide-body"><div class="compare-grid">
@@ -770,13 +770,13 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div>
 <p class="explain">Subword tokenization helps with rare words, names, technical terms, spelling variants, and words the model did not often see as full words.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_13.mp3" data-caption="caption/M6/M_slide_13.vtt" data-file="M_slide_13" data-slide="13" data-transcript="There are multiple subword tokenization algorithms. For practical use, the most important rule is to load the tokenizer that belongs to the pretrained model.">
+<section class="slide" data-audio="audio/M_slide_13.mp3" data-caption="captions/M_slide_13.vtt" data-file="M_slide_13" data-slide="13" data-transcript="There are multiple subword tokenization algorithms. For practical use, the most important rule is to load the tokenizer that belongs to the pretrained model.">
 <div class="slide-kicker">Tokenizer families</div>
 <h1>BPE, WordPiece, and SentencePiece</h1>
 <div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>BPE</h3><p>Byte-Pair Encoding merges frequent character or byte patterns into larger pieces.</p></article><article class="mini-card"><h3>WordPiece</h3><p>Used by many BERT-style tokenizers; learns useful word pieces.</p></article><article class="mini-card"><h3>SentencePiece</h3><p>Often used by multilingual and modern models; can tokenize raw text without pre-splitting words.</p></article></div>
 <div class="callout soft">Key point: do not memorize every tokenization algorithm. The tokenizer and model must match.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_14.mp3" data-caption="caption/M6/M_slide_14.vtt" data-file="M_slide_14" data-slide="14" data-transcript="Special tokens help the model organize input. They are part of the tokenizer and must be handled correctly.">
+<section class="slide" data-audio="audio/M_slide_14.mp3" data-caption="captions/M_slide_14.vtt" data-file="M_slide_14" data-slide="14" data-transcript="Special tokens help the model organize input. They are part of the tokenizer and must be handled correctly.">
 <div class="slide-kicker">Special tokens</div>
 <h1>Models use tokens that are not ordinary words</h1>
 <div class="slide-body"><table class="clean-table">
@@ -789,7 +789,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </tbody></table>
 <p class="small-note">Different model families may use different special-token conventions.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_15.mp3" data-caption="caption/M6/M_slide_15.vtt" data-file="M_slide_15" data-slide="15" data-transcript="The attention mask is especially important when padding is present. It tells the model which positions should count as real input.">
+<section class="slide" data-audio="audio/M_slide_15.mp3" data-caption="captions/M_slide_15.vtt" data-file="M_slide_15" data-slide="15" data-transcript="The attention mask is especially important when padding is present. It tells the model which positions should count as real input.">
 <div class="slide-kicker">Model input</div>
 <h1>Token IDs and attention masks</h1>
 <div class="slide-body"><div class="split"><div>
@@ -803,7 +803,7 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .f
 </div></div>
 <div class="callout">The model does not receive English text directly. It receives tensors.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_16.mp3" data-caption="caption/M6/M_slide_16.vtt" data-file="M_slide_16" data-slide="16" data-transcript="This code loads a tokenizer. The AutoTokenizer class is a practical shortcut because it knows which tokenizer implementation belongs to the model name.">
+<section class="slide" data-audio="audio/M_slide_16.mp3" data-caption="captions/M_slide_16.vtt" data-file="M_slide_16" data-slide="16" data-transcript="This code loads a tokenizer. The AutoTokenizer class is a practical shortcut because it knows which tokenizer implementation belongs to the model name.">
 <div class="slide-kicker">Code setup</div>
 <h1>Install libraries and load a tokenizer</h1>
 <div class="slide-body"><div class="code-card" data-output="Packages install. If torch is already installed, pip may report that requirements are already satisfied.">
@@ -832,7 +832,7 @@ print(tokenizer.tokenize(text))</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_17.mp3" data-caption="caption/M6/M_slide_17.vtt" data-file="M_slide_17" data-slide="17" data-transcript="This slide shows the exact IDs and special tokens, making tokenization concrete instead of abstract.">
+<section class="slide" data-audio="audio/M_slide_17.mp3" data-caption="captions/M_slide_17.vtt" data-file="M_slide_17" data-slide="17" data-transcript="This slide shows the exact IDs and special tokens, making tokenization concrete instead of abstract.">
 <div class="slide-kicker">Code</div>
 <h1>Inspect token IDs and decoded tokens</h1>
 <div class="slide-body"><div class="code-card" data-output="[101, 19081, 2904, 2715, 17953, 2361, 1012, 102]
@@ -854,7 +854,7 @@ print(tokenizer.convert_ids_to_tokens(encoded["input_ids"]))</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_18.mp3" data-caption="caption/M6/M_slide_18.vtt" data-file="M_slide_18" data-slide="18" data-transcript="Padding and truncation are routine when using Transformers in Python. The attention mask tells the model which padded positions to ignore.">
+<section class="slide" data-audio="audio/M_slide_18.mp3" data-caption="captions/M_slide_18.vtt" data-file="M_slide_18" data-slide="18" data-transcript="Padding and truncation are routine when using Transformers in Python. The attention mask tells the model which padded positions to ignore.">
 <div class="slide-kicker">Code</div>
 <h1>Padding and truncation for batches</h1>
 <div class="slide-body"><div class="code-card" data-output="dict_keys(['input_ids', 'token_type_ids', 'attention_mask'])
@@ -888,7 +888,7 @@ print(batch["attention_mask"])</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_19.mp3" data-caption="caption/M6/M_slide_19.vtt" data-file="M_slide_19" data-slide="19" data-transcript="The token ID is not meaningful by itself. It becomes useful after the model maps it to a dense vector.">
+<section class="slide" data-audio="audio/M_slide_19.mp3" data-caption="captions/M_slide_19.vtt" data-file="M_slide_19" data-slide="19" data-transcript="The token ID is not meaningful by itself. It becomes useful after the model maps it to a dense vector.">
 <div class="slide-kicker">Embeddings</div>
 <h1>From token IDs to vectors</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Token ID</div><div class="arrow">→</div><div class="flow-item">Embedding lookup table</div><div class="arrow">→</div><div class="flow-item">Dense vector</div><div class="arrow">→</div><div class="flow-item">Transformer layers</div></div>
@@ -897,7 +897,7 @@ print(batch["attention_mask"])</code></pre>
 <div>token ID 19081</div><div>→</div><div>[0.12, -0.44, 0.09, ...]</div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_20.mp3" data-caption="caption/M6/M_slide_20.vtt" data-file="M_slide_20" data-slide="20" data-transcript="A Transformer starts with token embeddings but then changes them through attention. The final token vector reflects the sentence context.">
+<section class="slide" data-audio="audio/M_slide_20.mp3" data-caption="captions/M_slide_20.vtt" data-file="M_slide_20" data-slide="20" data-transcript="A Transformer starts with token embeddings but then changes them through attention. The final token vector reflects the sentence context.">
 <div class="slide-kicker">Contextual representation</div>
 <h1>The vector changes after attention</h1>
 <div class="slide-body"><div class="split"><div>
@@ -912,7 +912,7 @@ bank in river sentence → contextual vector B</pre>
 </div></div>
 <div class="callout">This is why Transformer-based representations are called contextual.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_21.mp3" data-caption="caption/M6/M_slide_21.vtt" data-file="M_slide_21" data-slide="21" data-transcript="Without position information, the model would have difficulty distinguishing the order of words. Transformers add position information to token embeddings.">
+<section class="slide" data-audio="audio/M_slide_21.mp3" data-caption="captions/M_slide_21.vtt" data-file="M_slide_21" data-slide="21" data-transcript="Without position information, the model would have difficulty distinguishing the order of words. Transformers add position information to token embeddings.">
 <div class="slide-kicker">Position</div>
 <h1>Transformers need position information</h1>
 <div class="slide-body"><div class="sentence-box compact">
@@ -922,7 +922,7 @@ bank in river sentence → contextual vector B</pre>
 <p class="explain">Attention compares tokens, but the model also needs to know where tokens appear in the sequence. Position information is added to token embeddings.</p>
 <div class="flow"><div class="flow-item">Token embedding</div><div class="arrow">→</div><div class="flow-item">+</div><div class="arrow">→</div><div class="flow-item">Position information</div><div class="arrow">→</div><div class="flow-item">=</div><div class="arrow">→</div><div class="flow-item">Transformer input</div></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_22.mp3" data-caption="caption/M6/M_slide_22.vtt" data-file="M_slide_22" data-slide="22" data-transcript="Attention is a weighting mechanism. It helps the model decide which other tokens are most useful for representing the current token.">
+<section class="slide" data-audio="audio/M_slide_22.mp3" data-caption="captions/M_slide_22.vtt" data-file="M_slide_22" data-slide="22" data-transcript="Attention is a weighting mechanism. It helps the model decide which other tokens are most useful for representing the current token.">
 <div class="slide-kicker">Attention intuition</div>
 <h1>Attention answers: what should this token listen to?</h1>
 <div class="slide-body"><div class="attention-scene">
@@ -935,13 +935,13 @@ bank in river sentence → contextual vector B</pre>
 </div>
 <p class="explain">When representing <strong>it</strong>, the model may place high attention on words that help resolve what <strong>it</strong> refers to.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_23.mp3" data-caption="caption/M6/M_slide_23.vtt" data-file="M_slide_23" data-slide="23" data-transcript="Query, Key, and Value sound technical, but they can be explained as looking for information, matching available information, and passing useful information forward.">
+<section class="slide" data-audio="audio/M_slide_23.mp3" data-caption="captions/M_slide_23.vtt" data-file="M_slide_23" data-slide="23" data-transcript="Query, Key, and Value sound technical, but they can be explained as looking for information, matching available information, and passing useful information forward.">
 <div class="slide-kicker">Q, K, V</div>
 <h1>Query, Key, and Value in plain language</h1>
 <div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Query</h3><p>What information is the current token looking for?</p></article><article class="mini-card"><h3>Key</h3><p>What information does each token offer for matching?</p></article><article class="mini-card"><h3>Value</h3><p>What information should be passed forward if this token is useful?</p></article></div>
 <div class="callout soft">A token uses its Query to compare against other tokens’ Keys. The resulting attention weights are used to combine their Values.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_24.mp3" data-caption="caption/M6/M_slide_24.vtt" data-file="M_slide_24" data-slide="24" data-transcript="Attention is added after token embeddings and position information. The layer receives one vector per token, creates interactions among tokens, and returns updated vectors. The output shape remains compatible with the input, but the meaning changes because each token vector now includes information from related tokens. The PyTorch example shows how a multi-head attention layer is added in code.">
+<section class="slide" data-audio="audio/M_slide_24.mp3" data-caption="captions/M_slide_24.vtt" data-file="M_slide_24" data-slide="24" data-transcript="Attention is added after token embeddings and position information. The layer receives one vector per token, creates interactions among tokens, and returns updated vectors. The output shape remains compatible with the input, but the meaning changes because each token vector now includes information from related tokens. The PyTorch example shows how a multi-head attention layer is added in code.">
 <div class="slide-kicker">Adding the attention layer</div>
 <h1>Where attention fits in the model</h1>
 <div class="slide-body">
@@ -994,7 +994,7 @@ print("Attention weights shape:", attention_weights.shape)</code></pre>
 </div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_25.mp3" data-caption="caption/M6/M_slide_25.vtt" data-file="M_slide_25" data-slide="25" data-transcript="Inside the attention layer, the same input vectors are passed through three learned linear projections. These projections create Queries, Keys, and Values. The model learns these projection weights during training.">
+<section class="slide" data-audio="audio/M_slide_25.mp3" data-caption="captions/M_slide_25.vtt" data-file="M_slide_25" data-slide="25" data-transcript="Inside the attention layer, the same input vectors are passed through three learned linear projections. These projections create Queries, Keys, and Values. The model learns these projection weights during training.">
 <div class="slide-kicker">Inside the attention layer</div>
 <h1>The model learns three projections: Q, K, and V</h1>
 <div class="slide-body">
@@ -1010,7 +1010,7 @@ print("Attention weights shape:", attention_weights.shape)</code></pre>
 </div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_26.mp3" data-caption="caption/M6/M_slide_26.vtt" data-file="M_slide_26" data-slide="26" data-transcript="The attention layer is easier to understand as a five step process. First create Q, K, and V. Then compare queries with keys. Then normalize scores into weights. Then use the weights to blend values. Finally project the result back into the model dimension.">
+<section class="slide" data-audio="audio/M_slide_26.mp3" data-caption="captions/M_slide_26.vtt" data-file="M_slide_26" data-slide="26" data-transcript="The attention layer is easier to understand as a five step process. First create Q, K, and V. Then compare queries with keys. Then normalize scores into weights. Then use the weights to blend values. Finally project the result back into the model dimension.">
 <div class="slide-kicker">Attention layer steps</div>
 <h1>Attention is a five-step calculation</h1>
 <div class="slide-body">
@@ -1024,7 +1024,7 @@ print("Attention weights shape:", attention_weights.shape)</code></pre>
 <div class="callout soft">The layer is learned, but the data flow is systematic: project → compare → normalize → blend → project.</div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_27.mp3" data-caption="caption/M6/M_slide_27.vtt" data-file="M_slide_27" data-slide="27" data-transcript="Attention is inserted inside a Transformer block. In a real model, the attention output is not used alone. It is combined with the original input using a residual connection, normalized, passed through a feed-forward layer, and normalized again.">
+<section class="slide" data-audio="audio/M_slide_27.mp3" data-caption="captions/M_slide_27.vtt" data-file="M_slide_27" data-slide="27" data-transcript="Attention is inserted inside a Transformer block. In a real model, the attention output is not used alone. It is combined with the original input using a residual connection, normalized, passed through a feed-forward layer, and normalized again.">
 <div class="slide-kicker">Where attention sits</div>
 <h1>The attention layer is one part of a Transformer block</h1>
 <div class="slide-body">
@@ -1040,7 +1040,7 @@ print("Attention weights shape:", attention_weights.shape)</code></pre>
 <p class="explain">This is why a Transformer is not simply “an attention layer.” Attention is the central mechanism, but the full block also uses residual connections, normalization, and feed-forward layers.</p>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_28.mp3" data-caption="caption/M6/M_slide_28.vtt" data-file="M_slide_28" data-slide="28" data-transcript="An attention matrix helps make attention visible. Larger values mean more information is being taken from that column token.">
+<section class="slide" data-audio="audio/M_slide_28.mp3" data-caption="captions/M_slide_28.vtt" data-file="M_slide_28" data-slide="28" data-transcript="An attention matrix helps make attention visible. Larger values mean more information is being taken from that column token.">
 <div class="slide-kicker">Attention matrix</div>
 <h1>Each row shows what one token attends to</h1>
 <div class="slide-body"><table class="heat-table">
@@ -1053,13 +1053,13 @@ print("Attention weights shape:", attention_weights.shape)</code></pre>
 </tbody></table>
 <p class="explain">Rows usually represent the token being updated. Columns represent tokens it is attending to.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_29.mp3" data-caption="caption/M6/M_slide_29.vtt" data-file="M_slide_29" data-slide="29" data-transcript="The formula is less intimidating if we read it in parts: compare, scale, normalize, then combine values.">
+<section class="slide" data-audio="audio/M_slide_29.mp3" data-caption="captions/M_slide_29.vtt" data-file="M_slide_29" data-slide="29" data-transcript="The formula is less intimidating if we read it in parts: compare, scale, normalize, then combine values.">
 <div class="slide-kicker">Attention formula</div>
 <h1>Scaled dot-product attention</h1>
 <div class="slide-body"><div class="formula">Attention(Q, K, V) = softmax(QK<sup>T</sup> / √d<sub>k</sub>) V</div>
 <div class="card-grid"><article class="mini-card"><h3>QKᵀ</h3><p>Compares each query with each key.</p></article><article class="mini-card"><h3>√dₖ</h3><p>Scales the scores so they are numerically stable.</p></article><article class="mini-card"><h3>softmax</h3><p>Turns scores into weights that sum to 1.</p></article><article class="mini-card"><h3>× V</h3><p>Combines the value vectors using those weights.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_30.mp3" data-caption="caption/M6/M_slide_30.vtt" data-file="M_slide_30" data-slide="30" data-transcript="This simple PyTorch example implements the core attention computation without hiding the main steps.">
+<section class="slide" data-audio="audio/M_slide_30.mp3" data-caption="captions/M_slide_30.vtt" data-file="M_slide_30" data-slide="30" data-transcript="This simple PyTorch example implements the core attention computation without hiding the main steps.">
 <div class="slide-kicker">Code</div>
 <h1>Attention from scratch with small tensors</h1>
 <div class="slide-body"><div class="code-card" data-output="Scores: 3 x 3 matrix
@@ -1092,7 +1092,7 @@ print("Context vectors:\n", context)</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_31.mp3" data-caption="caption/M6/M_slide_31.vtt" data-file="M_slide_31" data-slide="31" data-transcript="Self-attention means the Queries, Keys, and Values all come from the same input sequence. Cross-attention is different: the decoder asks questions using its Queries, but it attends to Keys and Values from encoder outputs.">
+<section class="slide" data-audio="audio/M_slide_31.mp3" data-caption="captions/M_slide_31.vtt" data-file="M_slide_31" data-slide="31" data-transcript="Self-attention means the Queries, Keys, and Values all come from the same input sequence. Cross-attention is different: the decoder asks questions using its Queries, but it attends to Keys and Values from encoder outputs.">
 <div class="slide-kicker">Self-attention</div>
 <h1>Why it is called self-attention</h1>
 <div class="slide-body"><div class="split">
@@ -1110,7 +1110,7 @@ print("Context vectors:\n", context)</code></pre>
 <div class="callout">Encoder layers use self-attention. Encoder-decoder models also use cross-attention.</div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_32.mp3" data-caption="caption/M6/M_slide_32.vtt" data-file="M_slide_32" data-slide="32" data-transcript="Multi-head attention repeats the attention idea several times with different learned projections, then combines the results.">
+<section class="slide" data-audio="audio/M_slide_32.mp3" data-caption="captions/M_slide_32.vtt" data-file="M_slide_32" data-slide="32" data-transcript="Multi-head attention repeats the attention idea several times with different learned projections, then combines the results.">
 <div class="slide-kicker">Multi-head attention</div>
 <h1>One attention pattern is not enough</h1>
 <div class="slide-body"><div class="multihead">
@@ -1121,7 +1121,7 @@ print("Context vectors:\n", context)</code></pre>
 </div>
 <p class="explain">Multiple heads let the model learn several attention patterns in parallel. We should not assume each head has a simple human label, but they can capture different relationships.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_33.mp3" data-caption="caption/M6/M_slide_33.vtt" data-file="M_slide_33" data-slide="33" data-transcript="The important point is that the output has the same sequence length and embedding dimension. Attention updates the vectors; it does not remove tokens.">
+<section class="slide" data-audio="audio/M_slide_33.mp3" data-caption="captions/M_slide_33.vtt" data-file="M_slide_33" data-slide="33" data-transcript="The important point is that the output has the same sequence length and embedding dimension. Attention updates the vectors; it does not remove tokens.">
 <div class="slide-kicker">Code</div>
 <h1>Use a PyTorch MultiheadAttention layer</h1>
 <div class="slide-body"><div class="code-card" data-output="Input shape: torch.Size([1, 5, 8])
@@ -1156,20 +1156,20 @@ print("Attention weights shape:", attention_weights.shape)</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_34.mp3" data-caption="caption/M6/M_slide_34.vtt" data-file="M_slide_34" data-slide="34" data-transcript="Attention is only part of a Transformer layer. The residual connection and layer normalization help information flow through many layers.">
+<section class="slide" data-audio="audio/M_slide_34.mp3" data-caption="captions/M_slide_34.vtt" data-file="M_slide_34" data-slide="34" data-transcript="Attention is only part of a Transformer layer. The residual connection and layer normalization help information flow through many layers.">
 <div class="slide-kicker">Add &amp; Norm</div>
 <h1>A Transformer layer also uses residual connections</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Input x</div><div class="arrow">→</div><div class="flow-item">Attention output</div><div class="arrow">→</div><div class="flow-item">x + attention output</div><div class="arrow">→</div><div class="flow-item">LayerNorm</div><div class="arrow">→</div><div class="flow-item">Next sublayer</div></div>
 <div class="card-grid"><article class="mini-card"><h3>Residual connection</h3><p>Keeps the original information available by adding the input back.</p></article><article class="mini-card"><h3>Layer normalization</h3><p>Stabilizes values inside the network during training and inference.</p></article><article class="mini-card"><h3>Why it matters</h3><p>Deep Transformer stacks would be harder to train without these stabilizing steps.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_35.mp3" data-caption="caption/M6/M_slide_35.vtt" data-file="M_slide_35" data-slide="35" data-transcript="The attention sublayer lets tokens interact. The feed-forward sublayer processes each updated token vector through a neural network.">
+<section class="slide" data-audio="audio/M_slide_35.mp3" data-caption="captions/M_slide_35.vtt" data-file="M_slide_35" data-slide="35" data-transcript="The attention sublayer lets tokens interact. The feed-forward sublayer processes each updated token vector through a neural network.">
 <div class="slide-kicker">Feed-forward network</div>
 <h1>Each token also passes through a small neural network</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Contextual vector</div><div class="arrow">→</div><div class="flow-item">Linear layer</div><div class="arrow">→</div><div class="flow-item">Activation</div><div class="arrow">→</div><div class="flow-item">Linear layer</div><div class="arrow">→</div><div class="flow-item">Updated vector</div></div>
 <p class="explain">After attention mixes information across tokens, the feed-forward network transforms each token vector independently.</p>
 <div class="split"><div><div class="callout">Attention: mixes information across positions.</div></div><div><div class="callout soft">Feed-forward: transforms each position’s vector.</div></div></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_36.mp3" data-caption="caption/M6/M_slide_36.vtt" data-file="M_slide_36" data-slide="36" data-transcript="This code directly answers how attention is added as a layer. We start with vectors, apply attention, add and normalize, apply a feed-forward network, then add and normalize again.">
+<section class="slide" data-audio="audio/M_slide_36.mp3" data-caption="captions/M_slide_36.vtt" data-file="M_slide_36" data-slide="36" data-transcript="This code directly answers how attention is added as a layer. We start with vectors, apply attention, add and normalize, apply a feed-forward network, then add and normalize again.">
 <div class="slide-kicker">Code</div>
 <h1>Build the pieces of an encoder layer</h1>
 <div class="slide-body"><div class="code-card" data-output="torch.Size([1, 5, 8])">
@@ -1208,7 +1208,7 @@ print(x.shape)</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_37.mp3" data-caption="caption/M6/M_slide_37.vtt" data-file="M_slide_37" data-slide="37" data-transcript="The Transformer block is the repeated structure that powers many model families. Each block updates the token representations.">
+<section class="slide" data-audio="audio/M_slide_37.mp3" data-caption="captions/M_slide_37.vtt" data-file="M_slide_37" data-slide="37" data-transcript="The Transformer block is the repeated structure that powers many model families. Each block updates the token representations.">
 <div class="slide-kicker">Transformer block</div>
 <h1>The repeated building block</h1>
 <div class="slide-body"><div class="block-diagram">
@@ -1221,7 +1221,7 @@ print(x.shape)</code></pre>
 </div>
 <p class="explain">A full model stacks this block many times. Larger models usually have more layers, wider vectors, and more attention heads.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_38.mp3" data-caption="caption/M6/M_slide_38.vtt" data-file="M_slide_38" data-slide="38" data-transcript="This example uses a built-in PyTorch layer to show that Transformer layers preserve the sequence shape while updating vectors.">
+<section class="slide" data-audio="audio/M_slide_38.mp3" data-caption="captions/M_slide_38.vtt" data-file="M_slide_38" data-slide="38" data-transcript="This example uses a built-in PyTorch layer to show that Transformer layers preserve the sequence shape while updating vectors.">
 <div class="slide-kicker">Code</div>
 <h1>Use PyTorch built-in TransformerEncoderLayer</h1>
 <div class="slide-body"><div class="code-card" data-output="torch.Size([2, 10, 64])">
@@ -1247,20 +1247,20 @@ print(output.shape)</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_39.mp3" data-caption="caption/M6/M_slide_39.vtt" data-file="M_slide_39" data-slide="39" data-transcript="Encoder-only models read the input and create contextual representations. They are common for understanding-oriented tasks.">
+<section class="slide" data-audio="audio/M_slide_39.mp3" data-caption="captions/M_slide_39.vtt" data-file="M_slide_39" data-slide="39" data-transcript="Encoder-only models read the input and create contextual representations. They are common for understanding-oriented tasks.">
 <div class="slide-kicker">Encoder stack</div>
 <h1>Encoder-only models are strong for understanding</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Tokens</div><div class="arrow">→</div><div class="flow-item">Embeddings</div><div class="arrow">→</div><div class="flow-item">Encoder layer 1</div><div class="arrow">→</div><div class="flow-item">Encoder layer 2</div><div class="arrow">→</div><div class="flow-item">Encoder layer 3</div><div class="arrow">→</div><div class="flow-item">Contextual representations</div></div>
 <div class="card-grid"><article class="mini-card"><h3>Common model family</h3><p>BERT-style models.</p></article><article class="mini-card"><h3>Best for</h3><p>Classification, NER, feature extraction, sentence embeddings, retrieval embeddings.</p></article><article class="mini-card"><h3>Not designed primarily for</h3><p>Open-ended next-token generation like chat.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_40.mp3" data-caption="caption/M6/M_slide_40.vtt" data-file="M_slide_40" data-slide="40" data-transcript="Decoder-only models are designed for autoregressive generation. They predict the next token, append it, and continue.">
+<section class="slide" data-audio="audio/M_slide_40.mp3" data-caption="captions/M_slide_40.vtt" data-file="M_slide_40" data-slide="40" data-transcript="Decoder-only models are designed for autoregressive generation. They predict the next token, append it, and continue.">
 <div class="slide-kicker">Decoder stack</div>
 <h1>Decoder-only models generate text token by token</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Prompt tokens</div><div class="arrow">→</div><div class="flow-item">Decoder layer</div><div class="arrow">→</div><div class="flow-item">Predict next token</div><div class="arrow">→</div><div class="flow-item">Append token</div><div class="arrow">→</div><div class="flow-item">Repeat</div></div>
 <div class="callout">This is the basic idea behind GPT-style text generation.</div>
 <p class="explain">The model predicts the next token based on the previous tokens it is allowed to see.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_41.mp3" data-caption="caption/M6/M_slide_41.vtt" data-file="M_slide_41" data-slide="41" data-transcript="Masked attention is important for generation. The model should not see the answer token before it predicts it.">
+<section class="slide" data-audio="audio/M_slide_41.mp3" data-caption="captions/M_slide_41.vtt" data-file="M_slide_41" data-slide="41" data-transcript="Masked attention is important for generation. The model should not see the answer token before it predicts it.">
 <div class="slide-kicker">Masked attention</div>
 <h1>The decoder cannot look into the future</h1>
 <div class="slide-body"><table class="mask-table">
@@ -1272,13 +1272,13 @@ print(output.shape)</code></pre>
 </table>
 <p class="explain">Masked or causal attention prevents the model from using future tokens during next-token prediction.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_42.mp3" data-caption="caption/M6/M_slide_42.vtt" data-file="M_slide_42" data-slide="42" data-transcript="Encoder-decoder models combine understanding and generation. The encoder reads the input, and the decoder generates an output sequence.">
+<section class="slide" data-audio="audio/M_slide_42.mp3" data-caption="captions/M_slide_42.vtt" data-file="M_slide_42" data-slide="42" data-transcript="Encoder-decoder models combine understanding and generation. The encoder reads the input, and the decoder generates an output sequence.">
 <div class="slide-kicker">Encoder–decoder</div>
 <h1>Some models read input and generate output</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Input text</div><div class="arrow">→</div><div class="flow-item">Encoder</div><div class="arrow">→</div><div class="flow-item">Cross-attention</div><div class="arrow">→</div><div class="flow-item">Decoder</div><div class="arrow">→</div><div class="flow-item">Output text</div></div>
 <div class="card-grid"><article class="mini-card"><h3>Common models</h3><p>T5 and BART-style models.</p></article><article class="mini-card"><h3>Good for</h3><p>Translation, summarization, text-to-text transformation.</p></article><article class="mini-card"><h3>Key idea</h3><p>The decoder generates while attending to the encoder representation of the input.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_43.mp3" data-caption="caption/M6/M_slide_43.vtt" data-file="M_slide_43" data-slide="43" data-transcript="The model family should match the task. Do not begin with a famous model name. Begin with the desired input and output behavior.">
+<section class="slide" data-audio="audio/M_slide_43.mp3" data-caption="captions/M_slide_43.vtt" data-file="M_slide_43" data-slide="43" data-transcript="The model family should match the task. Do not begin with a famous model name. Begin with the desired input and output behavior.">
 <div class="slide-kicker">Three families</div>
 <h1>Choose architecture before choosing a model name</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1290,21 +1290,21 @@ print(output.shape)</code></pre>
 </tbody></table>
 <div class="callout">Model selection starts with the task.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_44.mp3" data-caption="caption/M6/M_slide_44.vtt" data-file="M_slide_44" data-slide="44" data-transcript="BERT-style models use bidirectional context and are excellent for many NLP understanding tasks.">
+<section class="slide" data-audio="audio/M_slide_44.mp3" data-caption="captions/M_slide_44.vtt" data-file="M_slide_44" data-slide="44" data-transcript="BERT-style models use bidirectional context and are excellent for many NLP understanding tasks.">
 <div class="slide-kicker">BERT-style models</div>
 <h1>Encoder-only understanding models</h1>
 <div class="slide-body"><div class="sentence-box compact"><p>The student submitted the <mark>[MASK]</mark>.</p></div>
 <p class="explain">BERT-style models were trained to use surrounding context. They are strong for understanding text and creating representations.</p>
 <div class="card-grid"><article class="mini-card"><h3>Classification</h3><p>Predict one label for a text.</p></article><article class="mini-card"><h3>Token classification</h3><p>Label each token, such as NER.</p></article><article class="mini-card"><h3>Feature extraction</h3><p>Use hidden states as contextual embeddings.</p></article><article class="mini-card"><h3>Sentence embeddings</h3><p>Often adapted through Sentence Transformers for semantic similarity.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_45.mp3" data-caption="caption/M6/M_slide_45.vtt" data-file="M_slide_45" data-slide="45" data-transcript="GPT-style models generate text by predicting the next token. They are powerful, but they are not a replacement for a database or verified source system.">
+<section class="slide" data-audio="audio/M_slide_45.mp3" data-caption="captions/M_slide_45.vtt" data-file="M_slide_45" data-slide="45" data-transcript="GPT-style models generate text by predicting the next token. They are powerful, but they are not a replacement for a database or verified source system.">
 <div class="slide-kicker">GPT-style models</div>
 <h1>Decoder-only generation models</h1>
 <div class="slide-body"><div class="sentence-box compact"><p>Natural language processing is</p><p class="ghost">→ useful for analyzing text data...</p></div>
 <p class="explain">GPT-style models are trained to continue text. Chat models add instruction tuning and conversation formatting on top of this generation ability.</p>
 <div class="card-grid"><article class="mini-card"><h3>Completion</h3><p>Continue a prompt.</p></article><article class="mini-card"><h3>Chat</h3><p>Follow instructions in conversational format.</p></article><article class="mini-card"><h3>Reasoning over context</h3><p>Use provided context, examples, or retrieved passages.</p></article><article class="mini-card"><h3>Not a database</h3><p>The model does not automatically know private or current documents.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_46.mp3" data-caption="caption/M6/M_slide_46.vtt" data-file="M_slide_46" data-slide="46" data-transcript="Encoder-decoder models are useful when the input and output are both text sequences, such as translation or summarization.">
+<section class="slide" data-audio="audio/M_slide_46.mp3" data-caption="captions/M_slide_46.vtt" data-file="M_slide_46" data-slide="46" data-transcript="Encoder-decoder models are useful when the input and output are both text sequences, such as translation or summarization.">
 <div class="slide-kicker">T5 and BART-style models</div>
 <h1>Text-to-text models</h1>
 <div class="slide-body"><div class="split"><div>
@@ -1316,7 +1316,7 @@ print(output.shape)</code></pre>
 </div></div>
 <p class="explain">Encoder-decoder models are natural when the task is to transform one text sequence into another text sequence.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_47.mp3" data-caption="caption/M6/M_slide_47.vtt" data-file="M_slide_47" data-slide="47" data-transcript="Pretrained means the model has already learned broad language patterns. In a course setting, we usually load and adapt pretrained models rather than train from scratch.">
+<section class="slide" data-audio="audio/M_slide_47.mp3" data-caption="captions/M_slide_47.vtt" data-file="M_slide_47" data-slide="47" data-transcript="Pretrained means the model has already learned broad language patterns. In a course setting, we usually load and adapt pretrained models rather than train from scratch.">
 <div class="slide-kicker">Pretrained models</div>
 <h1>What does pretrained mean?</h1>
 <div class="slide-body"><div class="timeline wide">
@@ -1327,7 +1327,7 @@ print(output.shape)</code></pre>
 <p class="explain">Pretraining gives the model general language patterns. Fine-tuning adapts it. Inference uses it.</p>
 <div class="callout soft">Most class projects should use pretrained models first, not train Transformers from scratch.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_48.mp3" data-caption="caption/M6/M_slide_48.vtt" data-file="M_slide_48" data-slide="48" data-transcript="There are too many pretrained model repositories to memorize. Public model hubs contain millions of repositories, and the exact count changes constantly. The important skill is model selection: task, architecture, domain fit, model size, license, and evaluation evidence.">
+<section class="slide" data-audio="audio/M_slide_48.mp3" data-caption="captions/M_slide_48.vtt" data-file="M_slide_48" data-slide="48" data-transcript="There are too many pretrained model repositories to memorize. Public model hubs contain millions of repositories, and the exact count changes constantly. The important skill is model selection: task, architecture, domain fit, model size, license, and evaluation evidence.">
 <div class="slide-kicker">Pretrained model ecosystem</div>
 <h1>There are too many pretrained models to memorize</h1>
 <div class="slide-body">
@@ -1350,7 +1350,7 @@ print(output.shape)</code></pre>
 </div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_49.mp3" data-caption="caption/M6/M_slide_49.vtt" data-file="M_slide_49" data-slide="49" data-transcript="Pretrained models come in different practical categories. Some are base checkpoints for feature extraction or fine-tuning. Some are already fine-tuned for a task. Some are instruction tuned for chat. Some create embeddings. Some rerank retrieved passages. Some are designed for domains such as medicine, law, finance, or scientific text.">
+<section class="slide" data-audio="audio/M_slide_49.mp3" data-caption="captions/M_slide_49.vtt" data-file="M_slide_49" data-slide="49" data-transcript="Pretrained models come in different practical categories. Some are base checkpoints for feature extraction or fine-tuning. Some are already fine-tuned for a task. Some are instruction tuned for chat. Some create embeddings. Some rerank retrieved passages. Some are designed for domains such as medicine, law, finance, or scientific text.">
 <div class="slide-kicker">Pretrained model landscape</div>
 <h1>Pretrained models are not all the same type</h1>
 <div class="slide-body">
@@ -1367,7 +1367,7 @@ print(output.shape)</code></pre>
 </table>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_50.mp3" data-caption="caption/M6/M_slide_50.vtt" data-file="M_slide_50" data-slide="50" data-transcript="A practical model choice usually starts from the task. For classification and named entity recognition, encoder models are often strong. For generation and chat, decoder models are natural. For summarization and translation, encoder-decoder models are common. For RAG retrieval, embedding models and rerankers are important.">
+<section class="slide" data-audio="audio/M_slide_50.mp3" data-caption="captions/M_slide_50.vtt" data-file="M_slide_50" data-slide="50" data-transcript="A practical model choice usually starts from the task. For classification and named entity recognition, encoder models are often strong. For generation and chat, decoder models are natural. For summarization and translation, encoder-decoder models are common. For RAG retrieval, embedding models and rerankers are important.">
 <div class="slide-kicker">Choosing a pretrained model</div>
 <h1>Start with the task, then narrow the model</h1>
 <div class="slide-body">
@@ -1381,7 +1381,7 @@ print(output.shape)</code></pre>
 <div class="callout soft">Do not choose a model only because it is popular. Choose it because it fits the task, data, and constraints.</div>
 </div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_51.mp3" data-caption="caption/M6/M_slide_51.vtt" data-file="M_slide_51" data-slide="51" data-transcript="Model type should match the job. A text generation model is not automatically the best model for NER or embeddings.">
+<section class="slide" data-audio="audio/M_slide_51.mp3" data-caption="captions/M_slide_51.vtt" data-file="M_slide_51" data-slide="51" data-transcript="Model type should match the job. A text generation model is not automatically the best model for NER or embeddings.">
 <div class="slide-kicker">Model categories</div>
 <h1>Common pretrained model types you will see</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1395,12 +1395,12 @@ print(output.shape)</code></pre>
 <tr><td>Domain model</td><td>Your language is specialized.</td><td>clinical, legal, finance, scientific text</td></tr>
 </tbody></table></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_52.mp3" data-caption="caption/M6/M_slide_52.vtt" data-file="M_slide_52" data-slide="52" data-transcript="A model card is part of responsible model use. Treat it like documentation, not marketing text.">
+<section class="slide" data-audio="audio/M_slide_52.mp3" data-caption="captions/M_slide_52.vtt" data-file="M_slide_52" data-slide="52" data-transcript="A model card is part of responsible model use. Treat it like documentation, not marketing text.">
 <div class="slide-kicker">Model card</div>
 <h1>Read the model card before using the model</h1>
 <div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Training data</h3><p>What kind of data was used? Is it close to your domain?</p></article><article class="mini-card"><h3>Intended use</h3><p>What tasks was the model designed for?</p></article><article class="mini-card"><h3>Limitations</h3><p>What mistakes or risks are documented?</p></article><article class="mini-card"><h3>Evaluation</h3><p>What benchmarks or datasets were used?</p></article><article class="mini-card"><h3>License</h3><p>Can you use it in your setting?</p></article><article class="mini-card"><h3>Size and hardware</h3><p>Can your machine or server run it?</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_53.mp3" data-caption="caption/M6/M_slide_53.vtt" data-file="M_slide_53" data-slide="53" data-transcript="This checklist is a practical tool. Start with the task, then architecture, then constraints, then evidence.">
+<section class="slide" data-audio="audio/M_slide_53.mp3" data-caption="captions/M_slide_53.vtt" data-file="M_slide_53" data-slide="53" data-transcript="This checklist is a practical tool. Start with the task, then architecture, then constraints, then evidence.">
 <div class="slide-kicker">Choosing a model</div>
 <h1>A simple model-selection checklist</h1>
 <div class="slide-body"><div class="steps">
@@ -1412,7 +1412,7 @@ print(output.shape)</code></pre>
 <div><b>6</b><span>Test on your own small examples before trusting it.</span></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_54.mp3" data-caption="caption/M6/M_slide_54.vtt" data-file="M_slide_54" data-slide="54" data-transcript="Model size affects accuracy, cost, speed, and deployment. Choose the smallest model that performs well enough for the task.">
+<section class="slide" data-audio="audio/M_slide_54.mp3" data-caption="captions/M_slide_54.vtt" data-file="M_slide_54" data-slide="54" data-transcript="Model size affects accuracy, cost, speed, and deployment. Choose the smallest model that performs well enough for the task.">
 <div class="slide-kicker">Size tradeoff</div>
 <h1>Small, medium, and large models solve different needs</h1>
 <div class="slide-body"><div class="compare-grid three">
@@ -1422,7 +1422,7 @@ print(output.shape)</code></pre>
 </div>
 <div class="callout">Bigger is not automatically better for a class assignment or production pipeline.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_55.mp3" data-caption="caption/M6/M_slide_55.vtt" data-file="M_slide_55" data-slide="55" data-transcript="Domain fit matters. A model trained or adapted for biomedical text may be more appropriate for clinical NLP than a general model, depending on the task.">
+<section class="slide" data-audio="audio/M_slide_55.mp3" data-caption="captions/M_slide_55.vtt" data-file="M_slide_55" data-slide="55" data-transcript="Domain fit matters. A model trained or adapted for biomedical text may be more appropriate for clinical NLP than a general model, depending on the task.">
 <div class="slide-kicker">Domain-specific models</div>
 <h1>When general models may not be enough</h1>
 <div class="slide-body"><div class="split"><div>
@@ -1434,7 +1434,7 @@ print(output.shape)</code></pre>
 </div></div>
 <p class="explain">Domain-specific text can use different vocabulary and writing patterns. A domain model or domain fine-tuning may improve results.</p></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_56.mp3" data-caption="caption/M6/M_slide_56.vtt" data-file="M_slide_56" data-slide="56" data-transcript="Deployment is part of model selection. The best model technically may not be the best model for your privacy, cost, or hardware situation.">
+<section class="slide" data-audio="audio/M_slide_56.mp3" data-caption="captions/M_slide_56.vtt" data-file="M_slide_56" data-slide="56" data-transcript="Deployment is part of model selection. The best model technically may not be the best model for your privacy, cost, or hardware situation.">
 <div class="slide-kicker">Deployment choice</div>
 <h1>Local model, hosted model, or API?</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1445,7 +1445,7 @@ print(output.shape)</code></pre>
 <tr><td>API model</td><td>You need strong general capability quickly.</td><td>Cost, external dependency, privacy review.</td></tr>
 </tbody></table></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_57.mp3" data-caption="caption/M6/M_slide_57.vtt" data-file="M_slide_57" data-slide="57" data-transcript="The pipeline API hides tokenization and model loading. It is excellent for quick examples, but production projects often need more explicit control.">
+<section class="slide" data-audio="audio/M_slide_57.mp3" data-caption="captions/M_slide_57.vtt" data-file="M_slide_57" data-slide="57" data-transcript="The pipeline API hides tokenization and model loading. It is excellent for quick examples, but production projects often need more explicit control.">
 <div class="slide-kicker">Code</div>
 <h1>The easiest way: pipeline</h1>
 <div class="slide-body"><div class="code-card" data-output="[{'label': 'POSITIVE', 'score': 0.99...}]">
@@ -1463,7 +1463,7 @@ print(result)</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_58.mp3" data-caption="caption/M6/M_slide_58.vtt" data-file="M_slide_58" data-slide="58" data-transcript="AutoTokenizer and AutoModel classes make the process more explicit. They are useful when you want to inspect outputs or customize processing.">
+<section class="slide" data-audio="audio/M_slide_58.mp3" data-caption="captions/M_slide_58.vtt" data-file="M_slide_58" data-slide="58" data-transcript="AutoTokenizer and AutoModel classes make the process more explicit. They are useful when you want to inspect outputs or customize processing.">
 <div class="slide-kicker">Code</div>
 <h1>Use AutoTokenizer and AutoModel for more control</h1>
 <div class="slide-body"><div class="code-card" data-output="tensor([...])">
@@ -1487,7 +1487,7 @@ print(outputs.logits)</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_59.mp3" data-caption="caption/M6/M_slide_59.vtt" data-file="M_slide_59" data-slide="59" data-transcript="AutoModel without a task head is useful when we want hidden states or embeddings rather than direct task labels.">
+<section class="slide" data-audio="audio/M_slide_59.mp3" data-caption="captions/M_slide_59.vtt" data-file="M_slide_59" data-slide="59" data-transcript="AutoModel without a task head is useful when we want hidden states or embeddings rather than direct task labels.">
 <div class="slide-kicker">Code</div>
 <h1>Get contextual token representations</h1>
 <div class="slide-body"><div class="code-card" data-output="torch.Size([1, number_of_tokens, 768])">
@@ -1514,7 +1514,7 @@ print(last_hidden_state.shape)
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_60.mp3" data-caption="caption/M6/M_slide_60.vtt" data-file="M_slide_60" data-slide="60" data-transcript="Sentence embedding models convert sentences or passages into vectors that can be compared. This is a direct bridge to semantic search and RAG.">
+<section class="slide" data-audio="audio/M_slide_60.mp3" data-caption="captions/M_slide_60.vtt" data-file="M_slide_60" data-slide="60" data-transcript="Sentence embedding models convert sentences or passages into vectors that can be compared. This is a direct bridge to semantic search and RAG.">
 <div class="slide-kicker">Code</div>
 <h1>Sentence embeddings for similarity and retrieval</h1>
 <div class="slide-body"><div class="code-card" data-output="Highest score should be near the Canvas/submission sentences.">
@@ -1546,7 +1546,7 @@ for sentence, score in zip(sentences, scores):
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_61.mp3" data-caption="caption/M6/M_slide_61.vtt" data-file="M_slide_61" data-slide="61" data-transcript="This example connects Module 3 linguistic analysis to modern Transformer-based token classification.">
+<section class="slide" data-audio="audio/M_slide_61.mp3" data-caption="captions/M_slide_61.vtt" data-file="M_slide_61" data-slide="61" data-transcript="This example connects Module 3 linguistic analysis to modern Transformer-based token classification.">
 <div class="slide-kicker">Code</div>
 <h1>Named Entity Recognition with a Transformer pipeline</h1>
 <div class="slide-body"><div class="code-card" data-output="Maria Lopez PER ...
@@ -1571,7 +1571,7 @@ for item in ner(text):
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_62.mp3" data-caption="caption/M6/M_slide_62.vtt" data-file="M_slide_62" data-slide="62" data-transcript="The fill-mask pipeline demonstrates the masked language model objective used by BERT-style models.">
+<section class="slide" data-audio="audio/M_slide_62.mp3" data-caption="captions/M_slide_62.vtt" data-file="M_slide_62" data-slide="62" data-transcript="The fill-mask pipeline demonstrates the masked language model objective used by BERT-style models.">
 <div class="slide-kicker">Code</div>
 <h1>Fill-mask shows BERT-style prediction</h1>
 <div class="slide-body"><div class="code-card" data-output="assignment ...
@@ -1593,7 +1593,7 @@ for r in results[:5]:
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_63.mp3" data-caption="caption/M6/M_slide_63.vtt" data-file="M_slide_63" data-slide="63" data-transcript="This example shows decoder-only generation. The output may vary because sampling is turned on.">
+<section class="slide" data-audio="audio/M_slide_63.mp3" data-caption="captions/M_slide_63.vtt" data-file="M_slide_63" data-slide="63" data-transcript="This example shows decoder-only generation. The output may vary because sampling is turned on.">
 <div class="slide-kicker">Code</div>
 <h1>Text generation with a small decoder-only model</h1>
 <div class="slide-body"><div class="code-card" data-output="Natural language processing helps students ...">
@@ -1622,7 +1622,7 @@ print(output[0]["generated_text"])</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_64.mp3" data-caption="caption/M6/M_slide_64.vtt" data-file="M_slide_64" data-slide="64" data-transcript="Summarization is a good example of encoder-decoder text-to-text modeling.">
+<section class="slide" data-audio="audio/M_slide_64.mp3" data-caption="captions/M_slide_64.vtt" data-file="M_slide_64" data-slide="64" data-transcript="Summarization is a good example of encoder-decoder text-to-text modeling.">
 <div class="slide-kicker">Optional code</div>
 <h1>Summarization with encoder–decoder models</h1>
 <div class="slide-body"><div class="code-card" data-output="A short generated summary of the article.">
@@ -1649,7 +1649,7 @@ print(summary[0]["summary_text"])</code></pre>
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_65.mp3" data-caption="caption/M6/M_slide_65.vtt" data-file="M_slide_65" data-slide="65" data-transcript="These terms are easy to confuse. Pretraining creates general language ability, fine-tuning adapts it, and inference uses it.">
+<section class="slide" data-audio="audio/M_slide_65.mp3" data-caption="captions/M_slide_65.vtt" data-file="M_slide_65" data-slide="65" data-transcript="These terms are easy to confuse. Pretraining creates general language ability, fine-tuning adapts it, and inference uses it.">
 <div class="slide-kicker">Fine-tuning</div>
 <h1>Pretraining, fine-tuning, and inference are different</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1661,7 +1661,7 @@ print(summary[0]["summary_text"])</code></pre>
 </tbody></table>
 <div class="callout">Most classroom projects use inference first and fine-tuning only when needed.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_66.mp3" data-caption="caption/M6/M_slide_66.vtt" data-file="M_slide_66" data-slide="66" data-transcript="Fine-tuning requires labeled data and careful evaluation. The code structure is useful, but it should not be treated as a magic recipe.">
+<section class="slide" data-audio="audio/M_slide_66.mp3" data-caption="captions/M_slide_66.vtt" data-file="M_slide_66" data-slide="66" data-transcript="Fine-tuning requires labeled data and careful evaluation. The code structure is useful, but it should not be treated as a magic recipe.">
 <div class="slide-kicker">Code structure</div>
 <h1>A beginner-friendly fine-tuning skeleton</h1>
 <div class="slide-body"><div class="code-card" data-output="A fine-tuning workflow has clear stages: data, tokenization, split, training settings, training, evaluation.">
@@ -1692,7 +1692,7 @@ model = AutoModelForSequenceClassification.from_pretrained(
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_67.mp3" data-caption="caption/M6/M_slide_67.vtt" data-file="M_slide_67" data-slide="67" data-transcript="The tokenizer and model belong together. Saving only the model can create problems when preprocessing changes.">
+<section class="slide" data-audio="audio/M_slide_67.mp3" data-caption="captions/M_slide_67.vtt" data-file="M_slide_67" data-slide="67" data-transcript="The tokenizer and model belong together. Saving only the model can create problems when preprocessing changes.">
 <div class="slide-kicker">Save and reuse</div>
 <h1>Saving a model and tokenizer together</h1>
 <div class="slide-body"><div class="code-card" data-output="Saved files can be reloaded from the folder.">
@@ -1715,7 +1715,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 <div class="output-box" hidden=""></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_68.mp3" data-caption="caption/M6/M_slide_68.vtt" data-file="M_slide_68" data-slide="68" data-transcript="Prompting, fine-tuning, and RAG solve different problems. Knowing the difference helps choose the right method.">
+<section class="slide" data-audio="audio/M_slide_68.mp3" data-caption="captions/M_slide_68.vtt" data-file="M_slide_68" data-slide="68" data-transcript="Prompting, fine-tuning, and RAG solve different problems. Knowing the difference helps choose the right method.">
 <div class="slide-kicker">Prompting vs fine-tuning vs RAG</div>
 <h1>Prompting, fine-tuning, and RAG solve different problems</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1727,7 +1727,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 </tbody></table>
 <div class="callout">RAG is not a replacement for all fine-tuning, and fine-tuning is not a replacement for retrieval.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_69.mp3" data-caption="caption/M6/M_slide_69.vtt" data-file="M_slide_69" data-slide="69" data-transcript="The context window explains why we cannot simply paste every document into a model. We need retrieval and selection.">
+<section class="slide" data-audio="audio/M_slide_69.mp3" data-caption="captions/M_slide_69.vtt" data-file="M_slide_69" data-slide="69" data-transcript="The context window explains why we cannot simply paste every document into a model. We need retrieval and selection.">
 <div class="slide-kicker">Context window</div>
 <h1>LLMs have limited input space</h1>
 <div class="slide-body"><div class="context-window">
@@ -1740,12 +1740,12 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 <p class="explain">All of these consume tokens. Long documents, conversation history, and generated answers compete for the same context window.</p>
 <div class="callout">This is one reason RAG retrieves only the most relevant chunks instead of sending every document.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_70.mp3" data-caption="caption/M6/M_slide_70.vtt" data-file="M_slide_70" data-slide="70" data-transcript="Transformers should be used responsibly. A good answer needs evidence, evaluation, and awareness of limitations.">
+<section class="slide" data-audio="audio/M_slide_70.mp3" data-caption="captions/M_slide_70.vtt" data-file="M_slide_70" data-slide="70" data-transcript="Transformers should be used responsibly. A good answer needs evidence, evaluation, and awareness of limitations.">
 <div class="slide-kicker">Limitations</div>
 <h1>Transformer models are powerful, but not magic</h1>
 <div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Hallucination</h3><p>A generated answer may sound confident but be unsupported.</p></article><article class="mini-card"><h3>Stale knowledge</h3><p>A model may not know recent or private information.</p></article><article class="mini-card"><h3>Context limits</h3><p>The model cannot always see all needed documents.</p></article><article class="mini-card"><h3>Bias and data issues</h3><p>Training data can shape model behavior in undesirable ways.</p></article><article class="mini-card"><h3>Cost and latency</h3><p>Large models can be expensive and slow.</p></article><article class="mini-card"><h3>Verification needed</h3><p>Outputs should be checked against evidence when stakes matter.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_71.mp3" data-caption="caption/M6/M_slide_71.vtt" data-file="M_slide_71" data-slide="71" data-transcript="Responsible use is not a separate topic at the end. It should be part of model selection, testing, and deployment.">
+<section class="slide" data-audio="audio/M_slide_71.mp3" data-caption="captions/M_slide_71.vtt" data-file="M_slide_71" data-slide="71" data-transcript="Responsible use is not a separate topic at the end. It should be part of model selection, testing, and deployment.">
 <div class="slide-kicker">Responsible use</div>
 <h1>Responsible-use checklist</h1>
 <div class="slide-body"><div class="steps">
@@ -1757,7 +1757,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 <div><b>✓</b><span>Do we have a way to evaluate errors?</span></div>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_72.mp3" data-caption="caption/M6/M_slide_72.vtt" data-file="M_slide_72" data-slide="72" data-transcript="This activity practices selecting model types rather than memorizing model names.">
+<section class="slide" data-audio="audio/M_slide_72.mp3" data-caption="captions/M_slide_72.vtt" data-file="M_slide_72" data-slide="72" data-transcript="This activity practices selecting model types rather than memorizing model names.">
 <div class="slide-kicker">Class activity</div>
 <h1>Applied model selection scenarios</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1770,7 +1770,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 <tr><td>Answer questions from private PDFs</td><td>RAG with embedding model + LLM</td><td>Need external document retrieval.</td></tr>
 </tbody></table></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_73.mp3" data-caption="caption/M6/M_slide_73.vtt" data-file="M_slide_73" data-slide="73" data-transcript="This slide can be used for a pause in class. Answer in plain language before moving to RAG.">
+<section class="slide" data-audio="audio/M_slide_73.mp3" data-caption="captions/M_slide_73.vtt" data-file="M_slide_73" data-slide="73" data-transcript="This slide can be used for a pause in class. Answer in plain language before moving to RAG.">
 <div class="slide-kicker">Knowledge check</div>
 <h1>Concept review before Module 7</h1>
 <div class="slide-body"><div class="quiz-list">
@@ -1784,19 +1784,19 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 <p>Try answering aloud first. Then connect each answer to the examples in this module: tokenization, model inputs, attention, architecture families, and external knowledge.</p>
 </div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_74.mp3" data-caption="caption/M6/M_slide_74.vtt" data-file="M_slide_74" data-slide="74" data-transcript="This summary reviews the core ideas needed for the next module. The next logical step is RAG and vector databases.">
+<section class="slide" data-audio="audio/M_slide_74.mp3" data-caption="captions/M_slide_74.vtt" data-file="M_slide_74" data-slide="74" data-transcript="This summary reviews the core ideas needed for the next module. The next logical step is RAG and vector databases.">
 <div class="slide-kicker">Summary</div>
 <h1>Module 6 summary</h1>
 <div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Transformers use tokens</h3><p>Text becomes tokens, IDs, masks, and vectors.</p></article><article class="mini-card"><h3>Attention builds context</h3><p>Tokens learn from other tokens through Q, K, V, and attention weights.</p></article><article class="mini-card"><h3>Blocks are stacked</h3><p>Attention, Add &amp; Norm, and feed-forward networks repeat across layers.</p></article><article class="mini-card"><h3>Model families differ</h3><p>Encoder-only, decoder-only, and encoder-decoder models fit different tasks.</p></article><article class="mini-card"><h3>Pretrained models require selection</h3><p>Choose by task, language, domain, size, evidence, and deployment constraints.</p></article><article class="mini-card"><h3>RAG comes next</h3><p>External knowledge requires retrieval, context construction, and evidence.</p></article></div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_75.mp3" data-caption="caption/M6/M_slide_75.vtt" data-file="M_slide_75" data-slide="75" data-transcript="The bridge to RAG is simple. Modern models are powerful, but when the answer lives in external documents, we need retrieval.">
+<section class="slide" data-audio="audio/M_slide_75.mp3" data-caption="captions/M_slide_75.vtt" data-file="M_slide_75" data-slide="75" data-transcript="The bridge to RAG is simple. Modern models are powerful, but when the answer lives in external documents, we need retrieval.">
 <div class="slide-kicker">Bridge to Module 7</div>
 <h1>Why Transformers lead naturally to RAG</h1>
 <div class="slide-body"><div class="flow"><div class="flow-item">Transformer / LLM</div><div class="arrow">→</div><div class="flow-item">User question</div><div class="arrow">→</div><div class="flow-item">Need external documents</div><div class="arrow">→</div><div class="flow-item">Retrieve relevant chunks</div><div class="arrow">→</div><div class="flow-item">Give context to LLM</div><div class="arrow">→</div><div class="flow-item">Grounded answer</div></div>
 <p class="lead small">A Transformer can generate language, but it does not automatically know your private PDFs, databases, policies, or course documents.</p>
 <div class="callout">Next module: Retrieval-Augmented Generation and vector databases.</div></div>
 </section>
-<section class="slide" data-audio="audio/M6/M_slide_76.mp3" data-caption="caption/M6/M_slide_76.vtt" data-file="M_slide_76" data-slide="76" data-transcript="The final slide gives sources for continued learning. The model ecosystem changes often, so check current documentation and model cards.">
+<section class="slide" data-audio="audio/M_slide_76.mp3" data-caption="captions/M_slide_76.vtt" data-file="M_slide_76" data-slide="76" data-transcript="The final slide gives sources for continued learning. The model ecosystem changes often, so check current documentation and model cards.">
 <div class="slide-kicker">References</div>
 <h1>Further resources</h1>
 <div class="slide-body"><table class="clean-table">
@@ -1881,8 +1881,8 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 </nav>
 </aside>
 <script>
-  const AUDIO_FOLDER = 'audio/M6';
-  const CAPTION_FOLDER = 'caption/M6';
+  const AUDIO_FOLDER = 'audio';
+  const CAPTION_FOLDER = 'captions';
   const AUDIO_EXT = 'mp3';
   const CAPTION_EXT = 'vtt';
 
@@ -2049,7 +2049,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   }
 
   async function loadTranscriptManifest() {
-    const candidates = ['manifest/M6_manifest.json', 'M6_manifest.json', 'manifest.json', 'narration_manifest.json', 'audio/M6/manifest.json'];
+    const candidates = ['manifest/M6_manifest.json', 'M6_manifest.json', 'manifest.json', 'narration_manifest.json', 'audio/manifest.json'];
     for (const path of candidates) {
       try {
         const res = await fetch(path, { cache:'no-store' });
