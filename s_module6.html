@@ -263,6 +263,109 @@
     @media print { .topbar,.bottom,.drawer,.caption-panel,.modal,.backdrop,.transcript-panel { display:none !important; } body { padding:0; background:#fff; } .deck { display:block; padding:0; } .slide { display:block !important; min-height:auto; box-shadow:none; page-break-after:always; width:100%; max-width:none; border:0; border-radius:0; } }
 
 </style>
+
+<style id="ian620-603-shell">
+  html,body{height:100%}
+  body{margin:0;overflow:hidden;padding-bottom:0}
+  .topbar{
+    height:60px;position:relative;top:auto;padding:0 14px;gap:10px;
+    background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);box-shadow:none
+  }
+  body.dark .topbar{background:rgba(11,18,32,.97)}
+  .brand{width:31px;height:31px;flex:0 0 31px;border-radius:9px;font-size:12px;box-shadow:0 6px 16px rgba(31,95,159,.22)}
+  .title-wrap{min-width:220px}
+  .mod-title{font-size:16px}
+  .course{font-size:11px;margin-top:1px}
+  .ready{font-size:12px}
+  .progress-pill{min-height:36px;padding:7px 11px;border-radius:10px}
+  .top-actions{margin-left:auto}
+  .top-actions button{min-height:36px;padding:7px 11px;border-radius:10px}
+  .deck{
+    height:calc(100vh - 60px - 158px);min-height:0;padding:18px 22px;
+    display:grid;place-items:center;overflow:hidden
+  }
+  body.cc-off .deck{height:calc(100vh - 60px - 112px)}
+  .slide{
+    width:min(1280px,100%);max-width:1280px;height:100%;min-height:0;max-height:800px;
+    overflow:auto;scrollbar-width:thin;border-radius:18px;padding:clamp(28px,3vw,54px)
+  }
+  .slide::after{right:26px;bottom:10px}
+  .bottom{
+    position:fixed;left:0;right:0;bottom:0;z-index:28;height:158px;
+    display:grid;grid-template-columns:auto minmax(540px,1fr) minmax(220px,320px) auto;
+    gap:12px;align-items:center;padding:8px 14px;background:var(--panel);
+    border-top:1px solid var(--line);box-shadow:none;backdrop-filter:none
+  }
+  body.dark .bottom{background:var(--panel)}
+  body.cc-off .bottom{height:112px}
+  .footer-left,.footer-right{display:flex;align-items:center}
+  .audio-block{min-width:0;display:grid;gap:6px}
+  .narration-controls{max-width:none;margin:0;display:flex;align-items:center;gap:6px;min-width:0}
+  .narration-btn,.narration-speed{
+    min-height:30px;border:1px solid var(--line);border-radius:8px;background:var(--panel);
+    color:var(--ink);padding:5px 8px;font-size:10.5px;font-weight:800;cursor:pointer;white-space:nowrap
+  }
+  .narration-btn.primary{background:#1764a6;color:#fff;border-color:#1764a6}
+  #ccBtn[aria-pressed="true"]{background:#1764a6;border-color:#1764a6;color:#fff}
+  #ccBtn[aria-pressed="false"]{background:var(--panel);border-color:var(--line);color:var(--ink)}
+  .caption-strip{
+    height:auto;min-height:42px;display:flex;align-items:center;justify-content:center;
+    padding:6px 18px;margin:0;border:1px solid #2f3a46;border-radius:8px;
+    background:rgba(18,22,27,.96);color:#fff;text-align:center;
+    font:600 15px/1.35 "Segoe UI",Arial,sans-serif;letter-spacing:.005em;
+    white-space:normal;text-overflow:clip;overflow:hidden
+  }
+  .caption-strip.off{color:#94a3b8}
+  body.cc-off .caption-strip{display:none}
+  .audio-player{
+    height:auto;display:grid;grid-template-columns:auto auto minmax(100px,1fr) auto auto;
+    align-items:center;gap:7px;border:1px solid var(--line);border-radius:10px;
+    padding:5px 8px;background:var(--panel2)
+  }
+  .audio-dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+  .audio-player.playing .audio-dot{background:var(--good)}
+  .audio-title{font-size:10.5px;font-weight:850;white-space:nowrap}
+  .audio-seek{width:100%;min-width:80px}
+  .audio-time{color:var(--muted);font:10px ui-monospace,monospace;white-space:nowrap}
+  .audio-play{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:5px 8px;font-size:10px;cursor:pointer}
+  #audio{display:none}
+  .bottom-nav{display:grid;gap:6px}
+  .bottom-nav #slideSelect{width:100%;max-width:none;min-height:30px;padding:6px 9px}
+  .bottom-progress{display:flex;align-items:center;gap:7px}
+  .bottom-progress .mini-progress{flex:1;height:7px}
+  .bottom-progress .counter{min-width:48px;font-size:10px;text-align:center}
+  .nav-button{height:36px;min-height:36px;font-size:14px;padding:7px 12px;border-radius:9px}
+  .transcript-panel{
+    right:22px;bottom:124px;width:min(560px,calc(100vw - 44px));
+    max-height:min(520px,70vh);border-radius:18px
+  }
+  body:not(.cc-off) .transcript-panel{bottom:170px}
+  @media(max-width:1200px){
+    .topbar{height:auto;min-height:60px;flex-wrap:wrap;padding:8px 12px}
+    .status{order:3;width:auto}
+    .top-actions{order:initial;width:auto;flex-wrap:wrap}
+    .deck{height:calc(100vh - 76px - 188px);padding:10px}
+    body.cc-off .deck{height:calc(100vh - 76px - 146px)}
+    .bottom{height:188px;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto}
+    body.cc-off .bottom{height:146px}
+    .audio-block{grid-column:1/-1}
+    .bottom-nav{grid-column:2;grid-row:2}
+    .slide{width:100%;height:100%;padding:28px 24px}
+  }
+  @media(max-width:720px){
+    body{overflow:auto}
+    .deck{height:auto;min-height:calc(100vh - 60px);overflow:visible}
+    .slide{height:auto;min-height:auto}
+    .bottom{position:sticky;height:auto;grid-template-columns:1fr;grid-template-rows:auto}
+    body.cc-off .bottom{height:auto}
+    .audio-block,.bottom-nav{grid-column:1;grid-row:auto}
+    .audio-player{grid-template-columns:auto 1fr auto}
+    .audio-title{grid-column:2}
+    .audio-seek{grid-column:1/-1}
+    .narration-controls{flex-wrap:wrap}
+    .transcript-panel{left:10px;right:10px;bottom:10px;width:auto;max-height:55vh}
+  }
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -272,7 +375,7 @@
 <div class="course">Transformers and Modern NLP</div>
 </div>
 <div class="status">
-<span class="ready">Python ready</span>
+<span class="ready">VS Code ready</span>
 <div class="progress-pill"><span class="progress-label">Progress</span><span class="progress-pct" id="progressPct">0%</span><small id="statusText">NLP 1/76</small></div>
 <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
 </div>
@@ -1462,36 +1565,49 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 </section>
 </main>
 <footer class="bottom">
-<div class="narration-controls">
-<button class="primary" onclick="startNarration()">Start Narration</button>
-<button id="narrationBtn" onclick="toggleNarrationMode()">Narration On</button>
-<button class="primary" id="ccBtn" onclick="toggleCaptions()">CC On</button>
-<button onclick="openTranscript()">Transcript</button>
-<select aria-label="Narration speed" id="speedSelect">
-<option value="0.75">0.75x</option>
-<option selected="" value="1">1.0x</option>
-<option value="1.25">1.25x</option>
-<option value="1.5">1.5x</option>
-<option value="2">2.0x</option>
-</select>
-</div>
-<div class="bottom-main">
-<button class="nav-button" onclick="prevSlide()">Previous</button>
-<div class="audio-zone">
-<div class="caption-strip" id="captionStrip">Captions will appear here after VTT files are uploaded.</div>
-<div class="audio-card">
-<div class="audio-ready" id="audioStatus">Slide audio ready</div>
-<audio controls="" id="audio" preload="metadata"></audio>
-<button class="play-mini" onclick="startNarration()">Play</button>
-</div>
-</div>
-<div class="slide-jump">
-<select aria-label="Go to slide" id="slideSelect"></select>
-<div class="mini-progress"><span id="miniProgress"></span></div>
-<div class="counter" id="counter">1 / 76</div>
-</div>
-<button class="nav-button" onclick="nextSlide()">Next</button>
-</div>
+  <div class="footer-left">
+    <button class="nav-button" type="button" onclick="prevSlide()">Previous</button>
+  </div>
+
+  <div class="audio-block">
+    <div class="narration-controls">
+      <button class="narration-btn primary" type="button" onclick="startNarration()">Start Narration</button>
+      <button class="narration-btn" id="narrationBtn" type="button" onclick="toggleNarrationMode()">Narration On</button>
+      <button class="narration-btn primary" id="ccBtn" type="button" aria-pressed="true" onclick="toggleCaptions()">CC On</button>
+      <button class="narration-btn" type="button" onclick="openTranscript()">Transcript</button>
+      <select class="narration-speed" aria-label="Narration speed" id="speedSelect">
+        <option value="0.85">0.85x</option>
+        <option selected value="1">1.0x</option>
+        <option value="1.15">1.15x</option>
+        <option value="1.3">1.3x</option>
+      </select>
+    </div>
+
+    <div class="caption-strip" id="captionStrip" aria-live="polite" aria-atomic="true">
+      Captions will appear here after VTT files are uploaded.
+    </div>
+
+    <div class="audio-player" id="audioPlayer">
+      <span class="audio-dot"></span>
+      <span class="audio-title" id="audioStatus">Slide audio ready</span>
+      <input class="audio-seek" id="audioSeek" type="range" min="0" max="100" value="0" aria-label="Audio position">
+      <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+      <button class="audio-play" id="audioPlay" type="button">Play</button>
+      <audio id="audio" preload="metadata"></audio>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <select aria-label="Go to slide" id="slideSelect"></select>
+    <div class="bottom-progress">
+      <div class="mini-progress"><span id="miniProgress"></span></div>
+      <div class="counter" id="counter">1 / 76</div>
+    </div>
+  </div>
+
+  <div class="footer-right">
+    <button class="nav-button" type="button" onclick="nextSlide()">Next</button>
+  </div>
 </footer>
 <aside aria-label="Current slide transcript" class="transcript-panel" id="transcriptPanel">
   <div class="transcript-head">
@@ -1697,7 +1813,9 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     rebuildTrack(cPath);
     document.getElementById('audioStatus').textContent = `Slide ${current + 1} audio ready`;
     ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
+    ccBtn.setAttribute('aria-pressed', ccOpen ? 'true' : 'false');
     ccBtn.classList.toggle('primary', ccOpen);
+    document.body.classList.toggle('cc-off', !ccOpen);
     narrationBtn.textContent = narrationMode ? 'Narration On' : 'Narration Off';
     updateCaptionText(slides[current]);
     if (document.getElementById('transcriptPanel').classList.contains('open')) refreshTranscriptPanel();
@@ -1797,7 +1915,9 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     ccOpen = true;
     localStorage.setItem('ian620_module6_cc','open');
     ccBtn.textContent = 'CC On';
+    ccBtn.setAttribute('aria-pressed','true');
     ccBtn.classList.add('primary');
+    document.body.classList.remove('cc-off');
     updateCaptionText(slides[current]);
   }
   window.startNarration = startNarration;
@@ -1833,6 +1953,47 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   audio.addEventListener('timeupdate', syncCaptionStrip);
   audio.addEventListener('seeked', syncCaptionStrip);
   audio.addEventListener('play', syncCaptionStrip);
+
+  
+  function formatAudioTime(seconds) {
+    if (!Number.isFinite(seconds)) return '0:00';
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60).toString().padStart(2,'0');
+    return m + ':' + s;
+  }
+
+  const audioSeek = document.getElementById('audioSeek');
+  const audioTime = document.getElementById('audioTime');
+  const audioPlay = document.getElementById('audioPlay');
+  const audioPlayer = document.getElementById('audioPlayer');
+
+  function refreshAudioUi() {
+    const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+    const currentTime = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+    audioSeek.value = duration > 0 ? String((currentTime / duration) * 100) : '0';
+    audioTime.textContent = formatAudioTime(currentTime) + ' / ' + formatAudioTime(duration);
+    audioPlay.textContent = audio.paused ? 'Play' : 'Pause';
+    audioPlayer.classList.toggle('playing', !audio.paused);
+  }
+
+  audio.addEventListener('loadedmetadata', refreshAudioUi);
+  audio.addEventListener('durationchange', refreshAudioUi);
+  audio.addEventListener('timeupdate', refreshAudioUi);
+  audio.addEventListener('play', refreshAudioUi);
+  audio.addEventListener('pause', refreshAudioUi);
+  audio.addEventListener('ended', refreshAudioUi);
+
+  audioSeek.addEventListener('input', () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      audio.currentTime = (Number(audioSeek.value) / 100) * audio.duration;
+    }
+  });
+
+  audioPlay.addEventListener('click', () => {
+    if (audio.paused) startNarration();
+    else audio.pause();
+  });
+
 
   document.querySelectorAll('.check-btn').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('done')));
   populateSlideSelect();
