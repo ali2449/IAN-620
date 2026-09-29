@@ -1,0 +1,38 @@
+name: Fix Module 6 CSS typo
+
+"on":
+  push:
+    paths:
+      - ".github/workflows/fix-module6-css-typo.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix typo
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('s_module6.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('100vh - 220ppx', '100vh - 220px')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Remove workflow
+        run: rm -f .github/workflows/fix-module6-css-typo.yml
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add s_module6.html .github/workflows/fix-module6-css-typo.yml
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git commit -m "Fix Module 6 small-screen CSS typo"
+          git push
