@@ -574,6 +574,28 @@
     }
   }
 </style>
+<style id="ian620-default-display-fix">
+body.cc-off .caption-strip{display:none!important}
+body:not(.auto-hide) .deck{height:calc(100vh - 50px - 148px)!important;min-height:0!important;padding:10px 0!important;overflow:hidden!important}
+body:not(.auto-hide).cc-off .deck{height:calc(100vh - 50px - 108px)!important}
+body:not(.auto-hide) .slide{height:100%!important;max-height:none!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important}
+body:not(.auto-hide) .bottom,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open){height:148px!important;display:grid!important;grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px!important;gap:12px!important;align-items:center!important;padding:7px 14px 9px!important;background:var(--panel)!important;border-top:1px solid var(--line)!important;box-shadow:none!important;overflow:visible!important}
+body:not(.auto-hide).cc-off .bottom,body:not(.auto-hide).cc-off .bottom:not(:hover):not(:focus-within):not(.force-open){height:108px!important}
+body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block::after{content:none!important;display:none!important}
+body:not(.auto-hide) .footer-left,body:not(.auto-hide) .footer-right,body:not(.auto-hide) .narration-controls,body:not(.auto-hide) .audio-player,body:not(.auto-hide) .bottom-nav,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav{opacity:1!important;visibility:visible!important;transform:none!important;max-height:none!important;pointer-events:auto!important;overflow:visible!important}
+body:not(.auto-hide) .audio-block,body:not(.auto-hide) .bottom-nav{display:grid!important}
+body:not(.auto-hide) .footer-left,body:not(.auto-hide) .footer-right,body:not(.auto-hide) .narration-controls,body:not(.auto-hide) .audio-player{display:flex!important}
+body.auto-hide .deck{height:calc(100vh - 50px - 52px)!important;min-height:0!important;padding:10px 0!important;overflow:hidden!important}
+body.auto-hide.cc-off .deck{height:calc(100vh - 50px - 18px)!important}
+body.auto-hide .slide{height:100%!important;max-height:none!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important}
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open){height:52px!important;display:grid!important;grid-template-columns:1fr!important;gap:0!important;padding:7px 14px 8px!important;overflow:hidden!important}
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open){height:18px!important;padding:4px 14px!important;background:transparent!important;border-top:0!important;box-shadow:none!important}
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right{display:none!important}
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block::after{content:""!important;display:block!important;width:160px!important;height:4px!important;margin:4px auto 0!important;border-radius:999px!important;background:rgba(23,100,166,.55)!important}
+body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{height:148px!important;display:grid!important;grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px!important;gap:12px!important;align-items:center!important;padding:7px 14px 9px!important;background:var(--panel)!important;border-top:1px solid var(--line)!important;box-shadow:0 -18px 46px rgba(15,23,42,.16)!important}
+body.auto-hide.cc-off .bottom:hover,body.auto-hide.cc-off .bottom:focus-within,body.auto-hide.cc-off .bottom.force-open{height:108px!important}
+@media(max-width:1380px) and (min-width:900px){body:not(.auto-hide) .bottom,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open),body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{grid-template-columns:90px minmax(520px,1fr) minmax(270px,320px) 70px!important;gap:10px!important}}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -591,6 +613,7 @@
 <button id="themeBtn">Dark mode</button>
 <button onclick="toggleFullscreen()">Fullscreen</button>
 <button class="primary" onclick="runSlide()">Run slide ▶</button>
+<button id="autoHideBtn" type="button" onclick="toggleAutoHide()">Auto-hide Off</button>
 <button onclick="toggleDrawer()">☰ Course Modules</button>
 </div>
 </header>
@@ -1852,6 +1875,14 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   const total = slides.length;
   let current = Number(localStorage.getItem('ian620_module6_slide') || '0');
   current = Math.max(0, Math.min(current, total - 1));
+  // Default display state for Module 6.
+  if (localStorage.getItem('ian620_module6_defaults_v4') !== 'done') {
+    localStorage.setItem('ian620_module6_autohide', 'off');
+    localStorage.setItem('ian620_module6_cc', 'open');
+    localStorage.setItem('ian620_module6_narration', 'on');
+    localStorage.setItem('ian620_module6_defaults_v4', 'done');
+  }
+  let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';
   let ccOpen = localStorage.getItem('ian620_module6_cc') !== 'closed';
   let narrationMode = localStorage.getItem('ian620_module6_narration') !== 'off';
 
@@ -1862,6 +1893,31 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   const slideSelect = document.getElementById('slideSelect');
   const speedSelect = document.getElementById('speedSelect');
   const captionStrip = document.getElementById('captionStrip');
+  const autoHideBtn = document.getElementById('autoHideBtn');
+
+  function syncDisplayState() {
+    document.body.classList.toggle('auto-hide', autoHide);
+    document.body.classList.toggle('cc-off', !ccOpen);
+    if (autoHideBtn) {
+      autoHideBtn.textContent = autoHide ? 'Auto-hide On' : 'Auto-hide Off';
+      autoHideBtn.setAttribute('aria-pressed', autoHide ? 'true' : 'false');
+      autoHideBtn.title = autoHide ? 'Auto-hide is on. Hover near the bottom to show controls.' : 'Auto-hide is off. The full bottom panel stays visible.';
+    }
+    if (ccBtn) {
+      ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
+      ccBtn.setAttribute('aria-pressed', ccOpen ? 'true' : 'false');
+      ccBtn.classList.toggle('primary', ccOpen);
+    }
+    if (captionStrip && !ccOpen) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }
+  }
+
+  function toggleAutoHide() {
+    autoHide = !autoHide;
+    localStorage.setItem('ian620_module6_autohide', autoHide ? 'on' : 'off');
+    syncDisplayState();
+  }
+  window.toggleAutoHide = toggleAutoHide;
+  syncDisplayState();
 
   function fileBase(slide) { return slide.dataset.file || `M_slide_${String(current + 1).padStart(2,'0')}`; }
   function audioPath(slide) { return `${AUDIO_FOLDER}/${fileBase(slide)}.${AUDIO_EXT}`; }
@@ -2140,6 +2196,8 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   function toggleCaptions() {
     ccOpen = !ccOpen;
     localStorage.setItem('ian620_module6_cc', ccOpen ? 'open' : 'closed');
+    syncDisplayState();
+    if (!ccOpen && captionStrip) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }
     ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
     ccBtn.classList.toggle('primary', ccOpen);
     updateCaptionText(slides[current]);
