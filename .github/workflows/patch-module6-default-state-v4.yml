@@ -23,253 +23,94 @@ jobs:
           p = Path('s_module6.html')
           s = p.read_text(encoding='utf-8')
 
-          # 1) Add Auto-hide button to the top toolbar.
-          if 'id="autoHideBtn"' not in s:
-              target = '<button class="primary" onclick="runSlide()">Run slide ▶</button>'
-              replacement = target + '\n<button id="autoHideBtn" type="button" onclick="toggleAutoHide()">Auto-hide Off</button>'
-              if target not in s:
-                  raise SystemExit('Run slide button target not found')
-              s = s.replace(target, replacement, 1)
+          run_btn = '<button class="primary" onclick="runSlide()">Run slide ▶</button>'
+          auto_btn = '<button id="autoHideBtn" type="button" onclick="toggleAutoHide()">Auto-hide Off</button>'
+          if 'id="autoHideBtn"' not in s and run_btn in s:
+              s = s.replace(run_btn, run_btn + '\n' + auto_btn, 1)
 
-          # 2) Default state: auto-hide OFF, CC ON, narration ON.
-          defaults_marker = 'ian620_module6_defaults_v4'
-          if defaults_marker not in s:
-              target = "  let ccOpen = localStorage.getItem('ian620_module6_cc') !== 'closed';"
-              insert = """
-  // Default display state for Module 6.
-  // Applied once so previous testing choices do not become the default student view.
-  if (localStorage.getItem('ian620_module6_defaults_v4') !== 'done') {
-    localStorage.setItem('ian620_module6_autohide', 'off');
-    localStorage.setItem('ian620_module6_cc', 'open');
-    localStorage.setItem('ian620_module6_narration', 'on');
-    localStorage.setItem('ian620_module6_defaults_v4', 'done');
-  }
-  let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';
-""" + target
-              if target not in s:
-                  raise SystemExit('ccOpen target not found')
-              s = s.replace(target, insert, 1)
-          elif "let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';" not in s:
-              target = "  let ccOpen = localStorage.getItem('ian620_module6_cc') !== 'closed';"
-              s = s.replace(target, "  let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';\n" + target, 1)
+          cc_line = "  let ccOpen = localStorage.getItem('ian620_module6_cc') !== 'closed';"
+          if 'ian620_module6_defaults_v4' not in s and cc_line in s:
+              defaults = "\n".join([
+                  "  // Default display state for Module 6.",
+                  "  if (localStorage.getItem('ian620_module6_defaults_v4') !== 'done') {",
+                  "    localStorage.setItem('ian620_module6_autohide', 'off');",
+                  "    localStorage.setItem('ian620_module6_cc', 'open');",
+                  "    localStorage.setItem('ian620_module6_narration', 'on');",
+                  "    localStorage.setItem('ian620_module6_defaults_v4', 'done');",
+                  "  }",
+                  "  let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';",
+                  cc_line
+              ])
+              s = s.replace(cc_line, defaults, 1)
+          elif "let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';" not in s and cc_line in s:
+              s = s.replace(cc_line, "  let autoHide = localStorage.getItem('ian620_module6_autohide') === 'on';\n" + cc_line, 1)
 
-          # 3) Add JS helpers for auto-hide state and UI sync.
-          if 'function toggleAutoHide()' not in s:
-              target = "  const captionStrip = document.getElementById('captionStrip');"
-              insert = target + """
-  const autoHideBtn = document.getElementById('autoHideBtn');
+          cap_line = "  const captionStrip = document.getElementById('captionStrip');"
+          if 'function toggleAutoHide()' not in s and cap_line in s:
+              js = "\n".join([
+                  cap_line,
+                  "  const autoHideBtn = document.getElementById('autoHideBtn');",
+                  "",
+                  "  function syncDisplayState() {",
+                  "    document.body.classList.toggle('auto-hide', autoHide);",
+                  "    document.body.classList.toggle('cc-off', !ccOpen);",
+                  "    if (autoHideBtn) {",
+                  "      autoHideBtn.textContent = autoHide ? 'Auto-hide On' : 'Auto-hide Off';",
+                  "      autoHideBtn.setAttribute('aria-pressed', autoHide ? 'true' : 'false');",
+                  "      autoHideBtn.title = autoHide ? 'Auto-hide is on. Hover near the bottom to show controls.' : 'Auto-hide is off. The full bottom panel stays visible.';",
+                  "    }",
+                  "    if (ccBtn) {",
+                  "      ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';",
+                  "      ccBtn.setAttribute('aria-pressed', ccOpen ? 'true' : 'false');",
+                  "      ccBtn.classList.toggle('primary', ccOpen);",
+                  "    }",
+                  "    if (captionStrip && !ccOpen) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }",
+                  "  }",
+                  "",
+                  "  function toggleAutoHide() {",
+                  "    autoHide = !autoHide;",
+                  "    localStorage.setItem('ian620_module6_autohide', autoHide ? 'on' : 'off');",
+                  "    syncDisplayState();",
+                  "  }",
+                  "  window.toggleAutoHide = toggleAutoHide;",
+                  "  syncDisplayState();"
+              ])
+              s = s.replace(cap_line, js, 1)
 
-  function syncDisplayState() {
-    document.body.classList.toggle('auto-hide', autoHide);
-    document.body.classList.toggle('cc-off', !ccOpen);
+          cc_store = "localStorage.setItem('ian620_module6_cc', ccOpen ? 'open' : 'closed');"
+          if cc_store in s and 'syncDisplayState();\n    if (!ccOpen && captionStrip)' not in s:
+              s = s.replace(cc_store, cc_store + "\n    syncDisplayState();\n    if (!ccOpen && captionStrip) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }", 1)
 
-    if (autoHideBtn) {
-      autoHideBtn.textContent = autoHide ? 'Auto-hide On' : 'Auto-hide Off';
-      autoHideBtn.setAttribute('aria-pressed', autoHide ? 'true' : 'false');
-      autoHideBtn.title = autoHide
-        ? 'Auto-hide is on. Hover near the bottom to show controls.'
-        : 'Auto-hide is off. The full bottom panel stays visible.';
-    }
-
-    if (ccBtn) {
-      ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
-      ccBtn.setAttribute('aria-pressed', ccOpen ? 'true' : 'false');
-      ccBtn.classList.toggle('primary', ccOpen);
-    }
-
-    if (captionStrip && !ccOpen) {
-      captionStrip.textContent = '';
-      captionStrip.classList.add('off');
-    }
-  }
-
-  function toggleAutoHide() {
-    autoHide = !autoHide;
-    localStorage.setItem('ian620_module6_autohide', autoHide ? 'on' : 'off');
-    syncDisplayState();
-  }
-  window.toggleAutoHide = toggleAutoHide;
-  syncDisplayState();
-"""
-              if target not in s:
-                  raise SystemExit('captionStrip target not found')
-              s = s.replace(target, insert, 1)
-
-          # 4) Ensure caption toggle always syncs the body classes and hides the subtitle bar when CC is off.
-          if 'syncDisplayState();\n    if (!ccOpen && captionStrip)' not in s:
-              target = "localStorage.setItem('ian620_module6_cc', ccOpen ? 'open' : 'closed');"
-              replacement = target + "\n    syncDisplayState();\n    if (!ccOpen && captionStrip) { captionStrip.textContent = ''; captionStrip.classList.add('off'); }"
-              if target in s:
-                  s = s.replace(target, replacement, 1)
-
-          # 5) CSS: auto-hide only when body.auto-hide is present.
-          #    When CC is off, remove the black subtitle bar entirely.
-          css = r'''<style id="ian620-default-display-fix">
-  /* Default: auto-hide is OFF, CC is ON, narration is ON. */
-  body:not(.auto-hide) .bottom {
-    overflow:visible !important;
-  }
-
-  body.cc-off .caption-strip {
-    display:none !important;
-  }
-
-  body:not(.auto-hide) .deck {
-    height:calc(100vh - 50px - 148px) !important;
-    min-height:0 !important;
-    padding:10px 0 !important;
-    overflow:hidden !important;
-  }
-  body:not(.auto-hide).cc-off .deck {
-    height:calc(100vh - 50px - 108px) !important;
-  }
-  body:not(.auto-hide) .slide {
-    height:100% !important;
-    max-height:none !important;
-    min-height:0 !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-  }
-  body:not(.auto-hide) .bottom {
-    height:148px !important;
-    display:grid !important;
-    grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px !important;
-    gap:12px !important;
-    align-items:center !important;
-    padding:7px 14px 9px !important;
-    opacity:1 !important;
-    visibility:visible !important;
-  }
-  body:not(.auto-hide).cc-off .bottom {
-    height:108px !important;
-  }
-  body:not(.auto-hide) .footer-left,
-  body:not(.auto-hide) .footer-right,
-  body:not(.auto-hide) .narration-controls,
-  body:not(.auto-hide) .audio-player,
-  body:not(.auto-hide) .bottom-nav {
-    opacity:1 !important;
-    visibility:visible !important;
-    transform:none !important;
-    max-height:none !important;
-    pointer-events:auto !important;
-    overflow:visible !important;
-  }
-
-  /* Auto-hide mode: keep captions visible, reveal controls on hover/focus. */
-  body.auto-hide .deck {
-    height:calc(100vh - 50px - 52px) !important;
-    min-height:0 !important;
-    padding:10px 0 !important;
-    overflow:hidden !important;
-  }
-  body.auto-hide.cc-off .deck {
-    height:calc(100vh - 50px - 18px) !important;
-  }
-  body.auto-hide .slide {
-    height:100% !important;
-    max-height:none !important;
-    min-height:0 !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-  }
-  body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) {
-    height:52px !important;
-    display:grid !important;
-    grid-template-columns:1fr !important;
-    gap:0 !important;
-    padding:7px 14px 8px !important;
-    overflow:hidden !important;
-  }
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) {
-    height:18px !important;
-    padding:4px 14px !important;
-    background:transparent !important;
-    border-top:0 !important;
-    box-shadow:none !important;
-  }
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block::after {
-    content:"" !important;
-    display:block !important;
-    width:160px !important;
-    height:4px !important;
-    margin:4px auto 0 !important;
-    border-radius:999px !important;
-    background:rgba(23,100,166,.55) !important;
-  }
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip,
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav,
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,
-  body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right {
-    display:none !important;
-  }
-  body.auto-hide .bottom:hover,
-  body.auto-hide .bottom:focus-within,
-  body.auto-hide .bottom.force-open {
-    height:148px !important;
-    display:grid !important;
-    grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px !important;
-    gap:12px !important;
-    align-items:center !important;
-    padding:7px 14px 9px !important;
-    background:var(--panel) !important;
-    border-top:1px solid var(--line) !important;
-    box-shadow:0 -18px 46px rgba(15,23,42,.16) !important;
-  }
-  body.auto-hide.cc-off .bottom:hover,
-  body.auto-hide.cc-off .bottom:focus-within,
-  body.auto-hide.cc-off .bottom.force-open {
-    height:108px !important;
-  }
-  body.auto-hide .bottom:hover .footer-left,
-  body.auto-hide .bottom:hover .footer-right,
-  body.auto-hide .bottom:hover .narration-controls,
-  body.auto-hide .bottom:hover .audio-player,
-  body.auto-hide .bottom:hover .bottom-nav,
-  body.auto-hide .bottom:focus-within .footer-left,
-  body.auto-hide .bottom:focus-within .footer-right,
-  body.auto-hide .bottom:focus-within .narration-controls,
-  body.auto-hide .bottom:focus-within .audio-player,
-  body.auto-hide .bottom:focus-within .bottom-nav,
-  body.auto-hide .bottom.force-open .footer-left,
-  body.auto-hide .bottom.force-open .footer-right,
-  body.auto-hide .bottom.force-open .narration-controls,
-  body.auto-hide .bottom.force-open .audio-player,
-  body.auto-hide .bottom.force-open .bottom-nav {
-    opacity:1 !important;
-    visibility:visible !important;
-    transform:none !important;
-    max-height:none !important;
-    pointer-events:auto !important;
-    overflow:visible !important;
-    display:flex;
-  }
-  body.auto-hide .bottom:hover .bottom-nav,
-  body.auto-hide .bottom:focus-within .bottom-nav,
-  body.auto-hide .bottom.force-open .bottom-nav,
-  body.auto-hide .bottom:hover .audio-block,
-  body.auto-hide .bottom:focus-within .audio-block,
-  body.auto-hide .bottom.force-open .audio-block {
-    display:grid !important;
-  }
-
-  @media (max-width: 1380px) and (min-width: 900px) {
-    body:not(.auto-hide) .bottom,
-    body.auto-hide .bottom:hover,
-    body.auto-hide .bottom:focus-within,
-    body.auto-hide .bottom.force-open {
-      grid-template-columns:90px minmax(520px,1fr) minmax(270px,320px) 70px !important;
-      gap:10px !important;
-    }
-  }
-</style>'''
+          css_lines = [
+              '<style id="ian620-default-display-fix">',
+              'body.cc-off .caption-strip{display:none!important}',
+              'body:not(.auto-hide) .deck{height:calc(100vh - 50px - 148px)!important;min-height:0!important;padding:10px 0!important;overflow:hidden!important}',
+              'body:not(.auto-hide).cc-off .deck{height:calc(100vh - 50px - 108px)!important}',
+              'body:not(.auto-hide) .slide{height:100%!important;max-height:none!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important}',
+              'body:not(.auto-hide) .bottom,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open){height:148px!important;display:grid!important;grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px!important;gap:12px!important;align-items:center!important;padding:7px 14px 9px!important;background:var(--panel)!important;border-top:1px solid var(--line)!important;box-shadow:none!important;overflow:visible!important}',
+              'body:not(.auto-hide).cc-off .bottom,body:not(.auto-hide).cc-off .bottom:not(:hover):not(:focus-within):not(.force-open){height:108px!important}',
+              'body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block::after{content:none!important;display:none!important}',
+              'body:not(.auto-hide) .footer-left,body:not(.auto-hide) .footer-right,body:not(.auto-hide) .narration-controls,body:not(.auto-hide) .audio-player,body:not(.auto-hide) .bottom-nav,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav{opacity:1!important;visibility:visible!important;transform:none!important;max-height:none!important;pointer-events:auto!important;overflow:visible!important}',
+              'body:not(.auto-hide) .audio-block,body:not(.auto-hide) .bottom-nav{display:grid!important}',
+              'body:not(.auto-hide) .footer-left,body:not(.auto-hide) .footer-right,body:not(.auto-hide) .narration-controls,body:not(.auto-hide) .audio-player{display:flex!important}',
+              'body.auto-hide .deck{height:calc(100vh - 50px - 52px)!important;min-height:0!important;padding:10px 0!important;overflow:hidden!important}',
+              'body.auto-hide.cc-off .deck{height:calc(100vh - 50px - 18px)!important}',
+              'body.auto-hide .slide{height:100%!important;max-height:none!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important}',
+              'body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open){height:52px!important;display:grid!important;grid-template-columns:1fr!important;gap:0!important;padding:7px 14px 8px!important;overflow:hidden!important}',
+              'body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open){height:18px!important;padding:4px 14px!important;background:transparent!important;border-top:0!important;box-shadow:none!important}',
+              'body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right{display:none!important}',
+              'body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block::after{content:""!important;display:block!important;width:160px!important;height:4px!important;margin:4px auto 0!important;border-radius:999px!important;background:rgba(23,100,166,.55)!important}',
+              'body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{height:148px!important;display:grid!important;grid-template-columns:92px minmax(580px,1fr) minmax(300px,360px) 72px!important;gap:12px!important;align-items:center!important;padding:7px 14px 9px!important;background:var(--panel)!important;border-top:1px solid var(--line)!important;box-shadow:0 -18px 46px rgba(15,23,42,.16)!important}',
+              'body.auto-hide.cc-off .bottom:hover,body.auto-hide.cc-off .bottom:focus-within,body.auto-hide.cc-off .bottom.force-open{height:108px!important}',
+              '@media(max-width:1380px) and (min-width:900px){body:not(.auto-hide) .bottom,body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open),body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{grid-template-columns:90px minmax(520px,1fr) minmax(270px,320px) 70px!important;gap:10px!important}}',
+              '</style>'
+          ]
+          css = '\n'.join(css_lines)
           start = s.find('<style id="ian620-default-display-fix">')
           if start != -1:
               end = s.find('</style>', start)
               if end == -1:
-                  raise SystemExit('Found default display style start but no closing style tag')
+                  raise SystemExit('Default display style block has no closing tag')
               s = s[:start] + css + s[end + len('</style>'):]
           else:
               s = s.replace('</head>', css + '\n</head>')
