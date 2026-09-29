@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.627
+Transformer tokenization is part of the model itself, not just a generic preprocessing step.
+
+00:00:06.627 --> 00:00:11.352
+Traditional tokenization may split text into words and punctuation.
+
+00:00:11.352 --> 00:00:18.992
+Transformer tokenizers often use subword units, so a rare or complex word can be represented as several
+
+00:00:18.992 --> 00:00:26.252
+smaller pieces. Those pieces come from a fixed vocabulary learned or defined during model training.
+
+00:00:26.252 --> 00:00:32.932
+Each piece maps to a numeric token ID, and the model has learned embeddings for those IDs.
+
+00:00:32.932 --> 00:00:38.697
+This is why we normally load the tokenizer that belongs to the exact pretrained checkpoint.
+
+00:00:38.697 --> 00:00:45.747
+If we use a different tokenizer, the token IDs may no longer correspond to the embeddings the model
+
+00:00:45.747 --> 00:00:53.532
+learned. Some models also expect special tokens, particular spacing rules, or model-specific normalization.
+
+00:00:53.532 --> 00:00:58.333
+In practice, tokenizer and model should be treated as a matched pair.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.017
+Let us begin with the simplest Hugging Face workflow.
+
+00:00:03.017 --> 00:00:05.372
+First install the libraries.
+
+00:00:05.372 --> 00:00:11.082
+In a Jupyter or Colab cell, the exclamation mark lets you run pip from the notebook.
+
+00:00:11.082 --> 00:00:17.492
+In a VS Code terminal, type the same pip install command without the exclamation mark.
+
+00:00:17.492 --> 00:00:21.507
+Then import AutoTokenizer and load bert-base-uncased.
+
+00:00:21.507 --> 00:00:26.302
+The word Auto is useful because Hugging Face reads the checkpoint configuration and selects the appropriate
+
+00:00:26.302 --> 00:00:29.562
+tokenizer implementation.
+
+00:00:29.562 --> 00:00:36.267
+After loading the tokenizer, pass a short sentence to tokenizer.tokenize and print the pieces.
+
+00:00:36.267 --> 00:00:41.152
+Run the code exactly once, then replace the sentence with a technical phrase, a person’s name,
+
+00:00:41.152 --> 00:00:43.757
+or a rare word. Compare the resulting pieces.
+
+00:00:43.757 --> 00:00:49.502
+The point is not to memorize BERT’s token vocabulary.
+
+00:00:49.502 --> 00:00:55.153
+The point is to see that the checkpoint controls how raw text becomes the tokens the model understands.

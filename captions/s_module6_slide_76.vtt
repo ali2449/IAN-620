@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.327
+Several resources can help you continue after the module.
+
+00:00:03.327 --> 00:00:09.612
+The original “Attention Is All You Need” paper is the historical source for the Transformer architecture,
+
+00:00:09.612 --> 00:00:13.107
+although it is more mathematical than our course treatment.
+
+00:00:13.107 --> 00:00:19.567
+The Hugging Face Transformers documentation is the practical reference for tokenizers, pipeline,
+
+00:00:19.567 --> 00:00:24.347
+AutoModel classes, training utilities, and task examples.
+
+00:00:24.347 --> 00:00:29.842
+Sentence Transformers is the main reference for sentence embeddings, semantic similarity, retrieval,
+
+00:00:29.842 --> 00:00:32.482
+and reranking workflows.
+
+00:00:32.482 --> 00:00:38.597
+When exploring public model hubs, remember that model availability and rankings change continuously.
+
+00:00:38.597 --> 00:00:45.132
+Read the model card for the exact checkpoint you intend to use rather than relying on an old
+
+00:00:45.132 --> 00:00:50.922
+tutorial. As you read documentation or research papers, keep using the same questions from this module:
+
+00:00:50.922 --> 00:00:57.587
+what is the input representation, what architecture family is being used, what was the model trained to do,
+
+00:00:57.587 --> 00:00:58.252
+and how is performance evaluated?
+
+00:00:58.252 --> 00:00:59.520
+----------------------------------------------------------------------------------------

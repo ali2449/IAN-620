@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.572
+Summarization is a natural sequence-to-sequence problem.
+
+00:00:03.572 --> 00:00:09.607
+The input is a longer text and the output is a shorter text that preserves the main information.
+
+00:00:09.607 --> 00:00:16.652
+In the example, the summarization pipeline loads a DistilBART checkpoint trained for news-style summarization.
+
+00:00:16.652 --> 00:00:23.632
+The article is passed through the tokenizer and encoder-decoder model, and the decoder generates a summary.
+
+00:00:23.632 --> 00:00:27.027
+max_length and min_length constrain the generated length,
+
+00:00:27.027 --> 00:00:31.522
+although exact behavior depends on tokenizer and model configuration.
+
+00:00:31.522 --> 00:00:37.587
+This checkpoint is larger than our earlier sentiment example, so the first download may take longer.
+
+00:00:37.587 --> 00:00:43.957
+More importantly, do not assume any summarization checkpoint works equally well for every domain.
+
+00:00:43.957 --> 00:00:49.747
+A model trained on news articles may behave differently on scientific papers, clinical notes,
+
+00:00:49.747 --> 00:00:51.487
+or meeting transcripts.
+
+00:00:51.487 --> 00:00:57.519
+Evaluate summaries for factual consistency and missing information, not only for fluency.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.507
+Before moving into RAG, try to explain the main Transformer ideas without reading definitions.
+
+00:00:06.507 --> 00:00:11.032
+What is the difference between a token ID and an embedding vector?
+
+00:00:11.032 --> 00:00:15.032
+Why do we need an attention mask when padding is present?
+
+00:00:15.032 --> 00:00:18.547
+Where do Q, K, and V come from, and what role does each one play?
+
+00:00:18.547 --> 00:00:26.242
+Why can the word bank end with different hidden representations in two sentences?
+
+00:00:26.242 --> 00:00:30.042
+How does causal masking change decoder attention?
+
+00:00:30.042 --> 00:00:33.097
+When would you start with an encoder-only model rather than a decoder-only model?
+
+00:00:33.097 --> 00:00:41.582
+What does pretrained mean, and why do most applied projects start from pretrained weights instead of random
+
+00:00:41.582 --> 00:00:43.827
+initialization?
+
+00:00:43.827 --> 00:00:48.282
+Finally, why would semantic search use a sentence-embedding model rather than a general text-generation model?
+
+00:00:48.282 --> 00:00:56.097
+If you can answer these in your own words and connect them to the Python examples,
+
+00:00:56.097 --> 00:00:58.855
+you have the foundation needed for the next module.

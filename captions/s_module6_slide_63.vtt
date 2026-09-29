@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.897
+Decoder-only generation is easy to see with a small model such as DistilGPT2.
+
+00:00:05.897 --> 00:00:11.787
+The text-generation pipeline receives a prompt and repeatedly predicts additional tokens.
+
+00:00:11.787 --> 00:00:15.967
+max_new_tokens limits how many new tokens can be generated.
+
+00:00:15.967 --> 00:00:22.202
+do_sample set to True means the model samples from the probability distribution instead of always choosing the
+
+00:00:22.202 --> 00:00:26.257
+single highest-probability token.
+
+00:00:26.257 --> 00:00:33.617
+temperature changes how concentrated that distribution is; lower values usually make output more predictable,
+
+00:00:33.617 --> 00:00:36.537
+while higher values allow more variation.
+
+00:00:36.537 --> 00:00:40.662
+Run the example several times and compare the continuations.
+
+00:00:40.662 --> 00:00:45.517
+Because sampling is involved, the text can change from run to run.
+
+00:00:45.517 --> 00:00:53.347
+DistilGPT2 is useful for teaching the mechanics of generation, but it is an older, small completion model,
+
+00:00:53.347 --> 00:00:56.247
+not a modern instruction-following assistant.
+
+00:00:56.247 --> 00:01:02.135
+The goal is to observe autoregressive decoding, not to evaluate current chat-model quality.

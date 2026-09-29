@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.267
+AutoTokenizer and AutoModelForSequenceClassification make the inference process explicit.
+
+00:00:06.267 --> 00:00:12.207
+The checkpoint name identifies a DistilBERT model already fine-tuned on sentiment data.
+
+00:00:12.207 --> 00:00:19.162
+We load the tokenizer and model from the same checkpoint so their vocabulary and learned parameters match.
+
+00:00:19.162 --> 00:00:23.272
+The tokenizer converts the sentence into PyTorch tensors.
+
+00:00:23.272 --> 00:00:28.577
+Passing those tensors into the model returns an output object containing logits.
+
+00:00:28.577 --> 00:00:32.862
+Logits are raw scores before converting them into probabilities.
+
+00:00:32.862 --> 00:00:38.147
+If we wanted the predicted class, we could apply softmax and choose the highest value,
+
+00:00:38.147 --> 00:00:42.522
+or use the model configuration to map class IDs to labels.
+
+00:00:42.522 --> 00:00:47.407
+This lower-level workflow is useful when you need batching, device control, custom post-processing,
+
+00:00:47.407 --> 00:00:49.232
+or access to the internal outputs.
+
+00:00:49.232 --> 00:00:51.997
+Notice that we are still doing inference.
+
+00:00:51.997 --> 00:01:00.064
+The model weights are not being updated simply because we loaded the model and passed text through it.

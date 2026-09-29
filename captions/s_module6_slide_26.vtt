@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.167
+Scaled dot-product attention can be understood as five operations.
+
+00:00:05.167 --> 00:00:07.112
+First, project the input into Q, K, and V.
+
+00:00:07.112 --> 00:00:13.872
+Second, compare every Query with the relevant Keys using dot products.
+
+00:00:13.872 --> 00:00:17.472
+This produces a score matrix: each row corresponds to one Query position,
+
+00:00:17.472 --> 00:00:22.627
+and each column corresponds to a Key position.
+
+00:00:22.627 --> 00:00:27.407
+Third, divide the scores by the square root of the key dimension.
+
+00:00:27.407 --> 00:00:32.607
+Without this scaling, dot products can become large as the vector dimension grows,
+
+00:00:32.607 --> 00:00:34.907
+making softmax overly sharp and harder to train.
+
+00:00:34.907 --> 00:00:41.912
+Fourth, apply any masks and then softmax so the allowed scores become normalized attention weights.
+
+00:00:41.912 --> 00:00:45.072
+Fifth, multiply those weights by V.
+
+00:00:45.072 --> 00:00:50.062
+The result is a weighted combination of Value vectors for each token.
+
+00:00:50.062 --> 00:00:56.062
+Multi-head attention performs the same general process several times using different learned projections,
+
+00:00:56.062 --> 00:01:04.560
+concatenates the head outputs, and uses one more learned projection to return to the model’s hidden dimension.

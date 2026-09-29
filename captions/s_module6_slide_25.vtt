@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.227
+Where do Q, K, and V actually come from?
+
+00:00:03.227 --> 00:00:06.747
+They are learned transformations of the input vectors.
+
+00:00:06.747 --> 00:00:11.697
+Suppose the matrix X contains the token representations for one sequence.
+
+00:00:11.697 --> 00:00:17.227
+The attention layer contains three parameter matrices, commonly written as W Q, W K, and W V.
+
+00:00:17.227 --> 00:00:19.762
+Multiplying X by W Q creates the Query matrix.
+
+00:00:19.762 --> 00:00:23.762
+Multiplying X by W K creates the Key matrix.
+
+00:00:23.762 --> 00:00:27.452
+Multiplying X by W V creates the Value matrix.
+
+00:00:27.452 --> 00:00:33.912
+These parameter matrices are initialized when the neural network is created and updated during training
+
+00:00:33.912 --> 00:00:37.652
+through backpropagation and gradient-based optimization.
+
+00:00:37.652 --> 00:00:40.517
+We do not calculate them manually for each sentence.
+
+00:00:40.517 --> 00:00:46.802
+The same token representation is therefore viewed in three different learned spaces:
+
+00:00:46.802 --> 00:00:51.362
+one for asking what information is needed, one for matching against other tokens,
+
+00:00:51.362 --> 00:00:56.782
+and one for carrying the information that will be mixed.
+
+00:00:56.782 --> 00:01:02.480
+When we add a library attention layer, these trainable projections are already built into that layer.

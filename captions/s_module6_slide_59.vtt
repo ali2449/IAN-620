@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.727
+Sometimes we do not want a final classification label at all.
+
+00:00:03.727 --> 00:00:08.467
+We want the contextual token representations produced by the Transformer.
+
+00:00:08.467 --> 00:00:13.532
+AutoModel loads the backbone without a task-specific classification head.
+
+00:00:13.532 --> 00:00:19.572
+After tokenization, we pass the tensors through the model and read last_hidden_state.
+
+00:00:19.572 --> 00:00:24.377
+The output shape is batch size by number of tokens by hidden dimension.
+
+00:00:24.377 --> 00:00:29.187
+In DistilBERT, the hidden dimension is typically seven hundred sixty-eight.
+
+00:00:29.187 --> 00:00:33.592
+That means every token position has its own contextual vector.
+
+00:00:33.592 --> 00:00:39.827
+These vectors already include information from the surrounding sequence after passing through the model
+
+00:00:39.827 --> 00:00:45.087
+layers. Do not automatically average them and assume you have a high-quality sentence embedding.
+
+00:00:45.087 --> 00:00:50.902
+General hidden states were not necessarily trained for cosine similarity between sentences.
+
+00:00:50.902 --> 00:00:56.342
+If semantic search is the goal, use a model explicitly trained for sentence embeddings,
+
+00:00:56.342 --> 00:00:58.456
+which is exactly what we do next.

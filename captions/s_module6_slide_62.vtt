@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.067
+Masked language modeling gives us a direct demonstration of BERT-style pretraining.
+
+00:00:05.067 --> 00:00:10.677
+We place the model’s mask token inside the sentence “The student submitted the mask.” The fill-mask pipeline
+
+00:00:10.677 --> 00:00:19.097
+evaluates likely vocabulary tokens for the missing position and returns ranked predictions with scores.
+
+00:00:19.097 --> 00:00:22.727
+The model is not generating an unrestricted paragraph.
+
+00:00:22.727 --> 00:00:27.612
+It is predicting the missing token using context from both the left and the right.
+
+00:00:27.612 --> 00:00:33.832
+That bidirectional context is one reason encoder models work well for understanding tasks.
+
+00:00:33.832 --> 00:00:40.712
+Try replacing the sentence with one that has an ambiguous missing word and inspect the top five predictions.
+
+00:00:40.712 --> 00:00:46.507
+The results also remind us that language models learn statistical patterns from training data.
+
+00:00:46.507 --> 00:00:53.027
+A high-probability token is not guaranteed to be factually correct or appropriate for every domain.
+
+00:00:53.027 --> 00:00:57.227
+The demonstration is useful for understanding the pretraining objective,
+
+00:00:57.227 --> 00:01:00.069
+not for treating BERT as a general chat model.

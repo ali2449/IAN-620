@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.702
+Now follow the conversion one step further.
+
+00:00:02.702 --> 00:00:09.597
+The tokenizer first turns the sentence into model tokens and then maps those tokens to integer IDs.
+
+00:00:09.597 --> 00:00:17.597
+The encoded dictionary contains input_ids, and in many cases it will also contain fields such as
+
+00:00:17.597 --> 00:00:20.937
+attention_mask or token_type_ids depending on the model.
+
+00:00:20.937 --> 00:00:26.557
+Printing the IDs lets us see the exact numeric representation passed into the model.
+
+00:00:26.557 --> 00:00:32.172
+Converting those IDs back to token labels makes the mapping easier to interpret.
+
+00:00:32.172 --> 00:00:38.742
+Notice the special tokens at the boundaries and any subword markers inside uncommon words.
+
+00:00:38.742 --> 00:00:44.592
+A useful experiment is to change just one word and compare the ID sequence.
+
+00:00:44.592 --> 00:00:49.572
+Another is to encode the same text with a different model’s tokenizer.
+
+00:00:49.572 --> 00:00:54.982
+The numbers will usually change because each tokenizer has its own vocabulary.
+
+00:00:54.982 --> 00:00:59.680
+That is another reason the tokenizer and pretrained checkpoint must stay together.

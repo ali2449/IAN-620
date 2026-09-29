@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.757
+Query, Key, and Value become much easier once we give each one a job.
+
+00:00:04.757 --> 00:00:08.502
+The Query represents what the current token is looking for.
+
+00:00:08.502 --> 00:00:13.552
+The Key represents how each available token can be matched against that request.
+
+00:00:13.552 --> 00:00:19.207
+The Value contains the information that can be passed forward when a token is considered useful.
+
+00:00:19.207 --> 00:00:22.957
+Every token can produce all three representations.
+
+00:00:22.957 --> 00:00:27.787
+The model compares a Query with many Keys to create compatibility scores.
+
+00:00:27.787 --> 00:00:31.347
+Softmax turns those scores into attention weights.
+
+00:00:31.347 --> 00:00:36.132
+The weights then determine how strongly the corresponding Values are blended together.
+
+00:00:36.132 --> 00:00:39.327
+A useful analogy is information retrieval.
+
+00:00:39.327 --> 00:00:46.362
+A query expresses a need, keys help identify relevant items, and values provide the content.
+
+00:00:46.362 --> 00:00:52.112
+The analogy is not mathematically exact, but it gives us a practical mental model before we look at
+
+00:00:52.112 --> 00:00:53.518
+the matrix operations.

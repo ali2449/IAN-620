@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.247
+Deployment is part of the model choice.
+
+00:00:02.247 --> 00:00:10.687
+A local or open-weight model gives you more control over where data is processed and can support offline
+
+00:00:10.687 --> 00:00:15.907
+or privacy-sensitive workflows, but you are responsible for hardware, environment setup, updates, and serving.
+
+00:00:15.907 --> 00:00:21.152
+Hosted inference reduces infrastructure work because a provider manages the runtime,
+
+00:00:21.152 --> 00:00:26.497
+but you need to consider cost, latency, reliability, and data policies.
+
+00:00:26.497 --> 00:00:31.252
+An external API can provide strong capabilities with very little setup,
+
+00:00:31.252 --> 00:00:37.447
+but it adds an external dependency and may require privacy, compliance, or procurement review.
+
+00:00:37.447 --> 00:00:42.377
+The best technical benchmark result may not be the best operational choice.
+
+00:00:42.377 --> 00:00:46.727
+Before choosing a deployment path, ask where the data is allowed to go,
+
+00:00:46.727 --> 00:00:53.002
+how quickly the application must respond, how much traffic you expect, what hardware you already have,
+
+00:00:53.002 --> 00:00:54.598
+and who will maintain the system.

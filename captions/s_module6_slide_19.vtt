@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.797
+A token ID is only an index into the model’s vocabulary.
+
+00:00:03.797 --> 00:00:07.542
+The number itself does not contain a semantic geometry.
+
+00:00:07.542 --> 00:00:12.477
+Inside the model, that ID is used to look up a learned embedding vector.
+
+00:00:12.477 --> 00:00:17.842
+You can imagine a large table where each vocabulary item has a row of learned numbers.
+
+00:00:17.842 --> 00:00:25.332
+Position information is then incorporated so the model can distinguish the same token appearing in different
+
+00:00:25.332 --> 00:00:30.007
+locations. These initial vectors become the input to the first Transformer block.
+
+00:00:30.007 --> 00:00:34.402
+Attention and feed-forward layers repeatedly modify them.
+
+00:00:34.402 --> 00:00:37.007
+This gives us two useful terms.
+
+00:00:37.007 --> 00:00:43.182
+The initial embedding is the starting representation associated with the token and its position.
+
+00:00:43.182 --> 00:00:51.027
+A contextual hidden state is the updated representation after the token has interacted with the surrounding
+
+00:00:51.027 --> 00:00:57.862
+sequence. When we later call AutoModel and inspect last_hidden_state, we are looking at contextual vectors,
+
+00:00:57.862 --> 00:00:59.918
+not just the original embedding lookup.

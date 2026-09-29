@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.382
+T5 and BART-style models use an encoder-decoder architecture,
+
+00:00:04.382 --> 00:00:08.192
+which is especially natural for text-to-text problems.
+
+00:00:08.192 --> 00:00:13.407
+The encoder reads the input and creates contextual representations.
+
+00:00:13.407 --> 00:00:21.767
+The decoder generates a new output sequence while attending to both its own earlier tokens and the encoder
+
+00:00:21.767 --> 00:00:28.557
+representations. T5 went further conceptually by expressing many NLP tasks in a text-to-text format:
+
+00:00:28.557 --> 00:00:32.727
+an instruction or task prefix plus input text is transformed into output text.
+
+00:00:32.727 --> 00:00:39.792
+Summarization, translation, question answering, and rewriting can all fit that pattern.
+
+00:00:39.792 --> 00:00:46.742
+Encoder-decoder models are still important even though large decoder-only models receive more attention today.
+
+00:00:46.742 --> 00:00:52.882
+For a focused sequence-to-sequence task, they can be efficient and straightforward.
+
+00:00:52.882 --> 00:00:57.777
+The correct choice depends on the task, the available checkpoints,
+
+00:00:57.777 --> 00:01:04.385
+and the deployment constraints rather than on which architecture is currently most popular.

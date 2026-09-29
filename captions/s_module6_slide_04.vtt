@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.947
+A useful way to understand Transformers is to follow the data from beginning to end.
+
+00:00:04.947 --> 00:00:07.457
+We start with ordinary text.
+
+00:00:07.457 --> 00:00:14.457
+A tokenizer breaks the text into model-specific pieces and maps those pieces to numeric IDs.
+
+00:00:14.457 --> 00:00:20.827
+The model looks up an embedding vector for each ID and adds information about token position.
+
+00:00:20.827 --> 00:00:28.092
+Those vectors then enter attention layers, where each token can gather information from other tokens in the
+
+00:00:28.092 --> 00:00:28.422
+sequence.
+
+00:00:28.422 --> 00:00:35.842
+Feed-forward layers transform the updated vectors, and the process is repeated across many Transformer blocks.
+
+00:00:35.842 --> 00:00:39.692
+The final representations can support different outputs.
+
+00:00:39.692 --> 00:00:45.332
+An encoder may produce features for classification or named entity recognition.
+
+00:00:45.332 --> 00:00:51.042
+An embedding model may produce vectors for semantic search.
+
+00:00:51.042 --> 00:00:56.862
+A decoder may generate the next token repeatedly to create text.
+
+00:00:56.862 --> 00:01:01.842
+Whenever a later code example feels complicated, return to this path: text, tokens, IDs, vectors, attention,
+
+00:01:01.842 --> 00:01:04.432
+Transformer blocks, output.

@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.025 --> 00:00:04.502
+A practical selection workflow begins by defining the required output.
+
+00:00:04.502 --> 00:00:11.017
+Do you need one label for the whole document, labels for individual tokens, generated text,
+
+00:00:11.017 --> 00:00:17.047
+an embedding vector, a relevance score, or an answer grounded in external documents?
+
+00:00:17.047 --> 00:00:20.167
+That answer narrows the architecture family.
+
+00:00:20.167 --> 00:00:23.652
+Next check language and domain.
+
+00:00:23.652 --> 00:00:28.552
+A strong English model may be a poor choice for multilingual data,
+
+00:00:28.552 --> 00:00:34.107
+and a general-domain model may miss specialized clinical or legal terminology.
+
+00:00:34.107 --> 00:00:41.247
+Then check constraints: available RAM or GPU memory, latency, cost, privacy requirements, license,
+
+00:00:41.247 --> 00:00:43.432
+and where the model must run.
+
+00:00:43.432 --> 00:00:50.107
+Finally, test a small set of realistic examples before committing to a large experiment.
+
+00:00:50.107 --> 00:00:56.982
+Ten or twenty carefully chosen examples can reveal tokenization problems, domain mismatch,
+
+00:00:56.982 --> 00:01:01.127
+unexpected output formats, or unacceptable latency.
+
+00:01:01.127 --> 00:01:04.382
+Popularity is not a substitute for fit.
+
+00:01:04.382 --> 00:01:07.920
+Choose a model because it matches the task and constraints.

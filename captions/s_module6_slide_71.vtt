@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.847
+Responsible use starts before inference.
+
+00:00:02.847 --> 00:00:07.962
+First ask whether the data is appropriate to send to the selected model or service.
+
+00:00:07.962 --> 00:00:16.657
+Remove or protect sensitive information when required, and understand the provider or local deployment policy.
+
+00:00:16.657 --> 00:00:20.417
+Next, identify what kind of error would matter most for the task.
+
+00:00:20.417 --> 00:00:26.917
+A false positive in spam filtering is different from an unsupported claim in a medical or legal setting.
+
+00:00:26.917 --> 00:00:32.207
+Evaluate with representative data rather than a few convenient examples.
+
+00:00:32.207 --> 00:00:37.092
+Keep track of the exact checkpoint, tokenizer, configuration, prompt,
+
+00:00:37.092 --> 00:00:41.742
+and software versions so results can be reproduced.
+
+00:00:41.742 --> 00:00:44.282
+Review the model card and license.
+
+00:00:44.282 --> 00:00:49.682
+Monitor performance after deployment because real input can differ from development data.
+
+00:00:49.682 --> 00:00:56.487
+And when a system produces factual claims, connect outputs to verifiable evidence whenever possible.
+
+00:00:56.487 --> 00:01:04.142
+Responsible NLP is not one checkbox; it is a process that continues from model selection through evaluation
+
+00:01:04.142 --> 00:01:04.839
+and deployment.

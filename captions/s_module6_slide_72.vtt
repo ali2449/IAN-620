@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.292
+Model selection becomes easier when we start from concrete scenarios.
+
+00:00:04.292 --> 00:00:12.957
+If we need to classify support tickets by urgency, an encoder-only classifier is often efficient because the
+
+00:00:12.957 --> 00:00:13.462
+output is a label.
+
+00:00:13.462 --> 00:00:20.222
+If we need to extract names and organizations, a token-classification model matches the structure of the
+
+00:00:20.222 --> 00:00:23.502
+problem because each token or span receives a label.
+
+00:00:23.502 --> 00:00:33.237
+If we need to find semantically similar questions, choose a sentence-embedding model and compare vectors.
+
+00:00:33.237 --> 00:00:39.697
+If we need to summarize long reports, an encoder-decoder model or a capable generative LLM may be appropriate,
+
+00:00:39.697 --> 00:00:43.207
+depending on length, quality, cost, and deployment needs.
+
+00:00:43.207 --> 00:00:48.707
+If we need answers from private PDFs, the problem is not only language generation;
+
+00:00:48.707 --> 00:00:51.402
+it is external knowledge access.
+
+00:00:51.402 --> 00:00:57.342
+That points toward RAG: an embedding or retrieval model finds relevant passages,
+
+00:00:57.342 --> 00:01:00.527
+and a generative model uses them to answer.
+
+00:01:00.527 --> 00:01:03.614
+The task tells us which model role is needed.

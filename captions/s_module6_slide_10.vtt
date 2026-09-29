@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.142
+Attention receives most of the attention, but a Transformer is much more than one attention operation.
+
+00:00:06.142 --> 00:00:09.177
+The full pipeline begins with tokenization.
+
+00:00:09.177 --> 00:00:16.112
+Token IDs are mapped to embedding vectors, and position information is incorporated so order is not lost.
+
+00:00:16.112 --> 00:00:22.037
+Inside each Transformer block, multi-head attention mixes information across tokens.
+
+00:00:22.037 --> 00:00:28.902
+Residual connections preserve the previous representation, layer normalization helps stabilize training,
+
+00:00:28.902 --> 00:00:33.792
+and a feed-forward network transforms each token representation independently.
+
+00:00:33.792 --> 00:00:36.522
+That block is stacked many times.
+
+00:00:36.522 --> 00:00:43.247
+A task-specific head or generation mechanism then turns the final hidden states into useful outputs such as
+
+00:00:43.247 --> 00:00:47.437
+class probabilities, token labels, embeddings, or generated tokens.
+
+00:00:47.437 --> 00:00:50.962
+This matters when we use pretrained models.
+
+00:00:50.962 --> 00:00:58.292
+A one-line pipeline call may hide dozens of layers and millions or billions of learned parameters,
+
+00:00:58.292 --> 00:01:01.870
+but the same basic processing path is still happening underneath.

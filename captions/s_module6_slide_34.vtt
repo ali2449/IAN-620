@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.752
+Residual connections answer an important engineering question:
+
+00:00:03.752 --> 00:00:09.687
+after attention changes the token representation, do we throw away the original input?
+
+00:00:09.687 --> 00:00:14.482
+Usually, no. We add the attention output back to the input.
+
+00:00:14.482 --> 00:00:20.057
+In a simple expression, the next representation is x plus attention of x.
+
+00:00:20.057 --> 00:00:24.787
+A normalization step is then applied according to the architecture’s design.
+
+00:00:24.787 --> 00:00:32.512
+This creates a direct path through the network so information does not have to survive only through every
+
+00:00:32.512 --> 00:00:32.952
+transformation.
+
+00:00:32.952 --> 00:00:40.602
+Residual paths also make very deep networks easier to optimize because gradients have a more direct route
+
+00:00:40.602 --> 00:00:40.902
+backward.
+
+00:00:40.902 --> 00:00:48.592
+In code, the shapes must match before addition, which is another reason the attention output returns to the
+
+00:00:48.592 --> 00:00:48.987
+same model dimension.
+
+00:00:48.987 --> 00:00:55.492
+Modern Transformer families differ in whether normalization occurs before or after certain sublayers,
+
+00:00:55.492 --> 00:01:02.272
+often called pre-norm and post-norm designs, but the core purpose remains stable information flow through
+
+00:01:02.272 --> 00:01:03.610
+repeated blocks.

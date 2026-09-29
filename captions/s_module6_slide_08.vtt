@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.177
+Before Transformers became dominant, recurrent neural networks and LSTMs were common choices for sequence
+
+00:00:07.177 --> 00:00:10.417
+data. An RNN reads a sequence step by step.
+
+00:00:10.417 --> 00:00:17.092
+The hidden state from one position contributes to the next position, so the model naturally preserves order.
+
+00:00:17.092 --> 00:00:24.922
+LSTMs and related gated architectures improved the ability to keep useful information over longer sequences.
+
+00:00:24.922 --> 00:00:29.382
+The difficulty is that the computation is still strongly sequential.
+
+00:00:29.382 --> 00:00:34.542
+Later steps depend on earlier steps, which makes training harder to parallelize.
+
+00:00:34.542 --> 00:00:41.112
+Long-range information can also become difficult to preserve through many recurrent transitions.
+
+00:00:41.112 --> 00:00:44.842
+Transformers changed the organization of the computation.
+
+00:00:44.842 --> 00:00:49.037
+Instead of passing information only through a chain of hidden states,
+
+00:00:49.037 --> 00:00:53.112
+attention lets tokens interact more directly with other tokens.
+
+00:00:53.112 --> 00:00:56.517
+This does not mean RNNs suddenly became invalid.
+
+00:00:56.517 --> 00:01:02.702
+It means Transformers offered a more scalable way to model broad context and became especially effective when
+
+00:01:02.702 --> 00:01:04.960
+trained on very large datasets.

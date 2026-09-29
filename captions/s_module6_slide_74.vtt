@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.767
+The full Transformer story now connects from input to application.
+
+00:00:04.767 --> 00:00:10.872
+Raw text is converted into model-specific tokens, token IDs, masks, and initial vectors.
+
+00:00:10.872 --> 00:00:15.707
+Position information preserves sequence structure.
+
+00:00:15.707 --> 00:00:20.677
+Self-attention creates Q, K, and V representations, calculates compatibility scores,
+
+00:00:20.677 --> 00:00:28.802
+normalizes them into weights, and uses those weights to mix information across tokens.
+
+00:00:28.802 --> 00:00:34.202
+A Transformer block combines multi-head attention with residual connections, normalization,
+
+00:00:34.202 --> 00:00:40.567
+and feed-forward processing, then repeats that structure across many layers.
+
+00:00:40.567 --> 00:00:45.787
+Encoder-only models are often strong for understanding and representation tasks.
+
+00:00:45.787 --> 00:00:49.912
+Decoder-only models are designed for autoregressive generation.
+
+00:00:49.912 --> 00:00:54.647
+Encoder-decoder models are natural for sequence-to-sequence transformation.
+
+00:00:54.647 --> 00:01:02.692
+In practice, we usually reuse pretrained checkpoints and select them by task, language, domain, size, license,
+
+00:01:02.692 --> 00:01:05.712
+evidence, privacy, and hardware constraints.
+
+00:01:05.712 --> 00:01:11.292
+Those same components will reappear when we build RAG systems.

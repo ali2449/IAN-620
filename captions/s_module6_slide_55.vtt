@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.107
+Domain-specific language can change both vocabulary and meaning.
+
+00:00:04.107 --> 00:00:09.637
+Clinical notes contain abbreviations, medication names, procedure terms,
+
+00:00:09.637 --> 00:00:13.522
+and writing patterns that are uncommon in general web text.
+
+00:00:13.522 --> 00:00:18.062
+Legal documents use specialized phrases and document structures.
+
+00:00:18.062 --> 00:00:23.907
+Financial filings and scientific papers have their own terminology and style.
+
+00:00:23.907 --> 00:00:30.137
+A general pretrained model may still work well, especially if it is large and broadly trained,
+
+00:00:30.137 --> 00:00:37.292
+but domain-pretrained or domain-adapted models can be worth testing when specialized terminology matters.
+
+00:00:37.292 --> 00:00:41.777
+Do not assume that a domain label automatically makes a model better.
+
+00:00:41.777 --> 00:00:46.307
+Compare candidates on representative examples from your actual task.
+
+00:00:46.307 --> 00:00:49.492
+Also inspect the training data and license.
+
+00:00:49.492 --> 00:00:56.287
+A clinical model trained on one type of note may not transfer perfectly to another institution or task.
+
+00:00:56.287 --> 00:01:00.130
+Domain fit is evidence to investigate, not a guarantee.

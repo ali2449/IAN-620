@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.737
+Pretraining, fine-tuning, and inference describe three different stages.
+
+00:00:04.737 --> 00:00:11.477
+Pretraining learns broad language patterns from a very large corpus using a general objective.
+
+00:00:11.477 --> 00:00:16.402
+It is computationally expensive and produces the starting checkpoint.
+
+00:00:16.402 --> 00:00:22.642
+Fine-tuning continues training from that checkpoint on a smaller task or domain dataset.
+
+00:00:22.642 --> 00:00:29.887
+For example, a pretrained encoder can be fine-tuned to classify support tickets into categories.
+
+00:00:29.887 --> 00:00:37.077
+During fine-tuning, at least some model parameters are updated based on task-specific loss.
+
+00:00:37.077 --> 00:00:43.347
+Inference happens after training. We pass new text to the model and obtain predictions, embeddings,
+
+00:00:43.347 --> 00:00:48.022
+or generated text without updating the weights.
+
+00:00:48.022 --> 00:00:53.597
+Prompting belongs to inference: changing the instructions changes the input, not the parameters.
+
+00:00:53.597 --> 00:00:59.857
+Keeping these terms separate helps when reading model cards and papers.
+
+00:00:59.857 --> 00:01:06.067
+Ask: what was learned during pretraining, what additional adaptation happened afterward,
+
+00:01:06.067 --> 00:01:08.540
+and what are we doing now at inference time?

@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.357
+The pretrained-model ecosystem is far too large and changes too quickly for memorizing model names to be a
+
+00:00:07.357 --> 00:00:08.682
+useful skill.
+
+00:00:08.682 --> 00:00:17.577
+Public hubs contain a huge number of repositories for base models, fine-tuned variants, quantized versions,
+
+00:00:17.577 --> 00:00:23.207
+adapters, embedding models, rerankers, multimodal systems, and many other specialized checkpoints.
+
+00:00:23.207 --> 00:00:29.987
+The exact count changes constantly as models are uploaded, updated, or removed.
+
+00:00:29.987 --> 00:00:32.337
+A better skill is filtering.
+
+00:00:32.337 --> 00:00:35.627
+Start by defining the task.
+
+00:00:35.627 --> 00:00:42.302
+Then narrow by architecture, supported language, domain, model size, license, hardware requirements,
+
+00:00:42.302 --> 00:00:43.907
+and evaluation evidence.
+
+00:00:43.907 --> 00:00:50.927
+For semantic search, do not browse general chat models first; look for embedding models.
+
+00:00:50.927 --> 00:00:55.322
+For document reranking, look for rerankers.
+
+00:00:55.322 --> 00:01:02.692
+For sentiment classification, look for a model already fine-tuned for that task or plan to fine-tune an
+
+00:01:02.692 --> 00:01:08.147
+encoder yourself. Model hubs are catalogs, not recommendation engines.
+
+00:01:08.147 --> 00:01:14.640
+The responsibility for matching a checkpoint to your problem remains with you.

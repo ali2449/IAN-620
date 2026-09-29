@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.767
+Transformer models are powerful statistical models, not automatic sources of truth.
+
+00:00:05.767 --> 00:00:11.037
+A generative model can produce fluent text that is unsupported or incorrect.
+
+00:00:11.037 --> 00:00:18.182
+A pretrained checkpoint may not know recent information, private documents,
+
+00:00:18.182 --> 00:00:18.932
+or facts outside its training data.
+
+00:00:18.932 --> 00:00:25.867
+Context windows limit how much evidence can be supplied at one time.
+
+00:00:25.867 --> 00:00:30.932
+Training data can introduce bias or uneven performance across languages, domains, and populations.
+
+00:00:30.932 --> 00:00:37.642
+Large models also create cost, latency, energy, and deployment challenges.
+
+00:00:37.642 --> 00:00:41.997
+The practical response is not to avoid the technology entirely;
+
+00:00:41.997 --> 00:00:46.327
+it is to design evaluation and verification around the task.
+
+00:00:46.327 --> 00:00:50.472
+For classification, inspect errors by class.
+
+00:00:50.472 --> 00:00:54.662
+For retrieval, measure whether relevant documents are found.
+
+00:00:54.662 --> 00:00:58.282
+For generation, check claims against evidence.
+
+00:00:58.282 --> 00:01:04.497
+For high-stakes applications, include appropriate human review and domain expertise.
+
+00:01:04.497 --> 00:01:09.688
+Good model use combines capability with explicit limits and validation.

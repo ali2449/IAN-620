@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.102
+Now we can assemble a simplified encoder layer from familiar parts.
+
+00:00:04.102 --> 00:00:07.402
+Start with x, a batch of token vectors.
+
+00:00:07.402 --> 00:00:10.552
+Pass x through multi-head self-attention.
+
+00:00:10.552 --> 00:00:14.772
+Add the attention output back to x and normalize the result.
+
+00:00:14.772 --> 00:00:19.212
+Next, pass the normalized vectors through the feed-forward network.
+
+00:00:19.212 --> 00:00:24.897
+Add that feed-forward output back to the previous representation and normalize again.
+
+00:00:24.897 --> 00:00:31.817
+The result has the same basic shape as the original input: one updated hidden vector for every token.
+
+00:00:31.817 --> 00:00:40.412
+That shape can be passed directly into another encoder layer, which is how Transformers become deep stacks.
+
+00:00:40.412 --> 00:00:45.172
+When reading the code, do not treat each line as an isolated command.
+
+00:00:45.172 --> 00:00:52.267
+Follow the data path: x, attention, residual plus normalization, feed-forward, residual plus normalization.
+
+00:00:52.267 --> 00:00:57.577
+Once you can trace that path, the architecture diagram and the Python implementation become two views of the
+
+00:00:57.577 --> 00:00:59.909
+same process.

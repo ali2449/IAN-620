@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.957
+Now we can place an attention layer inside the model.
+
+00:00:02.957 --> 00:00:08.447
+Before attention, we already have one vector per token.
+
+00:00:08.447 --> 00:00:13.332
+In the PyTorch example, x has shape one by four by eight: one sequence in the batch,
+
+00:00:13.332 --> 00:00:18.437
+four token positions, and an eight-dimensional hidden vector for each token.
+
+00:00:18.437 --> 00:00:27.212
+We create nn.MultiheadAttention with embed_dim equal to eight, so the layer expects eight numbers per token,
+
+00:00:27.212 --> 00:00:33.622
+and with two heads, so that hidden space is divided across two parallel attention operations.
+
+00:00:33.622 --> 00:00:40.802
+Because this is self-attention, the same x is supplied as the source for Query, Key, and Value.
+
+00:00:40.802 --> 00:00:45.272
+Internally, the layer does not simply reuse x unchanged.
+
+00:00:45.272 --> 00:00:49.317
+It learns separate linear projections that turn x into Q, K, and V.
+
+00:00:49.317 --> 00:00:56.057
+The layer compares Q with K, uses the resulting weights to combine V, merges the heads,
+
+00:00:56.057 --> 00:00:59.912
+and returns a new vector for every token.
+
+00:00:59.912 --> 00:01:04.097
+Notice that the output keeps the same hidden size.
+
+00:01:04.097 --> 00:01:09.527
+That shape compatibility lets us add the original x back through a residual connection and stack many
+
+00:01:09.527 --> 00:01:14.411
+Transformer blocks without changing the basic sequence shape.

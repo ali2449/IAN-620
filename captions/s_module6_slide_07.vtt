@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.857
+Word order can change meaning even when the vocabulary barely changes.
+
+00:00:04.857 --> 00:00:12.192
+Compare “the dog chased the cat” with “the cat chased the dog.” A Bag-of-Words representation mainly records
+
+00:00:12.192 --> 00:00:19.362
+which words appear and how often, so these two sentences can look extremely similar in feature space.
+
+00:00:19.362 --> 00:00:21.937
+But the grammatical roles are reversed.
+
+00:00:21.937 --> 00:00:25.537
+One animal is the agent and the other is the object.
+
+00:00:25.537 --> 00:00:31.162
+Transformers process an ordered sequence of tokens, include position information,
+
+00:00:31.162 --> 00:00:33.747
+and let tokens interact through attention.
+
+00:00:33.747 --> 00:00:40.552
+That gives the model a way to represent who is related to whom and how those relationships depend
+
+00:00:40.552 --> 00:00:46.622
+on order. Bag-of-Words is not wrong; it is simply designed for a different level of representation.
+
+00:00:46.622 --> 00:00:50.032
+For many tasks it is still a strong baseline.
+
+00:00:50.032 --> 00:00:55.897
+Transformers become useful when context, order, and relationships among tokens carry information that simple
+
+00:00:55.897 --> 00:00:58.908
+counts cannot capture.

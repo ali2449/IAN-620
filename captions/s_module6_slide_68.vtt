@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.018 --> 00:00:07.802
+Prompting, fine-tuning, and RAG solve different problems, and choosing the wrong one can create unnecessary
+
+00:00:07.802 --> 00:00:12.737
+work. Prompting changes the instructions or examples given at inference time.
+
+00:00:12.737 --> 00:00:20.587
+It is useful when the model already has the capability you need but needs clearer guidance about format
+
+00:00:20.587 --> 00:00:24.682
+or behavior. Fine-tuning changes model parameters using training data.
+
+00:00:24.682 --> 00:00:29.537
+It is useful when you need consistent task behavior, domain adaptation,
+
+00:00:29.537 --> 00:00:33.817
+or a specialized output pattern and have suitable examples.
+
+00:00:33.817 --> 00:00:37.842
+RAG does not primarily change the model weights.
+
+00:00:37.842 --> 00:00:45.307
+Instead, it retrieves external information at question time and places relevant evidence into the context.
+
+00:00:45.307 --> 00:00:51.617
+That is useful when answers depend on private, changing, or document-specific knowledge.
+
+00:00:51.617 --> 00:00:54.162
+These methods can also be combined.
+
+00:00:54.162 --> 00:00:58.622
+A fine-tuned or instruction-tuned model can still use RAG.
+
+00:00:58.622 --> 00:01:04.599
+The first question should always be: is the problem behavior, knowledge access, or both?

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.267
+Encoder-only models are designed to build strong contextual representations of an input sequence.
+
+00:00:06.267 --> 00:00:12.922
+Every token can usually attend to tokens on both sides, subject to the model’s masking rules.
+
+00:00:12.922 --> 00:00:19.367
+That bidirectional context is useful when the goal is to understand or label existing text rather than
+
+00:00:19.367 --> 00:00:23.412
+generate a long continuation token by token.
+
+00:00:23.412 --> 00:00:29.112
+BERT and RoBERTa are classic examples of encoder-style architectures.
+
+00:00:29.112 --> 00:00:34.417
+Common applications include document classification, sentiment analysis, named entity recognition,
+
+00:00:34.417 --> 00:00:40.212
+token classification, question-answering variants, and feature extraction.
+
+00:00:40.212 --> 00:00:46.692
+Sentence-embedding systems are often built by adapting encoder models so a whole sentence or passage maps to a
+
+00:00:46.692 --> 00:00:50.617
+useful vector.
+
+00:00:50.617 --> 00:00:55.207
+When you see a task whose output is a label, a set of token labels, or a representation,
+
+00:00:55.207 --> 00:00:59.982
+an encoder model is often a good place to start.
+
+00:00:59.982 --> 00:01:04.900
+The model architecture still matters, but the task should guide the choice.

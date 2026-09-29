@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.032
+Decoder-only models are organized around next-token prediction.
+
+00:00:04.032 --> 00:00:11.532
+Given the tokens generated or provided so far, the model predicts a probability distribution for the next
+
+00:00:11.532 --> 00:00:17.247
+token. After one token is chosen, it is appended to the sequence and the process repeats.
+
+00:00:17.247 --> 00:00:22.552
+That simple training objective scales into text completion, instruction following, code generation,
+
+00:00:22.552 --> 00:00:27.887
+and chat when the model is trained and tuned appropriately.
+
+00:00:27.887 --> 00:00:28.582
+GPT-style architectures are decoder-only.
+
+00:00:28.582 --> 00:00:36.232
+Their self-attention is causal, meaning a position cannot use information from future tokens during
+
+00:00:36.232 --> 00:00:42.862
+generation. The model can only condition on the prefix that is already available.
+
+00:00:42.862 --> 00:00:47.117
+This is exactly what we need when generating text from left to right.
+
+00:00:47.117 --> 00:00:49.762
+Decoder-only models can also analyze provided context,
+
+00:00:49.762 --> 00:00:55.403
+but their architecture and training objective make generation their natural strength.

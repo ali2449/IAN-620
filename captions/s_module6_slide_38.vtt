@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.287
+In normal application code, we rarely rebuild every encoder layer by hand.
+
+00:00:05.287 --> 00:00:12.147
+PyTorch provides TransformerEncoderLayer, which bundles self-attention, feed-forward processing,
+
+00:00:12.147 --> 00:00:17.927
+residual connections, normalization, and dropout into a reusable component.
+
+00:00:17.927 --> 00:00:23.592
+The code lets us specify d_model, the hidden size, and nhead, the number of attention heads.
+
+00:00:23.592 --> 00:00:29.267
+Passing a tensor through the layer returns another tensor with the same sequence structure and hidden
+
+00:00:29.267 --> 00:00:37.067
+dimension. Use this built-in layer to confirm the architecture we constructed manually.
+
+00:00:37.067 --> 00:00:42.022
+The manual version is valuable because it teaches what the components do.
+
+00:00:42.022 --> 00:00:47.272
+The built-in version is valuable because it reduces implementation mistakes.
+
+00:00:47.272 --> 00:00:54.742
+In pretrained NLP work, we usually go one step further and load an entire architecture through Hugging Face
+
+00:00:54.742 --> 00:00:57.487
+rather than assembling the blocks ourselves.
+
+00:00:57.487 --> 00:01:04.636
+Still, knowing what TransformerEncoderLayer contains makes pretrained models much less of a black box.

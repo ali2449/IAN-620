@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.557
+The attention formula looks compact, but every symbol corresponds to a step we already understand.
+
+00:00:06.557 --> 00:00:11.487
+Q times K transpose compares each Query with each Key.
+
+00:00:11.487 --> 00:00:17.947
+Dividing by the square root of d k scales the scores so their magnitude stays manageable.
+
+00:00:17.947 --> 00:00:22.537
+Softmax converts the scaled scores into normalized weights.
+
+00:00:22.537 --> 00:00:27.657
+Multiplying by V uses those weights to blend the Value vectors.
+
+00:00:27.657 --> 00:00:32.212
+Read the formula as four verbs: compare, scale, normalize, combine.
+
+00:00:32.212 --> 00:00:35.172
+Masks can also be applied before softmax.
+
+00:00:35.172 --> 00:00:42.822
+A padding mask blocks padded positions, while a causal mask blocks future positions in a decoder.
+
+00:00:42.822 --> 00:00:48.632
+Once you can explain the formula in words, there is no need to memorize it as a mysterious
+
+00:00:48.632 --> 00:00:56.122
+equation. The important outcome is a context vector for each token:
+
+00:00:56.122 --> 00:01:01.200
+a new representation built by gathering weighted information from the permitted tokens.

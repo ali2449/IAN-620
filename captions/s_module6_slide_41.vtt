@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.677
+Causal masking prevents the decoder from cheating during training.
+
+00:00:03.677 --> 00:00:11.107
+Suppose the sequence is “natural language processing is useful.” When the model is learning to predict
+
+00:00:11.107 --> 00:00:16.332
+processing, it should be allowed to use natural and language, but not is or useful,
+
+00:00:16.332 --> 00:00:20.637
+because those tokens are in the future relative to the prediction position.
+
+00:00:20.637 --> 00:00:25.752
+A causal mask blocks attention from each position to later positions.
+
+00:00:25.752 --> 00:00:34.757
+In an attention matrix, that produces a triangular pattern: tokens can attend backward to earlier context and
+
+00:00:34.757 --> 00:00:36.332
+usually to themselves, but not forward.
+
+00:00:36.332 --> 00:00:40.692
+During actual generation, the future tokens do not exist yet,
+
+00:00:40.692 --> 00:00:44.462
+so the same causal structure matches inference naturally.
+
+00:00:44.462 --> 00:00:49.467
+Do not confuse causal masking with the padding attention mask we used earlier.
+
+00:00:49.467 --> 00:00:53.112
+Padding masks hide artificial padded positions.
+
+00:00:53.112 --> 00:00:58.812
+Causal masks hide future positions to preserve autoregressive generation.
+
+00:00:58.812 --> 00:01:02.480
+A model may use both kinds of masking at the same time.

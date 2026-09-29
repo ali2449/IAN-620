@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.892
+Model size creates a tradeoff among capability, speed, memory, cost, and deployment complexity.
+
+00:00:05.892 --> 00:00:13.197
+A small or distilled model may run comfortably on a laptop or modest GPU and can be excellent
+
+00:00:13.197 --> 00:00:16.357
+for teaching, prototyping, and high-volume classification.
+
+00:00:16.357 --> 00:00:24.537
+A medium model often gives a useful balance between performance and operational cost.
+
+00:00:24.537 --> 00:00:29.272
+A large model may handle more complex generation and reasoning tasks, but it requires more memory,
+
+00:00:29.272 --> 00:00:36.197
+longer inference time, and often higher financial or infrastructure cost.
+
+00:00:36.197 --> 00:00:38.907
+Bigger is not automatically better.
+
+00:00:38.907 --> 00:00:45.082
+If a small encoder reaches the required classification accuracy with ten times lower latency,
+
+00:00:45.082 --> 00:00:48.822
+using a much larger chat model may be unnecessary.
+
+00:00:48.822 --> 00:00:55.227
+Model selection should be driven by the minimum capability needed to satisfy the task reliably.
+
+00:00:55.227 --> 00:01:01.717
+Benchmark candidate models on your own data and measure not only quality but also runtime, memory use,
+
+00:01:01.717 --> 00:01:03.440
+and cost.

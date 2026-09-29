@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.997
+Named entity recognition is a token-classification task.
+
+00:00:03.997 --> 00:00:10.602
+We want to identify spans such as person names, organizations, and locations inside a sentence.
+
+00:00:10.602 --> 00:00:16.322
+The pipeline API makes the workflow simple: create an NER pipeline, pass in the text,
+
+00:00:16.322 --> 00:00:20.322
+and inspect each returned entity, group, and confidence score.
+
+00:00:20.322 --> 00:00:26.622
+The grouping option combines subword predictions back into readable entity spans.
+
+00:00:26.622 --> 00:00:32.642
+Depending on the Transformers version, you may see aggregation_strategy used instead of the older
+
+00:00:32.642 --> 00:00:35.867
+grouped_entities argument.
+
+00:00:35.867 --> 00:00:41.437
+Run the example with a different sentence and watch how the model handles multi-word names.
+
+00:00:41.437 --> 00:00:47.932
+Also remember that a generic NER checkpoint is trained on a particular label set and domain.
+
+00:00:47.932 --> 00:00:51.997
+If your application needs clinical entities, legal entities, or custom categories,
+
+00:00:51.997 --> 00:00:59.902
+choose a domain-appropriate checkpoint or fine-tune a model on labeled examples for your own entity types.

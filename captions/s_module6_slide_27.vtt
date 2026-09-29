@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.752
+Attention is only one sublayer inside a Transformer block.
+
+00:00:03.752 --> 00:00:10.072
+After multi-head attention produces an updated vector for each token, the model keeps a path back to the
+
+00:00:10.072 --> 00:00:13.277
+original input through a residual connection.
+
+00:00:13.277 --> 00:00:19.782
+In a common arrangement, we add the attention output to the input and apply layer normalization.
+
+00:00:19.782 --> 00:00:24.172
+The result then passes through a position-wise feed-forward network,
+
+00:00:24.172 --> 00:00:29.047
+usually two linear transformations with a nonlinear activation between them.
+
+00:00:29.047 --> 00:00:33.137
+Another residual connection and normalization step follow.
+
+00:00:33.137 --> 00:00:35.852
+Why do we need these extra pieces?
+
+00:00:35.852 --> 00:00:39.542
+Attention mixes information across token positions.
+
+00:00:39.542 --> 00:00:44.302
+The feed-forward network transforms the features within each token vector.
+
+00:00:44.302 --> 00:00:49.822
+Residual connections help information and gradients travel through a deep stack of layers.
+
+00:00:49.822 --> 00:00:53.722
+Normalization helps keep the scale of activations stable.
+
+00:00:53.722 --> 00:00:58.202
+Different Transformer families may order normalization slightly differently,
+
+00:00:58.202 --> 00:01:01.692
+but this combination of attention, residual paths, normalization,
+
+00:01:01.692 --> 00:01:07.367
+and feed-forward transformation is the repeating unit we mean by a Transformer block.

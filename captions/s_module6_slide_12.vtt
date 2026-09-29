@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.842
+Subword tokenization gives a practical solution to the vocabulary problem.
+
+00:00:04.842 --> 00:00:08.247
+Suppose we encounter the word unbelievable.
+
+00:00:08.247 --> 00:00:13.022
+A word-level vocabulary would need unbelievable as a complete entry,
+
+00:00:13.022 --> 00:00:17.352
+or it would need an unknown-token strategy when that word is missing.
+
+00:00:17.352 --> 00:00:24.892
+A subword tokenizer can break the word into reusable pieces such as un, believ, and able.
+
+00:00:24.892 --> 00:00:30.392
+The exact segmentation depends on the tokenizer, but the principle is the same.
+
+00:00:30.392 --> 00:00:36.387
+Common pieces can be combined to represent rare words, names, technical terms, spelling variants,
+
+00:00:36.387 --> 00:00:41.647
+and words the model did not frequently see as complete units.
+
+00:00:41.647 --> 00:00:47.117
+This keeps the vocabulary manageable while still giving the model broad coverage.
+
+00:00:47.117 --> 00:00:55.392
+Subword tokenization also explains why the number of model tokens is not always the same as the number
+
+00:00:55.392 --> 00:00:55.777
+of words you see on the page.
+
+00:00:55.777 --> 00:01:03.600
+One ordinary word may become one token, several tokens, or in some tokenizers even byte-level pieces.

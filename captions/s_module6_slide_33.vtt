@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.016 --> 00:00:04.802
+PyTorch gives us the complete multi-head attention operation in one layer.
+
+00:00:04.802 --> 00:00:10.687
+We create nn.MultiheadAttention with an embedding dimension and a number of heads.
+
+00:00:10.687 --> 00:00:17.942
+With batch_first set to True, the expected tensor shape is batch, sequence length, hidden dimension,
+
+00:00:17.942 --> 00:00:20.242
+which is often easier to read.
+
+00:00:20.242 --> 00:00:25.487
+In self-attention, we call the layer with x as Query, Key, and Value.
+
+00:00:25.487 --> 00:00:30.022
+The layer returns two useful objects.
+
+00:00:30.022 --> 00:00:33.947
+attention_output contains the updated token vectors.
+
+00:00:33.947 --> 00:00:35.947
+attention_weights contains the learned weighting pattern,
+
+00:00:35.947 --> 00:00:40.487
+usually averaged across heads unless we request per-head weights.
+
+00:00:40.487 --> 00:00:47.662
+Try printing both shapes before worrying about the actual numbers.
+
+00:00:47.662 --> 00:00:51.907
+Shape tracking is one of the best habits in deep-learning code.
+
+00:00:51.907 --> 00:00:56.682
+If x begins as batch size two, sequence length five, hidden size eight,
+
+00:00:56.682 --> 00:01:02.352
+the attention output should remain compatible with that hidden size.
+
+00:01:02.352 --> 00:01:06.078
+That compatibility is what allows the next residual connection.

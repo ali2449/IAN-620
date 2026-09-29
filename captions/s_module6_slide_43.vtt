@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.552
+A reliable model-selection process begins with the output you need, not with a famous model name.
+
+00:00:06.552 --> 00:00:11.172
+If the task is text classification or named entity recognition,
+
+00:00:11.172 --> 00:00:18.087
+an encoder-style model or a task-specific fine-tuned checkpoint may be efficient and accurate.
+
+00:00:18.087 --> 00:00:22.712
+If the task is open-ended generation, chat, or completion,
+
+00:00:22.712 --> 00:00:27.247
+a decoder-only instruction-tuned model is a more natural fit.
+
+00:00:27.247 --> 00:00:33.802
+If the task transforms one sequence into another, such as translation or summarization,
+
+00:00:33.802 --> 00:00:37.407
+an encoder-decoder model may be especially convenient.
+
+00:00:37.407 --> 00:00:45.062
+If you need vectors for semantic search, choose an embedding model that has been trained for similarity rather
+
+00:00:45.062 --> 00:00:49.967
+than simply taking any hidden state from a general model.
+
+00:00:49.967 --> 00:00:53.862
+Architecture is the first filter, not the final decision.
+
+00:00:53.862 --> 00:00:57.052
+Language, domain, model size, license, latency, privacy,
+
+00:00:57.052 --> 00:01:01.806
+and evaluation on realistic data still matter afterward.

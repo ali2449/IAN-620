@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.752
+The central intuition behind self-attention is selective information sharing.
+
+00:00:04.752 --> 00:00:12.107
+When the model updates the representation of one token, it does not need to treat every other token
+
+00:00:12.107 --> 00:00:12.492
+as equally important.
+
+00:00:12.492 --> 00:00:20.037
+It can assign larger weights to tokens that are useful for the current representation and smaller weights to
+
+00:00:20.037 --> 00:00:21.832
+less relevant positions.
+
+00:00:21.832 --> 00:00:25.912
+Imagine the sentence “The animal did not cross the street because it was tired.” When updating the
+
+00:00:25.912 --> 00:00:32.032
+representation of the word it, the model may place more weight on animal than on street because animal
+
+00:00:32.032 --> 00:00:34.967
+helps resolve the reference.
+
+00:00:34.967 --> 00:00:40.562
+The model learns these weighting patterns during training; we do not manually write the rule.
+
+00:00:40.562 --> 00:00:45.907
+Attention therefore creates a direct path for information to move between useful tokens.
+
+00:00:45.907 --> 00:00:52.917
+Later we will turn this intuition into Query, Key, and Value vectors and then into the attention formula.
+
+00:00:52.917 --> 00:00:58.428
+For now, keep the simple idea: each token can decide where to gather context.

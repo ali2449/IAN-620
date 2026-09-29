@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.267
+An attention matrix makes the weighting process visible.
+
+00:00:03.267 --> 00:00:05.377
+Read one row at a time.
+
+00:00:05.377 --> 00:00:09.917
+The row represents the token whose representation is currently being updated.
+
+00:00:09.917 --> 00:00:15.372
+The columns represent tokens that can contribute information.
+
+00:00:15.372 --> 00:00:19.097
+After softmax, the numbers across an allowed row typically sum to one.
+
+00:00:19.097 --> 00:00:26.612
+A large value in one column means more of that token’s Value vector contributes to the new representation
+
+00:00:26.612 --> 00:00:29.712
+for the row token. A smaller value means less contribution.
+
+00:00:29.712 --> 00:00:34.577
+In a real Transformer there is not one universal attention matrix.
+
+00:00:34.577 --> 00:00:39.592
+Each layer contains multiple heads, and each head produces its own pattern.
+
+00:00:39.592 --> 00:00:45.652
+Some heads may become useful for local relationships, others for longer-distance interactions,
+
+00:00:45.652 --> 00:00:48.912
+and many patterns will not have a simple human label.
+
+00:00:48.912 --> 00:00:54.952
+Attention matrices are excellent for learning the mechanism, but we should not interpret one high weight as
+
+00:00:54.952 --> 00:00:58.588
+proof that a model “reasoned” in a particular human-like way.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.342
+Attention can compare tokens, but the model still needs information about sequence order.
+
+00:00:05.342 --> 00:00:11.117
+Compare “the student submitted the assignment” with “the assignment submitted the student.” The important
+
+00:00:11.117 --> 00:00:16.727
+words are nearly identical, yet their positions create very different meanings.
+
+00:00:16.727 --> 00:00:23.737
+Transformer architectures therefore add or encode position information along with token representations.
+
+00:00:23.737 --> 00:00:28.127
+The original Transformer used sinusoidal positional encodings.
+
+00:00:28.127 --> 00:00:31.237
+Many models use learned position embeddings.
+
+00:00:31.237 --> 00:00:37.082
+Newer architectures may use relative position methods or rotary position embeddings.
+
+00:00:37.082 --> 00:00:42.662
+The implementation differs, but the purpose is the same: the model needs a signal telling it where tokens
+
+00:00:42.662 --> 00:00:48.777
+occur and, in many designs, how tokens are positioned relative to one another.
+
+00:00:48.777 --> 00:00:54.307
+For this course, focus on the role rather than memorizing every positional method.
+
+00:00:54.307 --> 00:01:00.422
+Token identity tells the model what is present; positional information helps tell it where that information
+
+00:01:00.422 --> 00:01:00.960
+occurs.

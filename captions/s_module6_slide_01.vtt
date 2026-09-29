@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.402
+Welcome to Module 6, Transformers and Modern NLP.
+
+00:00:04.402 --> 00:00:11.197
+Up to this point, we have worked with preprocessing, linguistic analysis, text representation, embeddings,
+
+00:00:11.197 --> 00:00:18.582
+and classic machine-learning methods. Now we move into the architecture behind many modern NLP systems.
+
+00:00:18.582 --> 00:00:22.032
+The main idea is not to memorize every mathematical detail.
+
+00:00:22.032 --> 00:00:27.072
+Instead, we will build a clear mental model of how text enters a Transformer,
+
+00:00:27.072 --> 00:00:31.882
+how attention changes token representations, how different Transformer families are organized,
+
+00:00:31.882 --> 00:00:38.687
+and how pretrained models are selected and used in practice.
+
+00:00:38.687 --> 00:00:44.512
+We will connect the architecture to Python throughout the module, so when you call a tokenizer, a pipeline,
+
+00:00:44.512 --> 00:00:49.702
+or an AutoModel class, you will know what is happening underneath.
+
+00:00:49.702 --> 00:00:55.892
+By the end, the path from raw text to contextual vectors and generated language should feel connected rather
+
+00:00:55.892 --> 00:00:58.456
+than mysterious.

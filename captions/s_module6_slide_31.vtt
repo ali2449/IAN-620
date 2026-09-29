@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.287
+The term self-attention tells us where the information comes from.
+
+00:00:04.287 --> 00:00:11.012
+In self-attention, Q, K, and V are all derived from the same input sequence.
+
+00:00:11.012 --> 00:00:15.132
+That is why the PyTorch call can pass x three times:
+
+00:00:15.132 --> 00:00:16.997
+attention of x to x using information from x.
+
+00:00:16.997 --> 00:00:23.202
+The layer then applies different learned projections internally.
+
+00:00:23.202 --> 00:00:26.062
+Cross-attention changes the source.
+
+00:00:26.062 --> 00:00:32.527
+In an encoder-decoder model, for example, the decoder may create Queries from its current hidden states while
+
+00:00:32.527 --> 00:00:36.007
+the Keys and Values come from the encoder output.
+
+00:00:36.007 --> 00:00:44.077
+That lets the decoder ask, in effect, “Which parts of the encoded input are useful for generating the
+
+00:00:44.077 --> 00:00:49.812
+next output token?” Keep the distinction simple: self-attention mixes information within one sequence;
+
+00:00:49.812 --> 00:00:54.697
+cross-attention lets one representation attend to another source.
+
+00:00:54.697 --> 00:00:59.967
+This difference becomes important when we compare encoder-only, decoder-only,
+
+00:00:59.967 --> 00:01:02.080
+and encoder-decoder architectures.

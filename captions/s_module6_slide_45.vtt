@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.932
+GPT-style models use decoder-only architecture and autoregressive next-token prediction.
+
+00:00:05.932 --> 00:00:13.967
+Give the model a prefix such as “natural language processing is,” and it predicts a distribution over what
+
+00:00:13.967 --> 00:00:17.497
+token might come next. Repeating that process produces longer text.
+
+00:00:17.497 --> 00:00:24.862
+Chat models build on this capability with instruction tuning, preference optimization, conversation templates,
+
+00:00:24.862 --> 00:00:28.527
+safety training, or other post-training methods.
+
+00:00:28.527 --> 00:00:32.897
+A generative model can also reason over text you provide in the prompt, summarize context,
+
+00:00:32.897 --> 00:00:36.422
+or answer questions about it.
+
+00:00:36.422 --> 00:00:41.257
+But it is important to separate language generation from information storage.
+
+00:00:41.257 --> 00:00:47.237
+A decoder model is not automatically a current database, a private document repository,
+
+00:00:47.237 --> 00:00:49.417
+or a verified source system.
+
+00:00:49.417 --> 00:00:55.972
+That distinction is one reason RAG becomes useful: retrieval supplies external evidence,
+
+00:00:55.972 --> 00:00:59.401
+while the decoder uses that evidence to generate a response.

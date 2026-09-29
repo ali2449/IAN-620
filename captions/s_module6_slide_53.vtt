@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.337
+Use a repeatable checklist instead of choosing models by trial and error.
+
+00:00:04.337 --> 00:00:06.847
+First define the task precisely.
+
+00:00:06.847 --> 00:00:13.427
+“Use AI on text” is too vague; “classify support tickets into five urgency levels” is actionable.
+
+00:00:13.427 --> 00:00:18.142
+Second choose the architecture or specialized model family that fits the output.
+
+00:00:18.142 --> 00:00:20.592
+Third verify language and domain.
+
+00:00:20.592 --> 00:00:25.212
+Fourth check model size, speed, memory, and deployment environment.
+
+00:00:25.212 --> 00:00:29.537
+Fifth read the model card, license, and evaluation results.
+
+00:00:29.537 --> 00:00:34.297
+Sixth test on your own examples, including difficult and edge cases.
+
+00:00:34.297 --> 00:00:37.972
+If the task is retrieval, measure retrieval quality.
+
+00:00:37.972 --> 00:00:43.362
+If it is classification, examine confusion matrices and per-class performance.
+
+00:00:43.362 --> 00:00:49.107
+If it is generation, check factuality and failure cases, not only fluency.
+
+00:00:49.107 --> 00:00:53.712
+The checklist is deliberately simple because model catalogs change.
+
+00:00:53.712 --> 00:00:59.509
+A stable decision process is more valuable than memorizing a list of currently popular checkpoints.

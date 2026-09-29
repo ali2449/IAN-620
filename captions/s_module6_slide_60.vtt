@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.922
+Sentence Transformers make the bridge from Transformer representations to semantic search much more practical.
+
+00:00:06.922 --> 00:00:14.092
+The model all-MiniLM-L6-v2 converts each sentence into one fixed-length vector.
+
+00:00:14.092 --> 00:00:20.857
+We encode three candidate sentences, then encode the query “Where do students submit homework?” into the same
+
+00:00:20.857 --> 00:00:26.582
+vector space. Cosine similarity compares the query vector with each candidate vector.
+
+00:00:26.582 --> 00:00:33.247
+The sentence about submitting assignments in Canvas should receive a high score even though the wording is not
+
+00:00:33.247 --> 00:00:36.552
+identical to the query.
+
+00:00:36.552 --> 00:00:43.902
+That is the point of semantic retrieval: matching meaning rather than relying only on shared keywords.
+
+00:00:43.902 --> 00:00:50.342
+Run the code and add a fourth sentence that contains the word homework but is semantically unrelated,
+
+00:00:50.342 --> 00:00:55.267
+such as “Homework can be stressful.” Compare the scores.
+
+00:00:55.267 --> 00:01:01.472
+This experiment prepares us directly for RAG, where we will embed many document chunks,
+
+00:01:01.472 --> 00:01:05.785
+retrieve the most relevant ones, and pass them to a generative model.

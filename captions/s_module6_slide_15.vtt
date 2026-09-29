@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.547
+After tokenization, the model receives numbers rather than words.
+
+00:00:04.547 --> 00:00:08.292
+Input IDs identify the vocabulary tokens.
+
+00:00:08.292 --> 00:00:15.357
+An attention mask indicates which positions contain meaningful input and which positions are only padding.
+
+00:00:15.357 --> 00:00:20.267
+Imagine a batch containing one short sentence and one longer sentence.
+
+00:00:20.267 --> 00:00:25.442
+The short sentence needs padding so both examples have the same tensor width.
+
+00:00:25.442 --> 00:00:31.227
+Those padding positions should not influence the model in the same way as real text.
+
+00:00:31.227 --> 00:00:35.387
+The attention mask usually uses one for real positions and zero for padded positions,
+
+00:00:35.387 --> 00:00:41.152
+allowing the model to ignore the padding where appropriate.
+
+00:00:41.152 --> 00:00:48.057
+Do not confuse this padding mask with causal masking, which we will discuss later for decoder models.
+
+00:00:48.057 --> 00:00:50.327
+They solve different problems.
+
+00:00:50.327 --> 00:00:56.237
+When debugging Transformer input, printing both input IDs and the attention mask is one of the easiest ways
+
+00:00:56.237 --> 00:01:01.178
+to see whether the tokenizer created the batch you expected.

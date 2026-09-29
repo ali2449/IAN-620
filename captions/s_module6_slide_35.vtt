@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.782
+Attention mixes information across token positions, but each token also needs a richer nonlinear
+
+00:00:05.782 --> 00:00:07.832
+transformation of its own features.
+
+00:00:07.832 --> 00:00:10.602
+That is the job of the feed-forward network.
+
+00:00:10.602 --> 00:00:15.912
+A common design takes the hidden vector, projects it to a larger intermediate dimension,
+
+00:00:15.912 --> 00:00:21.687
+applies a nonlinear activation such as GELU, and projects it back to the model dimension.
+
+00:00:21.687 --> 00:00:27.557
+The same feed-forward network parameters are applied independently to every token position in the layer.
+
+00:00:27.557 --> 00:00:34.157
+So attention answers, “Which other tokens should contribute information?” while the feed-forward network
+
+00:00:34.157 --> 00:00:38.522
+answers, “How should the features inside this updated token vector be transformed?” A residual connection and
+
+00:00:38.522 --> 00:00:42.732
+normalization are used here as well.
+
+00:00:42.732 --> 00:00:48.147
+Large language models spend a substantial amount of computation in these feed-forward components,
+
+00:00:48.147 --> 00:00:51.760
+so it is important not to think of the Transformer as attention alone.

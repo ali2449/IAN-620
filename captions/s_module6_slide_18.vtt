@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.557
+Real batches contain sequences of different lengths, but tensors need a consistent shape.
+
+00:00:05.557 --> 00:00:11.932
+Padding adds special tokens to shorter examples so they match the longest example in the batch.
+
+00:00:11.932 --> 00:00:18.252
+Truncation removes tokens when an input exceeds the permitted maximum length or the limit you set.
+
+00:00:18.252 --> 00:00:24.147
+In the Python example, two sentences are tokenized together with padding, truncation,
+
+00:00:24.147 --> 00:00:26.877
+and return_tensors set to PyTorch.
+
+00:00:26.877 --> 00:00:29.472
+Print the keys, the input shape, and the attention mask.
+
+00:00:29.472 --> 00:00:36.752
+You should see a rectangular tensor even though the original sentences have different lengths.
+
+00:00:36.752 --> 00:00:41.427
+The attention mask distinguishes real tokens from padded positions.
+
+00:00:41.427 --> 00:00:45.122
+Truncation deserves special attention in real projects.
+
+00:00:45.122 --> 00:00:50.167
+If a document contains an important sentence near the end and you truncate it away,
+
+00:00:50.167 --> 00:00:53.507
+the model cannot use information it never receives.
+
+00:00:53.507 --> 00:00:59.062
+Long-document handling therefore becomes an architectural and data-design decision,
+
+00:00:59.062 --> 00:01:00.989
+not just a tokenizer option.

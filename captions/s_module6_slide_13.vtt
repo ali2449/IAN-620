@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.027 --> 00:00:06.622
+Three names appear often when we talk about subword tokenization: BPE, WordPiece, and SentencePiece.
+
+00:00:06.622 --> 00:00:13.442
+Byte-Pair Encoding, or BPE, repeatedly merges frequent patterns so common sequences become reusable tokens.
+
+00:00:13.442 --> 00:00:18.647
+WordPiece, associated historically with BERT-style tokenizers,
+
+00:00:18.647 --> 00:00:25.717
+also builds a vocabulary of useful subword pieces, although its vocabulary-learning procedure is different.
+
+00:00:25.717 --> 00:00:34.727
+SentencePiece is a toolkit that can learn subword vocabularies directly from raw text without assuming that
+
+00:00:34.727 --> 00:00:35.972
+spaces already define word boundaries.
+
+00:00:35.972 --> 00:00:41.262
+Modern model families may also use byte-level BPE or other variations.
+
+00:00:41.262 --> 00:00:49.502
+For applied work, you do not need to implement all of these algorithms from scratch.
+
+00:00:49.502 --> 00:00:55.447
+The practical rule is much simpler: load the tokenizer provided for the checkpoint,
+
+00:00:55.447 --> 00:01:01.621
+inspect how it segments your data, and verify that it handles your language and domain reasonably well.

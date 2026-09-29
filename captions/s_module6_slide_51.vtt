@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.015 --> 00:00:06.822
+When you browse a model hub, first identify the model type rather than jumping directly to a download.
+
+00:00:06.822 --> 00:00:12.662
+Base models are useful when you want hidden representations or plan to fine-tune.
+
+00:00:12.662 --> 00:00:19.587
+Task-fine-tuned models are convenient when you want a ready baseline for sentiment, named entity recognition,
+
+00:00:19.587 --> 00:00:23.152
+question answering, or another defined task.
+
+00:00:23.152 --> 00:00:30.292
+Instruction-tuned and chat models are designed to follow prompts and produce natural-language responses.
+
+00:00:30.292 --> 00:00:36.092
+Embedding models are trained so semantic similarity can be measured in vector space.
+
+00:00:36.092 --> 00:00:41.962
+Rerankers take a query and candidate passages together and produce relevance scores,
+
+00:00:41.962 --> 00:00:46.362
+which is especially useful after first-stage retrieval in RAG.
+
+00:00:46.362 --> 00:00:52.987
+Domain-specific models adapt vocabulary and representations to specialized text.
+
+00:00:52.987 --> 00:00:54.977
+These are different tools.
+
+00:00:54.977 --> 00:01:02.557
+A text-generation model is not automatically the best embedding model, and an embedding model is not a chat
+
+00:01:02.557 --> 00:01:05.040
+assistant. Match the training objective to the job.

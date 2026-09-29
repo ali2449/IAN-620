@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.752
+There are six major ideas to keep track of in this module.
+
+00:00:05.752 --> 00:00:11.877
+We begin with model input: subword tokenization, token IDs, attention masks, and embeddings.
+
+00:00:11.877 --> 00:00:17.722
+Then we move into attention and learn why Query, Key, and Value exist.
+
+00:00:17.722 --> 00:00:25.037
+After that, we assemble the pieces of a Transformer block: attention, residual connections,
+
+00:00:25.037 --> 00:00:28.802
+layer normalization, and feed-forward networks.
+
+00:00:28.802 --> 00:00:36.612
+Once the block is clear, we compare encoder-only, decoder-only, and encoder-decoder architectures.
+
+00:00:36.612 --> 00:00:42.342
+The second half of the module focuses on pretrained models: what pretraining means,
+
+00:00:42.342 --> 00:00:51.022
+what kinds of checkpoints exist, and how to choose a model based on task, domain, language, size, hardware,
+
+00:00:51.022 --> 00:00:54.197
+license, and evaluation evidence.
+
+00:00:54.197 --> 00:01:00.202
+Finally, we use Python examples that can be copied into VS Code, Jupyter, or Colab.
+
+00:01:00.202 --> 00:01:05.802
+The code is there to reinforce the concepts, not replace them.

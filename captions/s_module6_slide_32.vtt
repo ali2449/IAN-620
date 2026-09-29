@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.332
+One attention pattern is usually not enough to model all useful relationships in language.
+
+00:00:05.332 --> 00:00:09.592
+Multi-head attention creates several parallel attention heads.
+
+00:00:09.592 --> 00:00:14.097
+Each head has its own learned Q, K, and V projections,
+
+00:00:14.097 --> 00:00:17.737
+so each one operates in a different learned subspace.
+
+00:00:17.737 --> 00:00:22.172
+The heads can therefore develop different patterns for combining information.
+
+00:00:22.172 --> 00:00:28.407
+We should avoid saying that head one always learns grammar and head two always learns entities;
+
+00:00:28.407 --> 00:00:33.042
+real behavior is more complicated and varies by layer and model.
+
+00:00:33.042 --> 00:00:35.472
+The useful idea is diversity.
+
+00:00:35.472 --> 00:00:39.187
+Instead of forcing every relationship through one attention map,
+
+00:00:39.187 --> 00:00:43.022
+the model can represent several interaction patterns at once.
+
+00:00:43.022 --> 00:00:50.087
+After each head produces its context vectors, the outputs are concatenated and passed through another linear
+
+00:00:50.087 --> 00:00:53.757
+projection so the combined result returns to the model’s hidden size.
+
+00:00:53.757 --> 00:00:58.712
+In PyTorch, num_heads controls how many parallel heads are created,
+
+00:00:58.712 --> 00:01:01.619
+and embed_dim must be compatible with that split.

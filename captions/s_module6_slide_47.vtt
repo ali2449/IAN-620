@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.172
+Pretrained means the model has already learned useful language patterns before we apply it to our own task.
+
+00:00:06.172 --> 00:00:14.807
+During pretraining, a model is exposed to a very large collection of text and optimized with an objective
+
+00:00:14.807 --> 00:00:18.637
+such as masked-token prediction, next-token prediction, or a text-to-text objective.
+
+00:00:18.637 --> 00:00:24.632
+That training is expensive and usually performed by organizations with substantial compute.
+
+00:00:24.632 --> 00:00:29.167
+We then reuse the learned parameters instead of starting from random weights.
+
+00:00:29.167 --> 00:00:35.097
+Sometimes the pretrained checkpoint is already fine-tuned for a task such as sentiment analysis,
+
+00:00:35.097 --> 00:00:38.597
+named entity recognition, or summarization.
+
+00:00:38.597 --> 00:00:43.047
+Other times we fine-tune it ourselves on labeled domain data.
+
+00:00:43.047 --> 00:00:48.872
+Inference is the final stage where we use the trained model to make predictions or generate text.
+
+00:00:48.872 --> 00:00:53.342
+Keeping these stages separate helps avoid a common misunderstanding:
+
+00:00:53.342 --> 00:00:58.389
+loading a pretrained model in Python is not training the Transformer from scratch.

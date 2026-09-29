@@ -1,0 +1,779 @@
+{
+  "module": "s_module6",
+  "filename_prefix": "s_module6",
+  "source_file": "IAN620_Module6_Narration_TTS_Format.txt",
+  "voice_consistency_version": 2,
+  "reference_audio": "/home/ali/breeze-tts/voice_reference/course_instructor_consistent_v4.wav",
+  "reference_text": "Welcome to the course. We will work through each concept carefully, connect the\nideas step by step, and use practical examples to make technical topics easier\nto understand. When we introduce a new method, focus first on the problem it\nsolves and why it is useful. For example, in machine learning, features are the\ninformation we give the model, while the target is what we want it to predict.\nNow consider a simple question: what changes when the data contains missing\nvalues? We will think through the reason and then look at the code. In Python,\nwe can inspect the data, run one small step at a time, and explain what the\nresult means. The goal is to understand the logic, not simply memorize syntax.",
+  "locked_narration_seed": true,
+  "narration_seed": 1234,
+  "subtitle_method": "whole_slide_silence_alignment",
+  "caption_settings": {
+    "max_words": 18,
+    "max_chars": 110,
+    "minimum_silence_seconds": 0.2,
+    "boundary_search_window_seconds": 1.4
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "title": "Transformers and Modern NLP",
+      "transcript": "Welcome to Module 6, Transformers and Modern NLP.\n\nUp to this point, we have worked with preprocessing, linguistic analysis, text representation, embeddings, and classic machine-learning methods. Now we move into the architecture behind many modern NLP systems.\n\nThe main idea is not to memorize every mathematical detail. Instead, we will build a clear mental model of how text enters a Transformer, how attention changes token representations, how different Transformer families are organized, and how pretrained models are selected and used in practice.\n\nWe will connect the architecture to Python throughout the module, so when you call a tokenizer, a pipeline, or an AutoModel class, you will know what is happening underneath. By the end, the path from raw text to contextual vectors and generated language should feel connected rather than mysterious.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_01.wav",
+      "audio": "audio/s_module6_slide_01.mp3",
+      "captions": "audio/s_module6_slide_01.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 2,
+      "title": "Where Module 6 fits in IAN 620",
+      "transcript": "Module 6 sits between the classic NLP methods we already know and the retrieval and generation systems we will build next.\n\nIn Module 4, we represented text as vectors and used similarity to compare pieces of text. In Module 5, we used classic machine-learning models for classification.\n\nTransformers keep the idea of vector representations, but they make those vectors context-sensitive. The representation of a word can change depending on the words around it.\n\nThat change is important for classification, named entity recognition, semantic search, summarization, and text generation. The concepts we learn here will also make the next RAG module much easier to understand, because RAG depends on Transformer-based embedding models and generative models.\n\nThink of Module 6 as the bridge from traditional NLP pipelines to modern language-model systems.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_02.wav",
+      "audio": "audio/s_module6_slide_02.mp3",
+      "captions": "audio/s_module6_slide_02.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 3,
+      "title": "What this module covers",
+      "transcript": "There are six major ideas to keep track of in this module.\n\nWe begin with model input: subword tokenization, token IDs, attention masks, and embeddings. Then we move into attention and learn why Query, Key, and Value exist.\n\nAfter that, we assemble the pieces of a Transformer block: attention, residual connections, layer normalization, and feed-forward networks. Once the block is clear, we compare encoder-only, decoder-only, and encoder-decoder architectures.\n\nThe second half of the module focuses on pretrained models: what pretraining means, what kinds of checkpoints exist, and how to choose a model based on task, domain, language, size, hardware, license, and evaluation evidence.\n\nFinally, we use Python examples that can be copied into VS Code, Jupyter, or Colab. The code is there to reinforce the concepts, not replace them.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_03.wav",
+      "audio": "audio/s_module6_slide_03.mp3",
+      "captions": "audio/s_module6_slide_03.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 4,
+      "title": "A gradual path from text to modern models",
+      "transcript": "A useful way to understand Transformers is to follow the data from beginning to end.\n\nWe start with ordinary text. A tokenizer breaks the text into model-specific pieces and maps those pieces to numeric IDs.\n\nThe model looks up an embedding vector for each ID and adds information about token position. Those vectors then enter attention layers, where each token can gather information from other tokens in the sequence.\n\nFeed-forward layers transform the updated vectors, and the process is repeated across many Transformer blocks. The final representations can support different outputs.\n\nAn encoder may produce features for classification or named entity recognition. An embedding model may produce vectors for semantic search.\n\nA decoder may generate the next token repeatedly to create text. Whenever a later code example feels complicated, return to this path: text, tokens, IDs, vectors, attention, Transformer blocks, output.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_04.wav",
+      "audio": "audio/s_module6_slide_04.mp3",
+      "captions": "audio/s_module6_slide_04.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 5,
+      "title": "Why did NLP need Transformers?",
+      "transcript": "Transformers did not appear because earlier NLP methods were useless.\n\nBag-of-Words and TF-IDF are still excellent baselines when we need speed, interpretability, or strong keyword signals. Word2Vec and GloVe are useful for learning dense semantic representations.\n\nClassic classifiers can perform very well on many supervised text problems. The limitation is that language depends heavily on context and order.\n\nThe word bank can mean a financial institution or the side of a river. A relationship can span many words.\n\nTwo sentences can contain almost the same words but mean different things because the order changes. Sequence generation creates another challenge because the model must use prior context to predict what comes next.\n\nTransformers address these issues by combining position information with attention, allowing each token representation to be updated using information from other relevant tokens.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_05.wav",
+      "audio": "audio/s_module6_slide_05.mp3",
+      "captions": "audio/s_module6_slide_05.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 6,
+      "title": "The same word can have different meanings",
+      "transcript": "Consider the word bank in two sentences: the customer went to the bank to deposit a check, and the child sat near the river bank.\n\nA static embedding method such as Word2Vec learns one general vector for the vocabulary item bank. That vector reflects many training contexts, but it does not become a different vector simply because the current sentence is about finance or geography.\n\nA Transformer starts with an initial token embedding, then repeatedly updates that representation through attention. In the financial sentence, words such as deposit and check can influence the representation.\n\nIn the geographic sentence, river and nearby context can influence it differently. After several Transformer layers, the two occurrences of bank can have different contextual vectors.\n\nThis is one of the most important changes from static embeddings to contextual language models: meaning is represented together with the surrounding context.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_06.wav",
+      "audio": "audio/s_module6_slide_06.mp3",
+      "captions": "audio/s_module6_slide_06.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 7,
+      "title": "Bag-of-Words ignores order",
+      "transcript": "Word order can change meaning even when the vocabulary barely changes.\n\nCompare “the dog chased the cat” with “the cat chased the dog.” A Bag-of-Words representation mainly records which words appear and how often, so these two sentences can look extremely similar in feature space. But the grammatical roles are reversed.\n\nOne animal is the agent and the other is the object. Transformers process an ordered sequence of tokens, include position information, and let tokens interact through attention.\n\nThat gives the model a way to represent who is related to whom and how those relationships depend on order. Bag-of-Words is not wrong; it is simply designed for a different level of representation.\n\nFor many tasks it is still a strong baseline. Transformers become useful when context, order, and relationships among tokens carry information that simple counts cannot capture.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_07.wav",
+      "audio": "audio/s_module6_slide_07.mp3",
+      "captions": "audio/s_module6_slide_07.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 8,
+      "title": "RNNs and LSTMs processed text step by step",
+      "transcript": "Before Transformers became dominant, recurrent neural networks and LSTMs were common choices for sequence data.\n\nAn RNN reads a sequence step by step. The hidden state from one position contributes to the next position, so the model naturally preserves order.\n\nLSTMs and related gated architectures improved the ability to keep useful information over longer sequences. The difficulty is that the computation is still strongly sequential.\n\nLater steps depend on earlier steps, which makes training harder to parallelize. Long-range information can also become difficult to preserve through many recurrent transitions.\n\nTransformers changed the organization of the computation. Instead of passing information only through a chain of hidden states, attention lets tokens interact more directly with other tokens.\n\nThis does not mean RNNs suddenly became invalid. It means Transformers offered a more scalable way to model broad context and became especially effective when trained on very large datasets.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_08.wav",
+      "audio": "audio/s_module6_slide_08.mp3",
+      "captions": "audio/s_module6_slide_08.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 9,
+      "title": "A Transformer lets tokens look at other tokens",
+      "transcript": "The central intuition behind self-attention is selective information sharing.\n\nWhen the model updates the representation of one token, it does not need to treat every other token as equally important. It can assign larger weights to tokens that are useful for the current representation and smaller weights to less relevant positions.\n\nImagine the sentence “The animal did not cross the street because it was tired.” When updating the representation of the word it, the model may place more weight on animal than on street because animal helps resolve the reference.\n\nThe model learns these weighting patterns during training; we do not manually write the rule. Attention therefore creates a direct path for information to move between useful tokens.\n\nLater we will turn this intuition into Query, Key, and Value vectors and then into the attention formula. For now, keep the simple idea: each token can decide where to gather context.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_09.wav",
+      "audio": "audio/s_module6_slide_09.mp3",
+      "captions": "audio/s_module6_slide_09.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 10,
+      "title": "A Transformer is not just one layer",
+      "transcript": "Attention receives most of the attention, but a Transformer is much more than one attention operation.\n\nThe full pipeline begins with tokenization. Token IDs are mapped to embedding vectors, and position information is incorporated so order is not lost.\n\nInside each Transformer block, multi-head attention mixes information across tokens. Residual connections preserve the previous representation, layer normalization helps stabilize training, and a feed-forward network transforms each token representation independently.\n\nThat block is stacked many times. A task-specific head or generation mechanism then turns the final hidden states into useful outputs such as class probabilities, token labels, embeddings, or generated tokens.\n\nThis matters when we use pretrained models. A one-line pipeline call may hide dozens of layers and millions or billions of learned parameters, but the same basic processing path is still happening underneath.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_10.wav",
+      "audio": "audio/s_module6_slide_10.mp3",
+      "captions": "audio/s_module6_slide_10.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 11,
+      "title": "Transformer tokenization is more than splitting words",
+      "transcript": "Transformer tokenization is part of the model itself, not just a generic preprocessing step.\n\nTraditional tokenization may split text into words and punctuation. Transformer tokenizers often use subword units, so a rare or complex word can be represented as several smaller pieces.\n\nThose pieces come from a fixed vocabulary learned or defined during model training. Each piece maps to a numeric token ID, and the model has learned embeddings for those IDs.\n\nThis is why we normally load the tokenizer that belongs to the exact pretrained checkpoint. If we use a different tokenizer, the token IDs may no longer correspond to the embeddings the model learned.\n\nSome models also expect special tokens, particular spacing rules, or model-specific normalization. In practice, tokenizer and model should be treated as a matched pair.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_11.wav",
+      "audio": "audio/s_module6_slide_11.mp3",
+      "captions": "audio/s_module6_slide_11.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 12,
+      "title": "Why subword tokenization helps",
+      "transcript": "Subword tokenization gives a practical solution to the vocabulary problem.\n\nSuppose we encounter the word unbelievable. A word-level vocabulary would need unbelievable as a complete entry, or it would need an unknown-token strategy when that word is missing.\n\nA subword tokenizer can break the word into reusable pieces such as un, believ, and able. The exact segmentation depends on the tokenizer, but the principle is the same.\n\nCommon pieces can be combined to represent rare words, names, technical terms, spelling variants, and words the model did not frequently see as complete units. This keeps the vocabulary manageable while still giving the model broad coverage.\n\nSubword tokenization also explains why the number of model tokens is not always the same as the number of words you see on the page. One ordinary word may become one token, several tokens, or in some tokenizers even byte-level pieces.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_12.wav",
+      "audio": "audio/s_module6_slide_12.mp3",
+      "captions": "audio/s_module6_slide_12.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 13,
+      "title": "BPE, WordPiece, and SentencePiece",
+      "transcript": "Three names appear often when we talk about subword tokenization: BPE, WordPiece, and SentencePiece.\n\nByte-Pair Encoding, or BPE, repeatedly merges frequent patterns so common sequences become reusable tokens. WordPiece, associated historically with BERT-style tokenizers, also builds a vocabulary of useful subword pieces, although its vocabulary-learning procedure is different.\n\nSentencePiece is a toolkit that can learn subword vocabularies directly from raw text without assuming that spaces already define word boundaries. Modern model families may also use byte-level BPE or other variations.\n\nFor applied work, you do not need to implement all of these algorithms from scratch. The practical rule is much simpler: load the tokenizer provided for the checkpoint, inspect how it segments your data, and verify that it handles your language and domain reasonably well.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_13.wav",
+      "audio": "audio/s_module6_slide_13.mp3",
+      "captions": "audio/s_module6_slide_13.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 14,
+      "title": "Models use tokens that are not ordinary words",
+      "transcript": "Some Transformer tokens are control symbols rather than ordinary words.\n\nIn many BERT-style models, C L S can be placed at the beginning of a sequence and can support sequence-level tasks such as classification. S E P can mark a boundary between segments.\n\nP A D fills shorter examples so that several sequences can be placed in one rectangular batch. M A S K is used in masked-language-model training and in fill-mask demonstrations.\n\nThese conventions are model-specific. A decoder-only model may use different beginning-of-sequence, end-of-sequence, or padding rules.\n\nThe safest approach is to let the tokenizer add and manage the special tokens for the chosen checkpoint. If you manually add the wrong symbols or use conventions from another model family, the input may not match what the model saw during training.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_14.wav",
+      "audio": "audio/s_module6_slide_14.mp3",
+      "captions": "audio/s_module6_slide_14.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 15,
+      "title": "Token IDs and attention masks",
+      "transcript": "After tokenization, the model receives numbers rather than words.\n\nInput IDs identify the vocabulary tokens. An attention mask indicates which positions contain meaningful input and which positions are only padding.\n\nImagine a batch containing one short sentence and one longer sentence. The short sentence needs padding so both examples have the same tensor width.\n\nThose padding positions should not influence the model in the same way as real text. The attention mask usually uses one for real positions and zero for padded positions, allowing the model to ignore the padding where appropriate.\n\nDo not confuse this padding mask with causal masking, which we will discuss later for decoder models. They solve different problems.\n\nWhen debugging Transformer input, printing both input IDs and the attention mask is one of the easiest ways to see whether the tokenizer created the batch you expected.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_15.wav",
+      "audio": "audio/s_module6_slide_15.mp3",
+      "captions": "audio/s_module6_slide_15.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 16,
+      "title": "Install libraries and load a tokenizer",
+      "transcript": "Let us begin with the simplest Hugging Face workflow.\n\nFirst install the libraries. In a Jupyter or Colab cell, the exclamation mark lets you run pip from the notebook.\n\nIn a VS Code terminal, type the same pip install command without the exclamation mark. Then import AutoTokenizer and load bert-base-uncased.\n\nThe word Auto is useful because Hugging Face reads the checkpoint configuration and selects the appropriate tokenizer implementation. After loading the tokenizer, pass a short sentence to tokenizer.tokenize and print the pieces.\n\nRun the code exactly once, then replace the sentence with a technical phrase, a person’s name, or a rare word. Compare the resulting pieces.\n\nThe point is not to memorize BERT’s token vocabulary. The point is to see that the checkpoint controls how raw text becomes the tokens the model understands.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_16.wav",
+      "audio": "audio/s_module6_slide_16.mp3",
+      "captions": "audio/s_module6_slide_16.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 17,
+      "title": "Inspect token IDs and decoded tokens",
+      "transcript": "Now follow the conversion one step further.\n\nThe tokenizer first turns the sentence into model tokens and then maps those tokens to integer IDs. The encoded dictionary contains input_ids, and in many cases it will also contain fields such as attention_mask or token_type_ids depending on the model.\n\nPrinting the IDs lets us see the exact numeric representation passed into the model. Converting those IDs back to token labels makes the mapping easier to interpret.\n\nNotice the special tokens at the boundaries and any subword markers inside uncommon words. A useful experiment is to change just one word and compare the ID sequence.\n\nAnother is to encode the same text with a different model’s tokenizer. The numbers will usually change because each tokenizer has its own vocabulary.\n\nThat is another reason the tokenizer and pretrained checkpoint must stay together.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_17.wav",
+      "audio": "audio/s_module6_slide_17.mp3",
+      "captions": "audio/s_module6_slide_17.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 18,
+      "title": "Padding and truncation for batches",
+      "transcript": "Real batches contain sequences of different lengths, but tensors need a consistent shape.\n\nPadding adds special tokens to shorter examples so they match the longest example in the batch. Truncation removes tokens when an input exceeds the permitted maximum length or the limit you set.\n\nIn the Python example, two sentences are tokenized together with padding, truncation, and return_tensors set to PyTorch. Print the keys, the input shape, and the attention mask.\n\nYou should see a rectangular tensor even though the original sentences have different lengths. The attention mask distinguishes real tokens from padded positions.\n\nTruncation deserves special attention in real projects. If a document contains an important sentence near the end and you truncate it away, the model cannot use information it never receives.\n\nLong-document handling therefore becomes an architectural and data-design decision, not just a tokenizer option.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_18.wav",
+      "audio": "audio/s_module6_slide_18.mp3",
+      "captions": "audio/s_module6_slide_18.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 19,
+      "title": "From token IDs to vectors",
+      "transcript": "A token ID is only an index into the model’s vocabulary.\n\nThe number itself does not contain a semantic geometry. Inside the model, that ID is used to look up a learned embedding vector.\n\nYou can imagine a large table where each vocabulary item has a row of learned numbers. Position information is then incorporated so the model can distinguish the same token appearing in different locations.\n\nThese initial vectors become the input to the first Transformer block. Attention and feed-forward layers repeatedly modify them.\n\nThis gives us two useful terms. The initial embedding is the starting representation associated with the token and its position.\n\nA contextual hidden state is the updated representation after the token has interacted with the surrounding sequence. When we later call AutoModel and inspect last_hidden_state, we are looking at contextual vectors, not just the original embedding lookup.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_19.wav",
+      "audio": "audio/s_module6_slide_19.mp3",
+      "captions": "audio/s_module6_slide_19.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 20,
+      "title": "The vector changes after attention",
+      "transcript": "Return to the word bank.\n\nBoth occurrences begin from the same or very similar token embedding because they map to the same vocabulary item. The difference emerges as the vectors move through the Transformer layers.\n\nIn the finance sentence, the bank token can gather information from deposit, customer, or check. In the river sentence, it can gather information from river, child, or nearby spatial language.\n\nEach layer updates the representation again. By the final layer, the two bank vectors can occupy different positions in representation space because their contexts are different.\n\nThis distinction matters when we use Transformer features for classification, clustering, semantic search, or other downstream tasks. We are no longer asking only, “What word is this?” We are representing something closer to, “What does this token mean in this particular context?”",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_20.wav",
+      "audio": "audio/s_module6_slide_20.mp3",
+      "captions": "audio/s_module6_slide_20.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 21,
+      "title": "Transformers need position information",
+      "transcript": "Attention can compare tokens, but the model still needs information about sequence order.\n\nCompare “the student submitted the assignment” with “the assignment submitted the student.” The important words are nearly identical, yet their positions create very different meanings. Transformer architectures therefore add or encode position information along with token representations.\n\nThe original Transformer used sinusoidal positional encodings. Many models use learned position embeddings.\n\nNewer architectures may use relative position methods or rotary position embeddings. The implementation differs, but the purpose is the same: the model needs a signal telling it where tokens occur and, in many designs, how tokens are positioned relative to one another.\n\nFor this course, focus on the role rather than memorizing every positional method. Token identity tells the model what is present; positional information helps tell it where that information occurs.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_21.wav",
+      "audio": "audio/s_module6_slide_21.mp3",
+      "captions": "audio/s_module6_slide_21.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 22,
+      "title": "Attention answers: what should this token listen to?",
+      "transcript": "Think of attention as a learned weighting system for context.\n\nSuppose we are representing the pronoun it in a sentence. Several earlier words are available, but only some of them are useful for understanding what it refers to.\n\nThe attention mechanism produces a score for the relationship between the current token and other available tokens. After normalization, those scores become weights.\n\nTokens with larger weights contribute more of their information to the updated representation. Importantly, there is no hand-written rule saying “pronouns must attend to nouns.” The model learns useful patterns from training data.\n\nAlso be careful with interpretation. An attention weight tells us how information is mixed in one head at one layer; it is not a complete explanation of why the model produced a final answer.\n\nUse attention to understand the computation, not as a perfect window into reasoning.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_22.wav",
+      "audio": "audio/s_module6_slide_22.mp3",
+      "captions": "audio/s_module6_slide_22.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 23,
+      "title": "Query, Key, and Value in plain language",
+      "transcript": "Query, Key, and Value become much easier once we give each one a job.\n\nThe Query represents what the current token is looking for. The Key represents how each available token can be matched against that request.\n\nThe Value contains the information that can be passed forward when a token is considered useful. Every token can produce all three representations.\n\nThe model compares a Query with many Keys to create compatibility scores. Softmax turns those scores into attention weights.\n\nThe weights then determine how strongly the corresponding Values are blended together. A useful analogy is information retrieval.\n\nA query expresses a need, keys help identify relevant items, and values provide the content. The analogy is not mathematically exact, but it gives us a practical mental model before we look at the matrix operations.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_23.wav",
+      "audio": "audio/s_module6_slide_23.mp3",
+      "captions": "audio/s_module6_slide_23.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 24,
+      "title": "Where attention fits in the model",
+      "transcript": "Now we can place an attention layer inside the model.\n\nBefore attention, we already have one vector per token. In the PyTorch example, x has shape one by four by eight: one sequence in the batch, four token positions, and an eight-dimensional hidden vector for each token.\n\nWe create nn.MultiheadAttention with embed_dim equal to eight, so the layer expects eight numbers per token, and with two heads, so that hidden space is divided across two parallel attention operations. Because this is self-attention, the same x is supplied as the source for Query, Key, and Value.\n\nInternally, the layer does not simply reuse x unchanged. It learns separate linear projections that turn x into Q, K, and V.\n\nThe layer compares Q with K, uses the resulting weights to combine V, merges the heads, and returns a new vector for every token. Notice that the output keeps the same hidden size.\n\nThat shape compatibility lets us add the original x back through a residual connection and stack many Transformer blocks without changing the basic sequence shape.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_24.wav",
+      "audio": "audio/s_module6_slide_24.mp3",
+      "captions": "audio/s_module6_slide_24.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 25,
+      "title": "The model learns three projections: Q, K, and V",
+      "transcript": "Where do Q, K, and V actually come from?\n\nThey are learned transformations of the input vectors. Suppose the matrix X contains the token representations for one sequence.\n\nThe attention layer contains three parameter matrices, commonly written as W Q, W K, and W V. Multiplying X by W Q creates the Query matrix.\n\nMultiplying X by W K creates the Key matrix. Multiplying X by W V creates the Value matrix.\n\nThese parameter matrices are initialized when the neural network is created and updated during training through backpropagation and gradient-based optimization. We do not calculate them manually for each sentence.\n\nThe same token representation is therefore viewed in three different learned spaces: one for asking what information is needed, one for matching against other tokens, and one for carrying the information that will be mixed.\n\nWhen we add a library attention layer, these trainable projections are already built into that layer.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_25.wav",
+      "audio": "audio/s_module6_slide_25.mp3",
+      "captions": "audio/s_module6_slide_25.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 26,
+      "title": "Attention is a five-step calculation",
+      "transcript": "Scaled dot-product attention can be understood as five operations.\n\nFirst, project the input into Q, K, and V. Second, compare every Query with the relevant Keys using dot products.\n\nThis produces a score matrix: each row corresponds to one Query position, and each column corresponds to a Key position. Third, divide the scores by the square root of the key dimension.\n\nWithout this scaling, dot products can become large as the vector dimension grows, making softmax overly sharp and harder to train. Fourth, apply any masks and then softmax so the allowed scores become normalized attention weights.\n\nFifth, multiply those weights by V. The result is a weighted combination of Value vectors for each token.\n\nMulti-head attention performs the same general process several times using different learned projections, concatenates the head outputs, and uses one more learned projection to return to the model’s hidden dimension.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_26.wav",
+      "audio": "audio/s_module6_slide_26.mp3",
+      "captions": "audio/s_module6_slide_26.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 27,
+      "title": "The attention layer is one part of a Transformer block",
+      "transcript": "Attention is only one sublayer inside a Transformer block.\n\nAfter multi-head attention produces an updated vector for each token, the model keeps a path back to the original input through a residual connection. In a common arrangement, we add the attention output to the input and apply layer normalization.\n\nThe result then passes through a position-wise feed-forward network, usually two linear transformations with a nonlinear activation between them. Another residual connection and normalization step follow.\n\nWhy do we need these extra pieces? Attention mixes information across token positions.\n\nThe feed-forward network transforms the features within each token vector. Residual connections help information and gradients travel through a deep stack of layers.\n\nNormalization helps keep the scale of activations stable. Different Transformer families may order normalization slightly differently, but this combination of attention, residual paths, normalization, and feed-forward transformation is the repeating unit we mean by a Transformer block.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_27.wav",
+      "audio": "audio/s_module6_slide_27.mp3",
+      "captions": "audio/s_module6_slide_27.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 28,
+      "title": "Each row shows what one token attends to",
+      "transcript": "An attention matrix makes the weighting process visible.\n\nRead one row at a time. The row represents the token whose representation is currently being updated.\n\nThe columns represent tokens that can contribute information. After softmax, the numbers across an allowed row typically sum to one.\n\nA large value in one column means more of that token’s Value vector contributes to the new representation for the row token. A smaller value means less contribution.\n\nIn a real Transformer there is not one universal attention matrix. Each layer contains multiple heads, and each head produces its own pattern.\n\nSome heads may become useful for local relationships, others for longer-distance interactions, and many patterns will not have a simple human label.\n\nAttention matrices are excellent for learning the mechanism, but we should not interpret one high weight as proof that a model “reasoned” in a particular human-like way.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_28.wav",
+      "audio": "audio/s_module6_slide_28.mp3",
+      "captions": "audio/s_module6_slide_28.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 29,
+      "title": "Scaled dot-product attention",
+      "transcript": "The attention formula looks compact, but every symbol corresponds to a step we already understand.\n\nQ times K transpose compares each Query with each Key. Dividing by the square root of d k scales the scores so their magnitude stays manageable.\n\nSoftmax converts the scaled scores into normalized weights. Multiplying by V uses those weights to blend the Value vectors.\n\nRead the formula as four verbs: compare, scale, normalize, combine. Masks can also be applied before softmax.\n\nA padding mask blocks padded positions, while a causal mask blocks future positions in a decoder. Once you can explain the formula in words, there is no need to memorize it as a mysterious equation.\n\nThe important outcome is a context vector for each token: a new representation built by gathering weighted information from the permitted tokens.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_29.wav",
+      "audio": "audio/s_module6_slide_29.mp3",
+      "captions": "audio/s_module6_slide_29.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 30,
+      "title": "Attention from scratch with small tensors",
+      "transcript": "The small PyTorch example exposes the core attention calculation without hiding it inside a library class.\n\nWe manually create tiny Q, K, and V tensors. The matrix multiplication between Q and the transpose of K produces the raw compatibility scores.\n\nDividing by the square root of the feature dimension performs the scaling step. Softmax converts each row into normalized attention weights.\n\nThe final matrix multiplication between those weights and V produces the context vectors. Run the cell and print every intermediate object.\n\nLook at one row of the weight matrix and verify that its values sum to approximately one. Then change one Query vector and see how the weights move.\n\nThis is deliberately not a complete Transformer layer. There are no learned Q, K, V projections, no multiple heads, no residual connection, no normalization, and no feed-forward network.\n\nThe goal is to make the central calculation transparent before we return to the full architecture.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_30.wav",
+      "audio": "audio/s_module6_slide_30.mp3",
+      "captions": "audio/s_module6_slide_30.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 31,
+      "title": "Why it is called self-attention",
+      "transcript": "The term self-attention tells us where the information comes from.\n\nIn self-attention, Q, K, and V are all derived from the same input sequence. That is why the PyTorch call can pass x three times: attention of x to x using information from x.\n\nThe layer then applies different learned projections internally. Cross-attention changes the source.\n\nIn an encoder-decoder model, for example, the decoder may create Queries from its current hidden states while the Keys and Values come from the encoder output.\n\nThat lets the decoder ask, in effect, “Which parts of the encoded input are useful for generating the next output token?” Keep the distinction simple: self-attention mixes information within one sequence; cross-attention lets one representation attend to another source.\n\nThis difference becomes important when we compare encoder-only, decoder-only, and encoder-decoder architectures.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_31.wav",
+      "audio": "audio/s_module6_slide_31.mp3",
+      "captions": "audio/s_module6_slide_31.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 32,
+      "title": "One attention pattern is not enough",
+      "transcript": "One attention pattern is usually not enough to model all useful relationships in language.\n\nMulti-head attention creates several parallel attention heads. Each head has its own learned Q, K, and V projections, so each one operates in a different learned subspace.\n\nThe heads can therefore develop different patterns for combining information. We should avoid saying that head one always learns grammar and head two always learns entities; real behavior is more complicated and varies by layer and model.\n\nThe useful idea is diversity. Instead of forcing every relationship through one attention map, the model can represent several interaction patterns at once.\n\nAfter each head produces its context vectors, the outputs are concatenated and passed through another linear projection so the combined result returns to the model’s hidden size. In PyTorch, num_heads controls how many parallel heads are created, and embed_dim must be compatible with that split.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_32.wav",
+      "audio": "audio/s_module6_slide_32.mp3",
+      "captions": "audio/s_module6_slide_32.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 33,
+      "title": "Use a PyTorch MultiheadAttention layer",
+      "transcript": "PyTorch gives us the complete multi-head attention operation in one layer.\n\nWe create nn.MultiheadAttention with an embedding dimension and a number of heads. With batch_first set to True, the expected tensor shape is batch, sequence length, hidden dimension, which is often easier to read.\n\nIn self-attention, we call the layer with x as Query, Key, and Value. The layer returns two useful objects. attention_output contains the updated token vectors. attention_weights contains the learned weighting pattern, usually averaged across heads unless we request per-head weights.\n\nTry printing both shapes before worrying about the actual numbers. Shape tracking is one of the best habits in deep-learning code.\n\nIf x begins as batch size two, sequence length five, hidden size eight, the attention output should remain compatible with that hidden size. That compatibility is what allows the next residual connection.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_33.wav",
+      "audio": "audio/s_module6_slide_33.mp3",
+      "captions": "audio/s_module6_slide_33.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 34,
+      "title": "A Transformer layer also uses residual connections",
+      "transcript": "Residual connections answer an important engineering question: after attention changes the token representation, do we throw away the original input?\n\nUsually, no. We add the attention output back to the input.\n\nIn a simple expression, the next representation is x plus attention of x. A normalization step is then applied according to the architecture’s design.\n\nThis creates a direct path through the network so information does not have to survive only through every transformation. Residual paths also make very deep networks easier to optimize because gradients have a more direct route backward.\n\nIn code, the shapes must match before addition, which is another reason the attention output returns to the same model dimension.\n\nModern Transformer families differ in whether normalization occurs before or after certain sublayers, often called pre-norm and post-norm designs, but the core purpose remains stable information flow through repeated blocks.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_34.wav",
+      "audio": "audio/s_module6_slide_34.mp3",
+      "captions": "audio/s_module6_slide_34.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 35,
+      "title": "Each token also passes through a small neural network",
+      "transcript": "Attention mixes information across token positions, but each token also needs a richer nonlinear transformation of its own features.\n\nThat is the job of the feed-forward network. A common design takes the hidden vector, projects it to a larger intermediate dimension, applies a nonlinear activation such as GELU, and projects it back to the model dimension.\n\nThe same feed-forward network parameters are applied independently to every token position in the layer.\n\nSo attention answers, “Which other tokens should contribute information?” while the feed-forward network answers, “How should the features inside this updated token vector be transformed?” A residual connection and normalization are used here as well.\n\nLarge language models spend a substantial amount of computation in these feed-forward components, so it is important not to think of the Transformer as attention alone.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_35.wav",
+      "audio": "audio/s_module6_slide_35.mp3",
+      "captions": "audio/s_module6_slide_35.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 36,
+      "title": "Build the pieces of an encoder layer",
+      "transcript": "Now we can assemble a simplified encoder layer from familiar parts.\n\nStart with x, a batch of token vectors. Pass x through multi-head self-attention.\n\nAdd the attention output back to x and normalize the result. Next, pass the normalized vectors through the feed-forward network.\n\nAdd that feed-forward output back to the previous representation and normalize again. The result has the same basic shape as the original input: one updated hidden vector for every token.\n\nThat shape can be passed directly into another encoder layer, which is how Transformers become deep stacks. When reading the code, do not treat each line as an isolated command.\n\nFollow the data path: x, attention, residual plus normalization, feed-forward, residual plus normalization. Once you can trace that path, the architecture diagram and the Python implementation become two views of the same process.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_36.wav",
+      "audio": "audio/s_module6_slide_36.mp3",
+      "captions": "audio/s_module6_slide_36.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 37,
+      "title": "The repeated building block",
+      "transcript": "A Transformer model becomes deep by repeating the same kind of block many times.\n\nThe first layer receives relatively local information: token embeddings plus position information. After self-attention and the feed-forward transformation, every token has a more contextual representation.\n\nThe second layer receives those updated vectors and can build more complex patterns. Repeating the process lets later layers operate on representations that already contain information gathered by earlier layers.\n\nThe exact number of layers depends on the checkpoint. Small teaching models may have only a handful; larger models may have dozens or more.\n\nMore layers increase capacity but also increase memory use, computation, and latency. The useful mental picture is a stack: the sequence shape stays compatible across layers, while the meaning encoded in each hidden vector becomes progressively more contextual and task-relevant.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_37.wav",
+      "audio": "audio/s_module6_slide_37.mp3",
+      "captions": "audio/s_module6_slide_37.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 38,
+      "title": "Use PyTorch built-in TransformerEncoderLayer",
+      "transcript": "In normal application code, we rarely rebuild every encoder layer by hand.\n\nPyTorch provides TransformerEncoderLayer, which bundles self-attention, feed-forward processing, residual connections, normalization, and dropout into a reusable component. The code lets us specify d_model, the hidden size, and nhead, the number of attention heads.\n\nPassing a tensor through the layer returns another tensor with the same sequence structure and hidden dimension. Use this built-in layer to confirm the architecture we constructed manually.\n\nThe manual version is valuable because it teaches what the components do. The built-in version is valuable because it reduces implementation mistakes.\n\nIn pretrained NLP work, we usually go one step further and load an entire architecture through Hugging Face rather than assembling the blocks ourselves. Still, knowing what TransformerEncoderLayer contains makes pretrained models much less of a black box.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_38.wav",
+      "audio": "audio/s_module6_slide_38.mp3",
+      "captions": "audio/s_module6_slide_38.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 39,
+      "title": "Encoder-only models are strong for understanding",
+      "transcript": "Encoder-only models are designed to build strong contextual representations of an input sequence.\n\nEvery token can usually attend to tokens on both sides, subject to the model’s masking rules. That bidirectional context is useful when the goal is to understand or label existing text rather than generate a long continuation token by token.\n\nBERT and RoBERTa are classic examples of encoder-style architectures. Common applications include document classification, sentiment analysis, named entity recognition, token classification, question-answering variants, and feature extraction.\n\nSentence-embedding systems are often built by adapting encoder models so a whole sentence or passage maps to a useful vector. When you see a task whose output is a label, a set of token labels, or a representation, an encoder model is often a good place to start.\n\nThe model architecture still matters, but the task should guide the choice.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_39.wav",
+      "audio": "audio/s_module6_slide_39.mp3",
+      "captions": "audio/s_module6_slide_39.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 40,
+      "title": "Decoder-only models generate text token by token",
+      "transcript": "Decoder-only models are organized around next-token prediction.\n\nGiven the tokens generated or provided so far, the model predicts a probability distribution for the next token. After one token is chosen, it is appended to the sequence and the process repeats.\n\nThat simple training objective scales into text completion, instruction following, code generation, and chat when the model is trained and tuned appropriately. GPT-style architectures are decoder-only.\n\nTheir self-attention is causal, meaning a position cannot use information from future tokens during generation. The model can only condition on the prefix that is already available.\n\nThis is exactly what we need when generating text from left to right. Decoder-only models can also analyze provided context, but their architecture and training objective make generation their natural strength.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_40.wav",
+      "audio": "audio/s_module6_slide_40.mp3",
+      "captions": "audio/s_module6_slide_40.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 41,
+      "title": "The decoder cannot look into the future",
+      "transcript": "Causal masking prevents the decoder from cheating during training.\n\nSuppose the sequence is “natural language processing is useful.” When the model is learning to predict processing, it should be allowed to use natural and language, but not is or useful, because those tokens are in the future relative to the prediction position.\n\nA causal mask blocks attention from each position to later positions. In an attention matrix, that produces a triangular pattern: tokens can attend backward to earlier context and usually to themselves, but not forward.\n\nDuring actual generation, the future tokens do not exist yet, so the same causal structure matches inference naturally. Do not confuse causal masking with the padding attention mask we used earlier.\n\nPadding masks hide artificial padded positions. Causal masks hide future positions to preserve autoregressive generation.\n\nA model may use both kinds of masking at the same time.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_41.wav",
+      "audio": "audio/s_module6_slide_41.mp3",
+      "captions": "audio/s_module6_slide_41.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 42,
+      "title": "Some models read input and generate output",
+      "transcript": "Encoder-decoder models separate understanding the input from generating the output.\n\nThe encoder reads the source sequence and produces contextual representations for it. The decoder generates the target sequence one token at a time.\n\nIn addition to causal self-attention over the tokens it has generated so far, the decoder can use cross-attention to the encoder output. That cross-attention lets each output step focus on relevant parts of the source.\n\nThis structure is natural for sequence-to-sequence tasks where the input and output are both text but are not the same sequence. Translation is the classic example: encode a sentence in one language, then generate the translation.\n\nSummarization is another: encode a longer document, then generate a shorter summary. T5 and BART are well-known examples of encoder-decoder families.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_42.wav",
+      "audio": "audio/s_module6_slide_42.mp3",
+      "captions": "audio/s_module6_slide_42.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 43,
+      "title": "Choose architecture before choosing a model name",
+      "transcript": "A reliable model-selection process begins with the output you need, not with a famous model name.\n\nIf the task is text classification or named entity recognition, an encoder-style model or a task-specific fine-tuned checkpoint may be efficient and accurate. If the task is open-ended generation, chat, or completion, a decoder-only instruction-tuned model is a more natural fit.\n\nIf the task transforms one sequence into another, such as translation or summarization, an encoder-decoder model may be especially convenient.\n\nIf you need vectors for semantic search, choose an embedding model that has been trained for similarity rather than simply taking any hidden state from a general model. Architecture is the first filter, not the final decision.\n\nLanguage, domain, model size, license, latency, privacy, and evaluation on realistic data still matter afterward.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_43.wav",
+      "audio": "audio/s_module6_slide_43.mp3",
+      "captions": "audio/s_module6_slide_43.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 44,
+      "title": "Encoder-only understanding models",
+      "transcript": "BERT-style models are a useful example of encoder-only NLP.\n\nDuring pretraining, BERT learned from context on both sides of a token through masked language modeling. A sentence such as “the student submitted the mask” asks the model to use surrounding words to predict a missing token.\n\nThat training objective encourages strong contextual representations. For classification, a task-specific head can map a sequence representation to class labels.\n\nFor named entity recognition, a token-classification head predicts a label for each token. For feature extraction, we can use the hidden states directly.\n\nFor semantic similarity, plain BERT embeddings are usually not the best choice by themselves; Sentence Transformer models are specifically adapted so sentence vectors work well with similarity measures.\n\nThe architecture family tells us the general capability, while the checkpoint’s training tells us what it is actually good at.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_44.wav",
+      "audio": "audio/s_module6_slide_44.mp3",
+      "captions": "audio/s_module6_slide_44.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 45,
+      "title": "Decoder-only generation models",
+      "transcript": "GPT-style models use decoder-only architecture and autoregressive next-token prediction.\n\nGive the model a prefix such as “natural language processing is,” and it predicts a distribution over what token might come next. Repeating that process produces longer text.\n\nChat models build on this capability with instruction tuning, preference optimization, conversation templates, safety training, or other post-training methods. A generative model can also reason over text you provide in the prompt, summarize context, or answer questions about it.\n\nBut it is important to separate language generation from information storage. A decoder model is not automatically a current database, a private document repository, or a verified source system.\n\nThat distinction is one reason RAG becomes useful: retrieval supplies external evidence, while the decoder uses that evidence to generate a response.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_45.wav",
+      "audio": "audio/s_module6_slide_45.mp3",
+      "captions": "audio/s_module6_slide_45.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 46,
+      "title": "Text-to-text models",
+      "transcript": "T5 and BART-style models use an encoder-decoder architecture, which is especially natural for text-to-text problems.\n\nThe encoder reads the input and creates contextual representations. The decoder generates a new output sequence while attending to both its own earlier tokens and the encoder representations.\n\nT5 went further conceptually by expressing many NLP tasks in a text-to-text format: an instruction or task prefix plus input text is transformed into output text. Summarization, translation, question answering, and rewriting can all fit that pattern.\n\nEncoder-decoder models are still important even though large decoder-only models receive more attention today. For a focused sequence-to-sequence task, they can be efficient and straightforward.\n\nThe correct choice depends on the task, the available checkpoints, and the deployment constraints rather than on which architecture is currently most popular.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_46.wav",
+      "audio": "audio/s_module6_slide_46.mp3",
+      "captions": "audio/s_module6_slide_46.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 47,
+      "title": "What does pretrained mean?",
+      "transcript": "Pretrained means the model has already learned useful language patterns before we apply it to our own task.\n\nDuring pretraining, a model is exposed to a very large collection of text and optimized with an objective such as masked-token prediction, next-token prediction, or a text-to-text objective. That training is expensive and usually performed by organizations with substantial compute.\n\nWe then reuse the learned parameters instead of starting from random weights. Sometimes the pretrained checkpoint is already fine-tuned for a task such as sentiment analysis, named entity recognition, or summarization.\n\nOther times we fine-tune it ourselves on labeled domain data. Inference is the final stage where we use the trained model to make predictions or generate text.\n\nKeeping these stages separate helps avoid a common misunderstanding: loading a pretrained model in Python is not training the Transformer from scratch.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_47.wav",
+      "audio": "audio/s_module6_slide_47.mp3",
+      "captions": "audio/s_module6_slide_47.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 48,
+      "title": "There are too many pretrained models to memorize",
+      "transcript": "The pretrained-model ecosystem is far too large and changes too quickly for memorizing model names to be a useful skill.\n\nPublic hubs contain a huge number of repositories for base models, fine-tuned variants, quantized versions, adapters, embedding models, rerankers, multimodal systems, and many other specialized checkpoints. The exact count changes constantly as models are uploaded, updated, or removed.\n\nA better skill is filtering. Start by defining the task.\n\nThen narrow by architecture, supported language, domain, model size, license, hardware requirements, and evaluation evidence. For semantic search, do not browse general chat models first; look for embedding models.\n\nFor document reranking, look for rerankers. For sentiment classification, look for a model already fine-tuned for that task or plan to fine-tune an encoder yourself.\n\nModel hubs are catalogs, not recommendation engines. The responsibility for matching a checkpoint to your problem remains with you.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_48.wav",
+      "audio": "audio/s_module6_slide_48.mp3",
+      "captions": "audio/s_module6_slide_48.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 49,
+      "title": "Pretrained models are not all the same type",
+      "transcript": "The word pretrained covers several very different practical categories.\n\nA base checkpoint has learned general language patterns and is often a starting point for feature extraction or later fine-tuning. A task-fine-tuned checkpoint has already been adapted for a specific objective such as sentiment, named entity recognition, question answering, or summarization.\n\nAn instruction or chat model has been post-trained to respond to natural-language instructions and conversation formats. An embedding model is optimized to place semantically related texts near one another in vector space.\n\nA reranker, often a cross-encoder, scores a query and candidate text together to improve search ordering. Domain models are pretrained or adapted on specialized language such as biomedical, legal, financial, or scientific text.\n\nThese categories can overlap. For example, a biomedical model may also be task-fine-tuned.\n\nAlways inspect what training and objective produced the exact checkpoint.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_49.wav",
+      "audio": "audio/s_module6_slide_49.mp3",
+      "captions": "audio/s_module6_slide_49.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 50,
+      "title": "Start with the task, then narrow the model",
+      "transcript": "A practical selection workflow begins by defining the required output.\n\nDo you need one label for the whole document, labels for individual tokens, generated text, an embedding vector, a relevance score, or an answer grounded in external documents? That answer narrows the architecture family.\n\nNext check language and domain. A strong English model may be a poor choice for multilingual data, and a general-domain model may miss specialized clinical or legal terminology.\n\nThen check constraints: available RAM or GPU memory, latency, cost, privacy requirements, license, and where the model must run. Finally, test a small set of realistic examples before committing to a large experiment.\n\nTen or twenty carefully chosen examples can reveal tokenization problems, domain mismatch, unexpected output formats, or unacceptable latency. Popularity is not a substitute for fit.\n\nChoose a model because it matches the task and constraints.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_50.wav",
+      "audio": "audio/s_module6_slide_50.mp3",
+      "captions": "audio/s_module6_slide_50.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 51,
+      "title": "Common pretrained model types you will see",
+      "transcript": "When you browse a model hub, first identify the model type rather than jumping directly to a download.\n\nBase models are useful when you want hidden representations or plan to fine-tune. Task-fine-tuned models are convenient when you want a ready baseline for sentiment, named entity recognition, question answering, or another defined task.\n\nInstruction-tuned and chat models are designed to follow prompts and produce natural-language responses. Embedding models are trained so semantic similarity can be measured in vector space.\n\nRerankers take a query and candidate passages together and produce relevance scores, which is especially useful after first-stage retrieval in RAG. Domain-specific models adapt vocabulary and representations to specialized text.\n\nThese are different tools. A text-generation model is not automatically the best embedding model, and an embedding model is not a chat assistant.\n\nMatch the training objective to the job.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_51.wav",
+      "audio": "audio/s_module6_slide_51.mp3",
+      "captions": "audio/s_module6_slide_51.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 52,
+      "title": "Read the model card before using the model",
+      "transcript": "A model card should be treated as technical documentation.\n\nStart with intended use: what tasks and input formats was the checkpoint designed for? Then look at the training data description and ask whether it resembles your domain and language.\n\nRead the limitations section instead of assuming a high benchmark score means the model is safe or accurate everywhere. Check evaluation results carefully: which datasets were used, what metric was reported, and does that benchmark resemble your real problem?\n\nReview the license before using the checkpoint in a course project, deployment, or commercial setting. Model size and hardware requirements matter as well.\n\nA checkpoint that does not fit your available GPU memory is not a practical choice. Finally, look for preprocessing requirements, prompt templates, special tokens, or model-specific usage instructions.\n\nThe model card often contains details that make the difference between correct and incorrect implementation.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_52.wav",
+      "audio": "audio/s_module6_slide_52.mp3",
+      "captions": "audio/s_module6_slide_52.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 53,
+      "title": "A simple model-selection checklist",
+      "transcript": "Use a repeatable checklist instead of choosing models by trial and error.\n\nFirst define the task precisely. “Use AI on text” is too vague; “classify support tickets into five urgency levels” is actionable.\n\nSecond choose the architecture or specialized model family that fits the output. Third verify language and domain.\n\nFourth check model size, speed, memory, and deployment environment. Fifth read the model card, license, and evaluation results.\n\nSixth test on your own examples, including difficult and edge cases. If the task is retrieval, measure retrieval quality.\n\nIf it is classification, examine confusion matrices and per-class performance. If it is generation, check factuality and failure cases, not only fluency.\n\nThe checklist is deliberately simple because model catalogs change. A stable decision process is more valuable than memorizing a list of currently popular checkpoints.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_53.wav",
+      "audio": "audio/s_module6_slide_53.mp3",
+      "captions": "audio/s_module6_slide_53.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 54,
+      "title": "Small, medium, and large models solve different needs",
+      "transcript": "Model size creates a tradeoff among capability, speed, memory, cost, and deployment complexity.\n\nA small or distilled model may run comfortably on a laptop or modest GPU and can be excellent for teaching, prototyping, and high-volume classification. A medium model often gives a useful balance between performance and operational cost.\n\nA large model may handle more complex generation and reasoning tasks, but it requires more memory, longer inference time, and often higher financial or infrastructure cost. Bigger is not automatically better.\n\nIf a small encoder reaches the required classification accuracy with ten times lower latency, using a much larger chat model may be unnecessary. Model selection should be driven by the minimum capability needed to satisfy the task reliably.\n\nBenchmark candidate models on your own data and measure not only quality but also runtime, memory use, and cost.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_54.wav",
+      "audio": "audio/s_module6_slide_54.mp3",
+      "captions": "audio/s_module6_slide_54.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 55,
+      "title": "When general models may not be enough",
+      "transcript": "Domain-specific language can change both vocabulary and meaning.\n\nClinical notes contain abbreviations, medication names, procedure terms, and writing patterns that are uncommon in general web text. Legal documents use specialized phrases and document structures.\n\nFinancial filings and scientific papers have their own terminology and style. A general pretrained model may still work well, especially if it is large and broadly trained, but domain-pretrained or domain-adapted models can be worth testing when specialized terminology matters.\n\nDo not assume that a domain label automatically makes a model better. Compare candidates on representative examples from your actual task.\n\nAlso inspect the training data and license. A clinical model trained on one type of note may not transfer perfectly to another institution or task.\n\nDomain fit is evidence to investigate, not a guarantee.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_55.wav",
+      "audio": "audio/s_module6_slide_55.mp3",
+      "captions": "audio/s_module6_slide_55.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 56,
+      "title": "Local model, hosted model, or API?",
+      "transcript": "Deployment is part of the model choice.\n\nA local or open-weight model gives you more control over where data is processed and can support offline or privacy-sensitive workflows, but you are responsible for hardware, environment setup, updates, and serving.\n\nHosted inference reduces infrastructure work because a provider manages the runtime, but you need to consider cost, latency, reliability, and data policies.\n\nAn external API can provide strong capabilities with very little setup, but it adds an external dependency and may require privacy, compliance, or procurement review. The best technical benchmark result may not be the best operational choice.\n\nBefore choosing a deployment path, ask where the data is allowed to go, how quickly the application must respond, how much traffic you expect, what hardware you already have, and who will maintain the system.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_56.wav",
+      "audio": "audio/s_module6_slide_56.mp3",
+      "captions": "audio/s_module6_slide_56.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 57,
+      "title": "The easiest way: pipeline",
+      "transcript": "Hugging Face pipeline is the easiest way to experience a pretrained task model.\n\nIn the example, pipeline receives the task name sentiment-analysis. The library loads an appropriate model and tokenizer, prepares the text, runs inference, and formats the result.\n\nYou pass in an ordinary sentence and receive a label with a confidence score. That convenience is excellent for demonstrations and quick baselines because it hides a lot of boilerplate.\n\nThe tradeoff is that you have less visibility into tokenization, tensors, logits, batching, and device placement. Start with pipeline when you want to verify that a task works.\n\nMove to AutoTokenizer and a task-specific AutoModel class when you need more control, custom preprocessing, batching, fine-tuning, or access to intermediate outputs. Run the code, then replace the sentence with one that is ambiguous or domain-specific and see how the prediction changes.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_57.wav",
+      "audio": "audio/s_module6_slide_57.mp3",
+      "captions": "audio/s_module6_slide_57.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 58,
+      "title": "Use AutoTokenizer and AutoModel for more control",
+      "transcript": "AutoTokenizer and AutoModelForSequenceClassification make the inference process explicit.\n\nThe checkpoint name identifies a DistilBERT model already fine-tuned on sentiment data. We load the tokenizer and model from the same checkpoint so their vocabulary and learned parameters match.\n\nThe tokenizer converts the sentence into PyTorch tensors. Passing those tensors into the model returns an output object containing logits.\n\nLogits are raw scores before converting them into probabilities. If we wanted the predicted class, we could apply softmax and choose the highest value, or use the model configuration to map class IDs to labels.\n\nThis lower-level workflow is useful when you need batching, device control, custom post-processing, or access to the internal outputs. Notice that we are still doing inference.\n\nThe model weights are not being updated simply because we loaded the model and passed text through it.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_58.wav",
+      "audio": "audio/s_module6_slide_58.mp3",
+      "captions": "audio/s_module6_slide_58.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 59,
+      "title": "Get contextual token representations",
+      "transcript": "Sometimes we do not want a final classification label at all.\n\nWe want the contextual token representations produced by the Transformer. AutoModel loads the backbone without a task-specific classification head.\n\nAfter tokenization, we pass the tensors through the model and read last_hidden_state. The output shape is batch size by number of tokens by hidden dimension.\n\nIn DistilBERT, the hidden dimension is typically seven hundred sixty-eight. That means every token position has its own contextual vector.\n\nThese vectors already include information from the surrounding sequence after passing through the model layers. Do not automatically average them and assume you have a high-quality sentence embedding.\n\nGeneral hidden states were not necessarily trained for cosine similarity between sentences. If semantic search is the goal, use a model explicitly trained for sentence embeddings, which is exactly what we do next.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_59.wav",
+      "audio": "audio/s_module6_slide_59.mp3",
+      "captions": "audio/s_module6_slide_59.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 60,
+      "title": "Sentence embeddings for similarity and retrieval",
+      "transcript": "Sentence Transformers make the bridge from Transformer representations to semantic search much more practical.\n\nThe model all-MiniLM-L6-v2 converts each sentence into one fixed-length vector. We encode three candidate sentences, then encode the query “Where do students submit homework?” into the same vector space.\n\nCosine similarity compares the query vector with each candidate vector. The sentence about submitting assignments in Canvas should receive a high score even though the wording is not identical to the query.\n\nThat is the point of semantic retrieval: matching meaning rather than relying only on shared keywords. Run the code and add a fourth sentence that contains the word homework but is semantically unrelated, such as “Homework can be stressful.” Compare the scores.\n\nThis experiment prepares us directly for RAG, where we will embed many document chunks, retrieve the most relevant ones, and pass them to a generative model.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_60.wav",
+      "audio": "audio/s_module6_slide_60.mp3",
+      "captions": "audio/s_module6_slide_60.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 61,
+      "title": "Named Entity Recognition with a Transformer pipeline",
+      "transcript": "Named entity recognition is a token-classification task.\n\nWe want to identify spans such as person names, organizations, and locations inside a sentence. The pipeline API makes the workflow simple: create an NER pipeline, pass in the text, and inspect each returned entity, group, and confidence score.\n\nThe grouping option combines subword predictions back into readable entity spans. Depending on the Transformers version, you may see aggregation_strategy used instead of the older grouped_entities argument.\n\nRun the example with a different sentence and watch how the model handles multi-word names. Also remember that a generic NER checkpoint is trained on a particular label set and domain.\n\nIf your application needs clinical entities, legal entities, or custom categories, choose a domain-appropriate checkpoint or fine-tune a model on labeled examples for your own entity types.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_61.wav",
+      "audio": "audio/s_module6_slide_61.mp3",
+      "captions": "audio/s_module6_slide_61.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 62,
+      "title": "Fill-mask shows BERT-style prediction",
+      "transcript": "Masked language modeling gives us a direct demonstration of BERT-style pretraining.\n\nWe place the model’s mask token inside the sentence “The student submitted the mask.” The fill-mask pipeline evaluates likely vocabulary tokens for the missing position and returns ranked predictions with scores. The model is not generating an unrestricted paragraph.\n\nIt is predicting the missing token using context from both the left and the right. That bidirectional context is one reason encoder models work well for understanding tasks.\n\nTry replacing the sentence with one that has an ambiguous missing word and inspect the top five predictions. The results also remind us that language models learn statistical patterns from training data.\n\nA high-probability token is not guaranteed to be factually correct or appropriate for every domain. The demonstration is useful for understanding the pretraining objective, not for treating BERT as a general chat model.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_62.wav",
+      "audio": "audio/s_module6_slide_62.mp3",
+      "captions": "audio/s_module6_slide_62.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 63,
+      "title": "Text generation with a small decoder-only model",
+      "transcript": "Decoder-only generation is easy to see with a small model such as DistilGPT2.\n\nThe text-generation pipeline receives a prompt and repeatedly predicts additional tokens. max_new_tokens limits how many new tokens can be generated. do_sample set to True means the model samples from the probability distribution instead of always choosing the single highest-probability token. temperature changes how concentrated that distribution is; lower values usually make output more predictable, while higher values allow more variation.\n\nRun the example several times and compare the continuations. Because sampling is involved, the text can change from run to run.\n\nDistilGPT2 is useful for teaching the mechanics of generation, but it is an older, small completion model, not a modern instruction-following assistant. The goal is to observe autoregressive decoding, not to evaluate current chat-model quality.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_63.wav",
+      "audio": "audio/s_module6_slide_63.mp3",
+      "captions": "audio/s_module6_slide_63.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 64,
+      "title": "Summarization with encoder–decoder models",
+      "transcript": "Summarization is a natural sequence-to-sequence problem.\n\nThe input is a longer text and the output is a shorter text that preserves the main information. In the example, the summarization pipeline loads a DistilBART checkpoint trained for news-style summarization.\n\nThe article is passed through the tokenizer and encoder-decoder model, and the decoder generates a summary. max_length and min_length constrain the generated length, although exact behavior depends on tokenizer and model configuration.\n\nThis checkpoint is larger than our earlier sentiment example, so the first download may take longer. More importantly, do not assume any summarization checkpoint works equally well for every domain.\n\nA model trained on news articles may behave differently on scientific papers, clinical notes, or meeting transcripts. Evaluate summaries for factual consistency and missing information, not only for fluency.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_64.wav",
+      "audio": "audio/s_module6_slide_64.mp3",
+      "captions": "audio/s_module6_slide_64.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 65,
+      "title": "Pretraining, fine-tuning, and inference are different",
+      "transcript": "Pretraining, fine-tuning, and inference describe three different stages.\n\nPretraining learns broad language patterns from a very large corpus using a general objective. It is computationally expensive and produces the starting checkpoint.\n\nFine-tuning continues training from that checkpoint on a smaller task or domain dataset. For example, a pretrained encoder can be fine-tuned to classify support tickets into categories.\n\nDuring fine-tuning, at least some model parameters are updated based on task-specific loss. Inference happens after training.\n\nWe pass new text to the model and obtain predictions, embeddings, or generated text without updating the weights. Prompting belongs to inference: changing the instructions changes the input, not the parameters.\n\nKeeping these terms separate helps when reading model cards and papers. Ask: what was learned during pretraining, what additional adaptation happened afterward, and what are we doing now at inference time?",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_65.wav",
+      "audio": "audio/s_module6_slide_65.mp3",
+      "captions": "audio/s_module6_slide_65.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 66,
+      "title": "A beginner-friendly fine-tuning skeleton",
+      "transcript": "The fine-tuning code is intentionally a skeleton because a complete training notebook needs several additional pieces.\n\nWe begin with a pretrained tokenizer and AutoModelForSequenceClassification. Setting num_labels equal to two tells the classification head that our task has two output classes.\n\nFrom there, we need a labeled dataset, a train and test split, tokenization of the text column, training arguments, evaluation metrics, and a Trainer or custom training loop. During training, the model receives both tokenized input and labels.\n\nThe loss compares predicted class scores with the true labels, and backpropagation updates the model parameters. For a beginner project, start with a small pretrained encoder such as DistilBERT so training is manageable.\n\nAlways compare the fine-tuned model with a simple baseline such as logistic regression or TF-IDF. A Transformer is useful only if it provides enough improvement to justify the additional complexity and cost.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_66.wav",
+      "audio": "audio/s_module6_slide_66.mp3",
+      "captions": "audio/s_module6_slide_66.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 67,
+      "title": "Saving a model and tokenizer together",
+      "transcript": "When you save a fine-tuned Transformer, save the tokenizer with it. model.save_pretrained writes the model configuration and weights to the chosen directory. tokenizer.save_pretrained writes the vocabulary, tokenizer configuration, and special-token information.\n\nLater, from_pretrained can load both objects from that same local folder. Keeping them together prevents a common deployment mistake: loading model weights with a tokenizer from a different checkpoint.\n\nIf your model depends on a label mapping or custom configuration, verify that those settings are saved as well. For reproducibility, also record the library versions, training data version, preprocessing steps, and evaluation results.\n\nA folder containing model files is not the full experiment. The goal is to make sure someone else—or you several months later—can load the same tokenizer-model pair and understand how it was produced.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_67.wav",
+      "audio": "audio/s_module6_slide_67.mp3",
+      "captions": "audio/s_module6_slide_67.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 68,
+      "title": "Prompting, fine-tuning, and RAG solve different problems",
+      "transcript": "Prompting, fine-tuning, and RAG solve different problems, and choosing the wrong one can create unnecessary work.\n\nPrompting changes the instructions or examples given at inference time. It is useful when the model already has the capability you need but needs clearer guidance about format or behavior.\n\nFine-tuning changes model parameters using training data. It is useful when you need consistent task behavior, domain adaptation, or a specialized output pattern and have suitable examples.\n\nRAG does not primarily change the model weights. Instead, it retrieves external information at question time and places relevant evidence into the context.\n\nThat is useful when answers depend on private, changing, or document-specific knowledge. These methods can also be combined.\n\nA fine-tuned or instruction-tuned model can still use RAG. The first question should always be: is the problem behavior, knowledge access, or both?",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_68.wav",
+      "audio": "audio/s_module6_slide_68.mp3",
+      "captions": "audio/s_module6_slide_68.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 69,
+      "title": "LLMs have limited input space",
+      "transcript": "Every Transformer has a limit on how much input it can process at once.\n\nThe context window includes more than the user’s latest sentence. System instructions, conversation history, examples, retrieved documents, tool results, and the tokens reserved for the answer can all compete for the same context budget.\n\nLong context is useful, but it does not remove the need for good information selection. If we simply paste hundreds of pages into a prompt, we may exceed the model limit, increase cost and latency, or make it harder for the model to focus on the most relevant evidence.\n\nTokenization also matters because context limits are measured in tokens, not pages or words. This limitation creates a natural motivation for retrieval: instead of sending every document, find the most relevant chunks first and give the model a smaller, focused context.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_69.wav",
+      "audio": "audio/s_module6_slide_69.mp3",
+      "captions": "audio/s_module6_slide_69.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 70,
+      "title": "Transformer models are powerful, but not magic",
+      "transcript": "Transformer models are powerful statistical models, not automatic sources of truth.\n\nA generative model can produce fluent text that is unsupported or incorrect. A pretrained checkpoint may not know recent information, private documents, or facts outside its training data.\n\nContext windows limit how much evidence can be supplied at one time. Training data can introduce bias or uneven performance across languages, domains, and populations.\n\nLarge models also create cost, latency, energy, and deployment challenges. The practical response is not to avoid the technology entirely; it is to design evaluation and verification around the task.\n\nFor classification, inspect errors by class. For retrieval, measure whether relevant documents are found.\n\nFor generation, check claims against evidence. For high-stakes applications, include appropriate human review and domain expertise.\n\nGood model use combines capability with explicit limits and validation.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_70.wav",
+      "audio": "audio/s_module6_slide_70.mp3",
+      "captions": "audio/s_module6_slide_70.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 71,
+      "title": "Responsible-use checklist",
+      "transcript": "Responsible use starts before inference.\n\nFirst ask whether the data is appropriate to send to the selected model or service. Remove or protect sensitive information when required, and understand the provider or local deployment policy.\n\nNext, identify what kind of error would matter most for the task. A false positive in spam filtering is different from an unsupported claim in a medical or legal setting.\n\nEvaluate with representative data rather than a few convenient examples. Keep track of the exact checkpoint, tokenizer, configuration, prompt, and software versions so results can be reproduced.\n\nReview the model card and license. Monitor performance after deployment because real input can differ from development data.\n\nAnd when a system produces factual claims, connect outputs to verifiable evidence whenever possible. Responsible NLP is not one checkbox; it is a process that continues from model selection through evaluation and deployment.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_71.wav",
+      "audio": "audio/s_module6_slide_71.mp3",
+      "captions": "audio/s_module6_slide_71.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 72,
+      "title": "Applied model selection scenarios",
+      "transcript": "Model selection becomes easier when we start from concrete scenarios.\n\nIf we need to classify support tickets by urgency, an encoder-only classifier is often efficient because the output is a label. If we need to extract names and organizations, a token-classification model matches the structure of the problem because each token or span receives a label.\n\nIf we need to find semantically similar questions, choose a sentence-embedding model and compare vectors. If we need to summarize long reports, an encoder-decoder model or a capable generative LLM may be appropriate, depending on length, quality, cost, and deployment needs.\n\nIf we need answers from private PDFs, the problem is not only language generation; it is external knowledge access. That points toward RAG: an embedding or retrieval model finds relevant passages, and a generative model uses them to answer.\n\nThe task tells us which model role is needed.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_72.wav",
+      "audio": "audio/s_module6_slide_72.mp3",
+      "captions": "audio/s_module6_slide_72.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 73,
+      "title": "Concept review before Module 7",
+      "transcript": "Before moving into RAG, try to explain the main Transformer ideas without reading definitions.\n\nWhat is the difference between a token ID and an embedding vector? Why do we need an attention mask when padding is present?\n\nWhere do Q, K, and V come from, and what role does each one play? Why can the word bank end with different hidden representations in two sentences?\n\nHow does causal masking change decoder attention? When would you start with an encoder-only model rather than a decoder-only model?\n\nWhat does pretrained mean, and why do most applied projects start from pretrained weights instead of random initialization? Finally, why would semantic search use a sentence-embedding model rather than a general text-generation model?\n\nIf you can answer these in your own words and connect them to the Python examples, you have the foundation needed for the next module.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_73.wav",
+      "audio": "audio/s_module6_slide_73.mp3",
+      "captions": "audio/s_module6_slide_73.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 74,
+      "title": "Module 6 summary",
+      "transcript": "The full Transformer story now connects from input to application.\n\nRaw text is converted into model-specific tokens, token IDs, masks, and initial vectors. Position information preserves sequence structure.\n\nSelf-attention creates Q, K, and V representations, calculates compatibility scores, normalizes them into weights, and uses those weights to mix information across tokens.\n\nA Transformer block combines multi-head attention with residual connections, normalization, and feed-forward processing, then repeats that structure across many layers. Encoder-only models are often strong for understanding and representation tasks.\n\nDecoder-only models are designed for autoregressive generation. Encoder-decoder models are natural for sequence-to-sequence transformation.\n\nIn practice, we usually reuse pretrained checkpoints and select them by task, language, domain, size, license, evidence, privacy, and hardware constraints. Those same components will reappear when we build RAG systems.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_74.wav",
+      "audio": "audio/s_module6_slide_74.mp3",
+      "captions": "audio/s_module6_slide_74.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 75,
+      "title": "Why Transformers lead naturally to RAG",
+      "transcript": "Transformers can understand and generate language, but they do not automatically have access to every source of information we care about.\n\nA model may have been pretrained before a policy changed. It may never have seen an organization’s private PDFs, internal reports, course documents, or database records.\n\nEven if a model has a large context window, sending an entire document collection for every question is often inefficient and unfocused. Retrieval-Augmented Generation separates the problem into two stages.\n\nFirst, a retrieval system searches external information and selects the passages most relevant to the user’s question. Second, those passages are placed into the context of a generative model, which uses them to produce an answer.\n\nIn Module 7 we will build that pipeline step by step: document loading, chunking, embeddings, vector indexes and databases, sparse and dense retrieval, hybrid search, reranking, context construction, citations, and evaluation.",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_75.wav",
+      "audio": "audio/s_module6_slide_75.mp3",
+      "captions": "audio/s_module6_slide_75.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    },
+    {
+      "slide": 76,
+      "title": "Further resources",
+      "transcript": "Several resources can help you continue after the module.\n\nThe original “Attention Is All You Need” paper is the historical source for the Transformer architecture, although it is more mathematical than our course treatment.\n\nThe Hugging Face Transformers documentation is the practical reference for tokenizers, pipeline, AutoModel classes, training utilities, and task examples. Sentence Transformers is the main reference for sentence embeddings, semantic similarity, retrieval, and reranking workflows.\n\nWhen exploring public model hubs, remember that model availability and rankings change continuously. Read the model card for the exact checkpoint you intend to use rather than relying on an old tutorial.\n\nAs you read documentation or research papers, keep using the same questions from this module: what is the input representation, what architecture family is being used, what was the model trained to do, and how is performance evaluated? ----------------------------------------------------------------------------------------",
+      "seed": 1234,
+      "wav": "wav/s_module6_slide_76.wav",
+      "audio": "audio/s_module6_slide_76.mp3",
+      "captions": "audio/s_module6_slide_76.vtt",
+      "sync_method": "whole_slide_silence_alignment"
+    }
+  ]
+}

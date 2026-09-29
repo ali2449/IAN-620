@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.912
+Every Transformer has a limit on how much input it can process at once.
+
+00:00:04.912 --> 00:00:09.222
+The context window includes more than the user’s latest sentence.
+
+00:00:09.222 --> 00:00:15.352
+System instructions, conversation history, examples, retrieved documents, tool results,
+
+00:00:15.352 --> 00:00:21.882
+and the tokens reserved for the answer can all compete for the same context budget.
+
+00:00:21.882 --> 00:00:27.842
+Long context is useful, but it does not remove the need for good information selection.
+
+00:00:27.842 --> 00:00:33.512
+If we simply paste hundreds of pages into a prompt, we may exceed the model limit,
+
+00:00:33.512 --> 00:00:40.012
+increase cost and latency, or make it harder for the model to focus on the most relevant evidence.
+
+00:00:40.012 --> 00:00:47.562
+Tokenization also matters because context limits are measured in tokens, not pages or words.
+
+00:00:47.562 --> 00:00:53.852
+This limitation creates a natural motivation for retrieval: instead of sending every document,
+
+00:00:53.852 --> 00:00:59.010
+find the most relevant chunks first and give the model a smaller, focused context.

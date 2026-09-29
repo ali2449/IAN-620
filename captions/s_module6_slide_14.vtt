@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.957
+Some Transformer tokens are control symbols rather than ordinary words.
+
+00:00:04.957 --> 00:00:10.447
+In many BERT-style models, C L S can be placed at the beginning of a sequence and can
+
+00:00:10.447 --> 00:00:14.787
+support sequence-level tasks such as classification.
+
+00:00:14.787 --> 00:00:18.672
+S E P can mark a boundary between segments.
+
+00:00:18.672 --> 00:00:25.902
+P A D fills shorter examples so that several sequences can be placed in one rectangular batch.
+
+00:00:25.902 --> 00:00:29.997
+M A S K is used in masked-language-model training and in fill-mask demonstrations.
+
+00:00:29.997 --> 00:00:32.622
+These conventions are model-specific.
+
+00:00:32.622 --> 00:00:39.157
+A decoder-only model may use different beginning-of-sequence, end-of-sequence, or padding rules.
+
+00:00:39.157 --> 00:00:48.022
+The safest approach is to let the tokenizer add and manage the special tokens for the chosen checkpoint.
+
+00:00:48.022 --> 00:00:53.537
+If you manually add the wrong symbols or use conventions from another model family,
+
+00:00:53.537 --> 00:00:56.835
+the input may not match what the model saw during training.

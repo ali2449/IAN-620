@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.367
+A model card should be treated as technical documentation.
+
+00:00:03.367 --> 00:00:09.542
+Start with intended use: what tasks and input formats was the checkpoint designed for?
+
+00:00:09.542 --> 00:00:15.447
+Then look at the training data description and ask whether it resembles your domain and language.
+
+00:00:15.447 --> 00:00:23.332
+Read the limitations section instead of assuming a high benchmark score means the model is safe or accurate
+
+00:00:23.332 --> 00:00:29.332
+everywhere. Check evaluation results carefully: which datasets were used, what metric was reported,
+
+00:00:29.332 --> 00:00:32.522
+and does that benchmark resemble your real problem?
+
+00:00:32.522 --> 00:00:38.737
+Review the license before using the checkpoint in a course project, deployment, or commercial setting.
+
+00:00:38.737 --> 00:00:42.237
+Model size and hardware requirements matter as well.
+
+00:00:42.237 --> 00:00:49.087
+A checkpoint that does not fit your available GPU memory is not a practical choice.
+
+00:00:49.087 --> 00:00:53.952
+Finally, look for preprocessing requirements, prompt templates, special tokens,
+
+00:00:53.952 --> 00:00:56.802
+or model-specific usage instructions.
+
+00:00:56.802 --> 00:01:03.457
+The model card often contains details that make the difference between correct and incorrect implementation.

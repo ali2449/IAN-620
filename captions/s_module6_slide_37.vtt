@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.157
+A Transformer model becomes deep by repeating the same kind of block many times.
+
+00:00:05.157 --> 00:00:11.617
+The first layer receives relatively local information: token embeddings plus position information.
+
+00:00:11.617 --> 00:00:18.637
+After self-attention and the feed-forward transformation, every token has a more contextual representation.
+
+00:00:18.637 --> 00:00:24.292
+The second layer receives those updated vectors and can build more complex patterns.
+
+00:00:24.292 --> 00:00:31.787
+Repeating the process lets later layers operate on representations that already contain information gathered
+
+00:00:31.787 --> 00:00:34.957
+by earlier layers. The exact number of layers depends on the checkpoint.
+
+00:00:34.957 --> 00:00:41.087
+Small teaching models may have only a handful; larger models may have dozens or more.
+
+00:00:41.087 --> 00:00:48.117
+More layers increase capacity but also increase memory use, computation, and latency.
+
+00:00:48.117 --> 00:00:54.292
+The useful mental picture is a stack: the sequence shape stays compatible across layers,
+
+00:00:54.292 --> 00:01:00.278
+while the meaning encoded in each hidden vector becomes progressively more contextual and task-relevant.

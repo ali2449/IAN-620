@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.967
+The fine-tuning code is intentionally a skeleton because a complete training notebook needs several additional
+
+00:00:06.967 --> 00:00:12.257
+pieces. We begin with a pretrained tokenizer and AutoModelForSequenceClassification.
+
+00:00:12.257 --> 00:00:19.087
+Setting num_labels equal to two tells the classification head that our task has two output classes.
+
+00:00:19.087 --> 00:00:25.882
+From there, we need a labeled dataset, a train and test split, tokenization of the text column,
+
+00:00:25.882 --> 00:00:31.652
+training arguments, evaluation metrics, and a Trainer or custom training loop.
+
+00:00:31.652 --> 00:00:36.442
+During training, the model receives both tokenized input and labels.
+
+00:00:36.442 --> 00:00:40.087
+The loss compares predicted class scores with the true labels,
+
+00:00:40.087 --> 00:00:43.522
+and backpropagation updates the model parameters.
+
+00:00:43.522 --> 00:00:50.727
+For a beginner project, start with a small pretrained encoder such as DistilBERT so training is manageable.
+
+00:00:50.727 --> 00:00:57.932
+Always compare the fine-tuned model with a simple baseline such as logistic regression or TF-IDF.
+
+00:00:57.932 --> 00:01:04.303
+A Transformer is useful only if it provides enough improvement to justify the additional complexity and cost.

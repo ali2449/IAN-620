@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.502
+Return to the word bank.
+
+00:00:01.502 --> 00:00:08.887
+Both occurrences begin from the same or very similar token embedding because they map to the same vocabulary
+
+00:00:08.887 --> 00:00:14.797
+item. The difference emerges as the vectors move through the Transformer layers.
+
+00:00:14.797 --> 00:00:20.037
+In the finance sentence, the bank token can gather information from deposit, customer, or check.
+
+00:00:20.037 --> 00:00:26.517
+In the river sentence, it can gather information from river, child, or nearby spatial language.
+
+00:00:26.517 --> 00:00:29.777
+Each layer updates the representation again.
+
+00:00:29.777 --> 00:00:37.797
+By the final layer, the two bank vectors can occupy different positions in representation space because their
+
+00:00:37.797 --> 00:00:38.112
+contexts are different.
+
+00:00:38.112 --> 00:00:44.697
+This distinction matters when we use Transformer features for classification, clustering, semantic search,
+
+00:00:44.697 --> 00:00:46.922
+or other downstream tasks.
+
+00:00:46.922 --> 00:00:53.367
+We are no longer asking only, “What word is this?” We are representing something closer to,
+
+00:00:53.367 --> 00:00:56.581
+“What does this token mean in this particular context?”

@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.982
+The word pretrained covers several very different practical categories.
+
+00:00:04.982 --> 00:00:13.332
+A base checkpoint has learned general language patterns and is often a starting point for feature extraction
+
+00:00:13.332 --> 00:00:15.932
+or later fine-tuning.
+
+00:00:15.932 --> 00:00:22.352
+A task-fine-tuned checkpoint has already been adapted for a specific objective such as sentiment,
+
+00:00:22.352 --> 00:00:27.707
+named entity recognition, question answering, or summarization.
+
+00:00:27.707 --> 00:00:33.747
+An instruction or chat model has been post-trained to respond to natural-language instructions and
+
+00:00:33.747 --> 00:00:35.322
+conversation formats.
+
+00:00:35.322 --> 00:00:42.467
+An embedding model is optimized to place semantically related texts near one another in vector space.
+
+00:00:42.467 --> 00:00:50.692
+A reranker, often a cross-encoder, scores a query and candidate text together to improve search ordering.
+
+00:00:50.692 --> 00:00:57.302
+Domain models are pretrained or adapted on specialized language such as biomedical, legal, financial,
+
+00:00:57.302 --> 00:01:01.582
+or scientific text. These categories can overlap.
+
+00:01:01.582 --> 00:01:06.912
+For example, a biomedical model may also be task-fine-tuned.
+
+00:01:06.912 --> 00:01:11.838
+Always inspect what training and objective produced the exact checkpoint.

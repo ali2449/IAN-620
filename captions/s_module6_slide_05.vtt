@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.757
+Transformers did not appear because earlier NLP methods were useless.
+
+00:00:04.757 --> 00:00:10.777
+Bag-of-Words and TF-IDF are still excellent baselines when we need speed, interpretability,
+
+00:00:10.777 --> 00:00:17.032
+or strong keyword signals. Word2Vec and GloVe are useful for learning dense semantic representations.
+
+00:00:17.032 --> 00:00:22.262
+Classic classifiers can perform very well on many supervised text problems.
+
+00:00:22.262 --> 00:00:28.092
+The limitation is that language depends heavily on context and order.
+
+00:00:28.092 --> 00:00:34.182
+The word bank can mean a financial institution or the side of a river.
+
+00:00:34.182 --> 00:00:35.847
+A relationship can span many words.
+
+00:00:35.847 --> 00:00:43.192
+Two sentences can contain almost the same words but mean different things because the order changes.
+
+00:00:43.192 --> 00:00:50.862
+Sequence generation creates another challenge because the model must use prior context to predict what comes
+
+00:00:50.862 --> 00:00:58.312
+next. Transformers address these issues by combining position information with attention,
+
+00:00:58.312 --> 00:01:03.917
+allowing each token representation to be updated using information from other relevant tokens.
