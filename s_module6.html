@@ -2049,7 +2049,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
   }
 
   async function loadTranscriptManifest() {
-    const candidates = ['manifest/M6_manifest.json', 'M6_manifest.json', 'manifest.json', 'narration_manifest.json', 'audio/manifest.json'];
+    const candidates = ['s_module6_manifest.json', 'manifest/M6_manifest.json', 'M6_manifest.json', 'manifest.json', 'narration_manifest.json', 'audio/manifest.json'];
     for (const path of candidates) {
       try {
         const res = await fetch(path, { cache:'no-store' });
