@@ -22,7 +22,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_01.wav",
       "audio": "audio/s_module6_slide_01.mp3",
-      "captions": "audio/s_module6_slide_01.vtt",
+      "captions": "captions/s_module6_slide_01.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -32,7 +32,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_02.wav",
       "audio": "audio/s_module6_slide_02.mp3",
-      "captions": "audio/s_module6_slide_02.vtt",
+      "captions": "captions/s_module6_slide_02.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -42,7 +42,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_03.wav",
       "audio": "audio/s_module6_slide_03.mp3",
-      "captions": "audio/s_module6_slide_03.vtt",
+      "captions": "captions/s_module6_slide_03.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -52,7 +52,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_04.wav",
       "audio": "audio/s_module6_slide_04.mp3",
-      "captions": "audio/s_module6_slide_04.vtt",
+      "captions": "captions/s_module6_slide_04.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -62,7 +62,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_05.wav",
       "audio": "audio/s_module6_slide_05.mp3",
-      "captions": "audio/s_module6_slide_05.vtt",
+      "captions": "captions/s_module6_slide_05.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -72,7 +72,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_06.wav",
       "audio": "audio/s_module6_slide_06.mp3",
-      "captions": "audio/s_module6_slide_06.vtt",
+      "captions": "captions/s_module6_slide_06.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -82,7 +82,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_07.wav",
       "audio": "audio/s_module6_slide_07.mp3",
-      "captions": "audio/s_module6_slide_07.vtt",
+      "captions": "captions/s_module6_slide_07.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -92,7 +92,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_08.wav",
       "audio": "audio/s_module6_slide_08.mp3",
-      "captions": "audio/s_module6_slide_08.vtt",
+      "captions": "captions/s_module6_slide_08.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -102,7 +102,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_09.wav",
       "audio": "audio/s_module6_slide_09.mp3",
-      "captions": "audio/s_module6_slide_09.vtt",
+      "captions": "captions/s_module6_slide_09.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -112,7 +112,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_10.wav",
       "audio": "audio/s_module6_slide_10.mp3",
-      "captions": "audio/s_module6_slide_10.vtt",
+      "captions": "captions/s_module6_slide_10.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -122,7 +122,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_11.wav",
       "audio": "audio/s_module6_slide_11.mp3",
-      "captions": "audio/s_module6_slide_11.vtt",
+      "captions": "captions/s_module6_slide_11.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -132,7 +132,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_12.wav",
       "audio": "audio/s_module6_slide_12.mp3",
-      "captions": "audio/s_module6_slide_12.vtt",
+      "captions": "captions/s_module6_slide_12.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -142,7 +142,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_13.wav",
       "audio": "audio/s_module6_slide_13.mp3",
-      "captions": "audio/s_module6_slide_13.vtt",
+      "captions": "captions/s_module6_slide_13.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -152,7 +152,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_14.wav",
       "audio": "audio/s_module6_slide_14.mp3",
-      "captions": "audio/s_module6_slide_14.vtt",
+      "captions": "captions/s_module6_slide_14.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -162,7 +162,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_15.wav",
       "audio": "audio/s_module6_slide_15.mp3",
-      "captions": "audio/s_module6_slide_15.vtt",
+      "captions": "captions/s_module6_slide_15.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -172,7 +172,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_16.wav",
       "audio": "audio/s_module6_slide_16.mp3",
-      "captions": "audio/s_module6_slide_16.vtt",
+      "captions": "captions/s_module6_slide_16.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -182,7 +182,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_17.wav",
       "audio": "audio/s_module6_slide_17.mp3",
-      "captions": "audio/s_module6_slide_17.vtt",
+      "captions": "captions/s_module6_slide_17.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -192,7 +192,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_18.wav",
       "audio": "audio/s_module6_slide_18.mp3",
-      "captions": "audio/s_module6_slide_18.vtt",
+      "captions": "captions/s_module6_slide_18.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -202,7 +202,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_19.wav",
       "audio": "audio/s_module6_slide_19.mp3",
-      "captions": "audio/s_module6_slide_19.vtt",
+      "captions": "captions/s_module6_slide_19.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -212,7 +212,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_20.wav",
       "audio": "audio/s_module6_slide_20.mp3",
-      "captions": "audio/s_module6_slide_20.vtt",
+      "captions": "captions/s_module6_slide_20.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -222,7 +222,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_21.wav",
       "audio": "audio/s_module6_slide_21.mp3",
-      "captions": "audio/s_module6_slide_21.vtt",
+      "captions": "captions/s_module6_slide_21.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -232,7 +232,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_22.wav",
       "audio": "audio/s_module6_slide_22.mp3",
-      "captions": "audio/s_module6_slide_22.vtt",
+      "captions": "captions/s_module6_slide_22.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -242,7 +242,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_23.wav",
       "audio": "audio/s_module6_slide_23.mp3",
-      "captions": "audio/s_module6_slide_23.vtt",
+      "captions": "captions/s_module6_slide_23.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -252,7 +252,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_24.wav",
       "audio": "audio/s_module6_slide_24.mp3",
-      "captions": "audio/s_module6_slide_24.vtt",
+      "captions": "captions/s_module6_slide_24.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -262,7 +262,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_25.wav",
       "audio": "audio/s_module6_slide_25.mp3",
-      "captions": "audio/s_module6_slide_25.vtt",
+      "captions": "captions/s_module6_slide_25.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -272,7 +272,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_26.wav",
       "audio": "audio/s_module6_slide_26.mp3",
-      "captions": "audio/s_module6_slide_26.vtt",
+      "captions": "captions/s_module6_slide_26.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -282,7 +282,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_27.wav",
       "audio": "audio/s_module6_slide_27.mp3",
-      "captions": "audio/s_module6_slide_27.vtt",
+      "captions": "captions/s_module6_slide_27.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -292,7 +292,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_28.wav",
       "audio": "audio/s_module6_slide_28.mp3",
-      "captions": "audio/s_module6_slide_28.vtt",
+      "captions": "captions/s_module6_slide_28.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -302,7 +302,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_29.wav",
       "audio": "audio/s_module6_slide_29.mp3",
-      "captions": "audio/s_module6_slide_29.vtt",
+      "captions": "captions/s_module6_slide_29.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -312,7 +312,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_30.wav",
       "audio": "audio/s_module6_slide_30.mp3",
-      "captions": "audio/s_module6_slide_30.vtt",
+      "captions": "captions/s_module6_slide_30.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -322,7 +322,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_31.wav",
       "audio": "audio/s_module6_slide_31.mp3",
-      "captions": "audio/s_module6_slide_31.vtt",
+      "captions": "captions/s_module6_slide_31.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -332,7 +332,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_32.wav",
       "audio": "audio/s_module6_slide_32.mp3",
-      "captions": "audio/s_module6_slide_32.vtt",
+      "captions": "captions/s_module6_slide_32.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -342,7 +342,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_33.wav",
       "audio": "audio/s_module6_slide_33.mp3",
-      "captions": "audio/s_module6_slide_33.vtt",
+      "captions": "captions/s_module6_slide_33.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -352,7 +352,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_34.wav",
       "audio": "audio/s_module6_slide_34.mp3",
-      "captions": "audio/s_module6_slide_34.vtt",
+      "captions": "captions/s_module6_slide_34.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -362,7 +362,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_35.wav",
       "audio": "audio/s_module6_slide_35.mp3",
-      "captions": "audio/s_module6_slide_35.vtt",
+      "captions": "captions/s_module6_slide_35.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -372,7 +372,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_36.wav",
       "audio": "audio/s_module6_slide_36.mp3",
-      "captions": "audio/s_module6_slide_36.vtt",
+      "captions": "captions/s_module6_slide_36.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -382,7 +382,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_37.wav",
       "audio": "audio/s_module6_slide_37.mp3",
-      "captions": "audio/s_module6_slide_37.vtt",
+      "captions": "captions/s_module6_slide_37.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -392,7 +392,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_38.wav",
       "audio": "audio/s_module6_slide_38.mp3",
-      "captions": "audio/s_module6_slide_38.vtt",
+      "captions": "captions/s_module6_slide_38.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -402,7 +402,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_39.wav",
       "audio": "audio/s_module6_slide_39.mp3",
-      "captions": "audio/s_module6_slide_39.vtt",
+      "captions": "captions/s_module6_slide_39.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -412,7 +412,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_40.wav",
       "audio": "audio/s_module6_slide_40.mp3",
-      "captions": "audio/s_module6_slide_40.vtt",
+      "captions": "captions/s_module6_slide_40.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -422,7 +422,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_41.wav",
       "audio": "audio/s_module6_slide_41.mp3",
-      "captions": "audio/s_module6_slide_41.vtt",
+      "captions": "captions/s_module6_slide_41.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -432,7 +432,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_42.wav",
       "audio": "audio/s_module6_slide_42.mp3",
-      "captions": "audio/s_module6_slide_42.vtt",
+      "captions": "captions/s_module6_slide_42.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -442,7 +442,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_43.wav",
       "audio": "audio/s_module6_slide_43.mp3",
-      "captions": "audio/s_module6_slide_43.vtt",
+      "captions": "captions/s_module6_slide_43.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -452,7 +452,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_44.wav",
       "audio": "audio/s_module6_slide_44.mp3",
-      "captions": "audio/s_module6_slide_44.vtt",
+      "captions": "captions/s_module6_slide_44.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -462,7 +462,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_45.wav",
       "audio": "audio/s_module6_slide_45.mp3",
-      "captions": "audio/s_module6_slide_45.vtt",
+      "captions": "captions/s_module6_slide_45.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -472,7 +472,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_46.wav",
       "audio": "audio/s_module6_slide_46.mp3",
-      "captions": "audio/s_module6_slide_46.vtt",
+      "captions": "captions/s_module6_slide_46.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -482,7 +482,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_47.wav",
       "audio": "audio/s_module6_slide_47.mp3",
-      "captions": "audio/s_module6_slide_47.vtt",
+      "captions": "captions/s_module6_slide_47.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -492,7 +492,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_48.wav",
       "audio": "audio/s_module6_slide_48.mp3",
-      "captions": "audio/s_module6_slide_48.vtt",
+      "captions": "captions/s_module6_slide_48.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -502,7 +502,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_49.wav",
       "audio": "audio/s_module6_slide_49.mp3",
-      "captions": "audio/s_module6_slide_49.vtt",
+      "captions": "captions/s_module6_slide_49.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -512,7 +512,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_50.wav",
       "audio": "audio/s_module6_slide_50.mp3",
-      "captions": "audio/s_module6_slide_50.vtt",
+      "captions": "captions/s_module6_slide_50.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -522,7 +522,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_51.wav",
       "audio": "audio/s_module6_slide_51.mp3",
-      "captions": "audio/s_module6_slide_51.vtt",
+      "captions": "captions/s_module6_slide_51.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -532,7 +532,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_52.wav",
       "audio": "audio/s_module6_slide_52.mp3",
-      "captions": "audio/s_module6_slide_52.vtt",
+      "captions": "captions/s_module6_slide_52.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -542,7 +542,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_53.wav",
       "audio": "audio/s_module6_slide_53.mp3",
-      "captions": "audio/s_module6_slide_53.vtt",
+      "captions": "captions/s_module6_slide_53.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -552,7 +552,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_54.wav",
       "audio": "audio/s_module6_slide_54.mp3",
-      "captions": "audio/s_module6_slide_54.vtt",
+      "captions": "captions/s_module6_slide_54.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -562,7 +562,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_55.wav",
       "audio": "audio/s_module6_slide_55.mp3",
-      "captions": "audio/s_module6_slide_55.vtt",
+      "captions": "captions/s_module6_slide_55.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -572,7 +572,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_56.wav",
       "audio": "audio/s_module6_slide_56.mp3",
-      "captions": "audio/s_module6_slide_56.vtt",
+      "captions": "captions/s_module6_slide_56.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -582,7 +582,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_57.wav",
       "audio": "audio/s_module6_slide_57.mp3",
-      "captions": "audio/s_module6_slide_57.vtt",
+      "captions": "captions/s_module6_slide_57.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -592,7 +592,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_58.wav",
       "audio": "audio/s_module6_slide_58.mp3",
-      "captions": "audio/s_module6_slide_58.vtt",
+      "captions": "captions/s_module6_slide_58.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -602,7 +602,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_59.wav",
       "audio": "audio/s_module6_slide_59.mp3",
-      "captions": "audio/s_module6_slide_59.vtt",
+      "captions": "captions/s_module6_slide_59.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -612,7 +612,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_60.wav",
       "audio": "audio/s_module6_slide_60.mp3",
-      "captions": "audio/s_module6_slide_60.vtt",
+      "captions": "captions/s_module6_slide_60.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -622,7 +622,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_61.wav",
       "audio": "audio/s_module6_slide_61.mp3",
-      "captions": "audio/s_module6_slide_61.vtt",
+      "captions": "captions/s_module6_slide_61.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -632,7 +632,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_62.wav",
       "audio": "audio/s_module6_slide_62.mp3",
-      "captions": "audio/s_module6_slide_62.vtt",
+      "captions": "captions/s_module6_slide_62.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -642,7 +642,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_63.wav",
       "audio": "audio/s_module6_slide_63.mp3",
-      "captions": "audio/s_module6_slide_63.vtt",
+      "captions": "captions/s_module6_slide_63.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -652,7 +652,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_64.wav",
       "audio": "audio/s_module6_slide_64.mp3",
-      "captions": "audio/s_module6_slide_64.vtt",
+      "captions": "captions/s_module6_slide_64.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -662,7 +662,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_65.wav",
       "audio": "audio/s_module6_slide_65.mp3",
-      "captions": "audio/s_module6_slide_65.vtt",
+      "captions": "captions/s_module6_slide_65.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -672,7 +672,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_66.wav",
       "audio": "audio/s_module6_slide_66.mp3",
-      "captions": "audio/s_module6_slide_66.vtt",
+      "captions": "captions/s_module6_slide_66.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -682,7 +682,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_67.wav",
       "audio": "audio/s_module6_slide_67.mp3",
-      "captions": "audio/s_module6_slide_67.vtt",
+      "captions": "captions/s_module6_slide_67.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -692,7 +692,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_68.wav",
       "audio": "audio/s_module6_slide_68.mp3",
-      "captions": "audio/s_module6_slide_68.vtt",
+      "captions": "captions/s_module6_slide_68.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -702,7 +702,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_69.wav",
       "audio": "audio/s_module6_slide_69.mp3",
-      "captions": "audio/s_module6_slide_69.vtt",
+      "captions": "captions/s_module6_slide_69.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -712,7 +712,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_70.wav",
       "audio": "audio/s_module6_slide_70.mp3",
-      "captions": "audio/s_module6_slide_70.vtt",
+      "captions": "captions/s_module6_slide_70.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -722,7 +722,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_71.wav",
       "audio": "audio/s_module6_slide_71.mp3",
-      "captions": "audio/s_module6_slide_71.vtt",
+      "captions": "captions/s_module6_slide_71.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -732,7 +732,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_72.wav",
       "audio": "audio/s_module6_slide_72.mp3",
-      "captions": "audio/s_module6_slide_72.vtt",
+      "captions": "captions/s_module6_slide_72.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -742,7 +742,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_73.wav",
       "audio": "audio/s_module6_slide_73.mp3",
-      "captions": "audio/s_module6_slide_73.vtt",
+      "captions": "captions/s_module6_slide_73.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -752,7 +752,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_74.wav",
       "audio": "audio/s_module6_slide_74.mp3",
-      "captions": "audio/s_module6_slide_74.vtt",
+      "captions": "captions/s_module6_slide_74.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -762,7 +762,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_75.wav",
       "audio": "audio/s_module6_slide_75.mp3",
-      "captions": "audio/s_module6_slide_75.vtt",
+      "captions": "captions/s_module6_slide_75.vtt",
       "sync_method": "whole_slide_silence_alignment"
     },
     {
@@ -772,7 +772,7 @@
       "seed": 1234,
       "wav": "wav/s_module6_slide_76.wav",
       "audio": "audio/s_module6_slide_76.mp3",
-      "captions": "audio/s_module6_slide_76.vtt",
+      "captions": "captions/s_module6_slide_76.vtt",
       "sync_method": "whole_slide_silence_alignment"
     }
   ]
