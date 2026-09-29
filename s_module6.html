@@ -56,6 +56,10 @@
     body.dark .lead { color:#cbd7e8; }
     .explain { max-width:980px; margin:12px 0; }
     .slide-body { position:relative; z-index:1; }
+    .start-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+    .start-actions button { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:10px; padding:10px 14px; cursor:pointer; font-weight:800; }
+    .start-actions button.primary { background:#1764a6; color:#fff; border-color:#1764a6; }
+    .start-actions button:hover { border-color:var(--accent); }
     .pill-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
     .pill-row span, mark { display:inline-block; background:#e7f1ff; color:#0c5596; border-radius:8px; padding:5px 9px; font-weight:800; }
     body.dark .pill-row span, body.dark mark { background:#17385c; color:#a9d2ff; }
@@ -289,6 +293,7 @@
 <p class="lead">A practical introduction to the architecture behind modern NLP systems.</p>
 <p class="explain">This module explains how text becomes tokens, how tokens become vectors, how attention updates those vectors, and how pretrained Transformer models are selected and used in Python.</p>
 <div class="pill-row"><span>Tokenization</span><span>Attention</span><span>Pretrained Models</span><span>Hugging Face</span><span>VS Code Ready</span></div>
+<div class="start-actions"><button class="primary" type="button" onclick="showSlide(1,true)">Start presentation →</button><button type="button" onclick="startNarration()">Start Narration</button></div>
 </div>
 <div aria-label="Transformer module diagram" class="visual-card transformer-visual">
 <div class="viz-title">Modern NLP pipeline</div>
@@ -296,7 +301,7 @@
 <div class="layer-stack"><div>Input</div><div>Transformer Block</div><div>Transformer Block</div><div>Task Head / Generation</div></div>
 </div>
 </div>
-<div class="callout soft">The goal is not to turn this module into a deep-learning theory course. The goal is to understand enough architecture to use modern NLP models carefully and explain what each major component is doing.</div>
+<div class="callout soft">Module scope: foundational Transformer architecture, pretrained model selection, and practical Python workflows for modern NLP.</div>
 </div>
 </section>
 <section class="slide" data-audio="audio/M6/M_slide_02.mp3" data-caption="caption/M6/M_slide_02.vtt" data-file="M_slide_02" data-slide="2" data-transcript="The course now moves from classic NLP and machine learning toward modern Transformer-based NLP. This module connects previous vector ideas to modern pretrained models.">
@@ -998,3 +1003,843 @@ print(output.shape)</code></pre>
 </section>
 <section class="slide" data-audio="audio/M6/M_slide_49.mp3" data-caption="caption/M6/M_slide_49.vtt" data-file="M_slide_49" data-slide="49" data-transcript="Pretrained models come in different practical categories. Some are base checkpoints for feature extraction or fine-tuning. Some are already fine-tuned for a task. Some are instruction tuned for chat. Some create embeddings. Some rerank retrieved passages. Some are designed for domains such as medicine, law, finance, or scientific text.">
 <div class="slide-kicker">Pretrained model landscape</div>
+<h1>Pretrained models are not all the same type</h1>
+<div class="slide-body">
+<table class="clean-table">
+<thead><tr><th>Category</th><th>Use when</th><th>Typical examples</th></tr></thead>
+<tbody>
+<tr><td>Base model</td><td>You need representations or plan to fine-tune.</td><td>BERT base, RoBERTa base, T5 base</td></tr>
+<tr><td>Task fine-tuned model</td><td>You need a ready model for one task.</td><td>Sentiment, NER, QA, summarization</td></tr>
+<tr><td>Instruction/chat model</td><td>You need natural-language responses to instructions.</td><td>Chat assistants, summarizers, coding helpers</td></tr>
+<tr><td>Embedding model</td><td>You need semantic vectors.</td><td>Similarity search, clustering, RAG retrieval</td></tr>
+<tr><td>Reranker model</td><td>You need to reorder retrieved candidates.</td><td>Search quality improvement in RAG</td></tr>
+<tr><td>Domain model</td><td>Your text has specialized language.</td><td>Clinical, legal, finance, scientific models</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_50.mp3" data-caption="caption/M6/M_slide_50.vtt" data-file="M_slide_50" data-slide="50" data-transcript="A practical model choice usually starts from the task. For classification and named entity recognition, encoder models are often strong. For generation and chat, decoder models are natural. For summarization and translation, encoder-decoder models are common. For RAG retrieval, embedding models and rerankers are important.">
+<div class="slide-kicker">Choosing a pretrained model</div>
+<h1>Start with the task, then narrow the model</h1>
+<div class="slide-body">
+<div class="steps">
+<div><b>1</b><span>Define the output: label, token labels, generated text, vector, ranking, or answer.</span></div>
+<div><b>2</b><span>Choose the architecture family: encoder, decoder, encoder-decoder, embedding model, or reranker.</span></div>
+<div><b>3</b><span>Check language and domain fit: general English, multilingual, clinical, legal, finance, code, or science.</span></div>
+<div><b>4</b><span>Check constraints: model size, RAM/VRAM, speed, cost, privacy, license, and deployment location.</span></div>
+<div><b>5</b><span>Test with 10–20 realistic examples before trusting it for a larger project.</span></div>
+</div>
+<div class="callout soft">Do not choose a model only because it is popular. Choose it because it fits the task, data, and constraints.</div>
+</div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_51.mp3" data-caption="caption/M6/M_slide_51.vtt" data-file="M_slide_51" data-slide="51" data-transcript="Model type should match the job. A text generation model is not automatically the best model for NER or embeddings.">
+<div class="slide-kicker">Model categories</div>
+<h1>Common pretrained model types you will see</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Type</th><th>Use when</th><th>Examples of tasks</th></tr></thead>
+<tbody>
+<tr><td>Base model</td><td>You need features or fine-tuning.</td><td>embeddings, classification fine-tuning</td></tr>
+<tr><td>Task fine-tuned model</td><td>You need a ready task solution.</td><td>sentiment, NER, QA</td></tr>
+<tr><td>Instruction/chat model</td><td>You need responses to instructions.</td><td>chat, summarization, reasoning over context</td></tr>
+<tr><td>Embedding model</td><td>You need semantic vectors.</td><td>similarity, retrieval, RAG</td></tr>
+<tr><td>Reranker model</td><td>You need to reorder search results.</td><td>RAG retrieval improvement</td></tr>
+<tr><td>Domain model</td><td>Your language is specialized.</td><td>clinical, legal, finance, scientific text</td></tr>
+</tbody></table></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_52.mp3" data-caption="caption/M6/M_slide_52.vtt" data-file="M_slide_52" data-slide="52" data-transcript="A model card is part of responsible model use. Treat it like documentation, not marketing text.">
+<div class="slide-kicker">Model card</div>
+<h1>Read the model card before using the model</h1>
+<div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Training data</h3><p>What kind of data was used? Is it close to your domain?</p></article><article class="mini-card"><h3>Intended use</h3><p>What tasks was the model designed for?</p></article><article class="mini-card"><h3>Limitations</h3><p>What mistakes or risks are documented?</p></article><article class="mini-card"><h3>Evaluation</h3><p>What benchmarks or datasets were used?</p></article><article class="mini-card"><h3>License</h3><p>Can you use it in your setting?</p></article><article class="mini-card"><h3>Size and hardware</h3><p>Can your machine or server run it?</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_53.mp3" data-caption="caption/M6/M_slide_53.vtt" data-file="M_slide_53" data-slide="53" data-transcript="This checklist is a practical tool. Start with the task, then architecture, then constraints, then evidence.">
+<div class="slide-kicker">Choosing a model</div>
+<h1>A simple model-selection checklist</h1>
+<div class="slide-body"><div class="steps">
+<div><b>1</b><span>Define the task: classify, label tokens, generate, summarize, embed, retrieve.</span></div>
+<div><b>2</b><span>Choose the architecture family that matches the task.</span></div>
+<div><b>3</b><span>Check language and domain fit.</span></div>
+<div><b>4</b><span>Check model size, speed, memory, and deployment environment.</span></div>
+<div><b>5</b><span>Read the model card, license, and evaluation results.</span></div>
+<div><b>6</b><span>Test on your own small examples before trusting it.</span></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_54.mp3" data-caption="caption/M6/M_slide_54.vtt" data-file="M_slide_54" data-slide="54" data-transcript="Model size affects accuracy, cost, speed, and deployment. Choose the smallest model that performs well enough for the task.">
+<div class="slide-kicker">Size tradeoff</div>
+<h1>Small, medium, and large models solve different needs</h1>
+<div class="slide-body"><div class="compare-grid three">
+<div><h3>Small/distilled</h3><p>Fast, cheaper, easier to run locally. Good for demos, teaching, and simple tasks.</p></div>
+<div><h3>Medium</h3><p>Often a good balance for many applied NLP projects.</p></div>
+<div><h3>Large</h3><p>More capable, but slower, expensive, and harder to deploy responsibly.</p></div>
+</div>
+<div class="callout">Bigger is not automatically better for a class assignment or production pipeline.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_55.mp3" data-caption="caption/M6/M_slide_55.vtt" data-file="M_slide_55" data-slide="55" data-transcript="Domain fit matters. A model trained or adapted for biomedical text may be more appropriate for clinical NLP than a general model, depending on the task.">
+<div class="slide-kicker">Domain-specific models</div>
+<h1>When general models may not be enough</h1>
+<div class="slide-body"><div class="split"><div>
+<h3>General text</h3>
+<ul><li>reviews</li><li>news</li><li>general questions</li><li>web text</li></ul>
+</div><div>
+<h3>Specialized text</h3>
+<ul><li>clinical notes</li><li>legal contracts</li><li>financial filings</li><li>scientific abstracts</li></ul>
+</div></div>
+<p class="explain">Domain-specific text can use different vocabulary and writing patterns. A domain model or domain fine-tuning may improve results.</p></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_56.mp3" data-caption="caption/M6/M_slide_56.vtt" data-file="M_slide_56" data-slide="56" data-transcript="Deployment is part of model selection. The best model technically may not be the best model for your privacy, cost, or hardware situation.">
+<div class="slide-kicker">Deployment choice</div>
+<h1>Local model, hosted model, or API?</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Option</th><th>Good when</th><th>Watch out for</th></tr></thead>
+<tbody>
+<tr><td>Local/open model</td><td>You need control, privacy, or offline experimentation.</td><td>Hardware, setup, maintenance.</td></tr>
+<tr><td>Hosted inference</td><td>You need simpler deployment without managing GPUs.</td><td>Cost, latency, data policy.</td></tr>
+<tr><td>API model</td><td>You need strong general capability quickly.</td><td>Cost, external dependency, privacy review.</td></tr>
+</tbody></table></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_57.mp3" data-caption="caption/M6/M_slide_57.vtt" data-file="M_slide_57" data-slide="57" data-transcript="The pipeline API hides tokenization and model loading. It is excellent for quick examples, but production projects often need more explicit control.">
+<div class="slide-kicker">Code</div>
+<h1>The easiest way: pipeline</h1>
+<div class="slide-body"><div class="code-card" data-output="[{'label': 'POSITIVE', 'score': 0.99...}]">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Sentiment pipeline</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis")
+
+result = classifier("The new search feature works very well.")
+print(result)</code></pre>
+<p class="code-note">Pipelines are good for demos and quick baselines.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_58.mp3" data-caption="caption/M6/M_slide_58.vtt" data-file="M_slide_58" data-slide="58" data-transcript="AutoTokenizer and AutoModel classes make the process more explicit. They are useful when you want to inspect outputs or customize processing.">
+<div class="slide-kicker">Code</div>
+<h1>Use AutoTokenizer and AutoModel for more control</h1>
+<div class="slide-body"><div class="code-card" data-output="tensor([...])">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Explicit tokenizer + model</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+text = "The support team answered quickly."
+inputs = tokenizer(text, return_tensors="pt")
+outputs = model(**inputs)
+
+print(outputs.logits)</code></pre>
+<p class="code-note">Use task-specific AutoModel classes when you know the task.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_59.mp3" data-caption="caption/M6/M_slide_59.vtt" data-file="M_slide_59" data-slide="59" data-transcript="AutoModel without a task head is useful when we want hidden states or embeddings rather than direct task labels.">
+<div class="slide-kicker">Code</div>
+<h1>Get contextual token representations</h1>
+<div class="slide-body"><div class="code-card" data-output="torch.Size([1, number_of_tokens, 768])">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Feature extraction with AutoModel</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import AutoTokenizer, AutoModel
+
+model_name = "distilbert-base-uncased"
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModel.from_pretrained(model_name)
+
+text = "Transformers create contextual embeddings."
+inputs = tokenizer(text, return_tensors="pt")
+outputs = model(**inputs)
+
+last_hidden_state = outputs.last_hidden_state
+
+print(last_hidden_state.shape)
+# batch size, number of tokens, hidden dimension</code></pre>
+<p class="code-note">This returns vectors for tokens, not a final classification label.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_60.mp3" data-caption="caption/M6/M_slide_60.vtt" data-file="M_slide_60" data-slide="60" data-transcript="Sentence embedding models convert sentences or passages into vectors that can be compared. This is a direct bridge to semantic search and RAG.">
+<div class="slide-kicker">Code</div>
+<h1>Sentence embeddings for similarity and retrieval</h1>
+<div class="slide-body"><div class="code-card" data-output="Highest score should be near the Canvas/submission sentences.">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>SentenceTransformer embeddings</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+sentences = [
+    "Students can submit assignments in Canvas.",
+    "The database stores customer orders.",
+    "Course work must be turned in online."
+]
+
+embeddings = model.encode(sentences)
+
+query = "Where do students submit homework?"
+query_embedding = model.encode([query])
+
+scores = cosine_similarity(query_embedding, embeddings)[0]
+
+for sentence, score in zip(sentences, scores):
+    print(round(score, 3), sentence)</code></pre>
+<p class="code-note">This connects directly to semantic search and the next RAG module.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_61.mp3" data-caption="caption/M6/M_slide_61.vtt" data-file="M_slide_61" data-slide="61" data-transcript="This example connects Module 3 linguistic analysis to modern Transformer-based token classification.">
+<div class="slide-kicker">Code</div>
+<h1>Named Entity Recognition with a Transformer pipeline</h1>
+<div class="slide-body"><div class="code-card" data-output="Maria Lopez PER ...
+Green Valley Hospital ORG ...
+Atlanta LOC ...">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>NER pipeline</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import pipeline
+
+ner = pipeline(
+    "ner",
+    grouped_entities=True
+)
+
+text = "Maria Lopez works at Green Valley Hospital in Atlanta."
+
+for item in ner(text):
+    print(item["word"], item["entity_group"], round(item["score"], 3))</code></pre>
+<p class="code-note">Newer Transformers versions may use aggregation_strategy instead of grouped_entities.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_62.mp3" data-caption="caption/M6/M_slide_62.vtt" data-file="M_slide_62" data-slide="62" data-transcript="The fill-mask pipeline demonstrates the masked language model objective used by BERT-style models.">
+<div class="slide-kicker">Code</div>
+<h1>Fill-mask shows BERT-style prediction</h1>
+<div class="slide-body"><div class="code-card" data-output="assignment ...
+paper ...
+report ...">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Fill-mask task</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import pipeline
+
+fill_mask = pipeline("fill-mask", model="bert-base-uncased")
+
+results = fill_mask("The student submitted the [MASK].")
+
+for r in results[:5]:
+    print(r["token_str"], round(r["score"], 3))</code></pre>
+<p class="code-note">This is a simple way to demonstrate masked language modeling.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_63.mp3" data-caption="caption/M6/M_slide_63.vtt" data-file="M_slide_63" data-slide="63" data-transcript="This example shows decoder-only generation. The output may vary because sampling is turned on.">
+<div class="slide-kicker">Code</div>
+<h1>Text generation with a small decoder-only model</h1>
+<div class="slide-body"><div class="code-card" data-output="Natural language processing helps students ...">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Text generation demo</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import pipeline
+
+generator = pipeline(
+    "text-generation",
+    model="distilgpt2"
+)
+
+prompt = "Natural language processing helps students"
+
+output = generator(
+    prompt,
+    max_new_tokens=30,
+    do_sample=True,
+    temperature=0.7
+)
+
+print(output[0]["generated_text"])</code></pre>
+<p class="code-note">DistilGPT2 is small enough for teaching, but it is not a modern chat assistant.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_64.mp3" data-caption="caption/M6/M_slide_64.vtt" data-file="M_slide_64" data-slide="64" data-transcript="Summarization is a good example of encoder-decoder text-to-text modeling.">
+<div class="slide-kicker">Optional code</div>
+<h1>Summarization with encoder–decoder models</h1>
+<div class="slide-body"><div class="code-card" data-output="A short generated summary of the article.">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Summarization pipeline</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>from transformers import pipeline
+
+summarizer = pipeline(
+    "summarization",
+    model="sshleifer/distilbart-cnn-12-6"
+)
+
+article = (
+    "Transformers changed natural language processing by using attention "
+    "instead of processing text strictly one step at a time. They are now used "
+    "for classification, summarization, translation, retrieval, and generation."
+)
+
+summary = summarizer(article, max_length=40, min_length=15)
+print(summary[0]["summary_text"])</code></pre>
+<p class="code-note">This model may take longer to download than smaller classification examples.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_65.mp3" data-caption="caption/M6/M_slide_65.vtt" data-file="M_slide_65" data-slide="65" data-transcript="These terms are easy to confuse. Pretraining creates general language ability, fine-tuning adapts it, and inference uses it.">
+<div class="slide-kicker">Fine-tuning</div>
+<h1>Pretraining, fine-tuning, and inference are different</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Term</th><th>What happens</th><th>Typical cost</th></tr></thead>
+<tbody>
+<tr><td>Pretraining</td><td>Learn broad language patterns from huge data.</td><td>Very high.</td></tr>
+<tr><td>Fine-tuning</td><td>Adapt a pretrained model to a task or domain dataset.</td><td>Moderate.</td></tr>
+<tr><td>Inference</td><td>Use a trained model to produce labels, embeddings, or text.</td><td>Lowest per example, but still has cost.</td></tr>
+</tbody></table>
+<div class="callout">Most classroom projects use inference first and fine-tuning only when needed.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_66.mp3" data-caption="caption/M6/M_slide_66.vtt" data-file="M_slide_66" data-slide="66" data-transcript="Fine-tuning requires labeled data and careful evaluation. The code structure is useful, but it should not be treated as a magic recipe.">
+<div class="slide-kicker">Code structure</div>
+<h1>A beginner-friendly fine-tuning skeleton</h1>
+<div class="slide-body"><div class="code-card" data-output="A fine-tuning workflow has clear stages: data, tokenization, split, training settings, training, evaluation.">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Fine-tuning structure only</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code># This is a structure example, not a full assignment solution.
+
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import TrainingArguments, Trainer
+
+model_name = "distilbert-base-uncased"
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(
+    model_name,
+    num_labels=2
+)
+
+# 1. Load your labeled dataset
+# 2. Tokenize the text column
+# 3. Split into train/test
+# 4. Create TrainingArguments
+# 5. Create Trainer
+# 6. Train and evaluate</code></pre>
+<p class="code-note">This slide is intentionally a skeleton. Full fine-tuning should be handled step by step in a notebook.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_67.mp3" data-caption="caption/M6/M_slide_67.vtt" data-file="M_slide_67" data-slide="67" data-transcript="The tokenizer and model belong together. Saving only the model can create problems when preprocessing changes.">
+<div class="slide-kicker">Save and reuse</div>
+<h1>Saving a model and tokenizer together</h1>
+<div class="slide-body"><div class="code-card" data-output="Saved files can be reloaded from the folder.">
+<div class="code-head">
+<div><span class="run-label">Python</span><strong>Save locally</strong></div>
+<button class="copy-code" type="button">Copy</button>
+</div>
+<pre class="vscode"><code>save_dir = "my_transformer_model"
+
+model.save_pretrained(save_dir)
+tokenizer.save_pretrained(save_dir)
+
+# Later, load them again:
+
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+tokenizer = AutoTokenizer.from_pretrained(save_dir)
+model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre>
+<p class="code-note">Always save the tokenizer with the model.</p>
+<div class="output-box" hidden=""></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_68.mp3" data-caption="caption/M6/M_slide_68.vtt" data-file="M_slide_68" data-slide="68" data-transcript="Prompting, fine-tuning, and RAG solve different problems. Knowing the difference helps choose the right method.">
+<div class="slide-kicker">Prompting vs fine-tuning vs RAG</div>
+<h1>Prompting, fine-tuning, and RAG solve different problems</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Method</th><th>Changes model weights?</th><th>Best use</th></tr></thead>
+<tbody>
+<tr><td>Prompting</td><td>No</td><td>Guide behavior using instructions and examples.</td></tr>
+<tr><td>Fine-tuning</td><td>Yes</td><td>Adapt model behavior to a task or style using labeled examples.</td></tr>
+<tr><td>RAG</td><td>No</td><td>Give the model retrieved external context at question time.</td></tr>
+</tbody></table>
+<div class="callout">RAG is not a replacement for all fine-tuning, and fine-tuning is not a replacement for retrieval.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_69.mp3" data-caption="caption/M6/M_slide_69.vtt" data-file="M_slide_69" data-slide="69" data-transcript="The context window explains why we cannot simply paste every document into a model. We need retrieval and selection.">
+<div class="slide-kicker">Context window</div>
+<h1>LLMs have limited input space</h1>
+<div class="slide-body"><div class="context-window">
+<span>system instructions</span>
+<span>user question</span>
+<span>chat history</span>
+<span>documents</span>
+<span>model answer</span>
+</div>
+<p class="explain">All of these consume tokens. Long documents, conversation history, and generated answers compete for the same context window.</p>
+<div class="callout">This is one reason RAG retrieves only the most relevant chunks instead of sending every document.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_70.mp3" data-caption="caption/M6/M_slide_70.vtt" data-file="M_slide_70" data-slide="70" data-transcript="Transformers should be used responsibly. A good answer needs evidence, evaluation, and awareness of limitations.">
+<div class="slide-kicker">Limitations</div>
+<h1>Transformer models are powerful, but not magic</h1>
+<div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Hallucination</h3><p>A generated answer may sound confident but be unsupported.</p></article><article class="mini-card"><h3>Stale knowledge</h3><p>A model may not know recent or private information.</p></article><article class="mini-card"><h3>Context limits</h3><p>The model cannot always see all needed documents.</p></article><article class="mini-card"><h3>Bias and data issues</h3><p>Training data can shape model behavior in undesirable ways.</p></article><article class="mini-card"><h3>Cost and latency</h3><p>Large models can be expensive and slow.</p></article><article class="mini-card"><h3>Verification needed</h3><p>Outputs should be checked against evidence when stakes matter.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_71.mp3" data-caption="caption/M6/M_slide_71.vtt" data-file="M_slide_71" data-slide="71" data-transcript="Responsible use is not a separate topic at the end. It should be part of model selection, testing, and deployment.">
+<div class="slide-kicker">Responsible use</div>
+<h1>Responsible-use checklist</h1>
+<div class="slide-body"><div class="steps">
+<div><b>✓</b><span>Is the task appropriate for this model family?</span></div>
+<div><b>✓</b><span>Did we check the model card and limitations?</span></div>
+<div><b>✓</b><span>Did we test examples from our own data?</span></div>
+<div><b>✓</b><span>Do we know what evidence supports the answer?</span></div>
+<div><b>✓</b><span>Is private or sensitive data handled correctly?</span></div>
+<div><b>✓</b><span>Do we have a way to evaluate errors?</span></div>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_72.mp3" data-caption="caption/M6/M_slide_72.vtt" data-file="M_slide_72" data-slide="72" data-transcript="This activity practices selecting model types rather than memorizing model names.">
+<div class="slide-kicker">Class activity</div>
+<h1>Applied model selection scenarios</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Scenario</th><th>Likely model type</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Classify support tickets by urgency</td><td>Encoder-only or fine-tuned classifier</td><td>Input text → label.</td></tr>
+<tr><td>Extract names and organizations</td><td>Token classification model</td><td>Each token needs a label.</td></tr>
+<tr><td>Find similar questions</td><td>Sentence embedding model</td><td>Need semantic vectors and cosine similarity.</td></tr>
+<tr><td>Summarize long reports</td><td>Encoder-decoder or LLM</td><td>Input text → generated text.</td></tr>
+<tr><td>Answer questions from private PDFs</td><td>RAG with embedding model + LLM</td><td>Need external document retrieval.</td></tr>
+</tbody></table></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_73.mp3" data-caption="caption/M6/M_slide_73.vtt" data-file="M_slide_73" data-slide="73" data-transcript="This slide can be used for a pause in class. Answer in plain language before moving to RAG.">
+<div class="slide-kicker">Knowledge check</div>
+<h1>Concept review before Module 7</h1>
+<div class="slide-body"><div class="quiz-list">
+<button class="check-btn">Why must tokenizer and model match?</button>
+<button class="check-btn">What does the attention mask do?</button>
+<button class="check-btn">What is the difference between Query, Key, and Value?</button>
+<button class="check-btn">When would you choose BERT-style over GPT-style?</button>
+<button class="check-btn">Why is RAG useful even if the LLM is powerful?</button>
+</div>
+<div class="answer-panel" hidden="">
+<p>Try answering aloud first. Then connect each answer to the examples in this module: tokenization, model inputs, attention, architecture families, and external knowledge.</p>
+</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_74.mp3" data-caption="caption/M6/M_slide_74.vtt" data-file="M_slide_74" data-slide="74" data-transcript="This summary reviews the core ideas needed for the next module. The next logical step is RAG and vector databases.">
+<div class="slide-kicker">Summary</div>
+<h1>Module 6 summary</h1>
+<div class="slide-body"><div class="card-grid"><article class="mini-card"><h3>Transformers use tokens</h3><p>Text becomes tokens, IDs, masks, and vectors.</p></article><article class="mini-card"><h3>Attention builds context</h3><p>Tokens learn from other tokens through Q, K, V, and attention weights.</p></article><article class="mini-card"><h3>Blocks are stacked</h3><p>Attention, Add &amp; Norm, and feed-forward networks repeat across layers.</p></article><article class="mini-card"><h3>Model families differ</h3><p>Encoder-only, decoder-only, and encoder-decoder models fit different tasks.</p></article><article class="mini-card"><h3>Pretrained models require selection</h3><p>Choose by task, language, domain, size, evidence, and deployment constraints.</p></article><article class="mini-card"><h3>RAG comes next</h3><p>External knowledge requires retrieval, context construction, and evidence.</p></article></div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_75.mp3" data-caption="caption/M6/M_slide_75.vtt" data-file="M_slide_75" data-slide="75" data-transcript="The bridge to RAG is simple. Modern models are powerful, but when the answer lives in external documents, we need retrieval.">
+<div class="slide-kicker">Bridge to Module 7</div>
+<h1>Why Transformers lead naturally to RAG</h1>
+<div class="slide-body"><div class="flow"><div class="flow-item">Transformer / LLM</div><div class="arrow">→</div><div class="flow-item">User question</div><div class="arrow">→</div><div class="flow-item">Need external documents</div><div class="arrow">→</div><div class="flow-item">Retrieve relevant chunks</div><div class="arrow">→</div><div class="flow-item">Give context to LLM</div><div class="arrow">→</div><div class="flow-item">Grounded answer</div></div>
+<p class="lead small">A Transformer can generate language, but it does not automatically know your private PDFs, databases, policies, or course documents.</p>
+<div class="callout">Next module: Retrieval-Augmented Generation and vector databases.</div></div>
+</section>
+<section class="slide" data-audio="audio/M6/M_slide_76.mp3" data-caption="caption/M6/M_slide_76.vtt" data-file="M_slide_76" data-slide="76" data-transcript="The final slide gives sources for continued learning. The model ecosystem changes often, so check current documentation and model cards.">
+<div class="slide-kicker">References</div>
+<h1>Further resources</h1>
+<div class="slide-body"><table class="clean-table">
+<thead><tr><th>Source</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td><a href="https://arxiv.org/abs/1706.03762" rel="noopener" target="_blank">Attention Is All You Need</a></td><td>Original Transformer paper.</td></tr>
+<tr><td><a href="https://huggingface.co/docs/transformers/quicktour" rel="noopener" target="_blank">Hugging Face Transformers Quick Tour</a></td><td>Pipelines, AutoTokenizer, AutoModel.</td></tr>
+<tr><td><a href="https://huggingface.co/tasks" rel="noopener" target="_blank">Hugging Face Tasks</a></td><td>Explore model tasks and changing model counts.</td></tr>
+<tr><td><a href="https://www.sbert.net/" rel="noopener" target="_blank">Sentence Transformers documentation</a></td><td>Sentence embeddings, semantic search, retrieval examples.</td></tr>
+<tr><td><a href="https://huggingface.co/blog/state-of-open-models-summer-2026" rel="noopener" target="_blank">Hugging Face State of Open Models · Summer 2026</a></td><td>Recent ecosystem counts and model-hub trends.</td></tr></tbody></table>
+<p class="small-note">Counts and model availability change over time. Always check the current model card before using a model.</p></div>
+</section>
+</main>
+<footer class="bottom">
+<div class="narration-controls">
+<button class="primary" onclick="startNarration()">Start Narration</button>
+<button id="narrationBtn" onclick="toggleNarrationMode()">Narration On</button>
+<button class="primary" id="ccBtn" onclick="toggleCaptions()">CC On</button>
+<button onclick="openTranscript()">Transcript</button>
+<select aria-label="Narration speed" id="speedSelect">
+<option value="0.75">0.75x</option>
+<option selected="" value="1">1.0x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+<option value="2">2.0x</option>
+</select>
+</div>
+<div class="bottom-main">
+<button class="nav-button" onclick="prevSlide()">Previous</button>
+<div class="audio-zone">
+<div class="caption-strip" id="captionStrip">Captions will appear here after VTT files are uploaded.</div>
+<div class="audio-card">
+<div class="audio-ready" id="audioStatus">Slide audio ready</div>
+<audio controls="" id="audio" preload="metadata"></audio>
+<button class="play-mini" onclick="startNarration()">Play</button>
+</div>
+</div>
+<div class="slide-jump">
+<select aria-label="Go to slide" id="slideSelect"></select>
+<div class="mini-progress"><span id="miniProgress"></span></div>
+<div class="counter" id="counter">1 / 76</div>
+</div>
+<button class="nav-button" onclick="nextSlide()">Next</button>
+</div>
+</footer>
+<aside aria-label="Current slide transcript" class="transcript-panel" id="transcriptPanel">
+  <div class="transcript-head">
+    <h3 id="transcriptTitle">Slide 1 Narration</h3>
+    <button type="button" onclick="closeTranscript()">Close</button>
+  </div>
+  <div class="transcript-body">
+    <p id="transcriptText"></p>
+    <div class="transcript-source" id="transcriptSource">Narration transcript</div>
+  </div>
+</aside>
+<aside class="drawer" id="drawer">
+<div class="drawer-head"><h2>Course Modules</h2><button onclick="toggleDrawer()">×</button></div>
+<p class="small-note">Jump to another IAN 620 page or continue this module.</p>
+<nav class="module-links">
+<a href="module1.html"><span>01 Introduction to NLP</span><strong>Module 1 ›</strong></a>
+<a href="module2.html"><span>02 Collection &amp; Preprocessing</span><strong>Module 2 ›</strong></a>
+<a href="module3.html"><span>03 Linguistic Analysis</span><strong>Module 3 ›</strong></a>
+<a href="module3_workbench.html"><span>Module 3 Workbench</span><strong>Practice ›</strong></a>
+<a href="classic_nlp_workbench.html"><span>Classic NLP Workbench</span><strong>Practice ›</strong></a>
+<a href="M4.html"><span>04 Text Representation &amp; Embeddings</span><strong>Module 4 ›</strong></a>
+<a href="module5.html"><span>05 Text Classification</span><strong>Module 5 ›</strong></a>
+<a class="current" href="s_module6.html" aria-current="page"><span>06 Transformers and Modern NLP</span><strong>Current ›</strong></a>
+<a href="module7.html"><span>07 RAG and Vector Databases</span><strong>Next ›</strong></a>
+</nav>
+</aside>
+<script>
+  const AUDIO_FOLDER = 'audio/M6';
+  const CAPTION_FOLDER = 'caption/M6';
+  const AUDIO_EXT = 'mp3';
+  const CAPTION_EXT = 'vtt';
+
+  const slides = [...document.querySelectorAll('.slide')];
+  const total = slides.length;
+  let current = Number(localStorage.getItem('ian620_module6_slide') || '0');
+  current = Math.max(0, Math.min(current, total - 1));
+  let ccOpen = localStorage.getItem('ian620_module6_cc') !== 'closed';
+  let narrationMode = localStorage.getItem('ian620_module6_narration') !== 'off';
+
+  const audio = document.getElementById('audio');
+  const themeBtn = document.getElementById('themeBtn');
+  const ccBtn = document.getElementById('ccBtn');
+  const narrationBtn = document.getElementById('narrationBtn');
+  const slideSelect = document.getElementById('slideSelect');
+  const speedSelect = document.getElementById('speedSelect');
+  const captionStrip = document.getElementById('captionStrip');
+
+  function fileBase(slide) { return slide.dataset.file || `M_slide_${String(current + 1).padStart(2,'0')}`; }
+  function audioPath(slide) { return `${AUDIO_FOLDER}/${fileBase(slide)}.${AUDIO_EXT}`; }
+  function captionPath(slide) { return `${CAPTION_FOLDER}/${fileBase(slide)}.${CAPTION_EXT}`; }
+  function slideTitle(slide, index) { return slide.querySelector('h1')?.innerText.trim() || `Slide ${index + 1}`; }
+
+  function rebuildTrack(src) {
+    audio.querySelectorAll('track').forEach(t => t.remove());
+    const track = document.createElement('track');
+    track.kind = 'captions';
+    track.label = 'English';
+    track.srclang = 'en';
+    track.src = src;
+    track.default = true;
+    audio.appendChild(track);
+  }
+
+  let captionCues = [];
+  let transcriptManifest = null;
+  let transcriptManifestSource = '';
+
+  function parseTimecode(value) {
+    const parts = value.trim().replace(',', '.').split(':').map(Number);
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    return Number(value) || 0;
+  }
+
+  function parseVttCues(vtt) {
+    const blocks = vtt.replace(/^\uFEFF?WEBVTT[^\n]*\n?/i, '').split(/\n\s*\n/);
+    const cues = [];
+    for (const block of blocks) {
+      const lines = block.split(/\r?\n/).map(x => x.trim()).filter(Boolean);
+      const timingIndex = lines.findIndex(line => line.includes('-->'));
+      if (timingIndex < 0) continue;
+      const [left, rightRaw] = lines[timingIndex].split('-->');
+      const right = rightRaw.trim().split(/\s+/)[0];
+      const text = lines.slice(timingIndex + 1).join(' ').replace(/<[^>]+>/g, '').trim();
+      if (!text) continue;
+      cues.push({ start: parseTimecode(left), end: parseTimecode(right), text });
+    }
+    return cues;
+  }
+
+  function syncCaptionStrip() {
+    if (!ccOpen) return;
+    const t = audio.currentTime || 0;
+    const cue = captionCues.find(c => t >= c.start && t <= c.end);
+    if (cue) {
+      captionStrip.textContent = cue.text;
+      captionStrip.classList.remove('off');
+    } else if (!audio.paused && captionCues.length) {
+      captionStrip.textContent = '';
+    }
+  }
+
+  async function updateCaptionText(slide) {
+    const cPath = captionPath(slide);
+    captionCues = [];
+    if (!ccOpen) {
+      captionStrip.textContent = 'Closed captions are off.';
+      captionStrip.classList.add('off');
+      return;
+    }
+    captionStrip.classList.remove('off');
+    try {
+      const res = await fetch(cPath, { cache: 'no-store' });
+      if (!res.ok) throw new Error('caption not found');
+      const txt = await res.text();
+      captionCues = parseVttCues(txt);
+      captionStrip.textContent = 'Captions are on. Start narration to follow this slide.';
+      syncCaptionStrip();
+    } catch (err) {
+      captionStrip.textContent = 'Captions are on. Add ' + cPath + ' to display synchronized captions.';
+    }
+  }
+
+  function normalizeManifestEntry(value) {
+    if (typeof value === 'string') return value;
+    if (!value || typeof value !== 'object') return '';
+    return value.transcript || value.narration || value.text || value.script || value.notes || '';
+  }
+
+  function transcriptFromManifest(index, slide) {
+    if (!transcriptManifest) return '';
+    const base = fileBase(slide);
+    const num = index + 1;
+    if (Array.isArray(transcriptManifest)) {
+      const item = transcriptManifest.find(x => {
+        if (!x || typeof x !== 'object') return false;
+        const key = x.file || x.filename || x.id || x.slide || x.number;
+        return String(key) === base || Number(key) === num || String(key).padStart(2,'0') === String(num).padStart(2,'0');
+      });
+      return normalizeManifestEntry(item);
+    }
+    if (typeof transcriptManifest === 'object') {
+      const candidates = [base, String(num), String(num).padStart(2,'0'), `slide_${String(num).padStart(2,'0')}`, `M_slide_${String(num).padStart(2,'0')}`];
+      for (const key of candidates) {
+        if (key in transcriptManifest) return normalizeManifestEntry(transcriptManifest[key]);
+      }
+      if (Array.isArray(transcriptManifest.slides)) {
+        const item = transcriptManifest.slides.find(x => Number(x.slide || x.number) === num || x.file === base || x.id === base);
+        return normalizeManifestEntry(item);
+      }
+    }
+    return '';
+  }
+
+  async function loadTranscriptManifest() {
+    const candidates = ['manifest/M6_manifest.json', 'M6_manifest.json', 'manifest.json', 'narration_manifest.json', 'audio/M6/manifest.json'];
+    for (const path of candidates) {
+      try {
+        const res = await fetch(path, { cache:'no-store' });
+        if (!res.ok) continue;
+        transcriptManifest = await res.json();
+        transcriptManifestSource = path;
+        return;
+      } catch (e) {}
+    }
+  }
+
+  function refreshTranscriptPanel() {
+    const slide = slides[current];
+    const title = slideTitle(slide, current);
+    const manifestText = transcriptFromManifest(current, slide);
+    const fallback = slide.dataset.transcript || '';
+    document.getElementById('transcriptTitle').textContent = `Slide ${current + 1} Narration - ${title}`;
+    document.getElementById('transcriptText').textContent = manifestText || fallback || 'Transcript will appear here after narration text is added.';
+    document.getElementById('transcriptSource').textContent = manifestText
+      ? `Loaded from ${transcriptManifestSource}`
+      : 'Narration transcript for the current slide';
+  }
+
+  function populateSlideSelect() {
+    slideSelect.innerHTML = slides.map((slide, i) => `<option value="${i}">${i + 1}. ${slideTitle(slide, i)}</option>`).join('');
+    slideSelect.addEventListener('change', () => showSlide(Number(slideSelect.value), true));
+  }
+
+  function showSlide(index, userInitiated=false) {
+    slides.forEach(s => s.classList.remove('active'));
+    current = Math.max(0, Math.min(index, total - 1));
+    slides[current].classList.add('active');
+    localStorage.setItem('ian620_module6_slide', current);
+    const pct = Math.round(((current + 1) / total) * 100);
+    document.getElementById('statusText').textContent = `NLP ${current + 1}/${total}`;
+    document.getElementById('progressPct').textContent = `${pct}%`;
+    document.getElementById('progressBar').style.width = `${pct}%`;
+    document.getElementById('miniProgress').style.width = `${pct}%`;
+    document.getElementById('counter').textContent = `${current + 1} / ${total}`;
+    slideSelect.value = String(current);
+
+    const aPath = audioPath(slides[current]);
+    const cPath = captionPath(slides[current]);
+    audio.pause();
+    audio.src = aPath;
+    audio.playbackRate = Number(speedSelect.value || '1');
+    rebuildTrack(cPath);
+    document.getElementById('audioStatus').textContent = `Slide ${current + 1} audio ready`;
+    ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
+    ccBtn.classList.toggle('primary', ccOpen);
+    narrationBtn.textContent = narrationMode ? 'Narration On' : 'Narration Off';
+    updateCaptionText(slides[current]);
+    if (document.getElementById('transcriptPanel').classList.contains('open')) refreshTranscriptPanel();
+    if (userInitiated) window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (userInitiated && narrationMode) audio.play().catch(() => {});
+  }
+
+  window.showSlide = showSlide;
+
+  function nextSlide() { showSlide(current + 1, true); }
+  function prevSlide() { showSlide(current - 1, true); }
+  window.nextSlide = nextSlide; window.prevSlide = prevSlide;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target && ['INPUT','TEXTAREA','SELECT','BUTTON'].includes(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+  });
+
+  function toggleDrawer() { document.getElementById('drawer').classList.toggle('open'); }
+  window.toggleDrawer = toggleDrawer;
+
+  function toggleFullscreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+  window.toggleFullscreen = toggleFullscreen;
+
+  function setTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+    localStorage.setItem('ian620_module6_theme', dark ? 'dark' : 'light');
+  }
+  themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('dark')));
+  setTheme(localStorage.getItem('ian620_module6_theme') === 'dark');
+
+  speedSelect.addEventListener('change', () => { audio.playbackRate = Number(speedSelect.value); });
+
+  function escapeHtml(text) {
+    return text.replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]));
+  }
+
+  function highlightPython(line) {
+    let html = escapeHtml(line);
+    html = html.replace(/(#.*)$/g, '<span class="com">$1</span>');
+    html = html.replace(/(&quot;[^&]*?&quot;|"[^"]*"|'[^']*')/g, '<span class="str">$1</span>');
+    html = html.replace(/\b(def|class|from|import|as|for|in|if|else|elif|return|print|with|try|except|True|False|None|and|or|not|lambda)\b/g, '<span class="kw">$1</span>');
+    html = html.replace(/\b(AutoTokenizer|AutoModel|AutoModelForSequenceClassification|pipeline|SentenceTransformer|MultiheadAttention|LayerNorm|Linear|Sequential|ReLU|TensorDataset|DataLoader)\b/g, '<span class="builtin">$1</span>');
+    html = html.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="num">$1</span>');
+    html = html.replace(/\b([a-zA-Z_]\w*)(?=\()/g, '<span class="fn">$1</span>');
+    return html;
+  }
+
+  function prepareVsCodeBlocks() {
+    document.querySelectorAll('.code-card pre code').forEach(code => {
+      if (code.dataset.prepared === 'true') return;
+      const raw = code.textContent.replace(/\n$/,'');
+      code.dataset.raw = raw;
+      const lines = raw.split('\n');
+      code.innerHTML = lines.map((line, idx) =>
+        `<span class="code-line"><span class="ln">${idx + 1}</span><span class="src">${highlightPython(line) || ' '}</span></span>`
+      ).join('');
+      code.dataset.prepared = 'true';
+    });
+  }
+  prepareVsCodeBlocks();
+
+  document.querySelectorAll('.copy-code').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const codeEl = btn.closest('.code-card').querySelector('code');
+      const code = codeEl.dataset.raw || codeEl.innerText;
+      try { await navigator.clipboard.writeText(code); btn.textContent = 'Copied'; btn.classList.add('copied'); }
+      catch { btn.textContent = 'Select + copy'; }
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1400);
+    });
+  });
+
+  function runSlide() {
+    const active = slides[current];
+    const cards = [...active.querySelectorAll('.code-card')];
+    if (!cards.length) {
+      const checks = [...active.querySelectorAll('.check-btn')];
+      if (checks.length) checks.forEach(b => b.classList.toggle('done'));
+      const panel = active.querySelector('.answer-panel');
+      if (panel) panel.hidden = !panel.hidden;
+      return;
+    }
+    cards.forEach(card => {
+      const out = card.dataset.output || '';
+      let box = card.querySelector('.output-box');
+      if (!box && out) { box = document.createElement('div'); box.className = 'output-box'; card.appendChild(box); }
+      if (box) { box.textContent = out || 'This slide is copy-ready. Run the Python code in VS Code, Jupyter, or Colab.'; box.hidden = false; }
+    });
+  }
+  window.runSlide = runSlide;
+
+  function startNarration() {
+    audio.playbackRate = Number(speedSelect.value || '1');
+    audio.play().catch(() => {});
+    ccOpen = true;
+    localStorage.setItem('ian620_module6_cc','open');
+    ccBtn.textContent = 'CC On';
+    ccBtn.classList.add('primary');
+    updateCaptionText(slides[current]);
+  }
+  window.startNarration = startNarration;
+
+  function toggleNarrationMode() {
+    narrationMode = !narrationMode;
+    localStorage.setItem('ian620_module6_narration', narrationMode ? 'on' : 'off');
+    narrationBtn.textContent = narrationMode ? 'Narration On' : 'Narration Off';
+  }
+  window.toggleNarrationMode = toggleNarrationMode;
+
+  function toggleCaptions() {
+    ccOpen = !ccOpen;
+    localStorage.setItem('ian620_module6_cc', ccOpen ? 'open' : 'closed');
+    ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
+    ccBtn.classList.toggle('primary', ccOpen);
+    updateCaptionText(slides[current]);
+  }
+  window.toggleCaptions = toggleCaptions;
+
+  function openTranscript() {
+    const panel = document.getElementById('transcriptPanel');
+    refreshTranscriptPanel();
+    panel.classList.add('open');
+  }
+  window.openTranscript = openTranscript;
+
+  function closeTranscript() {
+    document.getElementById('transcriptPanel').classList.remove('open');
+  }
+  window.closeTranscript = closeTranscript;
+
+  audio.addEventListener('timeupdate', syncCaptionStrip);
+  audio.addEventListener('seeked', syncCaptionStrip);
+  audio.addEventListener('play', syncCaptionStrip);
+
+  document.querySelectorAll('.check-btn').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('done')));
+  populateSlideSelect();
+  showSlide(current);
+  loadTranscriptManifest().then(() => {
+    if (document.getElementById('transcriptPanel').classList.contains('open')) refreshTranscriptPanel();
+  });
+</script>
+</body>
+</html>
