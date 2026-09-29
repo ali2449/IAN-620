@@ -376,7 +376,7 @@
 </div>
 <div class="status">
 <span class="ready">VS Code ready</span>
-<div class="progress-pill"><span class="progress-label">Progress</span><span class="progress-pct" id="progressPct">0%</span><small id="statusText">NLP 1/76</small></div>
+<div class="progress-pill"><span class="progress-label">Progress</span><span class="progress-pct" id="progressPct">0%</span><small id="statusText">Slide 1/76</small></div>
 <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
 </div>
 <div class="top-actions">
@@ -1584,12 +1584,12 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     </div>
 
     <div class="caption-strip" id="captionStrip" aria-live="polite" aria-atomic="true">
-      Captions will appear here after VTT files are uploaded.
+      Captions will appear here during narration.
     </div>
 
     <div class="audio-player" id="audioPlayer">
       <span class="audio-dot"></span>
-      <span class="audio-title" id="audioStatus">Slide audio ready</span>
+      <span class="audio-title" id="audioStatus">Slide narration</span>
       <input class="audio-seek" id="audioSeek" type="range" min="0" max="100" value="0" aria-label="Audio position">
       <span class="audio-time" id="audioTime">0:00 / 0:00</span>
       <button class="audio-play" id="audioPlay" type="button">Play</button>
@@ -1727,7 +1727,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
       captionStrip.textContent = 'Captions are on. Start narration to follow this slide.';
       syncCaptionStrip();
     } catch (err) {
-      captionStrip.textContent = 'Captions are on. Add ' + cPath + ' to display synchronized captions.';
+      captionStrip.textContent = 'Captions will appear here during narration.';
     }
   }
 
@@ -1798,7 +1798,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     slides[current].classList.add('active');
     localStorage.setItem('ian620_module6_slide', current);
     const pct = Math.round(((current + 1) / total) * 100);
-    document.getElementById('statusText').textContent = `NLP ${current + 1}/${total}`;
+    document.getElementById('statusText').textContent = `Slide ${current + 1}/${total}`;
     document.getElementById('progressPct').textContent = `${pct}%`;
     document.getElementById('progressBar').style.width = `${pct}%`;
     document.getElementById('miniProgress').style.width = `${pct}%`;
@@ -1811,7 +1811,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     audio.src = aPath;
     audio.playbackRate = Number(speedSelect.value || '1');
     rebuildTrack(cPath);
-    document.getElementById('audioStatus').textContent = `Slide ${current + 1} audio ready`;
+    document.getElementById('audioStatus').textContent = `Slide ${current + 1} narration`;
     ccBtn.textContent = ccOpen ? 'CC On' : 'CC Off';
     ccBtn.setAttribute('aria-pressed', ccOpen ? 'true' : 'false');
     ccBtn.classList.toggle('primary', ccOpen);
@@ -1976,7 +1976,15 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     audioPlayer.classList.toggle('playing', !audio.paused);
   }
 
-  audio.addEventListener('loadedmetadata', refreshAudioUi);
+  
+  audio.addEventListener('loadedmetadata', () => {
+    document.getElementById('audioStatus').textContent = `Slide ${current + 1} audio ready`;
+    refreshAudioUi();
+  });
+  audio.addEventListener('error', () => {
+    document.getElementById('audioStatus').textContent = 'Narration file not uploaded yet';
+    refreshAudioUi();
+  });
   audio.addEventListener('durationchange', refreshAudioUi);
   audio.addEventListener('timeupdate', refreshAudioUi);
   audio.addEventListener('play', refreshAudioUi);
