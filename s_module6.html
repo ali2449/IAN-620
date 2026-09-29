@@ -654,38 +654,364 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .c
 }
 </style>
 
+
+<style id="ian620-ux-redesign-v1">
+/* Module 6 UI refinement: reduce duplication, separate metadata from actions,
+   and keep narration/navigation controls visually distinct. */
+
+.slide::after {
+  content:"Slide " attr(data-slide) !important;
+  right:22px !important;
+  bottom:12px !important;
+  color:var(--muted) !important;
+  opacity:.75;
+}
+
+/* Header */
+.topbar {
+  gap:12px !important;
+  padding-left:16px !important;
+  padding-right:16px !important;
+}
+.brand {
+  background:var(--accent) !important;
+  box-shadow:none !important;
+}
+.mod-title {
+  font-size:17px !important;
+  font-weight:850 !important;
+}
+.course {
+  font-size:12px !important;
+  margin-top:2px !important;
+}
+.status {
+  gap:8px !important;
+}
+.compact-status {
+  gap:7px !important;
+  padding:7px 10px !important;
+  border-radius:9px !important;
+  background:var(--panel2) !important;
+  border-color:var(--line) !important;
+  box-shadow:none !important;
+}
+.compact-status small,
+.compact-status .progress-pct {
+  font-size:12px !important;
+  font-weight:800 !important;
+}
+.status-sep {
+  color:var(--muted);
+  opacity:.65;
+}
+.top-actions {
+  gap:8px !important;
+}
+.top-actions > button,
+.settings-wrap > button {
+  min-height:34px !important;
+  padding:7px 11px !important;
+  border-radius:9px !important;
+  box-shadow:none !important;
+}
+.settings-wrap {
+  position:relative;
+}
+.settings-menu {
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
+  z-index:80;
+  width:190px;
+  display:none;
+  padding:7px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel);
+  box-shadow:0 16px 40px rgba(15,23,42,.16);
+}
+.settings-menu.open {
+  display:grid;
+  gap:4px;
+}
+.settings-menu button {
+  width:100%;
+  border:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  color:var(--ink) !important;
+  padding:9px 10px !important;
+  border-radius:8px !important;
+  text-align:left;
+}
+.settings-menu button:hover {
+  background:var(--panel2) !important;
+  color:var(--accent) !important;
+}
+
+/* Static metadata should not look like action buttons. */
+.pill-row {
+  gap:8px !important;
+}
+.pill-row span,
+mark {
+  border:0 !important;
+  border-radius:6px !important;
+  background:var(--panel2) !important;
+  color:var(--muted) !important;
+  padding:6px 8px !important;
+  font-size:12px !important;
+  font-weight:800 !important;
+  letter-spacing:.01em;
+}
+.start-actions {
+  display:none !important;
+}
+
+/* Intro pipeline: a connected architecture path instead of pill-like boxes. */
+.transformer-visual {
+  padding:22px 22px 20px !important;
+}
+.transformer-visual .mini-flow {
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:0 !important;
+  align-items:start !important;
+  margin:10px 0 18px !important;
+}
+.transformer-visual .mini-flow b {
+  display:none !important;
+}
+.transformer-visual .mini-flow span {
+  position:relative;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:var(--ink) !important;
+  padding:28px 6px 0 !important;
+  min-width:0 !important;
+  font-size:12px !important;
+  text-align:center;
+  line-height:1.25;
+}
+.transformer-visual .mini-flow span::before {
+  content:"";
+  position:absolute;
+  top:5px;
+  left:50%;
+  width:12px;
+  height:12px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 13%, transparent);
+}
+.transformer-visual .mini-flow span:not(:last-of-type)::after {
+  content:"";
+  position:absolute;
+  top:10px;
+  left:calc(50% + 11px);
+  width:calc(100% - 22px);
+  height:2px;
+  background:var(--line2);
+}
+.transformer-visual .layer-stack {
+  margin-top:10px !important;
+  gap:7px !important;
+  padding-left:10px;
+  border-left:2px solid var(--line2);
+}
+.transformer-visual .layer-stack div {
+  border:1px solid var(--line) !important;
+  border-radius:7px !important;
+  background:var(--panel) !important;
+  color:var(--ink) !important;
+  text-align:left !important;
+  padding:8px 10px !important;
+  box-shadow:none !important;
+}
+
+/* Footer: one audio dock + one clearly separate navigation cluster. */
+.bottom,
+body:not(.auto-hide) .bottom,
+body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open) {
+  grid-template-columns:minmax(560px,1fr) minmax(300px,380px) !important;
+  gap:18px !important;
+  padding:8px 16px 10px !important;
+}
+.audio-block {
+  min-width:0 !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:5px !important;
+}
+.narration-controls {
+  gap:5px !important;
+  margin:0 !important;
+}
+.narration-controls .narration-btn,
+.narration-speed {
+  min-height:30px !important;
+  padding:5px 8px !important;
+  border-radius:7px !important;
+  font-size:11px !important;
+  box-shadow:none !important;
+}
+.narration-controls .narration-btn {
+  background:transparent !important;
+}
+#ccBtn.primary {
+  background:color-mix(in srgb, var(--accent) 12%, var(--panel)) !important;
+  color:var(--accent) !important;
+  border-color:color-mix(in srgb, var(--accent) 32%, var(--line)) !important;
+}
+.speed-control {
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-left:auto;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+.caption-strip {
+  min-height:38px !important;
+  height:38px !important;
+  border-radius:7px !important;
+  font-size:13px !important;
+  padding:5px 12px !important;
+}
+.audio-player {
+  grid-template-columns:auto minmax(110px,auto) minmax(180px,1fr) auto !important;
+  gap:8px !important;
+  height:36px !important;
+  padding:4px 6px !important;
+  border-radius:8px !important;
+}
+.audio-dot {
+  display:none !important;
+}
+.primary-audio {
+  min-width:58px;
+  background:var(--accent) !important;
+  color:#fff !important;
+  border-color:var(--accent) !important;
+  font-weight:850 !important;
+}
+.audio-title {
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.presentation-nav {
+  display:grid;
+  grid-template-columns:38px minmax(220px,1fr) 38px;
+  gap:7px;
+  align-items:center;
+  padding-left:14px;
+  border-left:1px solid var(--line);
+}
+.presentation-nav .footer-left,
+.presentation-nav .footer-right {
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+}
+.presentation-nav .nav-button {
+  width:38px !important;
+  height:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  border-radius:50% !important;
+  font-size:24px !important;
+  line-height:1 !important;
+  box-shadow:none !important;
+}
+.presentation-nav .bottom-nav {
+  min-width:0;
+  display:grid !important;
+  gap:5px !important;
+}
+.presentation-nav #slideSelect {
+  min-height:34px !important;
+  font-size:13px !important;
+  padding:5px 8px !important;
+  border-radius:7px !important;
+}
+
+/* Auto-hide: hide the whole navigation cluster and audio controls except captions. */
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .presentation-nav {
+  display:none !important;
+}
+body.auto-hide:not(.cc-off) .bottom:not(:hover):not(:focus-within):not(.force-open) {
+  grid-template-columns:1fr !important;
+}
+body.auto-hide .bottom:hover,
+body.auto-hide .bottom:focus-within,
+body.auto-hide .bottom.force-open {
+  grid-template-columns:minmax(560px,1fr) minmax(300px,380px) !important;
+  gap:18px !important;
+}
+
+/* Compact screens */
+@media (max-width:1200px) and (min-width:721px) {
+  .topbar .course { display:none; }
+  .bottom,
+  body:not(.auto-hide) .bottom,
+  body:not(.auto-hide) .bottom:not(:hover):not(:focus-within):not(.force-open),
+  body.auto-hide .bottom:hover,
+  body.auto-hide .bottom:focus-within,
+  body.auto-hide .bottom.force-open {
+    grid-template-columns:minmax(500px,1fr) minmax(260px,320px) !important;
+    gap:10px !important;
+  }
+  .presentation-nav {
+    padding-left:9px;
+  }
+}
+@media (max-width:900px) {
+  .status { display:none !important; }
+  .settings-menu { right:auto; left:0; }
+}
+</style>
+
 </head>
 <body>
 <header class="topbar">
 <div class="brand">NLP</div>
 <div class="title-wrap">
-<div class="mod-title">IAN 620 · Module 6</div>
-<div class="course">Transformers and Modern NLP</div>
+<div class="mod-title">Module 6</div>
+<div class="course">IAN 620 · Transformers and Modern NLP</div>
 </div>
 <div class="status">
-<span class="ready">VS Code ready</span>
-<div class="progress-pill"><span class="progress-label">Progress</span><span class="progress-pct" id="progressPct">0%</span><small id="statusText">Slide 1/76</small></div>
+<div class="progress-pill compact-status"><small id="statusText">Slide 1/76</small><span class="status-sep">·</span><span class="progress-pct" id="progressPct">1%</span></div>
 <div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
 </div>
 <div class="top-actions">
-<button id="themeBtn">Dark mode</button>
-<button onclick="toggleFullscreen()">Fullscreen</button>
-
-<button id="autoHideBtn" type="button" onclick="toggleAutoHide()">Auto-hide Off</button>
-<button onclick="toggleDrawer()">☰ Course Modules</button>
+<div class="settings-wrap">
+<button id="settingsBtn" type="button" aria-expanded="false" onclick="toggleSettingsMenu()">⚙ Settings</button>
+<div class="settings-menu" id="settingsMenu" role="menu">
+<button id="themeBtn" type="button" role="menuitem">Dark mode</button>
+<button type="button" role="menuitem" onclick="toggleFullscreen()">Fullscreen</button>
+<button id="autoHideBtn" type="button" role="menuitem" onclick="toggleAutoHide()">Auto-hide Off</button>
+</div>
+</div>
+<button type="button" onclick="toggleDrawer()">☰ Modules</button>
 </div>
 </header>
 <main class="deck" id="deck">
 <section class="slide" data-audio="audio/s_module6_slide_01.mp3" data-caption="captions/s_module6_slide_01.vtt" data-file="s_module6_slide_01" data-slide="1" data-transcript="Module 6 introduces Transformers and modern NLP. The focus is practical. We will learn how text becomes model input, how attention creates context-aware representations, how pretrained models are organized, and how to choose and use those models responsibly in Python.">
-<div class="slide-kicker">IAN 620 · Module 6</div>
+<div class="slide-kicker">Module introduction</div>
 <h1>Transformers and Modern NLP</h1>
 <div class="slide-body">
 <div class="hero-layout">
 <div>
 <p class="lead">A practical introduction to the architecture behind modern NLP systems.</p>
 <p class="explain">This module explains how text becomes tokens, how tokens become vectors, how attention updates those vectors, and how pretrained Transformer models are selected and used in Python.</p>
-<div class="pill-row"><span>Tokenization</span><span>Attention</span><span>Pretrained Models</span><span>Hugging Face</span><span>VS Code Ready</span></div>
-<div class="start-actions"><button class="primary" type="button" onclick="showSlide(1,true)">Start presentation →</button><button type="button" onclick="startNarration()">Start Narration</button></div>
+<div class="pill-row"><span>Tokenization</span><span>Attention</span><span>Pretrained Models</span><span>Hugging Face</span></div>
+
 </div>
 <div aria-label="Transformer module diagram" class="visual-card transformer-visual">
 <div class="viz-title">Modern NLP pipeline</div>
@@ -1854,22 +2180,19 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 </section>
 </main>
 <footer class="bottom">
-  <div class="footer-left">
-    <button class="nav-button" type="button" onclick="prevSlide()">Previous</button>
-  </div>
-
-  <div class="audio-block">
+  <div class="audio-block" aria-label="Narration controls">
     <div class="narration-controls">
-      <button class="narration-btn primary" type="button" onclick="startNarration()">Start Narration</button>
-      <button class="narration-btn" id="narrationBtn" type="button" onclick="toggleNarrationMode()">Narration On</button>
-      <button class="narration-btn primary" id="ccBtn" type="button" aria-pressed="true" onclick="toggleCaptions()">CC On</button>
+      <button class="narration-btn" id="narrationBtn" type="button" onclick="toggleNarrationMode()">Auto-play On</button>
+      <button class="narration-btn" id="ccBtn" type="button" aria-pressed="true" onclick="toggleCaptions()">CC On</button>
       <button class="narration-btn" type="button" onclick="openTranscript()">Transcript</button>
-      <select class="narration-speed" aria-label="Narration speed" id="speedSelect">
-        <option value="0.85">0.85x</option>
-        <option selected value="1">1.0x</option>
-        <option value="1.15">1.15x</option>
-        <option value="1.3">1.3x</option>
-      </select>
+      <label class="speed-control" for="speedSelect"><span>Speed</span>
+        <select class="narration-speed" aria-label="Narration speed" id="speedSelect">
+          <option value="0.85">0.85x</option>
+          <option selected value="1">1.0x</option>
+          <option value="1.15">1.15x</option>
+          <option value="1.3">1.3x</option>
+        </select>
+      </label>
     </div>
 
     <div class="caption-strip" id="captionStrip" aria-live="polite" aria-atomic="true">
@@ -1877,25 +2200,28 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
     </div>
 
     <div class="audio-player" id="audioPlayer">
-      <span class="audio-dot"></span>
+      <button class="audio-play primary-audio" id="audioPlay" type="button">Play</button>
       <span class="audio-title" id="audioStatus">Slide narration</span>
       <input class="audio-seek" id="audioSeek" type="range" min="0" max="100" value="0" aria-label="Audio position">
       <span class="audio-time" id="audioTime">0:00 / 0:00</span>
-      <button class="audio-play" id="audioPlay" type="button">Play</button>
       <audio id="audio" preload="metadata"></audio>
     </div>
   </div>
 
-  <div class="bottom-nav">
-    <select aria-label="Go to slide" id="slideSelect"></select>
-    <div class="bottom-progress">
-      <div class="mini-progress"><span id="miniProgress"></span></div>
-      <div class="counter" id="counter">1 / 76</div>
+  <div class="presentation-nav" aria-label="Slide navigation">
+    <div class="footer-left">
+      <button class="nav-button" type="button" onclick="prevSlide()" aria-label="Previous slide">‹</button>
     </div>
-  </div>
-
-  <div class="footer-right">
-    <button class="nav-button" type="button" onclick="nextSlide()">Next</button>
+    <div class="bottom-nav">
+      <select aria-label="Go to slide" id="slideSelect"></select>
+      <div class="bottom-progress">
+        <div class="mini-progress"><span id="miniProgress"></span></div>
+        <div class="counter" id="counter">1 / 76</div>
+      </div>
+    </div>
+    <div class="footer-right">
+      <button class="nav-button" type="button" onclick="nextSlide()" aria-label="Next slide">›</button>
+    </div>
   </div>
 </footer>
 <aside aria-label="Current slide transcript" class="transcript-panel" id="transcriptPanel">
@@ -1968,7 +2294,7 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
       ccBtn.classList.toggle('primary', ccOpen);
     }
     if (narrationBtn) {
-      narrationBtn.textContent = narrationMode ? 'Narration On' : 'Narration Off';
+      narrationBtn.textContent = narrationMode ? 'Auto-play On' : 'Auto-play Off';
       narrationBtn.setAttribute('aria-pressed', narrationMode ? 'true' : 'false');
     }
     if (captionStrip) {
@@ -2166,6 +2492,24 @@ model = AutoModelForSequenceClassification.from_pretrained(save_dir)</code></pre
 
   function toggleDrawer() { document.getElementById('drawer').classList.toggle('open'); }
   window.toggleDrawer = toggleDrawer;
+
+  function toggleSettingsMenu(force) {
+    const menu = document.getElementById('settingsMenu');
+    const btn = document.getElementById('settingsBtn');
+    if (!menu || !btn) return;
+    const shouldOpen = typeof force === 'boolean' ? force : !menu.classList.contains('open');
+    menu.classList.toggle('open', shouldOpen);
+    btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+  }
+  window.toggleSettingsMenu = toggleSettingsMenu;
+
+  document.addEventListener('click', (event) => {
+    const wrap = document.querySelector('.settings-wrap');
+    if (wrap && !wrap.contains(event.target)) toggleSettingsMenu(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') toggleSettingsMenu(false);
+  });
 
   function toggleFullscreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
   window.toggleFullscreen = toggleFullscreen;
