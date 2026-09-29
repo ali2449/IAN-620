@@ -638,13 +638,14 @@ body.auto-hide:not(.cc-off) .bottom:not(:hover):not(:focus-within):not(.force-op
 }
 
 body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) {
-  height:0 !important;
-  min-height:0 !important;
+  height:16px !important;
+  min-height:16px !important;
   padding:0 !important;
   border:0 !important;
   background:transparent !important;
   box-shadow:none !important;
   overflow:hidden !important;
+  pointer-events:auto !important;
 }
 
 body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block,
