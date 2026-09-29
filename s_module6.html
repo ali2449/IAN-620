@@ -611,6 +611,48 @@ body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .b
 body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,
 body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right { display:none !important; }
 </style>
+
+<style id="ian620-autohide-hide-buttons-fix">
+/* Auto-hide ON: when the footer is collapsed, keep only captions visible.
+   Navigation, narration, audio, and slide controls appear only on hover/focus. */
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-left,
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .footer-right,
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player,
+body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .bottom-nav {
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+body.auto-hide:not(.cc-off) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block {
+  display:block !important;
+  width:100% !important;
+}
+
+body.auto-hide:not(.cc-off) .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip {
+  display:flex !important;
+  width:100% !important;
+  margin:0 !important;
+}
+
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) {
+  height:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:hidden !important;
+}
+
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block,
+body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .caption-strip {
+  display:none !important;
+}
+</style>
+
 </head>
 <body>
 <header class="topbar">
