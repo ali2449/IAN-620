@@ -1,0 +1,298 @@
+name: Patch Module 7 practical RAG slides
+
+on:
+  push:
+    paths:
+      - .github/workflows/patch-module7-practical.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch s_module7.html
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import html
+
+          p = Path('s_module7.html')
+          s = p.read_text(encoding='utf-8')
+
+          def code_card(title, code, note=''):
+              return f'''<div class="code-card" data-output="Run this in VS Code, Jupyter, or Colab."><div class="code-head"><div><span class="run-label">Python</span><strong>{html.escape(title)}</strong></div><button class="copy-code" type="button">Copy</button></div><pre><code>{html.escape(code.strip())}</code></pre>{f'<p class="micro" style="padding:10px 14px;margin:0;color:#cbd5e1;background:#252526;">{html.escape(note)}</p>' if note else ''}<div class="output-box" hidden></div></div>'''
+
+          def bullets(items):
+              return '<div class="four-grid">' + ''.join(f'<div class="panel"><p>{x}</p></div>' for x in items) + '</div>'
+
+          def table(rows):
+              out = ['<div class="table">']
+              for i, row in enumerate(rows):
+                  out.append('<div class="tr ' + ('head' if i == 0 else '') + '">' + ''.join(f'<span>{c}</span>' for c in row) + '</div>')
+              out.append('</div>')
+              return ''.join(out)
+
+          slides = [
+              dict(title='Practical workshop: build a small RAG system', kicker='Hands-on path', transcript='The practical part of Module 7 builds a small RAG system step by step. Students create a knowledge folder, load documents, split text into chunks, embed chunks, retrieve evidence, build a grounded prompt, call a language model, show sources, and evaluate retrieval quality.', body='<p class="lead">The rest of the module becomes a build path, not only a concept review.</p>' + bullets(['<strong>1. Prepare documents</strong><br/>Create a small knowledge base from text files.', '<strong>2. Index evidence</strong><br/>Chunk text, add metadata, embed chunks, and store vectors.', '<strong>3. Retrieve and answer</strong><br/>Search relevant chunks, build a grounded prompt, and generate an answer.', '<strong>4. Improve and evaluate</strong><br/>Add filters, FAISS/Chroma, reranking, and retrieval metrics.'])),
+              dict(title='Set up a RAG project in VS Code', kicker='Environment setup', transcript='A practical RAG project should have a clear folder structure. Students can keep documents, source code, indexes, and tests separate so the project is easy to debug and extend.', body='<p class="lead">Use a small project folder so every stage can be inspected.</p>' + code_card('Project folder', '''rag_module7/
+├── docs/
+│   ├── advising_policy.txt
+│   ├── course_faq.txt
+│   └── tech_support.txt
+├── index_store/
+├── rag_demo.py
+└── test_questions.py''', 'Create this manually or with the file explorer before running code.')),
+              dict(title='Install the minimum packages', kicker='Environment setup', transcript='The first implementation can be built with a small number of packages. Sentence Transformers creates embeddings, NumPy supports simple vector search, and optional packages such as FAISS or Chroma can be added later.', body='<p class="lead">Start with the smallest working setup, then add a vector database later.</p>' + code_card('Install packages', '''python -m venv .venv
+# Windows: .venv\\Scripts\\activate
+# macOS/Linux: source .venv/bin/activate
+
+pip install sentence-transformers numpy pandas
+
+# Optional upgrades
+pip install faiss-cpu chromadb openai''', 'NumPy is enough for a small classroom example. FAISS or Chroma becomes useful when the corpus grows.')),
+              dict(title='Create a tiny knowledge base', kicker='Data setup', transcript='A RAG system is only useful if it has documents to retrieve from. For a classroom demonstration, students can begin with a few short text files that simulate policies, course information, or support documentation.', body='<p class="lead">Use a small corpus first so retrieval results are easy to inspect.</p>' + code_card('Create sample documents', '''from pathlib import Path
+
+DOCS_DIR = Path("docs")
+DOCS_DIR.mkdir(exist_ok=True)
+
+(DOCS_DIR / "course_faq.txt").write_text("""
+Office hours are available online by appointment.
+Assignments are submitted through Canvas.
+Late submissions may receive a penalty unless an extension is approved.
+""", encoding="utf-8")
+
+(DOCS_DIR / "tech_support.txt").write_text("""
+If Python packages fail to install, check the active virtual environment.
+Students should run examples in VS Code, Jupyter, or Colab.
+""", encoding="utf-8")''', 'Students can replace these files with real course notes, FAQs, manuals, or policy documents later.')),
+              dict(title='Load documents with metadata', kicker='Ingestion', transcript='Each document should be loaded with metadata. Metadata helps display sources, filter results, enforce permissions, and debug retrieval problems.', body='<p class="lead">Do not store only text. Store where the text came from.</p>' + code_card('Load documents', '''from pathlib import Path
+
+def load_documents(folder="docs"):
+    documents = []
+    for path in Path(folder).glob("*.txt"):
+        text = path.read_text(encoding="utf-8")
+        documents.append({
+            "source": path.name,
+            "text": text
+        })
+    return documents
+
+documents = load_documents()
+print(len(documents))
+print(documents[0]["source"])''', 'A real project may also keep date, author, topic, section, permission level, or URL.')),
+              dict(title='Clean and chunk the documents', kicker='Chunking', transcript='Chunking creates retrieval units. The goal is to keep each chunk focused enough for precise search but large enough to preserve meaning.', body='<p class="lead">Chunking is one of the most important practical RAG decisions.</p>' + code_card('Simple overlapping chunker', '''def clean_text(text):
+    return " ".join(text.split())
+
+def chunk_text(text, chunk_size=350, overlap=80):
+    text = clean_text(text)
+    chunks = []
+    start = 0
+    while start < len(text):
+        end = start + chunk_size
+        chunks.append(text[start:end])
+        start = end - overlap
+    return chunks''', 'This character-based chunker is simple. Later, improve it with sentence or heading-based splitting.')),
+              dict(title='Build chunk records', kicker='Chunking + metadata', transcript='After chunking, each chunk becomes a record with text and metadata. This is the unit that will be embedded, retrieved, shown as evidence, and cited in the answer.', body='<p class="lead">Every chunk needs text plus source metadata.</p>' + code_card('Create chunk records', '''chunk_records = []
+
+for doc in documents:
+    chunks = chunk_text(doc["text"], chunk_size=350, overlap=80)
+    for i, chunk in enumerate(chunks):
+        chunk_records.append({
+            "chunk_id": f"{doc['source']}::chunk_{i}",
+            "source": doc["source"],
+            "chunk_index": i,
+            "text": chunk
+        })
+
+print("Number of chunks:", len(chunk_records))
+print(chunk_records[0])''', 'If retrieval is bad, print chunk records first. Many RAG problems start here.')),
+              dict(title='Embed the chunks', kicker='Embeddings', transcript='Embedding turns each chunk into a vector. The same embedding model must be used for the document chunks and the user query.', body='<p class="lead">Embeddings are the bridge between text and vector search.</p>' + code_card('Create embeddings', '''from sentence_transformers import SentenceTransformer
+import numpy as np
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+chunk_texts = [item["text"] for item in chunk_records]
+chunk_embeddings = model.encode(
+    chunk_texts,
+    normalize_embeddings=True
+)
+
+chunk_embeddings = np.array(chunk_embeddings)
+print(chunk_embeddings.shape)''', 'For a stronger project, test multiple embedding models and compare retrieval examples.')),
+              dict(title='Retrieve with NumPy first', kicker='Retriever baseline', transcript='Before adding a vector database, students should understand the basic retrieval calculation. With normalized embeddings, the dot product is cosine similarity.', body='<p class="lead">A simple retriever helps students see what the vector database will later automate.</p>' + code_card('Top-k vector search', '''def retrieve(query, k=3):
+    query_embedding = model.encode([query], normalize_embeddings=True)[0]
+    scores = chunk_embeddings @ query_embedding
+    top_indices = np.argsort(scores)[::-1][:k]
+
+    results = []
+    for idx in top_indices:
+        item = dict(chunk_records[idx])
+        item["score"] = float(scores[idx])
+        results.append(item)
+    return results
+
+for item in retrieve("How do I submit assignments?", k=2):
+    print(item["score"], item["source"], item["text"])''', 'This is the simplest dense retriever students can inspect line by line.')),
+              dict(title='Add filters and thresholds', kicker='Practical retrieval controls', transcript='Practical retrieval usually needs more than top-k. Filters restrict the search space, and similarity thresholds prevent weak evidence from entering the prompt.', body='<p class="lead">Top-k alone can return weak evidence. Add filters and thresholds.</p>' + code_card('Filtered retriever', '''def retrieve_filtered(query, k=3, source=None, min_score=0.25):
+    query_embedding = model.encode([query], normalize_embeddings=True)[0]
+    scores = chunk_embeddings @ query_embedding
+
+    candidates = []
+    for idx, score in enumerate(scores):
+        record = chunk_records[idx]
+        if source and record["source"] != source:
+            continue
+        if score < min_score:
+            continue
+        candidates.append((idx, float(score)))
+
+    candidates.sort(key=lambda x: x[1], reverse=True)
+    return [dict(chunk_records[i], score=s) for i, s in candidates[:k]]''', 'Filters can represent source, date, permission, department, course, or document type.')),
+              dict(title='Build a grounded prompt', kicker='Prompt construction', transcript='A RAG prompt should separate the user question from retrieved evidence and instruct the model to answer only from the evidence when appropriate.', body='<p class="lead">The prompt is where retrieval becomes generation.</p>' + code_card('Prompt template', '''def build_prompt(question, retrieved_chunks):
+    context_blocks = []
+    for i, item in enumerate(retrieved_chunks, start=1):
+        block = f"[Source {i}: {item['source']}]\\n{item['text']}"
+        context_blocks.append(block)
+
+    context = "\\n\\n".join(context_blocks)
+    return f"""
+You are a helpful course assistant.
+Answer the question using only the context below.
+If the context does not contain the answer, say that the documents do not provide enough information.
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:
+""".strip()''', 'This prompt makes grounding explicit and reduces unsupported answers.')),
+              dict(title='Connect to a language model', kicker='Generation', transcript='The generator can be an OpenAI-compatible endpoint, a local inference server, Ollama, or another model provider. The retrieval logic stays mostly the same.', body='<p class="lead">RAG is model-flexible: retrieval and generation are separate pieces.</p>' + code_card('OpenAI-compatible call', '''import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY", "EMPTY"),
+    base_url=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+)
+
+def call_llm(prompt):
+    response = client.chat.completions.create(
+        model=os.getenv("RAG_MODEL", "gpt-4o-mini"),
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2
+    )
+    return response.choices[0].message.content''', 'Set OPENAI_BASE_URL to a local server if you use TGI, vLLM, LM Studio, or another OpenAI-compatible service.')),
+              dict(title='Put retrieval and generation together', kicker='End-to-end RAG', transcript='A practical RAG function retrieves evidence, builds a prompt, calls the model, and returns both the answer and the sources so the user can inspect support.', body='<p class="lead">The smallest useful RAG function returns answer plus sources.</p>' + code_card('End-to-end RAG function', '''def rag_answer(question, k=3):
+    retrieved = retrieve(question, k=k)
+    prompt = build_prompt(question, retrieved)
+    answer = call_llm(prompt)
+
+    sources = [
+        {
+            "source": item["source"],
+            "chunk_index": item["chunk_index"],
+            "score": round(item["score"], 3),
+            "text": item["text"][:250]
+        }
+        for item in retrieved
+    ]
+
+    return {"answer": answer, "sources": sources}''', 'Showing sources is not optional in a teaching RAG system; it is how students debug trust.')),
+              dict(title='Move from NumPy to FAISS', kicker='Scaling retrieval', transcript='FAISS is useful when the number of chunks grows and exact NumPy search becomes slow. The conceptual workflow remains the same: embed, index, search.', body='<p class="lead">Use FAISS when you want a fast local vector index.</p>' + code_card('FAISS index', '''import faiss
+
+dimension = chunk_embeddings.shape[1]
+index = faiss.IndexFlatIP(dimension)
+index.add(chunk_embeddings.astype("float32"))
+
+def retrieve_faiss(query, k=3):
+    q = model.encode([query], normalize_embeddings=True).astype("float32")
+    scores, indices = index.search(q, k)
+    results = []
+    for score, idx in zip(scores[0], indices[0]):
+        results.append(dict(chunk_records[idx], score=float(score)))
+    return results''', 'FAISS is an index library, not a full document management system.')),
+              dict(title='Use Chroma as a vector database', kicker='Vector database setup', transcript='A vector database stores text, metadata, and embeddings together. Chroma is convenient for classroom projects because it can run locally with persistent storage.', body='<p class="lead">Use a vector database when you want persistence and metadata queries.</p>' + code_card('Chroma local database', '''import chromadb
+
+client = chromadb.PersistentClient(path="index_store/chroma")
+collection = client.get_or_create_collection("course_docs")
+
+collection.add(
+    ids=[item["chunk_id"] for item in chunk_records],
+    documents=[item["text"] for item in chunk_records],
+    metadatas=[{"source": item["source"], "chunk_index": item["chunk_index"]} for item in chunk_records],
+    embeddings=chunk_embeddings.tolist()
+)
+
+results = collection.query(
+    query_embeddings=model.encode(["How do I submit assignments?"], normalize_embeddings=True).tolist(),
+    n_results=3
+)
+print(results["documents"][0])''', 'Chroma gives students a simple path from classroom prototype to persistent local index.')),
+              dict(title='Choose the storage method', kicker='Method selection', transcript='Different vector storage options serve different levels of complexity. A small assignment can use NumPy or FAISS. A larger application may need a vector database, metadata filters, multi-user access, and updates.', body='<p class="lead">Choose storage based on project size and operational needs.</p>' + table([['Option','Use when','Notes'], ['NumPy','Tiny demos','Best for learning and transparency.'], ['FAISS','Large local search','Fast index, but metadata is handled separately.'], ['Chroma','Local persistent app','Good classroom vector database.'], ['Qdrant / Pinecone','Production service','Useful for APIs, filters, scaling, and deployment.'], ['pgvector','PostgreSQL projects','Good when relational data and vector search should live together.']])),
+              dict(title='Add reranking when top-k is noisy', kicker='Reranking', transcript='A retriever quickly finds candidates, but a reranker can compare the full query and each candidate more carefully. This often improves the final context sent to the language model.', body='<p class="lead">Retrieve many candidates, then rerank down to the best evidence.</p>' + code_card('Cross-encoder reranking', '''from sentence_transformers import CrossEncoder
+
+reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+
+def retrieve_then_rerank(question, retrieve_k=8, final_k=3):
+    candidates = retrieve(question, k=retrieve_k)
+    pairs = [(question, item["text"]) for item in candidates]
+    rerank_scores = reranker.predict(pairs)
+
+    for item, score in zip(candidates, rerank_scores):
+        item["rerank_score"] = float(score)
+
+    candidates.sort(key=lambda x: x["rerank_score"], reverse=True)
+    return candidates[:final_k]''', 'Reranking costs more time, so use it when quality matters more than speed.')),
+              dict(title='Evaluate retrieval with test questions', kicker='Evaluation', transcript='Students should test whether the right evidence appears in the retrieved results before judging the generated answer. Retrieval evaluation makes RAG debugging much easier.', body='<p class="lead">Evaluate search before evaluating generation.</p>' + code_card('Tiny retrieval test set', '''test_set = [
+    {
+        "question": "How do students submit assignments?",
+        "expected_source": "course_faq.txt"
+    },
+    {
+        "question": "What should I check if packages fail?",
+        "expected_source": "tech_support.txt"
+    }
+]
+
+correct = 0
+for row in test_set:
+    top = retrieve(row["question"], k=1)[0]
+    is_correct = top["source"] == row["expected_source"]
+    correct += int(is_correct)
+    print(row["question"], "->", top["source"], is_correct)
+
+print("Top-1 accuracy:", correct / len(test_set))''', 'A real evaluation set should include more questions and expected supporting chunks.')),
+              dict(title='Student mini-project: build a course RAG assistant', kicker='Applied assignment idea', transcript='A strong student assignment asks learners to build a small RAG assistant using their own document set. The goal is not only to produce an answer, but to show evidence, evaluate retrieval, and explain design choices.', body='<p class="lead">A practical deliverable should include code, evidence, and evaluation.</p>' + bullets(['<strong>Knowledge base</strong><br/>Use at least 5 text documents or cleaned pages.', '<strong>Working RAG pipeline</strong><br/>Load, chunk, embed, retrieve, prompt, answer, and cite sources.', '<strong>Comparison</strong><br/>Compare two chunk sizes or two retrieval methods.', '<strong>Evaluation</strong><br/>Create at least 10 test questions and report retrieval results.']) + '<div class="callout">Students should submit code, sample questions, generated answers, retrieved sources, and a short reflection on what failed and what improved.</div>'),
+          ]
+
+          def section(num, item):
+              file = f's_module7_slide_{num:02d}'
+              return f'''<section class="slide" data-slide="{num}" data-file="{file}" data-audio="audio/{file}.mp3" data-caption="captions/{file}.vtt" data-transcript="{html.escape(item['transcript'])}">\n<div class="slide-kicker">{item['kicker']}</div>\n<h1>{item['title']}</h1>\n<div class="slide-body">{item['body']}</div>\n</section>'''
+
+          new_sections = '\n'.join(section(41 + i, slide) for i, slide in enumerate(slides))
+          start = s.find('<section class="slide" data-slide="41"')
+          end_start = s.find('<section class="slide" data-slide="60"')
+          if start == -1 or end_start == -1:
+              raise SystemExit('Could not locate slides 41 through 60')
+          end = s.find('</section>', end_start)
+          if end == -1:
+              raise SystemExit('Could not locate end of slide 60')
+          end += len('</section>')
+          s = s[:start] + new_sections + s[end:]
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add s_module7.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Make Module 7 RAG slides more practical"
+          git push
