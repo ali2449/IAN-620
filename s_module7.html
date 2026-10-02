@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IAN 620 · Module 7 · RAG and Vector Databases</title>
+<style>
+:root{--bg:#e8eff6;--panel:#fff;--panel2:#f3f7fb;--ink:#0c1526;--muted:#5f6f87;--line:#d7e1ee;--line2:#c5d3e3;--accent:#1f5f9f;--accent2:#0f6fb8;--shadow:0 18px 45px rgba(19,40,68,.12);--topH:54px;--bottomH:150px}
+body.dark{--bg:#101b2c;--panel:#121c2e;--panel2:#18263b;--ink:#eef6ff;--muted:#a9b6c9;--line:#2c3e57;--line2:#40546f;--accent:#66a7ff;--accent2:#3aa7e0;--shadow:0 18px 55px rgba(0,0,0,.35)}
+*{box-sizing:border-box}html,body{margin:0;height:100%}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);overflow:hidden}button,select,input{font:inherit}button{cursor:pointer}.topbar{height:var(--topH);display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--line);position:relative;z-index:50}.brand{width:34px;height:34px;border-radius:9px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:900;font-size:12px}.title-wrap{min-width:240px;flex:1;line-height:1.05}.mod-title{font-size:17px;font-weight:900}.course{font-size:12px;color:var(--muted);margin-top:3px;font-weight:650}.status{display:flex;align-items:center}.progress-pill{display:flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);font-size:12px;font-weight:850}.status-sep{color:var(--muted)}.progress-pct{color:var(--accent)}.top-actions{display:flex;gap:8px;align-items:center}.top-actions button,.settings-menu button,.narration-btn,.nav-button,.audio-play,.copy-code{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:9px;padding:7px 10px;font-weight:800}.top-actions button:hover,.narration-btn:hover,.nav-button:hover{border-color:var(--accent);color:var(--accent)}.settings-wrap{position:relative}.settings-menu{position:absolute;top:42px;right:0;width:190px;padding:7px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);display:none;z-index:100}.settings-menu.open{display:grid;gap:4px}.settings-menu button{border:0;text-align:left;background:transparent}.settings-menu button:hover{background:var(--panel2)}
+.deck{height:calc(100vh - var(--topH) - var(--bottomH));display:flex;align-items:center;justify-content:center;padding:10px 0;overflow:hidden}.slide{display:none;width:min(1160px,calc(100vw - 180px));height:100%;max-height:720px;min-height:0;padding:42px 48px 36px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:var(--shadow);position:relative;overflow-y:auto}.slide.active{display:block}.slide::after{content:"Slide " attr(data-slide);position:absolute;right:22px;bottom:12px;color:var(--muted);opacity:.75;font-size:12px;font-weight:850}.slide-kicker{color:var(--accent);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:9px}h1{font-size:40px;line-height:1.06;margin:0 0 16px;letter-spacing:-.035em}h3{margin:0 0 8px;font-size:19px}p,li{font-size:18px;line-height:1.48;color:var(--muted)}.lead{font-size:24px;line-height:1.32;margin:0 0 12px;color:var(--ink);max-width:940px}.explain{margin:0 0 18px;max-width:980px}.hero-grid,.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start}.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.tag-row span{padding:6px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);font-size:12px;font-weight:800}.diagram,.panel,.callout,.prompt-box,.source-list,.code-card{border:1px solid var(--line);border-radius:14px;background:var(--panel2)}.diagram{padding:18px}.diagram-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:900;margin-bottom:18px}.pipeline{display:grid;grid-template-columns:repeat(9,auto);align-items:center;gap:6px;font-size:12px;font-weight:850}.pipeline span{text-align:center;padding:8px 7px;border-bottom:2px solid var(--accent)}.pipeline i{color:var(--muted);font-style:normal}.knowledge{margin-top:20px;padding:12px;border-left:3px solid var(--accent);background:var(--panel)}.knowledge b,.knowledge small{display:block}.knowledge small{color:var(--muted);margin-top:4px}.sequence{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:22px}.sequence div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);min-width:150px;text-align:center;color:var(--muted)}.sequence i{font-style:normal;color:var(--accent);font-weight:900}.sequence .active-box{border-color:var(--accent);background:var(--panel);color:var(--ink)}.panel{padding:16px}.panel p,.panel li{font-size:16px}.flow-vertical{display:grid;gap:8px}.flow-vertical span{padding:9px 10px;background:var(--panel);border-left:3px solid var(--accent);border-radius:6px;font-weight:750;color:var(--ink)}.four-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.callout{padding:14px 16px;border-left:5px solid var(--accent);color:var(--muted);font-size:16px}.chunk-demo,.hybrid,.rerank,.source-answer{display:flex;align-items:center;gap:16px;margin-top:20px}.doc-block{width:240px;height:170px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);padding:15px;font-weight:850}.doc-lines{height:100px;margin-top:10px;background:repeating-linear-gradient(to bottom,var(--line2) 0 2px,transparent 2px 16px)}.chunks{display:grid;grid-template-columns:repeat(2,120px);gap:9px}.chunks span,.overlap-demo span{padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);text-align:center;font-weight:800}.overlap-demo{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}.overlap-demo em{font-style:normal;color:var(--accent);font-size:13px}.micro{font-size:14px!important}.table{display:grid;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:16px}.tr{display:grid;grid-template-columns:.7fr 1fr 1.4fr}.tr span{padding:10px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}.tr.head span{background:var(--panel2);font-weight:900;color:var(--ink)}.vector-viz{height:220px;position:relative;border:1px solid var(--line);border-radius:14px;background:linear-gradient(to right,transparent 49.8%,var(--line) 50%,transparent 50.2%),linear-gradient(to bottom,transparent 49.8%,var(--line) 50%,transparent 50.2%);margin-top:15px}.v{position:absolute;padding:7px 9px;border-radius:8px;background:var(--panel);border:1px solid var(--line);font-size:12px;font-weight:850}.v.q{left:53%;top:36%;border-color:var(--accent)}.v.a{left:66%;top:25%}.v.b{left:62%;top:46%}.v.c{left:24%;top:64%}.hybrid .panel{min-width:180px;text-align:center}.hybrid small{display:block;color:var(--muted);margin-top:4px}.plus{font-size:24px;color:var(--accent);font-weight:900}.emphasis{border-color:var(--accent)}.candidate-list{display:grid;gap:6px;min-width:220px}.candidate-list span{padding:8px 10px;background:var(--panel2);border-radius:8px;border:1px solid var(--line);font-size:14px}.ranker{padding:18px 20px;border-radius:50px;background:var(--accent);color:#fff;font-weight:900}.prompt-box{display:grid;gap:9px;padding:13px;margin-top:15px}.prompt-box>div{background:var(--panel);border-radius:9px;padding:11px}.prompt-box p{font-size:14px;margin:5px 0 0}.source-answer{align-items:stretch}.source-answer .panel{flex:1}.source-list{display:grid;gap:8px;padding:14px;min-width:320px}.source-list span{font-size:13px;color:var(--muted)}
+.code-card{margin-top:15px;overflow:hidden;background:#1e1e1e;border-color:#2b2b2b}.code-head{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px;background:#252526;color:#d4d4d4;font-size:12px;font-weight:800}.copy-code{padding:5px 9px;background:#0e639c;color:#fff;border-color:#0e639c;font-size:11px}pre{margin:0;max-height:360px;overflow:auto;background:#1e1e1e;padding:14px 16px}pre code{font-family:"Cascadia Code",Consolas,monospace;font-size:14px;line-height:1.55;color:#d4d4d4;white-space:pre}
+.bottom{height:var(--bottomH);display:grid;grid-template-columns:minmax(560px,1fr) minmax(300px,380px);gap:18px;align-items:center;padding:8px 16px 10px;background:var(--panel);border-top:1px solid var(--line);position:relative;z-index:40}.audio-block{min-width:0;display:grid;gap:5px}.narration-controls{display:flex;align-items:center;gap:5px}.narration-btn,.narration-speed{min-height:30px;padding:5px 8px;border-radius:7px;font-size:11px}#ccBtn.primary{background:var(--panel2);color:var(--accent);border-color:var(--accent)}.speed-control{display:flex;align-items:center;gap:5px;margin-left:auto;color:var(--muted);font-size:10px;font-weight:800}.caption-strip{height:38px;display:flex;align-items:center;justify-content:center;padding:5px 12px;background:#151b24;color:#f8fafc;border-radius:7px;font-size:13px;text-align:center;overflow:hidden}body.cc-off .caption-strip{display:none}.audio-player{height:36px;display:grid;grid-template-columns:auto minmax(110px,auto) minmax(180px,1fr) auto;gap:8px;align-items:center;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--panel2)}.primary-audio{min-width:58px;background:var(--accent);color:#fff;border-color:var(--accent)}.audio-title{font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.audio-seek{width:100%}.audio-time{font:700 10px ui-monospace,monospace;color:var(--muted);white-space:nowrap}#audio{display:none}.presentation-nav{display:grid;grid-template-columns:38px minmax(220px,1fr) 38px;gap:7px;align-items:center;padding-left:14px;border-left:1px solid var(--line)}.footer-left,.footer-right{display:flex;justify-content:center}.nav-button{width:38px;height:38px;padding:0;border-radius:50%;font-size:24px;line-height:1}.bottom-nav{display:grid;gap:5px}#slideSelect{width:100%;min-height:34px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--ink);padding:5px 8px;font-size:13px}.bottom-progress{display:flex;align-items:center;gap:8px}.mini-progress{height:6px;flex:1;background:var(--line);border-radius:99px;overflow:hidden}.mini-progress span{display:block;height:100%;background:var(--accent);width:0}.counter{min-width:46px;text-align:right;color:var(--muted);font-size:10px;font-weight:900}
+body.auto-hide .deck{height:calc(100vh - var(--topH) - 52px)}body.auto-hide.cc-off .deck{height:calc(100vh - var(--topH) - 16px)}body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open){height:52px;grid-template-columns:1fr;padding:7px 14px 8px;overflow:hidden}body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .presentation-nav,body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player{display:none}body.auto-hide:not(.cc-off) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block{display:block}body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open){height:16px;min-height:16px;padding:0;border:0;background:transparent;box-shadow:none;pointer-events:auto}body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block{display:none}body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{height:150px;grid-template-columns:minmax(560px,1fr) minmax(300px,380px);padding:8px 16px 10px}
+.transcript-panel{position:fixed;right:20px;bottom:168px;width:min(560px,calc(100vw - 40px));max-height:65vh;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);z-index:120;display:none;overflow:hidden}.transcript-panel.open{display:block}.transcript-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}.transcript-head h3{margin:0;font-size:16px}.transcript-head button{border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--ink);padding:6px 8px}.transcript-body{padding:14px;overflow:auto;max-height:55vh}.transcript-body p{font-size:15px;white-space:pre-wrap;color:var(--ink)}.transcript-source{font-size:11px;color:var(--muted);margin-top:12px}.drawer{position:fixed;top:0;right:-390px;width:min(380px,94vw);height:100vh;background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:150;transition:right .2s ease;padding:18px;overflow:auto}.drawer.open{right:0}.drawer-head{display:flex;align-items:center;justify-content:space-between}.drawer-head button{border:0;background:transparent;color:var(--ink);font-size:28px}.module-links{display:grid;gap:7px;margin-top:12px}.module-links a{display:flex;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--panel2)}.module-links a.current{border-color:var(--accent);background:var(--panel)}.module-links strong{color:var(--accent);white-space:nowrap;font-size:12px}
+@media(max-width:1050px){.course{display:none}.slide{width:calc(100vw - 70px);padding:34px 30px}.bottom,.body.auto-hide .bottom:hover{grid-template-columns:minmax(460px,1fr) minmax(260px,310px);gap:10px}.presentation-nav{padding-left:8px}}
+@media(max-width:760px){body{overflow:auto}.topbar{height:auto;min-height:56px;flex-wrap:wrap;padding:8px 10px}.status{display:none}.deck{height:auto;min-height:calc(100vh - 56px);padding:10px}.slide{width:100%;height:auto;max-height:none;padding:26px 20px}h1{font-size:32px}.hero-grid,.two-col,.four-grid{grid-template-columns:1fr}.bottom{position:sticky;bottom:0;height:auto;grid-template-columns:1fr;padding:8px}.presentation-nav{border-left:0;padding-left:0}.narration-controls{flex-wrap:wrap}.speed-control{margin-left:0}.transcript-panel{left:10px;right:10px;bottom:10px;width:auto}}
+</style>
+</head>
+<body>
+<header class="topbar">
+<div class="brand">NLP</div><div class="title-wrap"><div class="mod-title">Module 7</div><div class="course">IAN 620 · RAG and Vector Databases</div></div>
+<div class="status"><div class="progress-pill"><small id="statusText">Slide 1/60</small><span class="status-sep">·</span><span class="progress-pct" id="progressPct">2%</span></div></div>
+<div class="top-actions"><div class="settings-wrap"><button id="settingsBtn" type="button" aria-expanded="false" onclick="toggleSettingsMenu()">⚙ Settings</button><div class="settings-menu" id="settingsMenu"><button id="themeBtn" type="button">Dark mode</button><button type="button" onclick="toggleFullscreen()">Fullscreen</button><button id="autoHideBtn" type="button" onclick="toggleAutoHide()">Auto-hide Off</button></div></div><button type="button" onclick="toggleDrawer()">☰ Modules</button></div>
+</header>
+<main class="deck" id="deck">
+<section class="slide" data-slide="1" data-file="s_module7_slide_01" data-audio="audio/s_module7_slide_01.mp3" data-caption="captions/s_module7_slide_01.vtt" data-transcript="Retrieval-Augmented Generation combines search with generation so a model can answer using external knowledge instead of relying only on what was learned during training. A practical path from documents to retrieval, grounding, and generated answers.">
+<div class="slide-kicker">Module introduction</div>
+<h1>RAG and Vector Databases</h1>
+<div class="slide-body">
+<p class="lead">A practical path from documents to retrieval, grounding, and generated answers.</p>
+<p class="explain">Retrieval-Augmented Generation combines search with generation so a model can answer using external knowledge instead of relying only on what was learned during training.</p>
+<div class="hero-grid"><div><p class="lead">Connect language models to external knowledge through retrieval.</p><p class="explain">This module follows the complete path from source documents to chunks, embeddings, vector search, grounded prompts, and generated answers.</p><div class="tag-row"><span>RAG</span><span>Embeddings</span><span>Vector Search</span><span>Reranking</span><span>Evaluation</span></div></div><div class="diagram"><div class="diagram-title">RAG request path</div><div class="pipeline"><span>Question</span><i>→</i><span>Retrieve</span><i>→</i><span>Context</span><i>→</i><span>LLM</span><i>→</i><span>Answer</span></div><div class="knowledge"><b>Knowledge base</b><small>documents · chunks · embeddings · metadata</small></div></div></div>
+</div>
+</section><section class="slide" data-slide="2" data-file="s_module7_slide_02" data-audio="audio/s_module7_slide_02.mp3" data-caption="captions/s_module7_slide_02.vtt" data-transcript="Module 6 introduced Transformers, contextual representations, and pretrained models. Module 7 uses those ideas to build retrieval systems that connect language models to external knowledge. Transformers provide the model; RAG provides the knowledge path.">
+<div class="slide-kicker">Course position</div>
+<h1>Where Module 7 fits in IAN 620</h1>
+<div class="slide-body">
+<p class="lead">Transformers provide the model; RAG provides the knowledge path.</p>
+<p class="explain">Module 6 introduced Transformers, contextual representations, and pretrained models. Module 7 uses those ideas to build retrieval systems that connect language models to external knowledge.</p>
+<div class="sequence"><div>Module 4<br><b>Embeddings</b></div><i>→</i><div>Module 5<br><b>Classification</b></div><i>→</i><div>Module 6<br><b>Transformers</b></div><i>→</i><div class="active-box">Module 7<br><b>RAG</b></div></div>
+</div>
+</section><section class="slide" data-slide="3" data-file="s_module7_slide_03" data-audio="audio/s_module7_slide_03.mp3" data-caption="captions/s_module7_slide_03.vtt" data-transcript="RAG retrieves useful information first and then gives that information to a generative model as context for the answer. Retrieve relevant evidence, then generate from that evidence.">
+<div class="slide-kicker">Core idea</div>
+<h1>What is Retrieval-Augmented Generation?</h1>
+<div class="slide-body">
+<p class="lead">Retrieve relevant evidence, then generate from that evidence.</p>
+<p class="explain">RAG retrieves useful information first and then gives that information to a generative model as context for the answer.</p>
+
+</div>
+</section><section class="slide" data-slide="4" data-file="s_module7_slide_04" data-audio="audio/s_module7_slide_04.mp3" data-caption="captions/s_module7_slide_04.vtt" data-transcript="A typical pipeline has two phases: prepare the knowledge base, then process user queries. The query side retrieves relevant chunks and builds a grounded prompt for generation. Documents → chunks → embeddings → index → query → retrieval → prompt → answer.">
+<div class="slide-kicker">System flow</div>
+<h1>The RAG pipeline at a glance</h1>
+<div class="slide-body">
+<p class="lead">Documents → chunks → embeddings → index → query → retrieval → prompt → answer.</p>
+<p class="explain">A typical pipeline has two phases: prepare the knowledge base, then process user queries. The query side retrieves relevant chunks and builds a grounded prompt for generation.</p>
+<div class="two-col"><div class="panel"><h3>Offline: prepare knowledge</h3><div class="flow-vertical"><span>Load documents</span><span>Clean text</span><span>Chunk</span><span>Embed</span><span>Store vectors + metadata</span></div></div><div class="panel"><h3>Online: answer a query</h3><div class="flow-vertical"><span>Embed query</span><span>Retrieve</span><span>Rerank / filter</span><span>Build prompt</span><span>Generate answer</span></div></div></div>
+</div>
+</section><section class="slide" data-slide="5" data-file="s_module7_slide_05" data-audio="audio/s_module7_slide_05.mp3" data-caption="captions/s_module7_slide_05.vtt" data-transcript="A pretrained model may not know private, recent, local, or organization-specific information. RAG adds a controlled path to external sources that can be updated independently of model training. External knowledge can be newer, narrower, and easier to update.">
+<div class="slide-kicker">Motivation</div>
+<h1>Why not rely only on model memory?</h1>
+<div class="slide-body">
+<p class="lead">External knowledge can be newer, narrower, and easier to update.</p>
+<p class="explain">A pretrained model may not know private, recent, local, or organization-specific information. RAG adds a controlled path to external sources that can be updated independently of model training.</p>
+
+</div>
+</section><section class="slide" data-slide="6" data-file="s_module7_slide_06" data-audio="audio/s_module7_slide_06.mp3" data-caption="captions/s_module7_slide_06.vtt" data-transcript="RAG is useful when answers should depend on a document collection, policy library, product manual, research corpus, knowledge base, or other source that changes over time. Use RAG when the answer should be grounded in retrievable evidence.">
+<div class="slide-kicker">Use cases</div>
+<h1>When RAG is useful</h1>
+<div class="slide-body">
+<p class="lead">Use RAG when the answer should be grounded in retrievable evidence.</p>
+<p class="explain">RAG is useful when answers should depend on a document collection, policy library, product manual, research corpus, knowledge base, or other source that changes over time.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="7" data-file="s_module7_slide_07" data-audio="audio/s_module7_slide_07.mp3" data-caption="captions/s_module7_slide_07.vtt" data-transcript="If the task is simple classification, rewriting, extraction, brainstorming, or general knowledge that does not require a specific knowledge source, retrieval may add complexity without much benefit. RAG is a design choice, not a requirement for every LLM task.">
+<div class="slide-kicker">Design choice</div>
+<h1>When RAG may be unnecessary</h1>
+<div class="slide-body">
+<p class="lead">RAG is a design choice, not a requirement for every LLM task.</p>
+<p class="explain">If the task is simple classification, rewriting, extraction, brainstorming, or general knowledge that does not require a specific knowledge source, retrieval may add complexity without much benefit.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="8" data-file="s_module7_slide_08" data-audio="audio/s_module7_slide_08.mp3" data-caption="captions/s_module7_slide_08.vtt" data-transcript="A practical RAG system can be understood as four parts: ingestion, indexing, retrieval, and generation. Evaluation and monitoring surround the entire pipeline. Ingest → index → retrieve → generate.">
+<div class="slide-kicker">Architecture</div>
+<h1>The four major parts of a RAG system</h1>
+<div class="slide-body">
+<p class="lead">Ingest → index → retrieve → generate.</p>
+<p class="explain">A practical RAG system can be understood as four parts: ingestion, indexing, retrieval, and generation. Evaluation and monitoring surround the entire pipeline.</p>
+<div class="four-grid"><div class="panel"><h3>1 · Ingestion</h3><p>Load and clean knowledge sources.</p></div><div class="panel"><h3>2 · Indexing</h3><p>Create vectors and store metadata.</p></div><div class="panel"><h3>3 · Retrieval</h3><p>Find the best evidence for the query.</p></div><div class="panel"><h3>4 · Generation</h3><p>Answer using retrieved context.</p></div></div>
+</div>
+</section><section class="slide" data-slide="9" data-file="s_module7_slide_09" data-audio="audio/s_module7_slide_09.mp3" data-caption="captions/s_module7_slide_09.vtt" data-transcript="The source collection may include PDF files, web pages, notes, FAQs, database exports, support documents, or structured records. The first goal is to make the content consistently readable. RAG begins with a well-defined knowledge collection.">
+<div class="slide-kicker">Ingestion</div>
+<h1>Knowledge sources</h1>
+<div class="slide-body">
+<p class="lead">RAG begins with a well-defined knowledge collection.</p>
+<p class="explain">The source collection may include PDF files, web pages, notes, FAQs, database exports, support documents, or structured records. The first goal is to make the content consistently readable.</p>
+
+</div>
+</section><section class="slide" data-slide="10" data-file="s_module7_slide_10" data-audio="audio/s_module7_slide_10.mp3" data-caption="captions/s_module7_slide_10.vtt" data-transcript="Ingestion converts source material into text plus useful metadata. The pipeline may also record source name, section, date, author, category, permissions, or document identifiers. Preserve enough metadata to trace each chunk back to its source.">
+<div class="slide-kicker">Ingestion</div>
+<h1>Document ingestion</h1>
+<div class="slide-body">
+<p class="lead">Preserve enough metadata to trace each chunk back to its source.</p>
+<p class="explain">Ingestion converts source material into text plus useful metadata. The pipeline may also record source name, section, date, author, category, permissions, or document identifiers.</p>
+
+</div>
+</section><section class="slide" data-slide="11" data-file="s_module7_slide_11" data-audio="audio/s_module7_slide_11.mp3" data-caption="captions/s_module7_slide_11.vtt" data-transcript="Remove repeated headers, broken encoding, navigation text, empty sections, duplicated pages, and other noise that can reduce retrieval quality. Bad input creates bad retrieval even when the embedding model is strong.">
+<div class="slide-kicker">Preparation</div>
+<h1>Cleaning before indexing</h1>
+<div class="slide-body">
+<p class="lead">Bad input creates bad retrieval even when the embedding model is strong.</p>
+<p class="explain">Remove repeated headers, broken encoding, navigation text, empty sections, duplicated pages, and other noise that can reduce retrieval quality.</p>
+
+</div>
+</section><section class="slide" data-slide="12" data-file="s_module7_slide_12" data-audio="audio/s_module7_slide_12.mp3" data-caption="captions/s_module7_slide_12.vtt" data-transcript="Embedding an entire long document as one vector can blur many topics together. Chunking creates smaller retrieval units so the system can return focused evidence. A chunk should be large enough to carry meaning and small enough to retrieve precisely.">
+<div class="slide-kicker">Chunking</div>
+<h1>Why chunk documents?</h1>
+<div class="slide-body">
+<p class="lead">A chunk should be large enough to carry meaning and small enough to retrieve precisely.</p>
+<p class="explain">Embedding an entire long document as one vector can blur many topics together. Chunking creates smaller retrieval units so the system can return focused evidence.</p>
+<div class="chunk-demo"><div class="doc-block">Long document<div class="doc-lines"></div></div><i>→</i><div class="chunks"><span>Chunk A</span><span>Chunk B</span><span>Chunk C</span><span>Chunk D</span></div></div>
+</div>
+</section><section class="slide" data-slide="13" data-file="s_module7_slide_13" data-audio="audio/s_module7_slide_13.mp3" data-caption="captions/s_module7_slide_13.vtt" data-transcript="The simplest strategy divides text by a fixed number of characters, words, sentences, or tokens. It is easy to implement and useful as a baseline. Start simple before moving to more complex chunking logic.">
+<div class="slide-kicker">Chunking method</div>
+<h1>Fixed-size chunking</h1>
+<div class="slide-body">
+<p class="lead">Start simple before moving to more complex chunking logic.</p>
+<p class="explain">The simplest strategy divides text by a fixed number of characters, words, sentences, or tokens. It is easy to implement and useful as a baseline.</p>
+
+</div>
+</section><section class="slide" data-slide="14" data-file="s_module7_slide_14" data-audio="audio/s_module7_slide_14.mp3" data-caption="captions/s_module7_slide_14.vtt" data-transcript="Overlap repeats a small portion of text between neighboring chunks so important ideas are less likely to be split across boundaries. Too much overlap creates redundancy and a larger index. Overlap protects context, but excessive overlap increases cost and duplicates.">
+<div class="slide-kicker">Chunking tradeoff</div>
+<h1>Chunk overlap</h1>
+<div class="slide-body">
+<p class="lead">Overlap protects context, but excessive overlap increases cost and duplicates.</p>
+<p class="explain">Overlap repeats a small portion of text between neighboring chunks so important ideas are less likely to be split across boundaries. Too much overlap creates redundancy and a larger index.</p>
+<div class="overlap-demo"><span>Chunk 1<br><em>A B C D E</em></span><span>Chunk 2<br><em>D E F G H</em></span><span>Chunk 3<br><em>G H I J K</em></span></div><p class="micro">Repeated boundary tokens preserve context across neighboring chunks.</p>
+</div>
+</section><section class="slide" data-slide="15" data-file="s_module7_slide_15" data-audio="audio/s_module7_slide_15.mp3" data-caption="captions/s_module7_slide_15.vtt" data-transcript="Instead of cutting only by size, a structure-aware strategy can split by headings, paragraphs, sections, code blocks, or document hierarchy. Document structure often provides better boundaries than arbitrary character counts.">
+<div class="slide-kicker">Chunking method</div>
+<h1>Structure-aware chunking</h1>
+<div class="slide-body">
+<p class="lead">Document structure often provides better boundaries than arbitrary character counts.</p>
+<p class="explain">Instead of cutting only by size, a structure-aware strategy can split by headings, paragraphs, sections, code blocks, or document hierarchy.</p>
+
+</div>
+</section><section class="slide" data-slide="16" data-file="s_module7_slide_16" data-audio="audio/s_module7_slide_16.mp3" data-caption="captions/s_module7_slide_16.vtt" data-transcript="Semantic chunking tries to keep related sentences together by detecting changes in meaning. It can improve coherence but costs more computation than fixed-size splitting. Use semantic boundaries when topic shifts matter more than uniform chunk size.">
+<div class="slide-kicker">Chunking method</div>
+<h1>Semantic chunking</h1>
+<div class="slide-body">
+<p class="lead">Use semantic boundaries when topic shifts matter more than uniform chunk size.</p>
+<p class="explain">Semantic chunking tries to keep related sentences together by detecting changes in meaning. It can improve coherence but costs more computation than fixed-size splitting.</p>
+
+</div>
+</section><section class="slide" data-slide="17" data-file="s_module7_slide_17" data-audio="audio/s_module7_slide_17.mp3" data-caption="captions/s_module7_slide_17.vtt" data-transcript="Metadata can support filtering, source display, access rules, recency control, and debugging. A useful chunk is not only text; it also carries context about where it came from. Text tells us what the chunk says; metadata tells us where it belongs.">
+<div class="slide-kicker">Metadata</div>
+<h1>Metadata is part of retrieval</h1>
+<div class="slide-body">
+<p class="lead">Text tells us what the chunk says; metadata tells us where it belongs.</p>
+<p class="explain">Metadata can support filtering, source display, access rules, recency control, and debugging. A useful chunk is not only text; it also carries context about where it came from.</p>
+<div class="table"><div class="tr head"><span>Field</span><span>Example</span><span>Why it matters</span></div><div class="tr"><span>source</span><span>manual.pdf</span><span>Traceability</span></div><div class="tr"><span>section</span><span>Troubleshooting</span><span>Display + filtering</span></div><div class="tr"><span>date</span><span>2026-09-10</span><span>Freshness</span></div><div class="tr"><span>access</span><span>internal</span><span>Authorization</span></div></div>
+</div>
+</section><section class="slide" data-slide="18" data-file="s_module7_slide_18" data-audio="audio/s_module7_slide_18.mp3" data-caption="captions/s_module7_slide_18.vtt" data-transcript="An embedding model maps each chunk to a dense numeric vector. Similar meanings should be located near one another in the embedding space. Embeddings make semantic retrieval possible.">
+<div class="slide-kicker">Representation</div>
+<h1>Embeddings in RAG</h1>
+<div class="slide-body">
+<p class="lead">Embeddings make semantic retrieval possible.</p>
+<p class="explain">An embedding model maps each chunk to a dense numeric vector. Similar meanings should be located near one another in the embedding space.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="19" data-file="s_module7_slide_19" data-audio="audio/s_module7_slide_19.mp3" data-caption="captions/s_module7_slide_19.vtt" data-transcript="Choose an embedding model based on language, domain, retrieval quality, vector dimension, speed, deployment constraints, and license. Test on your own retrieval examples instead of relying only on benchmark names. The best embedding model is the one that retrieves your relevant evidence reliably.">
+<div class="slide-kicker">Model selection</div>
+<h1>Choosing an embedding model</h1>
+<div class="slide-body">
+<p class="lead">The best embedding model is the one that retrieves your relevant evidence reliably.</p>
+<p class="explain">Choose an embedding model based on language, domain, retrieval quality, vector dimension, speed, deployment constraints, and license. Test on your own retrieval examples instead of relying only on benchmark names.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="20" data-file="s_module7_slide_20" data-audio="audio/s_module7_slide_20.mp3" data-caption="captions/s_module7_slide_20.vtt" data-transcript="At search time, the user query is embedded with the same compatible embedding model used for the document chunks. The system then compares the query vector with stored chunk vectors. Document vectors and query vectors must live in the same representation space.">
+<div class="slide-kicker">Query processing</div>
+<h1>The query becomes a vector too</h1>
+<div class="slide-body">
+<p class="lead">Document vectors and query vectors must live in the same representation space.</p>
+<p class="explain">At search time, the user query is embedded with the same compatible embedding model used for the document chunks. The system then compares the query vector with stored chunk vectors.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="21" data-file="s_module7_slide_21" data-audio="audio/s_module7_slide_21.mp3" data-caption="captions/s_module7_slide_21.vtt" data-transcript="Cosine similarity compares vector direction rather than raw magnitude. It is common for text embeddings because semantically similar vectors often point in similar directions. Higher cosine similarity usually means greater semantic similarity.">
+<div class="slide-kicker">Similarity</div>
+<h1>Cosine similarity</h1>
+<div class="slide-body">
+<p class="lead">Higher cosine similarity usually means greater semantic similarity.</p>
+<p class="explain">Cosine similarity compares vector direction rather than raw magnitude. It is common for text embeddings because semantically similar vectors often point in similar directions.</p>
+<div class="vector-viz"><div class="axis"></div><span class="v q">Query</span><span class="v a">A</span><span class="v b">B</span><span class="v c">C</span></div><p class="micro">Vectors pointing in similar directions have higher cosine similarity.</p>
+</div>
+</section><section class="slide" data-slide="22" data-file="s_module7_slide_22" data-audio="audio/s_module7_slide_22.mp3" data-caption="captions/s_module7_slide_22.vtt" data-transcript="Some embedding models or indexes use dot product or Euclidean distance. The correct measure depends on how the model was trained and whether vectors are normalized. Do not choose a similarity metric independently of the embedding model.">
+<div class="slide-kicker">Similarity</div>
+<h1>Dot product and Euclidean distance</h1>
+<div class="slide-body">
+<p class="lead">Do not choose a similarity metric independently of the embedding model.</p>
+<p class="explain">Some embedding models or indexes use dot product or Euclidean distance. The correct measure depends on how the model was trained and whether vectors are normalized.</p>
+
+</div>
+</section><section class="slide" data-slide="23" data-file="s_module7_slide_23" data-audio="audio/s_module7_slide_23.mp3" data-caption="captions/s_module7_slide_23.vtt" data-transcript="A vector index organizes embeddings so nearest-neighbor search can be much faster than comparing a query against every stored vector. The index is the search structure built over the vectors.">
+<div class="slide-kicker">Indexing</div>
+<h1>What is a vector index?</h1>
+<div class="slide-body">
+<p class="lead">The index is the search structure built over the vectors.</p>
+<p class="explain">A vector index organizes embeddings so nearest-neighbor search can be much faster than comparing a query against every stored vector.</p>
+
+</div>
+</section><section class="slide" data-slide="24" data-file="s_module7_slide_24" data-audio="audio/s_module7_slide_24.mp3" data-caption="captions/s_module7_slide_24.vtt" data-transcript="A vector database stores embeddings and usually supports similarity search, metadata, filtering, updates, persistence, and retrieval APIs. A vector database adds data-management features around vector search.">
+<div class="slide-kicker">Storage</div>
+<h1>What is a vector database?</h1>
+<div class="slide-body">
+<p class="lead">A vector database adds data-management features around vector search.</p>
+<p class="explain">A vector database stores embeddings and usually supports similarity search, metadata, filtering, updates, persistence, and retrieval APIs.</p>
+
+</div>
+</section><section class="slide" data-slide="25" data-file="s_module7_slide_25" data-audio="audio/s_module7_slide_25.mp3" data-caption="captions/s_module7_slide_25.vtt" data-transcript="Relational databases are designed around exact values, joins, constraints, and structured queries. Vector systems focus on nearest-neighbor similarity over high-dimensional vectors. Many applications use both. Exact structure and semantic similarity solve different search problems.">
+<div class="slide-kicker">Comparison</div>
+<h1>Vector database vs relational database</h1>
+<div class="slide-body">
+<p class="lead">Exact structure and semantic similarity solve different search problems.</p>
+<p class="explain">Relational databases are designed around exact values, joins, constraints, and structured queries. Vector systems focus on nearest-neighbor similarity over high-dimensional vectors. Many applications use both.</p>
+<div class="two-col"><div class="panel"><h3>Relational database</h3><ul><li>Exact values</li><li>Structured schema</li><li>Joins and constraints</li><li>SQL filters</li></ul></div><div class="panel"><h3>Vector database</h3><ul><li>Semantic similarity</li><li>High-dimensional vectors</li><li>Nearest-neighbor search</li><li>Metadata filters</li></ul></div></div>
+</div>
+</section><section class="slide" data-slide="26" data-file="s_module7_slide_26" data-audio="audio/s_module7_slide_26.mp3" data-caption="captions/s_module7_slide_26.vtt" data-transcript="Dense retrieval uses embedding vectors to find semantically related text even when the query and document do not share the same exact words. Dense search is strong when meaning matters more than keyword overlap.">
+<div class="slide-kicker">Retrieval method</div>
+<h1>Dense retrieval</h1>
+<div class="slide-body">
+<p class="lead">Dense search is strong when meaning matters more than keyword overlap.</p>
+<p class="explain">Dense retrieval uses embedding vectors to find semantically related text even when the query and document do not share the same exact words.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="27" data-file="s_module7_slide_27" data-audio="audio/s_module7_slide_27.mp3" data-caption="captions/s_module7_slide_27.vtt" data-transcript="Sparse retrieval emphasizes exact terms and term frequency. BM25 remains useful for identifiers, product names, rare terminology, codes, and precise lexical matches. Keyword retrieval still matters in modern RAG systems.">
+<div class="slide-kicker">Retrieval method</div>
+<h1>Sparse retrieval and BM25</h1>
+<div class="slide-body">
+<p class="lead">Keyword retrieval still matters in modern RAG systems.</p>
+<p class="explain">Sparse retrieval emphasizes exact terms and term frequency. BM25 remains useful for identifiers, product names, rare terminology, codes, and precise lexical matches.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="28" data-file="s_module7_slide_28" data-audio="audio/s_module7_slide_28.mp3" data-caption="captions/s_module7_slide_28.vtt" data-transcript="Hybrid retrieval combines dense semantic search with sparse keyword search. The results can be merged or reranked to benefit from both types of evidence. Hybrid search is often useful when exact terms and semantic meaning both matter.">
+<div class="slide-kicker">Retrieval method</div>
+<h1>Hybrid retrieval</h1>
+<div class="slide-body">
+<p class="lead">Hybrid search is often useful when exact terms and semantic meaning both matter.</p>
+<p class="explain">Hybrid retrieval combines dense semantic search with sparse keyword search. The results can be merged or reranked to benefit from both types of evidence.</p>
+<div class="hybrid"><div class="panel"><b>Dense</b><small>meaning</small></div><div class="plus">+</div><div class="panel"><b>Sparse</b><small>keywords</small></div><div class="plus">→</div><div class="panel emphasis"><b>Hybrid</b><small>combined evidence</small></div></div>
+</div>
+</section><section class="slide" data-slide="29" data-file="s_module7_slide_29" data-audio="audio/s_module7_slide_29.mp3" data-caption="captions/s_module7_slide_29.vtt" data-transcript="Filters can restrict retrieval before or after similarity search. Examples include document type, date, product category, language, department, or access level. Filtering narrows the search space using known structured constraints.">
+<div class="slide-kicker">Retrieval control</div>
+<h1>Metadata filtering</h1>
+<div class="slide-body">
+<p class="lead">Filtering narrows the search space using known structured constraints.</p>
+<p class="explain">Filters can restrict retrieval before or after similarity search. Examples include document type, date, product category, language, department, or access level.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="30" data-file="s_module7_slide_30" data-audio="audio/s_module7_slide_30.mp3" data-caption="captions/s_module7_slide_30.vtt" data-transcript="Top-k controls how many retrieved chunks are passed forward. A larger k may improve recall but can add irrelevant context, increase prompt length, and raise cost. More retrieved chunks are not automatically better.">
+<div class="slide-kicker">Retrieval parameter</div>
+<h1>Top-k retrieval</h1>
+<div class="slide-body">
+<p class="lead">More retrieved chunks are not automatically better.</p>
+<p class="explain">Top-k controls how many retrieved chunks are passed forward. A larger k may improve recall but can add irrelevant context, increase prompt length, and raise cost.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="31" data-file="s_module7_slide_31" data-audio="audio/s_module7_slide_31.mp3" data-caption="captions/s_module7_slide_31.vtt" data-transcript="A similarity threshold can prevent weak results from being treated as evidence. If nothing passes the threshold, the system can say that the knowledge base does not contain enough support. Sometimes the correct retrieval result is no result.">
+<div class="slide-kicker">Retrieval parameter</div>
+<h1>Similarity thresholds</h1>
+<div class="slide-body">
+<p class="lead">Sometimes the correct retrieval result is no result.</p>
+<p class="explain">A similarity threshold can prevent weak results from being treated as evidence. If nothing passes the threshold, the system can say that the knowledge base does not contain enough support.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="32" data-file="s_module7_slide_32" data-audio="audio/s_module7_slide_32.mp3" data-caption="captions/s_module7_slide_32.vtt" data-transcript="A reranker scores a smaller set of retrieved candidates more carefully. The first retriever is fast; the reranker spends more computation deciding which evidence is most relevant. Retrieve broadly, then rank more precisely.">
+<div class="slide-kicker">Retrieval improvement</div>
+<h1>Reranking</h1>
+<div class="slide-body">
+<p class="lead">Retrieve broadly, then rank more precisely.</p>
+<p class="explain">A reranker scores a smaller set of retrieved candidates more carefully. The first retriever is fast; the reranker spends more computation deciding which evidence is most relevant.</p>
+<div class="rerank"><div class="candidate-list"><span>1 · Candidate A</span><span>2 · Candidate B</span><span>3 · Candidate C</span><span>4 · Candidate D</span></div><i>→</i><div class="ranker">Reranker</div><i>→</i><div class="candidate-list"><span>1 · Candidate C</span><span>2 · Candidate A</span><span>3 · Candidate D</span></div></div>
+</div>
+</section><section class="slide" data-slide="33" data-file="s_module7_slide_33" data-audio="audio/s_module7_slide_33.mp3" data-caption="captions/s_module7_slide_33.vtt" data-transcript="A query can be rewritten to remove ambiguity, expand abbreviations, add domain terminology, or produce a search-friendly version before retrieval. Better search queries can improve retrieval without changing the document index.">
+<div class="slide-kicker">Query transformation</div>
+<h1>Query rewriting</h1>
+<div class="slide-body">
+<p class="lead">Better search queries can improve retrieval without changing the document index.</p>
+<p class="explain">A query can be rewritten to remove ambiguity, expand abbreviations, add domain terminology, or produce a search-friendly version before retrieval.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="34" data-file="s_module7_slide_34" data-audio="audio/s_module7_slide_34.mp3" data-caption="captions/s_module7_slide_34.vtt" data-transcript="One user question can be converted into several related search queries. Results from those queries are combined to improve coverage. Multiple search perspectives can recover evidence that one phrasing misses.">
+<div class="slide-kicker">Query transformation</div>
+<h1>Multi-query retrieval</h1>
+<div class="slide-body">
+<p class="lead">Multiple search perspectives can recover evidence that one phrasing misses.</p>
+<p class="explain">One user question can be converted into several related search queries. Results from those queries are combined to improve coverage.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="35" data-file="s_module7_slide_35" data-audio="audio/s_module7_slide_35.mp3" data-caption="captions/s_module7_slide_35.vtt" data-transcript="HyDE creates a hypothetical answer or document from the query, embeds that generated text, and uses it to search the real document collection. HyDE changes the retrieval representation rather than the stored knowledge.">
+<div class="slide-kicker">Advanced retrieval</div>
+<h1>HyDE: retrieve from a hypothetical answer</h1>
+<div class="slide-body">
+<p class="lead">HyDE changes the retrieval representation rather than the stored knowledge.</p>
+<p class="explain">HyDE creates a hypothetical answer or document from the query, embeds that generated text, and uses it to search the real document collection.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="36" data-file="s_module7_slide_36" data-audio="audio/s_module7_slide_36.mp3" data-caption="captions/s_module7_slide_36.vtt" data-transcript="A system can retrieve small child chunks for precision but return their larger parent section for context. This separates the best unit for search from the best unit for generation. Retrieve small; provide enough surrounding context to answer well.">
+<div class="slide-kicker">Advanced retrieval</div>
+<h1>Parent-child retrieval</h1>
+<div class="slide-body">
+<p class="lead">Retrieve small; provide enough surrounding context to answer well.</p>
+<p class="explain">A system can retrieve small child chunks for precision but return their larger parent section for context. This separates the best unit for search from the best unit for generation.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="37" data-file="s_module7_slide_37" data-audio="audio/s_module7_slide_37.mp3" data-caption="captions/s_module7_slide_37.vtt" data-transcript="After retrieval, a compression step can keep only the passages or sentences most relevant to the query. This can reduce prompt length and irrelevant context. Retrieval finds candidate evidence; compression can trim it.">
+<div class="slide-kicker">Advanced retrieval</div>
+<h1>Contextual compression</h1>
+<div class="slide-body">
+<p class="lead">Retrieval finds candidate evidence; compression can trim it.</p>
+<p class="explain">After retrieval, a compression step can keep only the passages or sentences most relevant to the query. This can reduce prompt length and irrelevant context.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="38" data-file="s_module7_slide_38" data-audio="audio/s_module7_slide_38.mp3" data-caption="captions/s_module7_slide_38.vtt" data-transcript="The prompt usually contains the user question, retrieved evidence, source labels, and explicit instructions about how to use the evidence. A good RAG prompt clearly separates instructions, context, and the user question.">
+<div class="slide-kicker">Prompt construction</div>
+<h1>Build the generation prompt</h1>
+<div class="slide-body">
+<p class="lead">A good RAG prompt clearly separates instructions, context, and the user question.</p>
+<p class="explain">The prompt usually contains the user question, retrieved evidence, source labels, and explicit instructions about how to use the evidence.</p>
+<div class="prompt-box"><div><b>System instruction</b><p>Use only the supplied context when the answer depends on the knowledge base.</p></div><div><b>Retrieved context</b><p>[Source A] ...<br>[Source B] ...</p></div><div><b>User question</b><p>...</p></div></div>
+</div>
+</section><section class="slide" data-slide="39" data-file="s_module7_slide_39" data-audio="audio/s_module7_slide_39.mp3" data-caption="captions/s_module7_slide_39.vtt" data-transcript="Grounding means the answer should be supported by the retrieved context rather than invented from unsupported assumptions. The prompt can ask the model to say when evidence is insufficient. The retrieved context should constrain the generated answer.">
+<div class="slide-kicker">Generation</div>
+<h1>Grounding the answer</h1>
+<div class="slide-body">
+<p class="lead">The retrieved context should constrain the generated answer.</p>
+<p class="explain">Grounding means the answer should be supported by the retrieved context rather than invented from unsupported assumptions. The prompt can ask the model to say when evidence is insufficient.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="40" data-file="s_module7_slide_40" data-audio="audio/s_module7_slide_40.mp3" data-caption="captions/s_module7_slide_40.vtt" data-transcript="A RAG interface can show the source chunks, document names, links, or section labels that supported the answer. This makes verification easier. Retrieval is more useful when users can inspect the supporting evidence.">
+<div class="slide-kicker">Trust</div>
+<h1>Source attribution and citations</h1>
+<div class="slide-body">
+<p class="lead">Retrieval is more useful when users can inspect the supporting evidence.</p>
+<p class="explain">A RAG interface can show the source chunks, document names, links, or section labels that supported the answer. This makes verification easier.</p>
+<div class="source-answer"><div class="panel"><h3>Answer</h3><p>The response is generated from retrieved passages.</p></div><div class="source-list"><span>Source 1 · policy.pdf · section 4</span><span>Source 2 · faq.html · returns</span></div></div>
+</div>
+</section><section class="slide" data-slide="41" data-file="s_module7_slide_41" data-audio="audio/s_module7_slide_41.mp3" data-caption="captions/s_module7_slide_41.vtt" data-transcript="We can understand RAG without a large external dataset. A small Python list of short documents is enough to demonstrate chunking, embeddings, similarity, and retrieval. A tiny corpus makes every step visible.">
+<div class="slide-kicker">Python workflow</div>
+<h1>A small built-in corpus</h1>
+<div class="slide-body">
+<p class="lead">A tiny corpus makes every step visible.</p>
+<p class="explain">We can understand RAG without a large external dataset. A small Python list of short documents is enough to demonstrate chunking, embeddings, similarity, and retrieval.</p>
+
+</div>
+</section><section class="slide" data-slide="42" data-file="s_module7_slide_42" data-audio="audio/s_module7_slide_42.mp3" data-caption="captions/s_module7_slide_42.vtt" data-transcript="A beginner-friendly local example can use sentence-transformers for embeddings, NumPy for similarity, and optionally FAISS for faster vector search. Keep the first implementation small and transparent.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Install and import the basic tools</h1>
+<div class="slide-body">
+<p class="lead">Keep the first implementation small and transparent.</p>
+<p class="explain">A beginner-friendly local example can use sentence-transformers for embeddings, NumPy for similarity, and optionally FAISS for faster vector search.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>pip install sentence-transformers numpy faiss-cpu</code></pre></div>
+</div>
+</section><section class="slide" data-slide="43" data-file="s_module7_slide_43" data-audio="audio/s_module7_slide_43.mp3" data-caption="captions/s_module7_slide_43.vtt" data-transcript="Represent each chunk as a dictionary with text and metadata. This simple structure makes it easy to inspect exactly what will be embedded and returned. Keep the text and its source information together.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Create chunks with metadata</h1>
+<div class="slide-body">
+<p class="lead">Keep the text and its source information together.</p>
+<p class="explain">Represent each chunk as a dictionary with text and metadata. This simple structure makes it easy to inspect exactly what will be embedded and returned.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>chunks = [
+    {&quot;text&quot;: &quot;RAG combines retrieval with generation.&quot;, &quot;source&quot;: &quot;notes_1&quot;},
+    {&quot;text&quot;: &quot;Vector databases support similarity search.&quot;, &quot;source&quot;: &quot;notes_2&quot;},
+    {&quot;text&quot;: &quot;Reranking can improve the order of retrieved results.&quot;, &quot;source&quot;: &quot;notes_3&quot;},
+]
+
+texts = [item[&quot;text&quot;] for item in chunks]
+print(texts)</code></pre></div>
+</div>
+</section><section class="slide" data-slide="44" data-file="s_module7_slide_44" data-audio="audio/s_module7_slide_44.mp3" data-caption="captions/s_module7_slide_44.vtt" data-transcript="The embedding model converts the chunk texts into a matrix where each row is one vector. Normalizing the vectors makes cosine-style comparison straightforward. After embedding, the corpus becomes searchable in vector space.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Embed the chunks</h1>
+<div class="slide-body">
+<p class="lead">After embedding, the corpus becomes searchable in vector space.</p>
+<p class="explain">The embedding model converts the chunk texts into a matrix where each row is one vector. Normalizing the vectors makes cosine-style comparison straightforward.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer(&quot;all-MiniLM-L6-v2&quot;)
+embeddings = model.encode(
+    texts,
+    normalize_embeddings=True
+)
+
+print(embeddings.shape)</code></pre></div>
+</div>
+</section><section class="slide" data-slide="45" data-file="s_module7_slide_45" data-audio="audio/s_module7_slide_45.mp3" data-caption="captions/s_module7_slide_45.vtt" data-transcript="For a small teaching example, NumPy can compute similarities directly. This makes the retrieval math easy to inspect before introducing a specialized index. Brute-force search is fine for learning and very small collections.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Retrieve with NumPy</h1>
+<div class="slide-body">
+<p class="lead">Brute-force search is fine for learning and very small collections.</p>
+<p class="explain">For a small teaching example, NumPy can compute similarities directly. This makes the retrieval math easy to inspect before introducing a specialized index.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>import numpy as np
+
+query = &quot;How does RAG search for useful information?&quot;
+query_vec = model.encode([query], normalize_embeddings=True)[0]
+
+scores = embeddings @ query_vec
+order = np.argsort(scores)[::-1]
+
+for i in order[:2]:
+    print(round(float(scores[i]), 3), chunks[i][&quot;text&quot;])</code></pre></div>
+</div>
+</section><section class="slide" data-slide="46" data-file="s_module7_slide_46" data-audio="audio/s_module7_slide_46.mp3" data-caption="captions/s_module7_slide_46.vtt" data-transcript="Always look at the actual chunks returned for several queries. Retrieval quality is easier to improve when we inspect the evidence instead of looking only at a final generated answer. Debug retrieval before debugging generation.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Inspect the top results</h1>
+<div class="slide-body">
+<p class="lead">Debug retrieval before debugging generation.</p>
+<p class="explain">Always look at the actual chunks returned for several queries. Retrieval quality is easier to improve when we inspect the evidence instead of looking only at a final generated answer.</p>
+
+</div>
+</section><section class="slide" data-slide="47" data-file="s_module7_slide_47" data-audio="audio/s_module7_slide_47.mp3" data-caption="captions/s_module7_slide_47.vtt" data-transcript="FAISS provides efficient nearest-neighbor search over vectors. The workflow stays conceptually the same: create vectors, add them to an index, embed a query, and search. An index changes search efficiency, not the basic RAG logic.">
+<div class="slide-kicker">Vector search</div>
+<h1>Move to FAISS when the corpus grows</h1>
+<div class="slide-body">
+<p class="lead">An index changes search efficiency, not the basic RAG logic.</p>
+<p class="explain">FAISS provides efficient nearest-neighbor search over vectors. The workflow stays conceptually the same: create vectors, add them to an index, embed a query, and search.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>import faiss
+import numpy as np
+
+index = faiss.IndexFlatIP(embeddings.shape[1])
+index.add(np.asarray(embeddings, dtype=&quot;float32&quot;))
+
+q = np.asarray([query_vec], dtype=&quot;float32&quot;)
+scores, ids = index.search(q, k=2)
+
+print(ids)
+print(scores)</code></pre></div>
+</div>
+</section><section class="slide" data-slide="48" data-file="s_module7_slide_48" data-audio="audio/s_module7_slide_48.mp3" data-caption="captions/s_module7_slide_48.vtt" data-transcript="A simple system can filter candidate chunks by metadata before similarity scoring. Production vector databases provide this capability through query filters. Structured filters and vector similarity can work together.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Metadata filtering in practice</h1>
+<div class="slide-body">
+<p class="lead">Structured filters and vector similarity can work together.</p>
+<p class="explain">A simple system can filter candidate chunks by metadata before similarity scoring. Production vector databases provide this capability through query filters.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>allowed_source = &quot;notes_2&quot;
+
+candidates = [
+    item for item in chunks
+    if item[&quot;source&quot;] == allowed_source
+]
+
+print(candidates)</code></pre></div>
+</div>
+</section><section class="slide" data-slide="49" data-file="s_module7_slide_49" data-audio="audio/s_module7_slide_49.mp3" data-caption="captions/s_module7_slide_49.vtt" data-transcript="Take the retrieved chunks, label each source, join them into a context block, and place that context beside the user question. Prompt construction connects retrieval to generation.">
+<div class="slide-kicker">Python workflow</div>
+<h1>Build a simple RAG prompt</h1>
+<div class="slide-body">
+<p class="lead">Prompt construction connects retrieval to generation.</p>
+<p class="explain">Take the retrieved chunks, label each source, join them into a context block, and place that context beside the user question.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>retrieved = [chunks[i] for i in order[:2]]
+context = &quot;\n\n&quot;.join(
+    f&quot;[{item[&#x27;source&#x27;]}] {item[&#x27;text&#x27;]}&quot;
+    for item in retrieved
+)
+
+prompt = f&quot;&quot;&quot;Use the context below to answer the question.
+If the context is not enough, say so.
+
+Context:
+{context}
+
+Question:
+{query}
+&quot;&quot;&quot;
+
+print(prompt)</code></pre></div>
+</div>
+</section><section class="slide" data-slide="50" data-file="s_module7_slide_50" data-audio="audio/s_module7_slide_50.mp3" data-caption="captions/s_module7_slide_50.vtt" data-transcript="The same retrieved context can be passed to a local model, hosted model, or API. Keep the retrieval layer modular so the generator can change without rebuilding the entire knowledge pipeline. Separate retrieval logic from model-provider logic.">
+<div class="slide-kicker">Generation workflow</div>
+<h1>Connect the prompt to a language model</h1>
+<div class="slide-body">
+<p class="lead">Separate retrieval logic from model-provider logic.</p>
+<p class="explain">The same retrieved context can be passed to a local model, hosted model, or API. Keep the retrieval layer modular so the generator can change without rebuilding the entire knowledge pipeline.</p>
+<div class="code-card"><div class="code-head"><span>Python · VS Code</span><button class="copy-code" type="button">Copy</button></div><pre><code>def generate_answer(prompt, llm_call):
+    return llm_call(prompt)
+
+# Keep retrieval separate from the model provider.
+# llm_call can later point to a local model or an API.</code></pre></div>
+</div>
+</section><section class="slide" data-slide="51" data-file="s_module7_slide_51" data-audio="audio/s_module7_slide_51.mp3" data-caption="captions/s_module7_slide_51.vtt" data-transcript="Retrieval can be evaluated before generation. Useful questions include whether a relevant chunk appears in the top-k results and how highly it is ranked. If retrieval fails, generation cannot recover missing evidence reliably.">
+<div class="slide-kicker">Evaluation</div>
+<h1>Evaluate retrieval separately</h1>
+<div class="slide-body">
+<p class="lead">If retrieval fails, generation cannot recover missing evidence reliably.</p>
+<p class="explain">Retrieval can be evaluated before generation. Useful questions include whether a relevant chunk appears in the top-k results and how highly it is ranked.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="52" data-file="s_module7_slide_52" data-audio="audio/s_module7_slide_52.mp3" data-caption="captions/s_module7_slide_52.vtt" data-transcript="Recall@k measures whether relevant evidence is found, Precision@k measures how much of the retrieved set is useful, and Mean Reciprocal Rank rewards placing the first relevant result near the top. Retrieval metrics help isolate search quality from answer quality.">
+<div class="slide-kicker">Evaluation metrics</div>
+<h1>Recall@k, Precision@k, and MRR</h1>
+<div class="slide-body">
+<p class="lead">Retrieval metrics help isolate search quality from answer quality.</p>
+<p class="explain">Recall@k measures whether relevant evidence is found, Precision@k measures how much of the retrieved set is useful, and Mean Reciprocal Rank rewards placing the first relevant result near the top.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="53" data-file="s_module7_slide_53" data-audio="audio/s_module7_slide_53.mp3" data-caption="captions/s_module7_slide_53.vtt" data-transcript="Generation can be checked for correctness, relevance, completeness, groundedness, and citation support. Human review is often valuable for important domain-specific questions. A fluent answer is not automatically a grounded answer.">
+<div class="slide-kicker">Evaluation</div>
+<h1>Evaluate the generated answer</h1>
+<div class="slide-body">
+<p class="lead">A fluent answer is not automatically a grounded answer.</p>
+<p class="explain">Generation can be checked for correctness, relevance, completeness, groundedness, and citation support. Human review is often valuable for important domain-specific questions.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="54" data-file="s_module7_slide_54" data-audio="audio/s_module7_slide_54.mp3" data-caption="captions/s_module7_slide_54.vtt" data-transcript="Failures can come from poor source data, weak chunking, bad embeddings, incorrect filters, low-quality retrieval, excessive context, weak prompts, or unsupported generation. Treat RAG as a pipeline and locate the stage where quality breaks.">
+<div class="slide-kicker">Debugging</div>
+<h1>Common RAG failure modes</h1>
+<div class="slide-body">
+<p class="lead">Treat RAG as a pipeline and locate the stage where quality breaks.</p>
+<p class="explain">Failures can come from poor source data, weak chunking, bad embeddings, incorrect filters, low-quality retrieval, excessive context, weak prompts, or unsupported generation.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="55" data-file="s_module7_slide_55" data-audio="audio/s_module7_slide_55.mp3" data-caption="captions/s_module7_slide_55.vtt" data-transcript="If the correct evidence was not retrieved, improve search. If the correct evidence was retrieved but ignored or misused, improve prompt construction or generation. Do not change the LLM when the real problem is retrieval.">
+<div class="slide-kicker">Debugging</div>
+<h1>Retrieval failure vs generation failure</h1>
+<div class="slide-body">
+<p class="lead">Do not change the LLM when the real problem is retrieval.</p>
+<p class="explain">If the correct evidence was not retrieved, improve search. If the correct evidence was retrieved but ignored or misused, improve prompt construction or generation.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="56" data-file="s_module7_slide_56" data-audio="audio/s_module7_slide_56.mp3" data-caption="captions/s_module7_slide_56.vtt" data-transcript="Knowledge changes. A production system needs a process for adding new documents, updating changed content, deleting stale chunks, and rebuilding affected embeddings. RAG quality depends on keeping the index synchronized with the source of truth.">
+<div class="slide-kicker">Operations</div>
+<h1>Freshness and updates</h1>
+<div class="slide-body">
+<p class="lead">RAG quality depends on keeping the index synchronized with the source of truth.</p>
+<p class="explain">Knowledge changes. A production system needs a process for adding new documents, updating changed content, deleting stale chunks, and rebuilding affected embeddings.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="57" data-file="s_module7_slide_57" data-audio="audio/s_module7_slide_57.mp3" data-caption="captions/s_module7_slide_57.vtt" data-transcript="Retrieved documents are data, but they can contain text that looks like instructions. A RAG system should separate trusted system instructions from untrusted retrieved content. Treat retrieved text as evidence, not as authority over the application.">
+<div class="slide-kicker">Safety</div>
+<h1>Security: retrieved text can contain instructions</h1>
+<div class="slide-body">
+<p class="lead">Treat retrieved text as evidence, not as authority over the application.</p>
+<p class="explain">Retrieved documents are data, but they can contain text that looks like instructions. A RAG system should separate trusted system instructions from untrusted retrieved content.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="58" data-file="s_module7_slide_58" data-audio="audio/s_module7_slide_58.mp3" data-caption="captions/s_module7_slide_58.vtt" data-transcript="The retriever should not return information a user is not authorized to see. Access rules are most reliable when enforced before generation, not after sensitive text has already entered the prompt. Authorization belongs in retrieval and data access, not only in the final UI.">
+<div class="slide-kicker">Safety</div>
+<h1>Privacy and access control</h1>
+<div class="slide-body">
+<p class="lead">Authorization belongs in retrieval and data access, not only in the final UI.</p>
+<p class="explain">The retriever should not return information a user is not authorized to see. Access rules are most reliable when enforced before generation, not after sensitive text has already entered the prompt.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="59" data-file="s_module7_slide_59" data-audio="audio/s_module7_slide_59.mp3" data-caption="captions/s_module7_slide_59.vtt" data-transcript="Embedding the query, searching the index, reranking, adding context, and generating the answer all contribute to latency and cost. Measure each stage separately. A useful RAG system balances quality, speed, and cost.">
+<div class="slide-kicker">Operations</div>
+<h1>Latency and cost</h1>
+<div class="slide-body">
+<p class="lead">A useful RAG system balances quality, speed, and cost.</p>
+<p class="explain">Embedding the query, searching the index, reranking, adding context, and generating the answer all contribute to latency and cost. Measure each stage separately.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section><section class="slide" data-slide="60" data-file="s_module7_slide_60" data-audio="audio/s_module7_slide_60.mp3" data-caption="captions/s_module7_slide_60.vtt" data-transcript="Define the knowledge source, clean it, choose chunking, add metadata, select embeddings, build the index, retrieve, rerank when useful, construct grounded prompts, evaluate, and monitor updates. RAG works best when each stage is simple enough to inspect and test.">
+<div class="slide-kicker">Recap</div>
+<h1>A practical architecture checklist</h1>
+<div class="slide-body">
+<p class="lead">RAG works best when each stage is simple enough to inspect and test.</p>
+<p class="explain">Define the knowledge source, clean it, choose chunking, add metadata, select embeddings, build the index, retrieve, rerank when useful, construct grounded prompts, evaluate, and monitor updates.</p>
+<div class="callout">Focus on the decision this step supports, not only the terminology.</div>
+</div>
+</section>
+</main>
+<footer class="bottom">
+<div class="audio-block"><div class="narration-controls"><button class="narration-btn" id="narrationBtn" type="button" onclick="toggleNarrationMode()">Auto-play On</button><button class="narration-btn primary" id="ccBtn" type="button" aria-pressed="true" onclick="toggleCaptions()">CC On</button><button class="narration-btn" type="button" onclick="openTranscript()">Transcript</button><label class="speed-control" for="speedSelect"><span>Speed</span><select class="narration-speed" id="speedSelect"><option value="0.85">0.85x</option><option selected value="1">1.0x</option><option value="1.15">1.15x</option><option value="1.3">1.3x</option></select></label></div><div class="caption-strip" id="captionStrip" aria-live="polite">Captions will appear here during narration.</div><div class="audio-player" id="audioPlayer"><button class="audio-play primary-audio" id="audioPlay" type="button">Play</button><span class="audio-title" id="audioStatus">Slide narration</span><input class="audio-seek" id="audioSeek" type="range" min="0" max="100" value="0" aria-label="Audio position"><span class="audio-time" id="audioTime">0:00 / 0:00</span><audio id="audio" preload="metadata"></audio></div></div>
+<div class="presentation-nav"><div class="footer-left"><button class="nav-button" type="button" onclick="prevSlide()">‹</button></div><div class="bottom-nav"><select aria-label="Go to slide" id="slideSelect"></select><div class="bottom-progress"><div class="mini-progress"><span id="miniProgress"></span></div><div class="counter" id="counter">1 / 60</div></div></div><div class="footer-right"><button class="nav-button" type="button" onclick="nextSlide()">›</button></div></div>
+</footer>
+<aside class="transcript-panel" id="transcriptPanel"><div class="transcript-head"><h3 id="transcriptTitle">Slide 1 Narration</h3><button type="button" onclick="closeTranscript()">Close</button></div><div class="transcript-body"><p id="transcriptText"></p><div class="transcript-source" id="transcriptSource">Narration transcript</div></div></aside>
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>Course Modules</h2><button onclick="toggleDrawer()">×</button></div><nav class="module-links"><a href="M4.html"><span>04 Text Representation & Embeddings</span><strong>Module 4 ›</strong></a><a href="module5.html"><span>05 Text Classification</span><strong>Module 5 ›</strong></a><a href="s_module6.html"><span>06 Transformers and Modern NLP</span><strong>Previous ›</strong></a><a class="current" href="s_module7.html" aria-current="page"><span>07 RAG and Vector Databases</span><strong>Current ›</strong></a></nav></aside>
+<script>
+const slides=[...document.querySelectorAll('.slide')];const total=slides.length;let current=Number(localStorage.getItem('ian620_module7_slide')||'0');current=Math.max(0,Math.min(current,total-1));let autoHide=false,ccOpen=true,narrationMode=true;const audio=document.getElementById('audio'),themeBtn=document.getElementById('themeBtn'),ccBtn=document.getElementById('ccBtn'),narrationBtn=document.getElementById('narrationBtn'),slideSelect=document.getElementById('slideSelect'),speedSelect=document.getElementById('speedSelect'),captionStrip=document.getElementById('captionStrip'),autoHideBtn=document.getElementById('autoHideBtn'),audioSeek=document.getElementById('audioSeek'),audioTime=document.getElementById('audioTime'),audioPlay=document.getElementById('audioPlay');let captionCues=[],transcriptManifest=null,transcriptManifestSource='';
+function toggleSettingsMenu(force){const m=document.getElementById('settingsMenu'),b=document.getElementById('settingsBtn');const open=typeof force==='boolean'?force:!m.classList.contains('open');m.classList.toggle('open',open);b.setAttribute('aria-expanded',open?'true':'false')}document.addEventListener('click',e=>{const w=document.querySelector('.settings-wrap');if(w&&!w.contains(e.target))toggleSettingsMenu(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleSettingsMenu(false)});
+function syncDisplayState(){document.body.classList.toggle('auto-hide',autoHide);document.body.classList.toggle('cc-off',!ccOpen);autoHideBtn.textContent=autoHide?'Auto-hide On':'Auto-hide Off';ccBtn.textContent=ccOpen?'CC On':'CC Off';ccBtn.classList.toggle('primary',ccOpen);narrationBtn.textContent=narrationMode?'Auto-play On':'Auto-play Off';if(!ccOpen)captionStrip.textContent=''}function toggleAutoHide(){autoHide=!autoHide;syncDisplayState()}function toggleCaptions(){ccOpen=!ccOpen;syncDisplayState();updateCaptionText(slides[current])}function toggleNarrationMode(){narrationMode=!narrationMode;syncDisplayState()}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}function setTheme(dark){document.body.classList.toggle('dark',dark);themeBtn.textContent=dark?'Light mode':'Dark mode';localStorage.setItem('ian620_module7_theme',dark?'dark':'light')}themeBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark')));setTheme(localStorage.getItem('ian620_module7_theme')==='dark');
+function fileBase(slide){return slide.dataset.file}function audioPath(slide){return `audio/${fileBase(slide)}.mp3`}function captionPath(slide){return `captions/${fileBase(slide)}.vtt`}function titleOf(slide,i){return slide.querySelector('h1')?.innerText.trim()||`Slide ${i+1}`}
+function parseTime(v){const p=v.trim().replace(',','.').split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:Number(v)||0}function parseVtt(t){const blocks=t.replace(/^﻿?WEBVTT[^
+]*
+?/i,'').split(/
+\s*
+/),out=[];for(const b of blocks){const l=b.split(/
+?
+/).map(x=>x.trim()).filter(Boolean),i=l.findIndex(x=>x.includes('-->'));if(i<0)continue;const [a,r]=l[i].split('-->'),e=r.trim().split(/\s+/)[0],tx=l.slice(i+1).join(' ').replace(/<[^>]+>/g,'').trim();if(tx)out.push({start:parseTime(a),end:parseTime(e),text:tx})}return out}function syncCaption(){if(!ccOpen)return;const t=audio.currentTime||0,c=captionCues.find(x=>t>=x.start&&t<=x.end);captionStrip.textContent=c?c.text:(!audio.paused&&captionCues.length?'':'Captions are on. Start narration to follow this slide.')}async function updateCaptionText(slide){captionCues=[];if(!ccOpen)return;try{const r=await fetch(captionPath(slide),{cache:'no-store'});if(!r.ok)throw 0;captionCues=parseVtt(await r.text());syncCaption()}catch{captionStrip.textContent='Captions will appear here during narration.'}}
+function normalizeEntry(v){if(typeof v==='string')return v;if(!v||typeof v!=='object')return '';return v.transcript||v.narration||v.text||v.script||v.notes||''}function transcriptFromManifest(index,slide){if(!transcriptManifest)return '';const num=index+1,base=fileBase(slide);if(Array.isArray(transcriptManifest.slides)){const x=transcriptManifest.slides.find(y=>Number(y.slide||y.number)===num||y.file===base||y.id===base);return normalizeEntry(x)}return ''}async function loadTranscriptManifest(){for(const p of ['s_module7_manifest.json','manifest.json']){try{const r=await fetch(p,{cache:'no-store'});if(!r.ok)continue;transcriptManifest=await r.json();transcriptManifestSource=p;return}catch{}}}function refreshTranscriptPanel(){const s=slides[current],m=transcriptFromManifest(current,s),f=s.dataset.transcript||'';document.getElementById('transcriptTitle').textContent=`Slide ${current+1} Narration - ${titleOf(s,current)}`;document.getElementById('transcriptText').textContent=m||f||'Transcript will appear here after narration text is added.';document.getElementById('transcriptSource').textContent=m?`Loaded from ${transcriptManifestSource}`:'Narration transcript for the current slide'}function openTranscript(){refreshTranscriptPanel();document.getElementById('transcriptPanel').classList.add('open')}function closeTranscript(){document.getElementById('transcriptPanel').classList.remove('open')}
+function showSlide(i,user=false){slides.forEach(s=>s.classList.remove('active'));current=Math.max(0,Math.min(i,total-1));slides[current].classList.add('active');localStorage.setItem('ian620_module7_slide',current);const pct=Math.round(((current+1)/total)*100);document.getElementById('statusText').textContent=`Slide ${current+1}/${total}`;document.getElementById('progressPct').textContent=`${pct}%`;document.getElementById('miniProgress').style.width=`${pct}%`;document.getElementById('counter').textContent=`${current+1} / ${total}`;slideSelect.value=String(current);audio.pause();audio.src=audioPath(slides[current]);audio.playbackRate=Number(speedSelect.value||'1');document.getElementById('audioStatus').textContent=`Slide ${current+1} narration`;updateCaptionText(slides[current]);if(document.getElementById('transcriptPanel').classList.contains('open'))refreshTranscriptPanel();if(user&&narrationMode)audio.play().catch(()=>{})}function nextSlide(){showSlide(current+1,true)}function prevSlide(){showSlide(current-1,true)}function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}function startNarration(){audio.playbackRate=Number(speedSelect.value||'1');audio.play().catch(()=>{});updateCaptionText(slides[current])}
+function formatTime(s){if(!Number.isFinite(s))return'0:00';const m=Math.floor(s/60),x=Math.floor(s%60).toString().padStart(2,'0');return `${m}:${x}`}function refreshAudioUi(){const d=Number.isFinite(audio.duration)?audio.duration:0,t=Number.isFinite(audio.currentTime)?audio.currentTime:0;audioSeek.value=d>0?String((t/d)*100):'0';audioTime.textContent=`${formatTime(t)} / ${formatTime(d)}`;audioPlay.textContent=audio.paused?'Play':'Pause'}audio.addEventListener('timeupdate',()=>{syncCaption();refreshAudioUi()});audio.addEventListener('play',refreshAudioUi);audio.addEventListener('pause',refreshAudioUi);audio.addEventListener('ended',refreshAudioUi);audio.addEventListener('loadedmetadata',refreshAudioUi);audioSeek.addEventListener('input',()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=(Number(audioSeek.value)/100)*audio.duration});audioPlay.addEventListener('click',()=>{if(audio.paused)startNarration();else audio.pause()});speedSelect.addEventListener('change',()=>audio.playbackRate=Number(speedSelect.value));
+slideSelect.innerHTML=slides.map((s,i)=>`<option value="${i}">${i+1}. ${titleOf(s,i)}</option>`).join('');slideSelect.addEventListener('change',()=>showSlide(Number(slideSelect.value),true));document.querySelectorAll('.copy-code').forEach(b=>b.addEventListener('click',async()=>{const code=b.closest('.code-card').querySelector('code').innerText;try{await navigator.clipboard.writeText(code);b.textContent='Copied'}catch{b.textContent='Select + copy'}setTimeout(()=>b.textContent='Copy',1200)}));syncDisplayState();showSlide(current);loadTranscriptManifest().then(()=>{if(document.getElementById('transcriptPanel').classList.contains('open'))refreshTranscriptPanel()});
+window.toggleSettingsMenu=toggleSettingsMenu;window.toggleFullscreen=toggleFullscreen;window.toggleAutoHide=toggleAutoHide;window.toggleCaptions=toggleCaptions;window.toggleNarrationMode=toggleNarrationMode;window.openTranscript=openTranscript;window.closeTranscript=closeTranscript;window.nextSlide=nextSlide;window.prevSlide=prevSlide;window.toggleDrawer=toggleDrawer;
+</script>
+</body></html>
