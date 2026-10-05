@@ -1,11 +1,11 @@
 """
 IAN 620 - Module 7
-Complete RAG workflow using one small student-support knowledge base.
+Complete baseline RAG workflow using the course student-support dataset.
 
 Install:
     pip install pandas numpy sentence-transformers scikit-learn openai python-dotenv
-Optional vector DB:
-    pip install chromadb
+
+This file intentionally uses the same variable and function names used in the slides.
 """
 
 from __future__ import annotations
@@ -17,24 +17,20 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
 
 
 DATA_PATH = Path("data/module7_rag_support.csv")
-EMBED_MODEL = "all-MiniLM-L6-v2"
+EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 def clean_text(text: str) -> str:
-    """Remove repeated whitespace while preserving the words."""
+    """Remove repeated whitespace while keeping the content intact."""
     return re.sub(r"\s+", " ", str(text)).strip()
 
 
 def chunk_text(text: str, chunk_size: int = 55, overlap: int = 15) -> list[str]:
-    """Simple word-based chunker for teaching."""
+    """Simple word-based overlapping chunker used for teaching."""
     words = clean_text(text).split()
-    if not words:
-        return []
-
     chunks = []
     start = 0
 
@@ -51,88 +47,83 @@ def chunk_text(text: str, chunk_size: int = 55, overlap: int = 15) -> list[str]:
 
 
 def build_chunk_table(df: pd.DataFrame) -> pd.DataFrame:
-    """Create one row per chunk and keep the source metadata."""
-    rows = []
+    """Create one row per chunk and preserve source metadata."""
+    chunk_rows = []
 
     for _, row in df.iterrows():
-        pieces = chunk_text(row["text"])
+        pieces = chunk_text(row["clean_text"])
 
-        for chunk_number, chunk in enumerate(pieces, start=1):
-            rows.append(
+        for i, chunk in enumerate(pieces, start=1):
+            chunk_rows.append(
                 {
-                    "chunk_id": f'{row["doc_id"]}_c{chunk_number:02d}',
+                    "chunk_id": f'{row["doc_id"]}_chunk_{i}',
                     "doc_id": row["doc_id"],
                     "title": row["title"],
                     "topic": row["topic"],
+                    "permission": row["permission"],
                     "updated_at": row["updated_at"],
                     "source": row["source"],
-                    "text": chunk,
+                    "chunk_text": chunk,
                 }
             )
 
-    return pd.DataFrame(rows)
+    return pd.DataFrame(chunk_rows)
 
 
-def create_embeddings(
-    chunks: pd.DataFrame,
-    model: SentenceTransformer,
-) -> np.ndarray:
-    """Create one embedding vector for each chunk."""
-    return model.encode(
-        chunks["text"].tolist(),
-        normalize_embeddings=True,
-        show_progress_bar=False,
-    )
-
-
-def retrieve(
+def dense_retrieve(
     question: str,
-    chunks: pd.DataFrame,
-    chunk_embeddings: np.ndarray,
+    chunks_df: pd.DataFrame,
+    chunk_vectors: np.ndarray,
     model: SentenceTransformer,
     top_k: int = 3,
-    topic: str | None = None,
 ) -> pd.DataFrame:
-    """Retrieve the most similar chunks, with an optional metadata filter."""
-    query_embedding = model.encode(
+    """Retrieve top chunks with normalized dense embeddings."""
+    q_vec = model.encode(
         [question],
         normalize_embeddings=True,
         show_progress_bar=False,
-    )
+    ).astype("float32")
 
-    scores = cosine_similarity(query_embedding, chunk_embeddings)[0]
+    scores = chunk_vectors @ q_vec[0]
+    top_idx = np.argsort(scores)[::-1][:top_k]
 
-    results = chunks.copy()
-    results["score"] = scores
+    results = chunks_df.iloc[top_idx].copy()
+    results["score"] = scores[top_idx]
 
-    if topic:
-        results = results[results["topic"] == topic]
-
-    return (
-        results.sort_values("score", ascending=False)
-        .head(top_k)
-        .reset_index(drop=True)
-    )
+    return results[
+        [
+            "chunk_id",
+            "doc_id",
+            "title",
+            "topic",
+            "permission",
+            "updated_at",
+            "source",
+            "score",
+            "chunk_text",
+        ]
+    ]
 
 
 def build_prompt(question: str, retrieved: pd.DataFrame) -> str:
-    """Create a grounded prompt from retrieved chunks."""
-    context_parts = []
+    """Build a grounded, source-aware prompt."""
+    context_blocks = []
 
-    for i, row in retrieved.iterrows():
-        context_parts.append(
-            f"[Source {i + 1}: {row['title']} | {row['source']}]\n{row['text']}"
+    for i, row in retrieved.reset_index(drop=True).iterrows():
+        context_blocks.append(
+            f"[{i + 1}] {row['title']} | source: {row['source']}\n"
+            f"{row['chunk_text']}"
         )
 
-    context = "\n\n".join(context_parts)
+    context = "\n\n".join(context_blocks)
 
     return f"""You are a student-support assistant.
 
-Use only the context below to answer the question.
+Use only the retrieved context below.
 If the context does not contain enough information, say:
-"I do not have enough information in the provided sources."
+"I do not have enough information in the retrieved sources."
 
-Cite the source number(s) you used.
+Cite the source number(s) you used, such as [1] or [2].
 
 CONTEXT
 {context}
@@ -141,31 +132,35 @@ QUESTION
 {question}
 
 ANSWER
-"""
+""".strip()
 
 
 def generate_answer(prompt: str) -> str:
     """
-    Optional LLM step using an OpenAI-compatible API.
+    Optional LLM step using the OpenAI Python client.
 
     Environment variables:
       OPENAI_API_KEY
       RAG_MODEL           default: gpt-4.1-mini
-      OPENAI_BASE_URL     optional for compatible local/hosted servers
+      OPENAI_BASE_URL     optional for an OpenAI-compatible endpoint
     """
     from openai import OpenAI
 
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         return (
-            "No OPENAI_API_KEY was found. Retrieval and prompt construction worked, "
-            "but the LLM call was skipped."
+            "No OPENAI_API_KEY was found. Retrieval and prompt construction "
+            "worked, but the LLM call was skipped."
         )
 
     base_url = os.getenv("OPENAI_BASE_URL")
     model_name = os.getenv("RAG_MODEL", "gpt-4.1-mini")
 
-    client = OpenAI(api_key=api_key, base_url=base_url) if base_url else OpenAI(api_key=api_key)
+    client = (
+        OpenAI(api_key=api_key, base_url=base_url)
+        if base_url
+        else OpenAI(api_key=api_key)
+    )
 
     response = client.chat.completions.create(
         model=model_name,
@@ -178,16 +173,16 @@ def generate_answer(prompt: str) -> str:
 
 def answer_question(
     question: str,
-    chunks: pd.DataFrame,
-    chunk_embeddings: np.ndarray,
+    chunks_df: pd.DataFrame,
+    chunk_vectors: np.ndarray,
     model: SentenceTransformer,
     top_k: int = 3,
 ) -> dict:
-    """Complete minimal RAG workflow."""
-    retrieved = retrieve(
+    """Run the complete baseline RAG workflow."""
+    retrieved = dense_retrieve(
         question,
-        chunks,
-        chunk_embeddings,
+        chunks_df,
+        chunk_vectors,
         model,
         top_k=top_k,
     )
@@ -197,41 +192,53 @@ def answer_question(
 
     return {
         "question": question,
-        "retrieved": retrieved,
-        "prompt": prompt,
         "answer": answer,
+        "sources": retrieved[
+            ["chunk_id", "title", "source", "score"]
+        ].to_dict("records"),
+        "retrieved_context": retrieved,
+        "prompt": prompt,
     }
 
 
 def main() -> None:
-    docs = pd.read_csv(DATA_PATH)
-    docs["text"] = docs["text"].apply(clean_text)
+    df = pd.read_csv(DATA_PATH)
+    df["clean_text"] = df["text"].apply(clean_text)
 
-    chunks = build_chunk_table(docs)
+    chunks_df = build_chunk_table(df)
 
     print("\nDOCUMENTS")
-    print(docs[["doc_id", "title", "topic"]])
+    print(df[["doc_id", "title", "topic", "permission"]])
 
     print("\nCHUNKS")
-    print(chunks[["chunk_id", "title", "topic", "text"]].head())
+    print(
+        chunks_df[
+            ["chunk_id", "doc_id", "title", "topic", "chunk_text"]
+        ].head()
+    )
 
     model = SentenceTransformer(EMBED_MODEL)
-    chunk_embeddings = create_embeddings(chunks, model)
+
+    chunk_vectors = model.encode(
+        chunks_df["chunk_text"].tolist(),
+        normalize_embeddings=True,
+        show_progress_bar=False,
+    ).astype("float32")
 
     question = "What should I do before registering for an internship?"
 
     result = answer_question(
         question,
-        chunks,
-        chunk_embeddings,
+        chunks_df,
+        chunk_vectors,
         model,
         top_k=3,
     )
 
     print("\nRETRIEVED CHUNKS")
     print(
-        result["retrieved"][
-            ["score", "chunk_id", "title", "source", "text"]
+        result["retrieved_context"][
+            ["score", "doc_id", "title", "source", "chunk_text"]
         ].to_string(index=False)
     )
 
