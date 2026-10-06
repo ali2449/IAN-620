@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.222
+There are many vector-search tools, and students do not need to memorize every product.
+
+00:00:06.222 --> 00:00:09.587
+Instead, focus on the categories and the engineering tradeoffs.
+
+00:00:09.587 --> 00:00:15.332
+FAISS is a fast local vector-search library, but it is not a full database.
+
+00:00:15.332 --> 00:00:18.747
+Chroma is convenient for local prototypes.
+
+00:00:18.747 --> 00:00:23.442
+Qdrant is a vector database with strong metadata filtering.
+
+00:00:23.442 --> 00:00:31.077
+pgvector keeps vector search inside PostgreSQL, which can be attractive for teams already using relational
+
+00:00:31.077 --> 00:00:34.037
+data. [tts-break] Pinecone is a managed cloud service.
+
+00:00:34.037 --> 00:00:38.982
+Weaviate supports vector and hybrid search with a broader platform around it.
+
+00:00:38.982 --> 00:00:43.682
+Milvus and Zilliz are designed for larger-scale vector workloads.
+
+00:00:43.682 --> 00:00:48.697
+The syntax changes from product to product, but the pattern stays familiar:
+
+00:00:48.697 --> 00:00:55.627
+create or connect to a collection or index, insert vectors with metadata, embed the query,
+
+00:00:55.627 --> 00:00:59.707
+search for nearby vectors, and return the associated text.
+
+00:00:59.707 --> 00:01:02.960
+Choose based on the project, not on popularity.

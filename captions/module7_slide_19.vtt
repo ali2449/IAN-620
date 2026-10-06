@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.026 --> 00:00:05.032
+A similarity score is useful, but it should never be the only thing you inspect.
+
+00:00:05.032 --> 00:00:11.592
+Look at the rank, the source title, the actual retrieved text, and the score together.
+
+00:00:11.592 --> 00:00:18.387
+For our internship question, the first result should contain direct evidence about internship registration.
+
+00:00:18.387 --> 00:00:23.772
+A second result about advising may still be related, but it is less specific.
+
+00:00:23.772 --> 00:00:27.957
+A third result with a low score may simply be noise.
+
+00:00:27.957 --> 00:00:32.187
+[tts-break] The exact numbers on your computer may differ from the example.
+
+00:00:32.187 --> 00:00:36.957
+Different embedding models or preprocessing choices can change score ranges.
+
+00:00:36.957 --> 00:00:44.862
+Do not build a production rule such as 'anything above point eight is always good' without evaluating your
+
+00:00:44.862 --> 00:00:47.767
+own data. First ask whether the ranking makes sense.
+
+00:00:47.767 --> 00:00:51.867
+Then collect evaluation questions and study the score distribution.
+
+00:00:51.867 --> 00:00:55.557
+Retrieval quality is about evidence, not just numbers.

@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.010 --> 00:00:04.352
+This slide compares a vague query with a context-aware version.
+
+00:00:04.352 --> 00:00:08.097
+The vague query says, 'Can I still do it late?' On its own,
+
+00:00:08.097 --> 00:00:12.797
+almost any policy about deadlines could look relevant.
+
+00:00:12.797 --> 00:00:19.662
+The context-aware version asks whether a student can request a payment plan after the tuition due date.
+
+00:00:19.662 --> 00:00:27.017
+Now the important concepts are explicit: payment plan, request, tuition due date, and lateness.
+
+00:00:27.017 --> 00:00:29.342
+[tts-break] Run both searches and compare the rankings.
+
+00:00:29.342 --> 00:00:37.842
+This is a useful demonstration because it shows that retrieval quality is partly a query-understanding
+
+00:00:37.842 --> 00:00:43.507
+problem. The embedding model cannot use context that we never provide.
+
+00:00:43.507 --> 00:00:49.307
+In a chat application, the retrieval query may need to be constructed from the current message plus relevant
+
+00:00:49.307 --> 00:00:56.873
+conversation history. The final answer can still respond naturally to the user's original question.

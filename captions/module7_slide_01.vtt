@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.932
+Welcome to Module 7.
+
+00:00:01.932 --> 00:00:07.572
+In this module, we are going to build one complete retrieval-augmented generation, or RAG,
+
+00:00:07.572 --> 00:00:08.607
+system from beginning to end.
+
+00:00:08.607 --> 00:00:15.707
+We will use one small student-support knowledge base throughout the module.
+
+00:00:15.707 --> 00:00:20.672
+That is important because I do not want the examples to feel disconnected.
+
+00:00:20.672 --> 00:00:25.472
+We will start with documents, clean them, split them into chunks, create embeddings,
+
+00:00:25.472 --> 00:00:32.782
+retrieve relevant evidence, build a grounded prompt, and finally generate an answer with sources.
+
+00:00:32.782 --> 00:00:37.067
+[tts-break] The first goal is not to use as many tools as possible.
+
+00:00:37.067 --> 00:00:40.292
+The first goal is to understand the architecture.
+
+00:00:40.292 --> 00:00:45.777
+Once the simple version works, we will move the same ideas into a vector database and then improve
+
+00:00:45.777 --> 00:00:50.692
+retrieval with filtering, keyword search, hybrid search, and reranking.
+
+00:00:50.692 --> 00:00:57.327
+By the end, you should be able to take a small document collection from your own work and
+
+00:00:57.327 --> 00:00:59.520
+build the same workflow yourself.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.197
+A reranker adds a second stage to retrieval.
+
+00:00:03.197 --> 00:00:07.887
+The first-stage retriever is fast and brings back a candidate set,
+
+00:00:07.887 --> 00:00:11.482
+perhaps the top ten or top twenty chunks.
+
+00:00:11.482 --> 00:00:16.127
+Then a cross-encoder looks at the question and each candidate together.
+
+00:00:16.127 --> 00:00:23.097
+Because it evaluates the pair directly, it can often produce a better ranking than vector similarity alone.
+
+00:00:23.097 --> 00:00:25.167
+[tts-break] The tradeoff is speed.
+
+00:00:25.167 --> 00:00:32.362
+Rerankers are usually more expensive than the first-stage search, so we do not run them across the entire
+
+00:00:32.362 --> 00:00:36.732
+corpus. The pattern is retrieve broadly, then rerank narrowly.
+
+00:00:36.732 --> 00:00:43.067
+Use reranking when the correct source is often retrieved but appears too low in the candidate list.
+
+00:00:43.067 --> 00:00:46.847
+Again, evaluation should drive the decision.
+
+00:00:46.847 --> 00:00:50.827
+If the baseline already places the correct chunk at rank one,
+
+00:00:50.827 --> 00:00:55.623
+adding a reranker may increase latency without improving the user experience.

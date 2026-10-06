@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.014 --> 00:00:03.147
+We now create one vector for every chunk.
+
+00:00:03.147 --> 00:00:09.792
+The code sends the chunk text to the Sentence Transformers model and asks for normalized embeddings.
+
+00:00:09.792 --> 00:00:15.572
+The resulting matrix has one row per chunk and one column per embedding dimension.
+
+00:00:15.572 --> 00:00:20.887
+With the model used here, each vector has 384 dimensions.
+
+00:00:20.887 --> 00:00:24.342
+Do not worry about interpreting individual numbers.
+
+00:00:24.342 --> 00:00:27.957
+A single value does not have a useful human meaning.
+
+00:00:27.957 --> 00:00:33.082
+What matters is the position of the entire vector relative to other vectors.
+
+00:00:33.082 --> 00:00:35.697
+[tts-break] The row alignment is important.
+
+00:00:35.697 --> 00:00:41.277
+Row zero in the vector matrix must correspond to row zero in the chunk table.
+
+00:00:41.277 --> 00:00:46.597
+That is how we map a similarity result back to the correct text and metadata.
+
+00:00:46.597 --> 00:00:53.492
+I recommend printing the shapes and adding an assertion that the number of vectors equals the number of
+
+00:00:53.492 --> 00:00:57.273
+chunks. Small checks like this prevent subtle retrieval bugs later.

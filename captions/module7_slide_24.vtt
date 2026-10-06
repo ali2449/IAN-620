@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.016 --> 00:00:03.517
+We can now combine the steps into one reusable function.
+
+00:00:03.517 --> 00:00:09.127
+The function receives a question, calls the dense retriever, builds the grounded prompt,
+
+00:00:09.127 --> 00:00:14.422
+sends that prompt to the language model, and returns both the answer and the sources.
+
+00:00:14.422 --> 00:00:18.017
+This is our first complete RAG workflow.
+
+00:00:18.017 --> 00:00:23.317
+Notice that we also return the retrieved context, not only the final answer.
+
+00:00:23.317 --> 00:00:25.772
+That is an important design choice.
+
+00:00:25.772 --> 00:00:31.062
+[tts-break] When a user reports a bad answer, you want to inspect what the system retrieved.
+
+00:00:31.062 --> 00:00:34.697
+Without that information, debugging becomes guesswork.
+
+00:00:34.697 --> 00:00:40.347
+The function is still small because each responsibility is separated into its own function.
+
+00:00:40.347 --> 00:00:45.642
+This is also how I recommend structuring a larger project.
+
+00:00:45.642 --> 00:00:52.127
+Keep retrieval, prompt construction, generation, and evaluation separable so that you can improve one layer
+
+00:00:52.127 --> 00:00:54.071
+without rewriting everything else.

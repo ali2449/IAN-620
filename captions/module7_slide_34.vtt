@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.116 --> 00:00:04.522
+Pinecone represents a managed-cloud approach to vector search.
+
+00:00:04.522 --> 00:00:10.017
+The application connects using an API key and an existing index.
+
+00:00:10.017 --> 00:00:17.122
+We insert vectors with IDs and metadata, then send a query vector and request the top results.
+
+00:00:17.122 --> 00:00:23.262
+The advantage of a managed service is that much of the infrastructure work is handled for you.
+
+00:00:23.262 --> 00:00:30.512
+The tradeoff is that you now depend on a cloud service, authentication, network access, vendor pricing,
+
+00:00:30.512 --> 00:00:33.037
+and vendor-specific APIs. [tts-break]
+
+00:00:33.037 --> 00:00:40.217
+The code pattern should still look familiar: create embeddings, upsert records, embed the query,
+
+00:00:40.217 --> 00:00:46.892
+and retrieve nearest matches. For students, the goal is not to memorize a cloud SDK.
+
+00:00:46.892 --> 00:00:53.977
+The goal is to recognize the same RAG storage pattern in a different environment.
+
+00:00:53.977 --> 00:01:00.960
+In a real project, the decision would include cost, latency, compliance, availability, and team experience.

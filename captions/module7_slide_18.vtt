@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.138 --> 00:00:04.197
+Before adding a language model, test whether retrieval works.
+
+00:00:04.197 --> 00:00:09.897
+We ask a question about internship registration and inspect the top three results.
+
+00:00:09.897 --> 00:00:16.387
+The expected behavior is that the Internship Registration Checklist appears at or near the top.
+
+00:00:16.387 --> 00:00:19.987
+If it does not, stop here and investigate.
+
+00:00:19.987 --> 00:00:23.262
+This is a crucial RAG debugging principle.
+
+00:00:23.262 --> 00:00:28.647
+The language model cannot reliably answer from evidence that was never retrieved.
+
+00:00:28.647 --> 00:00:33.792
+[tts-break] When the wrong source is returned, look at the document text, chunking, embedding model, filters,
+
+00:00:33.792 --> 00:00:38.362
+and similarity method before changing the prompt.
+
+00:00:38.362 --> 00:00:42.622
+A lot of RAG development is really retrieval engineering.
+
+00:00:42.622 --> 00:00:45.632
+The model is only one layer in the system.
+
+00:00:45.632 --> 00:00:49.707
+So at this stage, treat the retrieved rows as the product.
+
+00:00:49.707 --> 00:00:55.506
+Read them carefully and ask whether you would be comfortable giving those passages to a model as evidence.

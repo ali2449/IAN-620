@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.327
+The module is organized into four parts, and the order matters.
+
+00:00:04.327 --> 00:00:07.042
+Part 1 is the core build.
+
+00:00:07.042 --> 00:00:14.792
+We create a complete working RAG pipeline ourselves with Python, NumPy, and Sentence Transformers.
+
+00:00:14.792 --> 00:00:17.787
+This gives us a transparent baseline.
+
+00:00:17.787 --> 00:00:20.297
+Part 2 is storage.
+
+00:00:20.297 --> 00:00:27.092
+Once the baseline works, we move the vectors into Chroma and then compare other vector-search options.
+
+00:00:27.092 --> 00:00:33.532
+The point is to see that changing the storage layer does not require changing the whole application.
+
+00:00:33.532 --> 00:00:39.127
+[tts-break] Part 3 focuses on retrieval quality.
+
+00:00:39.127 --> 00:00:44.297
+We introduce metadata filters, top-k, BM25, hybrid retrieval, reranking, and query rewriting.
+
+00:00:44.297 --> 00:00:49.712
+Part 4 is evaluation and production thinking.
+
+00:00:49.712 --> 00:00:53.202
+We measure retrieval, diagnose failures, think about security and freshness,
+
+00:00:53.202 --> 00:00:59.557
+and connect the classroom system to the architecture companies use.
+
+00:00:59.557 --> 00:01:03.920
+If Part 1 is clear, the rest of the module becomes much easier.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.019 --> 00:00:03.042
+Here we make the NumPy-to-Chroma transition even more explicit.
+
+00:00:03.042 --> 00:00:03.817
+In the first version, we call a function such as dense_retrieve.
+
+00:00:03.817 --> 00:00:05.407
+In the second version, we call retrieve_chroma.
+
+00:00:05.407 --> 00:00:08.562
+After that, the retrieved rows still move into the same prompt builder and the same generation function.
+
+00:00:08.562 --> 00:00:10.117
+This is what we mean by a swappable retrieval layer.
+
+00:00:10.117 --> 00:00:10.922
+[tts-break] It also gives us a clean way to compare systems.
+
+00:00:10.922 --> 00:00:12.647
+We can run the same evaluation questions against NumPy, Chroma, Qdrant,
+
+00:00:12.647 --> 00:00:13.962
+or another backend and see whether the retrieved evidence changes.
+
+00:00:13.962 --> 00:00:17.632
+In a company, the retrieval interface may be an internal service rather than a Python function,
+
+00:00:17.632 --> 00:00:19.827
+but the architectural idea is the same.
+
+00:00:19.827 --> 00:00:20.202
+The application should depend on what retrieval returns—text, metadata,
+
+00:00:20.202 --> 00:00:23.001
+scores—not on the internal details of how the database performs nearest-neighbor search.

@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.042 --> 00:00:04.387
+Production RAG also introduces security and trust concerns.
+
+00:00:04.387 --> 00:00:11.207
+First, access control. A user should never receive a chunk they are not authorized to see.
+
+00:00:11.207 --> 00:00:18.102
+Permission filters should be applied during retrieval, not after sensitive text has already entered the
+
+00:00:18.102 --> 00:00:22.207
+prompt. Second, retrieved documents are untrusted data.
+
+00:00:22.207 --> 00:00:27.132
+A document might contain text that looks like an instruction to the language model.
+
+00:00:27.132 --> 00:00:34.332
+The system should treat that content as source material, not as a trusted system command.
+
+00:00:34.332 --> 00:00:35.797
+[tts-break] Third, show sources.
+
+00:00:35.797 --> 00:00:41.912
+Returning titles, source paths, chunk IDs, and sometimes retrieval scores helps users and developers verify
+
+00:00:41.912 --> 00:00:48.337
+the evidence. These are not optional cosmetic features.
+
+00:00:48.337 --> 00:00:55.667
+RAG connects language models to organizational data, so the retrieval layer becomes part of the security
+
+00:00:55.667 --> 00:01:00.448
+boundary. Good metadata and careful access design matter as much as embedding quality.

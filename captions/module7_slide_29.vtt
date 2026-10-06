@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.010 --> 00:00:06.087
+This slide emphasizes a software-design principle that matters in real RAG systems.
+
+00:00:06.087 --> 00:00:08.787
+The retriever should be replaceable.
+
+00:00:08.787 --> 00:00:12.332
+Our first version called a NumPy-based function.
+
+00:00:12.332 --> 00:00:15.432
+The Chroma version calls a database query.
+
+00:00:15.432 --> 00:00:21.997
+But the downstream steps—building context, creating the prompt, calling the language model,
+
+00:00:21.997 --> 00:00:26.222
+and displaying sources—can remain almost unchanged.
+
+00:00:26.222 --> 00:00:33.062
+This separation lets a team experiment with storage technologies without rewriting the whole application.
+
+00:00:33.062 --> 00:00:39.957
+[tts-break] For example, a prototype may start with Chroma and later move to Qdrant or pgvector.
+
+00:00:39.957 --> 00:00:46.102
+If retrieval is hidden behind a clean function or service, that migration is much easier.
+
+00:00:46.102 --> 00:00:53.737
+So when you design your own RAG code, avoid mixing database-specific syntax into every part of the
+
+00:00:53.737 --> 00:00:56.287
+application. Keep a boundary around retrieval.
+
+00:00:56.287 --> 00:01:01.637
+That same principle is common in production software engineering, not only in AI.

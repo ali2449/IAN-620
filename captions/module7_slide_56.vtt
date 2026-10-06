@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.114 --> 00:00:03.857
+A deployed RAG application needs more than a working notebook.
+
+00:00:03.857 --> 00:00:12.107
+Logging should capture the user question, retrieved chunk IDs, scores, model response, latency,
+
+00:00:12.107 --> 00:00:14.542
+and useful feedback signals.
+
+00:00:14.542 --> 00:00:20.892
+Cost monitoring may include embedding calls, vector database usage, reranking, and language-model tokens.
+
+00:00:20.892 --> 00:00:27.402
+Governance includes access control, source freshness, data retention,
+
+00:00:27.402 --> 00:00:31.482
+and human review for sensitive use cases.
+
+00:00:31.482 --> 00:00:36.402
+The indexing pipeline needs scheduled or event-driven updates.
+
+00:00:36.402 --> 00:00:40.817
+[tts-break] The system also needs evaluation over time.
+
+00:00:40.817 --> 00:00:47.162
+A model upgrade, embedding change, chunking change, or new document collection can affect retrieval quality.
+
+00:00:47.162 --> 00:00:52.002
+Think of RAG as both a data system and an AI system.
+
+00:00:52.002 --> 00:00:57.902
+The language model is only one service in a larger pipeline.
+
+00:00:57.902 --> 00:01:04.477
+Companies operate the entire pipeline, so observability and maintenance are part of the architecture.

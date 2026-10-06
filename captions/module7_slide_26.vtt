@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.164 --> 00:00:02.982
+Our NumPy retriever is excellent for learning, but it is not always the right storage layer for a
+
+00:00:02.982 --> 00:00:07.572
+real application. With a small dataset, comparing one query vector against every stored vector is easy.
+
+00:00:07.572 --> 00:00:09.452
+As collections grow, teams usually need persistence, indexing, metadata filters, APIs, concurrent users,
+
+00:00:09.452 --> 00:00:14.012
+backups, and operational tooling. That is where vector indexes and vector databases become useful.
+
+00:00:14.012 --> 00:00:16.037
+[tts-break] A vector database does not create RAG by itself.
+
+00:00:16.037 --> 00:00:18.382
+It mainly helps store and search vectors and associated metadata efficiently.
+
+00:00:18.382 --> 00:00:22.077
+This distinction matters because people sometimes equate RAG with a particular database product.
+
+00:00:22.077 --> 00:00:24.502
+RAG is the architecture. The vector database is one component.
+
+00:00:24.502 --> 00:00:26.672
+For a classroom project, NumPy or Chroma may be enough.
+
+00:00:26.672 --> 00:00:28.877
+For a production service, you may choose a server-based or managed system depending on scale, security,
+
+00:00:28.877 --> 00:00:31.098
+operations, and existing infrastructure.

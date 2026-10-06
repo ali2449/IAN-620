@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.022 --> 00:00:03.807
+Now we load the sample knowledge base into a Pandas DataFrame.
+
+00:00:03.807 --> 00:00:06.242
+The code is intentionally simple.
+
+00:00:06.242 --> 00:00:12.817
+We read the CSV, check its shape, and inspect a few columns such as document ID, title, topic,
+
+00:00:12.817 --> 00:00:14.937
+and source.
+
+00:00:14.937 --> 00:00:21.337
+At this point, I want you to develop a habit: inspect the raw data before transforming it.
+
+00:00:21.337 --> 00:00:23.812
+Confirm how many documents you have.
+
+00:00:23.812 --> 00:00:28.547
+Check the column names. Look for missing values or unexpected text.
+
+00:00:28.547 --> 00:00:32.242
+[tts-break] The sample dataset contains ten source documents.
+
+00:00:32.242 --> 00:00:40.307
+Later, those ten documents will become more than ten rows because long documents can be split into multiple
+
+00:00:40.307 --> 00:00:47.357
+chunks. This distinction matters. A source document and a retrieval chunk are not necessarily the same thing.
+
+00:00:47.357 --> 00:00:48.597
+For now, keep the original DataFrame intact.
+
+00:00:48.597 --> 00:00:55.600
+We will create a separate chunk table rather than overwriting the source collection.

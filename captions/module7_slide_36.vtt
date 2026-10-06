@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.462
+Milvus and Zilliz are commonly discussed for larger vector-search workloads.
+
+00:00:01.462 --> 00:00:02.362
+The pattern is still the same.
+
+00:00:02.362 --> 00:00:05.127
+Create or connect to a collection, define the vector dimension and metric,
+
+00:00:05.127 --> 00:00:07.442
+insert vectors with associated fields, and search using the query vector.
+
+00:00:07.442 --> 00:00:10.102
+The classroom example focuses on the search pattern rather than a full production deployment.
+
+00:00:10.102 --> 00:00:12.617
+[tts-break] At larger scale, additional concerns appear: index type, partitioning, replication, memory usage,
+
+00:00:12.617 --> 00:00:13.572
+deployment topology, and operational monitoring.
+
+00:00:13.572 --> 00:00:15.432
+Those are important topics, but they come after the basic RAG architecture is clear.
+
+00:00:15.432 --> 00:00:17.867
+I want you to see that even when the infrastructure becomes more sophisticated,
+
+00:00:17.867 --> 00:00:20.552
+the application still needs good chunks, appropriate embeddings, useful metadata,
+
+00:00:20.552 --> 00:00:21.832
+and a way to evaluate retrieval quality.
+
+00:00:21.832 --> 00:00:22.993
+Scale does not replace the fundamentals.

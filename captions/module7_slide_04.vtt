@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.452
+There are two companion files for this module.
+
+00:00:02.452 --> 00:00:02.832
+The first is the sample knowledge base, stored as a CSV file.
+
+00:00:02.832 --> 00:00:05.122
+It contains the source documents and metadata.
+
+00:00:05.122 --> 00:00:06.312
+The second is the complete Python reference script.
+
+00:00:06.312 --> 00:00:07.312
+The script is useful later when you want to see how all of the separate functions fit together.
+
+00:00:07.312 --> 00:00:07.612
+[tts-break]
+
+00:00:07.612 --> 00:00:10.422
+My recommendation is not to begin by running the complete script and treating it as a black box.
+
+00:00:10.422 --> 00:00:10.722
+Follow the smaller steps first.
+
+00:00:10.722 --> 00:00:12.092
+Load the data, inspect the chunks, create the embeddings, and test retrieval.
+
+00:00:12.092 --> 00:00:13.737
+Then use the complete script as a checkpoint.
+
+00:00:13.737 --> 00:00:15.497
+Compare your version with the reference version and make sure you understand why each function exists.
+
+00:00:15.497 --> 00:00:18.252
+That workflow is closer to how you should learn a real technical system: first understand the pieces,
+
+00:00:18.252 --> 00:00:18.789
+then look at the full implementation.

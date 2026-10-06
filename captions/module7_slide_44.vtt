@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.442
+Users do not always ask self-contained questions.
+
+00:00:03.442 --> 00:00:08.102
+Imagine a conversation about payment plans.
+
+00:00:08.102 --> 00:00:10.007
+The user then asks, 'Can I still do it late?'
+
+00:00:10.007 --> 00:00:19.722
+That short sentence is difficult for retrieval because it does not contain the subject of the conversation.
+
+00:00:19.722 --> 00:00:26.122
+Query rewriting creates a clearer search query while preserving the user's intent.
+
+00:00:26.122 --> 00:00:28.847
+[tts-break] A simple version might prepend the known conversation topic.
+
+00:00:28.847 --> 00:00:37.462
+A more advanced version might ask a language model to rewrite the question into a standalone retrieval query.
+
+00:00:37.462 --> 00:00:41.802
+The rewritten query is for search.
+
+00:00:41.802 --> 00:00:47.377
+It does not have to replace the user's original wording in the final response.
+
+00:00:47.377 --> 00:00:51.357
+This distinction is important. A good rewrite clarifies context.
+
+00:00:51.357 --> 00:00:54.027
+A bad rewrite invents assumptions.
+
+00:00:54.027 --> 00:01:01.757
+When you build conversational RAG, evaluate whether the rewrite helps retrieval without changing what the user
+
+00:01:01.757 --> 00:01:04.298
+actually meant.

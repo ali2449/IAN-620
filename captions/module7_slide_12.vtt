@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.024 --> 00:00:03.052
+Now we implement a small overlapping chunker.
+
+00:00:03.052 --> 00:00:08.612
+The function splits the text into words, takes a fixed number of words for each chunk,
+
+00:00:08.612 --> 00:00:12.967
+and then moves forward while keeping some overlap from the previous chunk.
+
+00:00:12.967 --> 00:00:16.547
+Focus on the logic rather than memorizing the code.
+
+00:00:16.547 --> 00:00:19.892
+The key variables are chunk size and overlap.
+
+00:00:19.892 --> 00:00:24.267
+If the chunk size is fifty-five words and the overlap is fifteen,
+
+00:00:24.267 --> 00:00:28.187
+the next chunk begins before the previous chunk completely ends.
+
+00:00:28.187 --> 00:00:32.642
+That repeated text can help preserve meaning around the boundary.
+
+00:00:32.642 --> 00:00:37.667
+[tts-break] After you run the function, inspect the returned strings.
+
+00:00:37.667 --> 00:00:43.442
+Do they read naturally? Does each chunk contain enough information to be useful on its own?
+
+00:00:43.442 --> 00:00:45.982
+Do not rush directly to embeddings.
+
+00:00:45.982 --> 00:00:49.902
+The embedding model will happily create vectors for bad chunks.
+
+00:00:49.902 --> 00:00:52.422
+Human inspection is still valuable.
+
+00:00:52.422 --> 00:00:58.229
+Later, evaluation will help us decide whether a different chunk size actually improves retrieval.

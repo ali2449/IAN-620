@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.502
+We finish the module by returning to the complete RAG workflow.
+
+00:00:02.502 --> 00:00:03.917
+Start with documents. Preserve metadata.
+
+00:00:03.917 --> 00:00:05.692
+Create chunks. Generate embeddings. Store or index those vectors.
+
+00:00:05.692 --> 00:00:07.152
+When a question arrives, embed the query, retrieve the best evidence, build a grounded prompt,
+
+00:00:07.152 --> 00:00:08.512
+generate the answer, and show the sources.
+
+00:00:08.512 --> 00:00:10.002
+Then evaluate the system. [tts-break]
+
+00:00:10.002 --> 00:00:10.332
+If retrieval is weak, improve retrieval.
+
+00:00:10.332 --> 00:00:14.277
+If the correct evidence is present but generation is weak, investigate the prompt and model behavior.
+
+00:00:14.277 --> 00:00:15.577
+If the system becomes too large for NumPy, move to a vector store.
+
+00:00:15.577 --> 00:00:18.982
+The most important takeaway is that the architecture remains understandable even when the tools change.
+
+00:00:18.982 --> 00:00:21.862
+You should now be able to replace our student-support dataset with a small collection from your own work
+
+00:00:21.862 --> 00:00:23.172
+and build the same pipeline.
+
+00:00:23.172 --> 00:00:23.474
+That is the practical foundation of RAG.

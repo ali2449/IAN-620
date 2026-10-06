@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.154 --> 00:00:05.822
+Recall at k only checks whether the correct source appears somewhere in the retrieved set.
+
+00:00:05.822 --> 00:00:12.102
+Mean Reciprocal Rank, or MRR, also cares about where that source appears.
+
+00:00:12.102 --> 00:00:16.847
+If the correct document is rank one, the reciprocal rank is one.
+
+00:00:16.847 --> 00:00:18.917
+Rank two gives one half.
+
+00:00:18.917 --> 00:00:21.572
+Rank three gives about one third.
+
+00:00:21.572 --> 00:00:26.347
+We calculate that value for every evaluation question and take the mean.
+
+00:00:26.347 --> 00:00:27.562
+[tts-break]
+
+00:00:27.562 --> 00:00:33.322
+MRR is useful when the ranking order matters, especially when only the first few chunks will be passed
+
+00:00:33.322 --> 00:00:35.887
+to the language model.
+
+00:00:35.887 --> 00:00:41.347
+Two systems can have the same Recall at five but very different user experiences if one consistently puts
+
+00:00:41.347 --> 00:00:47.062
+the correct evidence at rank one and the other puts it at rank five.
+
+00:00:47.062 --> 00:00:52.240
+Use Recall and MRR together to get a clearer picture of retrieval quality.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.762
+The mini-project asks you to apply the full workflow rather than only repeat individual code cells.
+
+00:00:06.762 --> 00:00:09.607
+Use at least eight source documents.
+
+00:00:09.607 --> 00:00:11.557
+Preserve useful metadata.
+
+00:00:11.557 --> 00:00:17.652
+Chunk the documents, create embeddings, build dense retrieval, add a metadata filter,
+
+00:00:17.652 --> 00:00:20.597
+and create a grounded prompt with citations.
+
+00:00:20.597 --> 00:00:25.457
+Then build a small evaluation set with at least eight questions.
+
+00:00:25.457 --> 00:00:32.612
+Your project should show the evidence path from source document to chunk to retrieved result to final answer.
+
+00:00:32.612 --> 00:00:39.117
+[tts-break] For an optional extension, move the vectors into Chroma, Qdrant, or FAISS.
+
+00:00:39.117 --> 00:00:43.917
+You can also add BM25, hybrid retrieval, reranking, or a Streamlit interface.
+
+00:00:43.917 --> 00:00:48.492
+The goal is not to include the largest number of features.
+
+00:00:48.492 --> 00:00:53.657
+The goal is to demonstrate that you understand the architecture, can inspect retrieval,
+
+00:00:53.657 --> 00:00:59.440
+and can explain why the final answer is supported by the retrieved evidence.

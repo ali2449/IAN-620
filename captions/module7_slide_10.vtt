@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.202
+Before chunking, we perform a basic cleaning step.
+
+00:00:02.202 --> 00:00:03.752
+Our sample data is already fairly clean, so the function mostly removes repeated whitespace.
+
+00:00:03.752 --> 00:00:06.362
+Real documents can be much messier.
+
+00:00:06.362 --> 00:00:09.977
+You may see repeated page headers, navigation menus, broken line endings, OCR artifacts, duplicate text,
+
+00:00:09.977 --> 00:00:10.292
+or footer content.
+
+00:00:10.292 --> 00:00:12.817
+Cleaning matters because noisy text produces noisy chunks, and noisy chunks produce weaker embeddings.
+
+00:00:12.817 --> 00:00:15.232
+[tts-break] At the same time, we should not over-clean.
+
+00:00:15.232 --> 00:00:18.422
+Punctuation, headings, and sentence boundaries often carry useful structure.
+
+00:00:18.422 --> 00:00:20.182
+Removing too much can make a passage harder to understand.
+
+00:00:20.182 --> 00:00:23.277
+A good practical rule is to keep the original source text and create a cleaned version in a
+
+00:00:23.277 --> 00:00:27.782
+separate column. That gives you something to compare when retrieval quality is poor.
+
+00:00:27.782 --> 00:00:28.982
+RAG quality begins much earlier than the language model.
+
+00:00:28.982 --> 00:00:30.463
+Good source preparation is part of retrieval engineering.

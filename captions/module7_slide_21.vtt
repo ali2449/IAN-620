@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.507
+Once retrieval is working, we can prepare evidence for the language model.
+
+00:00:04.507 --> 00:00:11.352
+A grounded RAG prompt should clearly separate instructions, retrieved context, the user question,
+
+00:00:11.352 --> 00:00:13.882
+and the expected answer behavior.
+
+00:00:13.882 --> 00:00:17.597
+We tell the model to use only the provided sources.
+
+00:00:17.597 --> 00:00:21.862
+We also specify what to do when the evidence is insufficient.
+
+00:00:21.862 --> 00:00:29.432
+Instead of inventing an answer, the model should say that the needed information is not available in the
+
+00:00:29.432 --> 00:00:34.077
+retrieved context. [tts-break] We number the sources so the final response can cite them.
+
+00:00:34.077 --> 00:00:41.772
+This does not guarantee perfect factual behavior, but it makes the task much clearer and easier to evaluate.
+
+00:00:41.772 --> 00:00:47.532
+A good way to think about RAG prompting is that retrieval decides what evidence is available,
+
+00:00:47.532 --> 00:00:50.982
+and the prompt tells the model how to use that evidence.
+
+00:00:50.982 --> 00:00:52.465
+Both parts matter.

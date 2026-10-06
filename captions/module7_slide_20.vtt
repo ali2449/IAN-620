@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.812
+This is your first short practice exercise.
+
+00:00:02.812 --> 00:00:04.612
+Before you run the code, read each question and predict which source should appear at the top.
+
+00:00:04.612 --> 00:00:08.537
+Try a scholarship appeal question, a VPN troubleshooting question, and a graduation question.
+
+00:00:08.537 --> 00:00:11.047
+Then run the retriever and compare the results with your prediction.
+
+00:00:11.047 --> 00:00:13.332
+Do not worry if a second or third result is not perfect.
+
+00:00:13.332 --> 00:00:16.202
+The main goal is to understand how the ranking changes when the meaning of the query changes.
+
+00:00:16.202 --> 00:00:19.747
+[tts-break] Also resist the temptation to change the embedding model immediately if one result surprises you.
+
+00:00:19.747 --> 00:00:23.462
+Read the source text and the returned chunk first.
+
+00:00:23.462 --> 00:00:25.172
+Sometimes the model is doing something reasonable that was not obvious from the title.
+
+00:00:25.172 --> 00:00:28.884
+This habit—predict, retrieve, inspect, explain—is useful when you later evaluate much larger RAG systems.

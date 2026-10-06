@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.797
+pgvector is especially interesting for teams that already use PostgreSQL.
+
+00:00:04.797 --> 00:00:12.707
+Instead of introducing a separate vector database, the application stores embeddings in a vector column next
+
+00:00:12.707 --> 00:00:17.092
+to relational fields such as document ID, title, topic, and source.
+
+00:00:17.092 --> 00:00:22.102
+The query uses a vector-distance operator to order rows by similarity.
+
+00:00:22.102 --> 00:00:28.032
+This approach can be attractive when the RAG system needs to combine semantic search with SQL joins,
+
+00:00:28.032 --> 00:00:35.232
+existing permissions, transactional data, backup procedures, or governance that already lives in PostgreSQL.
+
+00:00:35.232 --> 00:00:39.592
+[tts-break] It also gives data engineers a familiar environment.
+
+00:00:39.592 --> 00:00:43.222
+The important lesson is not the exact operator syntax.
+
+00:00:43.222 --> 00:00:48.127
+It is that vector retrieval can live inside a traditional relational database.
+
+00:00:48.127 --> 00:00:53.602
+When choosing architecture, consider what your organization already operates well.
+
+00:00:53.602 --> 00:00:58.352
+Sometimes the best RAG stack is the one that fits existing infrastructure rather than introducing a completely
+
+00:00:58.352 --> 00:01:00.960
+new platform.

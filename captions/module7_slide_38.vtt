@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.005 --> 00:00:04.482
+Semantic similarity alone is not enough for many real RAG systems.
+
+00:00:04.482 --> 00:00:09.207
+A user may ask a question that is semantically related to several documents,
+
+00:00:09.207 --> 00:00:15.622
+but some of those documents may belong to the wrong department, language, audience, tenant,
+
+00:00:15.622 --> 00:00:20.777
+or permission level. Metadata filters let us narrow the candidate set.
+
+00:00:20.777 --> 00:00:26.552
+In our example, we can filter by topic and permission before ranking the remaining vectors.
+
+00:00:26.552 --> 00:00:29.327
+[tts-break] This is especially important for security.
+
+00:00:29.327 --> 00:00:33.542
+If a student is only allowed to see public student-facing documents,
+
+00:00:33.542 --> 00:00:37.707
+staff-only content should not be retrieved and then hidden later.
+
+00:00:37.707 --> 00:00:40.947
+Access control belongs in the retrieval layer.
+
+00:00:40.947 --> 00:00:43.577
+Filters can also improve relevance.
+
+00:00:43.577 --> 00:00:51.007
+If we know the question is about technology, limiting search to the technology topic can reduce unrelated
+
+00:00:51.007 --> 00:00:55.410
+results. In production, metadata design is part of RAG design.
