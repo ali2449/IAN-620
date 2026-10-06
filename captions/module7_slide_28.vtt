@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.014 --> 00:00:09.122
+00:00:00.000 --> 00:00:05.772
 We will use Chroma as the main hands-on vector store because it is easy to run locally.
 
-00:00:09.122 --> 00:00:15.467
+00:00:05.772 --> 00:00:09.667
 The code creates a persistent client and a collection.
 
-00:00:15.467 --> 00:00:23.792
+00:00:09.667 --> 00:00:14.927
 Then we insert our existing chunk IDs, chunk text, metadata, and embeddings.
 
-00:00:23.792 --> 00:00:32.142
+00:00:14.927 --> 00:00:21.552
 Notice that we are not changing the embedding model or rebuilding the documents.
 
-00:00:32.142 --> 00:00:39.592
+00:00:21.552 --> 00:00:27.599
 We are moving the same objects from our in-memory NumPy workflow into a persistent vector store.
 
-00:00:39.592 --> 00:00:51.292
+00:00:28.140 --> 00:00:33.612
 When a user asks a question, we create the query embedding and send it to Chroma.
 
-00:00:51.292 --> 00:00:56.542
+00:00:33.612 --> 00:00:37.327
 Chroma returns the nearest documents and metadata.
 
-00:00:56.542 --> 00:01:02.487
+00:00:37.327 --> 00:00:42.052
 The example also includes a metadata filter for topic.
 
-00:01:02.487 --> 00:01:08.717
+00:00:42.052 --> 00:00:46.652
 This is a good point to compare the result with the NumPy version.
 
-00:01:08.717 --> 00:01:12.457
+00:00:46.652 --> 00:00:49.287
 The architecture should feel familiar.
 
-00:01:12.457 --> 00:01:22.062
+00:00:49.287 --> 00:00:56.497
 If it does, that means you are understanding RAG at the right level: the storage implementation changed,
 
-00:01:22.062 --> 00:01:26.320
+00:00:56.497 --> 00:00:58.872
 but the overall pipeline did not.

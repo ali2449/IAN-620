@@ -1,40 +1,37 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.322
+00:00:00.011 --> 00:00:04.497
 For the first version of RAG, we only need a small set of libraries.
 
-00:00:04.322 --> 00:00:07.582
+00:00:04.497 --> 00:00:08.097
 Pandas will manage the document and chunk tables.
 
-00:00:07.582 --> 00:00:13.707
+00:00:08.097 --> 00:00:11.807
 NumPy will hold our vectors and help with ranking.
 
-00:00:13.707 --> 00:00:17.047
+00:00:11.807 --> 00:00:15.367
 Sentence Transformers will create embeddings.
 
-00:00:17.047 --> 00:00:23.377
-Scikit-learn is useful for similarity calculations, and the OpenAI Python client can connect to a language
+00:00:15.367 --> 00:00:23.808
+Scikit-learn is useful for similarity calculations, and the OpenAI Python client can connect to a language model later.
 
-00:00:23.377 --> 00:00:28.492
-model later. Notice what we are not installing yet.
+00:00:24.426 --> 00:00:26.718
+Notice what we are not installing yet.
 
-00:00:28.492 --> 00:00:34.852
+00:00:26.718 --> 00:00:33.798
 We are not starting with several vector databases, LangChain, or a large orchestration framework.
 
-00:00:34.852 --> 00:00:36.017
+00:00:33.798 --> 00:00:35.908
 That is intentional.
 
-00:00:36.017 --> 00:00:43.762
-When too many libraries are introduced at the beginning, it becomes difficult to tell which part of the
+00:00:35.908 --> 00:00:42.598
+When too many libraries are introduced at the beginning, it becomes difficult to tell which part of the system is
 
-00:00:43.762 --> 00:00:46.252
-system is actually doing the retrieval.
+00:00:42.598 --> 00:00:49.003
+actually doing the retrieval. Start with the simplest environment that can demonstrate the architecture.
 
-00:00:46.252 --> 00:00:52.652
-Start with the simplest environment that can demonstrate the architecture.
+00:00:49.003 --> 00:00:56.468
+Once that works, adding a vector database becomes a meaningful engineering choice rather than another mysterious
 
-00:00:52.652 --> 00:00:57.787
-Once that works, adding a vector database becomes a meaningful engineering choice rather than another
-
-00:00:57.787 --> 00:01:00.012
-mysterious package.
+00:00:56.468 --> 00:00:57.163
+package.

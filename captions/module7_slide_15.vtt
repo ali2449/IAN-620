@@ -1,40 +1,37 @@
 WEBVTT
 
-00:00:00.012 --> 00:00:03.317
+00:00:00.000 --> 00:00:03.757
 Now we move from text into vector representations.
 
-00:00:03.317 --> 00:00:09.337
+00:00:03.757 --> 00:00:10.497
 For the baseline, we use one Sentence Transformers model for both chunks and questions.
 
-00:00:09.337 --> 00:00:14.482
+00:00:10.497 --> 00:00:16.252
 The important requirement is that both sides are represented in the same embedding space.
 
-00:00:14.482 --> 00:00:16.962
+00:00:16.252 --> 00:00:19.022
 Consider the example on the slide.
 
-00:00:16.962 --> 00:00:23.307
+00:00:19.022 --> 00:00:24.462
 One chunk says that students need an approved internship site and supervisor.
 
-00:00:23.307 --> 00:00:27.227
+00:00:24.462 --> 00:00:29.378
 The question asks what someone should complete before internship registration.
 
-00:00:27.227 --> 00:00:32.887
+00:00:30.030 --> 00:00:33.752
 The wording is not identical, but the meaning is similar.
 
-00:00:32.887 --> 00:00:37.622
+00:00:33.752 --> 00:00:38.682
 A good embedding model should place those two pieces of text near each other.
 
-00:00:37.622 --> 00:00:43.802
-That semantic behavior is the reason vector retrieval can work even when the user does not repeat the
+00:00:38.682 --> 00:00:47.417
+That semantic behavior is the reason vector retrieval can work even when the user does not repeat the exact wording in
 
-00:00:43.802 --> 00:00:46.852
-exact wording in the source document.
+00:00:47.417 --> 00:00:50.487
+the source document. For now, keep the model fixed.
 
-00:00:46.852 --> 00:00:48.587
-For now, keep the model fixed.
-
-00:00:48.587 --> 00:00:51.357
+00:00:50.487 --> 00:00:53.217
 First understand the retrieval pipeline.
 
-00:00:51.357 --> 00:00:57.108
+00:00:53.217 --> 00:00:59.252
 Later, if evaluation is weak, comparing embedding models becomes a meaningful experiment.

@@ -1,40 +1,40 @@
 WEBVTT
 
-00:00:00.026 --> 00:00:03.907
+00:00:00.000 --> 00:00:04.267
 A practical RAG system needs a small evaluation set.
 
-00:00:03.907 --> 00:00:08.807
+00:00:04.267 --> 00:00:10.077
 For each question, we record the document that should contain the supporting evidence.
 
-00:00:08.807 --> 00:00:16.267
+00:00:10.077 --> 00:00:16.872
 Our examples include payment plans, internship registration, scholarship appeals, VPN troubleshooting,
 
-00:00:16.267 --> 00:00:18.837
+00:00:16.872 --> 00:00:21.762
 and other topics from the knowledge base.
 
-00:00:18.837 --> 00:00:25.082
+00:00:21.762 --> 00:00:28.382
 These expected document IDs let us evaluate retrieval independently from generation.
 
-00:00:25.082 --> 00:00:31.222
+00:00:28.382 --> 00:00:32.829
 This is important because a final answer can fail for different reasons.
 
-00:00:31.222 --> 00:00:35.882
+00:00:33.459 --> 00:00:36.646
 Maybe the retriever never found the right source.
 
-00:00:35.882 --> 00:00:39.742
+00:00:36.646 --> 00:00:41.101
 Maybe the right source was present but the prompt was weak.
 
-00:00:39.742 --> 00:00:42.752
+00:00:41.101 --> 00:00:46.621
 Maybe the language model ignored the evidence.
 
-00:00:42.752 --> 00:00:47.137
+00:00:46.621 --> 00:00:49.441
 If we measure retrieval first, we can separate those problems.
 
-00:00:47.137 --> 00:00:52.792
+00:00:49.441 --> 00:00:55.366
 Start with a small set of questions that you understand well.
 
-00:00:52.792 --> 00:00:57.892
+00:00:55.366 --> 00:01:01.116
 Include easy examples, paraphrases, exact-term queries, and a few difficult cases.
 
-00:00:57.892 --> 00:01:03.190
+00:01:01.116 --> 00:01:06.734
 As the system grows, expand the evaluation set with real user questions.

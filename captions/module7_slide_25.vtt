@@ -1,43 +1,40 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:01.782
+00:00:00.000 --> 00:00:02.087
 This is an important checkpoint.
 
-00:00:01.782 --> 00:00:07.817
+00:00:02.087 --> 00:00:11.137
 If you understand everything up to this point, you already understand the core architecture of RAG.
 
-00:00:07.817 --> 00:00:13.772
+00:00:11.137 --> 00:00:16.137
 On the indexing side, we clean documents, create chunks, and generate embeddings.
 
-00:00:13.772 --> 00:00:18.442
-On the question side, we embed the query, retrieve relevant chunks, build a prompt,
+00:00:16.137 --> 00:00:25.987
+On the question side, we embed the query, retrieve relevant chunks, build a prompt, and generate an answer with sources.
 
-00:00:18.442 --> 00:00:22.072
-and generate an answer with sources.
-
-00:00:22.072 --> 00:00:25.917
+00:00:25.987 --> 00:00:30.087
 Everything that follows is an improvement around this architecture.
 
-00:00:25.917 --> 00:00:30.827
+00:00:30.799 --> 00:00:35.491
 A vector database changes how vectors and metadata are stored and searched.
 
-00:00:30.827 --> 00:00:34.312
+00:00:35.491 --> 00:00:39.091
 Hybrid retrieval changes how candidates are ranked.
 
-00:00:34.312 --> 00:00:37.662
+00:00:39.091 --> 00:00:42.651
 Reranking improves the order of those candidates.
 
-00:00:37.662 --> 00:00:41.142
+00:00:42.651 --> 00:00:46.296
 Evaluation tells us whether changes actually help.
 
-00:00:41.142 --> 00:00:44.532
+00:00:46.296 --> 00:00:49.811
 But the core information flow remains the same.
 
-00:00:44.532 --> 00:00:50.177
+00:00:49.811 --> 00:00:55.571
 Before continuing, make sure you could explain this pipeline without looking at the code.
 
-00:00:50.177 --> 00:00:55.412
-If you can describe each stage and why it exists, you are ready for the more practical production-oriented
+00:00:55.571 --> 00:01:02.041
+If you can describe each stage and why it exists, you are ready for the more practical production-oriented parts of the
 
-00:00:55.412 --> 00:00:57.511
-parts of the module.
+00:01:02.041 --> 00:01:03.198
+module.

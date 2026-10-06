@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:06.417
+00:00:00.000 --> 00:00:06.227
 RAG becomes much easier to understand when we separate indexing time from question time.
 
-00:00:06.417 --> 00:00:10.107
+00:00:06.227 --> 00:00:10.252
 Indexing happens before a user asks anything.
 
-00:00:10.107 --> 00:00:15.312
+00:00:10.252 --> 00:00:18.152
 We load documents, clean them, create chunks, generate embeddings, and store vectors with metadata.
 
-00:00:15.312 --> 00:00:24.302
+00:00:18.152 --> 00:00:26.292
 For a stable knowledge base, this work may happen once and then run again only when documents change.
 
-00:00:24.302 --> 00:00:25.242
+00:00:26.292 --> 00:00:30.272
 Question time begins when a user sends a query.
 
-00:00:25.242 --> 00:00:32.152
+00:00:30.272 --> 00:00:36.472
 We embed that question, retrieve the best chunks, build a prompt using those chunks,
 
-00:00:32.152 --> 00:00:34.477
+00:00:36.472 --> 00:00:39.388
 and ask the language model to generate an answer.
 
-00:00:34.477 --> 00:00:40.902
+00:00:40.013 --> 00:00:44.060
 This separation is important for both performance and debugging.
 
-00:00:40.902 --> 00:00:48.497
+00:00:44.060 --> 00:00:50.695
 If retrieval is slow, you need to know whether the problem is in indexing or query-time search.
 
-00:00:48.497 --> 00:00:54.642
+00:00:50.695 --> 00:00:57.555
 If an answer is stale, you may need to inspect the indexing pipeline rather than the language model.
 
-00:00:54.642 --> 00:00:59.917
+00:00:57.555 --> 00:01:02.715
 Keep these two flows in mind throughout the module: prepare knowledge first,
 
-00:00:59.917 --> 00:01:02.960
+00:01:02.715 --> 00:01:05.944
 then use that prepared knowledge to answer questions.

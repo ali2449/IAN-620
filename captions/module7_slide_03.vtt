@@ -1,37 +1,34 @@
 WEBVTT
 
-00:00:00.023 --> 00:00:03.487
+00:00:00.000 --> 00:00:03.817
 Our running project is a Student Support RAG Assistant.
 
-00:00:03.487 --> 00:00:11.197
-The knowledge base contains short documents about topics such as payment plans, internships,
+00:00:03.817 --> 00:00:12.332
+The knowledge base contains short documents about topics such as payment plans, internships, scholarship appeals,
 
-00:00:11.197 --> 00:00:15.132
-scholarship appeals, VPN troubleshooting, advising, registration, and graduation.
+00:00:12.332 --> 00:00:16.797
+VPN troubleshooting, advising, registration, and graduation.
 
-00:00:15.132 --> 00:00:23.112
-A user can ask a natural-language question, and our system should retrieve the right source before generating
+00:00:16.797 --> 00:00:26.252
+A user can ask a natural-language question, and our system should retrieve the right source before generating an answer.
 
-00:00:23.112 --> 00:00:30.452
-an answer. For example, if someone asks what is required before internship registration,
+00:00:26.252 --> 00:00:31.402
+For example, if someone asks what is required before internship registration,
 
-00:00:30.452 --> 00:00:36.347
+00:00:31.402 --> 00:00:38.972
 the system should find the internship checklist rather than guessing from general model knowledge.
 
-00:00:36.347 --> 00:00:43.147
+00:00:38.972 --> 00:00:45.198
 If the question is about VPN problems, the technology support document should move to the top.
 
-00:00:43.147 --> 00:00:48.962
+00:00:46.620 --> 00:00:53.397
 This dataset is small enough to inspect manually, which is useful for learning.
 
-00:00:48.962 --> 00:00:56.387
-At the same time, it contains the same kinds of metadata that matter in real projects: document IDs,
+00:00:53.397 --> 00:01:00.467
+At the same time, it contains the same kinds of metadata that matter in real projects: document IDs, topics, dates,
 
-00:00:56.387 --> 00:00:59.202
-topics, dates, sources, and permissions.
+00:01:00.467 --> 00:01:02.312
+sources, and permissions.
 
-00:00:59.202 --> 00:01:05.712
-We will keep returning to the same records so you can see exactly how data moves through a
-
-00:01:05.712 --> 00:01:07.040
-RAG pipeline.
+00:01:02.312 --> 00:01:10.883
+We will keep returning to the same records so you can see exactly how data moves through a RAG pipeline.

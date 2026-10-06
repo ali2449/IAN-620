@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.148 --> 00:00:02.277
+00:00:00.000 --> 00:00:01.977
 This is a debugging exercise.
 
-00:00:02.277 --> 00:00:08.607
+00:00:01.977 --> 00:00:07.842
 Consider three cases. In the first case, the correct document appears at rank seven.
 
-00:00:08.607 --> 00:00:11.717
+00:00:07.842 --> 00:00:11.117
 That suggests a retrieval or ranking problem.
 
-00:00:11.717 --> 00:00:18.177
+00:00:11.117 --> 00:00:17.592
 In the second case, the correct chunk is rank one but the generated answer invents a detail.
 
-00:00:18.177 --> 00:00:22.027
+00:00:17.592 --> 00:00:21.677
 That points us toward the prompt or the language model behavior.
 
-00:00:22.027 --> 00:00:25.947
+00:00:21.677 --> 00:00:25.872
 In the third case, the system returns an old policy.
 
-00:00:25.947 --> 00:00:29.607
+00:00:25.872 --> 00:00:29.058
 That suggests an indexing or freshness problem.
 
-00:00:29.607 --> 00:00:34.672
+00:00:29.678 --> 00:00:34.150
 For each case, write down the first diagnostic step you would take.
 
-00:00:34.672 --> 00:00:38.077
+00:00:34.150 --> 00:00:37.905
 There is intentionally no completed answer on the slide.
 
-00:00:38.077 --> 00:00:42.342
+00:00:37.905 --> 00:00:42.650
 The goal is to practice locating the failure before proposing a tool.
 
-00:00:42.342 --> 00:00:47.812
+00:00:42.650 --> 00:00:49.180
 In real RAG work, this reasoning is more valuable than memorizing another library.
 
-00:00:47.812 --> 00:00:52.597
+00:00:49.180 --> 00:00:54.185
 A good engineer asks, 'Which layer failed, and what evidence do I have?'

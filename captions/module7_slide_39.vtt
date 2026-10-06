@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:02.272
+00:00:00.000 --> 00:00:04.147
 Retrieval is not simply a question of finding relevant chunks.
 
-00:00:02.272 --> 00:00:03.882
+00:00:04.147 --> 00:00:08.232
 We also have to decide how much evidence to send forward.
 
-00:00:03.882 --> 00:00:06.302
+00:00:08.232 --> 00:00:11.702
 Top-k controls the number of retrieved chunks.
 
-00:00:06.302 --> 00:00:10.572
+00:00:11.702 --> 00:00:18.547
 A larger value may capture more evidence, but it can also add noise and increase prompt length.
 
-00:00:10.572 --> 00:00:13.102
+00:00:18.547 --> 00:00:25.757
 A similarity threshold can remove weak matches, but the threshold should be evaluated on your own data.
 
-00:00:13.102 --> 00:00:14.527
+00:00:25.757 --> 00:00:30.019
 Score ranges can change across embedding models and search systems.
 
-00:00:14.527 --> 00:00:17.972
+00:00:30.628 --> 00:00:35.910
 The context budget controls the total amount of retrieved text placed into the prompt.
 
-00:00:17.972 --> 00:00:21.547
+00:00:35.910 --> 00:00:38.545
 These settings interact with each other.
 
-00:00:21.547 --> 00:00:24.682
+00:00:38.545 --> 00:00:44.750
 For a short knowledge base, top three or top five may be reasonable starting points.
 
-00:00:24.682 --> 00:00:24.982
+00:00:44.750 --> 00:00:49.320
 For longer technical documents, you may need a different strategy.
 
-00:00:24.982 --> 00:00:28.822
+00:00:49.320 --> 00:00:52.950
 Do not optimize these values by intuition alone.
 
-00:00:28.822 --> 00:00:29.266
+00:00:52.950 --> 00:00:56.184
 Use an evaluation set and compare results.

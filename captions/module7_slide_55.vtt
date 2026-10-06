@@ -1,40 +1,40 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.042
+00:00:00.000 --> 00:00:05.347
 Once the notebook version works, we can put a simple user interface around it.
 
-00:00:05.042 --> 00:00:09.037
+00:00:05.347 --> 00:00:09.747
 Streamlit is a convenient option for a class project.
 
-00:00:09.037 --> 00:00:16.252
+00:00:09.747 --> 00:00:17.662
 The interface asks for a question, calls our existing answer_question function, displays the answer,
 
-00:00:16.252 --> 00:00:18.947
+00:00:17.662 --> 00:00:20.472
 and then lists the retrieved sources.
 
-00:00:18.947 --> 00:00:22.667
+00:00:20.472 --> 00:00:24.557
 Notice that the UI does not reimplement RAG.
 
-00:00:22.667 --> 00:00:26.932
+00:00:24.557 --> 00:00:29.492
 The retrieval and generation logic stays in reusable functions.
 
-00:00:26.932 --> 00:00:31.137
+00:00:29.492 --> 00:00:33.843
 The application layer only collects input and displays output.
 
-00:00:31.137 --> 00:00:35.272
+00:00:34.500 --> 00:00:38.802
 That separation makes the code easier to test and maintain.
 
-00:00:35.272 --> 00:00:38.632
+00:00:38.802 --> 00:00:42.312
 I also recommend making the source panel visible.
 
-00:00:38.632 --> 00:00:41.992
+00:00:42.312 --> 00:00:46.652
 Users should be able to see where the answer came from.
 
-00:00:41.992 --> 00:00:49.122
-A polished RAG product may add authentication, feedback buttons, conversation history, tracing,
+00:00:46.652 --> 00:00:55.977
+A polished RAG product may add authentication, feedback buttons, conversation history, tracing, or document links,
 
-00:00:49.122 --> 00:00:53.607
-or document links, but the basic app structure can remain simple.
+00:00:55.977 --> 00:00:59.427
+but the basic app structure can remain simple.
 
-00:00:53.607 --> 00:00:57.680
+00:00:59.427 --> 00:01:04.074
 Build the pipeline first; add the interface after it works.

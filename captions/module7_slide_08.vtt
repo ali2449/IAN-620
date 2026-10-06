@@ -1,40 +1,37 @@
 WEBVTT
 
-00:00:00.022 --> 00:00:07.592
+00:00:00.000 --> 00:00:08.382
 Our classroom example begins with a CSV, but real RAG projects usually start with other data sources.
 
-00:00:07.592 --> 00:00:14.407
-A company might have PDFs in SharePoint, Word documents in a shared drive, web pages, database records,
+00:00:08.382 --> 00:00:18.697
+A company might have PDFs in SharePoint, Word documents in a shared drive, web pages, database records, support tickets,
 
-00:00:14.407 --> 00:00:18.627
-support tickets, object storage, or internal APIs.
+00:00:18.697 --> 00:00:20.187
+object storage, or internal APIs.
 
-00:00:18.627 --> 00:00:23.712
+00:00:20.187 --> 00:00:29.392
 Before RAG can search those sources, the content has to be extracted and normalized.
 
-00:00:23.712 --> 00:00:28.427
+00:00:29.392 --> 00:00:34.377
 For PDFs, that may mean a parser such as PyMuPDF.
 
-00:00:28.427 --> 00:00:31.602
+00:00:34.377 --> 00:00:37.602
 Scanned documents may require OCR.
 
-00:00:31.602 --> 00:00:34.802
+00:00:37.602 --> 00:00:38.202
 Web pages need HTML cleanup.
 
-00:00:34.802 --> 00:00:38.052
+00:00:38.202 --> 00:00:45.661
 A database may already have structured metadata that should be preserved.
 
-00:00:38.052 --> 00:00:45.572
+00:00:46.111 --> 00:00:51.853
 The important point is that this ingestion layer comes before chunking and embeddings.
 
-00:00:45.572 --> 00:00:54.152
-Once the text and metadata have been extracted, the rest of the workflow is the same as our
+00:00:51.853 --> 00:01:00.978
+Once the text and metadata have been extracted, the rest of the workflow is the same as our classroom example:
 
-00:00:54.152 --> 00:00:58.197
-classroom example: clean the text, create chunks, embed them, store the vectors,
+00:01:00.978 --> 00:01:08.063
+clean the text, create chunks, embed them, store the vectors, and retrieve them when a user asks a question.
 
-00:00:58.197 --> 00:01:02.552
-and retrieve them when a user asks a question.
-
-00:01:02.552 --> 00:01:08.240
+00:01:08.063 --> 00:01:14.339
 So the CSV is a simplification of the ingestion stage, not a different architecture.

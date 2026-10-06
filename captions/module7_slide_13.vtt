@@ -1,31 +1,31 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.192
+00:00:00.000 --> 00:00:04.137
 Once the chunker works, we apply it to every source document.
 
-00:00:04.192 --> 00:00:08.202
+00:00:04.137 --> 00:00:08.267
 Each chunk becomes its own row in a new DataFrame.
 
-00:00:08.202 --> 00:00:14.777
-We give it a chunk ID and keep the original document ID, title, topic, permission, update date,
+00:00:08.267 --> 00:00:18.047
+We give it a chunk ID and keep the original document ID, title, topic, permission, update date, and source.
 
-00:00:14.777 --> 00:00:16.952
-and source. This is a very common RAG data model.
+00:00:18.047 --> 00:00:20.855
+This is a very common RAG data model.
 
-00:00:16.952 --> 00:00:23.407
+00:00:21.415 --> 00:00:26.827
 The vector represents the chunk text, but the metadata travels with that vector.
 
-00:00:23.407 --> 00:00:29.042
-When retrieval returns a vector match, we need to know which source document it came from,
+00:00:26.827 --> 00:00:34.687
+When retrieval returns a vector match, we need to know which source document it came from, what title to display,
 
-00:00:29.042 --> 00:00:38.232
-what title to display, whether the user has permission to see it, and whether the source is current.
+00:00:34.687 --> 00:00:39.792
+whether the user has permission to see it, and whether the source is current.
 
-00:00:38.232 --> 00:00:42.662
+00:00:39.792 --> 00:00:44.987
 Notice that we are not losing the relationship between chunk and document.
 
-00:00:42.662 --> 00:00:49.172
+00:00:44.987 --> 00:00:52.062
 One document may generate several chunks, but every chunk can still point back to the original source.
 
-00:00:49.172 --> 00:00:55.675
+00:00:52.062 --> 00:00:58.863
 That relationship becomes especially useful for citations, access control, and evaluation.

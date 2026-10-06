@@ -1,35 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.232
+00:00:00.000 --> 00:00:04.712
 FAISS is a useful option when you want fast local vector search.
 
-00:00:04.232 --> 00:00:08.302
+00:00:04.712 --> 00:00:08.952
 It is an indexing library rather than a complete database.
 
-00:00:08.302 --> 00:00:16.567
-We create an index with the embedding dimension, add our normalized vectors, embed a user question,
+00:00:08.952 --> 00:00:17.507
+We create an index with the embedding dimension, add our normalized vectors, embed a user question, and call search.
 
-00:00:16.567 --> 00:00:16.892
-and call search.
-
-00:00:16.892 --> 00:00:23.492
+00:00:17.507 --> 00:00:23.382
 The returned IDs tell us which rows in our chunk table were nearest to the query.
 
-00:00:23.492 --> 00:00:31.412
-This means the application still needs to maintain the mapping between FAISS positions and the original text
+00:00:23.382 --> 00:00:28.942
+This means the application still needs to maintain the mapping between FAISS positions and the original text and
 
-00:00:31.412 --> 00:00:32.242
-and metadata. 00:00:32.242 --> 00:00:40.127
+00:00:28.942 --> 00:00:31.072
+metadata.
+
+00:00:31.664 --> 00:00:38.291
 FAISS is excellent for experiments, notebooks, and systems where you control persistence separately.
 
-00:00:40.127 --> 00:00:45.687
+00:00:38.291 --> 00:00:44.431
 It is also a good teaching example because it makes the vector index feel concrete.
 
-00:00:45.687 --> 00:00:51.352
+00:00:44.431 --> 00:00:49.811
 Remember the key detail in this example: because our vectors are normalized,
 
-00:00:51.352 --> 00:00:56.732
+00:00:49.811 --> 00:00:53.871
 inner product behaves like cosine similarity for ranking.
 
-00:00:56.732 --> 00:01:02.613
+00:00:53.871 --> 00:01:00.357
 If you change the normalization or metric, you need to understand how the index interprets distance.

@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:08.212
+00:00:00.000 --> 00:00:06.952
 The easiest way to understand retrieval methods is to compare them on the same question.
 
-00:00:08.212 --> 00:00:14.682
+00:00:06.952 --> 00:00:13.032
 We run dense search, BM25, and hybrid retrieval using the query about VPN, MFA, and a client update.
 
-00:00:14.682 --> 00:00:18.427
+00:00:13.032 --> 00:00:18.772
 Then we look at the top document titles from each method.
 
-00:00:18.427 --> 00:00:23.492
+00:00:18.772 --> 00:00:22.027
 Do not expect one method to win every time.
 
-00:00:23.492 --> 00:00:26.607
+00:00:22.027 --> 00:00:23.761
 That is exactly the point.
 
-00:00:26.607 --> 00:00:28.682
+00:00:24.419 --> 00:00:27.451
 A semantic question may favor dense search.
 
-00:00:28.682 --> 00:00:33.567
+00:00:27.451 --> 00:00:32.106
 A query with an exact identifier may favor BM25.
 
-00:00:33.567 --> 00:00:39.142
+00:00:32.106 --> 00:00:37.206
 Hybrid retrieval may provide a useful balance across a mixed workload.
 
-00:00:39.142 --> 00:00:48.002
+00:00:37.206 --> 00:00:44.436
 This comparison also introduces an important engineering habit: when you add a more complicated method,
 
-00:00:48.002 --> 00:00:50.507
+00:00:44.436 --> 00:00:47.071
 compare it against the simpler baseline.
 
-00:00:50.507 --> 00:00:59.532
+00:00:47.071 --> 00:00:54.116
 If hybrid retrieval does not improve your evaluation results, complexity is not automatically valuable.
 
-00:00:59.532 --> 00:01:03.542
+00:00:54.116 --> 00:00:58.124
 Use evidence from your own question set to justify the change.

@@ -1,34 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:07.762
+00:00:00.000 --> 00:00:08.882
 Dense vector retrieval is strong when the question and source use different words with similar meaning.
 
-00:00:07.762 --> 00:00:09.647
+00:00:08.882 --> 00:00:10.972
 But exact terms still matter.
 
-00:00:09.647 --> 00:00:16.782
+00:00:10.972 --> 00:00:18.772
 Think about course numbers, error codes, product names, acronyms, policy IDs, or a rare technical term.
 
-00:00:16.782 --> 00:00:21.947
+00:00:18.772 --> 00:00:24.417
 In those situations, keyword retrieval can outperform semantic search.
 
-00:00:21.947 --> 00:00:23.607
+00:00:24.417 --> 00:00:28.744
 BM25 is a classic sparse retrieval method.
 
-00:00:23.607 --> 00:00:30.967
+00:00:29.329 --> 00:00:35.641
 We tokenize the chunk text, build a BM25 index, tokenize the question, calculate scores,
 
-00:00:30.967 --> 00:00:34.197
+00:00:35.641 --> 00:00:37.166
 and return the highest-ranked chunks.
 
-00:00:34.197 --> 00:00:39.197
+00:00:37.166 --> 00:00:42.501
 This gives us a second retrieval signal that behaves differently from embeddings.
 
-00:00:39.197 --> 00:00:41.842
+00:00:42.501 --> 00:00:47.051
 The point is not to replace dense retrieval.
 
-00:00:41.842 --> 00:00:49.722
+00:00:47.051 --> 00:00:53.371
 The point is to recognize that different queries benefit from different search signals.
 
-00:00:49.722 --> 00:00:55.531
+00:00:53.371 --> 00:00:59.303
 That leads naturally to hybrid retrieval, where semantic and keyword evidence are combined.

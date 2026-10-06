@@ -1,43 +1,43 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.892
+00:00:00.000 --> 00:00:04.087
 The classroom architecture is small, but it is not a toy.
 
-00:00:03.892 --> 00:00:09.527
+00:00:04.087 --> 00:00:10.442
 A production system begins with connectors and parsers instead of our simple CSV.
 
-00:00:09.527 --> 00:00:14.242
+00:00:10.442 --> 00:00:13.707
 It may use OCR, web crawlers, or database APIs.
 
-00:00:14.242 --> 00:00:17.612
+00:00:13.707 --> 00:00:19.452
 Chunking may become a document-processing service.
 
-00:00:17.612 --> 00:00:20.972
+00:00:19.452 --> 00:00:23.017
 Embeddings may come from a hosted model endpoint.
 
-00:00:20.972 --> 00:00:25.747
+00:00:23.017 --> 00:00:28.269
 The vector store may be a managed search platform with access-control filters.
 
-00:00:25.747 --> 00:00:31.857
+00:00:28.913 --> 00:00:34.325
 Retrieval may combine dense vectors, keyword search, and reranking.
 
-00:00:31.857 --> 00:00:35.627
+00:00:34.325 --> 00:00:38.180
 The prompt may be assembled by an orchestration service.
 
-00:00:35.627 --> 00:00:40.977
+00:00:38.180 --> 00:00:43.610
 The final answer includes citations and may be logged for evaluation.
 
-00:00:40.977 --> 00:00:47.782
+00:00:43.610 --> 00:00:51.205
 Then companies add monitoring, authentication, scheduled re-indexing, cost controls, and security reviews.
 
-00:00:47.782 --> 00:00:51.607
+00:00:51.205 --> 00:00:55.505
 The core idea, however, is still the same one you built in Part 1.
 
-00:00:51.607 --> 00:00:57.337
+00:00:55.505 --> 00:01:01.885
 Documents become searchable representations, relevant evidence is retrieved for a question,
 
-00:00:57.337 --> 00:01:03.642
+00:01:01.885 --> 00:01:08.825
 and the language model generates an answer from that evidence.
 
-00:01:03.642 --> 00:01:07.628
+00:01:08.825 --> 00:01:13.294
 Production adds scale and controls around the same information flow.

@@ -1,34 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.577
+00:00:00.000 --> 00:00:03.712
 A RAG system must have a plan for document updates.
 
-00:00:03.577 --> 00:00:09.177
+00:00:03.712 --> 00:00:09.277
 Imagine that a policy changes but the old chunks remain in the vector database.
 
-00:00:09.177 --> 00:00:15.992
+00:00:09.277 --> 00:00:16.172
 Retrieval may continue returning outdated evidence even though the language model is working perfectly.
 
-00:00:15.992 --> 00:00:23.967
+00:00:16.172 --> 00:00:24.452
 A practical update workflow detects changed documents, removes or marks the old chunks, creates new chunks,
 
-00:00:23.967 --> 00:00:28.367
+00:00:24.452 --> 00:00:28.320
 generates new embeddings, and upserts the new records.
 
-00:00:28.367 --> 00:00:32.412
+00:00:28.989 --> 00:00:32.371
 Then the evaluation questions should be run again.
 
-00:00:32.412 --> 00:00:37.457
+00:00:32.371 --> 00:00:37.806
 Keep version information and updated dates in metadata whenever possible.
 
-00:00:37.457 --> 00:00:44.797
-Freshness is especially important for policies, product documentation, pricing, regulations,
+00:00:37.806 --> 00:00:47.611
+Freshness is especially important for policies, product documentation, pricing, regulations, and internal procedures.
 
-00:00:44.797 --> 00:00:51.207
-and internal procedures. Indexing is not a one-time activity in a living system.
+00:00:47.611 --> 00:00:52.051
+Indexing is not a one-time activity in a living system.
 
-00:00:51.207 --> 00:00:57.622
-Production RAG needs a repeatable ingestion and re-indexing process so the knowledge base stays aligned with
+00:00:52.051 --> 00:00:59.161
+Production RAG needs a repeatable ingestion and re-indexing process so the knowledge base stays aligned with the
 
-00:00:57.622 --> 00:00:59.862
-the underlying sources.
+00:00:59.161 --> 00:01:01.574
+underlying sources.

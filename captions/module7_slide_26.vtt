@@ -1,34 +1,34 @@
 WEBVTT
 
-00:00:00.164 --> 00:00:02.982
-Our NumPy retriever is excellent for learning, but it is not always the right storage layer for a
+00:00:00.000 --> 00:00:10.082
+Our NumPy retriever is excellent for learning, but it is not always the right storage layer for a real application.
 
-00:00:02.982 --> 00:00:07.572
-real application. With a small dataset, comparing one query vector against every stored vector is easy.
+00:00:10.082 --> 00:00:16.972
+With a small dataset, comparing one query vector against every stored vector is easy.
 
-00:00:07.572 --> 00:00:09.452
-As collections grow, teams usually need persistence, indexing, metadata filters, APIs, concurrent users,
+00:00:16.972 --> 00:00:25.857
+As collections grow, teams usually need persistence, indexing, metadata filters, APIs, concurrent users, backups,
 
-00:00:09.452 --> 00:00:14.012
-backups, and operational tooling. That is where vector indexes and vector databases become useful.
+00:00:25.857 --> 00:00:32.787
+and operational tooling. That is where vector indexes and vector databases become useful.
 
-00:00:14.012 --> 00:00:16.037
+00:00:33.376 --> 00:00:37.028
 A vector database does not create RAG by itself.
 
-00:00:16.037 --> 00:00:18.382
+00:00:37.028 --> 00:00:42.538
 It mainly helps store and search vectors and associated metadata efficiently.
 
-00:00:18.382 --> 00:00:22.077
+00:00:42.538 --> 00:00:49.113
 This distinction matters because people sometimes equate RAG with a particular database product.
 
-00:00:22.077 --> 00:00:24.502
+00:00:49.113 --> 00:00:54.213
 RAG is the architecture. The vector database is one component.
 
-00:00:24.502 --> 00:00:26.672
+00:00:54.213 --> 00:00:58.843
 For a classroom project, NumPy or Chroma may be enough.
 
-00:00:26.672 --> 00:00:28.877
-For a production service, you may choose a server-based or managed system depending on scale, security,
+00:00:58.843 --> 00:01:06.538
+For a production service, you may choose a server-based or managed system depending on scale, security, operations,
 
-00:00:28.877 --> 00:00:31.098
-operations, and existing infrastructure.
+00:01:06.538 --> 00:01:09.272
+and existing infrastructure.

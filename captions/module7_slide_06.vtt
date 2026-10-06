@@ -1,41 +1,40 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.177
+00:00:00.000 --> 00:00:04.807
 Before writing RAG code, look carefully at the structure of a source document.
 
-00:00:05.177 --> 00:00:08.537
+00:00:04.807 --> 00:00:08.567
 The text field contains the knowledge we want to search.
 
-00:00:08.537 --> 00:00:11.762
+00:00:08.567 --> 00:00:12.287
 But the surrounding metadata is just as important.
 
-00:00:11.762 --> 00:00:15.112
+00:00:12.287 --> 00:00:16.127
 A document ID gives us a stable identifier.
 
-00:00:15.112 --> 00:00:20.952
+00:00:16.127 --> 00:00:20.047
 The title gives us something readable to display to a user.
 
-00:00:20.952 --> 00:00:21.262
+00:00:20.047 --> 00:00:22.657
 Topic can be used for filtering.
 
-00:00:21.262 --> 00:00:26.977
+00:00:22.657 --> 00:00:26.142
 The updated date helps us reason about freshness.
 
-00:00:26.977 --> 00:00:28.672
+00:00:26.142 --> 00:00:28.858
 The source field supports citations.
 
-00:00:28.672 --> 00:00:30.567
-00:00:30.567 --> 00:00:34.947
-In a production system, you might also keep department, language, document type, tenant, access role,
+00:00:29.329 --> 00:00:37.396
+In a production system, you might also keep department, language, document type, tenant, access role, or page number.
 
-00:00:34.947 --> 00:00:41.612
-or page number. A common mistake is to store only the text and throw away everything else.
+00:00:37.396 --> 00:00:44.796
+A common mistake is to store only the text and throw away everything else.
 
-00:00:41.612 --> 00:00:45.972
+00:00:44.796 --> 00:00:49.581
 That makes the system harder to debug and harder to secure.
 
-00:00:45.972 --> 00:00:50.787
+00:00:49.581 --> 00:00:53.771
 So from the beginning, think of RAG data as text plus metadata.
 
-00:00:50.787 --> 00:00:57.007
+00:00:53.771 --> 00:01:02.088
 The embedding represents the meaning of the text, while the metadata helps us control and explain retrieval.

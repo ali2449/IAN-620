@@ -1,35 +1,37 @@
 WEBVTT
 
-00:00:00.146 --> 00:00:05.882
+00:00:00.000 --> 00:00:05.787
 Retrieval evaluation is necessary, but the final answer also needs evaluation.
 
-00:00:05.882 --> 00:00:10.737
+00:00:05.787 --> 00:00:11.037
 Groundedness asks whether the response stays within the retrieved evidence.
 
-00:00:10.737 --> 00:00:14.867
+00:00:11.037 --> 00:00:15.352
 Correctness asks whether the content is factually right.
 
-00:00:14.867 --> 00:00:19.122
+00:00:15.352 --> 00:00:19.717
 Completeness asks whether important information was omitted.
 
-00:00:19.122 --> 00:00:24.777
+00:00:19.717 --> 00:00:25.672
 Citation precision asks whether the cited source actually supports the claim.
 
-00:00:24.777 --> 00:00:29.727
+00:00:25.672 --> 00:00:31.302
 Helpfulness asks whether the answer is clear enough for a user to act on.
 
-00:00:29.727 --> 00:00:32.482
-These dimensions are different. 00:00:32.482 --> 00:00:35.427
+00:00:31.302 --> 00:00:33.180
+These dimensions are different.
+
+00:00:33.803 --> 00:00:36.540
 A response can be grounded but incomplete.
 
-00:00:35.427 --> 00:00:40.252
+00:00:36.540 --> 00:00:41.815
 It can cite a relevant document but attach the citation to the wrong sentence.
 
-00:00:40.252 --> 00:00:44.232
+00:00:41.815 --> 00:00:46.080
 It can be factually correct but too vague to help the user.
 
-00:00:44.232 --> 00:00:49.897
+00:00:46.080 --> 00:00:52.205
 For a course project, a small human-reviewed rubric is a strong starting point.
 
-00:00:49.897 --> 00:00:56.160
+00:00:52.205 --> 00:00:59.369
 Automated evaluators can be added later, but first define what a good answer means for your application.

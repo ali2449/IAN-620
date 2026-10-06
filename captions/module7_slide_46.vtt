@@ -1,34 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.097
+00:00:00.000 --> 00:00:05.127
 There are many advanced retrieval techniques, but they should solve specific problems.
 
-00:00:05.097 --> 00:00:10.127
+00:00:05.127 --> 00:00:10.702
 Multi-query retrieval creates several alternative searches for one question.
 
-00:00:10.127 --> 00:00:16.212
+00:00:10.702 --> 00:00:16.692
 HyDE generates a hypothetical answer and embeds that instead of the short question.
 
-00:00:16.212 --> 00:00:21.867
+00:00:16.692 --> 00:00:22.822
 Parent-child retrieval searches small chunks but returns a larger surrounding section.
 
-00:00:21.867 --> 00:00:27.317
+00:00:22.822 --> 00:00:28.287
 Context compression reduces the amount of retrieved text before generation.
 
-00:00:27.317 --> 00:00:32.502
+00:00:28.287 --> 00:00:34.990
 These methods can be useful, but each one adds complexity, latency, and new failure modes.
 
-00:00:32.502 --> 00:00:39.862
+00:00:35.440 --> 00:00:40.627
 The best workflow is to begin with a strong baseline and an evaluation set.
 
-00:00:39.862 --> 00:00:45.072
+00:00:40.627 --> 00:00:46.667
 Identify a real failure. Then choose one method that could address that failure.
 
-00:00:45.072 --> 00:00:48.302
+00:00:46.667 --> 00:00:50.162
 Run the same evaluation again and compare.
 
-00:00:48.302 --> 00:00:53.152
+00:00:50.162 --> 00:00:55.557
 Do not build a complicated RAG stack simply because a technique is popular.
 
-00:00:53.152 --> 00:00:59.280
+00:00:55.557 --> 00:01:02.748
 A simple, measurable system is often more useful than a complex system that nobody understands.

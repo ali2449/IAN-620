@@ -1,43 +1,40 @@
 WEBVTT
 
-00:00:00.024 --> 00:00:03.052
+00:00:00.000 --> 00:00:03.267
 Now we implement a small overlapping chunker.
 
-00:00:03.052 --> 00:00:08.612
+00:00:03.267 --> 00:00:09.112
 The function splits the text into words, takes a fixed number of words for each chunk,
 
-00:00:08.612 --> 00:00:12.967
+00:00:09.112 --> 00:00:13.657
 and then moves forward while keeping some overlap from the previous chunk.
 
-00:00:12.967 --> 00:00:16.547
+00:00:13.657 --> 00:00:17.402
 Focus on the logic rather than memorizing the code.
 
-00:00:16.547 --> 00:00:19.892
+00:00:17.402 --> 00:00:20.877
 The key variables are chunk size and overlap.
 
-00:00:19.892 --> 00:00:24.267
-If the chunk size is fifty-five words and the overlap is fifteen,
+00:00:20.877 --> 00:00:29.562
+If the chunk size is fifty-five words and the overlap is fifteen, the next chunk begins before the previous chunk
 
-00:00:24.267 --> 00:00:28.187
-the next chunk begins before the previous chunk completely ends.
+00:00:29.562 --> 00:00:34.055
+completely ends. That repeated text can help preserve meaning around the boundary.
 
-00:00:28.187 --> 00:00:32.642
-That repeated text can help preserve meaning around the boundary.
-
-00:00:32.642 --> 00:00:37.667
+00:00:34.742 --> 00:00:38.184
 After you run the function, inspect the returned strings.
 
-00:00:37.667 --> 00:00:43.442
+00:00:38.184 --> 00:00:44.189
 Do they read naturally? Does each chunk contain enough information to be useful on its own?
 
-00:00:43.442 --> 00:00:45.982
+00:00:44.189 --> 00:00:47.064
 Do not rush directly to embeddings.
 
-00:00:45.982 --> 00:00:49.902
+00:00:47.064 --> 00:00:51.284
 The embedding model will happily create vectors for bad chunks.
 
-00:00:49.902 --> 00:00:52.422
+00:00:51.284 --> 00:00:53.949
 Human inspection is still valuable.
 
-00:00:52.422 --> 00:00:58.229
+00:00:53.949 --> 00:01:00.256
 Later, evaluation will help us decide whether a different chunk size actually improves retrieval.

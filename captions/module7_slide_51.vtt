@@ -1,34 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:02.857
+00:00:00.000 --> 00:00:03.332
 RAG failures should be diagnosed by layer.
 
-00:00:02.857 --> 00:00:10.532
+00:00:03.332 --> 00:00:11.897
 If no relevant result appears, inspect the source data, chunking, embedding model, and retrieval method.
 
-00:00:10.532 --> 00:00:14.322
+00:00:11.897 --> 00:00:19.382
 If the right source is retrieved but ranked too low, hybrid retrieval or reranking may help.
 
-00:00:14.322 --> 00:00:19.777
-If the correct evidence is rank one but the answer still invents a detail,
+00:00:19.382 --> 00:00:26.942
+If the correct evidence is rank one but the answer still invents a detail, the problem is more likely in prompt design
 
-00:00:19.777 --> 00:00:25.612
-the problem is more likely in prompt design or generation.
+00:00:26.942 --> 00:00:28.412
+or generation.
 
-00:00:25.612 --> 00:00:31.392
+00:00:29.002 --> 00:00:34.384
 If an answer is stale, check whether an old document version is still in the index.
 
-00:00:31.392 --> 00:00:34.342
+00:00:34.384 --> 00:00:37.459
 This layered way of thinking saves time.
 
-00:00:34.342 --> 00:00:39.382
+00:00:37.459 --> 00:00:43.054
 Without it, teams often respond to every problem by changing the language model.
 
-00:00:39.382 --> 00:00:45.597
+00:00:43.054 --> 00:00:49.649
 A larger model cannot fix a source that was never indexed, a permission filter that was not applied,
 
-00:00:45.597 --> 00:00:48.367
+00:00:49.649 --> 00:00:52.774
 or an outdated vector that was never deleted.
 
-00:00:48.367 --> 00:00:52.160
+00:00:52.774 --> 00:00:56.796
 Debug the system from data to retrieval to generation.

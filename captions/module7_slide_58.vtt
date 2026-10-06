@@ -1,34 +1,31 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.117
+00:00:00.000 --> 00:00:03.017
 You may hear more and more about agentic RAG.
 
-00:00:03.117 --> 00:00:09.657
-Classic RAG usually follows a direct flow: receive a question, retrieve evidence, build context,
+00:00:03.017 --> 00:00:12.927
+Classic RAG usually follows a direct flow: receive a question, retrieve evidence, build context, and generate an answer.
 
-00:00:09.657 --> 00:00:13.422
-and generate an answer. Agentic RAG can make additional decisions.
+00:00:12.927 --> 00:00:16.472
+Agentic RAG can make additional decisions.
 
-00:00:13.422 --> 00:00:20.452
-An agent might break a complex question into smaller parts, choose among multiple data sources,
+00:00:16.472 --> 00:00:25.017
+An agent might break a complex question into smaller parts, choose among multiple data sources, call different tools,
 
-00:00:20.452 --> 00:00:29.802
-call different tools, inspect intermediate results, and decide whether another retrieval step is needed.
+00:00:25.017 --> 00:00:30.415
+inspect intermediate results, and decide whether another retrieval step is needed.
 
-00:00:29.802 --> 00:00:35.577
+00:00:30.880 --> 00:00:36.357
 That can be useful for multi-hop questions or tasks that span several systems.
 
-00:00:35.577 --> 00:00:40.312
+00:00:36.357 --> 00:00:41.467
 But agentic RAG does not remove the need to understand classic retrieval.
 
-00:00:40.312 --> 00:00:46.942
+00:00:41.467 --> 00:00:50.122
 The agent still depends on good data, useful chunks, embeddings, search, permissions, and evaluation.
 
-00:00:46.942 --> 00:00:52.517
+00:00:50.122 --> 00:00:54.607
 That is why this module teaches the classic pipeline first.
 
-00:00:52.517 --> 00:00:57.632
-Once you understand the basic architecture, agentic patterns become an extension rather than another black
-
-00:00:57.632 --> 00:00:59.551
-box.
+00:00:54.607 --> 00:01:02.258
+Once you understand the basic architecture, agentic patterns become an extension rather than another black box.

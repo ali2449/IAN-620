@@ -1,34 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:01.697
+00:00:00.000 --> 00:00:04.427
 Before creating embeddings, print a few chunks and read them.
 
-00:00:01.697 --> 00:00:03.657
+00:00:04.427 --> 00:00:10.102
 This step may feel simple, but it catches a surprising number of problems.
 
-00:00:03.657 --> 00:00:05.647
+00:00:10.102 --> 00:00:15.527
 Ask whether the chunk is understandable without seeing the entire original document.
 
-00:00:05.647 --> 00:00:08.632
+00:00:15.527 --> 00:00:21.262
 Check whether important headings or conditions were separated from the sentence they explain.
 
-00:00:08.632 --> 00:00:13.577
+00:00:21.262 --> 00:00:29.212
 Look for duplicated navigation text, broken words, or chunks that contain almost no useful information.
 
-00:00:13.577 --> 00:00:13.932
+00:00:29.682 --> 00:00:34.884
 If a chunk is poor, the embedding model cannot repair the missing context.
 
-00:00:13.932 --> 00:00:18.882
-In real projects, I also like to inspect chunks from different document types rather than only the first
+00:00:34.884 --> 00:00:43.239
+In real projects, I also like to inspect chunks from different document types rather than only the first few rows.
 
-00:00:18.882 --> 00:00:19.272
-few rows. A PDF, web page, and policy document may behave very differently.
+00:00:43.239 --> 00:00:49.364
+A PDF, web page, and policy document may behave very differently.
 
-00:00:19.272 --> 00:00:21.717
+00:00:49.364 --> 00:00:53.264
 Think of this as quality control before indexing.
 
-00:00:21.717 --> 00:00:24.712
+00:00:53.264 --> 00:01:00.429
 Once thousands or millions of chunks are embedded, changing the chunking strategy becomes more expensive.
 
-00:00:24.712 --> 00:00:26.182
+00:01:00.429 --> 00:01:04.164
 Good retrieval begins with useful retrieval units.

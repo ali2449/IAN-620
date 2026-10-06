@@ -1,37 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:02.227
+00:00:00.000 --> 00:00:02.412
 This is the first real retrieval step.
 
-00:00:02.227 --> 00:00:06.522
+00:00:02.412 --> 00:00:06.847
 We embed the user's question with the same model used for the chunks.
 
-00:00:06.522 --> 00:00:12.617
+00:00:06.847 --> 00:00:13.362
 Because the vectors are normalized, the dot product gives us a cosine-style similarity score.
 
-00:00:12.617 --> 00:00:18.167
+00:00:13.362 --> 00:00:19.312
 Then we sort the scores from highest to lowest and return the top matching chunk rows.
 
-00:00:18.167 --> 00:00:21.492
+00:00:19.312 --> 00:00:22.927
 I want you to notice that there is no vector database yet.
 
-00:00:21.492 --> 00:00:28.107
+00:00:22.927 --> 00:00:26.739
 We can understand the full retrieval logic with a NumPy matrix.
 
-00:00:28.107 --> 00:00:34.252
+00:00:27.189 --> 00:00:33.596
 That is useful because later, when Chroma, Qdrant, or another database performs the search,
 
-00:00:34.252 --> 00:00:37.367
+00:00:33.596 --> 00:00:37.141
 you will know what job the database is replacing.
 
-00:00:37.367 --> 00:00:42.232
+00:00:37.141 --> 00:00:42.651
 Also notice that the function returns metadata along with text and score.
 
-00:00:42.232 --> 00:00:46.092
-The retrieval result should be useful to the rest of the application,
+00:00:42.651 --> 00:00:49.841
+The retrieval result should be useful to the rest of the application, not just a list of vector positions.
 
-00:00:46.092 --> 00:00:48.587
-not just a list of vector positions.
-
-00:00:48.587 --> 00:00:51.389
+00:00:49.841 --> 00:00:52.993
 This simple function is our baseline retriever.

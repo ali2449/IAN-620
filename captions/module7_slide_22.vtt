@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.167
+00:00:00.000 --> 00:00:04.507
 Now we turn the prompt design into a reusable Python function.
 
-00:00:04.167 --> 00:00:09.822
+00:00:04.507 --> 00:00:10.957
 The function loops through the retrieved rows, creates a numbered source block for each one,
 
-00:00:09.822 --> 00:00:15.697
+00:00:10.957 --> 00:00:17.392
 joins those blocks into one context section, and inserts the user's question below it.
 
-00:00:15.697 --> 00:00:20.502
+00:00:17.392 --> 00:00:22.812
 Notice that the source title and source path are included with the chunk text.
 
-00:00:20.502 --> 00:00:25.467
+00:00:22.812 --> 00:00:28.174
 That gives the language model and the final answer a simple trace back to the evidence.
 
-00:00:25.467 --> 00:00:28.342
+00:00:28.813 --> 00:00:31.235
 After building the prompt, print it.
 
-00:00:28.342 --> 00:00:32.047
+00:00:31.235 --> 00:00:35.720
 Do not treat prompt construction as an invisible step.
 
-00:00:32.047 --> 00:00:37.512
+00:00:35.720 --> 00:00:42.040
 When an answer looks wrong, the actual prompt is one of the first things you should inspect.
 
-00:00:37.512 --> 00:00:40.422
+00:00:42.040 --> 00:00:44.950
 Check whether the correct chunks are present.
 
-00:00:40.422 --> 00:00:43.162
+00:00:44.950 --> 00:00:47.910
 Check whether the source numbering is clear.
 
-00:00:43.162 --> 00:00:47.432
+00:00:47.910 --> 00:00:52.445
 Check whether the instruction about insufficient evidence is included.
 
-00:00:47.432 --> 00:00:51.680
+00:00:52.445 --> 00:00:56.956
 This function gives us a consistent prompt structure for every question.

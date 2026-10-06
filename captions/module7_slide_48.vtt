@@ -1,37 +1,34 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.202
+00:00:00.000 --> 00:00:04.887
 Recall at k is one of the easiest retrieval metrics to understand.
 
-00:00:04.202 --> 00:00:13.087
-For each evaluation question, we retrieve the top k chunks and check whether the expected source document
+00:00:04.887 --> 00:00:12.397
+For each evaluation question, we retrieve the top k chunks and check whether the expected source document appears
 
-00:00:13.087 --> 00:00:15.287
-appears anywhere in that set.
+00:00:12.397 --> 00:00:19.012
+anywhere in that set. If the correct document is present, that question is a hit.
 
-00:00:15.287 --> 00:00:20.722
-If the correct document is present, that question is a hit.
-
-00:00:20.722 --> 00:00:24.272
+00:00:19.012 --> 00:00:23.266
 Recall at k is the proportion of questions that produce a hit.
 
-00:00:24.272 --> 00:00:30.462
+00:00:23.914 --> 00:00:29.112
 Recall at one is stricter because the correct document must be ranked first.
 
-00:00:30.462 --> 00:00:34.772
+00:00:29.112 --> 00:00:33.151
 Recall at three gives the system a little more room.
 
-00:00:34.772 --> 00:00:41.087
+00:00:33.151 --> 00:00:38.596
 This metric does not tell us everything, but it answers an important question:
 
-00:00:41.087 --> 00:00:44.017
+00:00:38.596 --> 00:00:42.071
 did retrieval provide the evidence we needed?
 
-00:00:44.017 --> 00:00:49.392
+00:00:42.071 --> 00:00:49.842
 If recall is poor, changing the language model is usually not the first fix.
 
-00:00:49.392 --> 00:00:54.192
+00:00:49.842 --> 00:00:55.262
 Investigate chunking, metadata, embeddings, filters, and retrieval methods first.
 
-00:00:54.192 --> 00:00:59.676
+00:00:55.262 --> 00:00:59.144
 This is how evaluation helps us target the correct layer.

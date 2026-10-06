@@ -1,37 +1,37 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:01.982
+00:00:00.000 --> 00:00:03.782
 Weaviate supports several ways to perform vector search.
 
-00:00:01.982 --> 00:00:03.672
+00:00:03.782 --> 00:00:10.672
 In the example, the near_text pattern is useful when the collection is configured with a vectorizer.
 
-00:00:03.672 --> 00:00:05.932
+00:00:10.672 --> 00:00:17.402
 You provide natural-language text, and the system handles the vectorization before searching.
 
-00:00:05.932 --> 00:00:09.752
+00:00:17.402 --> 00:00:24.122
 If your application generates its own embeddings, you can instead use a near-vector style query.
 
-00:00:09.752 --> 00:00:10.222
+00:00:24.122 --> 00:00:26.478
 This distinction is worth noticing.
 
-00:00:10.222 --> 00:00:12.292
+00:00:26.930 --> 00:00:31.017
 Some platforms want the application to own embedding generation.
 
-00:00:12.292 --> 00:00:15.712
+00:00:31.017 --> 00:00:35.812
 Others can integrate the embedding step into the database workflow.
 
-00:00:15.712 --> 00:00:16.092
+00:00:35.812 --> 00:00:40.832
 Neither approach is automatically better.
 
-00:00:16.092 --> 00:00:18.942
+00:00:40.832 --> 00:00:45.292
 The choice affects consistency, model upgrades, cost, and operational control.
 
-00:00:18.942 --> 00:00:21.762
+00:00:45.292 --> 00:00:52.917
 When you evaluate a vector platform, ask who creates the embeddings, where the model configuration lives,
 
-00:00:21.762 --> 00:00:22.312
+00:00:52.917 --> 00:00:57.652
 how metadata filters work, and how the system handles updates.
 
-00:00:22.312 --> 00:00:24.235
+00:00:57.652 --> 00:01:02.193
 Those questions matter more than the exact method names in the SDK.

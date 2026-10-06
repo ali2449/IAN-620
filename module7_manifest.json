@@ -1,619 +1,624 @@
 {
   "module": "module7",
+  "generation_version": "ian620_safe_v4_exact_reference_text_seed1234",
   "filename_prefix": "module7",
   "source_file": "IAN620_Module7_RAG_Narration_TTS_Breaks.txt",
-  "voice_consistency_version": 2,
   "reference_audio": "/home/ali/breeze-tts/voice_reference/course_instructor_consistent_v4.wav",
+  "reference_text_version": "course_instructor_consistent_v4_exact_transcript",
   "reference_text": "Welcome to the course. We will work through each concept carefully, connect the\nideas step by step, and use practical examples to make technical topics easier\nto understand. When we introduce a new method, focus first on the problem it\nsolves and why it is useful. For example, in machine learning, features are the\ninformation we give the model, while the target is what we want it to predict.\nNow consider a simple question: what changes when the data contains missing\nvalues? We will think through the reason and then look at the code. In Python,\nwe can inspect the data, run one small step at a time, and explain what the\nresult means. The goal is to understand the logic, not simply memorize syntax.",
-  "locked_narration_seed": true,
-  "narration_seed": 1234,
-  "subtitle_method": "whole_slide_silence_alignment",
+  "subtitle_method": "tts_break_section_generation",
+  "generation_boundary": "[tts-break]",
+  "instruction_mode": "disabled_to_prevent_spoken_prompt_leakage",
+  "spoken_instruction_sent_to_breeze": false,
+  "audio_settings": {
+    "speech_speed": 0.93,
+    "speed_method": "ffmpeg_atempo_before_vtt_alignment"
+  },
   "caption_settings": {
-    "max_words": 18,
-    "max_chars": 110,
-    "minimum_silence_seconds": 0.2,
-    "boundary_search_window_seconds": 1.4
+    "max_words": 24,
+    "max_chars": 120,
+    "tts_break_pause_seconds": 0.45
   },
   "slides": [
     {
       "slide": 1,
       "title": "Build one complete RAG system",
       "transcript": "Welcome to Module 7. In this module, we are going to build one complete retrieval-augmented generation, or RAG, system from beginning to end.\n\nWe will use one small student-support knowledge base throughout the module. That is important because I do not want the examples to feel disconnected. We will start with documents, clean them, split them into chunks, create embeddings, retrieve relevant evidence, build a grounded prompt, and finally generate an answer with sources.\n\n[tts-break]\n\nThe first goal is not to use as many tools as possible. The first goal is to understand the architecture. Once the simple version works, we will move the same ideas into a vector database and then improve retrieval with filtering, keyword search, hybrid search, and reranking.\n\nBy the end, you should be able to take a small document collection from your own work and build the same workflow yourself.",
-      "seed": 1234,
       "wav": "wav/module7_slide_01.wav",
       "audio": "audio/module7_slide_01.mp3",
       "captions": "audio/module7_slide_01.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 2,
       "title": "Four parts, in this order",
       "transcript": "The module is organized into four parts, and the order matters.\n\nPart 1 is the core build. We create a complete working RAG pipeline ourselves with Python, NumPy, and Sentence Transformers. This gives us a transparent baseline.\n\nPart 2 is storage. Once the baseline works, we move the vectors into Chroma and then compare other vector-search options. The point is to see that changing the storage layer does not require changing the whole application.\n\n[tts-break]\n\nPart 3 focuses on retrieval quality. We introduce metadata filters, top-k, BM25, hybrid retrieval, reranking, and query rewriting.\n\nPart 4 is evaluation and production thinking. We measure retrieval, diagnose failures, think about security and freshness, and connect the classroom system to the architecture companies use.\n\nIf Part 1 is clear, the rest of the module becomes much easier.",
-      "seed": 1234,
       "wav": "wav/module7_slide_02.wav",
       "audio": "audio/module7_slide_02.mp3",
       "captions": "audio/module7_slide_02.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 3,
       "title": "Running project: Student Support RAG Assistant",
       "transcript": "Our running project is a Student Support RAG Assistant.\n\nThe knowledge base contains short documents about topics such as payment plans, internships, scholarship appeals, VPN troubleshooting, advising, registration, and graduation. A user can ask a natural-language question, and our system should retrieve the right source before generating an answer.\n\nFor example, if someone asks what is required before internship registration, the system should find the internship checklist rather than guessing from general model knowledge. If the question is about VPN problems, the technology support document should move to the top.\n\n[tts-break]\n\nThis dataset is small enough to inspect manually, which is useful for learning. At the same time, it contains the same kinds of metadata that matter in real projects: document IDs, topics, dates, sources, and permissions.\n\nWe will keep returning to the same records so you can see exactly how data moves through a RAG pipeline.",
-      "seed": 1234,
       "wav": "wav/module7_slide_03.wav",
       "audio": "audio/module7_slide_03.mp3",
       "captions": "audio/module7_slide_03.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 4,
       "title": "Use these two files throughout the module",
       "transcript": "There are two companion files for this module.\n\nThe first is the sample knowledge base, stored as a CSV file. It contains the source documents and metadata. The second is the complete Python reference script. The script is useful later when you want to see how all of the separate functions fit together.\n\n[tts-break]\n\nMy recommendation is not to begin by running the complete script and treating it as a black box. Follow the smaller steps first. Load the data, inspect the chunks, create the embeddings, and test retrieval.\n\nThen use the complete script as a checkpoint. Compare your version with the reference version and make sure you understand why each function exists.\n\nThat workflow is closer to how you should learn a real technical system: first understand the pieces, then look at the full implementation.",
-      "seed": 1234,
       "wav": "wav/module7_slide_04.wav",
       "audio": "audio/module7_slide_04.mp3",
       "captions": "audio/module7_slide_04.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 5,
       "title": "Install only the libraries needed for the first RAG",
       "transcript": "For the first version of RAG, we only need a small set of libraries.\n\nPandas will manage the document and chunk tables. NumPy will hold our vectors and help with ranking. Sentence Transformers will create embeddings. Scikit-learn is useful for similarity calculations, and the OpenAI Python client can connect to a language model later.\n\n[tts-break]\n\nNotice what we are not installing yet. We are not starting with several vector databases, LangChain, or a large orchestration framework.\n\nThat is intentional. When too many libraries are introduced at the beginning, it becomes difficult to tell which part of the system is actually doing the retrieval.\n\nStart with the simplest environment that can demonstrate the architecture. Once that works, adding a vector database becomes a meaningful engineering choice rather than another mysterious package.",
-      "seed": 1234,
       "wav": "wav/module7_slide_05.wav",
       "audio": "audio/module7_slide_05.mp3",
       "captions": "audio/module7_slide_05.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 6,
       "title": "Know what one source document looks like",
       "transcript": "Before writing RAG code, look carefully at the structure of a source document.\n\nThe text field contains the knowledge we want to search. But the surrounding metadata is just as important. A document ID gives us a stable identifier. The title gives us something readable to display to a user. Topic can be used for filtering. The updated date helps us reason about freshness. The source field supports citations.\n\n[tts-break]\n\nIn a production system, you might also keep department, language, document type, tenant, access role, or page number.\n\nA common mistake is to store only the text and throw away everything else. That makes the system harder to debug and harder to secure.\n\nSo from the beginning, think of RAG data as text plus metadata. The embedding represents the meaning of the text, while the metadata helps us control and explain retrieval.",
-      "seed": 1234,
       "wav": "wav/module7_slide_06.wav",
       "audio": "audio/module7_slide_06.mp3",
       "captions": "audio/module7_slide_06.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 7,
       "title": "Load the sample CSV",
       "transcript": "Now we load the sample knowledge base into a Pandas DataFrame.\n\nThe code is intentionally simple. We read the CSV, check its shape, and inspect a few columns such as document ID, title, topic, and source.\n\nAt this point, I want you to develop a habit: inspect the raw data before transforming it. Confirm how many documents you have. Check the column names. Look for missing values or unexpected text.\n\n[tts-break]\n\nThe sample dataset contains ten source documents. Later, those ten documents will become more than ten rows because long documents can be split into multiple chunks.\n\nThis distinction matters. A source document and a retrieval chunk are not necessarily the same thing.\n\nFor now, keep the original DataFrame intact. We will create a separate chunk table rather than overwriting the source collection.",
-      "seed": 1234,
       "wav": "wav/module7_slide_07.wav",
       "audio": "audio/module7_slide_07.mp3",
       "captions": "audio/module7_slide_07.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 8,
       "title": "In a company, the CSV is replaced by real document sources",
       "transcript": "Our classroom example begins with a CSV, but real RAG projects usually start with other data sources.\n\nA company might have PDFs in SharePoint, Word documents in a shared drive, web pages, database records, support tickets, object storage, or internal APIs. Before RAG can search those sources, the content has to be extracted and normalized.\n\nFor PDFs, that may mean a parser such as PyMuPDF. Scanned documents may require OCR. Web pages need HTML cleanup. A database may already have structured metadata that should be preserved.\n\n[tts-break]\n\nThe important point is that this ingestion layer comes before chunking and embeddings.\n\nOnce the text and metadata have been extracted, the rest of the workflow is the same as our classroom example: clean the text, create chunks, embed them, store the vectors, and retrieve them when a user asks a question.\n\nSo the CSV is a simplification of the ingestion stage, not a different architecture.",
-      "seed": 1234,
       "wav": "wav/module7_slide_08.wav",
       "audio": "audio/module7_slide_08.mp3",
       "captions": "audio/module7_slide_08.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 9,
       "title": "Keep indexing time separate from question time",
       "transcript": "RAG becomes much easier to understand when we separate indexing time from question time.\n\nIndexing happens before a user asks anything. We load documents, clean them, create chunks, generate embeddings, and store vectors with metadata. For a stable knowledge base, this work may happen once and then run again only when documents change.\n\nQuestion time begins when a user sends a query. We embed that question, retrieve the best chunks, build a prompt using those chunks, and ask the language model to generate an answer.\n\n[tts-break]\n\nThis separation is important for both performance and debugging.\n\nIf retrieval is slow, you need to know whether the problem is in indexing or query-time search. If an answer is stale, you may need to inspect the indexing pipeline rather than the language model.\n\nKeep these two flows in mind throughout the module: prepare knowledge first, then use that prepared knowledge to answer questions.",
-      "seed": 1234,
       "wav": "wav/module7_slide_09.wav",
       "audio": "audio/module7_slide_09.mp3",
       "captions": "audio/module7_slide_09.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 10,
       "title": "Clean text before chunking",
       "transcript": "Before chunking, we perform a basic cleaning step.\n\nOur sample data is already fairly clean, so the function mostly removes repeated whitespace. Real documents can be much messier. You may see repeated page headers, navigation menus, broken line endings, OCR artifacts, duplicate text, or footer content.\n\nCleaning matters because noisy text produces noisy chunks, and noisy chunks produce weaker embeddings.\n\n[tts-break]\n\nAt the same time, we should not over-clean. Punctuation, headings, and sentence boundaries often carry useful structure. Removing too much can make a passage harder to understand.\n\nA good practical rule is to keep the original source text and create a cleaned version in a separate column. That gives you something to compare when retrieval quality is poor.\n\nRAG quality begins much earlier than the language model. Good source preparation is part of retrieval engineering.",
-      "seed": 1234,
       "wav": "wav/module7_slide_10.wav",
       "audio": "audio/module7_slide_10.mp3",
       "captions": "audio/module7_slide_10.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 11,
       "title": "Why chunking matters",
       "transcript": "Chunking is one of the most important design decisions in a RAG system.\n\nIf we embed an entire long document, the vector may represent many unrelated ideas at once. Retrieval might find the right document but still send a large amount of irrelevant context to the model.\n\nIf chunks are too small, we create the opposite problem. A retrieved passage may contain the right sentence but lose an important condition or explanation that appeared just before it.\n\n[tts-break]\n\nOverlap helps reduce boundary problems by repeating a small amount of text between neighboring chunks.\n\nThere is no universal best chunk size. A legal policy, a support article, a research paper, and source code may need different strategies.\n\nFor this module, we begin with simple word-based chunks because the logic is easy to see. Later, you can move to token-aware, sentence-aware, section-aware, or semantic chunking when the project requires it.",
-      "seed": 1234,
       "wav": "wav/module7_slide_11.wav",
       "audio": "audio/module7_slide_11.mp3",
       "captions": "audio/module7_slide_11.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 12,
       "title": "Implement a simple overlapping chunker",
       "transcript": "Now we implement a small overlapping chunker.\n\nThe function splits the text into words, takes a fixed number of words for each chunk, and then moves forward while keeping some overlap from the previous chunk.\n\nFocus on the logic rather than memorizing the code. The key variables are chunk size and overlap.\n\nIf the chunk size is fifty-five words and the overlap is fifteen, the next chunk begins before the previous chunk completely ends. That repeated text can help preserve meaning around the boundary.\n\n[tts-break]\n\nAfter you run the function, inspect the returned strings. Do they read naturally? Does each chunk contain enough information to be useful on its own?\n\nDo not rush directly to embeddings. The embedding model will happily create vectors for bad chunks. Human inspection is still valuable.\n\nLater, evaluation will help us decide whether a different chunk size actually improves retrieval.",
-      "seed": 1234,
       "wav": "wav/module7_slide_12.wav",
       "audio": "audio/module7_slide_12.mp3",
       "captions": "audio/module7_slide_12.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 13,
       "title": "Create a chunk table with metadata",
       "transcript": "Once the chunker works, we apply it to every source document.\n\nEach chunk becomes its own row in a new DataFrame. We give it a chunk ID and keep the original document ID, title, topic, permission, update date, and source.\n\nThis is a very common RAG data model.\n\n[tts-break]\n\nThe vector represents the chunk text, but the metadata travels with that vector. When retrieval returns a vector match, we need to know which source document it came from, what title to display, whether the user has permission to see it, and whether the source is current.\n\nNotice that we are not losing the relationship between chunk and document. One document may generate several chunks, but every chunk can still point back to the original source.\n\nThat relationship becomes especially useful for citations, access control, and evaluation.",
-      "seed": 1234,
       "wav": "wav/module7_slide_13.wav",
       "audio": "audio/module7_slide_13.mp3",
       "captions": "audio/module7_slide_13.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 14,
       "title": "Inspect chunks before embedding them",
       "transcript": "Before creating embeddings, print a few chunks and read them.\n\nThis step may feel simple, but it catches a surprising number of problems.\n\nAsk whether the chunk is understandable without seeing the entire original document. Check whether important headings or conditions were separated from the sentence they explain. Look for duplicated navigation text, broken words, or chunks that contain almost no useful information.\n\n[tts-break]\n\nIf a chunk is poor, the embedding model cannot repair the missing context.\n\nIn real projects, I also like to inspect chunks from different document types rather than only the first few rows. A PDF, web page, and policy document may behave very differently.\n\nThink of this as quality control before indexing. Once thousands or millions of chunks are embedded, changing the chunking strategy becomes more expensive.\n\nGood retrieval begins with useful retrieval units.",
-      "seed": 1234,
       "wav": "wav/module7_slide_14.wav",
       "audio": "audio/module7_slide_14.mp3",
       "captions": "audio/module7_slide_14.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 15,
       "title": "Use one embedding model first",
       "transcript": "Now we move from text into vector representations.\n\nFor the baseline, we use one Sentence Transformers model for both chunks and questions. The important requirement is that both sides are represented in the same embedding space.\n\nConsider the example on the slide. One chunk says that students need an approved internship site and supervisor. The question asks what someone should complete before internship registration.\n\n[tts-break]\n\nThe wording is not identical, but the meaning is similar. A good embedding model should place those two pieces of text near each other.\n\nThat semantic behavior is the reason vector retrieval can work even when the user does not repeat the exact wording in the source document.\n\nFor now, keep the model fixed. First understand the retrieval pipeline. Later, if evaluation is weak, comparing embedding models becomes a meaningful experiment.",
-      "seed": 1234,
       "wav": "wav/module7_slide_15.wav",
       "audio": "audio/module7_slide_15.mp3",
       "captions": "audio/module7_slide_15.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 16,
       "title": "Embed the chunks",
       "transcript": "We now create one vector for every chunk.\n\nThe code sends the chunk text to the Sentence Transformers model and asks for normalized embeddings. The resulting matrix has one row per chunk and one column per embedding dimension.\n\nWith the model used here, each vector has 384 dimensions.\n\nDo not worry about interpreting individual numbers. A single value does not have a useful human meaning. What matters is the position of the entire vector relative to other vectors.\n\n[tts-break]\n\nThe row alignment is important. Row zero in the vector matrix must correspond to row zero in the chunk table. That is how we map a similarity result back to the correct text and metadata.\n\nI recommend printing the shapes and adding an assertion that the number of vectors equals the number of chunks.\n\nSmall checks like this prevent subtle retrieval bugs later.",
-      "seed": 1234,
       "wav": "wav/module7_slide_16.wav",
       "audio": "audio/module7_slide_16.mp3",
       "captions": "audio/module7_slide_16.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 17,
       "title": "Retrieve with cosine similarity in NumPy",
       "transcript": "This is the first real retrieval step.\n\nWe embed the user's question with the same model used for the chunks. Because the vectors are normalized, the dot product gives us a cosine-style similarity score.\n\nThen we sort the scores from highest to lowest and return the top matching chunk rows.\n\nI want you to notice that there is no vector database yet. We can understand the full retrieval logic with a NumPy matrix.\n\n[tts-break]\n\nThat is useful because later, when Chroma, Qdrant, or another database performs the search, you will know what job the database is replacing.\n\nAlso notice that the function returns metadata along with text and score. The retrieval result should be useful to the rest of the application, not just a list of vector positions.\n\nThis simple function is our baseline retriever.",
-      "seed": 1234,
       "wav": "wav/module7_slide_17.wav",
       "audio": "audio/module7_slide_17.mp3",
       "captions": "audio/module7_slide_17.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 18,
       "title": "Test retrieval before you add the LLM",
       "transcript": "Before adding a language model, test whether retrieval works.\n\nWe ask a question about internship registration and inspect the top three results.\n\nThe expected behavior is that the Internship Registration Checklist appears at or near the top. If it does not, stop here and investigate.\n\nThis is a crucial RAG debugging principle. The language model cannot reliably answer from evidence that was never retrieved.\n\n[tts-break]\n\nWhen the wrong source is returned, look at the document text, chunking, embedding model, filters, and similarity method before changing the prompt.\n\nA lot of RAG development is really retrieval engineering.\n\nThe model is only one layer in the system.\n\nSo at this stage, treat the retrieved rows as the product. Read them carefully and ask whether you would be comfortable giving those passages to a model as evidence.",
-      "seed": 1234,
       "wav": "wav/module7_slide_18.wav",
       "audio": "audio/module7_slide_18.mp3",
       "captions": "audio/module7_slide_18.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 19,
       "title": "Read the ranked retrieval result like an engineer",
       "transcript": "A similarity score is useful, but it should never be the only thing you inspect.\n\nLook at the rank, the source title, the actual retrieved text, and the score together.\n\nFor our internship question, the first result should contain direct evidence about internship registration. A second result about advising may still be related, but it is less specific. A third result with a low score may simply be noise.\n\n[tts-break]\n\nThe exact numbers on your computer may differ from the example. Different embedding models or preprocessing choices can change score ranges.\n\nDo not build a production rule such as 'anything above point eight is always good' without evaluating your own data.\n\nFirst ask whether the ranking makes sense. Then collect evaluation questions and study the score distribution.\n\nRetrieval quality is about evidence, not just numbers.",
-      "seed": 1234,
       "wav": "wav/module7_slide_19.wav",
       "audio": "audio/module7_slide_19.mp3",
       "captions": "audio/module7_slide_19.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 20,
       "title": "Change the question and inspect what retrieval does",
       "transcript": "This is your first short practice exercise.\n\nBefore you run the code, read each question and predict which source should appear at the top.\n\nTry a scholarship appeal question, a VPN troubleshooting question, and a graduation question.\n\nThen run the retriever and compare the results with your prediction.\n\nDo not worry if a second or third result is not perfect. The main goal is to understand how the ranking changes when the meaning of the query changes.\n\n[tts-break]\n\nAlso resist the temptation to change the embedding model immediately if one result surprises you. Read the source text and the returned chunk first.\n\nSometimes the model is doing something reasonable that was not obvious from the title.\n\nThis habit—predict, retrieve, inspect, explain—is useful when you later evaluate much larger RAG systems.",
-      "seed": 1234,
       "wav": "wav/module7_slide_20.wav",
       "audio": "audio/module7_slide_20.mp3",
       "captions": "audio/module7_slide_20.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 21,
       "title": "Build a prompt from retrieved evidence",
       "transcript": "Once retrieval is working, we can prepare evidence for the language model.\n\nA grounded RAG prompt should clearly separate instructions, retrieved context, the user question, and the expected answer behavior.\n\nWe tell the model to use only the provided sources. We also specify what to do when the evidence is insufficient. Instead of inventing an answer, the model should say that the needed information is not available in the retrieved context.\n\n[tts-break]\n\nWe number the sources so the final response can cite them.\n\nThis does not guarantee perfect factual behavior, but it makes the task much clearer and easier to evaluate.\n\nA good way to think about RAG prompting is that retrieval decides what evidence is available, and the prompt tells the model how to use that evidence.\n\nBoth parts matter.",
-      "seed": 1234,
       "wav": "wav/module7_slide_21.wav",
       "audio": "audio/module7_slide_21.mp3",
       "captions": "audio/module7_slide_21.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 22,
       "title": "Turn retrieved chunks into a prompt",
       "transcript": "Now we turn the prompt design into a reusable Python function.\n\nThe function loops through the retrieved rows, creates a numbered source block for each one, joins those blocks into one context section, and inserts the user's question below it.\n\nNotice that the source title and source path are included with the chunk text. That gives the language model and the final answer a simple trace back to the evidence.\n\n[tts-break]\n\nAfter building the prompt, print it.\n\nDo not treat prompt construction as an invisible step. When an answer looks wrong, the actual prompt is one of the first things you should inspect.\n\nCheck whether the correct chunks are present. Check whether the source numbering is clear. Check whether the instruction about insufficient evidence is included.\n\nThis function gives us a consistent prompt structure for every question.",
-      "seed": 1234,
       "wav": "wav/module7_slide_22.wav",
       "audio": "audio/module7_slide_22.mp3",
       "captions": "audio/module7_slide_22.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 23,
       "title": "Generate the answer from the grounded prompt",
       "transcript": "Now we connect the grounded prompt to a language model.\n\nThe example uses the OpenAI Python client, but the important idea is provider independence. The same retrieval pipeline can work with a hosted API or with an OpenAI-compatible local endpoint.\n\nWe keep the API key and model configuration in environment variables rather than writing credentials into the notebook.\n\n[tts-break]\n\nFor this kind of support or policy RAG, we also use a low temperature. We are not asking the model to be creative. We want a stable answer that follows the evidence.\n\nRemember that generation is only one step in the pipeline. The model receives the question together with retrieved context.\n\nIf retrieval is correct and the prompt is clear, generation has a much easier job.\n\nNever commit API keys to GitHub or include them directly in student files.",
-      "seed": 1234,
       "wav": "wav/module7_slide_23.wav",
       "audio": "audio/module7_slide_23.mp3",
       "captions": "audio/module7_slide_23.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 24,
       "title": "Put the pieces together in one RAG function",
       "transcript": "We can now combine the steps into one reusable function.\n\nThe function receives a question, calls the dense retriever, builds the grounded prompt, sends that prompt to the language model, and returns both the answer and the sources.\n\nThis is our first complete RAG workflow.\n\nNotice that we also return the retrieved context, not only the final answer. That is an important design choice.\n\n[tts-break]\n\nWhen a user reports a bad answer, you want to inspect what the system retrieved. Without that information, debugging becomes guesswork.\n\nThe function is still small because each responsibility is separated into its own function.\n\nThis is also how I recommend structuring a larger project. Keep retrieval, prompt construction, generation, and evaluation separable so that you can improve one layer without rewriting everything else.",
-      "seed": 1234,
       "wav": "wav/module7_slide_24.wav",
       "audio": "audio/module7_slide_24.mp3",
       "captions": "audio/module7_slide_24.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 25,
       "title": "Stop here: the complete RAG workflow already works",
       "transcript": "This is an important checkpoint.\n\nIf you understand everything up to this point, you already understand the core architecture of RAG.\n\nOn the indexing side, we clean documents, create chunks, and generate embeddings. On the question side, we embed the query, retrieve relevant chunks, build a prompt, and generate an answer with sources.\n\nEverything that follows is an improvement around this architecture.\n\n[tts-break]\n\nA vector database changes how vectors and metadata are stored and searched. Hybrid retrieval changes how candidates are ranked. Reranking improves the order of those candidates. Evaluation tells us whether changes actually help.\n\nBut the core information flow remains the same.\n\nBefore continuing, make sure you could explain this pipeline without looking at the code.\n\nIf you can describe each stage and why it exists, you are ready for the more practical production-oriented parts of the module.",
-      "seed": 1234,
       "wav": "wav/module7_slide_25.wav",
       "audio": "audio/module7_slide_25.mp3",
       "captions": "audio/module7_slide_25.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 26,
       "title": "When do we need a vector database?",
       "transcript": "Our NumPy retriever is excellent for learning, but it is not always the right storage layer for a real application.\n\nWith a small dataset, comparing one query vector against every stored vector is easy. As collections grow, teams usually need persistence, indexing, metadata filters, APIs, concurrent users, backups, and operational tooling.\n\nThat is where vector indexes and vector databases become useful.\n\n[tts-break]\n\nA vector database does not create RAG by itself. It mainly helps store and search vectors and associated metadata efficiently.\n\nThis distinction matters because people sometimes equate RAG with a particular database product.\n\nRAG is the architecture. The vector database is one component.\n\nFor a classroom project, NumPy or Chroma may be enough. For a production service, you may choose a server-based or managed system depending on scale, security, operations, and existing infrastructure.",
-      "seed": 1234,
       "wav": "wav/module7_slide_26.wav",
       "audio": "audio/module7_slide_26.mp3",
       "captions": "audio/module7_slide_26.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 27,
       "title": "Vector database comparison",
       "transcript": "There are many vector-search tools, and students do not need to memorize every product.\n\nInstead, focus on the categories and the engineering tradeoffs.\n\nFAISS is a fast local vector-search library, but it is not a full database. Chroma is convenient for local prototypes. Qdrant is a vector database with strong metadata filtering. pgvector keeps vector search inside PostgreSQL, which can be attractive for teams already using relational data.\n\n[tts-break]\n\nPinecone is a managed cloud service. Weaviate supports vector and hybrid search with a broader platform around it. Milvus and Zilliz are designed for larger-scale vector workloads.\n\nThe syntax changes from product to product, but the pattern stays familiar: create or connect to a collection or index, insert vectors with metadata, embed the query, search for nearby vectors, and return the associated text.\n\nChoose based on the project, not on popularity.",
-      "seed": 1234,
       "wav": "wav/module7_slide_27.wav",
       "audio": "audio/module7_slide_27.mp3",
       "captions": "audio/module7_slide_27.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 28,
       "title": "Chroma local syntax",
       "transcript": "We will use Chroma as the main hands-on vector store because it is easy to run locally.\n\nThe code creates a persistent client and a collection. Then we insert our existing chunk IDs, chunk text, metadata, and embeddings.\n\nNotice that we are not changing the embedding model or rebuilding the documents.\n\nWe are moving the same objects from our in-memory NumPy workflow into a persistent vector store.\n\n[tts-break]\n\nWhen a user asks a question, we create the query embedding and send it to Chroma. Chroma returns the nearest documents and metadata.\n\nThe example also includes a metadata filter for topic.\n\nThis is a good point to compare the result with the NumPy version. The architecture should feel familiar.\n\nIf it does, that means you are understanding RAG at the right level: the storage implementation changed, but the overall pipeline did not.",
-      "seed": 1234,
       "wav": "wav/module7_slide_28.wav",
       "audio": "audio/module7_slide_28.mp3",
       "captions": "audio/module7_slide_28.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 29,
       "title": "The RAG pipeline stays the same when Chroma replaces NumPy",
       "transcript": "This slide emphasizes a software-design principle that matters in real RAG systems.\n\nThe retriever should be replaceable.\n\nOur first version called a NumPy-based function. The Chroma version calls a database query. But the downstream steps—building context, creating the prompt, calling the language model, and displaying sources—can remain almost unchanged.\n\nThis separation lets a team experiment with storage technologies without rewriting the whole application.\n\n[tts-break]\n\nFor example, a prototype may start with Chroma and later move to Qdrant or pgvector. If retrieval is hidden behind a clean function or service, that migration is much easier.\n\nSo when you design your own RAG code, avoid mixing database-specific syntax into every part of the application.\n\nKeep a boundary around retrieval.\n\nThat same principle is common in production software engineering, not only in AI.",
-      "seed": 1234,
       "wav": "wav/module7_slide_29.wav",
       "audio": "audio/module7_slide_29.mp3",
       "captions": "audio/module7_slide_29.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 30,
       "title": "NumPy to Chroma: only the retrieval layer changes",
       "transcript": "Here we make the NumPy-to-Chroma transition even more explicit.\n\nIn the first version, we call a function such as dense_retrieve. In the second version, we call retrieve_chroma.\n\nAfter that, the retrieved rows still move into the same prompt builder and the same generation function.\n\nThis is what we mean by a swappable retrieval layer.\n\n[tts-break]\n\nIt also gives us a clean way to compare systems. We can run the same evaluation questions against NumPy, Chroma, Qdrant, or another backend and see whether the retrieved evidence changes.\n\nIn a company, the retrieval interface may be an internal service rather than a Python function, but the architectural idea is the same.\n\nThe application should depend on what retrieval returns—text, metadata, scores—not on the internal details of how the database performs nearest-neighbor search.",
-      "seed": 1234,
       "wav": "wav/module7_slide_30.wav",
       "audio": "audio/module7_slide_30.mp3",
       "captions": "audio/module7_slide_30.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 31,
       "title": "FAISS local index syntax",
       "transcript": "FAISS is a useful option when you want fast local vector search.\n\nIt is an indexing library rather than a complete database. We create an index with the embedding dimension, add our normalized vectors, embed a user question, and call search.\n\nThe returned IDs tell us which rows in our chunk table were nearest to the query.\n\nThis means the application still needs to maintain the mapping between FAISS positions and the original text and metadata.\n\n[tts-break]\n\nFAISS is excellent for experiments, notebooks, and systems where you control persistence separately.\n\nIt is also a good teaching example because it makes the vector index feel concrete.\n\nRemember the key detail in this example: because our vectors are normalized, inner product behaves like cosine similarity for ranking.\n\nIf you change the normalization or metric, you need to understand how the index interprets distance.",
-      "seed": 1234,
       "wav": "wav/module7_slide_31.wav",
       "audio": "audio/module7_slide_31.mp3",
       "captions": "audio/module7_slide_31.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 32,
       "title": "Qdrant local syntax",
       "transcript": "Qdrant moves us closer to a full vector database.\n\nA Qdrant collection stores vectors together with payload metadata. We specify the vector dimension and the distance metric, then insert points.\n\nEach point has an ID, a vector, and a payload. The payload can include fields such as title, topic, source, permission, or any other metadata useful for filtering.\n\n[tts-break]\n\nAt query time, we embed the question and ask Qdrant for the nearest points.\n\nThe classroom example can run in memory, but Qdrant can also run as a persistent server or managed cloud service.\n\nWhat should feel familiar is the information flow.\n\nWe still have chunk text, metadata, embeddings, and a query vector.\n\nThe database simply gives us more infrastructure around those pieces, especially filtering, persistence, and service-style deployment.",
-      "seed": 1234,
       "wav": "wav/module7_slide_32.wav",
       "audio": "audio/module7_slide_32.mp3",
       "captions": "audio/module7_slide_32.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 33,
       "title": "pgvector syntax in PostgreSQL",
       "transcript": "pgvector is especially interesting for teams that already use PostgreSQL.\n\nInstead of introducing a separate vector database, the application stores embeddings in a vector column next to relational fields such as document ID, title, topic, and source.\n\nThe query uses a vector-distance operator to order rows by similarity.\n\nThis approach can be attractive when the RAG system needs to combine semantic search with SQL joins, existing permissions, transactional data, backup procedures, or governance that already lives in PostgreSQL.\n\n[tts-break]\n\nIt also gives data engineers a familiar environment.\n\nThe important lesson is not the exact operator syntax. It is that vector retrieval can live inside a traditional relational database.\n\nWhen choosing architecture, consider what your organization already operates well.\n\nSometimes the best RAG stack is the one that fits existing infrastructure rather than introducing a completely new platform.",
-      "seed": 1234,
       "wav": "wav/module7_slide_33.wav",
       "audio": "audio/module7_slide_33.mp3",
       "captions": "audio/module7_slide_33.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 34,
       "title": "Pinecone managed-cloud pattern",
       "transcript": "Pinecone represents a managed-cloud approach to vector search.\n\nThe application connects using an API key and an existing index. We insert vectors with IDs and metadata, then send a query vector and request the top results.\n\nThe advantage of a managed service is that much of the infrastructure work is handled for you.\n\nThe tradeoff is that you now depend on a cloud service, authentication, network access, vendor pricing, and vendor-specific APIs.\n\n[tts-break]\n\nThe code pattern should still look familiar: create embeddings, upsert records, embed the query, and retrieve nearest matches.\n\nFor students, the goal is not to memorize a cloud SDK. The goal is to recognize the same RAG storage pattern in a different environment.\n\nIn a real project, the decision would include cost, latency, compliance, availability, and team experience.",
-      "seed": 1234,
       "wav": "wav/module7_slide_34.wav",
       "audio": "audio/module7_slide_34.mp3",
       "captions": "audio/module7_slide_34.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 35,
       "title": "Weaviate near_text pattern",
       "transcript": "Weaviate supports several ways to perform vector search.\n\nIn the example, the near_text pattern is useful when the collection is configured with a vectorizer. You provide natural-language text, and the system handles the vectorization before searching.\n\nIf your application generates its own embeddings, you can instead use a near-vector style query.\n\nThis distinction is worth noticing.\n\n[tts-break]\n\nSome platforms want the application to own embedding generation. Others can integrate the embedding step into the database workflow.\n\nNeither approach is automatically better. The choice affects consistency, model upgrades, cost, and operational control.\n\nWhen you evaluate a vector platform, ask who creates the embeddings, where the model configuration lives, how metadata filters work, and how the system handles updates.\n\nThose questions matter more than the exact method names in the SDK.",
-      "seed": 1234,
       "wav": "wav/module7_slide_35.wav",
       "audio": "audio/module7_slide_35.mp3",
       "captions": "audio/module7_slide_35.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 36,
       "title": "Milvus / Zilliz search pattern",
       "transcript": "Milvus and Zilliz are commonly discussed for larger vector-search workloads.\n\nThe pattern is still the same. Create or connect to a collection, define the vector dimension and metric, insert vectors with associated fields, and search using the query vector.\n\nThe classroom example focuses on the search pattern rather than a full production deployment.\n\n[tts-break]\n\nAt larger scale, additional concerns appear: index type, partitioning, replication, memory usage, deployment topology, and operational monitoring.\n\nThose are important topics, but they come after the basic RAG architecture is clear.\n\nI want you to see that even when the infrastructure becomes more sophisticated, the application still needs good chunks, appropriate embeddings, useful metadata, and a way to evaluate retrieval quality.\n\nScale does not replace the fundamentals.",
-      "seed": 1234,
       "wav": "wav/module7_slide_36.wav",
       "audio": "audio/module7_slide_36.mp3",
       "captions": "audio/module7_slide_36.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 37,
       "title": "How to choose a vector database",
       "transcript": "There is no single best vector database for every RAG project.\n\nFor a notebook or small class project, NumPy, FAISS, or Chroma may be the best choice because they are simple and transparent.\n\nFor a small application that needs persistence and filtering, Chroma or Qdrant may be practical. If the organization already depends heavily on PostgreSQL, pgvector may reduce architectural complexity.\n\n[tts-break]\n\nFor managed cloud deployment, teams may evaluate services such as Pinecone or hosted versions of Qdrant, Weaviate, or Zilliz.\n\nThe decision should consider document volume, update frequency, metadata filtering, latency, security, cost, backup requirements, and team skills.\n\nDo not choose a database only because it appears frequently in tutorials.\n\nThe storage layer should support the needs of the application and the organization.",
-      "seed": 1234,
       "wav": "wav/module7_slide_37.wav",
       "audio": "audio/module7_slide_37.mp3",
       "captions": "audio/module7_slide_37.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 38,
       "title": "Add metadata filters",
       "transcript": "Semantic similarity alone is not enough for many real RAG systems.\n\nA user may ask a question that is semantically related to several documents, but some of those documents may belong to the wrong department, language, audience, tenant, or permission level.\n\nMetadata filters let us narrow the candidate set.\n\nIn our example, we can filter by topic and permission before ranking the remaining vectors.\n\n[tts-break]\n\nThis is especially important for security. If a student is only allowed to see public student-facing documents, staff-only content should not be retrieved and then hidden later.\n\nAccess control belongs in the retrieval layer.\n\nFilters can also improve relevance. If we know the question is about technology, limiting search to the technology topic can reduce unrelated results.\n\nIn production, metadata design is part of RAG design.",
-      "seed": 1234,
       "wav": "wav/module7_slide_38.wav",
       "audio": "audio/module7_slide_38.mp3",
       "captions": "audio/module7_slide_38.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 39,
       "title": "Top-k, threshold, and context budget",
       "transcript": "Retrieval is not simply a question of finding relevant chunks. We also have to decide how much evidence to send forward.\n\nTop-k controls the number of retrieved chunks. A larger value may capture more evidence, but it can also add noise and increase prompt length.\n\nA similarity threshold can remove weak matches, but the threshold should be evaluated on your own data. Score ranges can change across embedding models and search systems.\n\n[tts-break]\n\nThe context budget controls the total amount of retrieved text placed into the prompt.\n\nThese settings interact with each other.\n\nFor a short knowledge base, top three or top five may be reasonable starting points. For longer technical documents, you may need a different strategy.\n\nDo not optimize these values by intuition alone. Use an evaluation set and compare results.",
-      "seed": 1234,
       "wav": "wav/module7_slide_39.wav",
       "audio": "audio/module7_slide_39.mp3",
       "captions": "audio/module7_slide_39.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 40,
       "title": "Add keyword retrieval with BM25",
       "transcript": "Dense vector retrieval is strong when the question and source use different words with similar meaning.\n\nBut exact terms still matter.\n\nThink about course numbers, error codes, product names, acronyms, policy IDs, or a rare technical term. In those situations, keyword retrieval can outperform semantic search.\n\nBM25 is a classic sparse retrieval method.\n\n[tts-break]\n\nWe tokenize the chunk text, build a BM25 index, tokenize the question, calculate scores, and return the highest-ranked chunks.\n\nThis gives us a second retrieval signal that behaves differently from embeddings.\n\nThe point is not to replace dense retrieval. The point is to recognize that different queries benefit from different search signals.\n\nThat leads naturally to hybrid retrieval, where semantic and keyword evidence are combined.",
-      "seed": 1234,
       "wav": "wav/module7_slide_40.wav",
       "audio": "audio/module7_slide_40.mp3",
       "captions": "audio/module7_slide_40.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 41,
       "title": "Combine dense and sparse scores",
       "transcript": "Hybrid retrieval combines dense semantic scores with sparse keyword scores.\n\nIn this teaching example, we normalize both score arrays and combine them with a weight called alpha.\n\nIf alpha is larger, the system gives more weight to dense retrieval. If alpha is smaller, BM25 has more influence.\n\nThis is a simplified version of hybrid search, but it makes the idea clear.\n\n[tts-break]\n\nWhy might this help? A question can contain natural-language meaning and an exact technical term at the same time.\n\nDense retrieval may understand the overall intent while BM25 protects important exact matches.\n\nThe weight should not be chosen randomly. Run evaluation questions and compare the results.\n\nIn production search platforms, hybrid ranking may use more sophisticated fusion methods, but the motivation remains the same: use complementary retrieval signals.",
-      "seed": 1234,
       "wav": "wav/module7_slide_41.wav",
       "audio": "audio/module7_slide_41.mp3",
       "captions": "audio/module7_slide_41.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 42,
       "title": "Compare dense, BM25, and hybrid on the same question",
       "transcript": "The easiest way to understand retrieval methods is to compare them on the same question.\n\nWe run dense search, BM25, and hybrid retrieval using the query about VPN, MFA, and a client update.\n\nThen we look at the top document titles from each method.\n\nDo not expect one method to win every time. That is exactly the point.\n\n[tts-break]\n\nA semantic question may favor dense search. A query with an exact identifier may favor BM25. Hybrid retrieval may provide a useful balance across a mixed workload.\n\nThis comparison also introduces an important engineering habit: when you add a more complicated method, compare it against the simpler baseline.\n\nIf hybrid retrieval does not improve your evaluation results, complexity is not automatically valuable.\n\nUse evidence from your own question set to justify the change.",
-      "seed": 1234,
       "wav": "wav/module7_slide_42.wav",
       "audio": "audio/module7_slide_42.mp3",
       "captions": "audio/module7_slide_42.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 43,
       "title": "Use a reranker after retrieval",
       "transcript": "A reranker adds a second stage to retrieval.\n\nThe first-stage retriever is fast and brings back a candidate set, perhaps the top ten or top twenty chunks.\n\nThen a cross-encoder looks at the question and each candidate together. Because it evaluates the pair directly, it can often produce a better ranking than vector similarity alone.\n\n[tts-break]\n\nThe tradeoff is speed. Rerankers are usually more expensive than the first-stage search, so we do not run them across the entire corpus.\n\nThe pattern is retrieve broadly, then rerank narrowly.\n\nUse reranking when the correct source is often retrieved but appears too low in the candidate list.\n\nAgain, evaluation should drive the decision.\n\nIf the baseline already places the correct chunk at rank one, adding a reranker may increase latency without improving the user experience.",
-      "seed": 1234,
       "wav": "wav/module7_slide_43.wav",
       "audio": "audio/module7_slide_43.mp3",
       "captions": "audio/module7_slide_43.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 44,
       "title": "Rewrite vague questions before retrieval",
       "transcript": "Users do not always ask self-contained questions.\n\nImagine a conversation about payment plans. The user then asks, 'Can I still do it late?'\n\nThat short sentence is difficult for retrieval because it does not contain the subject of the conversation.\n\nQuery rewriting creates a clearer search query while preserving the user's intent.\n\n[tts-break]\n\nA simple version might prepend the known conversation topic. A more advanced version might ask a language model to rewrite the question into a standalone retrieval query.\n\nThe rewritten query is for search. It does not have to replace the user's original wording in the final response.\n\nThis distinction is important.\n\nA good rewrite clarifies context. A bad rewrite invents assumptions.\n\nWhen you build conversational RAG, evaluate whether the rewrite helps retrieval without changing what the user actually meant.",
-      "seed": 1234,
       "wav": "wav/module7_slide_44.wav",
       "audio": "audio/module7_slide_44.mp3",
       "captions": "audio/module7_slide_44.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 45,
       "title": "See why conversation context can change retrieval",
       "transcript": "This slide compares a vague query with a context-aware version.\n\nThe vague query says, 'Can I still do it late?' On its own, almost any policy about deadlines could look relevant.\n\nThe context-aware version asks whether a student can request a payment plan after the tuition due date.\n\nNow the important concepts are explicit: payment plan, request, tuition due date, and lateness.\n\n[tts-break]\n\nRun both searches and compare the rankings.\n\nThis is a useful demonstration because it shows that retrieval quality is partly a query-understanding problem.\n\nThe embedding model cannot use context that we never provide.\n\nIn a chat application, the retrieval query may need to be constructed from the current message plus relevant conversation history.\n\nThe final answer can still respond naturally to the user's original question.",
-      "seed": 1234,
       "wav": "wav/module7_slide_45.wav",
       "audio": "audio/module7_slide_45.mp3",
       "captions": "audio/module7_slide_45.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 46,
       "title": "Add advanced retrieval only when evaluation shows a problem",
       "transcript": "There are many advanced retrieval techniques, but they should solve specific problems.\n\nMulti-query retrieval creates several alternative searches for one question. HyDE generates a hypothetical answer and embeds that instead of the short question. Parent-child retrieval searches small chunks but returns a larger surrounding section. Context compression reduces the amount of retrieved text before generation.\n\nThese methods can be useful, but each one adds complexity, latency, and new failure modes.\n\n[tts-break]\n\nThe best workflow is to begin with a strong baseline and an evaluation set.\n\nIdentify a real failure. Then choose one method that could address that failure. Run the same evaluation again and compare.\n\nDo not build a complicated RAG stack simply because a technique is popular.\n\nA simple, measurable system is often more useful than a complex system that nobody understands.",
-      "seed": 1234,
       "wav": "wav/module7_slide_46.wav",
       "audio": "audio/module7_slide_46.mp3",
       "captions": "audio/module7_slide_46.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 47,
       "title": "Create an evaluation question set",
       "transcript": "A practical RAG system needs a small evaluation set.\n\nFor each question, we record the document that should contain the supporting evidence.\n\nOur examples include payment plans, internship registration, scholarship appeals, VPN troubleshooting, and other topics from the knowledge base.\n\nThese expected document IDs let us evaluate retrieval independently from generation.\n\nThis is important because a final answer can fail for different reasons.\n\n[tts-break]\n\nMaybe the retriever never found the right source. Maybe the right source was present but the prompt was weak. Maybe the language model ignored the evidence.\n\nIf we measure retrieval first, we can separate those problems.\n\nStart with a small set of questions that you understand well. Include easy examples, paraphrases, exact-term queries, and a few difficult cases.\n\nAs the system grows, expand the evaluation set with real user questions.",
-      "seed": 1234,
       "wav": "wav/module7_slide_47.wav",
       "audio": "audio/module7_slide_47.mp3",
       "captions": "audio/module7_slide_47.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 48,
       "title": "Measure retrieval before measuring answers",
       "transcript": "Recall at k is one of the easiest retrieval metrics to understand.\n\nFor each evaluation question, we retrieve the top k chunks and check whether the expected source document appears anywhere in that set.\n\nIf the correct document is present, that question is a hit. Recall at k is the proportion of questions that produce a hit.\n\n[tts-break]\n\nRecall at one is stricter because the correct document must be ranked first. Recall at three gives the system a little more room.\n\nThis metric does not tell us everything, but it answers an important question: did retrieval provide the evidence we needed?\n\nIf recall is poor, changing the language model is usually not the first fix.\n\nInvestigate chunking, metadata, embeddings, filters, and retrieval methods first.\n\nThis is how evaluation helps us target the correct layer.",
-      "seed": 1234,
       "wav": "wav/module7_slide_48.wav",
       "audio": "audio/module7_slide_48.mp3",
       "captions": "audio/module7_slide_48.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 49,
       "title": "Add MRR when ranking order matters",
       "transcript": "Recall at k only checks whether the correct source appears somewhere in the retrieved set.\n\nMean Reciprocal Rank, or MRR, also cares about where that source appears.\n\nIf the correct document is rank one, the reciprocal rank is one. Rank two gives one half. Rank three gives about one third.\n\nWe calculate that value for every evaluation question and take the mean.\n\n[tts-break]\n\nMRR is useful when the ranking order matters, especially when only the first few chunks will be passed to the language model.\n\nTwo systems can have the same Recall at five but very different user experiences if one consistently puts the correct evidence at rank one and the other puts it at rank five.\n\nUse Recall and MRR together to get a clearer picture of retrieval quality.",
-      "seed": 1234,
       "wav": "wav/module7_slide_49.wav",
       "audio": "audio/module7_slide_49.mp3",
       "captions": "audio/module7_slide_49.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 50,
       "title": "Evaluate the generated answer too",
       "transcript": "Retrieval evaluation is necessary, but the final answer also needs evaluation.\n\nGroundedness asks whether the response stays within the retrieved evidence. Correctness asks whether the content is factually right. Completeness asks whether important information was omitted.\n\nCitation precision asks whether the cited source actually supports the claim. Helpfulness asks whether the answer is clear enough for a user to act on.\n\nThese dimensions are different.\n\n[tts-break]\n\nA response can be grounded but incomplete. It can cite a relevant document but attach the citation to the wrong sentence. It can be factually correct but too vague to help the user.\n\nFor a course project, a small human-reviewed rubric is a strong starting point.\n\nAutomated evaluators can be added later, but first define what a good answer means for your application.",
-      "seed": 1234,
       "wav": "wav/module7_slide_50.wav",
       "audio": "audio/module7_slide_50.mp3",
       "captions": "audio/module7_slide_50.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 51,
       "title": "Common RAG failures and fixes",
       "transcript": "RAG failures should be diagnosed by layer.\n\nIf no relevant result appears, inspect the source data, chunking, embedding model, and retrieval method.\n\nIf the right source is retrieved but ranked too low, hybrid retrieval or reranking may help.\n\nIf the correct evidence is rank one but the answer still invents a detail, the problem is more likely in prompt design or generation.\n\n[tts-break]\n\nIf an answer is stale, check whether an old document version is still in the index.\n\nThis layered way of thinking saves time.\n\nWithout it, teams often respond to every problem by changing the language model.\n\nA larger model cannot fix a source that was never indexed, a permission filter that was not applied, or an outdated vector that was never deleted.\n\nDebug the system from data to retrieval to generation.",
-      "seed": 1234,
       "wav": "wav/module7_slide_51.wav",
       "audio": "audio/module7_slide_51.mp3",
       "captions": "audio/module7_slide_51.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 52,
       "title": "Diagnose one RAG failure before changing the model",
       "transcript": "This is a debugging exercise.\n\nConsider three cases.\n\nIn the first case, the correct document appears at rank seven. That suggests a retrieval or ranking problem.\n\nIn the second case, the correct chunk is rank one but the generated answer invents a detail. That points us toward the prompt or the language model behavior.\n\nIn the third case, the system returns an old policy. That suggests an indexing or freshness problem.\n\n[tts-break]\n\nFor each case, write down the first diagnostic step you would take.\n\nThere is intentionally no completed answer on the slide.\n\nThe goal is to practice locating the failure before proposing a tool.\n\nIn real RAG work, this reasoning is more valuable than memorizing another library. A good engineer asks, 'Which layer failed, and what evidence do I have?'",
-      "seed": 1234,
       "wav": "wav/module7_slide_52.wav",
       "audio": "audio/module7_slide_52.mp3",
       "captions": "audio/module7_slide_52.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 53,
       "title": "Handle document updates and freshness",
       "transcript": "A RAG system must have a plan for document updates.\n\nImagine that a policy changes but the old chunks remain in the vector database. Retrieval may continue returning outdated evidence even though the language model is working perfectly.\n\nA practical update workflow detects changed documents, removes or marks the old chunks, creates new chunks, generates new embeddings, and upserts the new records.\n\n[tts-break]\n\nThen the evaluation questions should be run again.\n\nKeep version information and updated dates in metadata whenever possible.\n\nFreshness is especially important for policies, product documentation, pricing, regulations, and internal procedures.\n\nIndexing is not a one-time activity in a living system.\n\nProduction RAG needs a repeatable ingestion and re-indexing process so the knowledge base stays aligned with the underlying sources.",
-      "seed": 1234,
       "wav": "wav/module7_slide_53.wav",
       "audio": "audio/module7_slide_53.mp3",
       "captions": "audio/module7_slide_53.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 54,
       "title": "Protect access, resist document instructions, and show sources",
       "transcript": "Production RAG also introduces security and trust concerns.\n\nFirst, access control. A user should never receive a chunk they are not authorized to see. Permission filters should be applied during retrieval, not after sensitive text has already entered the prompt.\n\nSecond, retrieved documents are untrusted data. A document might contain text that looks like an instruction to the language model. The system should treat that content as source material, not as a trusted system command.\n\n[tts-break]\n\nThird, show sources. Returning titles, source paths, chunk IDs, and sometimes retrieval scores helps users and developers verify the evidence.\n\nThese are not optional cosmetic features.\n\nRAG connects language models to organizational data, so the retrieval layer becomes part of the security boundary.\n\nGood metadata and careful access design matter as much as embedding quality.",
-      "seed": 1234,
       "wav": "wav/module7_slide_54.wav",
       "audio": "audio/module7_slide_54.mp3",
       "captions": "audio/module7_slide_54.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 55,
       "title": "Optional: make a small RAG app",
       "transcript": "Once the notebook version works, we can put a simple user interface around it.\n\nStreamlit is a convenient option for a class project. The interface asks for a question, calls our existing answer_question function, displays the answer, and then lists the retrieved sources.\n\nNotice that the UI does not reimplement RAG.\n\nThe retrieval and generation logic stays in reusable functions. The application layer only collects input and displays output.\n\n[tts-break]\n\nThat separation makes the code easier to test and maintain.\n\nI also recommend making the source panel visible. Users should be able to see where the answer came from.\n\nA polished RAG product may add authentication, feedback buttons, conversation history, tracing, or document links, but the basic app structure can remain simple.\n\nBuild the pipeline first; add the interface after it works.",
-      "seed": 1234,
       "wav": "wav/module7_slide_55.wav",
       "audio": "audio/module7_slide_55.mp3",
       "captions": "audio/module7_slide_55.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 56,
       "title": "Deployment considerations",
       "transcript": "A deployed RAG application needs more than a working notebook.\n\nLogging should capture the user question, retrieved chunk IDs, scores, model response, latency, and useful feedback signals.\n\nCost monitoring may include embedding calls, vector database usage, reranking, and language-model tokens.\n\nGovernance includes access control, source freshness, data retention, and human review for sensitive use cases.\n\nThe indexing pipeline needs scheduled or event-driven updates.\n\n[tts-break]\n\nThe system also needs evaluation over time. A model upgrade, embedding change, chunking change, or new document collection can affect retrieval quality.\n\nThink of RAG as both a data system and an AI system.\n\nThe language model is only one service in a larger pipeline.\n\nCompanies operate the entire pipeline, so observability and maintenance are part of the architecture.",
-      "seed": 1234,
       "wav": "wav/module7_slide_56.wav",
       "audio": "audio/module7_slide_56.mp3",
       "captions": "audio/module7_slide_56.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 57,
       "title": "The company architecture is the same core RAG pattern with more layers",
       "transcript": "The classroom architecture is small, but it is not a toy.\n\nA production system begins with connectors and parsers instead of our simple CSV. It may use OCR, web crawlers, or database APIs.\n\nChunking may become a document-processing service. Embeddings may come from a hosted model endpoint. The vector store may be a managed search platform with access-control filters.\n\n[tts-break]\n\nRetrieval may combine dense vectors, keyword search, and reranking. The prompt may be assembled by an orchestration service. The final answer includes citations and may be logged for evaluation.\n\nThen companies add monitoring, authentication, scheduled re-indexing, cost controls, and security reviews.\n\nThe core idea, however, is still the same one you built in Part 1.\n\nDocuments become searchable representations, relevant evidence is retrieved for a question, and the language model generates an answer from that evidence.\n\nProduction adds scale and controls around the same information flow.",
-      "seed": 1234,
       "wav": "wav/module7_slide_57.wav",
       "audio": "audio/module7_slide_57.mp3",
       "captions": "audio/module7_slide_57.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 58,
       "title": "Classic RAG first; agentic RAG later",
       "transcript": "You may hear more and more about agentic RAG.\n\nClassic RAG usually follows a direct flow: receive a question, retrieve evidence, build context, and generate an answer.\n\nAgentic RAG can make additional decisions. An agent might break a complex question into smaller parts, choose among multiple data sources, call different tools, inspect intermediate results, and decide whether another retrieval step is needed.\n\n[tts-break]\n\nThat can be useful for multi-hop questions or tasks that span several systems.\n\nBut agentic RAG does not remove the need to understand classic retrieval.\n\nThe agent still depends on good data, useful chunks, embeddings, search, permissions, and evaluation.\n\nThat is why this module teaches the classic pipeline first.\n\nOnce you understand the basic architecture, agentic patterns become an extension rather than another black box.",
-      "seed": 1234,
       "wav": "wav/module7_slide_58.wav",
       "audio": "audio/module7_slide_58.mp3",
       "captions": "audio/module7_slide_58.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 59,
       "title": "Mini-project: build the assistant",
       "transcript": "The mini-project asks you to apply the full workflow rather than only repeat individual code cells.\n\nUse at least eight source documents. Preserve useful metadata. Chunk the documents, create embeddings, build dense retrieval, add a metadata filter, and create a grounded prompt with citations.\n\nThen build a small evaluation set with at least eight questions.\n\nYour project should show the evidence path from source document to chunk to retrieved result to final answer.\n\n[tts-break]\n\nFor an optional extension, move the vectors into Chroma, Qdrant, or FAISS. You can also add BM25, hybrid retrieval, reranking, or a Streamlit interface.\n\nThe goal is not to include the largest number of features.\n\nThe goal is to demonstrate that you understand the architecture, can inspect retrieval, and can explain why the final answer is supported by the retrieved evidence.",
-      "seed": 1234,
       "wav": "wav/module7_slide_59.wav",
       "audio": "audio/module7_slide_59.mp3",
       "captions": "audio/module7_slide_59.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     },
     {
       "slide": 60,
       "title": "Rebuild the same workflow with a new document collection",
       "transcript": "We finish the module by returning to the complete RAG workflow.\n\nStart with documents. Preserve metadata. Create chunks. Generate embeddings. Store or index those vectors. When a question arrives, embed the query, retrieve the best evidence, build a grounded prompt, generate the answer, and show the sources.\n\nThen evaluate the system.\n\n[tts-break]\n\nIf retrieval is weak, improve retrieval. If the correct evidence is present but generation is weak, investigate the prompt and model behavior. If the system becomes too large for NumPy, move to a vector store.\n\nThe most important takeaway is that the architecture remains understandable even when the tools change.\n\nYou should now be able to replace our student-support dataset with a small collection from your own work and build the same pipeline.\n\nThat is the practical foundation of RAG.",
-      "seed": 1234,
       "wav": "wav/module7_slide_60.wav",
       "audio": "audio/module7_slide_60.mp3",
       "captions": "audio/module7_slide_60.vtt",
-      "sync_method": "whole_slide_silence_alignment"
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
     }
   ]
 }
