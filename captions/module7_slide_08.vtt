@@ -25,7 +25,7 @@ Web pages need HTML cleanup.
 A database may already have structured metadata that should be preserved.
 
 00:00:38.052 --> 00:00:45.572
-[tts-break] The important point is that this ingestion layer comes before chunking and embeddings.
+The important point is that this ingestion layer comes before chunking and embeddings.
 
 00:00:45.572 --> 00:00:54.152
 Once the text and metadata have been extracted, the rest of the workflow is the same as our

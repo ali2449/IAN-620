@@ -22,7 +22,7 @@ A single value does not have a useful human meaning.
 What matters is the position of the entire vector relative to other vectors.
 
 00:00:33.082 --> 00:00:35.697
-[tts-break] The row alignment is important.
+The row alignment is important.
 
 00:00:35.697 --> 00:00:41.277
 Row zero in the vector matrix must correspond to row zero in the chunk table.

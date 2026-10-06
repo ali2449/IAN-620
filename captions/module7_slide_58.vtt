@@ -16,7 +16,7 @@ An agent might break a complex question into smaller parts, choose among multipl
 call different tools, inspect intermediate results, and decide whether another retrieval step is needed.
 
 00:00:29.802 --> 00:00:35.577
-[tts-break] That can be useful for multi-hop questions or tasks that span several systems.
+That can be useful for multi-hop questions or tasks that span several systems.
 
 00:00:35.577 --> 00:00:40.312
 But agentic RAG does not remove the need to understand classic retrieval.

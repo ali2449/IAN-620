@@ -16,7 +16,7 @@ In those situations, keyword retrieval can outperform semantic search.
 BM25 is a classic sparse retrieval method.
 
 00:00:23.607 --> 00:00:30.967
-[tts-break] We tokenize the chunk text, build a BM25 index, tokenize the question, calculate scores,
+We tokenize the chunk text, build a BM25 index, tokenize the question, calculate scores,
 
 00:00:30.967 --> 00:00:34.197
 and return the highest-ranked chunks.

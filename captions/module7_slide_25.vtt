@@ -19,7 +19,7 @@ and generate an answer with sources.
 Everything that follows is an improvement around this architecture.
 
 00:00:25.917 --> 00:00:30.827
-[tts-break] A vector database changes how vectors and metadata are stored and searched.
+A vector database changes how vectors and metadata are stored and searched.
 
 00:00:30.827 --> 00:00:34.312
 Hybrid retrieval changes how candidates are ranked.

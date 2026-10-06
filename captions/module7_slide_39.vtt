@@ -19,7 +19,7 @@ A similarity threshold can remove weak matches, but the threshold should be eval
 Score ranges can change across embedding models and search systems.
 
 00:00:14.527 --> 00:00:17.972
-[tts-break] The context budget controls the total amount of retrieved text placed into the prompt.
+The context budget controls the total amount of retrieved text placed into the prompt.
 
 00:00:17.972 --> 00:00:21.547
 These settings interact with each other.

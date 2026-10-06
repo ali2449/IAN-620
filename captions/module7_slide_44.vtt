@@ -16,7 +16,7 @@ That short sentence is difficult for retrieval because it does not contain the s
 Query rewriting creates a clearer search query while preserving the user's intent.
 
 00:00:26.122 --> 00:00:28.847
-[tts-break] A simple version might prepend the known conversation topic.
+A simple version might prepend the known conversation topic.
 
 00:00:28.847 --> 00:00:37.462
 A more advanced version might ask a language model to rewrite the question into a standalone retrieval query.

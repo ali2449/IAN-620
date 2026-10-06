@@ -22,7 +22,7 @@ We embed that question, retrieve the best chunks, build a prompt using those chu
 and ask the language model to generate an answer.
 
 00:00:34.477 --> 00:00:40.902
-[tts-break] This separation is important for both performance and debugging.
+This separation is important for both performance and debugging.
 
 00:00:40.902 --> 00:00:48.497
 If retrieval is slow, you need to know whether the problem is in indexing or query-time search.

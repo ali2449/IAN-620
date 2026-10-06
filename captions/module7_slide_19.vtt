@@ -16,7 +16,7 @@ A second result about advising may still be related, but it is less specific.
 A third result with a low score may simply be noise.
 
 00:00:27.957 --> 00:00:32.187
-[tts-break] The exact numbers on your computer may differ from the example.
+The exact numbers on your computer may differ from the example.
 
 00:00:32.187 --> 00:00:36.957
 Different embedding models or preprocessing choices can change score ranges.

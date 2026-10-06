@@ -16,7 +16,7 @@ If your application generates its own embeddings, you can instead use a near-vec
 This distinction is worth noticing.
 
 00:00:10.222 --> 00:00:12.292
-[tts-break] Some platforms want the application to own embedding generation.
+Some platforms want the application to own embedding generation.
 
 00:00:12.292 --> 00:00:15.712
 Others can integrate the embedding step into the database workflow.

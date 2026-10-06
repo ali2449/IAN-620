@@ -19,7 +19,7 @@ Context compression reduces the amount of retrieved text before generation.
 These methods can be useful, but each one adds complexity, latency, and new failure modes.
 
 00:00:32.502 --> 00:00:39.862
-[tts-break] The best workflow is to begin with a strong baseline and an evaluation set.
+The best workflow is to begin with a strong baseline and an evaluation set.
 
 00:00:39.862 --> 00:00:45.072
 Identify a real failure. Then choose one method that could address that failure.

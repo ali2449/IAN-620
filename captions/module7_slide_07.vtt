@@ -22,7 +22,7 @@ Confirm how many documents you have.
 Check the column names. Look for missing values or unexpected text.
 
 00:00:28.547 --> 00:00:32.242
-[tts-break] The sample dataset contains ten source documents.
+The sample dataset contains ten source documents.
 
 00:00:32.242 --> 00:00:40.307
 Later, those ten documents will become more than ten rows because long documents can be split into multiple

@@ -13,7 +13,7 @@ As collections grow, teams usually need persistence, indexing, metadata filters,
 backups, and operational tooling. That is where vector indexes and vector databases become useful.
 
 00:00:14.012 --> 00:00:16.037
-[tts-break] A vector database does not create RAG by itself.
+A vector database does not create RAG by itself.
 
 00:00:16.037 --> 00:00:18.382
 It mainly helps store and search vectors and associated metadata efficiently.

@@ -13,7 +13,7 @@ The same retrieval pipeline can work with a hosted API or with an OpenAI-compati
 We keep the API key and model configuration in environment variables rather than writing credentials into the
 
 00:00:24.857 --> 00:00:30.457
-notebook. [tts-break] For this kind of support or policy RAG, we also use a low temperature.
+notebook. For this kind of support or policy RAG, we also use a low temperature.
 
 00:00:30.457 --> 00:00:33.387
 We are not asking the model to be creative.

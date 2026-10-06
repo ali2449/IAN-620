@@ -19,7 +19,7 @@ These expected document IDs let us evaluate retrieval independently from generat
 This is important because a final answer can fail for different reasons.
 
 00:00:31.222 --> 00:00:35.882
-[tts-break] Maybe the retriever never found the right source.
+Maybe the retriever never found the right source.
 
 00:00:35.882 --> 00:00:39.742
 Maybe the right source was present but the prompt was weak.

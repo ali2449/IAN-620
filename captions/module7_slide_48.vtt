@@ -16,7 +16,7 @@ If the correct document is present, that question is a hit.
 Recall at k is the proportion of questions that produce a hit.
 
 00:00:24.272 --> 00:00:30.462
-[tts-break] Recall at one is stricter because the correct document must be ranked first.
+Recall at one is stricter because the correct document must be ranked first.
 
 00:00:30.462 --> 00:00:34.772
 Recall at three gives the system a little more room.

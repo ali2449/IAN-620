@@ -19,7 +19,7 @@ This approach can be attractive when the RAG system needs to combine semantic se
 existing permissions, transactional data, backup procedures, or governance that already lives in PostgreSQL.
 
 00:00:35.232 --> 00:00:39.592
-[tts-break] It also gives data engineers a familiar environment.
+It also gives data engineers a familiar environment.
 
 00:00:39.592 --> 00:00:43.222
 The important lesson is not the exact operator syntax.

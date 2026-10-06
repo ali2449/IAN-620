@@ -16,7 +16,7 @@ A practical update workflow detects changed documents, removes or marks the old 
 generates new embeddings, and upserts the new records.
 
 00:00:28.367 --> 00:00:32.412
-[tts-break] Then the evaluation questions should be run again.
+Then the evaluation questions should be run again.
 
 00:00:32.412 --> 00:00:37.457
 Keep version information and updated dates in metadata whenever possible.

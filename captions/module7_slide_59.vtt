@@ -22,7 +22,7 @@ Then build a small evaluation set with at least eight questions.
 Your project should show the evidence path from source document to chunk to retrieved result to final answer.
 
 00:00:32.612 --> 00:00:39.117
-[tts-break] For an optional extension, move the vectors into Chroma, Qdrant, or FAISS.
+For an optional extension, move the vectors into Chroma, Qdrant, or FAISS.
 
 00:00:39.117 --> 00:00:43.917
 You can also add BM25, hybrid retrieval, reranking, or a Streamlit interface.

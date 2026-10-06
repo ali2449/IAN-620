@@ -16,7 +16,7 @@ Notice that we are not changing the embedding model or rebuilding the documents.
 We are moving the same objects from our in-memory NumPy workflow into a persistent vector store.
 
 00:00:39.592 --> 00:00:51.292
-[tts-break] When a user asks a question, we create the query embedding and send it to Chroma.
+When a user asks a question, we create the query embedding and send it to Chroma.
 
 00:00:51.292 --> 00:00:56.542
 Chroma returns the nearest documents and metadata.

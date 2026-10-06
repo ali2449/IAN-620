@@ -16,9 +16,7 @@ The advantage of a managed service is that much of the infrastructure work is ha
 The tradeoff is that you now depend on a cloud service, authentication, network access, vendor pricing,
 
 00:00:30.512 --> 00:00:33.037
-and vendor-specific APIs. [tts-break]
-
-00:00:33.037 --> 00:00:40.217
+and vendor-specific APIs. 00:00:33.037 --> 00:00:40.217
 The code pattern should still look familiar: create embeddings, upsert records, embed the query,
 
 00:00:40.217 --> 00:00:46.892

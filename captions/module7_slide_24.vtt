@@ -19,7 +19,7 @@ Notice that we also return the retrieved context, not only the final answer.
 That is an important design choice.
 
 00:00:25.772 --> 00:00:31.062
-[tts-break] When a user reports a bad answer, you want to inspect what the system retrieved.
+When a user reports a bad answer, you want to inspect what the system retrieved.
 
 00:00:31.062 --> 00:00:34.697
 Without that information, debugging becomes guesswork.

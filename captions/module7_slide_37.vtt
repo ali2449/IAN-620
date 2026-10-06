@@ -16,8 +16,6 @@ For a small application that needs persistence and filtering, Chroma or Qdrant m
 If the organization already depends heavily on PostgreSQL, pgvector may reduce architectural complexity.
 
 00:00:28.122 --> 00:00:29.042
-[tts-break]
-
 00:00:29.042 --> 00:00:36.472
 For managed cloud deployment, teams may evaluate services such as Pinecone or hosted versions of Qdrant,
 

@@ -19,7 +19,7 @@ Embeddings may come from a hosted model endpoint.
 The vector store may be a managed search platform with access-control filters.
 
 00:00:25.747 --> 00:00:31.857
-[tts-break] Retrieval may combine dense vectors, keyword search, and reranking.
+Retrieval may combine dense vectors, keyword search, and reranking.
 
 00:00:31.857 --> 00:00:35.627
 The prompt may be assembled by an orchestration service.

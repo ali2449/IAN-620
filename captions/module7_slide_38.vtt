@@ -16,7 +16,7 @@ or permission level. Metadata filters let us narrow the candidate set.
 In our example, we can filter by topic and permission before ranking the remaining vectors.
 
 00:00:26.552 --> 00:00:29.327
-[tts-break] This is especially important for security.
+This is especially important for security.
 
 00:00:29.327 --> 00:00:33.542
 If a student is only allowed to see public student-facing documents,

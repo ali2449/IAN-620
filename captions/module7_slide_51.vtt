@@ -16,7 +16,7 @@ If the correct evidence is rank one but the answer still invents a detail,
 the problem is more likely in prompt design or generation.
 
 00:00:25.612 --> 00:00:31.392
-[tts-break] If an answer is stale, check whether an old document version is still in the index.
+If an answer is stale, check whether an old document version is still in the index.
 
 00:00:31.392 --> 00:00:34.342
 This layered way of thinking saves time.

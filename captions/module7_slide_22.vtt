@@ -16,7 +16,7 @@ Notice that the source title and source path are included with the chunk text.
 That gives the language model and the final answer a simple trace back to the evidence.
 
 00:00:25.467 --> 00:00:28.342
-[tts-break] After building the prompt, print it.
+After building the prompt, print it.
 
 00:00:28.342 --> 00:00:32.047
 Do not treat prompt construction as an invisible step.

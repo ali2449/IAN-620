@@ -16,7 +16,7 @@ Sentence Transformers will create embeddings.
 Scikit-learn is useful for similarity calculations, and the OpenAI Python client can connect to a language
 
 00:00:23.377 --> 00:00:28.492
-model later. [tts-break] Notice what we are not installing yet.
+model later. Notice what we are not installing yet.
 
 00:00:28.492 --> 00:00:34.852
 We are not starting with several vector databases, LangChain, or a large orchestration framework.

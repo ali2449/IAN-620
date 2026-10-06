@@ -16,7 +16,7 @@ After that, the retrieved rows still move into the same prompt builder and the s
 This is what we mean by a swappable retrieval layer.
 
 00:00:10.117 --> 00:00:10.922
-[tts-break] It also gives us a clean way to compare systems.
+It also gives us a clean way to compare systems.
 
 00:00:10.922 --> 00:00:12.647
 We can run the same evaluation questions against NumPy, Chroma, Qdrant,

@@ -22,7 +22,7 @@ and human review for sensitive use cases.
 The indexing pipeline needs scheduled or event-driven updates.
 
 00:00:36.402 --> 00:00:40.817
-[tts-break] The system also needs evaluation over time.
+The system also needs evaluation over time.
 
 00:00:40.817 --> 00:00:47.162
 A model upgrade, embedding change, chunking change, or new document collection can affect retrieval quality.

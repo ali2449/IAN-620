@@ -22,7 +22,7 @@ The retrieval and generation logic stays in reusable functions.
 The application layer only collects input and displays output.
 
 00:00:31.137 --> 00:00:35.272
-[tts-break] That separation makes the code easier to test and maintain.
+That separation makes the code easier to test and maintain.
 
 00:00:35.272 --> 00:00:38.632
 I also recommend making the source panel visible.

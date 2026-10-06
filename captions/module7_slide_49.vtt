@@ -19,8 +19,6 @@ Rank three gives about one third.
 We calculate that value for every evaluation question and take the mean.
 
 00:00:26.347 --> 00:00:27.562
-[tts-break]
-
 00:00:27.562 --> 00:00:33.322
 MRR is useful when the ranking order matters, especially when only the first few chunks will be passed
 

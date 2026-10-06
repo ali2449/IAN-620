@@ -25,7 +25,7 @@ the next chunk begins before the previous chunk completely ends.
 That repeated text can help preserve meaning around the boundary.
 
 00:00:32.642 --> 00:00:37.667
-[tts-break] After you run the function, inspect the returned strings.
+After you run the function, inspect the returned strings.
 
 00:00:37.667 --> 00:00:43.442
 Do they read naturally? Does each chunk contain enough information to be useful on its own?

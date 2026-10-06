@@ -19,7 +19,7 @@ Qdrant is a vector database with strong metadata filtering.
 pgvector keeps vector search inside PostgreSQL, which can be attractive for teams already using relational
 
 00:00:31.077 --> 00:00:34.037
-data. [tts-break] Pinecone is a managed cloud service.
+data. Pinecone is a managed cloud service.
 
 00:00:34.037 --> 00:00:38.982
 Weaviate supports vector and hybrid search with a broader platform around it.

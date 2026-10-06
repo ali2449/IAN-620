@@ -16,9 +16,7 @@ When a question arrives, embed the query, retrieve the best evidence, build a gr
 generate the answer, and show the sources.
 
 00:00:08.512 --> 00:00:10.002
-Then evaluate the system. [tts-break]
-
-00:00:10.002 --> 00:00:10.332
+Then evaluate the system. 00:00:10.002 --> 00:00:10.332
 If retrieval is weak, improve retrieval.
 
 00:00:10.332 --> 00:00:14.277

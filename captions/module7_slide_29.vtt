@@ -22,7 +22,7 @@ and displaying sources—can remain almost unchanged.
 This separation lets a team experiment with storage technologies without rewriting the whole application.
 
 00:00:33.062 --> 00:00:39.957
-[tts-break] For example, a prototype may start with Chroma and later move to Qdrant or pgvector.
+For example, a prototype may start with Chroma and later move to Qdrant or pgvector.
 
 00:00:39.957 --> 00:00:46.102
 If retrieval is hidden behind a clean function or service, that migration is much easier.

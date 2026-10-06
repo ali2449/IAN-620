@@ -19,9 +19,7 @@ The returned IDs tell us which rows in our chunk table were nearest to the query
 This means the application still needs to maintain the mapping between FAISS positions and the original text
 
 00:00:31.412 --> 00:00:32.242
-and metadata. [tts-break]
-
-00:00:32.242 --> 00:00:40.127
+and metadata. 00:00:32.242 --> 00:00:40.127
 FAISS is excellent for experiments, notebooks, and systems where you control persistence separately.
 
 00:00:40.127 --> 00:00:45.687

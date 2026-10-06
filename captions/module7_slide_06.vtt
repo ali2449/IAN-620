@@ -25,8 +25,6 @@ The updated date helps us reason about freshness.
 The source field supports citations.
 
 00:00:28.672 --> 00:00:30.567
-[tts-break]
-
 00:00:30.567 --> 00:00:34.947
 In a production system, you might also keep department, language, document type, tenant, access role,
 

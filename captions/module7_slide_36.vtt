@@ -16,7 +16,7 @@ insert vectors with associated fields, and search using the query vector.
 The classroom example focuses on the search pattern rather than a full production deployment.
 
 00:00:10.102 --> 00:00:12.617
-[tts-break] At larger scale, additional concerns appear: index type, partitioning, replication, memory usage,
+At larger scale, additional concerns appear: index type, partitioning, replication, memory usage,
 
 00:00:12.617 --> 00:00:13.572
 deployment topology, and operational monitoring.

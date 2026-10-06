@@ -19,7 +19,7 @@ The payload can include fields such as title, topic, source, permission,
 or any other metadata useful for filtering.
 
 00:00:25.532 --> 00:00:33.932
-[tts-break] At query time, we embed the question and ask Qdrant for the nearest points.
+At query time, we embed the question and ask Qdrant for the nearest points.
 
 00:00:33.932 --> 00:00:40.062
 The classroom example can run in memory, but Qdrant can also run as a persistent server or managed

@@ -22,7 +22,7 @@ the system should find the internship checklist rather than guessing from genera
 If the question is about VPN problems, the technology support document should move to the top.
 
 00:00:43.147 --> 00:00:48.962
-[tts-break] This dataset is small enough to inspect manually, which is useful for learning.
+This dataset is small enough to inspect manually, which is useful for learning.
 
 00:00:48.962 --> 00:00:56.387
 At the same time, it contains the same kinds of metadata that matter in real projects: document IDs,

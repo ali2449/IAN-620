@@ -19,7 +19,7 @@ We also specify what to do when the evidence is insufficient.
 Instead of inventing an answer, the model should say that the needed information is not available in the
 
 00:00:29.432 --> 00:00:34.077
-retrieved context. [tts-break] We number the sources so the final response can cite them.
+retrieved context. We number the sources so the final response can cite them.
 
 00:00:34.077 --> 00:00:41.772
 This does not guarantee perfect factual behavior, but it makes the task much clearer and easier to evaluate.

@@ -16,7 +16,7 @@ Then a cross-encoder looks at the question and each candidate together.
 Because it evaluates the pair directly, it can often produce a better ranking than vector similarity alone.
 
 00:00:23.097 --> 00:00:25.167
-[tts-break] The tradeoff is speed.
+The tradeoff is speed.
 
 00:00:25.167 --> 00:00:32.362
 Rerankers are usually more expensive than the first-stage search, so we do not run them across the entire

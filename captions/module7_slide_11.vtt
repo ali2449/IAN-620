@@ -16,9 +16,7 @@ If chunks are too small, we create the opposite problem.
 A retrieved passage may contain the right sentence but lose an important condition or explanation that
 
 00:00:30.372 --> 00:00:32.502
-appeared just before it. [tts-break]
-
-00:00:32.502 --> 00:00:38.167
+appeared just before it. 00:00:32.502 --> 00:00:38.167
 Overlap helps reduce boundary problems by repeating a small amount of text between neighboring chunks.
 
 00:00:38.167 --> 00:00:42.892

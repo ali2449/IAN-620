@@ -16,7 +16,7 @@ If alpha is smaller, BM25 has more influence.
 This is a simplified version of hybrid search, but it makes the idea clear.
 
 00:00:29.787 --> 00:00:32.732
-[tts-break] Why might this help?
+Why might this help?
 
 00:00:32.732 --> 00:00:39.062
 A question can contain natural-language meaning and an exact technical term at the same time.

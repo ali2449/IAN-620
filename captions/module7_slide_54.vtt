@@ -19,7 +19,7 @@ A document might contain text that looks like an instruction to the language mod
 The system should treat that content as source material, not as a trusted system command.
 
 00:00:34.332 --> 00:00:35.797
-[tts-break] Third, show sources.
+Third, show sources.
 
 00:00:35.797 --> 00:00:41.912
 Returning titles, source paths, chunk IDs, and sometimes retrieval scores helps users and developers verify

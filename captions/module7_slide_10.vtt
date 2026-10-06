@@ -19,7 +19,7 @@ or footer content.
 Cleaning matters because noisy text produces noisy chunks, and noisy chunks produce weaker embeddings.
 
 00:00:12.817 --> 00:00:15.232
-[tts-break] At the same time, we should not over-clean.
+At the same time, we should not over-clean.
 
 00:00:15.232 --> 00:00:18.422
 Punctuation, headings, and sentence boundaries often carry useful structure.

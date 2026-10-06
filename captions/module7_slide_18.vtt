@@ -19,7 +19,7 @@ This is a crucial RAG debugging principle.
 The language model cannot reliably answer from evidence that was never retrieved.
 
 00:00:28.647 --> 00:00:33.792
-[tts-break] When the wrong source is returned, look at the document text, chunking, embedding model, filters,
+When the wrong source is returned, look at the document text, chunking, embedding model, filters,
 
 00:00:33.792 --> 00:00:38.362
 and similarity method before changing the prompt.

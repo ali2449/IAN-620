@@ -22,7 +22,7 @@ We will start with documents, clean them, split them into chunks, create embeddi
 retrieve relevant evidence, build a grounded prompt, and finally generate an answer with sources.
 
 00:00:32.782 --> 00:00:37.067
-[tts-break] The first goal is not to use as many tools as possible.
+The first goal is not to use as many tools as possible.
 
 00:00:37.067 --> 00:00:40.292
 The first goal is to understand the architecture.

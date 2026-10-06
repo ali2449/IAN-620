@@ -19,7 +19,7 @@ Do not worry if a second or third result is not perfect.
 The main goal is to understand how the ranking changes when the meaning of the query changes.
 
 00:00:16.202 --> 00:00:19.747
-[tts-break] Also resist the temptation to change the embedding model immediately if one result surprises you.
+Also resist the temptation to change the embedding model immediately if one result surprises you.
 
 00:00:19.747 --> 00:00:23.462
 Read the source text and the returned chunk first.

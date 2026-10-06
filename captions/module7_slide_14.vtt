@@ -16,7 +16,7 @@ Check whether important headings or conditions were separated from the sentence 
 Look for duplicated navigation text, broken words, or chunks that contain almost no useful information.
 
 00:00:13.577 --> 00:00:13.932
-[tts-break] If a chunk is poor, the embedding model cannot repair the missing context.
+If a chunk is poor, the embedding model cannot repair the missing context.
 
 00:00:13.932 --> 00:00:18.882
 In real projects, I also like to inspect chunks from different document types rather than only the first

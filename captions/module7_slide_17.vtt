@@ -19,7 +19,7 @@ I want you to notice that there is no vector database yet.
 We can understand the full retrieval logic with a NumPy matrix.
 
 00:00:28.107 --> 00:00:34.252
-[tts-break] That is useful because later, when Chroma, Qdrant, or another database performs the search,
+That is useful because later, when Chroma, Qdrant, or another database performs the search,
 
 00:00:34.252 --> 00:00:37.367
 you will know what job the database is replacing.

@@ -22,7 +22,7 @@ Once the baseline works, we move the vectors into Chroma and then compare other 
 The point is to see that changing the storage layer does not require changing the whole application.
 
 00:00:33.532 --> 00:00:39.127
-[tts-break] Part 3 focuses on retrieval quality.
+Part 3 focuses on retrieval quality.
 
 00:00:39.127 --> 00:00:44.297
 We introduce metadata filters, top-k, BM25, hybrid retrieval, reranking, and query rewriting.
