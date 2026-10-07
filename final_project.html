@@ -111,7 +111,7 @@ Evaluation</pre></div>
 <p>Use the Stanford Question Answering Dataset. In this project, <code>context</code> becomes the document collection, <code>question</code> becomes the query, and <code>answers</code> provides a known answer for evaluation.</p>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>load_squad.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>from datasets import load_dataset
+<pre><code class="language-python">from datasets import load_dataset
 import pandas as pd
 
 dataset = load_dataset("rajpurkar/squad")
@@ -143,7 +143,7 @@ validation_df.head()</code></pre>
 <h3>Required libraries</h3>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">TXT</span>requirements.txt</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>datasets
+<pre><code class="language-plaintext">datasets
 pandas
 scikit-learn
 sentence-transformers
@@ -155,7 +155,7 @@ numpy</code></pre>
 <h3>Required embedding model</h3>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>embeddings.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+<pre><code class="language-python">MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 # TODO:
 # 1. Import SentenceTransformer
@@ -172,7 +172,7 @@ embedding_model = None</code></pre>
 <p class="lead">Students must use ChromaDB for semantic retrieval.</p>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>chromadb_setup.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code># TODO: Create a persistent ChromaDB client.
+<pre><code class="language-python"># TODO: Create a persistent ChromaDB client.
 # TODO: Create or open a collection named "squad_contexts".
 
 # Useful names to investigate:
@@ -187,7 +187,7 @@ collection = None</code></pre>
 <h3>Basic retrieval structure</h3>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>rag_retrieval.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>def retrieve_chroma(question, top_k=3):
+<pre><code class="language-python">def retrieve_chroma(question, top_k=3):
     # TODO:
     # 1. Embed the question with MiniLM-L6
     # 2. Query ChromaDB
@@ -204,7 +204,7 @@ collection = None</code></pre>
 <h2>Required RAG Prompt Structure</h2>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">TXT</span>prompt.txt</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>Use only the information in the context below to answer the question.
+<pre><code class="language-plaintext">Use only the information in the context below to answer the question.
 If the context does not contain enough information, say that you do not
 have enough information to answer.
 
@@ -259,7 +259,7 @@ Answer:</code></pre>
 
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">TERMINAL</span>Local model</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>ollama pull qwen3.5:4b
+<pre><code class="language-bash">ollama pull qwen3.5:4b
 ollama run qwen3.5:4b</code></pre>
 <div class="vstatus"><span>Terminal</span><span>Local inference</span></div>
 </div>
@@ -268,7 +268,7 @@ ollama run qwen3.5:4b</code></pre>
 
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">TERMINAL</span>Install Python client</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>pip install ollama</code></pre>
+<pre><code class="language-bash">pip install ollama</code></pre>
 <div class="vstatus"><span>Terminal</span><span>Python client</span></div>
 </div>
 
@@ -360,7 +360,16 @@ Model references:
 </div>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".vscode pre code").forEach((block) => {
+    hljs.highlightElement(block);
+  });
+});
+
 function copyCode(button){
  const block=button.closest(".vscode");
  const code=block.querySelector("code").innerText;
