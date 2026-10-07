@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IAN 620 · Final Project</title>
+<style>
+:root{--bg:#f6f8fb;--surface:#fff;--surface2:#eef3f8;--text:#172033;--muted:#5e6b7e;--border:#d9e1ea;--primary:#173f63;--primary2:#215d8f;--accent:#0f766e;--shadow:0 12px 32px rgba(23,63,99,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}a{color:var(--primary2)}
+.hero{background:linear-gradient(135deg,#102f4b,#173f63 52%,#215d8f);color:#fff;padding:60px 24px 52px}.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}.eyebrow{display:inline-block;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);font-weight:700;font-size:.88rem}.hero h1{margin:18px 0 12px;max-width:900px;font-size:clamp(2.2rem,5vw,4rem);line-height:1.08}.hero p{max-width:880px;color:#e8f0f7;font-size:1.08rem}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:800;border:1px solid transparent}.btn.primary{background:#fff;color:var(--primary)}.btn.secondary{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.08)}
+main{padding:28px 0 64px}.nav{position:sticky;top:0;z-index:10;background:rgba(246,248,251,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 16px;overflow-x:auto;white-space:nowrap;margin-bottom:28px}.nav a{display:inline-block;padding:7px 11px;margin-right:6px;border-radius:8px;text-decoration:none;font-weight:750;color:var(--primary)}.nav a:hover{background:#e7edf4}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:clamp(20px,4vw,34px);margin-bottom:22px}.card h2{margin:0 0 10px;color:var(--primary);font-size:clamp(1.45rem,3vw,2rem)}h3{color:#22354b;margin:24px 0 8px}.lead{font-size:1.08rem;color:#334155}.muted{color:var(--muted)}
+.grid2,.grid3{display:grid;gap:16px;margin-top:18px}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}.mini{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px}.mini strong{display:block;color:var(--primary);margin-bottom:5px}
+.callout{border-radius:12px;padding:16px 18px;margin:18px 0;border:1px solid}.good{background:#ecfdf5;border-color:#a7f3d0}.warn{background:#fff7ed;border-color:#fed7aa}
+.workflow{display:grid;gap:10px;margin-top:18px}.step{display:grid;grid-template-columns:48px 1fr;gap:14px;padding:16px;border:1px solid var(--border);border-radius:12px;background:#fbfcfe}.num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--primary);color:#fff;font-weight:900}.step h3{margin:0 0 4px}.step p{margin:0;color:#475569}
+table{width:100%;border-collapse:collapse;margin-top:14px}th,td{text-align:left;padding:12px 13px;border-bottom:1px solid var(--border);vertical-align:top}th{background:#eaf0f6;color:var(--primary)}tbody tr:nth-child(even){background:#fafbfd}.total td{font-weight:900;background:#eef5fb}
+.check{list-style:none;padding:0}.check li{position:relative;padding-left:30px;margin:8px 0}.check li:before{content:"✓";position:absolute;left:0;top:0;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;background:#dff6ef;color:var(--accent);font-weight:900;font-size:.82rem}
+.arch{background:#f8fafc;border:1px solid var(--border);border-radius:14px;padding:18px;overflow-x:auto}.arch pre{margin:0;background:transparent;color:#203047;border:0;padding:0;min-width:620px}
+code{font-family:"Cascadia Code","Source Code Pro",Consolas,monospace}
+.vscode{margin:18px 0;border:1px solid #30363d;border-radius:10px;overflow:hidden;background:#1e1e1e;box-shadow:0 8px 20px rgba(15,23,42,.16)}.vtop{height:36px;display:flex;align-items:center;justify-content:space-between;background:#181818;border-bottom:1px solid #2b2b2b}.vtab{height:36px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#1e1e1e;border-top:2px solid #007acc;color:#d4d4d4;font-size:.82rem}.vicon{color:#ffd343;font-weight:900}.copy{margin-right:10px;border:1px solid #454545;background:#252526;color:#d4d4d4;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:.76rem;font-weight:700}.vscode pre{margin:0;background:#1e1e1e;color:#d4d4d4;padding:16px 18px;border:0;overflow-x:auto;line-height:1.6}.vstatus{min-height:24px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:#007acc;color:#fff;font-size:.7rem}
+.notebook{margin-top:18px;padding:20px;border-radius:14px;border:1px solid #b9d7ee;background:#f0f8ff}.notebook h3{margin-top:0}.notebook a{display:inline-flex;margin-top:8px;padding:10px 14px;border-radius:9px;background:var(--primary);color:#fff;text-decoration:none;font-weight:800}
+.footer{text-align:center;color:var(--muted);margin-top:30px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}.hero{padding-top:42px}table{font-size:.92rem}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+<div class="eyebrow">IAN 620 · Final Project</div>
+<h1>Build and Evaluate a Retrieval-Augmented Generation (RAG) System</h1>
+<p>Build a complete NLP workflow using SQuAD 1.1, a TF-IDF baseline, <strong>sentence-transformers/all-MiniLM-L6-v2</strong>, <strong>ChromaDB</strong>, Top-K retrieval, prompt construction, generation, and evaluation.</p>
+<div class="actions">
+<a class="btn primary" href="IAN_620_Final_Project_Starter.ipynb" download>Download Starter Notebook</a>
+<a class="btn secondary" href="https://huggingface.co/datasets/rajpurkar/squad" target="_blank" rel="noopener">Open SQuAD Dataset</a>
+<a class="btn secondary" href="#requirements">Project Requirements</a>
+</div>
+</div>
+</header>
+
+<main>
+<div class="nav">
+<div class="wrap">
+<a href="#overview">Overview</a><a href="#dataset">Dataset</a><a href="#requirements">Requirements</a><a href="#chromadb">ChromaDB</a><a href="#evaluation">Evaluation</a><a href="#deliverables">Deliverables</a><a href="#rubric">Rubric</a>
+</div>
+</div>
+
+<div class="wrap">
+<section class="card" id="overview">
+<h2>Project Overview</h2>
+<p class="lead">Your goal is to receive a natural-language question, retrieve the most relevant SQuAD passages, place those passages into a prompt, and generate an answer grounded in the retrieved text.</p>
+<div class="arch"><pre>Documents / Contexts
+        │
+        ▼
+Prepare the text
+        │
+        ├──────────────► TF-IDF baseline
+        │
+        ▼
+MiniLM-L6 embeddings
+        │
+        ▼
+     ChromaDB
+        │
+User Question ──► Query embedding
+        │
+        ▼
+Retrieve Top 3 passages
+        │
+        ▼
+Question + Retrieved Context
+        │
+        ▼
+       LLM
+        │
+        ▼
+Generated Answer
+        │
+        ▼
+Evaluation</pre></div>
+<div class="grid2">
+<div class="mini"><strong>Required embedding model</strong><code>sentence-transformers/all-MiniLM-L6-v2</code></div>
+<div class="mini"><strong>Required vector database</strong>ChromaDB</div>
+</div>
+<div class="callout good"><strong>Main learning goal:</strong> show each stage clearly. Do not hide the entire RAG workflow inside one high-level function.</div>
+<div class="notebook">
+<h3>Starter Notebook</h3>
+<p>Download the starter notebook before you begin. It contains the project structure, SQuAD loading code, TF-IDF setup, MiniLM-L6 setup, ChromaDB indexing and retrieval scaffolding, a RAG prompt builder, and clearly marked student tasks. It is a starting point, not a completed solution.</p>
+<a href="IAN_620_Final_Project_Starter.ipynb" download>Download IAN_620_Final_Project_Starter.ipynb</a>
+</div>
+</section>
+
+<section class="card" id="dataset">
+<h2>Dataset: SQuAD 1.1</h2>
+<p>Use the Stanford Question Answering Dataset. In this project, <code>context</code> becomes the document collection, <code>question</code> becomes the query, and <code>answers</code> provides a known answer for evaluation.</p>
+<div class="vscode">
+<div class="vtop"><div class="vtab"><span class="vicon">PY</span>load_squad.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>from datasets import load_dataset
+import pandas as pd
+
+dataset = load_dataset("rajpurkar/squad")
+
+train_df = pd.DataFrame(dataset["train"])
+validation_df = pd.DataFrame(dataset["validation"])
+
+validation_df.head()</code></pre>
+<div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
+</div>
+<div class="callout warn"><strong>Important:</strong> create the retrieval collection from unique SQuAD context passages. The question is the query; the context passages are the documents being searched.</div>
+</section>
+
+<section class="card" id="requirements">
+<h2>Project Requirements</h2>
+<div class="workflow">
+<div class="step"><div class="num">1</div><div><h3>Load and understand the data</h3><p>Load SQuAD, inspect the columns, and explain how context, question, and answers will be used.</p></div></div>
+<div class="step"><div class="num">2</div><div><h3>Prepare the document collection</h3><p>Create a collection of unique context passages and retain useful metadata such as title and document ID.</p></div></div>
+<div class="step"><div class="num">3</div><div><h3>Explore the text</h3><p>Show meaningful EDA such as number of documents, typical passage length, and sample records.</p></div></div>
+<div class="step"><div class="num">4</div><div><h3>Build a TF-IDF baseline</h3><p>Represent the documents with TF-IDF, use cosine similarity, and retrieve the Top 3 passages for several questions.</p></div></div>
+<div class="step"><div class="num">5</div><div><h3>Create MiniLM-L6 embeddings</h3><p>Use <code>sentence-transformers/all-MiniLM-L6-v2</code> for both passage and question embeddings.</p></div></div>
+<div class="step"><div class="num">6</div><div><h3>Store vectors in ChromaDB</h3><p>Store document IDs, context text, MiniLM-L6 embeddings, and metadata in a ChromaDB collection.</p></div></div>
+<div class="step"><div class="num">7</div><div><h3>Retrieve Top 3 passages</h3><p>Embed the user question and use ChromaDB to retrieve the three most relevant passages.</p></div></div>
+<div class="step"><div class="num">8</div><div><h3>Compare retrieval methods</h3><p>Compare TF-IDF with MiniLM-L6 + ChromaDB and discuss at least one case where their behavior differs.</p></div></div>
+<div class="step"><div class="num">9</div><div><h3>Build the RAG prompt</h3><p>Combine the question with retrieved context and instruct the LLM to answer only from that context.</p></div></div>
+<div class="step"><div class="num">10</div><div><h3>Evaluate the full system</h3><p>Evaluate retrieval separately from generated answers. Compare no-RAG answers with RAG answers and include at least one failure case.</p></div></div>
+</div>
+
+<h3>Required libraries</h3>
+<div class="vscode">
+<div class="vtop"><div class="vtab"><span class="vicon">TXT</span>requirements.txt</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>datasets
+pandas
+scikit-learn
+sentence-transformers
+chromadb
+numpy</code></pre>
+<div class="vstatus"><span>UTF-8</span><span>Required stack</span></div>
+</div>
+
+<h3>Required embedding model</h3>
+<div class="vscode">
+<div class="vtop"><div class="vtab"><span class="vicon">PY</span>embeddings.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer(
+    "sentence-transformers/all-MiniLM-L6-v2"
+)</code></pre>
+<div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
+</div>
+</section>
+
+<section class="card" id="chromadb">
+<h2>Required Vector Database: ChromaDB</h2>
+<p class="lead">Students must use ChromaDB for semantic retrieval.</p>
+<div class="vscode">
+<div class="vtop"><div class="vtab"><span class="vicon">PY</span>chromadb_setup.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>import chromadb
+
+client = chromadb.PersistentClient(
+    path="./chroma_ian620_final"
+)
+
+collection = client.get_or_create_collection(
+    name="squad_contexts"
+)</code></pre>
+<div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
+</div>
+
+<h3>Basic retrieval structure</h3>
+<div class="vscode">
+<div class="vtop"><div class="vtab"><span class="vicon">PY</span>rag_retrieval.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>question_embedding = model.encode(
+    [question],
+    normalize_embeddings=True
+)
+
+results = collection.query(
+    query_embeddings=question_embedding.tolist(),
+    n_results=3,
+    include=["documents", "metadatas", "distances"]
+)</code></pre>
+<div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
+</div>
+<div class="callout warn"><strong>Do not treat this sample as the final solution.</strong> Your notebook must still show data preparation, TF-IDF retrieval, ChromaDB storage, retrieval results, prompt construction, evaluation, and discussion.</div>
+</section>
+
+<section class="card" id="prompt">
+<h2>Required RAG Prompt Structure</h2>
+<div class="vscode">
+<div class="vtop"><div class="vtab"><span class="vicon">TXT</span>prompt.txt</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
+<pre><code>Use only the information in the context below to answer the question.
+If the context does not contain enough information, say that you do not
+have enough information to answer.
+
+Context:
+[Retrieved passage 1]
+
+[Retrieved passage 2]
+
+[Retrieved passage 3]
+
+Question:
+[User question]
+
+Answer:</code></pre>
+<div class="vstatus"><span>Plain Text</span><span>UTF-8</span></div>
+</div>
+<div class="grid2">
+<div class="mini"><strong>Without RAG</strong>Question → LLM → Answer</div>
+<div class="mini"><strong>With RAG</strong>Question → ChromaDB retrieval → Context + Question → LLM → Answer</div>
+</div>
+</section>
+
+<section class="card" id="evaluation">
+<h2>Evaluation</h2>
+<p class="lead">Evaluate retrieval separately from answer generation.</p>
+<div class="grid3">
+<div class="mini"><strong>Hit@1</strong>Was the correct SQuAD context ranked first?</div>
+<div class="mini"><strong>Recall@3</strong>Was the correct context anywhere in the Top 3?</div>
+<div class="mini"><strong>Method comparison</strong>Compare TF-IDF with MiniLM-L6 + ChromaDB.</div>
+</div>
+<h3>Answer evaluation</h3>
+<div style="overflow-x:auto">
+<table>
+<thead><tr><th>Question</th><th>Correct passage retrieved?</th><th>Known answer</th><th>RAG answer</th><th>Supported by context?</th></tr></thead>
+<tbody>
+<tr><td>Example question 1</td><td>Yes</td><td>Expected answer</td><td>Generated answer</td><td>Yes</td></tr>
+<tr><td>Example question 2</td><td>No</td><td>Expected answer</td><td>Generated answer</td><td>No / Partially</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout good"><strong>Include failures.</strong> At least one example must explain whether the problem came from retrieval, prompt design, or generation.</div>
+</section>
+
+<section class="card" id="deliverables">
+<h2>Final Deliverables</h2>
+<div class="grid2">
+<div class="mini"><strong>1. Jupyter Notebook</strong>Complete runnable notebook with explanations, outputs, retrieval comparisons, RAG, evaluation, and conclusion.</div>
+<div class="mini"><strong>2. README or Short Report</strong>Problem, dataset, architecture, major results, limitations, and run instructions.</div>
+<div class="mini"><strong>3. Short Video Demonstration</strong>Demonstrate the workflow and representative results.</div>
+<div class="mini"><strong>4. Supporting Files</strong>Any Python or configuration files needed to reproduce the project.</div>
+</div>
+</section>
+
+<section class="card" id="rubric">
+<h2>Grading Rubric — 100 Points</h2>
+<div style="overflow-x:auto">
+<table>
+<thead><tr><th>Component</th><th>What is evaluated</th><th>Points</th></tr></thead>
+<tbody>
+<tr><td>Problem setup & dataset</td><td>Correct use of SQuAD and clear project setup.</td><td>10</td></tr>
+<tr><td>Text preparation & exploration</td><td>Unique document collection, useful EDA, clear decisions.</td><td>10</td></tr>
+<tr><td>TF-IDF baseline</td><td>Correct vectorization, cosine similarity, Top-K retrieval.</td><td>10</td></tr>
+<tr><td>MiniLM-L6 embeddings</td><td>Correct use of all-MiniLM-L6-v2 and explanation of semantic representation.</td><td>15</td></tr>
+<tr><td>ChromaDB retrieval</td><td>Stored document embeddings, metadata, query embedding, Top-K retrieval.</td><td>15</td></tr>
+<tr><td>RAG implementation</td><td>Prompt construction, retrieved context, and end-to-end question answering.</td><td>20</td></tr>
+<tr><td>Evaluation & discussion</td><td>Hit@1, Recall@3, TF-IDF vs semantic retrieval, no-RAG vs RAG, failure analysis.</td><td>10</td></tr>
+<tr><td>Communication & demonstration</td><td>Notebook organization, report quality, and project demonstration.</td><td>10</td></tr>
+<tr class="total"><td colspan="2">Total</td><td>100</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>Before You Submit</h2>
+<ul class="check">
+<li>My notebook runs from top to bottom.</li>
+<li>I created a collection from unique SQuAD contexts.</li>
+<li>I implemented a TF-IDF baseline.</li>
+<li>I used <code>sentence-transformers/all-MiniLM-L6-v2</code>.</li>
+<li>I stored embeddings and metadata in ChromaDB.</li>
+<li>I retrieved Top 3 passages using ChromaDB.</li>
+<li>I built a RAG prompt using retrieved context.</li>
+<li>I evaluated retrieval separately from generated answers.</li>
+<li>I compared TF-IDF vs MiniLM-L6 + ChromaDB.</li>
+<li>I compared no-RAG vs RAG answers.</li>
+<li>I included at least one failure case and a conclusion.</li>
+</ul>
+</section>
+
+<p class="footer">IAN 620 · Natural Language Processing · Final Project</p>
+</div>
+</main>
+
+<script>
+function copyCode(button){
+ const block=button.closest(".vscode");
+ const code=block.querySelector("code").innerText;
+ navigator.clipboard.writeText(code).then(()=>{
+  const old=button.textContent;
+  button.textContent="Copied";
+  setTimeout(()=>button.textContent=old,1200);
+ });
+}
+</script>
+</body>
+</html>
