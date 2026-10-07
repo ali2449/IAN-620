@@ -84,7 +84,7 @@ Evaluation</pre></div>
 <div class="callout good"><strong>Main learning goal:</strong> show each stage clearly. Do not hide the entire RAG workflow inside one high-level function.</div>
 <div class="notebook">
 <h3>Starter Notebook</h3>
-<p>Download the starter notebook before you begin. It contains the project structure, SQuAD loading code, TF-IDF setup, MiniLM-L6 setup, ChromaDB indexing and retrieval scaffolding, a RAG prompt builder, and clearly marked student tasks. It is a starting point, not a completed solution.</p>
+<p>Download the starter notebook before you begin. It contains the project structure, the SQuAD loading example, TODO cells, hints, checkpoints, and required outputs. The core retrieval, embedding, ChromaDB, RAG, and evaluation code is intentionally left for you to complete.</p>
 <a href="IAN_620_Final_Project_Starter.ipynb" download>Download IAN_620_Final_Project_Starter.ipynb</a>
 </div>
 </section>
@@ -138,11 +138,14 @@ numpy</code></pre>
 <h3>Required embedding model</h3>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>embeddings.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>from sentence_transformers import SentenceTransformer
+<pre><code>MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-model = SentenceTransformer(
-    "sentence-transformers/all-MiniLM-L6-v2"
-)</code></pre>
+# TODO:
+# 1. Import SentenceTransformer
+# 2. Load the required embedding model
+# 3. Use the same model for documents and questions
+
+embedding_model = None</code></pre>
 <div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
 </div>
 </section>
@@ -152,34 +155,32 @@ model = SentenceTransformer(
 <p class="lead">Students must use ChromaDB for semantic retrieval.</p>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>chromadb_setup.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>import chromadb
+<pre><code># TODO: Create a persistent ChromaDB client.
+# TODO: Create or open a collection named "squad_contexts".
 
-client = chromadb.PersistentClient(
-    path="./chroma_ian620_final"
-)
+# Useful names to investigate:
+# PersistentClient
+# get_or_create_collection
 
-collection = client.get_or_create_collection(
-    name="squad_contexts"
-)</code></pre>
+chroma_client = None
+collection = None</code></pre>
 <div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
 </div>
 
 <h3>Basic retrieval structure</h3>
 <div class="vscode">
 <div class="vtop"><div class="vtab"><span class="vicon">PY</span>rag_retrieval.py</div><button class="copy" onclick="copyCode(this)">Copy</button></div>
-<pre><code>question_embedding = model.encode(
-    [question],
-    normalize_embeddings=True
-)
+<pre><code>def retrieve_chroma(question, top_k=3):
+    # TODO:
+    # 1. Embed the question with MiniLM-L6
+    # 2. Query ChromaDB
+    # 3. Retrieve Top-K passages
+    # 4. Return a readable result
 
-results = collection.query(
-    query_embeddings=question_embedding.tolist(),
-    n_results=3,
-    include=["documents", "metadatas", "distances"]
-)</code></pre>
+    pass</code></pre>
 <div class="vstatus"><span>Python 3</span><span>Spaces: 4 · UTF-8</span></div>
 </div>
-<div class="callout warn"><strong>Do not treat this sample as the final solution.</strong> Your notebook must still show data preparation, TF-IDF retrieval, ChromaDB storage, retrieval results, prompt construction, evaluation, and discussion.</div>
+<div class="callout warn"><strong>The starter code is intentionally incomplete.</strong> You are responsible for writing the TF-IDF, MiniLM-L6, ChromaDB indexing/retrieval, RAG, and evaluation code.</div>
 </section>
 
 <section class="card" id="prompt">
