@@ -396,18 +396,9 @@ function runCostCalculator(){
   if(!out)return;
   out.innerHTML=
     '<strong>Estimated API/token cost</strong><br>'+
-    'Per request: 
-</script>
-</body>
-</html>+perReq.toFixed(6)+'<br>'+
-    'Per day: 
-</script>
-</body>
-</html>+day.toFixed(2)+'<br>'+
-    '30-day month: 
-</script>
-</body>
-</html>+month.toFixed(2)+'<br><br>'+
+    'Per request: USD '+perReq.toFixed(6)+'<br>'+
+    'Per day: USD '+day.toFixed(2)+'<br>'+
+    '30-day month: USD '+month.toFixed(2)+'<br><br>'+
     '<strong>Generation-only latency:</strong> ~'+genLatency.toFixed(1)+' s/request<br>'+
     '<span style="color:var(--muted);font-size:12px">Actual latency also includes prompt processing, queueing, networking, batching, and application overhead.</span>'
 }
