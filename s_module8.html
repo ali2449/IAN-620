@@ -170,7 +170,7 @@ function highlightLine(line,language){
   }else if(language==='shell'){
     pattern=/(#.*$)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\b(python|pip|source|cd|mkdir|streamlit)\b|\b(\d+(?:\.\d+)?)\b/gi
   }else{
-    pattern=/(#.*$)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\b(def|class|from|import|as|for|in|if|else|elif|return|print|with|try|except|finally|raise|True|False|None|and|or|not|lambda|while|break|continue|pass|yield|async|await|is)\b|\b(pd|np|os|re|SentenceTransformer|OpenAI|Path|QdrantClient|MilvusClient|Pinecone|BM25Okapi|CrossEncoder|DataFrame|models|faiss|chromadb)\b|\b(\d+(?:\.\d+)?)\b|\b([A-Za-z_]\w*)(?=\s*\()/g
+    pattern=/(#.*$)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\b(def|class|from|import|as|for|in|if|else|elif|return|print|with|try|except|finally|raise|True|False|None|and|or|not|lambda|while|break|continue|pass|yield|async|await|is)\b|\b(pd|np|os|re|SentenceTransformer|OpenAI|Path|AutoConfig|AutoTokenizer|AutoModelForCausalLM|BitsAndBytesConfig|LoraConfig|SFTTrainer|QdrantClient|MilvusClient|Pinecone|BM25Okapi|CrossEncoder|DataFrame|models|faiss|chromadb|torch|nn|pipeline|json)\b|\b(\d+(?:\.\d+)?)\b|\b([A-Za-z_]\w*)(?=\s*\()/g
   }
 
   let html='',last=0;
@@ -235,7 +235,221 @@ function renderSlides(){
   ).join('');
   prepareVsCodeBlocks();
   bindCopyButtons()
-}function syncDisplayState(){document.body.classList.toggle('auto-hide',autoHide);document.body.classList.toggle('cc-off',!ccOpen);autoHideBtn.textContent=autoHide?'Auto-hide On':'Auto-hide Off';ccBtn.textContent=ccOpen?'CC On':'CC Off';ccBtn.setAttribute('aria-pressed',ccOpen?'true':'false');ccBtn.classList.toggle('primary',ccOpen);narrationBtn.textContent=narrationMode?'Auto-play On':'Auto-play Off';if(!ccOpen)captionStrip.textContent=''}function showSlide(i,user=false){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));current=Math.max(0,Math.min(i,total-1));document.querySelectorAll('.slide')[current].classList.add('active');localStorage.setItem('ian620_module8_slide',current);const pct=Math.round(((current+1)/total)*100);document.getElementById('statusText').textContent=`Slide ${current+1}/${total}`;document.getElementById('progressPct').textContent=pct+'%';document.getElementById('counter').textContent=`${current+1} / ${total}`;document.getElementById('miniProgress').style.width=pct+'%';slideSelect.value=String(current);audio.pause();audio.src=audioPath(current);audio.playbackRate=Number(speedSelect.value||'1');audioStatus.textContent=`Slide ${current+1} narration`;updateCaptionText(current);if(document.getElementById('transcriptPanel').classList.contains('open'))refreshTranscriptPanel();if(user&&narrationMode)audio.play().catch(()=>{})}function nextSlide(){showSlide(current+1,true)}function prevSlide(){showSlide(current-1,true)}function toggleSettingsMenu(force){const m=document.getElementById('settingsMenu'),b=document.getElementById('settingsBtn');const open=typeof force==='boolean'?force:!m.classList.contains('open');m.classList.toggle('open',open);b.setAttribute('aria-expanded',open?'true':'false')}document.addEventListener('click',e=>{const w=document.querySelector('.settings-wrap');if(w&&!w.contains(e.target))toggleSettingsMenu(false)});function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}function toggleAutoHide(){autoHide=!autoHide;syncDisplayState()}function toggleNarrationMode(){narrationMode=!narrationMode;syncDisplayState()}function toggleCaptions(){ccOpen=!ccOpen;syncDisplayState();updateCaptionText(current)}function setTheme(dark){document.body.classList.toggle('dark',dark);themeBtn.textContent=dark?'Light mode':'Dark mode';localStorage.setItem('ian620_module8_theme',dark?'dark':'light')}themeBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark')));setTheme(localStorage.getItem('ian620_module8_theme')==='dark');speedSelect.addEventListener('change',()=>audio.playbackRate=Number(speedSelect.value));slideSelect.addEventListener('change',()=>showSlide(Number(slideSelect.value),true));function toSec(v){const p=v.trim().replace(',','.').split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:Number(v)||0}function parseVtt(txt){const blocks=txt.replace(/^\uFEFF?WEBVTT[^\n]*\n?/i,'').split(/\n\s*\n/);const cues=[];for(const block of blocks){const lines=block.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const idx=lines.findIndex(x=>x.includes('-->'));if(idx<0)continue;const parts=lines[idx].split('-->');const text=lines.slice(idx+1).join(' ').replace(/<[^>]+>/g,'').trim();if(text)cues.push({start:toSec(parts[0]),end:toSec(parts[1].trim().split(/\s+/)[0]),text})}return cues}function syncCaption(){if(!ccOpen)return;const t=audio.currentTime||0;const c=captionCues.find(x=>t>=x.start&&t<=x.end);captionStrip.textContent=c?c.text:(!audio.paused&&captionCues.length?'':'Captions are on. Start narration to follow this slide.')}async function updateCaptionText(i){captionCues=[];if(!ccOpen)return;try{const r=await fetch(captionPath(i),{cache:'no-store'});if(!r.ok)throw 0;captionCues=parseVtt(await r.text());syncCaption()}catch{captionStrip.textContent='Captions will appear here during narration.'}}function normalizeEntry(x){const text=typeof x==='string'?x:(x&&(x.transcript||x.narration||x.text||x.script||x.notes))||'';return String(text).replace(/\s*\[tts-break\]\s*/gi,'\n\n').trim()}function transcriptFromManifest(i){if(!transcriptManifest)return'';const base=fileBase(i),num=i+1;if(Array.isArray(transcriptManifest)){const item=transcriptManifest.find(x=>x&&(x.file===base||x.id===base||Number(x.slide||x.number)===num));return normalizeEntry(item)}if(Array.isArray(transcriptManifest.slides)){const item=transcriptManifest.slides.find(x=>x&&(x.file===base||x.id===base||Number(x.slide||x.number)===num));return normalizeEntry(item)}return normalizeEntry(transcriptManifest[base]||transcriptManifest[String(num)]||transcriptManifest[String(num).padStart(2,'0')])}async function loadTranscriptManifest(){for(const p of ['s_module8_manifest.json','module8_manifest.json','manifest/s_module8_manifest.json','manifest/module8_manifest.json','manifest.json']){try{const r=await fetch(p,{cache:'no-store'});if(r.ok){transcriptManifest=await r.json();transcriptManifestSource=p;return}}catch(e){}}}function refreshTranscriptPanel(){const s=SLIDES[current],m=transcriptFromManifest(current);document.getElementById('transcriptTitle').textContent=`Slide ${current+1} Narration - ${s.t}`;document.getElementById('transcriptText').textContent=m||s.tr||'Transcript will appear after narration text is added.';document.getElementById('transcriptSource').textContent=m?`Loaded from ${transcriptManifestSource}`:'Narration transcript for the current slide'}function openTranscript(){refreshTranscriptPanel();document.getElementById('transcriptPanel').classList.add('open')}function closeTranscript(){document.getElementById('transcriptPanel').classList.remove('open')}function fmt(sec){if(!Number.isFinite(sec))return'0:00';const m=Math.floor(sec/60),s=String(Math.floor(sec%60)).padStart(2,'0');return`${m}:${s}`}function refreshAudio(){const d=Number.isFinite(audio.duration)?audio.duration:0,t=Number.isFinite(audio.currentTime)?audio.currentTime:0;audioSeek.value=d>0?String((t/d)*100):'0';audioTime.textContent=fmt(t)+' / '+fmt(d);audioPlay.textContent=audio.paused?'Play':'Pause'}audio.addEventListener('timeupdate',()=>{syncCaption();refreshAudio()});audio.addEventListener('loadedmetadata',refreshAudio);audio.addEventListener('durationchange',refreshAudio);audio.addEventListener('play',()=>{syncCaption();refreshAudio()});audio.addEventListener('pause',refreshAudio);audio.addEventListener('error',()=>{audioStatus.textContent='Narration file not uploaded yet';refreshAudio()});audioSeek.addEventListener('input',()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=(Number(audioSeek.value)/100)*audio.duration});audioPlay.addEventListener('click',()=>{if(audio.paused)audio.play().catch(()=>{});else audio.pause()});window.nextSlide=nextSlide;window.prevSlide=prevSlide;window.toggleSettingsMenu=toggleSettingsMenu;window.toggleFullscreen=toggleFullscreen;window.toggleDrawer=toggleDrawer;window.toggleAutoHide=toggleAutoHide;window.toggleNarrationMode=toggleNarrationMode;window.toggleCaptions=toggleCaptions;window.openTranscript=openTranscript;window.closeTranscript=closeTranscript;renderSlides();syncDisplayState();showSlide(current);loadTranscriptManifest();
+}function syncDisplayState(){document.body.classList.toggle('auto-hide',autoHide);document.body.classList.toggle('cc-off',!ccOpen);autoHideBtn.textContent=autoHide?'Auto-hide On':'Auto-hide Off';ccBtn.textContent=ccOpen?'CC On':'CC Off';ccBtn.setAttribute('aria-pressed',ccOpen?'true':'false');ccBtn.classList.toggle('primary',ccOpen);narrationBtn.textContent=narrationMode?'Auto-play On':'Auto-play Off';if(!ccOpen)captionStrip.textContent=''}function showSlide(i,user=false){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));current=Math.max(0,Math.min(i,total-1));document.querySelectorAll('.slide')[current].classList.add('active');localStorage.setItem('ian620_module8_slide',current);const pct=Math.round(((current+1)/total)*100);document.getElementById('statusText').textContent=`Slide ${current+1}/${total}`;document.getElementById('progressPct').textContent=pct+'%';document.getElementById('counter').textContent=`${current+1} / ${total}`;document.getElementById('miniProgress').style.width=pct+'%';slideSelect.value=String(current);audio.pause();audio.src=audioPath(current);audio.playbackRate=Number(speedSelect.value||'1');audioStatus.textContent=`Slide ${current+1} narration`;updateCaptionText(current);if(document.getElementById('transcriptPanel').classList.contains('open'))refreshTranscriptPanel();if(user&&narrationMode)audio.play().catch(()=>{})}function nextSlide(){showSlide(current+1,true)}function prevSlide(){showSlide(current-1,true)}function toggleSettingsMenu(force){const m=document.getElementById('settingsMenu'),b=document.getElementById('settingsBtn');const open=typeof force==='boolean'?force:!m.classList.contains('open');m.classList.toggle('open',open);b.setAttribute('aria-expanded',open?'true':'false')}document.addEventListener('click',e=>{const w=document.querySelector('.settings-wrap');if(w&&!w.contains(e.target))toggleSettingsMenu(false)});function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}function toggleAutoHide(){autoHide=!autoHide;syncDisplayState()}function toggleNarrationMode(){narrationMode=!narrationMode;syncDisplayState()}function toggleCaptions(){ccOpen=!ccOpen;syncDisplayState();updateCaptionText(current)}function setTheme(dark){document.body.classList.toggle('dark',dark);themeBtn.textContent=dark?'Light mode':'Dark mode';localStorage.setItem('ian620_module8_theme',dark?'dark':'light')}themeBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark')));setTheme(localStorage.getItem('ian620_module8_theme')==='dark');speedSelect.addEventListener('change',()=>audio.playbackRate=Number(speedSelect.value));slideSelect.addEventListener('change',()=>showSlide(Number(slideSelect.value),true));function toSec(v){const p=v.trim().replace(',','.').split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:Number(v)||0}function parseVtt(txt){const blocks=txt.replace(/^\uFEFF?WEBVTT[^\n]*\n?/i,'').split(/\n\s*\n/);const cues=[];for(const block of blocks){const lines=block.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const idx=lines.findIndex(x=>x.includes('-->'));if(idx<0)continue;const parts=lines[idx].split('-->');const text=lines.slice(idx+1).join(' ').replace(/<[^>]+>/g,'').trim();if(text)cues.push({start:toSec(parts[0]),end:toSec(parts[1].trim().split(/\s+/)[0]),text})}return cues}function syncCaption(){if(!ccOpen)return;const t=audio.currentTime||0;const c=captionCues.find(x=>t>=x.start&&t<=x.end);captionStrip.textContent=c?c.text:(!audio.paused&&captionCues.length?'':'Captions are on. Start narration to follow this slide.')}async function updateCaptionText(i){captionCues=[];if(!ccOpen)return;try{const r=await fetch(captionPath(i),{cache:'no-store'});if(!r.ok)throw 0;captionCues=parseVtt(await r.text());syncCaption()}catch{captionStrip.textContent='Captions will appear here during narration.'}}function normalizeEntry(x){const text=typeof x==='string'?x:(x&&(x.transcript||x.narration||x.text||x.script||x.notes))||'';return String(text).replace(/\s*\[tts-break\]\s*/gi,'\n\n').trim()}function transcriptFromManifest(i){if(!transcriptManifest)return'';const base=fileBase(i),num=i+1;if(Array.isArray(transcriptManifest)){const item=transcriptManifest.find(x=>x&&(x.file===base||x.id===base||Number(x.slide||x.number)===num));return normalizeEntry(item)}if(Array.isArray(transcriptManifest.slides)){const item=transcriptManifest.slides.find(x=>x&&(x.file===base||x.id===base||Number(x.slide||x.number)===num));return normalizeEntry(item)}return normalizeEntry(transcriptManifest[base]||transcriptManifest[String(num)]||transcriptManifest[String(num).padStart(2,'0')])}async function loadTranscriptManifest(){for(const p of ['s_module8_manifest.json','module8_manifest.json','manifest/s_module8_manifest.json','manifest/module8_manifest.json','manifest.json']){try{const r=await fetch(p,{cache:'no-store'});if(r.ok){transcriptManifest=await r.json();transcriptManifestSource=p;return}}catch(e){}}}function refreshTranscriptPanel(){const s=SLIDES[current],m=transcriptFromManifest(current);document.getElementById('transcriptTitle').textContent=`Slide ${current+1} Narration - ${s.t}`;document.getElementById('transcriptText').textContent=m||s.tr||'Transcript will appear after narration text is added.';document.getElementById('transcriptSource').textContent=m?`Loaded from ${transcriptManifestSource}`:'Narration transcript for the current slide'}function openTranscript(){refreshTranscriptPanel();document.getElementById('transcriptPanel').classList.add('open')}function closeTranscript(){document.getElementById('transcriptPanel').classList.remove('open')}function fmt(sec){if(!Number.isFinite(sec))return'0:00';const m=Math.floor(sec/60),s=String(Math.floor(sec%60)).padStart(2,'0');return`${m}:${s}`}function refreshAudio(){const d=Number.isFinite(audio.duration)?audio.duration:0,t=Number.isFinite(audio.currentTime)?audio.currentTime:0;audioSeek.value=d>0?String((t/d)*100):'0';audioTime.textContent=fmt(t)+' / '+fmt(d);audioPlay.textContent=audio.paused?'Play':'Pause'}audio.addEventListener('timeupdate',()=>{syncCaption();refreshAudio()});audio.addEventListener('loadedmetadata',refreshAudio);audio.addEventListener('durationchange',refreshAudio);audio.addEventListener('play',()=>{syncCaption();refreshAudio()});audio.addEventListener('pause',refreshAudio);audio.addEventListener('error',()=>{audioStatus.textContent='Narration file not uploaded yet';refreshAudio()});audioSeek.addEventListener('input',()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=(Number(audioSeek.value)/100)*audio.duration});audioPlay.addEventListener('click',()=>{if(audio.paused)audio.play().catch(()=>{});else audio.pause()});window.nextSlide=nextSlide;window.prevSlide=prevSlide;window.toggleSettingsMenu=toggleSettingsMenu;window.toggleFullscreen=toggleFullscreen;window.toggleDrawer=toggleDrawer;window.toggleAutoHide=toggleAutoHide;window.toggleNarrationMode=toggleNarrationMode;window.toggleCaptions=toggleCaptions;window.openTranscript=openTranscript;window.closeTranscript=closeTranscript;
+function demoEscape(value){
+  return String(value).replace(/[&<>"]/g,ch=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'
+  }[ch]))
+}
+function stableTeachingId(token){
+  let hash=0;
+  for(let i=0;i<token.length;i++){
+    hash=(hash*31+token.charCodeAt(i))>>>0
+  }
+  return 1000+(hash%8000)
+}
+function runTokenizerDemo(){
+  const input=document.getElementById('tokenizerInput');
+  const output=document.getElementById('tokenizerOutput');
+  if(!input||!output)return;
+  const text=input.value.trim();
+  const pieces=text.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*|[^\sA-Za-z0-9]/g)||[];
+  const rows=[{token:'<BOS>',id:1,special:true}]
+    .concat(pieces.map(t=>({token:t,id:stableTeachingId(t),special:false})))
+    .concat([{token:'<EOS>',id:2,special:true}]);
+  output.innerHTML=
+    '<div style="font-weight:900;margin-bottom:7px">Simplified teaching tokens</div>'+
+    rows.map(x=>'<span style="display:inline-block;margin:3px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;background:var(--panel2)">'+
+      demoEscape(x.token)+' <small style="color:var(--muted)">#'+x.id+(x.special?' · special':'')+'</small></span>').join('')+
+    '<div style="margin-top:8px;color:var(--muted);font-size:12px">Use AutoTokenizer on the next code slide for real checkpoint-specific tokens.</div>'
+}
+const ATTENTION_DEMO=[
+  [1,0,0,0],
+  [.34,.66,0,0],
+  [.16,.29,.55,0],
+  [.09,.18,.27,.46]
+];
+const ATTENTION_TOKENS=['The','model','learns','patterns'];
+function showAttentionRow(index){
+  const out=document.getElementById('attentionOutput');
+  if(!out)return;
+  document.querySelectorAll('#attnTokens .token-chip').forEach((b,i)=>b.classList.toggle('active',i===index));
+  out.innerHTML='<div style="font-weight:900;margin-bottom:8px">Query token: '+ATTENTION_TOKENS[index]+'</div>'+
+    ATTENTION_TOKENS.map((token,j)=>{
+      const blocked=j>index;
+      const weight=ATTENTION_DEMO[index][j];
+      return '<div class="attn-row"><span>'+token+'</span>'+
+        '<div style="height:12px;border-radius:99px;background:var(--line);overflow:hidden">'+
+        '<div class="attn-bar" style="width:'+(blocked?0:Math.round(weight*100))+'%"></div></div>'+
+        '<strong style="font-size:12px">'+(blocked?'blocked':Math.round(weight*100)+'%')+'</strong></div>'
+    }).join('')+
+    '<div style="margin-top:8px;color:var(--muted);font-size:12px">Future tokens are blocked by the causal mask.</div>'
+}
+const BLOCK_PARTS={
+  norm1:'Normalize the incoming hidden state before attention so the next transformation receives numerically stable values.',
+  attn:'Masked self-attention lets each token combine information from itself and earlier tokens using learned Q, K, and V projections.',
+  res1:'Add the attention result back to the earlier hidden state. This residual path preserves information and supports deep training.',
+  norm2:'Normalize again before the feed-forward transformation.',
+  ffn:'The feed-forward network transforms each token independently through wider learned projections and nonlinear or gated activations.',
+  res2:'Add the feed-forward result back to the residual stream. The result becomes input to the next decoder block.'
+};
+function showBlockPart(key){
+  const out=document.getElementById('blockExplorerOutput');
+  if(out)out.innerHTML='<strong>'+demoEscape(key.toUpperCase())+'</strong><br>'+demoEscape(BLOCK_PARTS[key]||'')
+}
+function updateSamplingDemo(){
+  const tempEl=document.getElementById('tempSlider');
+  const topPEl=document.getElementById('topPSlider');
+  const bars=document.getElementById('samplingBars');
+  if(!tempEl||!topPEl||!bars)return;
+  const temperature=Math.max(.05,Number(tempEl.value)||1);
+  const topP=Number(topPEl.value)||.9;
+  const labels=['model','system','answer','context','data'];
+  const base=[.46,.24,.15,.10,.05];
+  const adjusted=base.map(p=>Math.pow(p,1/temperature));
+  const z=adjusted.reduce((a,b)=>a+b,0);
+  const probs=adjusted.map(p=>p/z);
+  let cumulative=0;
+  const kept=probs.map((p,i)=>{
+    const include=cumulative<topP || i===0;
+    if(include)cumulative+=p;
+    return include?p:0
+  });
+  const keptZ=kept.reduce((a,b)=>a+b,0)||1;
+  const finalP=kept.map(p=>p/keptZ);
+  document.getElementById('tempValue').textContent=temperature.toFixed(1);
+  document.getElementById('topPValue').textContent=topP.toFixed(2);
+  bars.innerHTML=labels.map((label,i)=>
+    '<div class="prob-row"><span>'+label+'</span>'+
+    '<div class="prob-track"><div class="prob-fill" style="width:'+Math.round(finalP[i]*100)+'%"></div></div>'+
+    '<strong style="font-size:12px">'+(finalP[i]*100).toFixed(1)+'%</strong></div>'
+  ).join('')
+}
+const EMBED_DEMO={
+  student:[.82,.68],
+  learner:[.76,.74],
+  database:[-.72,-.55],
+  SQL:[-.78,-.48],
+  model:[.18,.30]
+};
+function cosine2(a,b){
+  const dot=a[0]*b[0]+a[1]*b[1];
+  const na=Math.hypot(a[0],a[1]),nb=Math.hypot(b[0],b[1]);
+  return dot/(na*nb)
+}
+function selectEmbeddingWord(word){
+  const out=document.getElementById('embeddingOutput');
+  if(!out)return;
+  const source=EMBED_DEMO[word];
+  const scores=Object.entries(EMBED_DEMO)
+    .filter(([w])=>w!==word)
+    .map(([w,v])=>[w,cosine2(source,v)])
+    .sort((a,b)=>b[1]-a[1]);
+  out.innerHTML='<strong>'+demoEscape(word)+'</strong><br>'+
+    scores.slice(0,3).map(([w,s])=>demoEscape(w)+': cosine '+s.toFixed(2)).join('<br>')+
+    '<div style="margin-top:7px;color:var(--muted);font-size:12px">Toy 2D vectors only.</div>'
+}
+function runModelDecision(){
+  const difficulty=document.getElementById('decisionDifficulty')?.value;
+  const privacy=document.getElementById('decisionPrivacy')?.value;
+  const hardware=document.getElementById('decisionHardware')?.value;
+  const latency=document.getElementById('decisionLatency')?.value;
+  const out=document.getElementById('modelDecisionOutput');
+  if(!out)return;
+  let bucket='Medium (about 7B–14B)';
+  let deployment=privacy==='local'?'local/self-hosted':'hosted or self-hosted';
+  let reason='A medium model is a sensible baseline for general assistants and RAG.';
+  if(difficulty==='low'||hardware==='cpu'||latency==='fast'){
+    bucket='Small (sub-4B)';
+    reason='The task or hardware favors a smaller baseline. Measure quality before scaling up.'
+  }
+  if(difficulty==='high'&&hardware==='server'&&latency==='quality'){
+    bucket='Large (27B+)';
+    reason='The task prioritizes difficult capability and the infrastructure can support a larger model.'
+  }else if(difficulty==='high'&&hardware!=='server'){
+    bucket='Medium first; compare against a larger hosted model';
+    reason='Start with what fits locally, then measure whether a larger endpoint gives enough quality improvement.'
+  }
+  if(privacy==='local'&&hardware==='cpu'){
+    deployment='local, with a very small or quantized model';
+  }
+  out.innerHTML='<strong>Start with: '+demoEscape(bucket)+'</strong><br>'+
+    'Deployment: '+demoEscape(deployment)+'<br>'+
+    '<span style="color:var(--muted)">'+demoEscape(reason)+'</span>'
+}
+function numberValue(id){
+  const n=Number(document.getElementById(id)?.value);
+  return Number.isFinite(n)?n:0
+}
+function runCostCalculator(){
+  const inTok=numberValue('calcInputTokens');
+  const outTok=numberValue('calcOutputTokens');
+  const inPrice=numberValue('calcInputPrice');
+  const outPrice=numberValue('calcOutputPrice');
+  const req=numberValue('calcRequests');
+  const tps=Math.max(.1,numberValue('calcTPS'));
+  const perReq=(inTok/1e6)*inPrice+(outTok/1e6)*outPrice;
+  const day=perReq*req;
+  const month=day*30;
+  const genLatency=outTok/tps;
+  const out=document.getElementById('costCalcOutput');
+  if(!out)return;
+  out.innerHTML=
+    '<strong>Estimated API/token cost</strong><br>'+
+    'Per request: 
+</script>
+</body>
+</html>+perReq.toFixed(6)+'<br>'+
+    'Per day: 
+</script>
+</body>
+</html>+day.toFixed(2)+'<br>'+
+    '30-day month: 
+</script>
+</body>
+</html>+month.toFixed(2)+'<br><br>'+
+    '<strong>Generation-only latency:</strong> ~'+genLatency.toFixed(1)+' s/request<br>'+
+    '<span style="color:var(--muted);font-size:12px">Actual latency also includes prompt processing, queueing, networking, batching, and application overhead.</span>'
+}
+function checkQuiz(button,correct,message){
+  const card=button.closest('.quiz-card');
+  if(!card)return;
+  card.querySelectorAll('.quiz-options button').forEach(b=>b.classList.remove('correct','wrong'));
+  button.classList.add(correct?'correct':'wrong');
+  const feedback=card.querySelector('.quiz-feedback');
+  if(feedback)feedback.textContent=message
+}
+const GLOSSARY_TERMS=[
+  ['Attention','Weighted mixing of information across token positions.'],
+  ['Causal mask','Blocks a decoder token from attending to future positions.'],
+  ['Context window','Maximum token context a model can process in one request.'],
+  ['Embedding','Vector representation used by a model or retrieval system.'],
+  ['Hidden state','Contextual vector representation inside a model layer.'],
+  ['KV cache','Stored attention keys and values reused during generation.'],
+  ['Logits','Raw scores for candidate output tokens before softmax.'],
+  ['LoRA','Low-rank adapters that train a small parameter subset.'],
+  ['MoE','Mixture-of-experts architecture that routes tokens to selected experts.'],
+  ['Quantization','Store weights with fewer bits to reduce memory.'],
+  ['RAG','Retrieval-augmented generation using external evidence.'],
+  ['Residual connection','Adds earlier hidden state to a sublayer output.'],
+  ['Softmax','Converts scores into a normalized probability distribution.'],
+  ['Temperature','Controls how sharp or flat sampling probabilities become.'],
+  ['Token','A vocabulary unit processed by the model.'],
+  ['Tokenizer','Maps text to tokens and token IDs.'],
+  ['Top-p','Samples from a cumulative probability mass.'],
+  ['Tool calling','Model requests an approved function using structured arguments.']
+];
+function filterGlossary(){
+  const grid=document.getElementById('glossaryGrid');
+  if(!grid)return;
+  const q=(document.getElementById('glossarySearch')?.value||'').trim().toLowerCase();
+  const rows=GLOSSARY_TERMS.filter(([term,def])=>(term+' '+def).toLowerCase().includes(q));
+  grid.innerHTML=rows.map(([term,def])=>
+    '<div class="glossary-item"><strong>'+demoEscape(term)+'</strong><span>'+demoEscape(def)+'</span></div>'
+  ).join('')||'<div class="demo-output">No matching term.</div>'
+}
+
+renderSlides();filterGlossary();updateSamplingDemo();syncDisplayState();showSlide(current);loadTranscriptManifest();
 </script>
 </body>
 </html>
