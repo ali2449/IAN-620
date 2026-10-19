@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">How training learns model weights</title>
+<desc id="desc">A training loop starts with input tokens, predicts the next token, compares the prediction with the correct target to calculate loss, uses backpropagation to compute gradients, and an optimizer updates the weights before the process repeats.</desc>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+  </marker>
+  <style>
+    .bg{fill:#ffffff}.panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}
+    .node{fill:#ffffff;stroke:#334155;stroke-width:2.3}
+    .accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.5}
+    .good{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.3}
+    .line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    .loop{stroke:#2563eb;stroke-width:3;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+    .t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}
+    .muted{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+    .mono{font-family:Consolas,Menlo,monospace;fill:#0f172a}
+  </style>
+</defs>
+<rect class="bg" width="1200" height="700"/>
+<text class="t" x="60" y="66" font-size="34" font-weight="700">Training learns the weights</text>
+<text class="muted" x="60" y="104" font-size="20">Prediction creates an error signal. Backpropagation and the optimizer use that signal to update model parameters.</text>
+
+<rect class="panel" x="55" y="150" rx="18" width="1090" height="455"/>
+
+<rect class="node" x="85" y="270" rx="15" width="150" height="90"/>
+<text class="t" x="160" y="306" text-anchor="middle" font-size="21" font-weight="700">Input tokens</text>
+<text class="muted" x="160" y="335" text-anchor="middle" font-size="16">earlier context</text>
+
+<path class="line" d="M235 315 L300 315"/>
+
+<rect class="accent" x="315" y="250" rx="15" width="170" height="130"/>
+<text class="t" x="400" y="292" text-anchor="middle" font-size="21" font-weight="700">Model</text>
+<text class="muted" x="400" y="320" text-anchor="middle" font-size="16">current weights</text>
+<text class="mono" x="400" y="350" text-anchor="middle" font-size="17">W</text>
+
+<path class="line" d="M485 315 L550 315"/>
+
+<rect class="node" x="565" y="270" rx="15" width="155" height="90"/>
+<text class="t" x="642" y="306" text-anchor="middle" font-size="21" font-weight="700">Prediction</text>
+<text class="muted" x="642" y="335" text-anchor="middle" font-size="16">next-token probabilities</text>
+
+<path class="line" d="M720 315 L785 315"/>
+
+<rect class="node" x="800" y="245" rx="15" width="155" height="140"/>
+<text class="t" x="877" y="282" text-anchor="middle" font-size="21" font-weight="700">Loss</text>
+<text class="muted" x="877" y="311" text-anchor="middle" font-size="16">compare with</text>
+<text class="muted" x="877" y="336" text-anchor="middle" font-size="16">correct next token</text>
+<text class="mono" x="877" y="365" text-anchor="middle" font-size="17">error signal</text>
+
+<path class="line" d="M877 385 L877 445"/>
+
+<rect class="node" x="785" y="460" rx="15" width="185" height="85"/>
+<text class="t" x="877" y="494" text-anchor="middle" font-size="20" font-weight="700">Backpropagation</text>
+<text class="muted" x="877" y="523" text-anchor="middle" font-size="16">compute gradients</text>
+
+<path class="line" d="M785 503 L675 503"/>
+
+<rect class="good" x="495" y="460" rx="15" width="165" height="85"/>
+<text class="t" x="577" y="494" text-anchor="middle" font-size="20" font-weight="700">Optimizer</text>
+<text class="muted" x="577" y="523" text-anchor="middle" font-size="16">update weights</text>
+
+<path class="loop" d="M495 503 C395 503 350 455 365 382"/>
+<text class="muted" x="360" y="490" text-anchor="middle" font-size="16">W ← W − step</text>
+
+<rect class="good" x="970" y="270" rx="15" width="140" height="90"/>
+<text class="t" x="1040" y="304" text-anchor="middle" font-size="19" font-weight="700">Target token</text>
+<text class="muted" x="1040" y="334" text-anchor="middle" font-size="16">correct answer</text>
+<path class="line" d="M970 315 L955 315"/>
+
+<text class="muted" x="60" y="652" font-size="19">Training: weights change. &nbsp;&nbsp; Inference: weights stay fixed while new hidden states are computed for each prompt.</text>
+</svg>
