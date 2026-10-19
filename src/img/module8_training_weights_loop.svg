@@ -68,5 +68,5 @@
 <text class="muted" x="1040" y="334" text-anchor="middle" font-size="16">correct answer</text>
 <path class="line" d="M970 315 L955 315"/>
 
-<text class="muted" x="60" y="652" font-size="19">Training: weights change. &nbsp;&nbsp; Inference: weights stay fixed while new hidden states are computed for each prompt.</text>
+<text class="muted" x="60" y="652" font-size="19">Training: weights change.    Inference: weights stay fixed while new hidden states are computed for each prompt.</text>
 </svg>
