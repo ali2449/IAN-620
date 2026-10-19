@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<title id="title">A weighted neuron</title>
+<desc id="desc">Two numeric inputs are multiplied by learned weights, combined with a bias, passed through ReLU, and produce one hidden value.</desc>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+  </marker>
+  <style>
+    .bg{fill:#ffffff}.panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}
+    .node{fill:#ffffff;stroke:#334155;stroke-width:2.5}
+    .accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.5}
+    .line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    .t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}
+    .muted{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+    .mono{font-family:Consolas,Menlo,monospace;fill:#0f172a}
+  </style>
+</defs>
+<rect class="bg" width="1200" height="680"/>
+<text class="t" x="60" y="70" font-size="34" font-weight="700">One neuron: inputs × learned weights + bias</text>
+<text class="muted" x="60" y="108" font-size="20">A tiny numerical example before scaling the same idea to deep networks and LLMs.</text>
+
+<rect class="panel" x="55" y="150" rx="18" width="1090" height="440"/>
+
+<circle class="node" cx="170" cy="275" r="58"/>
+<text class="t" x="170" y="264" text-anchor="middle" font-size="24" font-weight="700">x1 = 2</text>
+<text class="muted" x="170" y="296" text-anchor="middle" font-size="17">input</text>
+
+<circle class="node" cx="170" cy="465" r="58"/>
+<text class="t" x="170" y="454" text-anchor="middle" font-size="24" font-weight="700">x2 = 1</text>
+<text class="muted" x="170" y="486" text-anchor="middle" font-size="17">input</text>
+
+<path class="line" d="M230 275 C330 275 350 310 450 330"/>
+<text class="mono" x="315" y="263" font-size="21">w1 = 0.5</text>
+
+<path class="line" d="M230 465 C330 465 350 405 450 370"/>
+<text class="mono" x="315" y="455" font-size="21">w2 = -0.2</text>
+
+<circle class="accent" cx="525" cy="350" r="78"/>
+<text class="t" x="525" y="333" text-anchor="middle" font-size="23" font-weight="700">weighted</text>
+<text class="t" x="525" y="362" text-anchor="middle" font-size="23" font-weight="700">sum</text>
+<text class="mono" x="525" y="393" text-anchor="middle" font-size="18">+ b = 0.1</text>
+
+<path class="line" d="M605 350 L735 350"/>
+
+<rect class="node" x="760" y="285" rx="16" width="170" height="130"/>
+<text class="t" x="845" y="333" text-anchor="middle" font-size="25" font-weight="700">ReLU</text>
+<text class="mono" x="845" y="371" text-anchor="middle" font-size="20">max(0, z)</text>
+
+<path class="line" d="M930 350 L1030 350"/>
+
+<circle class="accent" cx="1080" cy="350" r="48"/>
+<text class="t" x="1080" y="343" text-anchor="middle" font-size="22" font-weight="700">h</text>
+<text class="mono" x="1080" y="372" text-anchor="middle" font-size="18">0.9</text>
+
+<rect x="330" y="515" rx="14" width="610" height="55" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+<text class="mono" x="635" y="550" text-anchor="middle" font-size="22">z = (2 × 0.5) + (1 × -0.2) + 0.1 = 0.9</text>
+
+<text class="muted" x="60" y="640" font-size="19">A weight is a learned number that controls how strongly an input influences the next computation.</text>
+</svg>
