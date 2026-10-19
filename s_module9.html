@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>IAN 620 · Module 9 · Agentic RAG</title>
+<style>
+:root{--bg:#e8eff6;--panel:#fff;--panel2:#f3f7fb;--ink:#0c1526;--muted:#5f6f87;--line:#d7e1ee;--line2:#c5d3e3;--accent:#1f5f9f;--accent2:#0f6fb8;--good:#0f7a3d;--warn:#b45309;--shadow:0 18px 45px rgba(19,40,68,.12);--topH:54px;--bottomH:150px}body.dark{--bg:#101b2c;--panel:#121c2e;--panel2:#18263b;--ink:#eef6ff;--muted:#a9b6c9;--line:#2c3e57;--line2:#40546f;--accent:#66a7ff;--accent2:#3aa7e0;--good:#4ade80;--shadow:0 18px 55px rgba(0,0,0,.35)}*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden}button,select,input{font:inherit}button{cursor:pointer}.topbar{height:var(--topH);display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--line);position:relative;z-index:50}.brand{width:34px;height:34px;border-radius:9px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:900;font-size:12px}.title-wrap{min-width:255px;flex:1;line-height:1.05}.mod-title{font-size:17px;font-weight:900}.course{font-size:12px;color:var(--muted);margin-top:3px;font-weight:650}.progress-pill{display:flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);font-size:12px;font-weight:850}.status-sep{color:var(--muted)}.progress-pct{color:var(--accent)}.top-actions{display:flex;gap:8px;align-items:center}.top-actions button,.settings-menu button,.narration-btn,.nav-button,.audio-play,.copy-code{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:9px;padding:7px 10px;font-weight:800}.top-actions button:hover,.narration-btn:hover,.nav-button:hover,.copy-code:hover{border-color:var(--accent);color:var(--accent)}.settings-wrap{position:relative}.settings-menu{position:absolute;top:42px;right:0;width:190px;padding:7px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);display:none;z-index:100}.settings-menu.open{display:grid;gap:4px}.settings-menu button{border:0;text-align:left;background:transparent}.settings-menu button:hover{background:var(--panel2)}.deck{height:calc(100vh - var(--topH) - var(--bottomH));display:flex;align-items:center;justify-content:center;padding:10px 0;overflow:hidden}.slide{display:none;width:min(1180px,calc(100vw - 165px));height:100%;max-height:730px;min-height:0;padding:40px 46px 34px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:var(--shadow);position:relative;overflow-y:auto}.slide.active{display:block}.slide::after{content:'Slide ' attr(data-slide);position:absolute;right:22px;bottom:12px;color:var(--muted);opacity:.75;font-size:12px;font-weight:850}.slide-kicker{color:var(--accent);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:9px}h1{font-size:39px;line-height:1.06;margin:0 0 14px;letter-spacing:-.035em}h2{font-size:25px;margin:0 0 10px}h3{margin:0 0 7px;font-size:18px}p,li{font-size:17px;line-height:1.48;color:var(--muted)}.lead{font-size:23px;line-height:1.32;margin:0 0 12px;color:var(--ink);max-width:950px}.explain{margin:0 0 16px;max-width:990px}.grid2,.hero{display:grid;grid-template-columns:1.04fr .96fr;gap:22px;align-items:start}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.panel,.callout,.diagram,.table,.code-card,.dataset,.prompt{border:1px solid var(--line);border-radius:14px;background:var(--panel2)}.panel{padding:15px}.panel p,.panel li{font-size:15.5px;margin:.35em 0}.panel strong{color:var(--ink)}.callout{padding:13px 15px;border-left:5px solid var(--accent);font-size:15.5px;color:var(--muted)}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.tags span{padding:6px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);font-size:12px;font-weight:850}.pipeline{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin:14px 0}.pipeline span{position:relative;text-align:center;padding:26px 5px 0;font-size:12px;font-weight:900;color:var(--ink)}.pipeline span:before{content:'';position:absolute;top:6px;left:50%;width:12px;height:12px;transform:translateX(-50%);border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 13%,transparent)}.pipeline span:not(:last-child):after{content:'';position:absolute;top:11px;left:calc(50% + 11px);width:calc(100% - 22px);height:2px;background:var(--line2)}.dataset{overflow:hidden}.dataset .row{display:grid;grid-template-columns:.65fr 1.2fr 1.5fr .8fr}.dataset .row span{padding:9px 10px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}.dataset .head span{background:var(--panel2);color:var(--ink);font-weight:900}.method-table{display:grid;overflow:hidden;border:1px solid var(--line);border-radius:12px}.method-table .row{display:grid;grid-template-columns:.75fr 1.15fr 1.4fr}.method-table .row span{padding:9px 10px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted)}.method-table .head span{background:var(--panel2);color:var(--ink);font-weight:900}.flow-list{display:grid;gap:8px}.flow-list span{display:block;border-left:3px solid var(--accent);padding:9px 10px;background:var(--panel);border-radius:6px;font-weight:800;color:var(--ink)}.diagram{padding:16px}.diagram-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:900;margin-bottom:12px}.chunk-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.chunk-strip span{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;font-weight:850;color:var(--ink)}.chunk-strip em{font-style:normal;color:var(--accent)}.prompt{padding:13px;display:grid;gap:8px}.prompt div{background:var(--panel);border-radius:9px;padding:10px;font-size:14px;color:var(--muted)}.prompt b{color:var(--ink)}.vector{height:200px;position:relative;border:1px solid var(--line);border-radius:14px;background:linear-gradient(to right,transparent 49.8%,var(--line) 50%,transparent 50.2%),linear-gradient(to bottom,transparent 49.8%,var(--line) 50%,transparent 50.2%)}.v{position:absolute;padding:7px 9px;border-radius:8px;background:var(--panel);border:1px solid var(--line);font-size:12px;font-weight:850}.v.q{left:53%;top:37%;border-color:var(--accent)}.v.a{left:67%;top:25%}.v.b{left:61%;top:49%}.v.c{left:23%;top:66%}.mini{font-size:13px!important}.code-card{
+  margin-top:16px;
+  border:1px solid #2b2b2b;
+  border-radius:12px;
+  overflow:hidden;
+  background:#1e1e1e;
+  box-shadow:0 14px 30px rgba(0,0,0,.18)
+}
+.code-card.small-code pre{max-height:280px}
+.code-head{
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 10px 0 14px;
+  background:#252526;
+  color:#d4d4d4;
+  border-bottom:1px solid #3c3c3c;
+  font-size:12.5px;
+  font-weight:800
+}
+.code-head span:first-child{
+  display:flex;
+  align-items:center;
+  gap:9px
+}
+.code-head span:first-child::before{
+  content:"";
+  width:44px;
+  height:12px;
+  flex:0 0 44px;
+  background:
+    radial-gradient(circle at 6px 6px,#ff5f57 0 5px,transparent 5.5px),
+    radial-gradient(circle at 22px 6px,#ffbd2e 0 5px,transparent 5.5px),
+    radial-gradient(circle at 38px 6px,#28c840 0 5px,transparent 5.5px)
+}
+.copy-code{
+  padding:6px 10px;
+  border:1px solid #3c3c3c;
+  border-radius:7px;
+  background:#0e639c;
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  box-shadow:none
+}
+.copy-code:hover{
+  background:#1177bb;
+  color:#fff;
+  border-color:#1177bb
+}
+.copy-code.copied{
+  background:#16825d;
+  border-color:#16825d;
+  color:#fff
+}
+pre{
+  margin:0;
+  padding:0;
+  max-height:370px;
+  overflow:auto;
+  background:#1e1e1e;
+  font-family:"Cascadia Code","Consolas","SFMono-Regular",monospace
+}
+pre code{
+  display:block;
+  color:#d4d4d4;
+  font-family:"Cascadia Code","Consolas","SFMono-Regular",monospace;
+  font-size:14px;
+  line-height:1.58;
+  tab-size:4
+}
+pre code .code-line{
+  display:flex;
+  min-height:1.58em
+}
+pre code .ln{
+  flex:0 0 48px;
+  padding-right:13px;
+  text-align:right;
+  color:#858585;
+  background:#1e1e1e;
+  border-right:1px solid rgba(255,255,255,.045);
+  user-select:none
+}
+pre code .src{
+  display:block;
+  min-width:max-content;
+  padding-left:15px;
+  padding-right:18px;
+  white-space:pre
+}
+pre code .kw{color:#569cd6}
+pre code .fn{color:#dcdcaa}
+pre code .str{color:#ce9178}
+pre code .com{color:#6a9955;font-style:italic}
+pre code .num{color:#b5cea8}
+pre code .builtin{color:#4ec9b0}
+pre code .op{color:#d4d4d4}
+pre code .sqlkw{color:#c586c0}
+pre code .shellcmd{color:#dcdcaa}
+.code-note{
+  padding:10px 14px;
+  background:#252526;
+  color:#b9c6d8;
+  border-top:1px solid #3c3c3c;
+  font-size:13px
+}
+.output-box{
+  padding:12px 14px;
+  border-top:1px solid #3c3c3c;
+  background:#0c0c0c;
+  color:#cccccc;
+  white-space:pre-wrap;
+  font-family:"Cascadia Code","Consolas",monospace;
+  font-size:13px
+}
+.bottom{height:var(--bottomH);display:grid;grid-template-columns:minmax(560px,1fr) minmax(300px,380px);gap:18px;align-items:center;padding:8px 16px 10px;background:var(--panel);border-top:1px solid var(--line);position:relative;z-index:40}.audio-block{min-width:0;display:grid;gap:5px}.narration-controls{display:flex;align-items:center;gap:5px}.narration-btn,.narration-speed{min-height:30px;padding:5px 8px;border-radius:7px;font-size:11px}#ccBtn.primary{background:var(--panel2);color:var(--accent);border-color:var(--accent)}.speed-control{display:flex;align-items:center;gap:5px;margin-left:auto;color:var(--muted);font-size:10px;font-weight:800}.caption-strip{height:38px;display:flex;align-items:center;justify-content:center;padding:5px 12px;background:#151b24;color:#f8fafc;border-radius:7px;font-size:13px;text-align:center;overflow:hidden}body.cc-off .caption-strip{display:none}.audio-player{height:36px;display:grid;grid-template-columns:auto minmax(110px,auto) minmax(180px,1fr) auto;gap:8px;align-items:center;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--panel2)}.primary-audio{min-width:58px;background:var(--accent);color:#fff;border-color:var(--accent)}.audio-title{font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.audio-seek{width:100%}.audio-time{font:700 10px ui-monospace,monospace;color:var(--muted);white-space:nowrap}#audio{display:none}.presentation-nav{display:grid;grid-template-columns:38px minmax(220px,1fr) 38px;gap:7px;align-items:center;padding-left:14px;border-left:1px solid var(--line)}.footer-left,.footer-right{display:flex;justify-content:center}.nav-button{width:38px;height:38px;padding:0;border-radius:50%;font-size:24px;line-height:1}.bottom-nav{display:grid;gap:5px}#slideSelect{width:100%;min-height:34px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--ink);padding:5px 8px;font-size:13px}.bottom-progress{display:flex;align-items:center;gap:8px}.mini-progress{height:6px;flex:1;background:var(--line);border-radius:99px;overflow:hidden}.mini-progress span{display:block;height:100%;background:var(--accent);width:0}.counter{min-width:46px;text-align:right;color:var(--muted);font-size:10px;font-weight:900}body.auto-hide .deck{height:calc(100vh - var(--topH) - 52px)}body.auto-hide.cc-off .deck{height:calc(100vh - var(--topH) - 16px)}body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open){height:52px;grid-template-columns:1fr;padding:7px 14px 8px;overflow:hidden}body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .presentation-nav,body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .narration-controls,body.auto-hide .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-player{display:none}body.auto-hide:not(.cc-off) .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block{display:block}body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open){height:16px;min-height:16px;padding:0;border:0;background:transparent;box-shadow:none;pointer-events:auto}body.auto-hide.cc-off .bottom:not(:hover):not(:focus-within):not(.force-open) .audio-block{display:none}body.auto-hide .bottom:hover,body.auto-hide .bottom:focus-within,body.auto-hide .bottom.force-open{height:150px;grid-template-columns:minmax(560px,1fr) minmax(300px,380px);padding:8px 16px 10px}.transcript-panel{position:fixed;right:20px;bottom:168px;width:min(560px,calc(100vw - 40px));max-height:65vh;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);z-index:120;display:none;overflow:hidden}.transcript-panel.open{display:block}.transcript-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line)}.transcript-head h3{margin:0;font-size:16px}.transcript-head button{border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--ink);padding:6px 8px}.transcript-body{padding:14px;overflow:auto;max-height:55vh}.transcript-body p{font-size:15px;white-space:pre-wrap;color:var(--ink)}.transcript-source{font-size:11px;color:var(--muted);margin-top:12px}.drawer{position:fixed;top:0;right:-390px;width:min(380px,94vw);height:100vh;background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:150;transition:right .2s ease;padding:18px;overflow:auto}.drawer.open{right:0}.drawer-head{display:flex;align-items:center;justify-content:space-between}.drawer-head button{border:0;background:transparent;color:var(--ink);font-size:28px}.module-links{display:grid;gap:7px;margin-top:12px}.module-links a{display:flex;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--ink);text-decoration:none}.module-links a.current{border-color:var(--accent);background:var(--panel)}@media(max-width:1180px){.slide{width:calc(100vw - 40px);padding:32px 28px}.grid2,.hero{grid-template-columns:1fr}.bottom{grid-template-columns:1fr;height:auto;position:sticky}.deck{height:auto;min-height:calc(100vh - var(--topH));overflow:visible}.presentation-nav{border-left:0;padding-left:0}body{overflow:auto}.status{display:none}.grid3,.grid4{grid-template-columns:1fr 1fr}}@media(max-width:720px){.topbar{height:auto;min-height:54px;flex-wrap:wrap;padding:8px 12px}.title-wrap{min-width:180px}.slide{width:calc(100vw - 18px);height:auto}.grid3,.grid4,.dataset .row,.method-table .row{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr;gap:8px}.pipeline span{text-align:left;padding:9px 10px 9px 28px;background:var(--panel2);border-radius:8px}.pipeline span:before{left:12px;top:13px}.pipeline span:after{display:none}.audio-player{grid-template-columns:auto 1fr auto}.audio-seek{grid-column:1/-1}.narration-controls{flex-wrap:wrap}.top-actions{flex-wrap:wrap}}
+
+/* Interactive learning components */
+.interactive-card,.quiz-card{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}
+.interactive-label{display:block;font-size:13px;font-weight:900;color:var(--ink);margin-bottom:6px}
+.interactive-input,.decision-grid select,.calc-grid input{width:100%;border:1px solid var(--line2);border-radius:8px;background:var(--panel);color:var(--ink);padding:9px 10px}
+.interactive-actions{display:flex;gap:8px;margin-top:10px}.interactive-actions.wrap{flex-wrap:wrap}
+.demo-btn,.token-chip,.embed-point,.quiz-options button{border:1px solid var(--line2);border-radius:8px;background:var(--panel);color:var(--ink);padding:8px 10px;font-weight:800}
+.demo-btn:hover,.token-chip:hover,.quiz-options button:hover{border-color:var(--accent);color:var(--accent)}
+.demo-output{margin-top:12px;padding:12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14px;line-height:1.5;color:var(--ink);min-height:48px}
+.token-row{display:flex;gap:8px;flex-wrap:wrap}.token-chip.active{border-color:var(--accent);color:var(--accent)}
+.attn-row{display:grid;grid-template-columns:90px 1fr 48px;gap:8px;align-items:center;margin:6px 0}.attn-bar{height:12px;border-radius:99px;background:var(--accent);min-width:2px}
+.slider-row{display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;margin:10px 0}.slider-row input{width:100%}
+.prob-row{display:grid;grid-template-columns:90px 1fr 58px;gap:8px;align-items:center;margin:6px 0}.prob-track{height:14px;border-radius:99px;background:var(--line);overflow:hidden}.prob-fill{height:100%;background:var(--accent)}
+.embed-plot{height:240px;position:relative;border:1px solid var(--line);border-radius:12px;background:linear-gradient(to right,transparent 49.7%,var(--line) 50%,transparent 50.3%),linear-gradient(to bottom,transparent 49.7%,var(--line) 50%,transparent 50.3%)}.embed-point{position:absolute;transform:translate(-50%,-50%);font-size:12px}
+.decision-grid,.calc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.decision-grid label,.calc-grid label{display:grid;gap:5px;font-size:12px;font-weight:850;color:var(--muted)}
+.quiz-options{display:grid;gap:8px;margin-top:10px}.quiz-options button{text-align:left}.quiz-options button.correct{border-color:var(--good)}.quiz-options button.wrong{border-color:var(--warn)}.quiz-feedback{margin-top:10px;font-size:14px;font-weight:750;color:var(--ink)}
+.glossary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.glossary-item{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.glossary-item strong{display:block;color:var(--ink);margin-bottom:3px}.glossary-item span{font-size:13px;color:var(--muted)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px}
+@media(max-width:720px){.decision-grid,.calc-grid,.glossary-grid{grid-template-columns:1fr}.slider-row{grid-template-columns:1fr}.attn-row,.prob-row{grid-template-columns:74px 1fr 46px}}
+
+/* Consistent learning callouts */
+.callout-key,.callout-mistake,.callout-try,.callout-production{border-left-width:5px}
+.callout-key strong,.callout-mistake strong,.callout-try strong,.callout-production strong{color:var(--ink)}
+.callout-mistake{border-left-style:double}
+.callout-try{border-left-style:dashed}
+.callout-production{border-left-style:solid;background:var(--panel)}
+.tags a{color:var(--accent);text-decoration:none}.tags a:hover{text-decoration:underline}
+
+/* Module 8 compact teaching visuals */
+.mini-chart{display:grid;gap:7px;margin:10px 0}
+.mini-bar{display:grid;grid-template-columns:minmax(72px,110px) 1fr minmax(42px,62px);gap:8px;align-items:center;font-size:13px}
+.mini-track{height:11px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
+.mini-fill{height:100%;background:var(--accent);border-radius:999px}
+.mini-label{font-weight:750;color:var(--ink)}
+.mini-value{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:750}
+.mini-axis{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:2px}
+.compare-strip{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:10px 0}
+.compare-arrow{font-weight:900;color:var(--muted)}
+.example-box{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:10px 12px;margin:8px 0}
+.example-box b{color:var(--ink)}
+.vector-flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+.vector-chip{border:1px solid var(--line);background:var(--panel2);border-radius:9px;padding:8px 10px;font-weight:750}
+.metric-dot{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:5px 8px;font-size:12px;font-weight:800}
+.tradeoff-grid{display:grid;grid-template-columns:72px repeat(3,1fr);gap:6px;align-items:end;margin:10px 0}
+.tradeoff-col{display:flex;flex-direction:column;align-items:center;gap:5px}
+.tradeoff-bar{width:70%;min-width:28px;border:1px solid var(--line);background:var(--accent);border-radius:7px 7px 2px 2px}
+.tradeoff-label{font-size:11px;color:var(--muted);text-align:center}
+@media(max-width:760px){
+  .mini-bar{grid-template-columns:76px 1fr 44px}
+  .compare-strip{grid-template-columns:1fr}
+  .compare-arrow{transform:rotate(90deg);text-align:center}
+  .tradeoff-grid{grid-template-columns:58px repeat(3,1fr)}
+}
+
+/* Module 8 concept figures */
+.concept-figure{margin:10px 0;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;overflow:hidden}
+.concept-figure img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain;border-radius:8px}
+@media(max-width:760px){.concept-figure{padding:5px}.concept-figure img{max-height:none}}
+
+/* Module 9 agent trace */
+.agent-trace{display:grid;gap:7px;margin:10px 0}.trace-step{display:grid;grid-template-columns:54px 140px 1fr;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:9px;padding:8px 10px}.trace-step b{color:var(--accent)}.trace-step span{font-size:13px;color:var(--muted)}@media(max-width:720px){.trace-step{grid-template-columns:46px 1fr}.trace-step span:last-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<header class='topbar'><div class='brand'>NLP</div><div class='title-wrap'><div class='mod-title'>Module 9</div><div class='course'>IAN 620 · Agentic RAG and Intelligent Retrieval Workflows</div></div><div class='status'><div class='progress-pill'><small id='statusText'>Slide 1/6</small><span class='status-sep'>·</span><span class='progress-pct' id='progressPct'>2%</span></div></div><div class='top-actions'><div class='settings-wrap'><button id='settingsBtn' type='button' onclick='toggleSettingsMenu()'>⚙ Settings</button><div class='settings-menu' id='settingsMenu'><button id='themeBtn' type='button'>Dark mode</button><button type='button' onclick='toggleFullscreen()'>Fullscreen</button><button id='autoHideBtn' type='button' onclick='toggleAutoHide()'>Auto-hide Off</button></div></div><button type='button' onclick='toggleDrawer()'>☰ Modules</button></div></header>
+<main class='deck' id='deck'></main>
+<footer class='bottom'><div class='audio-block'><div class='narration-controls'><button class='narration-btn' id='narrationBtn' onclick='toggleNarrationMode()'>Auto-play On</button><button class='narration-btn primary' id='ccBtn' aria-pressed='true' onclick='toggleCaptions()'>CC On</button><button class='narration-btn' onclick='openTranscript()'>Transcript</button><label class='speed-control'>Speed <select class='narration-speed' id='speedSelect'><option value='.85'>0.85x</option><option selected value='1'>1.0x</option><option value='1.15'>1.15x</option><option value='1.3'>1.3x</option></select></label></div><div class='caption-strip' id='captionStrip'>Captions will appear here during narration.</div><div class='audio-player' id='audioPlayer'><button class='audio-play primary-audio' id='audioPlay'>Play</button><span class='audio-title' id='audioStatus'>Slide narration</span><input class='audio-seek' id='audioSeek' type='range' min='0' max='100' value='0' aria-label='Audio position'><span class='audio-time' id='audioTime'>0:00 / 0:00</span><audio id='audio' preload='metadata'></audio></div></div><div class='presentation-nav'><div class='footer-left'><button class='nav-button' onclick='prevSlide()' aria-label='Previous slide'>‹</button></div><div class='bottom-nav'><select id='slideSelect' aria-label='Go to slide'></select><div class='bottom-progress'><div class='mini-progress'><span id='miniProgress'></span></div><div class='counter' id='counter'>1 / 6</div></div></div><div class='footer-right'><button class='nav-button' onclick='nextSlide()' aria-label='Next slide'>›</button></div></div></footer>
+<aside class='transcript-panel' id='transcriptPanel'><div class='transcript-head'><h3 id='transcriptTitle'>Slide narration</h3><button onclick='closeTranscript()'>Close</button></div><div class='transcript-body'><p id='transcriptText'></p><div class='transcript-source' id='transcriptSource'>Narration transcript</div></div></aside>
+<aside class='drawer' id='drawer'><div class='drawer-head'><h2>Modules</h2><button onclick='toggleDrawer()'>×</button></div><nav class='module-links'><a href='module1.html'><span>01 Introduction to NLP</span><strong>Module 1 ›</strong></a><a href='module2.html'><span>02 Collection and Preprocessing</span><strong>Module 2 ›</strong></a><a href='module3.html'><span>03 Linguistic Analysis</span><strong>Module 3 ›</strong></a><a href='M4.html'><span>04 Text Representation and Embeddings</span><strong>Module 4 ›</strong></a><a href='module5.html'><span>05 Text Classification</span><strong>Module 5 ›</strong></a><a href='s_module6.html'><span>06 Transformers and Modern NLP</span><strong>Module 6 ›</strong></a><a href='s_module7.html'><span>07 Practical RAG and Vector Databases</span><strong>Module 7 ›</strong></a><a href='s_module8.html'><span>08 Large Language Models and Applications</span><strong>Module 8 ›</strong></a><a class='current' href='s_module9.html'><span>09 Agentic RAG</span><strong>Current ›</strong></a></nav></aside>
+<script>
+const AUDIO_FOLDER='audio', CAPTION_FOLDER='captions', AUDIO_EXT='mp3', CAPTION_EXT='vtt';
+const SLIDES=[{"k":"MODULE 9","t":"Agentic RAG: Retrieval That Can Decide What to Do Next","tr":"Traditional RAG follows a fixed retrieval pipeline. Agentic RAG adds controlled decisions around retrieval, tools, evidence checks, retries, and stopping conditions.","h":"<div class='hero'><div><p class='lead'>RAG retrieves once. Agentic RAG can decide, inspect, correct, and try again.</p><p class='explain'>The goal is not to make every application an agent. The goal is to understand when a controlled decision loop improves a retrieval system.</p><div class='tags'><span>Routing</span><span>State</span><span>Tools</span><span>Query rewriting</span><span>Corrective RAG</span><span>LangGraph</span><span>Evaluation</span><span>Safety</span></div></div><div class='panel'><h3>Central workflow</h3><div class='pipeline'><span>Question</span><span>Decide</span><span>Retrieve</span><span>Grade</span><span>Correct</span><span>Generate</span><span>Validate</span></div></div></div>"},{"k":"BEFORE YOU START","t":"Before You Begin","tr":"This module assumes you already understand the RAG workflow from Module 7 and the LLM, tool-calling, validation, and deployment concepts from Module 8.","h":"<div class='grid2'><div class='panel'><h3>Useful background</h3><ul><li>embeddings and vector retrieval</li><li>chunks and top-k retrieval</li><li>prompt construction and grounding</li><li>LLM tool calling</li><li>structured output and validation</li></ul></div><div class='panel'><h3>By the end</h3><ul><li>build a controlled agentic RAG loop</li><li>route questions to the right source</li><li>rewrite weak retrieval queries</li><li>grade evidence before generation</li><li>implement the workflow in plain Python and LangGraph</li><li>evaluate cost, quality, and safety</li></ul></div></div><div class='callout callout-key'><strong>Goal</strong><br>Explain every decision in the workflow and reproduce it without hiding the logic inside a framework.</div>"},{"k":"CONNECTION","t":"Modules 7, 8, and 9 Form One Progression","tr":"Module 7 supplied external evidence. Module 8 opened the LLM box. Module 9 adds controlled orchestration around those same components.","h":"<div class='grid3'><div class='panel'><h3>Module 7 · RAG</h3><p>question → retrieve → context → LLM → answer</p></div><div class='panel'><h3>Module 8 · LLM</h3><p>understand, run, control, evaluate, and connect the model</p></div><div class='panel'><h3>Module 9 · Agentic RAG</h3><p>decide → act → observe → update state → decide again → stop</p></div></div><div class='callout callout-key'><strong>Keep the boundary</strong><br>The retriever and LLM are still the same kinds of components. Agentic behavior comes from orchestration around them.</div>"},{"k":"SCOPE","t":"What This Module Covers","tr":"The module focuses on practical, bounded agentic retrieval workflows rather than general autonomous-agent theory.","h":"<div class='grid2'><div class='panel'><h3>Covered in depth</h3><ul><li>state and control loops</li><li>retrieval as a tool</li><li>routing and query rewriting</li><li>evidence grading and corrective RAG</li><li>multi-source retrieval</li><li>plain-Python controllers</li><li>LangGraph state graphs</li><li>evaluation and guardrails</li></ul></div><div class='panel'><h3>Introduced briefly</h3><ul><li>human-in-the-loop</li><li>durable execution</li><li>multi-agent systems</li><li>long-term memory</li><li>production tracing</li></ul></div></div><div class='callout callout-key'><strong>Scope</strong><br>One well-controlled agent is more valuable for learning than a complicated multi-agent system.</div>"},{"k":"COMMON MISCONCEPTIONS","t":"Four Common Misconceptions","tr":"Agentic RAG is often described too loosely. These distinctions will matter throughout the module.","h":"<div class='grid4'><div class='panel'><h3>“Tool call = agent”</h3><p>No. A single function request can be tool calling without a control loop.</p></div><div class='panel'><h3>“Agent = autonomous”</h3><p>No. Good systems use explicit permissions, limits, and stop conditions.</p></div><div class='panel'><h3>“More tools = better”</h3><p>No. Every tool adds cost, latency, and security surface.</p></div><div class='panel'><h3>“Agentic RAG always beats RAG”</h3><p>No. Fixed RAG is often simpler, cheaper, and easier to debug.</p></div></div>"},{"k":"MODULE MAP","t":"Module Roadmap","tr":"We move from architecture to a plain-Python implementation before introducing LangGraph.","h":"<div class='grid4'><div class='panel'><h3>1–2</h3><p><strong>Agent foundations</strong><br>state, decisions, loops, stopping</p></div><div class='panel'><h3>3–4</h3><p><strong>Retrieval decisions</strong><br>tools, routing, rewriting</p></div><div class='panel'><h3>5–6</h3><p><strong>Correction + build</strong><br>grading, retries, complete Python</p></div><div class='panel'><h3>7–8</h3><p><strong>Framework + production</strong><br>LangGraph, evaluation, safety</p></div></div><div class='callout callout-key'><strong>Learning strategy</strong><br>Understand the loop in plain Python first. Then use a framework to manage the same state and transitions.</div>"}];
+const total=SLIDES.length;let current=Number(localStorage.getItem('ian620_module9_v1_slide')||'0');current=Math.max(0,Math.min(current,total-1));let autoHide=false,ccOpen=true,narrationMode=true;const deck=document.getElementById('deck'),audio=document.getElementById('audio'),captionStrip=document.getElementById('captionStrip'),slideSelect=document.getElementById('slideSelect'),speedSelect=document.getElementById('speedSelect'),audioSeek=document.getElementById('audioSeek'),audioTime=document.getElementById('audioTime'),audioPlay=document.getElementById('audioPlay'),audioStatus=document.getElementById('audioStatus'),themeBtn=document.getElementById('themeBtn'),ccBtn=document.getElementById('ccBtn'),narrationBtn=document.getElementById('narrationBtn'),autoHideBtn=document.getElementById('autoHideBtn');let captionCues=[],transcriptManifest=null,transcriptManifestSource='';function fileBase(i){return 's_module9_slide_'+String(i+1).padStart(2,'0')}function audioPath(i){return AUDIO_FOLDER+'/'+fileBase(i)+'.'+AUDIO_EXT}function captionPath(i){return CAPTION_FOLDER+'/'+fileBase(i)+'.'+CAPTION_EXT}function escapeCodeHtml(value){
+  return String(value).replace(/[&<>]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]))
+}
+function codeLanguage(card){
+  const label=(card.querySelector('.code-head span')?.textContent||'').toLowerCase();
+  if(label.includes('sql')||label.includes('postgres'))return 'sql';
+  if(label.includes('terminal')||label.includes('shell')||label.includes('bash')||label.includes('powershell'))return 'shell';
+  return 'python'
+}
+function highlightLine(line,language){
+  let pattern;
+  if(language==='sql'){
+    pattern=/(--.*$)|('(?:\\.|[^'\\])*')|\b(CREATE|TABLE|SELECT|FROM|WHERE|ORDER|BY|LIMIT|INSERT|INTO|VALUES|EXTENSION|IF|NOT|EXISTS|PRIMARY|KEY|TEXT|VECTOR|AS|AND|OR|ASC|DESC|UPDATE|DELETE|JOIN|ON|GROUP|HAVING|NULL|TRUE|FALSE)\b|\b(\d+(?:\.\d+)?)\b|\b([A-Za-z_]\w*)(?=\s*\()/gi
+  }else if(language==='shell'){
+    pattern=/(#.*$)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\b(python|pip|source|cd|mkdir|streamlit)\b|\b(\d+(?:\.\d+)?)\b/gi
+  }else{
+    pattern=/(#.*$)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\b(def|class|from|import|as|for|in|if|else|elif|return|print|with|try|except|finally|raise|True|False|None|and|or|not|lambda|while|break|continue|pass|yield|async|await|is)\b|\b(pd|np|os|re|SentenceTransformer|OpenAI|Path|AutoConfig|AutoTokenizer|AutoModelForCausalLM|BitsAndBytesConfig|LoraConfig|SFTTrainer|QdrantClient|MilvusClient|Pinecone|BM25Okapi|CrossEncoder|DataFrame|models|faiss|chromadb|torch|nn|pipeline|json)\b|\b(\d+(?:\.\d+)?)\b|\b([A-Za-z_]\w*)(?=\s*\()/g
+  }
+
+  let html='',last=0;
+  for(const match of line.matchAll(pattern)){
+    const index=match.index??0;
+    html+=escapeCodeHtml(line.slice(last,index));
+    let cls='';
+
+    if(language==='sql'){
+      cls=match[1]?'com':match[2]?'str':match[3]?'sqlkw':match[4]?'num':'fn';
+    }else if(language==='shell'){
+      cls=match[1]?'com':match[2]?'str':match[3]?'shellcmd':'num';
+    }else{
+      cls=match[1]?'com':match[2]?'str':match[3]?'kw':match[4]?'builtin':match[5]?'num':'fn';
+    }
+
+    html+='<span class="'+cls+'">'+escapeCodeHtml(match[0])+'</span>';
+    last=index+match[0].length;
+  }
+  html+=escapeCodeHtml(line.slice(last));
+  return html||' '
+}
+function prepareVsCodeBlocks(){
+  document.querySelectorAll('.code-card pre code').forEach(code=>{
+    if(code.dataset.prepared==='true')return;
+    const card=code.closest('.code-card');
+    const language=codeLanguage(card);
+    const raw=code.textContent.replace(/\n$/,'');
+    code.dataset.raw=raw;
+    const lines=raw.split('\n');
+    code.innerHTML=lines.map((line,index)=>
+      '<span class="code-line"><span class="ln">'+(index+1)+'</span><span class="src">'+highlightLine(line,language)+'</span></span>'
+    ).join('');
+    code.dataset.prepared='true'
+  })
+}
+function bindCopyButtons(){
+  document.querySelectorAll('.copy-code').forEach(btn=>{
+    btn.addEventListener('click',async()=>{
+      const code=btn.closest('.code-card').querySelector('code');
+      const raw=code.dataset.raw||code.textContent;
+      try{
+        await navigator.clipboard.writeText(raw);
+        btn.textContent='Copied';
+        btn.classList.add('copied');
+        setTimeout(()=>{
+          btn.textContent='Copy';
+          btn.classList.remove('copied')
+        },1300)
+      }catch{
+        btn.textContent='Select + copy'
+      }
+    })
+  })
+}
+function renderSlides(){
+  deck.innerHTML=SLIDES.map((s,i)=>
+    `<section class='slide' data-slide='${i+1}'><div class='slide-kicker'>${s.k}</div><h1>${s.t}</h1><div class='slide-body'>${s.h}</div></section>`
+  ).join('');
+  slideSelect.innerHTML=SLIDES.map((s,i)=>
+    `<option value='${i}'>${i+1}. ${s.t}</option>`
+  ).join('');
+  prepareVsCodeBlocks();
+  bindCopyButtons()
+}function syncDisplayState(){document.body.classList.toggle('auto-hide',autoHide);document.body.classList.toggle('cc-off',!ccOpen);autoHideBtn.textContent=autoHide?'Auto-hide On':'Auto-hide Off';ccBtn.textContent=ccOpen?'CC On':'CC Off';ccBtn.setAttribute('aria-pressed',ccOpen?'true':'false');ccBtn.classList.toggle('primary',ccOpen);narrationBtn.textContent=narrationMode?'Auto-play On':'Auto-play Off';if(!ccOpen)captionStrip.textContent=''}function showSlide(i,user=false){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));current=Math.max(0,Math.min(i,total-1));document.querySelectorAll('.slide')[current].classList.add('active');localStorage.setItem('ian620_module9_v1_slide',current);const pct=Math.round(((current+1)/total)*100);document.getElementById('statusText').textContent=`Slide ${current+1}/${total}`;document.getElementById('progressPct').textContent=pct+'%';document.getElementById('counter').textContent=`${current+1} / ${total}`;document.getElementById('miniProgress').style.width=pct+'%';slideSelect.value=String(current);audio.pause();audio.src=audioPath(current);audio.playbackRate=Number(speedSelect.value||'1');audioStatus.textContent=`Slide ${current+1} narration`;updateCaptionText(current);if(document.getElementById('transcriptPanel').classList.contains('open'))refreshTranscriptPanel();if(user&&narrationMode)audio.play().catch(()=>{})}function nextSlide(){showSlide(current+1,true)}function prevSlide(){showSlide(current-1,true)}function toggleSettingsMenu(force){const m=document.getElementById('settingsMenu'),b=document.getElementById('settingsBtn');const open=typeof force==='boolean'?force:!m.classList.contains('open');m.classList.toggle('open',open);b.setAttribute('aria-expanded',open?'true':'false')}document.addEventListener('click',e=>{const w=document.querySelector('.settings-wrap');if(w&&!w.contains(e.target))toggleSettingsMenu(false)});function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}function toggleAutoHide(){autoHide=!autoHide;syncDisplayState()}function toggleNarrationMode(){narrationMode=!narrationMode;syncDisplayState()}function toggleCaptions(){ccOpen=!ccOpen;syncDisplayState();updateCaptionText(current)}function setTheme(dark){document.body.classList.toggle('dark',dark);themeBtn.textContent=dark?'Light mode':'Dark mode';localStorage.setItem('ian620_module8_theme',dark?'dark':'light')}themeBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark')));setTheme(localStorage.getItem('ian620_module8_theme')==='dark');speedSelect.addEventListener('change',()=>audio.playbackRate=Number(speedSelect.value));slideSelect.addEventListener('change',()=>showSlide(Number(slideSelect.value),true));function toSec(v){const p=v.trim().replace(',','.').split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:Number(v)||0}function parseVtt(txt){const blocks=txt.replace(/^\uFEFF?WEBVTT[^\n]*\n?/i,'').split(/\n\s*\n/);const cues=[];for(const block of blocks){const lines=block.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const idx=lines.findIndex(x=>x.includes('-->'));if(idx<0)continue;const parts=lines[idx].split('-->');const text=lines.slice(idx+1).join(' ').replace(/<[^>]+>/g,'').trim();if(text)cues.push({start:toSec(parts[0]),end:toSec(parts[1].trim().split(/\s+/)[0]),text})}return cues}function syncCaption(){if(!ccOpen)return;const t=audio.currentTime||0;const c=captionCues.find(x=>t>=x.start&&t<=x.end);captionStrip.textContent=c?c.text:(!audio.paused&&captionCues.length?'':'Captions are on. Start narration to follow this slide.')}async function updateCaptionText(i){captionCues=[];if(!ccOpen)return;try{const r=await fetch(captionPath(i),{cache:'no-store'});if(!r.ok)throw 0;captionCues=parseVtt(await r.text());syncCaption()}catch{captionStrip.textContent='Captions will appear here during narration.'}}function normalizeEntry(x){const text=typeof x==='string'?x:(x&&(x.transcript||x.narration||x.text||x.script||x.notes))||'';return String(text).replace(/\s*\[tts-break\]\s*/gi,'\n\n').trim()}function transcriptFromManifest(i){if(!transcriptManifest)return'';const base=fileBase(i),num=i+1;if(Array.isArray(transcriptManifest)){const item=transcriptManifest.find(x=>x&&(x.file===base||x.id===base||Number(x.slide||x.number)===num));return normalizeEntry(item)}if(Array.isArray(transcriptManifest.slides)){const item=transcriptManifest.slides.find(x=>x&&(x.file===base||x.id===base||Number(x.slide||x.number)===num));return normalizeEntry(item)}return normalizeEntry(transcriptManifest[base]||transcriptManifest[String(num)]||transcriptManifest[String(num).padStart(2,'0')])}async function loadTranscriptManifest(){for(const p of ['s_module9_manifest.json','module9_manifest.json','manifest/s_module9_manifest.json','manifest/module9_manifest.json','manifest.json']){try{const r=await fetch(p,{cache:'no-store'});if(r.ok){transcriptManifest=await r.json();transcriptManifestSource=p;return}}catch(e){}}}function refreshTranscriptPanel(){const s=SLIDES[current],m=transcriptFromManifest(current);document.getElementById('transcriptTitle').textContent=`Slide ${current+1} Narration - ${s.t}`;document.getElementById('transcriptText').textContent=m||s.tr||'Transcript will appear after narration text is added.';document.getElementById('transcriptSource').textContent=m?`Loaded from ${transcriptManifestSource}`:'Narration transcript for the current slide'}function openTranscript(){refreshTranscriptPanel();document.getElementById('transcriptPanel').classList.add('open')}function closeTranscript(){document.getElementById('transcriptPanel').classList.remove('open')}function fmt(sec){if(!Number.isFinite(sec))return'0:00';const m=Math.floor(sec/60),s=String(Math.floor(sec%60)).padStart(2,'0');return`${m}:${s}`}function refreshAudio(){const d=Number.isFinite(audio.duration)?audio.duration:0,t=Number.isFinite(audio.currentTime)?audio.currentTime:0;audioSeek.value=d>0?String((t/d)*100):'0';audioTime.textContent=fmt(t)+' / '+fmt(d);audioPlay.textContent=audio.paused?'Play':'Pause'}audio.addEventListener('timeupdate',()=>{syncCaption();refreshAudio()});audio.addEventListener('loadedmetadata',refreshAudio);audio.addEventListener('durationchange',refreshAudio);audio.addEventListener('play',()=>{syncCaption();refreshAudio()});audio.addEventListener('pause',refreshAudio);audio.addEventListener('error',()=>{audioStatus.textContent='Narration file not uploaded yet';refreshAudio()});audioSeek.addEventListener('input',()=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=(Number(audioSeek.value)/100)*audio.duration});audioPlay.addEventListener('click',()=>{if(audio.paused)audio.play().catch(()=>{});else audio.pause()});window.nextSlide=nextSlide;window.prevSlide=prevSlide;window.toggleSettingsMenu=toggleSettingsMenu;window.toggleFullscreen=toggleFullscreen;window.toggleDrawer=toggleDrawer;window.toggleAutoHide=toggleAutoHide;window.toggleNarrationMode=toggleNarrationMode;window.toggleCaptions=toggleCaptions;window.openTranscript=openTranscript;window.closeTranscript=closeTranscript;
+function demoEscape(value){
+  return String(value).replace(/[&<>"]/g,ch=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'
+  }[ch]))
+}
+function stableDemoId(token){
+  let hash=0;
+  for(let i=0;i<token.length;i++){
+    hash=(hash*31+token.charCodeAt(i))>>>0
+  }
+  return 1000+(hash%8000)
+}
+function runTokenizerDemo(){
+  const input=document.getElementById('tokenizerInput');
+  const output=document.getElementById('tokenizerOutput');
+  if(!input||!output)return;
+  const text=input.value.trim();
+  const pieces=text.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*|[^\sA-Za-z0-9]/g)||[];
+  const rows=[{token:'<BOS>',id:1,special:true}]
+    .concat(pieces.map(t=>({token:t,id:stableDemoId(t),special:false})))
+    .concat([{token:'<EOS>',id:2,special:true}]);
+  output.innerHTML=
+    '<div style="font-weight:900;margin-bottom:7px">Example tokenization</div>'+
+    rows.map(x=>'<span style="display:inline-block;margin:3px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;background:var(--panel2)">'+
+      demoEscape(x.token)+' <small style="color:var(--muted)">#'+x.id+(x.special?' · special':'')+'</small></span>').join('')+
+    '<div style="margin-top:8px;color:var(--muted);font-size:12px">The Python example uses AutoTokenizer for real checkpoint-specific tokens.</div>'
+}
+const ATTENTION_DEMO=[
+  [1,0,0,0],
+  [.34,.66,0,0],
+  [.16,.29,.55,0],
+  [.09,.18,.27,.46]
+];
+const ATTENTION_TOKENS=['The','model','learns','patterns'];
+function showAttentionRow(index){
+  const out=document.getElementById('attentionOutput');
+  if(!out)return;
+  document.querySelectorAll('#attnTokens .token-chip').forEach((b,i)=>b.classList.toggle('active',i===index));
+  out.innerHTML='<div style="font-weight:900;margin-bottom:8px">Query token: '+ATTENTION_TOKENS[index]+'</div>'+
+    ATTENTION_TOKENS.map((token,j)=>{
+      const blocked=j>index;
+      const weight=ATTENTION_DEMO[index][j];
+      return '<div class="attn-row"><span>'+token+'</span>'+
+        '<div style="height:12px;border-radius:99px;background:var(--line);overflow:hidden">'+
+        '<div class="attn-bar" style="width:'+(blocked?0:Math.round(weight*100))+'%"></div></div>'+
+        '<strong style="font-size:12px">'+(blocked?'blocked':Math.round(weight*100)+'%')+'</strong></div>'
+    }).join('')+
+    '<div style="margin-top:8px;color:var(--muted);font-size:12px">Future tokens are blocked by the causal mask.</div>'
+}
+const BLOCK_PARTS={
+  norm1:'Normalize the incoming hidden state before attention so the next transformation receives numerically stable values.',
+  attn:'Masked self-attention lets each token combine information from itself and earlier tokens using learned Q, K, and V projections.',
+  res1:'Add the attention result back to the earlier hidden state. This residual path preserves information and supports deep training.',
+  norm2:'Normalize again before the feed-forward transformation.',
+  ffn:'The feed-forward network transforms each token independently through wider learned projections and nonlinear or gated activations.',
+  res2:'Add the feed-forward result back to the residual stream. The result becomes input to the next decoder block.'
+};
+function showBlockPart(key){
+  const out=document.getElementById('blockExplorerOutput');
+  if(out)out.innerHTML='<strong>'+demoEscape(key.toUpperCase())+'</strong><br>'+demoEscape(BLOCK_PARTS[key]||'')
+}
+function updateSamplingDemo(){
+  const tempEl=document.getElementById('tempSlider');
+  const topPEl=document.getElementById('topPSlider');
+  const bars=document.getElementById('samplingBars');
+  if(!tempEl||!topPEl||!bars)return;
+  const temperature=Math.max(.05,Number(tempEl.value)||1);
+  const topP=Number(topPEl.value)||.9;
+  const labels=['model','system','answer','context','data'];
+  const base=[.46,.24,.15,.10,.05];
+  const adjusted=base.map(p=>Math.pow(p,1/temperature));
+  const z=adjusted.reduce((a,b)=>a+b,0);
+  const probs=adjusted.map(p=>p/z);
+  let cumulative=0;
+  const kept=probs.map((p,i)=>{
+    const include=cumulative<topP || i===0;
+    if(include)cumulative+=p;
+    return include?p:0
+  });
+  const keptZ=kept.reduce((a,b)=>a+b,0)||1;
+  const finalP=kept.map(p=>p/keptZ);
+  document.getElementById('tempValue').textContent=temperature.toFixed(1);
+  document.getElementById('topPValue').textContent=topP.toFixed(2);
+  bars.innerHTML=labels.map((label,i)=>
+    '<div class="prob-row"><span>'+label+'</span>'+
+    '<div class="prob-track"><div class="prob-fill" style="width:'+Math.round(finalP[i]*100)+'%"></div></div>'+
+    '<strong style="font-size:12px">'+(finalP[i]*100).toFixed(1)+'%</strong></div>'
+  ).join('')
+}
+const EMBED_DEMO={
+  doctor:[.82,.68],
+  physician:[.76,.74],
+  database:[-.72,-.55],
+  SQL:[-.78,-.48],
+  model:[.18,.30]
+};
+function cosine2(a,b){
+  const dot=a[0]*b[0]+a[1]*b[1];
+  const na=Math.hypot(a[0],a[1]),nb=Math.hypot(b[0],b[1]);
+  return dot/(na*nb)
+}
+function selectEmbeddingWord(word){
+  const out=document.getElementById('embeddingOutput');
+  if(!out)return;
+  const source=EMBED_DEMO[word];
+  const scores=Object.entries(EMBED_DEMO)
+    .filter(([w])=>w!==word)
+    .map(([w,v])=>[w,cosine2(source,v)])
+    .sort((a,b)=>b[1]-a[1]);
+  out.innerHTML='<strong>'+demoEscape(word)+'</strong><br>'+
+    scores.slice(0,3).map(([w,s])=>demoEscape(w)+': cosine '+s.toFixed(2)).join('<br>')+
+    '<div style="margin-top:7px;color:var(--muted);font-size:12px">Toy 2D vectors only.</div>'
+}
+function runModelDecision(){
+  const difficulty=document.getElementById('decisionDifficulty')?.value;
+  const privacy=document.getElementById('decisionPrivacy')?.value;
+  const hardware=document.getElementById('decisionHardware')?.value;
+  const latency=document.getElementById('decisionLatency')?.value;
+  const out=document.getElementById('modelDecisionOutput');
+  if(!out)return;
+  let bucket='Medium (about 7B–14B)';
+  let deployment=privacy==='local'?'local/self-hosted':'hosted or self-hosted';
+  let reason='A medium model is a sensible baseline for general assistants and RAG.';
+  if(difficulty==='low'||hardware==='cpu'||latency==='fast'){
+    bucket='Small (sub-4B)';
+    reason='The task or hardware favors a smaller baseline. Measure quality before scaling up.'
+  }
+  if(difficulty==='high'&&hardware==='server'&&latency==='quality'){
+    bucket='Large (27B+)';
+    reason='The task prioritizes difficult capability and the infrastructure can support a larger model.'
+  }else if(difficulty==='high'&&hardware!=='server'){
+    bucket='Medium first; compare against a larger hosted model';
+    reason='Start with what fits locally, then measure whether a larger endpoint gives enough quality improvement.'
+  }
+  if(privacy==='local'&&hardware==='cpu'){
+    deployment='local, with a very small or quantized model';
+  }
+  out.innerHTML='<strong>Start with: '+demoEscape(bucket)+'</strong><br>'+
+    'Deployment: '+demoEscape(deployment)+'<br>'+
+    '<span style="color:var(--muted)">'+demoEscape(reason)+'</span>'
+}
+function numberValue(id){
+  const n=Number(document.getElementById(id)?.value);
+  return Number.isFinite(n)?n:0
+}
+function runCostCalculator(){
+  const inTok=numberValue('calcInputTokens');
+  const outTok=numberValue('calcOutputTokens');
+  const inPrice=numberValue('calcInputPrice');
+  const outPrice=numberValue('calcOutputPrice');
+  const req=numberValue('calcRequests');
+  const tps=Math.max(.1,numberValue('calcTPS'));
+  const perReq=(inTok/1e6)*inPrice+(outTok/1e6)*outPrice;
+  const day=perReq*req;
+  const month=day*30;
+  const genLatency=outTok/tps;
+  const out=document.getElementById('costCalcOutput');
+  if(!out)return;
+  out.innerHTML=
+    '<strong>Estimated API/token cost</strong><br>'+
+    'Per request: USD '+perReq.toFixed(6)+'<br>'+
+    'Per day: USD '+day.toFixed(2)+'<br>'+
+    '30-day month: USD '+month.toFixed(2)+'<br><br>'+
+    '<strong>Generation-only latency:</strong> ~'+genLatency.toFixed(1)+' s/request<br>'+
+    '<span style="color:var(--muted);font-size:12px">Actual latency also includes prompt processing, queueing, networking, batching, and application overhead.</span>'
+}
+function checkQuiz(button,correct,message){
+  const card=button.closest('.quiz-card');
+  if(!card)return;
+  card.querySelectorAll('.quiz-options button').forEach(b=>b.classList.remove('correct','wrong'));
+  button.classList.add(correct?'correct':'wrong');
+  const feedback=card.querySelector('.quiz-feedback');
+  if(feedback)feedback.textContent=message
+}
+const GLOSSARY_TERMS=[
+['Action','Approved function or tool execution chosen by the workflow.'],
+['Agent state','Structured working record shared across workflow steps.'],
+['Agentic RAG','RAG workflow with controlled decisions, tools, observations, and stopping conditions.'],
+['Conditional edge','Graph transition selected from current state rather than always following one path.'],
+['Corrective RAG','Workflow that evaluates retrieval quality and corrects weak retrieval before generation.'],
+['Evidence grader','Component that judges whether retrieved evidence is relevant and sufficient.'],
+['Human-in-the-loop','Workflow step that pauses automation for human review or approval.'],
+['Node','Function or step in a graph workflow.'],
+['Observation','Result returned by a tool or action and written back to state.'],
+['Provenance','Information identifying where evidence came from.'],
+['Query rewriting','Reformulating a retrieval query while preserving the user intent.'],
+['Reranker','Model that reorders retrieved candidates using a stronger relevance score.'],
+['Route','Selected next action or evidence source.'],
+['Router','Component that chooses the appropriate next action or source.'],
+['StateGraph','LangGraph graph structure that orchestrates functions over shared state.'],
+['Stop condition','Explicit rule that ends the workflow in success, failure, or escalation.'],
+['Tool','Approved callable function exposed to the agent workflow.'],
+['Trajectory','Ordered sequence of decisions, actions, and observations taken during a run.'],
+['Validation','Application check applied to decisions, tool arguments, evidence, or outputs.']
+];
+function filterGlossary(){
+  const grid=document.getElementById('glossaryGrid');
+  if(!grid)return;
+  const q=(document.getElementById('glossarySearch')?.value||'').trim().toLowerCase();
+  const rows=GLOSSARY_TERMS.filter(([term,def])=>(term+' '+def).toLowerCase().includes(q));
+  grid.innerHTML=rows.map(([term,def])=>
+    '<div class="glossary-item"><strong>'+demoEscape(term)+'</strong><span>'+demoEscape(def)+'</span></div>'
+  ).join('')||'<div class="demo-output">No matching term.</div>'
+}
+
+document.addEventListener('keydown',e=>{
+  const tag=(e.target?.tagName||'').toLowerCase();
+  const editing=tag==='input'||tag==='textarea'||tag==='select'||e.target?.isContentEditable;
+  if(editing)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();nextSlide()}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevSlide()}
+});
+renderSlides();filterGlossary();syncDisplayState();showSlide(current);loadTranscriptManifest();
+</script>
+</body>
+</html>
