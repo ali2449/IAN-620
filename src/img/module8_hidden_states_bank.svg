@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Hidden states change with context</title>
+<desc id="desc">The same token bank begins with the same token identity but develops different contextual hidden states in a financial sentence and a river sentence.</desc>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+  </marker>
+  <style>
+    .bg{fill:#ffffff}.panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}
+    .node{fill:#ffffff;stroke:#334155;stroke-width:2.5}
+    .accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.5}
+    .line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    .dash{stroke:#94a3b8;stroke-width:2.5;stroke-dasharray:7 7;fill:none}
+    .t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}
+    .muted{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+    .mono{font-family:Consolas,Menlo,monospace;fill:#0f172a}
+  </style>
+</defs>
+<rect class="bg" width="1200" height="700"/>
+<text class="t" x="60" y="66" font-size="34" font-weight="700">Same token, different hidden states</text>
+<text class="muted" x="60" y="104" font-size="20">Weights stay fixed during inference, but hidden representations change with the surrounding context.</text>
+
+<rect class="panel" x="55" y="145" rx="18" width="1090" height="480"/>
+
+<rect class="accent" x="470" y="185" rx="16" width="260" height="86"/>
+<text class="t" x="600" y="220" text-anchor="middle" font-size="24" font-weight="700">token: bank</text>
+<text class="muted" x="600" y="250" text-anchor="middle" font-size="18">same vocabulary identity</text>
+
+<path class="line" d="M530 272 C470 315 390 330 330 355"/>
+<path class="line" d="M670 272 C730 315 810 330 870 355"/>
+
+<rect class="node" x="110" y="340" rx="16" width="390" height="105"/>
+<text class="t" x="305" y="380" text-anchor="middle" font-size="22" font-weight="700">“The bank approved my loan.”</text>
+<text class="muted" x="305" y="414" text-anchor="middle" font-size="18">approved · loan → financial context</text>
+
+<rect class="node" x="700" y="340" rx="16" width="390" height="105"/>
+<text class="t" x="895" y="380" text-anchor="middle" font-size="22" font-weight="700">“We sat on the bank of the river.”</text>
+<text class="muted" x="895" y="414" text-anchor="middle" font-size="18">sat · river → geographic context</text>
+
+<path class="line" d="M305 445 L305 505"/>
+<path class="line" d="M895 445 L895 505"/>
+
+<rect class="accent" x="145" y="515" rx="16" width="320" height="76"/>
+<text class="t" x="305" y="548" text-anchor="middle" font-size="21" font-weight="700">contextual hidden state</text>
+<text class="muted" x="305" y="576" text-anchor="middle" font-size="17">financial institution meaning</text>
+
+<rect class="accent" x="735" y="515" rx="16" width="320" height="76"/>
+<text class="t" x="895" y="548" text-anchor="middle" font-size="21" font-weight="700">contextual hidden state</text>
+<text class="muted" x="895" y="576" text-anchor="middle" font-size="17">river edge meaning</text>
+
+<path class="dash" d="M600 270 L600 602"/>
+<text class="muted" x="60" y="664" font-size="19">The token ID can begin the same, while attention and feed-forward layers reshape its hidden state using surrounding tokens.</text>
+</svg>
