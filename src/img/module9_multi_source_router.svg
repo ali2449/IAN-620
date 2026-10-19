@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Multi-source Agentic RAG router</title>
+<desc id="desc">A router selects between policy vector search, an order database tool, and an external service API, then combines validated evidence for answer generation.</desc>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+<style>.bg{fill:#fff}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2.2}.accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.4}.line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#a)}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}</style></defs>
+<rect class="bg" width="1200" height="630"/>
+<text class="t" x="60" y="62" font-size="34" font-weight="700">One question can require different evidence sources</text>
+<text class="m" x="60" y="100" font-size="20">Routing should follow the information need, not simply send every request to every tool.</text>
+<rect class="box" x="80" y="255" rx="16" width="170" height="88"/><text class="t" x="165" y="295" text-anchor="middle" font-size="21" font-weight="700">User question</text><text class="m" x="165" y="323" text-anchor="middle" font-size="16">policy + order status?</text>
+<path class="line" d="M250 299 L350 299"/>
+<rect class="accent" x="365" y="240" rx="16" width="180" height="118"/><text class="t" x="455" y="280" text-anchor="middle" font-size="22" font-weight="700">Router</text><text class="m" x="455" y="310" text-anchor="middle" font-size="16">What information</text><text class="m" x="455" y="334" text-anchor="middle" font-size="16">is actually needed?</text>
+
+<path class="line" d="M545 270 L680 175"/>
+<path class="line" d="M545 299 L680 299"/>
+<path class="line" d="M545 330 L680 425"/>
+
+<rect class="box" x="695" y="125" rx="16" width="230" height="92"/><text class="t" x="810" y="163" text-anchor="middle" font-size="20" font-weight="700">Policy vector search</text><text class="m" x="810" y="191" text-anchor="middle" font-size="16">return / refund rules</text>
+<rect class="box" x="695" y="253" rx="16" width="230" height="92"/><text class="t" x="810" y="291" text-anchor="middle" font-size="20" font-weight="700">Order database tool</text><text class="m" x="810" y="319" text-anchor="middle" font-size="16">purchase date · status</text>
+<rect class="box" x="695" y="381" rx="16" width="230" height="92"/><text class="t" x="810" y="419" text-anchor="middle" font-size="20" font-weight="700">External service API</text><text class="m" x="810" y="447" text-anchor="middle" font-size="16">live shipping / payment</text>
+
+<path class="line" d="M925 171 L1010 252"/>
+<path class="line" d="M925 299 L1010 299"/>
+<path class="line" d="M925 427 L1010 346"/>
+<rect class="accent" x="1025" y="245" rx="16" width="125" height="108"/><text class="t" x="1087" y="282" text-anchor="middle" font-size="19" font-weight="700">Validated</text><text class="t" x="1087" y="306" text-anchor="middle" font-size="19" font-weight="700">evidence</text><text class="m" x="1087" y="334" text-anchor="middle" font-size="15">then answer</text>
+<text class="m" x="60" y="570" font-size="18">Use the minimum tools needed. Every tool call adds latency, cost, and security surface.</text>
+</svg>
