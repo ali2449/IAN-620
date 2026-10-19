@@ -1,60 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500" viewBox="0 0 600 500" role="img" aria-labelledby="title desc">
 <title id="title">From a tiny neural network to an LLM</title>
-<desc id="desc">A simple neural network and a large language model both transform numeric representations through learned weights, but an LLM uses embeddings and many Transformer blocks before producing vocabulary logits.</desc>
+<desc id="desc">A compact comparison showing that both a tiny neural network and a large language model transform numeric representations using learned weights.</desc>
 <defs>
-  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
     <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
   </marker>
   <style>
-    .bg{fill:#ffffff}.panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}
-    .node{fill:#ffffff;stroke:#334155;stroke-width:2.2}
+    .bg{fill:#ffffff}
+    .panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}
+    .box{fill:#ffffff;stroke:#334155;stroke-width:2}
     .accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.2}
-    .line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    .line{stroke:#64748b;stroke-width:2.6;fill:none;marker-end:url(#arrow)}
     .t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}
-    .muted{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+    .m{font-family:Arial,Helvetica,sans-serif;fill:#475569}
   </style>
 </defs>
-<rect class="bg" width="1200" height="680"/>
-<text class="t" x="60" y="66" font-size="34" font-weight="700">The same core idea scales up</text>
-<text class="muted" x="60" y="104" font-size="20">Learned weights transform numeric representations. An LLM simply does this at a much larger scale with Transformer-specific operations.</text>
 
-<rect class="panel" x="55" y="150" rx="18" width="510" height="440"/>
-<text class="t" x="310" y="195" text-anchor="middle" font-size="26" font-weight="700">Tiny neural network</text>
+<rect class="bg" width="600" height="500"/>
 
-<rect class="node" x="100" y="265" rx="14" width="120" height="70"/>
-<text class="t" x="160" y="307" text-anchor="middle" font-size="21" font-weight="700">numeric input</text>
-<path class="line" d="M220 300 L285 300"/>
+<rect class="panel" x="18" y="18" rx="16" width="270" height="448"/>
+<text class="t" x="153" y="58" text-anchor="middle" font-size="24" font-weight="700">Tiny neural network</text>
 
-<rect class="accent" x="300" y="245" rx="14" width="165" height="110"/>
-<text class="t" x="382" y="286" text-anchor="middle" font-size="20" font-weight="700">weight matrix</text>
-<text class="muted" x="382" y="317" text-anchor="middle" font-size="17">+ bias + activation</text>
-<path class="line" d="M382 355 L382 420"/>
+<rect class="box" x="68" y="92" rx="12" width="170" height="58"/>
+<text class="t" x="153" y="128" text-anchor="middle" font-size="20" font-weight="700">numeric input x</text>
 
-<rect class="node" x="292" y="435" rx="14" width="180" height="72"/>
-<text class="t" x="382" y="478" text-anchor="middle" font-size="21" font-weight="700">hidden vector</text>
-<path class="line" d="M472 471 L515 471"/>
-<text class="muted" x="310" y="548" text-anchor="middle" font-size="18">repeat layers → output</text>
+<path class="line" d="M153 150 L153 190"/>
 
-<rect class="panel" x="635" y="150" rx="18" width="510" height="440"/>
-<text class="t" x="890" y="195" text-anchor="middle" font-size="26" font-weight="700">Large language model</text>
+<rect class="accent" x="58" y="198" rx="12" width="190" height="82"/>
+<text class="t" x="153" y="231" text-anchor="middle" font-size="20" font-weight="700">weight matrix W</text>
+<text class="m" x="153" y="258" text-anchor="middle" font-size="17">+ bias b + activation</text>
 
-<rect class="node" x="680" y="235" rx="14" width="130" height="65"/>
-<text class="t" x="745" y="275" text-anchor="middle" font-size="20" font-weight="700">token IDs</text>
-<path class="line" d="M810 268 L855 268"/>
+<path class="line" d="M153 280 L153 320"/>
 
-<rect class="accent" x="870" y="225" rx="14" width="190" height="85"/>
-<text class="t" x="965" y="259" text-anchor="middle" font-size="20" font-weight="700">embedding weights</text>
-<text class="muted" x="965" y="286" text-anchor="middle" font-size="17">token vectors</text>
-<path class="line" d="M965 310 L965 352"/>
+<rect class="box" x="68" y="328" rx="12" width="170" height="58"/>
+<text class="t" x="153" y="364" text-anchor="middle" font-size="20" font-weight="700">hidden vector h</text>
 
-<rect class="accent" x="855" y="365" rx="14" width="220" height="100"/>
-<text class="t" x="965" y="400" text-anchor="middle" font-size="20" font-weight="700">Transformer blocks</text>
-<text class="muted" x="965" y="428" text-anchor="middle" font-size="17">attention + feed-forward</text>
-<text class="muted" x="965" y="451" text-anchor="middle" font-size="17">many learned matrices</text>
-<path class="line" d="M965 465 L965 510"/>
+<path class="line" d="M153 386 L153 417"/>
+<text class="m" x="153" y="447" text-anchor="middle" font-size="17">repeat layers → output</text>
 
-<rect class="node" x="850" y="520" rx="14" width="230" height="52"/>
-<text class="t" x="965" y="552" text-anchor="middle" font-size="20" font-weight="700">final hidden state → logits</text>
+<rect class="panel" x="312" y="18" rx="16" width="270" height="448"/>
+<text class="t" x="447" y="58" text-anchor="middle" font-size="24" font-weight="700">Large language model</text>
 
-<text class="muted" x="600" y="642" text-anchor="middle" font-size="19">Weights are learned during training. Hidden states are temporary values produced for the current input.</text>
+<rect class="box" x="362" y="82" rx="12" width="170" height="58"/>
+<text class="t" x="447" y="118" text-anchor="middle" font-size="20" font-weight="700">token IDs</text>
+
+<path class="line" d="M447 140 L447 174"/>
+
+<rect class="accent" x="352" y="182" rx="12" width="190" height="72"/>
+<text class="t" x="447" y="213" text-anchor="middle" font-size="20" font-weight="700">embedding weights</text>
+<text class="m" x="447" y="238" text-anchor="middle" font-size="16">create token vectors</text>
+
+<path class="line" d="M447 254 L447 288"/>
+
+<rect class="accent" x="342" y="296" rx="12" width="210" height="86"/>
+<text class="t" x="447" y="328" text-anchor="middle" font-size="20" font-weight="700">Transformer blocks</text>
+<text class="m" x="447" y="354" text-anchor="middle" font-size="16">attention + feed-forward</text>
+
+<path class="line" d="M447 382 L447 414"/>
+<text class="t" x="447" y="446" text-anchor="middle" font-size="19" font-weight="700">hidden state → logits</text>
+
+<text class="m" x="300" y="492" text-anchor="middle" font-size="16">Both use learned weights to transform numbers into new representations.</text>
 </svg>
