@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.327
+Prompt changes can alter behavior as much as ordinary code changes.
+
+00:00:04.327 --> 00:00:11.522
+Save prompt versions together with model identifiers, decoding settings, and evaluation results.
+
+00:00:11.522 --> 00:00:19.122
+That history makes regressions easier to reproduce and successful configurations easier to recover.
+
+00:00:19.122 --> 00:00:25.872
+If prompt version three performs worse than version two, versioning lets you reproduce the regression instead of
+
+00:00:25.872 --> 00:00:27.609
+guessing what changed.

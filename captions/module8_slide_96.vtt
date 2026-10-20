@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.882
+The example on the screen is valid jay son, but it is not valid application data.
+
+00:00:05.882 --> 00:00:12.117
+The category is “refund,” even though refund is not one of the allowed labels.
+
+00:00:12.117 --> 00:00:19.467
+The urgency is the number seven, even though the application expects low, medium, or high.
+
+00:00:19.467 --> 00:00:23.802
+A parser only answers whether the syntax is readable.
+
+00:00:23.802 --> 00:00:28.356
+Schema and business validation answer whether the data is acceptable.

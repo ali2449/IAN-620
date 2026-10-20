@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.642
+For tasks with fixed labels or exact fields, accuracy is a useful starting metric.
+
+00:00:06.642 --> 00:00:12.602
+Compare each prediction with the expected result and count the proportion that match.
+
+00:00:12.602 --> 00:00:18.807
+It is simple, but it only works when the task has a clearly defined correct output.
+
+00:00:18.807 --> 00:00:22.022
+Exact match is intentionally strict.
+
+00:00:22.022 --> 00:00:28.217
+It is useful for labels and structured fields, but it can be unfair for open-ended text where several answers may be
+
+00:00:28.217 --> 00:00:30.656
+acceptable.

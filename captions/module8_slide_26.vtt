@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.432
+Query, Key, and Value are not separate databases inside the model.
+
+00:00:05.432 --> 00:00:13.377
+They are vectors created from the current hidden states using learned projection matrices.
+
+00:00:13.377 --> 00:00:17.162
+Conceptually, Q equals H multiplied by W Q.
+
+00:00:17.162 --> 00:00:20.862
+K equals H multiplied by W K.
+
+00:00:20.862 --> 00:00:24.243
+And V equals H multiplied by W V.
+
+00:00:24.693 --> 00:00:28.655
+The hidden state H changes with the prompt and with the layer.
+
+00:00:28.655 --> 00:00:36.250
+The W Q, W K, and W V matrices are learned model weights stored in the checkpoint.
+
+00:00:36.250 --> 00:00:41.703
+This is another direct connection between the simple weight example and Transformer attention.

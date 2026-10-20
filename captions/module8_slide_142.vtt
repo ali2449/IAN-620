@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.482
+The module began with learned weights and hidden states and followed the model all the way to real application design.
+
+00:00:08.482 --> 00:00:16.232
+You can now explain how tokens move through the model, how log its become generated tokens,
+
+00:00:16.232 --> 00:00:22.672
+how to run public or gated local checkpoints, how hosted A P I's differ from local inference,
+
+00:00:22.672 --> 00:00:27.092
+how memory and quantization affect deployment, and how to evaluate model choices.
+
+00:00:27.092 --> 00:00:35.257
+You can also control outputs with prompting and validation, ground answers with RAG, adapt behavior with low rah,
+
+00:00:35.257 --> 00:00:38.077
+and connect approved tools safely.
+
+00:00:38.077 --> 00:00:47.492
+The next step is Agentic RAG, where controlled decisions, tools, state, and loops are added around these same L L M
+
+00:00:47.492 --> 00:00:48.381
+foundations.

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.767
+Where the model runs has a major effect on performance.
+
+00:00:03.767 --> 00:00:11.602
+A model can be placed on C P U, G P U, or multiple devices, and lower-precision data types can reduce memory use on
+
+00:00:11.602 --> 00:00:21.622
+supported hardware. Device placement and precision should be treated as deployment decisions, not just code details.
+
+00:00:21.622 --> 00:00:28.602
+A model that technically runs on C P U may still be too slow for an interactive application.
+
+00:00:28.602 --> 00:00:31.762
+Fit and usability are different requirements.

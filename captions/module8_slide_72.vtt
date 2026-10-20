@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.637
+A gated Hugging Face repository adds an authorization step before download.
+
+00:00:05.637 --> 00:00:10.897
+The example uses Meta Llama three point one eight billion Instruct,
+
+00:00:10.897 --> 00:00:19.152
+a text-generation checkpoint that works with the causal language-model classes used here.
+
+00:00:19.152 --> 00:00:26.292
+The workflow is: sign in, open the model page, request access or accept the terms, receive access,
+
+00:00:26.292 --> 00:00:31.552
+and authenticate from your environment with a Hugging Face token.
+
+00:00:31.552 --> 00:00:37.412
+After authentication, the tokenizer and model files can be downloaded.
+
+00:00:37.412 --> 00:00:42.432
+The Hugging Face token authorizes access to the repository.
+
+00:00:42.432 --> 00:00:49.710
+It does not mean Hugging Face must perform the inference after the files are on your machine.

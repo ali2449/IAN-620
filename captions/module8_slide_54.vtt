@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.542
+Here is the complete local inference path in one compact example.
+
+00:00:05.542 --> 00:00:13.347
+We begin with role-based messages, apply the model's chat template, tokenize the formatted text,
+
+00:00:13.347 --> 00:00:17.867
+move the tensors to the model device, and call generate.
+
+00:00:17.867 --> 00:00:27.377
+After generation, we separate the newly generated token I D's from the original prompt and decode only those new tokens.
+
+00:00:27.377 --> 00:00:33.103
+That final decode gives us the assistant response without repeating the entire input.

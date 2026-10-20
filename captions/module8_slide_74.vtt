@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.025 --> 00:00:07.862
+When choosing an access path, think about control, hardware, privacy, operational effort, and cost.
+
+00:00:07.862 --> 00:00:15.237
+A public local checkpoint gives you direct control and normally costs whatever your own compute costs.
+
+00:00:15.237 --> 00:00:23.122
+A gated local checkpoint is similar, except that you must first receive access and authenticate before downloading the
+
+00:00:23.122 --> 00:00:30.712
+weights. A local model server keeps the weights on infrastructure you control and exposes your own A P I.
+
+00:00:30.712 --> 00:00:38.362
+Hugging Face Inference Providers and direct commercial A P I services keep the model on provider infrastructure and
+
+00:00:38.362 --> 00:00:40.701
+charge according to their service model.
+
+00:00:41.459 --> 00:00:49.876
+A useful shortcut is this: if local privacy and control matter most, downloadable weights may be attractive.
+
+00:00:49.876 --> 00:00:56.836
+If you do not want to manage G P U infrastructure, a hosted A P I is often simpler.
+
+00:00:56.836 --> 00:01:05.071
+If the model is gated, request access first and then decide whether local inference is practical for your hardware.

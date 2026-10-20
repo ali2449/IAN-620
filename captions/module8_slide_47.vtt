@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.025 --> 00:00:07.482
+A plain string such as “Explain rag” may not be equivalent to a properly formatted chat conversation.
+
+00:00:07.482 --> 00:00:14.427
+An instruction or chat model may rely on special role markers and generation tokens.
+
+00:00:14.427 --> 00:00:21.107
+Using the model's chat template makes the input match the format used during post-training.
+
+00:00:21.107 --> 00:00:28.132
+If a chat model behaves strangely with a plain string, the first thing to check is whether the expected chat template
+
+00:00:28.132 --> 00:00:29.435
+was used.

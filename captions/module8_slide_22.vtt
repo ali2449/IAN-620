@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.142
+Before opening every internal component, run a small real model.
+
+00:00:05.142 --> 00:00:15.172
+The example uses q w e n three zero point six billion, and we will keep using that same checkpoint through the local
+
+00:00:15.172 --> 00:00:21.007
+inference workflow. Instead of passing an unstructured string, we send a user message.
+
+00:00:21.007 --> 00:00:30.857
+Qwen three can operate with thinking behavior, so the short slash no think instruction keeps this first demonstration
+
+00:00:30.857 --> 00:00:31.162
+concise.
+
+00:00:31.162 --> 00:00:40.247
+The pipeline loads the model and tokenizer, prepares the input, runs generation, and returns the assistant response.
+
+00:00:40.247 --> 00:00:45.219
+Once this works, we can expose those hidden steps one at a time.

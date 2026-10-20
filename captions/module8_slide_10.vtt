@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.027
+During causal language-model training, the model learns to predict the token that actually comes next.
+
+00:00:08.027 --> 00:00:14.402
+In the example, the model gives forty-eight percent probability to “today,” twenty-four percent to “before,” thirteen
+
+00:00:14.402 --> 00:00:22.902
+percent to “and,” eight percent to “late,” five percent to “yesterday,” and the remaining two percent to all other
+
+00:00:22.902 --> 00:00:30.246
+vocabulary tokens. The numbers are illustrative, but they now form a complete probability distribution.
+
+00:00:30.805 --> 00:00:34.842
+The training target is the word that truly occurs next.
+
+00:00:34.842 --> 00:00:42.027
+Training changes the model parameters so that useful next-token probabilities become more likely across enormous numbers
+
+00:00:42.027 --> 00:00:43.366
+of examples.

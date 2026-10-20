@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.707
+A decoder block receives hidden states and produces updated hidden states.
+
+00:00:04.707 --> 00:00:12.417
+Normalization prepares the representation, masked self-attention mixes information across allowed token positions,
+
+00:00:12.417 --> 00:00:17.192
+and a residual connection preserves a direct path around that transformation.
+
+00:00:17.192 --> 00:00:24.680
+A second normalization is followed by the feed-forward network, or F F N, and another residual connection.
+
+00:00:25.294 --> 00:00:30.456
+Both attention and the feed-forward network contain learned weight matrices.
+
+00:00:30.456 --> 00:00:36.183
+The output hidden states from this block become the input hidden states for the next block.

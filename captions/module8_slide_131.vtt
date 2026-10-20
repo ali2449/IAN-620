@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.292
+Tool calling is easiest to understand with a concrete example.
+
+00:00:04.292 --> 00:00:08.587
+Suppose the user asks for the current weather in Greensboro.
+
+00:00:08.587 --> 00:00:15.982
+Instead of inventing an answer, the L L M can propose a structured call to a `get_weather` function with Greensboro as
+
+00:00:15.982 --> 00:00:18.486
+the city argument.
+
+00:00:19.006 --> 00:00:24.378
+The application validates the request, executes the actual weather function,
+
+00:00:24.378 --> 00:00:28.638
+and receives structured data such as temperature and condition.
+
+00:00:28.638 --> 00:00:34.773
+That result can then be returned to the model so it can write a natural-language answer.
+
+00:00:34.773 --> 00:00:39.035
+The model proposes the call; the software performs it.

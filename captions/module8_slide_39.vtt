@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.272
+Top P is also called nucleus sampling.
+
+00:00:03.272 --> 00:00:12.127
+The model sorts candidate tokens by probability and keeps the smallest group whose cumulative probability reaches the
+
+00:00:12.127 --> 00:00:16.442
+threshold. Sampling then happens only inside that reduced group.
+
+00:00:16.442 --> 00:00:23.622
+With top P set to 0.8, the model might keep only the first few candidates whose probabilities together reach about
+
+00:00:23.622 --> 00:00:28.468
+eighty percent and ignore the rest for that sampling step.

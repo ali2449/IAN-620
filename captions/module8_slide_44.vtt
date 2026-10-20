@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.232
+Model names give useful clues, but they are not complete documentation.
+
+00:00:05.232 --> 00:00:15.467
+For example, q w e n three eight billion tells us the family, generation, and approximate parameter scale.
+
+00:00:15.467 --> 00:00:22.628
+A Llama name that includes instruct tells us the checkpoint received instruction-oriented post-training.
+
+00:00:23.317 --> 00:00:26.284
+Different families use different naming conventions.
+
+00:00:26.284 --> 00:00:35.009
+Always open the exact model card to verify the license, context length, access requirements, chat format,
+
+00:00:35.009 --> 00:00:36.946
+and hardware recommendations.

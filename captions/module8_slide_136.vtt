@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.452
+A RAG request is easier to understand when we follow one concrete question.
+
+00:00:05.452 --> 00:00:14.082
+Suppose the user asks, “What is the refund deadline?” The retriever finds a chunk stating that refund requests must be
+
+00:00:14.082 --> 00:00:16.612
+submitted within fourteen days.
+
+00:00:16.612 --> 00:00:24.032
+The application formats that chunk, builds a prompt telling the L L M to use only the supplied context,
+
+00:00:24.032 --> 00:00:27.037
+and sends the final tokenized request.
+
+00:00:27.037 --> 00:00:31.922
+From the model's point of view, the vector database is no longer visible.
+
+00:00:31.922 --> 00:00:35.013
+It only sees the prompt your application assembled.

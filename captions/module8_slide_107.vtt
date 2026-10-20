@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.492
+Public benchmarks can reveal broad capabilities, but they do not automatically predict performance on your workflow.
+
+00:00:07.492 --> 00:00:14.622
+Your application may care about format compliance, refusal behavior, private terminology, latency,
+
+00:00:14.622 --> 00:00:19.882
+or a specific failure cost that the benchmark never measures.
+
+00:00:19.882 --> 00:00:23.162
+A leaderboard can help shortlist candidates.
+
+00:00:23.162 --> 00:00:27.507
+Your own evaluation determines whether a candidate belongs in your system.

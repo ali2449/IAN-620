@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.032
+A generative decoder should not see future tokens while predicting the next one.
+
+00:00:05.032 --> 00:00:13.387
+Causal masking enforces that rule by allowing a position to attend only to itself and earlier positions.
+
+00:00:13.387 --> 00:00:18.527
+That restriction is what makes next-token generation autoregressive.
+
+00:00:18.527 --> 00:00:25.507
+If the model could see the future token during training, next-token prediction would become a cheating problem.
+
+00:00:25.507 --> 00:00:28.547
+The mask prevents that information leak.

@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.122
+Take a moment to classify the problem before choosing the technique.
+
+00:00:04.122 --> 00:00:11.517
+The policy document in the question changes frequently, so ask whether we need to change model behavior or simply
+
+00:00:11.517 --> 00:00:15.227
+provide newer knowledge at request time.
+
+00:00:15.227 --> 00:00:21.644
+Choose your answer on the screen, then connect it back to the difference between rag and fine-tuning.

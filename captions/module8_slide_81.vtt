@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.777
+Inference memory has at least two important components.
+
+00:00:03.777 --> 00:00:11.672
+Model weight memory is mostly determined by the number of parameters and the precision used to store them.
+
+00:00:11.672 --> 00:00:16.632
+That part is relatively fixed once the checkpoint and precision are chosen.
+
+00:00:16.632 --> 00:00:19.492
+K V cache memory behaves differently.
+
+00:00:19.492 --> 00:00:26.772
+It grows with sequence length, batch size, layer count, K V heads, head dimension, and precision.
+
+00:00:26.772 --> 00:00:34.221
+A model can fit its weights and still run out of memory when the context or concurrency grows.

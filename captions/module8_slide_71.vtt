@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.025 --> 00:00:08.827
+A public Hugging Face checkpoint can usually be downloaded directly without requesting special model access.
+
+00:00:08.827 --> 00:00:15.802
+For example, q w e n three zero point six billion is available as a public checkpoint.
+
+00:00:15.802 --> 00:00:24.447
+The Transformers code downloads the tokenizer, configuration, and model files into the local Hugging Face cache.
+
+00:00:24.447 --> 00:00:28.826
+After that, the actual inference runs on your own hardware.
+
+00:00:29.576 --> 00:00:31.303
+This distinction matters.
+
+00:00:31.303 --> 00:00:38.038
+Hugging Face may host the files, but Hugging Face is not necessarily running the model for you.
+
+00:00:38.038 --> 00:00:44.183
+Once the weights are downloaded, your C P U or G P U is doing the generation.
+
+00:00:44.183 --> 00:00:52.439
+For a normal public checkpoint, you usually do not need a Hugging Face access token just to download the public files.

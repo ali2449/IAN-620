@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.552
+Start with the smallest model that meets the task's quality requirement.
+
+00:00:04.552 --> 00:00:12.567
+If it passes the evaluation set, a larger model may add cost and latency without creating meaningful value.
+
+00:00:12.567 --> 00:00:17.892
+Scale up only when measured failures justify the extra capability.
+
+00:00:17.892 --> 00:00:25.005
+Smaller models can also be easier to host privately, scale horizontally, and update quickly.

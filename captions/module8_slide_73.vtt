@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.672
+Hosted inference follows a different path.
+
+00:00:02.672 --> 00:00:08.607
+The provider keeps the model on its infrastructure.
+
+00:00:08.607 --> 00:00:13.532
+Your application authenticates, sends messages to an A P I, and receives generated output.
+
+00:00:13.532 --> 00:00:22.508
+Examples include the Open A I A P I, Claude, Gemini, mee strahl, and Hugging Face Inference Providers.
+
+00:00:22.985 --> 00:00:28.777
+The Python example reads the Hugging Face token from the H F token environment variable.
+
+00:00:28.777 --> 00:00:30.252
+This is deliberate.
+
+00:00:30.252 --> 00:00:38.562
+Never paste private A P I keys or access tokens directly into a notebook that may be shared or committed to GitHub.
+
+00:00:38.562 --> 00:00:45.867
+Hosted services may use free quotas, credits, usage tiers, or pay-as-you-go billing.
+
+00:00:45.867 --> 00:00:49.825
+Always check current pricing and rate limits before deployment.

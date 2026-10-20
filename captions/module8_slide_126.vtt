@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.362
+Before sending data to any model endpoint, identify what leaves the application, where it is processed,
+
+00:00:07.362 --> 00:00:10.382
+what is retained, and what is logged.
+
+00:00:10.382 --> 00:00:18.782
+Local deployment can increase control, but it does not automatically make an application private or secure.
+
+00:00:18.782 --> 00:00:22.692
+Data handling has to be designed explicitly.
+
+00:00:22.692 --> 00:00:31.497
+Draw the data path if necessary: user input, application logs, retrieval system, model endpoint, and monitoring.
+
+00:00:31.497 --> 00:00:37.378
+Privacy questions become much easier when the path is explicit.

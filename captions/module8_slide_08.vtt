@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.602
+In a rag system, retrieval and generation have different jobs.
+
+00:00:04.602 --> 00:00:12.007
+The retriever finds useful external evidence, while the L L M receives that evidence together with the question and
+
+00:00:12.007 --> 00:00:20.162
+generates the response. Keeping those two jobs separate makes rag problems much easier to diagnose.
+
+00:00:20.162 --> 00:00:25.912
+If the correct document never reaches the prompt, the retriever is the first suspect.
+
+00:00:25.912 --> 00:00:33.103
+If the correct evidence is present but the answer is still wrong, the problem may be in prompting or generation.

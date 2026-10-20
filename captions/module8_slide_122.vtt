@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.137
+After low rah adapters are attached, measure the trainable parameter count instead of simply assuming the configuration
+
+00:00:08.137 --> 00:00:14.517
+is lightweight. The code counts parameters whose requires grad flag is true, counts the total parameters,
+
+00:00:14.517 --> 00:00:17.312
+and calculates the trainable percentage.
+
+00:00:17.312 --> 00:00:20.312
+This is a useful verification step.
+
+00:00:20.312 --> 00:00:27.512
+A low rah configuration only helps if it targets the intended modules and leaves the expected fraction of the base model
+
+00:00:27.512 --> 00:00:28.515
+frozen.

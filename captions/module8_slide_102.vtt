@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.082
+The context window is the tokenized information available in a single request.
+
+00:00:05.082 --> 00:00:12.407
+It may include system instructions, conversation history, examples, retrieved rag chunks, and the current question.
+
+00:00:12.407 --> 00:00:21.627
+Because all of these compete for the same context budget, retrieval and prompt design have to work together.
+
+00:00:21.627 --> 00:00:29.382
+If you add more conversation history or more retrieved chunks, something else may need to be removed or compressed to
+
+00:00:29.382 --> 00:00:31.289
+stay within the context budget.

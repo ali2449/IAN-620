@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.322
+Start with a small set of examples that you can inspect manually.
+
+00:00:04.322 --> 00:00:10.782
+For a classification task, that might include messages about login, billing,
+
+00:00:10.782 --> 00:00:14.812
+and registration together with the expected labels.
+
+00:00:14.812 --> 00:00:20.672
+A small, trusted set is more useful than relying only on intuition.
+
+00:00:20.672 --> 00:00:29.372
+Ten carefully chosen examples can already reveal patterns that are invisible when you test only one prompt by hand.

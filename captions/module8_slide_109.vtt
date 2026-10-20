@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.007 --> 00:00:04.197
+When comparing model sizes, keep the experiment stable.
+
+00:00:04.197 --> 00:00:11.907
+Use the same prompt set, the same decoding settings, and the same evaluation rubric for every candidate.
+
+00:00:11.907 --> 00:00:19.952
+The code can expose one common evaluation function even if one model runs locally and another model is reached through a
+
+00:00:19.952 --> 00:00:27.413
+remote endpoint. The point is to compare the models, not accidentally compare different test conditions.

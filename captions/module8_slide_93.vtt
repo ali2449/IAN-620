@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.222
+Instructions and data should be clearly separated.
+
+00:00:03.222 --> 00:00:12.802
+Delimiters, labeled fields, or structured formats make it easier for the model to distinguish what it should do from the
+
+00:00:12.802 --> 00:00:18.867
+content it should analyze. This becomes especially important when external or untrusted text enters the prompt.
+
+00:00:18.867 --> 00:00:26.752
+This separation also supports security because retrieved or user-provided text should not be confused with trusted
+
+00:00:26.752 --> 00:00:28.899
+application instructions.

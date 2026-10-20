@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.887
+The roadmap has four broad stages.
+
+00:00:03.887 --> 00:00:12.962
+First, understand what is happening inside the L L M: learned weights, hidden states, generation, and chat formatting.
+
+00:00:12.962 --> 00:00:22.637
+Next, run and choose models using local checkpoints, hosted A P I's, memory estimates, and deployment tradeoffs.
+
+00:00:22.637 --> 00:00:31.377
+Then control and evaluate the model through prompting, grounding, structured output, and fixed evaluation.
+
+00:00:31.377 --> 00:00:40.241
+Finally, adapt and connect the model with low rah, security controls, tools, and the bridge toward Agentic RAG.

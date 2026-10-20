@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.532
+The concepts from this module directly affect rag.
+
+00:00:03.532 --> 00:00:12.177
+Context limits determine how many chunks can fit, deterministic decoding can improve repeatability for factual tasks,
+
+00:00:12.177 --> 00:00:19.587
+model capacity affects how well evidence is used, and prompt injection can arrive through retrieved text.
+
+00:00:19.587 --> 00:00:25.872
+rag changes the context, but the same generation and security principles still apply.
+
+00:00:25.872 --> 00:00:33.787
+For example, a larger context window can allow more evidence, but adding more chunks is not automatically better if the
+
+00:00:33.787 --> 00:00:36.936
+extra text is irrelevant or contradictory.

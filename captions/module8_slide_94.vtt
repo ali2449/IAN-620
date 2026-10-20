@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.887
+Many applications need structured data rather than prose.
+
+00:00:03.887 --> 00:00:10.667
+For the duplicate-charge example, we can require three fields: category, urgency, and summary.
+
+00:00:10.667 --> 00:00:15.992
+We can also define the allowed values before generation.
+
+00:00:15.992 --> 00:00:19.887
+A useful output might classify the request as billing, assign medium urgency,
+
+00:00:19.887 --> 00:00:26.872
+and summarize that a duplicate charge occurred and a refund was requested.
+
+00:00:26.872 --> 00:00:32.201
+Because the structure is explicit, the application can validate it before using it.

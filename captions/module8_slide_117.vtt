@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.152
+Full fine-tuning computes gradients and updates the model's trainable weights across the whole network.
+
+00:00:06.152 --> 00:00:13.252
+That provides maximum flexibility, but it also requires much more G P U memory, compute, storage,
+
+00:00:13.252 --> 00:00:17.712
+and training infrastructure than lightweight adaptation.
+
+00:00:17.712 --> 00:00:23.447
+Because so many weights are trainable, the optimizer also needs substantial memory,
+
+00:00:23.447 --> 00:00:26.665
+which is one reason full fine-tuning is expensive.

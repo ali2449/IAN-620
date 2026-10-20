@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.087
+Fitting in V ram and running fast are different requirements.
+
+00:00:04.087 --> 00:00:10.762
+Two models can both fit comfortably in memory and still have very different generation speeds.
+
+00:00:10.762 --> 00:00:19.252
+The example compares one workload generating about seven tokens per second with another generating about forty-two.
+
+00:00:19.252 --> 00:00:25.332
+Memory capacity answers, “Can I load it?” Latency and throughput answer,
+
+00:00:25.332 --> 00:00:29.049
+“Is it usable for my application?” Measure both.

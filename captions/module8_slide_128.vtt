@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.135 --> 00:00:04.482
+rag can retrieve malicious instructions along with useful information.
+
+00:00:04.482 --> 00:00:11.877
+A retrieved document should be treated as evidence, not as an authority that can override system rules.
+
+00:00:11.877 --> 00:00:16.982
+Tool permissions and access controls must remain outside the model.
+
+00:00:16.982 --> 00:00:23.902
+This is especially important for web-connected rag, because a retrieved page may contain instructions written
+
+00:00:23.902 --> 00:00:26.476
+specifically to manipulate an A I system.

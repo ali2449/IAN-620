@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.047
+Use the decision helper as a starting point rather than a benchmark.
+
+00:00:04.047 --> 00:00:11.362
+Consider task difficulty, privacy requirements, available hardware, and latency goals.
+
+00:00:11.362 --> 00:00:17.367
+Then validate the recommendation by running real examples through candidate models.
+
+00:00:17.367 --> 00:00:21.072
+Use the recommendation as a starting hypothesis.
+
+00:00:21.072 --> 00:00:25.095
+The final decision should come from real measurements on your workload.

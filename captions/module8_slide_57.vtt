@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.807
+There are two useful local architectures.
+
+00:00:02.807 --> 00:00:11.262
+For a notebook or small prototype, the Python process can load the tokenizer and model directly and run inference on the
+
+00:00:11.262 --> 00:00:13.378
+local C P U or G P U.
+
+00:00:13.942 --> 00:00:20.234
+For a shared application, it is often better to keep the model loaded in a dedicated inference server.
+
+00:00:20.234 --> 00:00:27.529
+The web application sends H T T P requests, and the server manages the expensive model resource.
+
+00:00:27.529 --> 00:00:33.524
+Start with the simple architecture and add a server when sharing or concurrency makes it useful.

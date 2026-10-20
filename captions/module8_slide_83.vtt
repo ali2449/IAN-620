@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.013 --> 00:00:03.527
+K V cache grows approximately with sequence length.
+
+00:00:03.527 --> 00:00:08.612
+If one thousand tokens require one unit of cache under a fixed architecture,
+
+00:00:08.612 --> 00:00:15.527
+four thousand tokens require roughly four times as much, and eight thousand roughly eight times as much.
+
+00:00:15.527 --> 00:00:22.967
+Grouped-query attention can reduce that memory because it uses fewer K V heads than ordinary multi-head attention.
+
+00:00:22.967 --> 00:00:29.513
+That architecture difference becomes especially important with long contexts and many concurrent requests.

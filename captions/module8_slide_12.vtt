@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.897
+Keep one complete pipeline in mind.
+
+00:00:02.897 --> 00:00:11.737
+A prompt may first be formatted with a chat template, then tokenized into token I D's, processed by the language model,
+
+00:00:11.737 --> 00:00:18.387
+converted into log its, and passed through a decoding strategy to select a new token.
+
+00:00:18.387 --> 00:00:27.032
+The new token is appended, the process repeats, and the final token I D's are decoded back into readable text.
+
+00:00:27.524 --> 00:00:35.636
+If the output is surprising, this pipeline also gives us a debugging checklist: was the prompt formatted correctly,
+
+00:00:35.636 --> 00:00:43.488
+did tokenization change the input, did decoding add randomness, or did the model itself lack the capability?

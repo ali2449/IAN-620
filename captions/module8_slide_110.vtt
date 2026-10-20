@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.117
+Accuracy is not the only result that matters.
+
+00:00:03.117 --> 00:00:09.757
+The illustrative comparison shows a small model with lower quality but very low latency,
+
+00:00:09.757 --> 00:00:17.507
+a medium model with a substantial quality improvement, and a large model with only a small additional quality gain but
+
+00:00:17.507 --> 00:00:19.913
+much higher latency and cost.
+
+00:00:20.476 --> 00:00:26.703
+That creates the real deployment question: if the medium model already passes the requirement,
+
+00:00:26.703 --> 00:00:29.991
+is the extra cost of the large model justified?

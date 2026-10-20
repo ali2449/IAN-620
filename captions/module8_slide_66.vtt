@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.082
+A generic benchmark can be useful, but an application needs its own evaluation set.
+
+00:00:06.082 --> 00:00:14.702
+Collect examples that represent the questions, formats, edge cases, and failure modes that matter in the real workflow.
+
+00:00:14.702 --> 00:00:21.587
+Without that baseline, it is difficult to say whether a model or prompt change is actually better.
+
+00:00:21.587 --> 00:00:28.582
+If your real application extracts support categories, an impressive coding benchmark is interesting but not enough
+
+00:00:28.582 --> 00:00:31.656
+evidence for that extraction task.

@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.892
+The module goes deeply into the pieces that directly affect practical L L M applications: weights and hidden states,
+
+00:00:07.892 --> 00:00:17.382
+decoder generation, prompting, structured output, model access, memory, quantization, local inference, evaluation, RAG,
+
+00:00:17.382 --> 00:00:21.382
+and tool calling. Some neighboring subjects are introduced only briefly.
+
+00:00:21.382 --> 00:00:28.582
+Full fine-tuning, distributed training, benchmark design, large-scale training optimization,
+
+00:00:28.582 --> 00:00:32.732
+and production serving deserve their own deeper treatment.
+
+00:00:32.732 --> 00:00:36.197
+The boundary is deliberate.
+
+00:00:36.197 --> 00:00:44.539
+You should leave knowing what you can build now and what topics would require a more specialized course.

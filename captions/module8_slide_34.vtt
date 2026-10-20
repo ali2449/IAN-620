@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.242
+Greedy decoding always selects the token with the highest probability.
+
+00:00:06.242 --> 00:00:12.932
+It is easy to understand and reproducible, which can be useful for constrained tasks.
+
+00:00:12.932 --> 00:00:21.992
+The tradeoff is that always taking the top choice can make output repetitive or prevent useful alternatives from
+
+00:00:21.992 --> 00:00:29.257
+appearing. Imagine the next-token probabilities are 0.52, 0.28, and 0.20.
+
+00:00:29.257 --> 00:00:36.521
+Greedy decoding always chooses the 0.52 option, even when the alternatives are reasonable.

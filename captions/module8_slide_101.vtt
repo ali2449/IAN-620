@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.157
+Grounding becomes clearer when we compare the same question with and without evidence.
+
+00:00:05.157 --> 00:00:08.782
+Suppose the user asks for the refund deadline.
+
+00:00:08.782 --> 00:00:15.936
+Without grounding, the model might confidently say thirty days even if that number was never provided.
+
+00:00:16.677 --> 00:00:23.364
+Now provide a retrieved document stating that refund requests must be submitted within fourteen days.
+
+00:00:23.364 --> 00:00:29.944
+The model can answer fourteen days, and the application can check that statement against the evidence.
+
+00:00:29.944 --> 00:00:35.674
+Grounding does not guarantee correctness, but it creates something concrete to verify.

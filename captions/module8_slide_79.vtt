@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.192
+Two models with similar parameter counts can behave very differently.
+
+00:00:06.192 --> 00:00:13.417
+Training data, architecture, tokenizer, context length, post-training, and optimization all matter.
+
+00:00:13.417 --> 00:00:19.762
+Treat parameter count as one deployment signal, not as a complete quality score.
+
+00:00:19.762 --> 00:00:25.462
+Think of parameter count as engine size, not total vehicle performance.
+
+00:00:25.462 --> 00:00:31.811
+Training quality, architecture, and post-training can change the result dramatically.

@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.112
+The model does not receive raw text directly.
+
+00:00:03.112 --> 00:00:10.367
+A tokenizer breaks the text into vocabulary pieces and maps those pieces to integer I D's.
+
+00:00:10.367 --> 00:00:20.067
+Different model families can tokenize the same sentence differently, which affects token count, context usage,
+
+00:00:20.067 --> 00:00:21.602
+and sometimes cost.
+
+00:00:21.602 --> 00:00:31.042
+For example, a technical identifier such as `patient_id` might become one token in one tokenizer and several tokens in
+
+00:00:31.042 --> 00:00:35.855
+another. That difference changes how much context space the text consumes.

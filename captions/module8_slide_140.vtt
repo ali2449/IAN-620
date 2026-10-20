@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.492
+Read the failure carefully before choosing a fix.
+
+00:00:03.492 --> 00:00:10.477
+The correct chunk is already in the context, so ask which part of the system has already succeeded.
+
+00:00:10.477 --> 00:00:14.207
+Choose your answer on the screen before continuing.
+
+00:00:14.207 --> 00:00:20.619
+Good rag debugging starts by locating the failing layer instead of changing everything at once.

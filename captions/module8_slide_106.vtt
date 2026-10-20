@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.512
+Evaluation should match the task.
+
+00:00:02.512 --> 00:00:08.992
+Classification may use accuracy or F1, extraction can compare fields, summaries may need human review,
+
+00:00:08.992 --> 00:00:17.402
+and rag answers need faithfulness and citation checks in addition to answer quality.
+
+00:00:17.402 --> 00:00:21.957
+No single metric describes every L L M application.
+
+00:00:21.957 --> 00:00:29.480
+The metric should reflect what failure actually matters to the application, not simply what is easiest to calculate.

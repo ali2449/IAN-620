@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.517
+The useful background for this module is basic Python, vectors and matrices, the Transformer overview,
+
+00:00:07.517 --> 00:00:13.407
+and the RAG workflow. We will use those ideas rather than starting from zero.
+
+00:00:13.407 --> 00:00:22.067
+By the end, you should be able to explain weights, parameters, and hidden states; trace a token through a decoder L L M;
+
+00:00:22.067 --> 00:00:28.702
+choose between local and hosted models; control generation; estimate memory needs; evaluate model tradeoffs;
+
+00:00:28.702 --> 00:00:32.902
+and connect an L L M safely to RAG and tools.
+
+00:00:32.902 --> 00:00:37.262
+The goal is not simply to learn how to call an A P I.
+
+00:00:37.262 --> 00:00:43.332
+It is to understand enough of the model to make better application decisions.

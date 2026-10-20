@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.107
+A large language model is a neural network trained to model patterns in token sequences.
+
+00:00:06.107 --> 00:00:13.697
+For generative text models, the central operation is simple to state: given the tokens so far,
+
+00:00:13.697 --> 00:00:17.162
+estimate which token is likely to come next.
+
+00:00:17.162 --> 00:00:23.667
+Very complex behavior can emerge from repeating that prediction process at large scale.
+
+00:00:23.667 --> 00:00:28.407
+A helpful way to think about it is autocomplete at an enormous scale.
+
+00:00:28.407 --> 00:00:35.745
+The difference is that the model has learned rich patterns across language, code, and many kinds of text.

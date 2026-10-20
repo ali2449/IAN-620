@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.467
+The three access paths are easier to remember when you follow where the model weights go.
+
+00:00:05.467 --> 00:00:11.082
+For a public local model, you download the weights and run them on your hardware.
+
+00:00:11.082 --> 00:00:19.642
+For a gated Hugging Face model, you first request access, authenticate with a Hugging Face token, download the weights,
+
+00:00:19.642 --> 00:00:22.052
+and then still run locally.
+
+00:00:22.052 --> 00:00:29.122
+For a hosted A P I, the weights stay with the provider and your application sends requests to the provider's
+
+00:00:29.122 --> 00:00:30.880
+infrastructure.
+
+00:00:31.747 --> 00:00:38.733
+Ask one question whenever the terminology becomes confusing: where are the model weights actually running?

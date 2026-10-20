@@ -1,0 +1,1444 @@
+{
+  "module": "module8",
+  "generation_version": "ian620_safe_v4_exact_reference_text_seed1234",
+  "filename_prefix": "module8",
+  "source_file": "IAN_620_Module_8_Narration_142_Slides_Breeze_TTS_Final.txt",
+  "reference_audio": "/home/ali/breeze-tts/voice_reference/course_instructor_consistent_v4.wav",
+  "reference_text_version": "course_instructor_consistent_v4_exact_transcript",
+  "reference_text": "Welcome to the course. We will work through each concept carefully, connect the\nideas step by step, and use practical examples to make technical topics easier\nto understand. When we introduce a new method, focus first on the problem it\nsolves and why it is useful. For example, in machine learning, features are the\ninformation we give the model, while the target is what we want it to predict.\nNow consider a simple question: what changes when the data contains missing\nvalues? We will think through the reason and then look at the code. In Python,\nwe can inspect the data, run one small step at a time, and explain what the\nresult means. The goal is to understand the logic, not simply memorize syntax.",
+  "subtitle_method": "tts_break_section_generation",
+  "generation_boundary": "[tts-break]",
+  "instruction_mode": "disabled_to_prevent_spoken_prompt_leakage",
+  "spoken_instruction_sent_to_breeze": false,
+  "audio_settings": {
+    "speech_speed": 0.93,
+    "speed_method": "ffmpeg_atempo_before_vtt_alignment"
+  },
+  "caption_settings": {
+    "max_words": 24,
+    "max_chars": 120,
+    "tts_break_pause_seconds": 0.45
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "title": "The LLM inside your RAG system",
+      "transcript": "Module 7 used a large language model as the generator at the end of the rag pipeline. Now we are going to open that box and look at what the model is actually doing. We will connect tokens, prediction, prompting, generation, local models, evaluation, and tool calling back to the rag workflow you already know. Think of Module 7 as asking, “What information should the model see?” This module asks, “Once the information is in the prompt, what does the model actually do with it?”",
+      "wav": "wav/module8_slide_01.wav",
+      "audio": "audio/module8_slide_01.mp3",
+      "captions": "audio/module8_slide_01.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 2,
+      "title": "Before You Begin",
+      "transcript": "The useful background for this module is basic Python, vectors and matrices, the Transformer overview, and the RAG workflow. We will use those ideas rather than starting from zero.\n\nBy the end, you should be able to explain weights, parameters, and hidden states; trace a token through a decoder L L M; choose between local and hosted models; control generation; estimate memory needs; evaluate model tradeoffs; and connect an L L M safely to RAG and tools.\n\nThe goal is not simply to learn how to call an A P I. It is to understand enough of the model to make better application decisions.",
+      "wav": "wav/module8_slide_02.wav",
+      "audio": "audio/module8_slide_02.mp3",
+      "captions": "audio/module8_slide_02.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 3,
+      "title": "Learn by Trying, Changing, and Measuring",
+      "transcript": "The best way to learn these systems is to run something small, change one factor, and observe what happens. When a result changes, ask what caused the change and whether it actually improved the task. That habit is more useful than memorizing terminology. For example, if you raise temperature and the answer changes, do not stop at “it became more creative.” Look at what happened to the token probabilities and whether that change helped the task.",
+      "wav": "wav/module8_slide_03.wav",
+      "audio": "audio/module8_slide_03.mp3",
+      "captions": "audio/module8_slide_03.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 4,
+      "title": "What This Module Covers",
+      "transcript": "The module goes deeply into the pieces that directly affect practical L L M applications: weights and hidden states, decoder generation, prompting, structured output, model access, memory, quantization, local inference, evaluation, RAG, and tool calling.\n\nSome neighboring subjects are introduced only briefly. Full fine-tuning, distributed training, benchmark design, large-scale training optimization, and production serving deserve their own deeper treatment.\n\nThe boundary is deliberate. You should leave knowing what you can build now and what topics would require a more specialized course.",
+      "wav": "wav/module8_slide_04.wav",
+      "audio": "audio/module8_slide_04.mp3",
+      "captions": "audio/module8_slide_04.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 5,
+      "title": "Four Common Misconceptions",
+      "transcript": "Four misconceptions are worth removing early. An L L M is not a database, attention is not the same thing as reasoning, temperature does not make a model more intelligent, and a larger model is not automatically the best model for every application. These misconceptions cause real design mistakes. For example, treating an L L M like a database can lead someone to trust a fluent answer that was never retrieved from a verified source.",
+      "wav": "wav/module8_slide_05.wav",
+      "audio": "audio/module8_slide_05.mp3",
+      "captions": "audio/module8_slide_05.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 6,
+      "title": "Module Roadmap",
+      "transcript": "The roadmap has four broad stages. First, understand what is happening inside the L L M: learned weights, hidden states, generation, and chat formatting.\n\nNext, run and choose models using local checkpoints, hosted A P I's, memory estimates, and deployment tradeoffs.\n\nThen control and evaluate the model through prompting, grounding, structured output, and fixed evaluation.\n\nFinally, adapt and connect the model with low rah, security controls, tools, and the bridge toward Agentic RAG.",
+      "wav": "wav/module8_slide_06.wav",
+      "audio": "audio/module8_slide_06.mp3",
+      "captions": "audio/module8_slide_06.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 7,
+      "title": "Part 1 — What an LLM Actually Does",
+      "transcript": "Part one builds the mental model we will reuse throughout the module. We begin with learned numerical weights and temporary hidden states, then connect those ideas to token embeddings, Transformer blocks, log its, soft max, and next-token generation.\n\nBy the end of this part, you should be able to explain how fixed learned weights transform a prompt into changing hidden states and finally into probabilities for the next token.",
+      "wav": "wav/module8_slide_07.wav",
+      "audio": "audio/module8_slide_07.mp3",
+      "captions": "audio/module8_slide_07.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 8,
+      "title": "Where was the LLM in Module 7?",
+      "transcript": "In a rag system, retrieval and generation have different jobs. The retriever finds useful external evidence, while the L L M receives that evidence together with the question and generates the response. Keeping those two jobs separate makes rag problems much easier to diagnose. If the correct document never reaches the prompt, the retriever is the first suspect. If the correct evidence is present but the answer is still wrong, the problem may be in prompting or generation.",
+      "wav": "wav/module8_slide_08.wav",
+      "audio": "audio/module8_slide_08.mp3",
+      "captions": "audio/module8_slide_08.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 9,
+      "title": "What is a large language model?",
+      "transcript": "A large language model is a neural network trained to model patterns in token sequences. For generative text models, the central operation is simple to state: given the tokens so far, estimate which token is likely to come next. Very complex behavior can emerge from repeating that prediction process at large scale. A helpful way to think about it is autocomplete at an enormous scale. The difference is that the model has learned rich patterns across language, code, and many kinds of text.",
+      "wav": "wav/module8_slide_09.wav",
+      "audio": "audio/module8_slide_09.mp3",
+      "captions": "audio/module8_slide_09.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 10,
+      "title": "The basic training objective: predict the next token",
+      "transcript": "During causal language-model training, the model learns to predict the token that actually comes next. In the example, the model gives forty-eight percent probability to “today,” twenty-four percent to “before,” thirteen percent to “and,” eight percent to “late,” five percent to “yesterday,” and the remaining two percent to all other vocabulary tokens.\n\nThe numbers are illustrative, but they now form a complete probability distribution.\n\n[tts-break]\n\nThe training target is the word that truly occurs next. Training changes the model parameters so that useful next-token probabilities become more likely across enormous numbers of examples.",
+      "wav": "wav/module8_slide_10.wav",
+      "audio": "audio/module8_slide_10.mp3",
+      "captions": "audio/module8_slide_10.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 11,
+      "title": "One Sentence for the Whole Module",
+      "transcript": "We will keep using the same sentence so the mechanics stay easy to compare. Start with “The user submitted the request.” The text becomes tokens and I D's, the L L M produces logits, those logits become probabilities, and a decoding strategy selects a token.\n\nSuppose the selected token is “today.” That token is appended to the sequence, so the next prediction now starts from “The user submitted the request today.” Then the same process repeats.",
+      "wav": "wav/module8_slide_11.wav",
+      "audio": "audio/module8_slide_11.mp3",
+      "captions": "audio/module8_slide_11.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 12,
+      "title": "The Complete LLM Pipeline",
+      "transcript": "Keep one complete pipeline in mind. A prompt may first be formatted with a chat template, then tokenized into token I D's, processed by the language model, converted into log its, and passed through a decoding strategy to select a new token. The new token is appended, the process repeats, and the final token I D's are decoded back into readable text.\n\n[tts-break]\n\nIf the output is surprising, this pipeline also gives us a debugging checklist: was the prompt formatted correctly, did tokenization change the input, did decoding add randomness, or did the model itself lack the capability?",
+      "wav": "wav/module8_slide_12.wav",
+      "audio": "audio/module8_slide_12.mp3",
+      "captions": "audio/module8_slide_12.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 13,
+      "title": "Tokenize the Sentence",
+      "transcript": "The model does not receive raw text directly. A tokenizer breaks the text into vocabulary pieces and maps those pieces to integer I D's. Different model families can tokenize the same sentence differently, which affects token count, context usage, and sometimes cost. For example, a technical identifier such as `patient_id` might become one token in one tokenizer and several tokens in another. That difference changes how much context space the text consumes.",
+      "wav": "wav/module8_slide_13.wav",
+      "audio": "audio/module8_slide_13.mp3",
+      "captions": "audio/module8_slide_13.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 14,
+      "title": "Tokenizer playground",
+      "transcript": "The tokenizer playground gives a quick visual preview of how text can be split into pieces. The I D's in the browser demo are only examples, so use the Python tokenizer when you want the real checkpoint-specific tokens. Try punctuation, technical words, U R L's, or code and watch how the pieces change. Try a normal sentence first, then something unusual like an email address, a U R L, or a Python variable. The differences make tokenization much more intuitive.",
+      "wav": "wav/module8_slide_14.wav",
+      "audio": "audio/module8_slide_14.mp3",
+      "captions": "audio/module8_slide_14.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 15,
+      "title": "Token IDs are integers",
+      "transcript": "After tokenization, every token maps to an integer in the model vocabulary. The model does not directly receive the visible text. It receives token I D's.\n\nThe code uses the same q w e n three zero point six billion checkpoint used throughout the local-model examples. We tokenize a short RAG sentence and then inspect both the token pieces and their numerical I D's.\n\nRemember that an I D is an identifier. A larger token I D does not mean the token is more important.",
+      "wav": "wav/module8_slide_15.wav",
+      "audio": "audio/module8_slide_15.mp3",
+      "captions": "audio/module8_slide_15.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 16,
+      "title": "Token Embeddings Are Different from Sentence Embeddings",
+      "transcript": "Token embeddings and sentence embeddings are both vectors, but they solve different problems. On the left, each individual token begins with its own vector and then moves through the Transformer layers. Those token representations become context dependent as the model processes the sequence.\n\n[tts-break]\n\nOn the right, a sentence embedding represents an entire sentence or chunk with one vector. That is useful for semantic similarity and retrieval. So token embeddings support language-model computation, while sentence embeddings are commonly used for search and RAG retrieval.",
+      "wav": "wav/module8_slide_16.wav",
+      "audio": "audio/module8_slide_16.mp3",
+      "captions": "audio/module8_slide_16.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 17,
+      "title": "Start Small: One Neuron and Its Weights",
+      "transcript": "Before scaling up to a large language model, start with one neuron. A neuron takes numeric inputs, multiplies them by learned weights, adds a bias, and then applies an activation function.\n\nUse the numbers in the diagram. X one is two, X two is one, weight one is zero point five, weight two is negative zero point two, and the bias is zero point one. The weighted sum becomes zero point nine. Re L U keeps that positive value, so the hidden output is zero point nine.\n\n[tts-break]\n\nThe important idea is not the arithmetic itself. A weight is a learned number that controls how strongly an input contributes to the next computation. An L L M contains vastly more learned parameters, but this weighted-transformation idea is still underneath the larger architecture.",
+      "wav": "wav/module8_slide_17.wav",
+      "audio": "audio/module8_slide_17.mp3",
+      "captions": "audio/module8_slide_17.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 18,
+      "title": "A Tiny Deep-Learning Model in Python",
+      "transcript": "A neural network does not normally calculate one connection at a time. It stores many weights inside matrices and applies them efficiently with matrix multiplication.\n\nThe Python example uses pie torch. The input vector contains two values. W is a small weight matrix, and b is the bias vector. The expression X multiplied by W plus b produces the next representation, and Re L U applies the activation.\n\n[tts-break]\n\nNow compare the diagram on the right. A tiny neural network transforms numeric input with learned weights. An L L M does the same broad kind of numerical transformation at a much larger scale, using embedding weights, attention, feed-forward layers, and many Transformer blocks.",
+      "wav": "wav/module8_slide_18.wav",
+      "audio": "audio/module8_slide_18.mp3",
+      "captions": "audio/module8_slide_18.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 19,
+      "title": "How Does the Model Learn the Weights?",
+      "transcript": "Now we can answer an important question: where do the weights come from?\n\nTraining begins with input tokens and the model's current weights. The model predicts the next token. That prediction is compared with the correct target, and a loss value measures the error.\n\n[tts-break]\n\nBackpropagation then computes gradients. A gradient tells us how changing a parameter would affect the loss. An optimizer uses those gradients to make small updates to the weights. The process repeats across many training examples.\n\nThis gives us one of the most important distinctions in the module: training changes the weights. During normal inference, those learned weights stay fixed while the model computes new hidden states for each prompt.",
+      "wav": "wav/module8_slide_19.wav",
+      "audio": "audio/module8_slide_19.mp3",
+      "captions": "audio/module8_slide_19.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 20,
+      "title": "Weights and Hidden States Are Different",
+      "transcript": "Weights and hidden states are easy to confuse, so keep them separate.\n\nWeights are learned model parameters. Training changes them, and the checkpoint stores them. During ordinary inference, those weights normally stay fixed.\n\nHidden states are temporary vectors created while the current prompt moves through the model. They are recomputed for every new input and change from one Transformer layer to the next.\n\n[tts-break]\n\nA useful summary is: training learns the weights. Inference uses those fixed weights to compute new hidden states for the current prompt.",
+      "wav": "wav/module8_slide_20.wav",
+      "audio": "audio/module8_slide_20.mp3",
+      "captions": "audio/module8_slide_20.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 21,
+      "title": "The Same Token Can Develop Different Hidden States",
+      "transcript": "The word “bank” is a useful example of why hidden states matter. In “The bank approved my loan,” nearby words such as approved and loan indicate a financial meaning.\n\nIn “We sat on the bank of the river,” the surrounding words point toward the edge of a river.\n\n[tts-break]\n\nThe token can begin from the same vocabulary identity, but attention and feed-forward layers repeatedly update its representation using context. So the hidden state for bank becomes different in the two sentences. This is one way a Transformer represents context-dependent meaning.",
+      "wav": "wav/module8_slide_21.wav",
+      "audio": "audio/module8_slide_21.mp3",
+      "captions": "audio/module8_slide_21.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 22,
+      "title": "Run a Small LLM First",
+      "transcript": "Before opening every internal component, run a small real model. The example uses q w e n three zero point six billion, and we will keep using that same checkpoint through the local inference workflow.\n\nInstead of passing an unstructured string, we send a user message. Qwen three can operate with thinking behavior, so the short slash no think instruction keeps this first demonstration concise.\n\nThe pipeline loads the model and tokenizer, prepares the input, runs generation, and returns the assistant response. Once this works, we can expose those hidden steps one at a time.",
+      "wav": "wav/module8_slide_22.wav",
+      "audio": "audio/module8_slide_22.mp3",
+      "captions": "audio/module8_slide_22.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 23,
+      "title": "What Does pipeline() Handle?",
+      "transcript": "The pipeline A P I is convenient because it handles several common steps for you. It loads the tokenizer and model, prepares the input, performs generation, decodes the result, and returns text. The explicit workflow is not a different model; it simply exposes more control over the same process. The convenience is similar to using a high-level database library instead of manually managing every connection and cursor. It saves setup, but understanding the lower level gives you more control.",
+      "wav": "wav/module8_slide_23.wav",
+      "audio": "audio/module8_slide_23.mp3",
+      "captions": "audio/module8_slide_23.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 24,
+      "title": "Decoder-only Transformers power many generative LLMs",
+      "transcript": "Now scale the small neural-network idea up to a decoder-only L L M. Token I D's first use learned embedding weights to create vectors. The model also needs information about token order, because the same words in a different order can mean something different.\n\nModern models use positional methods such as rotary position information. We do not need the full mathematics here.\n\n[tts-break]\n\nThe representations then pass through many Transformer blocks. Attention and feed-forward layers repeatedly update the hidden states. The final hidden state is projected through learned output weights to produce vocabulary log its.",
+      "wav": "wav/module8_slide_24.wav",
+      "audio": "audio/module8_slide_24.mp3",
+      "captions": "audio/module8_slide_24.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 25,
+      "title": "Inside One Decoder Block",
+      "transcript": "A decoder block receives hidden states and produces updated hidden states. Normalization prepares the representation, masked self-attention mixes information across allowed token positions, and a residual connection preserves a direct path around that transformation.\n\nA second normalization is followed by the feed-forward network, or F F N, and another residual connection.\n\n[tts-break]\n\nBoth attention and the feed-forward network contain learned weight matrices. The output hidden states from this block become the input hidden states for the next block.",
+      "wav": "wav/module8_slide_25.wav",
+      "audio": "audio/module8_slide_25.mp3",
+      "captions": "audio/module8_slide_25.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 26,
+      "title": "Query, Key, and Value",
+      "transcript": "Query, Key, and Value are not separate databases inside the model. They are vectors created from the current hidden states using learned projection matrices.\n\nConceptually, Q equals H multiplied by W Q. K equals H multiplied by W K. And V equals H multiplied by W V.\n\n[tts-break]\n\nThe hidden state H changes with the prompt and with the layer. The W Q, W K, and W V matrices are learned model weights stored in the checkpoint. This is another direct connection between the simple weight example and Transformer attention.",
+      "wav": "wav/module8_slide_26.wav",
+      "audio": "audio/module8_slide_26.mp3",
+      "captions": "audio/module8_slide_26.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 27,
+      "title": "Causal Masking Hides Future Tokens",
+      "transcript": "A generative decoder should not see future tokens while predicting the next one. Causal masking enforces that rule by allowing a position to attend only to itself and earlier positions. That restriction is what makes next-token generation autoregressive. If the model could see the future token during training, next-token prediction would become a cheating problem. The mask prevents that information leak.",
+      "wav": "wav/module8_slide_27.wav",
+      "audio": "audio/module8_slide_27.mp3",
+      "captions": "audio/module8_slide_27.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 28,
+      "title": "Explore one causal attention row",
+      "transcript": "Use the attention demo to click a token and inspect which earlier positions are available to it. Future positions stay blocked, while the allowed positions receive normalized attention weights. The numbers are illustrative, but the masking behavior matches the core idea used in decoder models. When you click a later token, it can look backward to more positions. When you click an early token, only a small part of the sequence is available.",
+      "wav": "wav/module8_slide_28.wav",
+      "audio": "audio/module8_slide_28.mp3",
+      "captions": "audio/module8_slide_28.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 29,
+      "title": "The Model Produces Vocabulary Logits",
+      "transcript": "After the Transformer stack, the model has a context-aware hidden state for the current position. It projects that vector into one raw score for every token in the vocabulary. Those raw scores are called log its.\n\nThe example bars show that “today” has a higher log it than “before,” “and,” or “late.” The exact numbers are only illustrative. The important point is that log its are scores, not probabilities yet.",
+      "wav": "wav/module8_slide_29.wav",
+      "audio": "audio/module8_slide_29.mp3",
+      "captions": "audio/module8_slide_29.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 30,
+      "title": "Convert logits to probabilities",
+      "transcript": "Now compare the two sides. On the left are raw log its such as 4.1, 3.4, and 2.8. Soft max transforms those scores into a probability distribution. On the right, the candidates now have interpretable probabilities such as forty-eight percent, twenty-four percent, and thirteen percent.\n\n[tts-break]\n\nThe Python code does the same thing with a real model. We take the last-position log its, apply soft max, select the top candidates, and decode their token I D's so we can inspect what the model is considering next.",
+      "wav": "wav/module8_slide_30.wav",
+      "audio": "audio/module8_slide_30.mp3",
+      "captions": "audio/module8_slide_30.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 31,
+      "title": "Generation repeats the entire next-token process",
+      "transcript": "Generation is a loop. Start with “The user submitted the request.” The model predicts a token, perhaps “today,” and appends it. The new sequence becomes the input for the next prediction. The next selected token might be “before,” and then another token such as “noon.”\n\nThis is autoregressive generation. Every token changes the context for the token that comes after it.",
+      "wav": "wav/module8_slide_31.wav",
+      "audio": "audio/module8_slide_31.mp3",
+      "captions": "audio/module8_slide_31.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 32,
+      "title": "Part 1 checkpoint",
+      "transcript": "Before moving on, check two foundation ideas.\n\nFirst, during normal inference the learned weights stay fixed, while hidden states change with the current prompt and with each Transformer layer.\n\nSecond, the decoder produces log its. Those scores become a probability distribution, and the decoding strategy decides which token is selected next.\n\nIf those two ideas are clear, the rest of the module has a much stronger foundation.",
+      "wav": "wav/module8_slide_32.wav",
+      "audio": "audio/module8_slide_32.mp3",
+      "captions": "audio/module8_slide_32.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 33,
+      "title": "Part 2 — Generation and Chat Models",
+      "transcript": "Now that the next-token loop is clear, we can control how the next token is chosen. This is where greedy decoding, temperature, and top P enter the picture.\n\n[tts-break]\n\nWe will also look at base, instruct, and chat checkpoints, because the way a model was post-trained changes how you should talk to it.",
+      "wav": "wav/module8_slide_33.wav",
+      "audio": "audio/module8_slide_33.mp3",
+      "captions": "audio/module8_slide_33.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 34,
+      "title": "Greedy decoding chooses the highest-probability token",
+      "transcript": "Greedy decoding always selects the token with the highest probability. It is easy to understand and reproducible, which can be useful for constrained tasks. The tradeoff is that always taking the top choice can make output repetitive or prevent useful alternatives from appearing. Imagine the next-token probabilities are 0.52, 0.28, and 0.20. Greedy decoding always chooses the 0.52 option, even when the alternatives are reasonable.",
+      "wav": "wav/module8_slide_34.wav",
+      "audio": "audio/module8_slide_34.mp3",
+      "captions": "audio/module8_slide_34.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 35,
+      "title": "Temperature changes randomness",
+      "transcript": "Temperature reshapes the token probability distribution before sampling. Lower values make high-probability tokens more dominant, while higher values flatten the distribution and allow more variation. Temperature changes selection behavior, not what the model has learned. At a low temperature, the distribution becomes sharper. At a high temperature, smaller candidates receive more relative probability and are more likely to be sampled.",
+      "wav": "wav/module8_slide_35.wav",
+      "audio": "audio/module8_slide_35.mp3",
+      "captions": "audio/module8_slide_35.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 36,
+      "title": "Temperature and top-p simulator",
+      "transcript": "Use the sliders to see how temperature and top P affect the same set of candidate tokens. Watch the probability bars rather than thinking only in terms of labels like creative or deterministic. The goal is to see exactly which candidates become more or less likely. Move only one control at a time. If you change both sliders together, it becomes harder to tell which setting caused the new behavior.",
+      "wav": "wav/module8_slide_36.wav",
+      "audio": "audio/module8_slide_36.mp3",
+      "captions": "audio/module8_slide_36.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 37,
+      "title": "Temperature vs. top-p on the same distribution",
+      "transcript": "Temperature and top P solve different problems. Temperature reshapes the entire probability distribution, while top P keeps only enough high-probability tokens to reach a chosen cumulative probability threshold. Comparing them on the same distribution makes that distinction much clearer. This is why the two settings should not be described as interchangeable creativity controls. One reshapes probabilities; the other removes the low-probability tail.",
+      "wav": "wav/module8_slide_37.wav",
+      "audio": "audio/module8_slide_37.mp3",
+      "captions": "audio/module8_slide_37.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 38,
+      "title": "Temperature does not make the model smarter",
+      "transcript": "A higher temperature does not add knowledge or reasoning ability. It simply allows more variation during sampling. A lower temperature is more predictable, a higher temperature is more varied, and neither one changes the model's underlying capabilities. If a model does not know a fact, turning temperature up will not create reliable knowledge. It can simply create more varied guesses.",
+      "wav": "wav/module8_slide_38.wav",
+      "audio": "audio/module8_slide_38.mp3",
+      "captions": "audio/module8_slide_38.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 39,
+      "title": "Top-p limits sampling to a probability mass",
+      "transcript": "Top P is also called nucleus sampling. The model sorts candidate tokens by probability and keeps the smallest group whose cumulative probability reaches the threshold. Sampling then happens only inside that reduced group. With top P set to 0.8, the model might keep only the first few candidates whose probabilities together reach about eighty percent and ignore the rest for that sampling step.",
+      "wav": "wav/module8_slide_39.wav",
+      "audio": "audio/module8_slide_39.mp3",
+      "captions": "audio/module8_slide_39.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 40,
+      "title": "Choose decoding settings for two tasks",
+      "transcript": "Decoding settings should match the task. If the goal is to extract an invoice number or produce a fixed label, stable and conservative generation is usually preferable. If the goal is brainstorming or creative variation, sampling may be useful because diversity is part of the requirement. A useful rule is to ask whether variation is a feature or a bug. For extraction, variation is usually a bug. For brainstorming, some variation may be the point.",
+      "wav": "wav/module8_slide_40.wav",
+      "audio": "audio/module8_slide_40.mp3",
+      "captions": "audio/module8_slide_40.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 41,
+      "title": "Use deterministic settings when consistency matters",
+      "transcript": "Consistency is often valuable for extraction, structured output, grading, and grounded RAG. Creative tasks may intentionally allow more variation.\n\nBut there is an important qualification: consistency does not mean that every model should always use greedy decoding.\n\nSome modern checkpoints, especially models with dedicated reasoning modes, publish specific recommended sampling settings. Treat generation settings as part of the model configuration and application design. Read the model card and test the settings instead of applying one recipe to every checkpoint.",
+      "wav": "wav/module8_slide_41.wav",
+      "audio": "audio/module8_slide_41.mp3",
+      "captions": "audio/module8_slide_41.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 42,
+      "title": "Generation quiz",
+      "transcript": "Take a moment to answer the question on the screen before continuing. Ask yourself what temperature actually changes. Does it change the model's knowledge, or does it change the shape of the sampling distribution? The goal of the checkpoint is to separate model capability from decoding behavior.",
+      "wav": "wav/module8_slide_42.wav",
+      "audio": "audio/module8_slide_42.mp3",
+      "captions": "audio/module8_slide_42.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 43,
+      "title": "Base vs. instruct vs. chat checkpoints",
+      "transcript": "Base, instruct, and chat checkpoints can belong to the same model family but behave differently because of post-training and expected input format. Consider the same intent: summarize a paragraph in one sentence.\n\nA base model may simply continue the text. An instruct checkpoint is more likely to treat the sentence as a task. A chat checkpoint expects role-based messages and can use system, user, and assistant turns. The model family matters, but the checkpoint type matters too.",
+      "wav": "wav/module8_slide_43.wav",
+      "audio": "audio/module8_slide_43.mp3",
+      "captions": "audio/module8_slide_43.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 44,
+      "title": "How to Read a Model Name",
+      "transcript": "Model names give useful clues, but they are not complete documentation. For example, q w e n three eight billion tells us the family, generation, and approximate parameter scale. A Llama name that includes instruct tells us the checkpoint received instruction-oriented post-training.\n\n[tts-break]\n\nDifferent families use different naming conventions. Always open the exact model card to verify the license, context length, access requirements, chat format, and hardware recommendations.",
+      "wav": "wav/module8_slide_44.wav",
+      "audio": "audio/module8_slide_44.mp3",
+      "captions": "audio/module8_slide_44.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 45,
+      "title": "Chat models receive roles",
+      "transcript": "Chat A P I's commonly separate messages into roles. The system role defines behavior or high-level rules, the user role contains a request, and assistant messages represent earlier model responses. These roles help preserve conversation structure across turns. The system message is not magical security. It is part of the model input, so real permissions still need to be enforced by application code.",
+      "wav": "wav/module8_slide_45.wav",
+      "audio": "audio/module8_slide_45.mp3",
+      "captions": "audio/module8_slide_45.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 46,
+      "title": "A chat template turns roles into model-specific tokens",
+      "transcript": "Different chat checkpoints expect different special tokens and formatting around roles. The tokenizer's chat template converts a list of system, user, and assistant messages into the exact token sequence expected by that model. This is why a chat template should come from the checkpoint rather than being guessed manually. Two models can use the same visible messages but require different hidden formatting. The chat template handles that checkpoint-specific detail.",
+      "wav": "wav/module8_slide_46.wav",
+      "audio": "audio/module8_slide_46.mp3",
+      "captions": "audio/module8_slide_46.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 47,
+      "title": "Plain text is not always the same as a chat request",
+      "transcript": "A plain string such as “Explain rag” may not be equivalent to a properly formatted chat conversation. An instruction or chat model may rely on special role markers and generation tokens. Using the model's chat template makes the input match the format used during post-training. If a chat model behaves strangely with a plain string, the first thing to check is whether the expected chat template was used.",
+      "wav": "wav/module8_slide_47.wav",
+      "audio": "audio/module8_slide_47.mp3",
+      "captions": "audio/module8_slide_47.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 48,
+      "title": "Part 3 — Running a Local LLM",
+      "transcript": "We have used the high-level pipeline. Now we will open it up and run the same workflow with explicit components. That means loading the tokenizer, loading the model, formatting the chat, generating new token I D's, and decoding them.\n\n[tts-break]\n\nThe benefit is control. Once you understand these pieces, moving from a notebook to a real local application becomes much easier.",
+      "wav": "wav/module8_slide_48.wav",
+      "audio": "audio/module8_slide_48.mp3",
+      "captions": "audio/module8_slide_48.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 49,
+      "title": "Use a Reproducible Environment",
+      "transcript": "Use a supported Python version and keep the project environment isolated. For this module, Python three point eleven is the recommended baseline.\n\nA virtual environment or Conda environment helps prevent one project from changing another project's package versions.\n\n[tts-break]\n\nThe installation cell pins the versions of Transformers, Accelerate, Datasets, P E F T, and T R L used for the module. PyTorch is handled separately because the correct installation depends on the C P U, C U D A version, or platform you are using.",
+      "wav": "wav/module8_slide_49.wav",
+      "audio": "audio/module8_slide_49.mp3",
+      "captions": "audio/module8_slide_49.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 50,
+      "title": "Open the Module 8 lab notebook",
+      "transcript": "The companion notebook brings the practical experiments together in one place. It includes environment setup, tokenization, model loading, next-token probabilities, sampling, structured output validation, memory calculations, and a fixed evaluation set. Run it once unchanged before modifying individual parts. When working through the notebook, run cells in order the first time. After the baseline works, go back and experiment with one variable at a time.",
+      "wav": "wav/module8_slide_50.wav",
+      "audio": "audio/module8_slide_50.mp3",
+      "captions": "audio/module8_slide_50.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 51,
+      "title": "Core Python Libraries for LLM Work",
+      "transcript": "The main libraries each have a different job. pie torch handles tensors and model execution, transformers provides tokenizers and model classes, accelerate helps with device placement, datasets supports data loading, and P E F T or T R L become relevant when we move into adaptation and training workflows. Knowing the role of each library makes error messages easier to interpret. A tokenizer error, a device-placement error, and a dataset error usually come from different parts of the stack.",
+      "wav": "wav/module8_slide_51.wav",
+      "audio": "audio/module8_slide_51.mp3",
+      "captions": "audio/module8_slide_51.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 52,
+      "title": "Load tokenizer and model explicitly",
+      "transcript": "Now we expose the model components that pipeline hid. We still use q w e n three zero point six billion, so the teaching example stays consistent.\n\nAuto tokenizer loads the matching tokenizer. Auto model for causal L M loads the decoder language model. The data type is selected automatically, and device map auto lets the loading stack place model weights on available hardware.\n\nThe model is unchanged. We simply have more direct access to its pieces.",
+      "wav": "wav/module8_slide_52.wav",
+      "audio": "audio/module8_slide_52.mp3",
+      "captions": "audio/module8_slide_52.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 53,
+      "title": "Format a real chat request",
+      "transcript": "A chat checkpoint should receive the message structure it was trained to expect. We create system and user messages, then let the tokenizer apply the model's own chat template.\n\nFor q w e n three, we explicitly set enable thinking to false in this general-purpose example. That keeps the response concise and avoids mixing a model-specific reasoning mode into the basic chat workflow.\n\nThe important habit is to use the checkpoint's own chat template instead of manually guessing its special-token format.",
+      "wav": "wav/module8_slide_53.wav",
+      "audio": "audio/module8_slide_53.mp3",
+      "captions": "audio/module8_slide_53.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 54,
+      "title": "Tokenize, generate, and decode",
+      "transcript": "Here is the complete local inference path in one compact example. We begin with role-based messages, apply the model's chat template, tokenize the formatted text, move the tensors to the model device, and call generate.\n\nAfter generation, we separate the newly generated token I D's from the original prompt and decode only those new tokens. That final decode gives us the assistant response without repeating the entire input.",
+      "wav": "wav/module8_slide_54.wav",
+      "audio": "audio/module8_slide_54.mp3",
+      "captions": "audio/module8_slide_54.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 55,
+      "title": "Device and data type affect memory and speed",
+      "transcript": "Where the model runs has a major effect on performance. A model can be placed on C P U, G P U, or multiple devices, and lower-precision data types can reduce memory use on supported hardware. Device placement and precision should be treated as deployment decisions, not just code details. A model that technically runs on C P U may still be too slow for an interactive application. Fit and usability are different requirements.",
+      "wav": "wav/module8_slide_55.wav",
+      "audio": "audio/module8_slide_55.mp3",
+      "captions": "audio/module8_slide_55.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 56,
+      "title": "CPU, GPU, Apple Silicon, or hosted API?",
+      "transcript": "There is no single correct execution path. A C P U may be enough for a very small or heavily quantized model, Apple Silicon can run many local models with optimized runtimes, a consumer G P U can handle small or medium checkpoints, and a server or hosted A P I may be the better choice for larger workloads. The easiest choice is often the one that meets your latency and privacy needs with the least operational complexity.",
+      "wav": "wav/module8_slide_56.wav",
+      "audio": "audio/module8_slide_56.mp3",
+      "captions": "audio/module8_slide_56.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 57,
+      "title": "Local application architecture",
+      "transcript": "There are two useful local architectures. For a notebook or small prototype, the Python process can load the tokenizer and model directly and run inference on the local C P U or G P U.\n\n[tts-break]\n\nFor a shared application, it is often better to keep the model loaded in a dedicated inference server. The web application sends H T T P requests, and the server manages the expensive model resource. Start with the simple architecture and add a server when sharing or concurrency makes it useful.",
+      "wav": "wav/module8_slide_57.wav",
+      "audio": "audio/module8_slide_57.mp3",
+      "captions": "audio/module8_slide_57.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 58,
+      "title": "A local model can expose an OpenAI-compatible API",
+      "transcript": "Many local inference servers provide an A P I that follows the same general shape as familiar chat-completions interfaces. This lets application code send messages over H T T P while the server handles model loading and generation. It also makes it easier to replace the inference engine later. That compatibility can make application code portable because the client interface stays similar even when the underlying local model changes.",
+      "wav": "wav/module8_slide_58.wav",
+      "audio": "audio/module8_slide_58.mp3",
+      "captions": "audio/module8_slide_58.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 59,
+      "title": "Common serving engines",
+      "transcript": "Several serving tools can expose local or self-hosted models. vee L L M is commonly used for high-throughput G P U serving, llama dot C P P is useful for portable and quantized local inference, oh llama simplifies local model management, and hugging face T G I is another production-oriented serving option. The application architecture should not depend conceptually on only one of them. Do not memorize one product as the architecture. The stable idea is the boundary between the application and the inference service.",
+      "wav": "wav/module8_slide_59.wav",
+      "audio": "audio/module8_slide_59.mp3",
+      "captions": "audio/module8_slide_59.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 60,
+      "title": "Why separate the model server from the application?",
+      "transcript": "Separating the model server from the application gives each layer a clear responsibility. The application handles users, business logic, retrieval, permissions, and validation, while the inference server manages model loading, batching, G P U memory, and token generation. This separation also helps teams scale the two layers independently. The web application may need many lightweight workers while the model server needs expensive G P U resources.",
+      "wav": "wav/module8_slide_60.wav",
+      "audio": "audio/module8_slide_60.mp3",
+      "captions": "audio/module8_slide_60.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 61,
+      "title": "Common local-model problems",
+      "transcript": "Local inference problems usually fall into a few categories. Out-of-memory errors suggest a smaller model, quantization, or shorter context; slow generation may indicate poor device placement; garbled chat can mean the wrong prompt format; and repetitive output often points back to prompts or decoding settings. When debugging, change one dimension at a time: model size, precision, device, context length, prompt format, or generation settings.",
+      "wav": "wav/module8_slide_61.wav",
+      "audio": "audio/module8_slide_61.mp3",
+      "captions": "audio/module8_slide_61.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 62,
+      "title": "Always inspect the model card",
+      "transcript": "Before using any checkpoint, read its model card. Check the intended use, license, architecture, context length, chat format, recommended inference code, and known limitations. A model name alone is not enough to make a reliable deployment decision. The model card is where you verify details that may otherwise be guessed incorrectly, such as context length or the correct chat format.",
+      "wav": "wav/module8_slide_62.wav",
+      "audio": "audio/module8_slide_62.mp3",
+      "captions": "audio/module8_slide_62.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 63,
+      "title": "Part 3 checkpoint",
+      "transcript": "Use this checkpoint to think like an application developer. If many users need the same local model, should every request load a new copy of the model, or should one inference service keep it loaded and accept requests? Choose your answer on the screen, then connect it back to memory use, startup time, and application design.",
+      "wav": "wav/module8_slide_63.wav",
+      "audio": "audio/module8_slide_63.mp3",
+      "captions": "audio/module8_slide_63.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 64,
+      "title": "Part 4 — Choosing and Deploying Models",
+      "transcript": "The next question is not simply, which model is biggest? The better question is, what problem are we solving, how will we measure success, and what is the smallest model that satisfies the requirement?\n\n[tts-break]\n\nWe will connect model size to quality, memory, quantization, latency, hardware, and deployment.",
+      "wav": "wav/module8_slide_64.wav",
+      "audio": "audio/module8_slide_64.mp3",
+      "captions": "audio/module8_slide_64.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 65,
+      "title": "What problem are you actually solving?",
+      "transcript": "Different failures call for different solutions. Missing instructions often point to better prompting, missing or private knowledge points to rag, repeated behavior problems may justify fine-tuning, and a true capability limitation may require a stronger model. Choosing a larger model should not be the automatic first response.\n\n[tts-break]\n\nThis is one of the most useful decision slides in the module. If the problem is missing knowledge, a larger model may still not know your private or current information; retrieval is the more direct fix.",
+      "wav": "wav/module8_slide_65.wav",
+      "audio": "audio/module8_slide_65.mp3",
+      "captions": "audio/module8_slide_65.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 66,
+      "title": "LLM evaluation begins with the real task",
+      "transcript": "A generic benchmark can be useful, but an application needs its own evaluation set. Collect examples that represent the questions, formats, edge cases, and failure modes that matter in the real workflow. Without that baseline, it is difficult to say whether a model or prompt change is actually better. If your real application extracts support categories, an impressive coding benchmark is interesting but not enough evidence for that extraction task.",
+      "wav": "wav/module8_slide_66.wav",
+      "audio": "audio/module8_slide_66.mp3",
+      "captions": "audio/module8_slide_66.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 67,
+      "title": "Create a tiny evaluation table",
+      "transcript": "Start with a small set of examples that you can inspect manually. For a classification task, that might include messages about login, billing, and registration together with the expected labels. A small, trusted set is more useful than relying only on intuition. Ten carefully chosen examples can already reveal patterns that are invisible when you test only one prompt by hand.",
+      "wav": "wav/module8_slide_67.wav",
+      "audio": "audio/module8_slide_67.mp3",
+      "captions": "audio/module8_slide_67.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 68,
+      "title": "A practical model-selection ladder",
+      "transcript": "A practical selection process starts small. Test the small model, improve the prompt, add rag if the problem is missing knowledge, and test again. Move to a medium or large model only when the evaluation set shows that capability is still the limiting factor. This ladder helps avoid expensive overengineering. Each step asks whether the current system already meets the requirement before adding more complexity.",
+      "wav": "wav/module8_slide_68.wav",
+      "audio": "audio/module8_slide_68.mp3",
+      "captions": "audio/module8_slide_68.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 69,
+      "title": "Popular LLM Families and Access Patterns",
+      "transcript": "Model family and access method are different questions.\n\nHosted A P I-first families include Open A I G P T models, Claude from Anthropic, and Gemini from Google. Your application sends requests to provider infrastructure and does not download those hosted model weights.\n\nOpen-weight and hybrid ecosystems include q w e n, Llama, mee strahl, Gemma, DeepSeek, and G P T oss from Open A I. Specific checkpoints can be downloaded and self-hosted, while many are also available through hosting providers.\n\n[tts-break]\n\nNotice that one organization can support both patterns. Open A I offers hosted G P T models and separately publishes G P T oss open-weight models.\n\nAlso remember that open-weight does not automatically mean every dataset, source component, or license condition is unrestricted. Always inspect the exact model card and license.",
+      "wav": "wav/module8_slide_69.wav",
+      "audio": "audio/module8_slide_69.mp3",
+      "captions": "audio/module8_slide_69.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 70,
+      "title": "Three Ways to Use an LLM",
+      "transcript": "The three access paths are easier to remember when you follow where the model weights go.\n\nFor a public local model, you download the weights and run them on your hardware. For a gated Hugging Face model, you first request access, authenticate with a Hugging Face token, download the weights, and then still run locally. For a hosted A P I, the weights stay with the provider and your application sends requests to the provider's infrastructure.\n\n[tts-break]\n\nAsk one question whenever the terminology becomes confusing: where are the model weights actually running?",
+      "wav": "wav/module8_slide_70.wav",
+      "audio": "audio/module8_slide_70.mp3",
+      "captions": "audio/module8_slide_70.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 71,
+      "title": "Public Hugging Face Model: Download and Run Locally",
+      "transcript": "A public Hugging Face checkpoint can usually be downloaded directly without requesting special model access. For example, q w e n three zero point six billion is available as a public checkpoint.\n\nThe Transformers code downloads the tokenizer, configuration, and model files into the local Hugging Face cache. After that, the actual inference runs on your own hardware.\n\n[tts-break]\n\nThis distinction matters. Hugging Face may host the files, but Hugging Face is not necessarily running the model for you. Once the weights are downloaded, your C P U or G P U is doing the generation.\n\nFor a normal public checkpoint, you usually do not need a Hugging Face access token just to download the public files.",
+      "wav": "wav/module8_slide_71.wav",
+      "audio": "audio/module8_slide_71.mp3",
+      "captions": "audio/module8_slide_71.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 72,
+      "title": "Gated Hugging Face Model: Request Access First",
+      "transcript": "A gated Hugging Face repository adds an authorization step before download. The example uses Meta Llama three point one eight billion Instruct, a text-generation checkpoint that works with the causal language-model classes used here.\n\nThe workflow is: sign in, open the model page, request access or accept the terms, receive access, and authenticate from your environment with a Hugging Face token.\n\nAfter authentication, the tokenizer and model files can be downloaded. The Hugging Face token authorizes access to the repository. It does not mean Hugging Face must perform the inference after the files are on your machine.",
+      "wav": "wav/module8_slide_72.wav",
+      "audio": "audio/module8_slide_72.mp3",
+      "captions": "audio/module8_slide_72.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 73,
+      "title": "Hosted LLM APIs: Send a Request, Receive a Response",
+      "transcript": "Hosted inference follows a different path. The provider keeps the model on its infrastructure. Your application authenticates, sends messages to an A P I, and receives generated output.\n\nExamples include the Open A I A P I, Claude, Gemini, mee strahl, and Hugging Face Inference Providers.\n\n[tts-break]\n\nThe Python example reads the Hugging Face token from the H F token environment variable. This is deliberate. Never paste private A P I keys or access tokens directly into a notebook that may be shared or committed to GitHub.\n\nHosted services may use free quotas, credits, usage tiers, or pay-as-you-go billing. Always check current pricing and rate limits before deployment.",
+      "wav": "wav/module8_slide_73.wav",
+      "audio": "audio/module8_slide_73.mp3",
+      "captions": "audio/module8_slide_73.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 74,
+      "title": "Choose the Access Path",
+      "transcript": "When choosing an access path, think about control, hardware, privacy, operational effort, and cost.\n\nA public local checkpoint gives you direct control and normally costs whatever your own compute costs. A gated local checkpoint is similar, except that you must first receive access and authenticate before downloading the weights.\n\nA local model server keeps the weights on infrastructure you control and exposes your own A P I. Hugging Face Inference Providers and direct commercial A P I services keep the model on provider infrastructure and charge according to their service model.\n\n[tts-break]\n\nA useful shortcut is this: if local privacy and control matter most, downloadable weights may be attractive. If you do not want to manage G P U infrastructure, a hosted A P I is often simpler. If the model is gated, request access first and then decide whether local inference is practical for your hardware.",
+      "wav": "wav/module8_slide_74.wav",
+      "audio": "audio/module8_slide_74.mp3",
+      "captions": "audio/module8_slide_74.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 75,
+      "title": "Small, Medium, and Large Are Informal Categories",
+      "transcript": "There is no universal industry definition of a small, medium, or large language model. The ranges here are teaching shorthand.\n\nBelow roughly four billion parameters is a useful small-model category. Around four to fourteen billion is a practical medium range. Roughly fifteen to forty billion represents heavier local models, and still larger models or mixture-of-experts systems often require distributed or managed infrastructure.\n\nThe exact deployment fit depends on architecture, active parameters, quantization, context length, and hardware. Parameter count is only the first estimate.",
+      "wav": "wav/module8_slide_75.wav",
+      "audio": "audio/module8_slide_75.mp3",
+      "captions": "audio/module8_slide_75.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 76,
+      "title": "Small LLMs Are a Practical Starting Point",
+      "transcript": "Small models are fast to download, use less memory, and are excellent for building the first complete version of an application. They are often strong enough for constrained extraction, classification, rewriting, or simple assistants. Start small and let evaluation tell you whether you need more. A small model that is fast, private, and accurate enough can be a better production choice than a much larger model that is only slightly more accurate.",
+      "wav": "wav/module8_slide_76.wav",
+      "audio": "audio/module8_slide_76.mp3",
+      "captions": "audio/module8_slide_76.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 77,
+      "title": "Medium models are a common local sweet spot",
+      "transcript": "Models around seven to fourteen billion parameters are a common middle ground for local work. They can provide stronger instruction following and richer generation while still being practical on capable workstations, especially with quantization. rag assistants, coding help, and domain prototypes often fit well in this range. This range is often where quantization becomes especially useful because it can turn a model that is too large in full precision into something practical on one workstation.",
+      "wav": "wav/module8_slide_77.wav",
+      "audio": "audio/module8_slide_77.mp3",
+      "captions": "audio/module8_slide_77.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 78,
+      "title": "Large models increase capacity and infrastructure needs",
+      "transcript": "Larger dense models can improve difficult reasoning, multilingual work, coding, and robustness, but they require much more memory and serving infrastructure. The important question is whether the quality improvement justifies the added latency, cost, and operational complexity. The operational cost grows too: larger models can mean more G P U's, slower startup, more complex serving, and higher latency under load.",
+      "wav": "wav/module8_slide_78.wav",
+      "audio": "audio/module8_slide_78.mp3",
+      "captions": "audio/module8_slide_78.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 79,
+      "title": "Parameter count is not the whole story",
+      "transcript": "Two models with similar parameter counts can behave very differently. Training data, architecture, tokenizer, context length, post-training, and optimization all matter. Treat parameter count as one deployment signal, not as a complete quality score. Think of parameter count as engine size, not total vehicle performance. Training quality, architecture, and post-training can change the result dramatically.",
+      "wav": "wav/module8_slide_79.wav",
+      "audio": "audio/module8_slide_79.mp3",
+      "captions": "audio/module8_slide_79.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 80,
+      "title": "MoE: total parameters vs. active parameters",
+      "transcript": "Mixture-of-experts models separate total capacity from active computation. The server may store many expert parameters, while a router sends each token through only a subset of those experts. Active parameters affect per-token compute, but total weights still matter for memory and serving. For example, a model may store many experts but route each token through only two of them. Compute per token can be lower than the total parameter count suggests, while memory still has to account for the stored experts.",
+      "wav": "wav/module8_slide_80.wav",
+      "audio": "audio/module8_slide_80.mp3",
+      "captions": "audio/module8_slide_80.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 81,
+      "title": "Estimate Weight and KV-Cache Memory",
+      "transcript": "Inference memory has at least two important components. Model weight memory is mostly determined by the number of parameters and the precision used to store them. That part is relatively fixed once the checkpoint and precision are chosen.\n\nK V cache memory behaves differently. It grows with sequence length, batch size, layer count, K V heads, head dimension, and precision. A model can fit its weights and still run out of memory when the context or concurrency grows.",
+      "wav": "wav/module8_slide_81.wav",
+      "audio": "audio/module8_slide_81.mp3",
+      "captions": "audio/module8_slide_81.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 82,
+      "title": "7B model: raw weights are only the starting point",
+      "transcript": "The bar chart gives a fast estimate for a seven-billion-parameter dense model. At F P thirty-two, raw weights are about twenty-eight gigabytes. At F P sixteen, about fourteen gigabytes. Eight-bit weights are roughly seven gigabytes, and four-bit weights are roughly three and a half gigabytes.\n\n[tts-break]\n\nThese numbers describe raw weight storage only. Real inference needs additional memory for the K V cache, temporary buffers, framework overhead, and other runtime structures.",
+      "wav": "wav/module8_slide_82.wav",
+      "audio": "audio/module8_slide_82.mp3",
+      "captions": "audio/module8_slide_82.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 83,
+      "title": "KV cache: 4K context with MHA vs. GQA",
+      "transcript": "K V cache grows approximately with sequence length. If one thousand tokens require one unit of cache under a fixed architecture, four thousand tokens require roughly four times as much, and eight thousand roughly eight times as much.\n\nGrouped-query attention can reduce that memory because it uses fewer K V heads than ordinary multi-head attention. That architecture difference becomes especially important with long contexts and many concurrent requests.",
+      "wav": "wav/module8_slide_83.wav",
+      "audio": "audio/module8_slide_83.mp3",
+      "captions": "audio/module8_slide_83.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 84,
+      "title": "Fits in VRAM ≠ runs fast",
+      "transcript": "Fitting in V ram and running fast are different requirements. Two models can both fit comfortably in memory and still have very different generation speeds.\n\nThe example compares one workload generating about seven tokens per second with another generating about forty-two. Memory capacity answers, “Can I load it?” Latency and throughput answer, “Is it usable for my application?” Measure both.",
+      "wav": "wav/module8_slide_84.wav",
+      "audio": "audio/module8_slide_84.mp3",
+      "captions": "audio/module8_slide_84.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 85,
+      "title": "Quantization reduces numerical precision",
+      "transcript": "Quantization stores model weights with fewer bits. That can reduce memory dramatically and may improve inference efficiency, although there can be a quality tradeoff. Eight-bit and four-bit formats are common choices for local model deployment. The practical tradeoff is simple: use fewer bits to save memory, then evaluate whether the quality remains good enough for the task.",
+      "wav": "wav/module8_slide_85.wav",
+      "audio": "audio/module8_slide_85.mp3",
+      "captions": "audio/module8_slide_85.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 86,
+      "title": "Why Quantization Matters in Practice",
+      "transcript": "Quantization can make a model practical on hardware that could not hold the full-precision weights. This is one reason local experimentation with medium-sized models is possible on consumer hardware. Always evaluate the quantized model because memory savings are useful only if task quality remains acceptable. Quantization is especially important when the goal is local deployment rather than training, because inference often tolerates reduced precision well.",
+      "wav": "wav/module8_slide_86.wav",
+      "audio": "audio/module8_slide_86.mp3",
+      "captions": "audio/module8_slide_86.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 87,
+      "title": "Model-size decision helper",
+      "transcript": "Use the decision helper as a starting point rather than a benchmark. Consider task difficulty, privacy requirements, available hardware, and latency goals. Then validate the recommendation by running real examples through candidate models. Use the recommendation as a starting hypothesis. The final decision should come from real measurements on your workload.",
+      "wav": "wav/module8_slide_87.wav",
+      "audio": "audio/module8_slide_87.mp3",
+      "captions": "audio/module8_slide_87.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 88,
+      "title": "Part 5 — Prompting, Structured Outputs, and Grounding",
+      "transcript": "Now we move from choosing a model to controlling how the application communicates with it. Good prompting is less about clever phrases and more about clear software requirements: the task, the context, the constraints, and the output format.\n\n[tts-break]\n\nWe will also make the model's output safer to use by validating structured data and grounding factual answers in evidence.",
+      "wav": "wav/module8_slide_88.wav",
+      "audio": "audio/module8_slide_88.mp3",
+      "captions": "audio/module8_slide_88.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 89,
+      "title": "A useful prompt has clear parts",
+      "transcript": "A practical prompt is easier to debug when its parts are explicit. Separate the system role, the task, the context, the constraints, and the required output format. Clear structure makes it easier to identify what should change when the output is wrong. If the output is wrong, this structure tells you where to look. Was the task unclear, was the context incomplete, were the constraints missing, or was the output format underspecified?",
+      "wav": "wav/module8_slide_89.wav",
+      "audio": "audio/module8_slide_89.mp3",
+      "captions": "audio/module8_slide_89.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 90,
+      "title": "Bad prompt → engineered prompt",
+      "transcript": "Use the support message as a concrete prompting example: “My account was charged twice and I need a refund.” A vague request such as “Analyze this message” leaves many decisions undefined.\n\nA stronger prompt defines the allowed categories and requests a specific machine-readable output containing category, urgency, and summary. Better prompting is not about making the prompt longer. It is about making the requirements clearer and testable.",
+      "wav": "wav/module8_slide_90.wav",
+      "audio": "audio/module8_slide_90.mp3",
+      "captions": "audio/module8_slide_90.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 91,
+      "title": "Zero-shot prompting gives the task directly",
+      "transcript": "Zero-shot prompting asks the model to perform a task without worked examples. Strong instruction models can handle many common tasks this way, especially when the request, constraints, and output format are clear. It is usually the simplest baseline to try first. Always try a simple zero-shot baseline before adding many examples. You may find that the model already handles the task well enough.",
+      "wav": "wav/module8_slide_91.wav",
+      "audio": "audio/module8_slide_91.mp3",
+      "captions": "audio/module8_slide_91.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 92,
+      "title": "Few-shot prompting demonstrates the pattern",
+      "transcript": "Few-shot prompting adds a small number of examples before the new request. The examples can clarify ambiguous labels, tone, or formatting and improve consistency. They also consume context tokens, so include them because they improve measured performance, not simply because more examples seem better. A good example teaches the pattern you want. A poor or inconsistent example can teach the wrong pattern just as effectively.",
+      "wav": "wav/module8_slide_92.wav",
+      "audio": "audio/module8_slide_92.mp3",
+      "captions": "audio/module8_slide_92.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 93,
+      "title": "Separate instructions from data",
+      "transcript": "Instructions and data should be clearly separated. Delimiters, labeled fields, or structured formats make it easier for the model to distinguish what it should do from the content it should analyze. This becomes especially important when external or untrusted text enters the prompt. This separation also supports security because retrieved or user-provided text should not be confused with trusted application instructions.",
+      "wav": "wav/module8_slide_93.wav",
+      "audio": "audio/module8_slide_93.mp3",
+      "captions": "audio/module8_slide_93.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 94,
+      "title": "Applications often need data, not prose",
+      "transcript": "Many applications need structured data rather than prose. For the duplicate-charge example, we can require three fields: category, urgency, and summary. We can also define the allowed values before generation.\n\nA useful output might classify the request as billing, assign medium urgency, and summarize that a duplicate charge occurred and a refund was requested. Because the structure is explicit, the application can validate it before using it.",
+      "wav": "wav/module8_slide_94.wav",
+      "audio": "audio/module8_slide_94.mp3",
+      "captions": "audio/module8_slide_94.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 95,
+      "title": "Validate JSON after generation",
+      "transcript": "Once the model returns jay son, parse it and validate the values. The code first checks that the category belongs to the allowed category set and that urgency belongs to the allowed urgency set.\n\nThis is an important software boundary. Asking for jay son is not the same thing as receiving trustworthy application data. Parse first, validate second.",
+      "wav": "wav/module8_slide_95.wav",
+      "audio": "audio/module8_slide_95.mp3",
+      "captions": "audio/module8_slide_95.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 96,
+      "title": "Valid JSON is not enough",
+      "transcript": "The example on the screen is valid jay son, but it is not valid application data. The category is “refund,” even though refund is not one of the allowed labels. The urgency is the number seven, even though the application expects low, medium, or high.\n\nA parser only answers whether the syntax is readable. Schema and business validation answer whether the data is acceptable.",
+      "wav": "wav/module8_slide_96.wav",
+      "audio": "audio/module8_slide_96.mp3",
+      "captions": "audio/module8_slide_96.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 97,
+      "title": "When Structured Output Fails",
+      "transcript": "A robust structured-output workflow expects failures. Generate the response, parse it, validate the schema, and use a small bounded retry when repair is appropriate. If validation still fails, stop predictably rather than passing malformed data deeper into the system.\n\n[tts-break]\n\nRetries should be bounded. If the model repeatedly violates the schema, returning a controlled error is safer than creating an endless generation loop.",
+      "wav": "wav/module8_slide_97.wav",
+      "audio": "audio/module8_slide_97.mp3",
+      "captions": "audio/module8_slide_97.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 98,
+      "title": "Structured-output checkpoint",
+      "transcript": "Before continuing, look at the malformed output in the question and decide what your application should do. The important habit is to treat model output as untrusted data. Choose an answer first. Then think about the safe sequence: parse, validate, retry only when appropriate, and fail predictably if validation still does not pass.",
+      "wav": "wav/module8_slide_98.wav",
+      "audio": "audio/module8_slide_98.mp3",
+      "captions": "audio/module8_slide_98.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 99,
+      "title": "Fluent output can still be wrong",
+      "transcript": "Language models are optimized to produce plausible continuations, not to guarantee that every statement is true. A polished answer can still contain unsupported details, wrong dates, or fabricated sources. Fluency should never be treated as evidence of correctness. Confidence in tone is not confidence in fact. A smooth paragraph and a correct answer are two different properties.",
+      "wav": "wav/module8_slide_99.wav",
+      "audio": "audio/module8_slide_99.mp3",
+      "captions": "audio/module8_slide_99.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 100,
+      "title": "An LLM is not a fact database",
+      "transcript": "A useful failure test is to ask for a citation that does not exist. A model may produce a convincing-looking title, journal, author list, or D O I even though the source is fictional. If an application needs verifiable facts, connect generation to trusted evidence and validate the result. This is why citation-sensitive applications should retrieve sources first and then verify that the generated answer is actually supported by those sources.",
+      "wav": "wav/module8_slide_100.wav",
+      "audio": "audio/module8_slide_100.mp3",
+      "captions": "audio/module8_slide_100.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 101,
+      "title": "Grounding connects generation to evidence",
+      "transcript": "Grounding becomes clearer when we compare the same question with and without evidence. Suppose the user asks for the refund deadline. Without grounding, the model might confidently say thirty days even if that number was never provided.\n\n[tts-break]\n\nNow provide a retrieved document stating that refund requests must be submitted within fourteen days. The model can answer fourteen days, and the application can check that statement against the evidence. Grounding does not guarantee correctness, but it creates something concrete to verify.",
+      "wav": "wav/module8_slide_101.wav",
+      "audio": "audio/module8_slide_101.mp3",
+      "captions": "audio/module8_slide_101.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 102,
+      "title": "The context window is the model's working input",
+      "transcript": "The context window is the tokenized information available in a single request. It may include system instructions, conversation history, examples, retrieved rag chunks, and the current question. Because all of these compete for the same context budget, retrieval and prompt design have to work together. If you add more conversation history or more retrieved chunks, something else may need to be removed or compressed to stay within the context budget.",
+      "wav": "wav/module8_slide_102.wav",
+      "audio": "audio/module8_slide_102.mp3",
+      "captions": "audio/module8_slide_102.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 103,
+      "title": "Part 6 — Evaluation and Model Comparison",
+      "transcript": "At this point we can generate answers, but we still need a disciplined way to decide whether a change is actually better. Evaluation gives us that discipline.\n\n[tts-break]\n\nWe will keep the examples, decoding settings, and rubric fixed so changes in quality can be connected to the model or prompt rather than to a changing experiment.",
+      "wav": "wav/module8_slide_103.wav",
+      "audio": "audio/module8_slide_103.mp3",
+      "captions": "audio/module8_slide_103.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 104,
+      "title": "Use a fixed 10-prompt evaluation set",
+      "transcript": "One impressive response is not enough to evaluate a model. A small fixed set can cover definition, extraction, formatting, hallucination, rag behavior, and model-selection decisions. Reuse the same set whenever you change the model or prompt so the comparison stays fair. The set does not need to be large to be useful. It needs to be representative, stable, and difficult enough to expose the failures you care about.",
+      "wav": "wav/module8_slide_104.wav",
+      "audio": "audio/module8_slide_104.mp3",
+      "captions": "audio/module8_slide_104.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 105,
+      "title": "Measure exact-match accuracy",
+      "transcript": "For tasks with fixed labels or exact fields, accuracy is a useful starting metric. Compare each prediction with the expected result and count the proportion that match. It is simple, but it only works when the task has a clearly defined correct output. Exact match is intentionally strict. It is useful for labels and structured fields, but it can be unfair for open-ended text where several answers may be acceptable.",
+      "wav": "wav/module8_slide_105.wav",
+      "audio": "audio/module8_slide_105.mp3",
+      "captions": "audio/module8_slide_105.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 106,
+      "title": "Different tasks need different metrics",
+      "transcript": "Evaluation should match the task. Classification may use accuracy or F1, extraction can compare fields, summaries may need human review, and rag answers need faithfulness and citation checks in addition to answer quality. No single metric describes every L L M application. The metric should reflect what failure actually matters to the application, not simply what is easiest to calculate.",
+      "wav": "wav/module8_slide_106.wav",
+      "audio": "audio/module8_slide_106.mp3",
+      "captions": "audio/module8_slide_106.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 107,
+      "title": "Leaderboard scores rarely answer your application question",
+      "transcript": "Public benchmarks can reveal broad capabilities, but they do not automatically predict performance on your workflow. Your application may care about format compliance, refusal behavior, private terminology, latency, or a specific failure cost that the benchmark never measures. A leaderboard can help shortlist candidates. Your own evaluation determines whether a candidate belongs in your system.",
+      "wav": "wav/module8_slide_107.wav",
+      "audio": "audio/module8_slide_107.mp3",
+      "captions": "audio/module8_slide_107.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 108,
+      "title": "LLM-as-a-judge can help, but it is not ground truth",
+      "transcript": "Another language model can help score relevance, style, or groundedness at scale. That can be useful, but the judge can also be biased or inconsistent. Calibrate automated judging against a smaller set of human-reviewed examples before trusting the scores. If the judge disagrees with human reviewers on important cases, the automated score should not be treated as authoritative.",
+      "wav": "wav/module8_slide_108.wav",
+      "audio": "audio/module8_slide_108.mp3",
+      "captions": "audio/module8_slide_108.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 109,
+      "title": "Run the same task across model sizes",
+      "transcript": "When comparing model sizes, keep the experiment stable. Use the same prompt set, the same decoding settings, and the same evaluation rubric for every candidate.\n\nThe code can expose one common evaluation function even if one model runs locally and another model is reached through a remote endpoint. The point is to compare the models, not accidentally compare different test conditions.",
+      "wav": "wav/module8_slide_109.wav",
+      "audio": "audio/module8_slide_109.mp3",
+      "captions": "audio/module8_slide_109.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 110,
+      "title": "Record more than accuracy",
+      "transcript": "Accuracy is not the only result that matters. The illustrative comparison shows a small model with lower quality but very low latency, a medium model with a substantial quality improvement, and a large model with only a small additional quality gain but much higher latency and cost.\n\n[tts-break]\n\nThat creates the real deployment question: if the medium model already passes the requirement, is the extra cost of the large model justified?",
+      "wav": "wav/module8_slide_110.wav",
+      "audio": "audio/module8_slide_110.mp3",
+      "captions": "audio/module8_slide_110.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 111,
+      "title": "Track prompts as versioned application code",
+      "transcript": "Prompt changes can alter behavior as much as ordinary code changes. Save prompt versions together with model identifiers, decoding settings, and evaluation results. That history makes regressions easier to reproduce and successful configurations easier to recover. If prompt version three performs worse than version two, versioning lets you reproduce the regression instead of guessing what changed.",
+      "wav": "wav/module8_slide_111.wav",
+      "audio": "audio/module8_slide_111.mp3",
+      "captions": "audio/module8_slide_111.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 112,
+      "title": "Cost and latency calculator",
+      "transcript": "Use the calculator to compare scenarios rather than memorize today's prices. Enter the current input and output token prices, request volume, and measured generation speed. The result gives a rough cost and generation-time estimate that can support model and deployment decisions. Treat the result as an estimate. Network time, queueing, prompt processing, and batching can all make real end-to-end latency different.",
+      "wav": "wav/module8_slide_112.wav",
+      "audio": "audio/module8_slide_112.mp3",
+      "captions": "audio/module8_slide_112.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 113,
+      "title": "Use the smallest model that passes your evaluation",
+      "transcript": "Start with the smallest model that meets the task's quality requirement. If it passes the evaluation set, a larger model may add cost and latency without creating meaningful value. Scale up only when measured failures justify the extra capability. Smaller models can also be easier to host privately, scale horizontally, and update quickly.",
+      "wav": "wav/module8_slide_113.wav",
+      "audio": "audio/module8_slide_113.mp3",
+      "captions": "audio/module8_slide_113.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 114,
+      "title": "Evaluation checkpoint",
+      "transcript": "Use the checkpoint to choose the stronger evaluation practice. A fair comparison should hold the test set, settings, and rubric constant. Answer the question on the screen first. The larger model or the most impressive single response is not automatically the better application choice.",
+      "wav": "wav/module8_slide_114.wav",
+      "audio": "audio/module8_slide_114.mp3",
+      "captions": "audio/module8_slide_114.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 115,
+      "title": "Part 7 — Fine-Tuning and LoRA",
+      "transcript": "Fine-tuning is useful, but it should not be the first tool we reach for. We will first ask whether the problem is really about model behavior, or whether prompting or rag would solve it more simply.\n\n[tts-break]\n\nThen we will compare full fine-tuning with low rah and look at the kind of training data an instruction model needs.",
+      "wav": "wav/module8_slide_115.wav",
+      "audio": "audio/module8_slide_115.mp3",
+      "captions": "audio/module8_slide_115.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 116,
+      "title": "When should you consider fine-tuning?",
+      "transcript": "Fine-tuning is useful when you have a stable behavior you want the model to learn repeatedly and prompting or rag does not solve it reliably. Examples include specialized classification, a consistent response format, or a domain-specific behavior. Frequently changing facts are usually better handled through retrieval. A useful test is to ask whether the missing capability is behavior or knowledge. Fine-tuning is better suited to stable behavior; rag is better suited to changing external knowledge.",
+      "wav": "wav/module8_slide_116.wav",
+      "audio": "audio/module8_slide_116.mp3",
+      "captions": "audio/module8_slide_116.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 117,
+      "title": "Full fine-tuning updates all model parameters",
+      "transcript": "Full fine-tuning computes gradients and updates the model's trainable weights across the whole network. That provides maximum flexibility, but it also requires much more G P U memory, compute, storage, and training infrastructure than lightweight adaptation. Because so many weights are trainable, the optimizer also needs substantial memory, which is one reason full fine-tuning is expensive.",
+      "wav": "wav/module8_slide_117.wav",
+      "audio": "audio/module8_slide_117.mp3",
+      "captions": "audio/module8_slide_117.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 118,
+      "title": "LoRA trains small adapter matrices",
+      "transcript": "Full fine-tuning and low rah differ mainly in how many parameters are updated. Full fine-tuning computes gradients across the base model and changes a very large number of weights.\n\nLow rah keeps the base model frozen and adds small trainable low-rank adapter matrices to selected layers. Conceptually, the final transformation combines the frozen base behavior with a small learned adjustment. That is why low rah can be much more practical on limited hardware.",
+      "wav": "wav/module8_slide_118.wav",
+      "audio": "audio/module8_slide_118.mp3",
+      "captions": "audio/module8_slide_118.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 119,
+      "title": "PEFT libraries make adapter training practical",
+      "transcript": "Parameter-efficient fine-tuning libraries provide implementations of low rah and related approaches. A small configuration can control adapter rank, scaling, dropout, and task type. The correct target modules still depend on the architecture, so do not copy one configuration blindly across every model. low rah rank and target modules affect both training cost and adaptation capacity, so they should be treated as experiment settings rather than magic defaults.",
+      "wav": "wav/module8_slide_119.wav",
+      "audio": "audio/module8_slide_119.mp3",
+      "captions": "audio/module8_slide_119.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 120,
+      "title": "Instruction-tuning data format",
+      "transcript": "Supervised instruction tuning usually pairs a request with the response you want the model to learn. For chat models, the data often uses system, user, and assistant messages that match the model's conversation format. Consistent formatting is as important in training data as it is during inference. The quality of these examples matters greatly. If the target answers are inconsistent, the adapter learns that inconsistency.",
+      "wav": "wav/module8_slide_120.wav",
+      "audio": "audio/module8_slide_120.mp3",
+      "captions": "audio/module8_slide_120.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 121,
+      "title": "Install PEFT for LoRA",
+      "transcript": "The P E F T package provides common parameter-efficient adaptation methods such as low rah. A training workflow may also use transformers, datasets, accelerate, and sometimes T R L. Install only the pieces required for the adaptation experiment you are actually running. Installing a library is the easy part. The harder part is defining a good dataset and a useful evaluation before training begins.",
+      "wav": "wav/module8_slide_121.wav",
+      "audio": "audio/module8_slide_121.mp3",
+      "captions": "audio/module8_slide_121.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 122,
+      "title": "Measure How Much LoRA Actually Trains",
+      "transcript": "After low rah adapters are attached, measure the trainable parameter count instead of simply assuming the configuration is lightweight.\n\nThe code counts parameters whose requires grad flag is true, counts the total parameters, and calculates the trainable percentage.\n\nThis is a useful verification step. A low rah configuration only helps if it targets the intended modules and leaves the expected fraction of the base model frozen.",
+      "wav": "wav/module8_slide_122.wav",
+      "audio": "audio/module8_slide_122.mp3",
+      "captions": "audio/module8_slide_122.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 123,
+      "title": "Fine-Tuning Scope for This Module",
+      "transcript": "For an applications-focused workflow, the important ideas are when to fine-tune, when not to, how low rah works, what the dataset looks like, and what the cost tradeoffs are. Large-scale distributed training and optimizer research belong to a deeper model-training workflow. The goal here is to understand the decision and the workflow well enough to use low rah responsibly, not to turn this module into a large-scale model-training course.",
+      "wav": "wav/module8_slide_123.wav",
+      "audio": "audio/module8_slide_123.mp3",
+      "captions": "audio/module8_slide_123.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 124,
+      "title": "Fine-tuning checkpoint",
+      "transcript": "Take a moment to classify the problem before choosing the technique. The policy document in the question changes frequently, so ask whether we need to change model behavior or simply provide newer knowledge at request time. Choose your answer on the screen, then connect it back to the difference between rag and fine-tuning.",
+      "wav": "wav/module8_slide_124.wav",
+      "audio": "audio/module8_slide_124.mp3",
+      "captions": "audio/module8_slide_124.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 125,
+      "title": "Part 8 — Safety, Tools, and Agentic RAG",
+      "transcript": "The final part places the L L M inside a real application boundary. The model can read untrusted text, request tools, and influence application behavior, so software controls around the model become essential.\n\n[tts-break]\n\nWe will finish by distinguishing ordinary tool calling from an agentic loop, which prepares the transition to Agentic rag.",
+      "wav": "wav/module8_slide_125.wav",
+      "audio": "audio/module8_slide_125.mp3",
+      "captions": "audio/module8_slide_125.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 126,
+      "title": "Privacy depends on deployment and data flow",
+      "transcript": "Before sending data to any model endpoint, identify what leaves the application, where it is processed, what is retained, and what is logged. Local deployment can increase control, but it does not automatically make an application private or secure. Data handling has to be designed explicitly. Draw the data path if necessary: user input, application logs, retrieval system, model endpoint, and monitoring. Privacy questions become much easier when the path is explicit.",
+      "wav": "wav/module8_slide_126.wav",
+      "audio": "audio/module8_slide_126.mp3",
+      "captions": "audio/module8_slide_126.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 127,
+      "title": "Prompt injection is an application problem, not just a prompt problem",
+      "transcript": "External text can contain instructions aimed at the model. That text may come from users, retrieved documents, web pages, or uploaded files. Treat it as untrusted content and enforce permissions and security rules in application code rather than relying on the model to protect itself. A stronger system prompt alone is not a complete defense. Security-sensitive actions must be restricted by software controls outside the model.",
+      "wav": "wav/module8_slide_127.wav",
+      "audio": "audio/module8_slide_127.mp3",
+      "captions": "audio/module8_slide_127.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 128,
+      "title": "Indirect prompt injection through retrieved content",
+      "transcript": "rag can retrieve malicious instructions along with useful information. A retrieved document should be treated as evidence, not as an authority that can override system rules. Tool permissions and access controls must remain outside the model. This is especially important for web-connected rag, because a retrieved page may contain instructions written specifically to manipulate an A I system.",
+      "wav": "wav/module8_slide_128.wav",
+      "audio": "audio/module8_slide_128.mp3",
+      "captions": "audio/module8_slide_128.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 129,
+      "title": "Red-team the application, not only the prompt",
+      "transcript": "Adversarial testing should cover the whole application. Test prompt injection, attempts to expose sensitive data, jailbreak behavior, and unsafe tool arguments. When a failure is found, record the input, the expected safe behavior, and the mitigation so the case can remain in the evaluation set. Each discovered failure should become a regression test. That way, a future prompt or model update does not silently reintroduce the same vulnerability.",
+      "wav": "wav/module8_slide_129.wav",
+      "audio": "audio/module8_slide_129.mp3",
+      "captions": "audio/module8_slide_129.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 130,
+      "title": "Sometimes normal software is better",
+      "transcript": "An L L M adds uncertainty, latency, cost, and a larger security surface. Exact calculations are often better handled by deterministic code, simple lookups by a database, and fixed business rules by normal validation logic. Use an L L M when flexible language understanding or generation creates real value. Choosing not to use an L L M can be a strong engineering decision when deterministic software solves the problem more reliably.",
+      "wav": "wav/module8_slide_130.wav",
+      "audio": "audio/module8_slide_130.mp3",
+      "captions": "audio/module8_slide_130.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 131,
+      "title": "An LLM can request a function instead of writing the result itself",
+      "transcript": "Tool calling is easiest to understand with a concrete example. Suppose the user asks for the current weather in Greensboro. Instead of inventing an answer, the L L M can propose a structured call to a `get_weather` function with Greensboro as the city argument.\n\n[tts-break]\n\nThe application validates the request, executes the actual weather function, and receives structured data such as temperature and condition. That result can then be returned to the model so it can write a natural-language answer. The model proposes the call; the software performs it.",
+      "wav": "wav/module8_slide_131.wav",
+      "audio": "audio/module8_slide_131.mp3",
+      "captions": "audio/module8_slide_131.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 132,
+      "title": "A tool needs a clear schema",
+      "transcript": "A tool needs a clear schema. The weather example defines the tool name, explains its purpose, and specifies that `city` is a required string.\n\nThat means the application can accept a request such as Greensboro and reject an invalid argument such as a number. The schema is the contract between model output and application code.",
+      "wav": "wav/module8_slide_132.wav",
+      "audio": "audio/module8_slide_132.mp3",
+      "captions": "audio/module8_slide_132.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 133,
+      "title": "Never execute model-generated arguments blindly",
+      "transcript": "Never send model-generated arguments directly to a real function. First validate the schema, then check whether the user is authorized, then apply any business rules, and only then execute the tool.\n\nThe L L M can suggest an action, but it must not be the component that grants itself permission to perform that action.",
+      "wav": "wav/module8_slide_133.wav",
+      "audio": "audio/module8_slide_133.mp3",
+      "captions": "audio/module8_slide_133.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 134,
+      "title": "Tool calling vs. an agent",
+      "transcript": "Tool calling and agentic behavior are related, but they are not the same thing.\n\nA single tool call can be one model decision. The user asks for weather, the model proposes the weather function, the application runs it, and the model produces an answer.\n\nAn agent adds a control loop. It observes the current state, decides what to do, may call a tool, observes the result, updates its state, and decides again until a stopping condition is reached.\n\n[tts-break]\n\nAgentic does not mean uncontrolled. A useful agent still needs allowed actions, validation, permissions, state management, stopping conditions, and evaluation around the L L M.",
+      "wav": "wav/module8_slide_134.wav",
+      "audio": "audio/module8_slide_134.mp3",
+      "captions": "audio/module8_slide_134.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 135,
+      "title": "One complete LLM application architecture",
+      "transcript": "A complete L L M application has controls before, around, and after the model. Before the model, we may have authentication, authorization, retrieval filters, and input validation. Around the model, we construct prompts, call the L L M, and orchestrate approved tools.\n\nAfter the model, we validate outputs, verify citations, log important events, collect metrics, evaluate quality, and monitor behavior. The model is one component inside that larger software system.",
+      "wav": "wav/module8_slide_135.wav",
+      "audio": "audio/module8_slide_135.mp3",
+      "captions": "audio/module8_slide_135.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 136,
+      "title": "A Complete RAG Request from the LLM Side",
+      "transcript": "A RAG request is easier to understand when we follow one concrete question. Suppose the user asks, “What is the refund deadline?” The retriever finds a chunk stating that refund requests must be submitted within fourteen days.\n\nThe application formats that chunk, builds a prompt telling the L L M to use only the supplied context, and sends the final tokenized request. From the model's point of view, the vector database is no longer visible. It only sees the prompt your application assembled.",
+      "wav": "wav/module8_slide_136.wav",
+      "audio": "audio/module8_slide_136.mp3",
+      "captions": "audio/module8_slide_136.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 137,
+      "title": "Map LLM concepts directly to RAG decisions",
+      "transcript": "The concepts from this module directly affect rag. Context limits determine how many chunks can fit, deterministic decoding can improve repeatability for factual tasks, model capacity affects how well evidence is used, and prompt injection can arrive through retrieved text. rag changes the context, but the same generation and security principles still apply. For example, a larger context window can allow more evidence, but adding more chunks is not automatically better if the extra text is irrelevant or contradictory.",
+      "wav": "wav/module8_slide_137.wav",
+      "audio": "audio/module8_slide_137.mp3",
+      "captions": "audio/module8_slide_137.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 138,
+      "title": "RAG failure matrix",
+      "transcript": "When a rag answer is wrong, diagnose the layer before changing the model. Missing documents point toward retrieval, correct evidence with a wrong answer points toward prompting or generation, wrong citations point toward source handling, and fabricated facts point toward grounding or generation. The symptom should guide the fix. Use the matrix as a debugging shortcut. Identify the symptom, map it to the most likely layer, and test that layer before changing the rest of the system.",
+      "wav": "wav/module8_slide_138.wav",
+      "audio": "audio/module8_slide_138.mp3",
+      "captions": "audio/module8_slide_138.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 139,
+      "title": "A citation-enforcing RAG prompt",
+      "transcript": "A grounded prompt can explicitly require use of the supplied context, citations after factual claims, and a clear abstention when the evidence is missing. Those instructions help, but they are not guarantees. The final application should still evaluate whether the answer is supported by the retrieved sources. The abstention rule is just as important as the citation rule. A grounded system should be allowed to say that the provided evidence does not contain the answer.",
+      "wav": "wav/module8_slide_139.wav",
+      "audio": "audio/module8_slide_139.mp3",
+      "captions": "audio/module8_slide_139.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 140,
+      "title": "RAG diagnosis quiz",
+      "transcript": "Read the failure carefully before choosing a fix. The correct chunk is already in the context, so ask which part of the system has already succeeded. Choose your answer on the screen before continuing. Good rag debugging starts by locating the failing layer instead of changing everything at once.",
+      "wav": "wav/module8_slide_140.wav",
+      "audio": "audio/module8_slide_140.mp3",
+      "captions": "audio/module8_slide_140.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 141,
+      "title": "Search the module glossary",
+      "transcript": "Use the glossary whenever a term needs a quick refresher. Search for concepts such as log its, causal mask, key-value cache, top P, mixture of experts, quantization, or low rah. The goal is to make the terminology easy to revisit without interrupting the larger workflow. A glossary is most useful when you use it while working. If a term such as log its or key-value cache becomes fuzzy, look it up immediately and then return to the workflow.",
+      "wav": "wav/module8_slide_141.wav",
+      "audio": "audio/module8_slide_141.mp3",
+      "captions": "audio/module8_slide_141.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 142,
+      "title": "The LLM Is One Part of the Application",
+      "transcript": "The module began with learned weights and hidden states and followed the model all the way to real application design.\n\nYou can now explain how tokens move through the model, how log its become generated tokens, how to run public or gated local checkpoints, how hosted A P I's differ from local inference, how memory and quantization affect deployment, and how to evaluate model choices.\n\nYou can also control outputs with prompting and validation, ground answers with RAG, adapt behavior with low rah, and connect approved tools safely.\n\nThe next step is Agentic RAG, where controlled decisions, tools, state, and loops are added around these same L L M foundations.",
+      "wav": "wav/module8_slide_142.wav",
+      "audio": "audio/module8_slide_142.mp3",
+      "captions": "audio/module8_slide_142.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    }
+  ]
+}

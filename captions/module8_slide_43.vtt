@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.952
+Base, instruct, and chat checkpoints can belong to the same model family but behave differently because of post-training
+
+00:00:07.952 --> 00:00:14.887
+and expected input format. Consider the same intent: summarize a paragraph in one sentence.
+
+00:00:14.887 --> 00:00:18.207
+A base model may simply continue the text.
+
+00:00:18.207 --> 00:00:22.672
+An instruct checkpoint is more likely to treat the sentence as a task.
+
+00:00:22.672 --> 00:00:30.497
+A chat checkpoint expects role-based messages and can use system, user, and assistant turns.
+
+00:00:30.497 --> 00:00:34.904
+The model family matters, but the checkpoint type matters too.

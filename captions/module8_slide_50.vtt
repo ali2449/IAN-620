@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.857
+The companion notebook brings the practical experiments together in one place.
+
+00:00:06.857 --> 00:00:11.642
+It includes environment setup, tokenization, model loading, next-token probabilities, sampling,
+
+00:00:11.642 --> 00:00:18.842
+structured output validation, memory calculations, and a fixed evaluation set.
+
+00:00:18.842 --> 00:00:22.852
+Run it once unchanged before modifying individual parts.
+
+00:00:22.852 --> 00:00:28.087
+When working through the notebook, run cells in order the first time.
+
+00:00:28.087 --> 00:00:33.225
+After the baseline works, go back and experiment with one variable at a time.

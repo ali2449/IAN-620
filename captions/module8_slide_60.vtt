@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.622
+Separating the model server from the application gives each layer a clear responsibility.
+
+00:00:05.622 --> 00:00:12.932
+The application handles users, business logic, retrieval, permissions, and validation,
+
+00:00:12.932 --> 00:00:18.482
+while the inference server manages model loading, batching, G P U memory, and token generation.
+
+00:00:18.482 --> 00:00:25.437
+This separation also helps teams scale the two layers independently.
+
+00:00:25.437 --> 00:00:32.654
+The web application may need many lightweight workers while the model server needs expensive G P U resources.

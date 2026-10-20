@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.817
+Local inference problems usually fall into a few categories.
+
+00:00:03.817 --> 00:00:09.992
+Out-of-memory errors suggest a smaller model, quantization, or shorter context;
+
+00:00:09.992 --> 00:00:16.902
+slow generation may indicate poor device placement; garbled chat can mean the wrong prompt format;
+
+00:00:16.902 --> 00:00:23.377
+and repetitive output often points back to prompts or decoding settings.
+
+00:00:23.377 --> 00:00:30.207
+When debugging, change one dimension at a time: model size, precision, device, context length, prompt format,
+
+00:00:30.207 --> 00:00:32.956
+or generation settings.

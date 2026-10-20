@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.022
+A higher temperature does not add knowledge or reasoning ability.
+
+00:00:04.022 --> 00:00:07.927
+It simply allows more variation during sampling.
+
+00:00:07.927 --> 00:00:13.887
+A lower temperature is more predictable, a higher temperature is more varied,
+
+00:00:13.887 --> 00:00:18.272
+and neither one changes the model's underlying capabilities.
+
+00:00:18.272 --> 00:00:24.902
+If a model does not know a fact, turning temperature up will not create reliable knowledge.
+
+00:00:24.902 --> 00:00:27.715
+It can simply create more varied guesses.

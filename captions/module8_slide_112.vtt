@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.482
+Use the calculator to compare scenarios rather than memorize today's prices.
+
+00:00:05.482 --> 00:00:12.977
+Enter the current input and output token prices, request volume, and measured generation speed.
+
+00:00:12.977 --> 00:00:20.207
+The result gives a rough cost and generation-time estimate that can support model and deployment decisions.
+
+00:00:20.207 --> 00:00:22.532
+Treat the result as an estimate.
+
+00:00:22.532 --> 00:00:30.429
+Network time, queueing, prompt processing, and batching can all make real end-to-end latency different.

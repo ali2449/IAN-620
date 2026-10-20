@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.010 --> 00:00:05.642
+We will keep using the same sentence so the mechanics stay easy to compare.
+
+00:00:05.642 --> 00:00:13.312
+Start with “The user submitted the request.” The text becomes tokens and I D's, the L L M produces logits,
+
+00:00:13.312 --> 00:00:18.872
+those logits become probabilities, and a decoding strategy selects a token.
+
+00:00:18.872 --> 00:00:25.262
+Suppose the selected token is “today.” That token is appended to the sequence,
+
+00:00:25.262 --> 00:00:32.997
+so the next prediction now starts from “The user submitted the request today.” Then the same process repeats.

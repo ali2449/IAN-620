@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.037
+Take a moment to answer the question on the screen before continuing.
+
+00:00:04.037 --> 00:00:07.927
+Ask yourself what temperature actually changes.
+
+00:00:07.927 --> 00:00:14.277
+Does it change the model's knowledge, or does it change the shape of the sampling distribution?
+
+00:00:14.277 --> 00:00:20.034
+The goal of the checkpoint is to separate model capability from decoding behavior.

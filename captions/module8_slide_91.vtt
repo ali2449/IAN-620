@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.937
+Zero-shot prompting asks the model to perform a task without worked examples.
+
+00:00:04.937 --> 00:00:11.172
+Strong instruction models can handle many common tasks this way, especially when the request, constraints,
+
+00:00:11.172 --> 00:00:14.362
+and output format are clear.
+
+00:00:14.362 --> 00:00:18.317
+It is usually the simplest baseline to try first.
+
+00:00:18.317 --> 00:00:23.462
+Always try a simple zero-shot baseline before adding many examples.
+
+00:00:23.462 --> 00:00:27.216
+You may find that the model already handles the task well enough.

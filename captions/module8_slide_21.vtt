@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.092
+The word “bank” is a useful example of why hidden states matter.
+
+00:00:05.092 --> 00:00:12.877
+In “The bank approved my loan,” nearby words such as approved and loan indicate a financial meaning.
+
+00:00:12.877 --> 00:00:18.602
+In “We sat on the bank of the river,” the surrounding words point toward the edge of a river.
+
+00:00:19.192 --> 00:00:26.064
+The token can begin from the same vocabulary identity, but attention and feed-forward layers repeatedly update its
+
+00:00:26.064 --> 00:00:33.629
+representation using context. So the hidden state for bank becomes different in the two sentences.
+
+00:00:33.629 --> 00:00:38.189
+This is one way a Transformer represents context-dependent meaning.

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.197
+Use the sliders to see how temperature and top P affect the same set of candidate tokens.
+
+00:00:06.197 --> 00:00:13.177
+Watch the probability bars rather than thinking only in terms of labels like creative or deterministic.
+
+00:00:13.177 --> 00:00:18.317
+The goal is to see exactly which candidates become more or less likely.
+
+00:00:18.317 --> 00:00:21.137
+Move only one control at a time.
+
+00:00:21.137 --> 00:00:27.166
+If you change both sliders together, it becomes harder to tell which setting caused the new behavior.

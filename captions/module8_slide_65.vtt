@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.957
+Different failures call for different solutions.
+
+00:00:02.957 --> 00:00:09.732
+Missing instructions often point to better prompting, missing or private knowledge points to rag,
+
+00:00:09.732 --> 00:00:18.322
+repeated behavior problems may justify fine-tuning, and a true capability limitation may require a stronger model.
+
+00:00:18.322 --> 00:00:22.929
+Choosing a larger model should not be the automatic first response.
+
+00:00:23.402 --> 00:00:27.119
+This is one of the most useful decision slides in the module.
+
+00:00:27.119 --> 00:00:33.989
+If the problem is missing knowledge, a larger model may still not know your private or current information;
+
+00:00:33.989 --> 00:00:36.406
+retrieval is the more direct fix.

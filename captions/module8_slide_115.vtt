@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.122
+Fine-tuning is useful, but it should not be the first tool we reach for.
+
+00:00:05.122 --> 00:00:13.042
+We will first ask whether the problem is really about model behavior, or whether prompting or rag would solve it more
+
+00:00:13.042 --> 00:00:13.414
+simply.
+
+00:00:14.087 --> 00:00:21.114
+Then we will compare full fine-tuning with low rah and look at the kind of training data an instruction model needs.

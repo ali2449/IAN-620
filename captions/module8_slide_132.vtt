@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.932
+A tool needs a clear schema.
+
+00:00:01.932 --> 00:00:10.177
+The weather example defines the tool name, explains its purpose, and specifies that `city` is a required string.
+
+00:00:10.177 --> 00:00:18.157
+That means the application can accept a request such as Greensboro and reject an invalid argument such as a number.
+
+00:00:18.157 --> 00:00:22.682
+The schema is the contract between model output and application code.

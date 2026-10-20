@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.037
+Use the attention demo to click a token and inspect which earlier positions are available to it.
+
+00:00:06.037 --> 00:00:12.792
+Future positions stay blocked, while the allowed positions receive normalized attention weights.
+
+00:00:12.792 --> 00:00:19.962
+The numbers are illustrative, but the masking behavior matches the core idea used in decoder models.
+
+00:00:19.962 --> 00:00:24.872
+When you click a later token, it can look backward to more positions.
+
+00:00:24.872 --> 00:00:29.563
+When you click an early token, only a small part of the sequence is available.

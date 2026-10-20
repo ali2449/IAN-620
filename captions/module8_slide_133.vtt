@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.592
+Never send model-generated arguments directly to a real function.
+
+00:00:04.592 --> 00:00:11.872
+First validate the schema, then check whether the user is authorized, then apply any business rules,
+
+00:00:11.872 --> 00:00:14.512
+and only then execute the tool.
+
+00:00:14.512 --> 00:00:22.513
+The L L M can suggest an action, but it must not be the component that grants itself permission to perform that action.

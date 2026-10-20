@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.022
+Before continuing, look at the malformed output in the question and decide what your application should do.
+
+00:00:07.022 --> 00:00:11.667
+The important habit is to treat model output as untrusted data.
+
+00:00:11.667 --> 00:00:20.367
+Choose an answer first. Then think about the safe sequence: parse, validate, retry only when appropriate,
+
+00:00:20.367 --> 00:00:24.074
+and fail predictably if validation still does not pass.

@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.662
+Decoding settings should match the task.
+
+00:00:02.662 --> 00:00:07.807
+If the goal is to extract an invoice number or produce a fixed label,
+
+00:00:07.807 --> 00:00:12.057
+stable and conservative generation is usually preferable.
+
+00:00:12.057 --> 00:00:21.142
+If the goal is brainstorming or creative variation, sampling may be useful because diversity is part of the requirement.
+
+00:00:21.142 --> 00:00:26.562
+A useful rule is to ask whether variation is a feature or a bug.
+
+00:00:26.562 --> 00:00:30.392
+For extraction, variation is usually a bug.
+
+00:00:30.392 --> 00:00:33.873
+For brainstorming, some variation may be the point.

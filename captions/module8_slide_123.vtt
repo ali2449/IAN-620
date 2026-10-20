@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.057
+For an applications-focused workflow, the important ideas are when to fine-tune, when not to, how low rah works,
+
+00:00:07.057 --> 00:00:13.337
+what the dataset looks like, and what the cost tradeoffs are.
+
+00:00:13.337 --> 00:00:20.002
+Large-scale distributed training and optimizer research belong to a deeper model-training workflow.
+
+00:00:20.002 --> 00:00:26.642
+The goal here is to understand the decision and the workflow well enough to use low rah responsibly,
+
+00:00:26.642 --> 00:00:30.809
+not to turn this module into a large-scale model-training course.

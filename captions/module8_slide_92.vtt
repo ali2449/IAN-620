@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.037
+Few-shot prompting adds a small number of examples before the new request.
+
+00:00:05.037 --> 00:00:12.787
+The examples can clarify ambiguous labels, tone, or formatting and improve consistency.
+
+00:00:12.787 --> 00:00:19.237
+They also consume context tokens, so include them because they improve measured performance,
+
+00:00:19.237 --> 00:00:22.537
+not simply because more examples seem better.
+
+00:00:22.537 --> 00:00:25.722
+A good example teaches the pattern you want.
+
+00:00:25.722 --> 00:00:31.176
+A poor or inconsistent example can teach the wrong pattern just as effectively.

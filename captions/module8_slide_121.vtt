@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.992
+The P E F T package provides common parameter-efficient adaptation methods such as low rah.
+
+00:00:07.992 --> 00:00:13.867
+A training workflow may also use transformers, datasets, accelerate, and sometimes T R L.
+
+00:00:13.867 --> 00:00:22.197
+Install only the pieces required for the adaptation experiment you are actually running.
+
+00:00:22.197 --> 00:00:25.262
+Installing a library is the easy part.
+
+00:00:25.262 --> 00:00:31.630
+The harder part is defining a good dataset and a useful evaluation before training begins.

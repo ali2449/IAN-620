@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.202
+Small models are fast to download, use less memory, and are excellent for building the first complete version of an
+
+00:00:08.202 --> 00:00:16.087
+application. They are often strong enough for constrained extraction, classification, rewriting, or simple assistants.
+
+00:00:16.087 --> 00:00:20.792
+Start small and let evaluation tell you whether you need more.
+
+00:00:20.792 --> 00:00:28.832
+A small model that is fast, private, and accurate enough can be a better production choice than a much larger model that
+
+00:00:28.832 --> 00:00:30.849
+is only slightly more accurate.

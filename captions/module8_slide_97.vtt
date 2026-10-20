@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.877
+A robust structured-output workflow expects failures.
+
+00:00:03.877 --> 00:00:12.407
+Generate the response, parse it, validate the schema, and use a small bounded retry when repair is appropriate.
+
+00:00:12.407 --> 00:00:19.519
+If validation still fails, stop predictably rather than passing malformed data deeper into the system.
+
+00:00:19.969 --> 00:00:21.786
+Retries should be bounded.
+
+00:00:21.786 --> 00:00:29.001
+If the model repeatedly violates the schema, returning a controlled error is safer than creating an endless generation
+
+00:00:29.001 --> 00:00:30.145
+loop.

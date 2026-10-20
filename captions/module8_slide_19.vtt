@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.487
+Now we can answer an important question: where do the weights come from?
+
+00:00:04.487 --> 00:00:09.337
+Training begins with input tokens and the model's current weights.
+
+00:00:09.337 --> 00:00:12.127
+The model predicts the next token.
+
+00:00:12.127 --> 00:00:17.535
+That prediction is compared with the correct target, and a loss value measures the error.
+
+00:00:17.987 --> 00:00:25.669
+Backpropagation then computes gradients. A gradient tells us how changing a parameter would affect the loss.
+
+00:00:25.669 --> 00:00:30.769
+An optimizer uses those gradients to make small updates to the weights.
+
+00:00:30.769 --> 00:00:34.714
+The process repeats across many training examples.
+
+00:00:34.714 --> 00:00:41.104
+This gives us one of the most important distinctions in the module: training changes the weights.
+
+00:00:41.104 --> 00:00:48.558
+During normal inference, those learned weights stay fixed while the model computes new hidden states for each prompt.

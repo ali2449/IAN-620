@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.522
+Now we expose the model components that pipeline hid.
+
+00:00:03.522 --> 00:00:11.447
+We still use q w e n three zero point six billion, so the teaching example stays consistent.
+
+00:00:11.447 --> 00:00:15.512
+Auto tokenizer loads the matching tokenizer.
+
+00:00:15.512 --> 00:00:20.847
+Auto model for causal L M loads the decoder language model.
+
+00:00:20.847 --> 00:00:29.322
+The data type is selected automatically, and device map auto lets the loading stack place model weights on available
+
+00:00:29.322 --> 00:00:31.887
+hardware. The model is unchanged.
+
+00:00:31.887 --> 00:00:35.118
+We simply have more direct access to its pieces.

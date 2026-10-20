@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.492
+Models around seven to fourteen billion parameters are a common middle ground for local work.
+
+00:00:06.492 --> 00:00:14.417
+They can provide stronger instruction following and richer generation while still being practical on capable
+
+00:00:14.417 --> 00:00:19.502
+workstations, especially with quantization.
+
+00:00:19.502 --> 00:00:25.057
+rag assistants, coding help, and domain prototypes often fit well in this range.
+
+00:00:25.057 --> 00:00:34.242
+This range is often where quantization becomes especially useful because it can turn a model that is too large in full
+
+00:00:34.242 --> 00:00:38.841
+precision into something practical on one workstation.

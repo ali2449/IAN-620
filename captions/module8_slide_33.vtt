@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.422
+Now that the next-token loop is clear, we can control how the next token is chosen.
+
+00:00:05.422 --> 00:00:10.494
+This is where greedy decoding, temperature, and top P enter the picture.
+
+00:00:11.006 --> 00:00:17.648
+We will also look at base, instruct, and chat checkpoints, because the way a model was post-trained changes how you
+
+00:00:17.648 --> 00:00:19.360
+should talk to it.

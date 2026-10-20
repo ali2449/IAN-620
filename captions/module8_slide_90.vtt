@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.567
+Use the support message as a concrete prompting example: “My account was charged twice and I need a refund.” A vague
+
+00:00:07.567 --> 00:00:14.707
+request such as “Analyze this message” leaves many decisions undefined.
+
+00:00:14.707 --> 00:00:21.597
+A stronger prompt defines the allowed categories and requests a specific machine-readable output containing category,
+
+00:00:21.597 --> 00:00:29.542
+urgency, and summary. Better prompting is not about making the prompt longer.
+
+00:00:29.542 --> 00:00:33.022
+It is about making the requirements clearer and testable.

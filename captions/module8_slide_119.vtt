@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.013 --> 00:00:06.557
+Parameter-efficient fine-tuning libraries provide implementations of low rah and related approaches.
+
+00:00:06.557 --> 00:00:13.657
+A small configuration can control adapter rank, scaling, dropout, and task type.
+
+00:00:13.657 --> 00:00:21.772
+The correct target modules still depend on the architecture, so do not copy one configuration blindly across every
+
+00:00:21.772 --> 00:00:26.812
+model. low rah rank and target modules affect both training cost and adaptation capacity,
+
+00:00:26.812 --> 00:00:32.532
+so they should be treated as experiment settings rather than magic defaults.

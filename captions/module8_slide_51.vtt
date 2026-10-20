@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.152
+The main libraries each have a different job.
+
+00:00:03.152 --> 00:00:11.132
+pie torch handles tensors and model execution, transformers provides tokenizers and model classes,
+
+00:00:11.132 --> 00:00:19.247
+accelerate helps with device placement, datasets supports data loading, and P E F T or T R L become relevant when we
+
+00:00:19.247 --> 00:00:24.137
+move into adaptation and training workflows.
+
+00:00:24.137 --> 00:00:29.547
+Knowing the role of each library makes error messages easier to interpret.
+
+00:00:29.547 --> 00:00:37.240
+A tokenizer error, a device-placement error, and a dataset error usually come from different parts of the stack.

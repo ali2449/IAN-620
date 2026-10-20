@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.187
+We have used the high-level pipeline.
+
+00:00:02.187 --> 00:00:07.077
+Now we will open it up and run the same workflow with explicit components.
+
+00:00:07.077 --> 00:00:15.587
+That means loading the tokenizer, loading the model, formatting the chat, generating new token I D's, and decoding them.
+
+00:00:16.090 --> 00:00:17.937
+The benefit is control.
+
+00:00:17.937 --> 00:00:25.102
+Once you understand these pieces, moving from a notebook to a real local application becomes much easier.

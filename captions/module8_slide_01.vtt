@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.137
+Module 7 used a large language model as the generator at the end of the rag pipeline.
+
+00:00:06.137 --> 00:00:13.202
+Now we are going to open that box and look at what the model is actually doing.
+
+00:00:13.202 --> 00:00:17.122
+We will connect tokens, prediction, prompting, generation, local models, evaluation,
+
+00:00:17.122 --> 00:00:22.597
+and tool calling back to the rag workflow you already know.
+
+00:00:22.597 --> 00:00:27.912
+Think of Module 7 as asking, “What information should the model see?” This module asks,
+
+00:00:27.912 --> 00:00:34.344
+“Once the information is in the prompt, what does the model actually do with it?”

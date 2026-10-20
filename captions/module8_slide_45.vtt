@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.347
+Chat A P I's commonly separate messages into roles.
+
+00:00:04.347 --> 00:00:11.417
+The system role defines behavior or high-level rules, the user role contains a request,
+
+00:00:11.417 --> 00:00:15.737
+and assistant messages represent earlier model responses.
+
+00:00:15.737 --> 00:00:19.652
+These roles help preserve conversation structure across turns.
+
+00:00:19.652 --> 00:00:23.952
+The system message is not magical security.
+
+00:00:23.952 --> 00:00:30.160
+It is part of the model input, so real permissions still need to be enforced by application code.

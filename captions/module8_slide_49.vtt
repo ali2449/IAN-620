@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.052
+Use a supported Python version and keep the project environment isolated.
+
+00:00:05.052 --> 00:00:10.572
+For this module, Python three point eleven is the recommended baseline.
+
+00:00:10.572 --> 00:00:17.965
+A virtual environment or Conda environment helps prevent one project from changing another project's package versions.
+
+00:00:18.580 --> 00:00:27.377
+The installation cell pins the versions of Transformers, Accelerate, Datasets, P E F T, and T R L used for the module.
+
+00:00:27.377 --> 00:00:36.857
+PyTorch is handled separately because the correct installation depends on the C P U, C U D A version,
+
+00:00:36.857 --> 00:00:38.623
+or platform you are using.

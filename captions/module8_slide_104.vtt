@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.747
+One impressive response is not enough to evaluate a model.
+
+00:00:03.747 --> 00:00:11.082
+A small fixed set can cover definition, extraction, formatting, hallucination, rag behavior,
+
+00:00:11.082 --> 00:00:19.187
+and model-selection decisions. Reuse the same set whenever you change the model or prompt so the comparison stays fair.
+
+00:00:19.187 --> 00:00:25.222
+The set does not need to be large to be useful.
+
+00:00:25.222 --> 00:00:31.560
+It needs to be representative, stable, and difficult enough to expose the failures you care about.

@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.317
+Several serving tools can expose local or self-hosted models.
+
+00:00:04.317 --> 00:00:12.762
+vee L L M is commonly used for high-throughput G P U serving, llama dot C P P is useful for portable and quantized
+
+00:00:12.762 --> 00:00:20.457
+local inference, oh llama simplifies local model management, and hugging face T G I is another production-oriented
+
+00:00:20.457 --> 00:00:28.042
+serving option. The application architecture should not depend conceptually on only one of them.
+
+00:00:28.042 --> 00:00:33.012
+Do not memorize one product as the architecture.
+
+00:00:33.012 --> 00:00:38.148
+The stable idea is the boundary between the application and the inference service.

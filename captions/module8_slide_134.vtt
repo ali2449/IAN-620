@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.177
+Tool calling and agentic behavior are related, but they are not the same thing.
+
+00:00:05.177 --> 00:00:08.772
+A single tool call can be one model decision.
+
+00:00:08.772 --> 00:00:15.007
+The user asks for weather, the model proposes the weather function, the application runs it,
+
+00:00:15.007 --> 00:00:17.537
+and the model produces an answer.
+
+00:00:17.537 --> 00:00:20.167
+An agent adds a control loop.
+
+00:00:20.167 --> 00:00:27.222
+It observes the current state, decides what to do, may call a tool, observes the result, updates its state,
+
+00:00:27.222 --> 00:00:32.114
+and decides again until a stopping condition is reached.
+
+00:00:32.599 --> 00:00:35.156
+Agentic does not mean uncontrolled.
+
+00:00:35.156 --> 00:00:43.386
+A useful agent still needs allowed actions, validation, permissions, state management, stopping conditions,
+
+00:00:43.386 --> 00:00:45.846
+and evaluation around the L L M.

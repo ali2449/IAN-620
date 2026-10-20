@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.892
+Now we move from choosing a model to controlling how the application communicates with it.
+
+00:00:05.892 --> 00:00:14.772
+Good prompting is less about clever phrases and more about clear software requirements: the task, the context,
+
+00:00:14.772 --> 00:00:17.681
+the constraints, and the output format.
+
+00:00:18.159 --> 00:00:24.761
+We will also make the model's output safer to use by validating structured data and grounding factual answers in
+
+00:00:24.761 --> 00:00:26.416
+evidence.

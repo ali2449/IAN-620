@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.897
+The pipeline A P I is convenient because it handles several common steps for you.
+
+00:00:05.897 --> 00:00:13.637
+It loads the tokenizer and model, prepares the input, performs generation, decodes the result, and returns text.
+
+00:00:13.637 --> 00:00:23.507
+The explicit workflow is not a different model; it simply exposes more control over the same process.
+
+00:00:23.507 --> 00:00:31.492
+The convenience is similar to using a high-level database library instead of manually managing every connection and
+
+00:00:31.492 --> 00:00:36.729
+cursor. It saves setup, but understanding the lower level gives you more control.

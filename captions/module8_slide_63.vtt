@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.752
+Use this checkpoint to think like an application developer.
+
+00:00:03.752 --> 00:00:10.217
+If many users need the same local model, should every request load a new copy of the model,
+
+00:00:10.217 --> 00:00:14.757
+or should one inference service keep it loaded and accept requests?
+
+00:00:14.757 --> 00:00:22.349
+Choose your answer on the screen, then connect it back to memory use, startup time, and application design.

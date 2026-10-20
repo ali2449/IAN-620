@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.122
+A useful failure test is to ask for a citation that does not exist.
+
+00:00:05.122 --> 00:00:14.857
+A model may produce a convincing-looking title, journal, author list, or D O I even though the source is fictional.
+
+00:00:14.857 --> 00:00:22.482
+If an application needs verifiable facts, connect generation to trusted evidence and validate the result.
+
+00:00:22.482 --> 00:00:29.332
+This is why citation-sensitive applications should retrieve sources first and then verify that the generated answer is
+
+00:00:29.332 --> 00:00:33.000
+actually supported by those sources.

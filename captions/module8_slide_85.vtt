@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.522
+Quantization stores model weights with fewer bits.
+
+00:00:03.522 --> 00:00:11.262
+That can reduce memory dramatically and may improve inference efficiency, although there can be a quality tradeoff.
+
+00:00:11.262 --> 00:00:17.097
+Eight-bit and four-bit formats are common choices for local model deployment.
+
+00:00:17.097 --> 00:00:25.072
+The practical tradeoff is simple: use fewer bits to save memory, then evaluate whether the quality remains good enough
+
+00:00:25.072 --> 00:00:26.440
+for the task.

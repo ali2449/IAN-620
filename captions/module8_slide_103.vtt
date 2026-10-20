@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.867
+At this point we can generate answers, but we still need a disciplined way to decide whether a change is actually
+
+00:00:07.867 --> 00:00:10.734
+better. Evaluation gives us that discipline.
+
+00:00:11.203 --> 00:00:19.650
+We will keep the examples, decoding settings, and rubric fixed so changes in quality can be connected to the model or
+
+00:00:19.650 --> 00:00:21.941
+prompt rather than to a changing experiment.

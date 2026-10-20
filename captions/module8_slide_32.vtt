@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.017
+Before moving on, check two foundation ideas.
+
+00:00:04.017 --> 00:00:11.652
+First, during normal inference the learned weights stay fixed, while hidden states change with the current prompt and
+
+00:00:11.652 --> 00:00:17.727
+with each Transformer layer. Second, the decoder produces log its.
+
+00:00:17.727 --> 00:00:25.507
+Those scores become a probability distribution, and the decoding strategy decides which token is selected next.
+
+00:00:25.507 --> 00:00:30.959
+If those two ideas are clear, the rest of the module has a much stronger foundation.

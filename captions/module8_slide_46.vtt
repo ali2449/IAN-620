@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.332
+Different chat checkpoints expect different special tokens and formatting around roles.
+
+00:00:05.332 --> 00:00:13.522
+The tokenizer's chat template converts a list of system, user, and assistant messages into the exact token sequence
+
+00:00:13.522 --> 00:00:21.497
+expected by that model. This is why a chat template should come from the checkpoint rather than being guessed manually.
+
+00:00:21.497 --> 00:00:27.132
+Two models can use the same visible messages but require different hidden formatting.
+
+00:00:27.132 --> 00:00:30.810
+The chat template handles that checkpoint-specific detail.

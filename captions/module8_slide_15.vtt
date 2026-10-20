@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.847
+After tokenization, every token maps to an integer in the model vocabulary.
+
+00:00:05.847 --> 00:00:09.652
+The model does not directly receive the visible text.
+
+00:00:09.652 --> 00:00:12.387
+It receives token I D's.
+
+00:00:12.387 --> 00:00:20.907
+The code uses the same q w e n three zero point six billion checkpoint used throughout the local-model examples.
+
+00:00:20.907 --> 00:00:28.597
+We tokenize a short RAG sentence and then inspect both the token pieces and their numerical I D's.
+
+00:00:28.597 --> 00:00:31.812
+Remember that an I D is an identifier.
+
+00:00:31.812 --> 00:00:35.852
+A larger token I D does not mean the token is more important.

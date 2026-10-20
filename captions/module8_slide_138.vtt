@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.007 --> 00:00:05.117
+When a rag answer is wrong, diagnose the layer before changing the model.
+
+00:00:05.117 --> 00:00:13.192
+Missing documents point toward retrieval, correct evidence with a wrong answer points toward prompting or generation,
+
+00:00:13.192 --> 00:00:20.712
+wrong citations point toward source handling, and fabricated facts point toward grounding or generation.
+
+00:00:20.712 --> 00:00:23.512
+The symptom should guide the fix.
+
+00:00:23.512 --> 00:00:26.787
+Use the matrix as a debugging shortcut.
+
+00:00:26.787 --> 00:00:34.158
+Identify the symptom, map it to the most likely layer, and test that layer before changing the rest of the system.

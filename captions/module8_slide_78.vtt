@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.192
+Larger dense models can improve difficult reasoning, multilingual work, coding, and robustness,
+
+00:00:07.192 --> 00:00:11.177
+but they require much more memory and serving infrastructure.
+
+00:00:11.177 --> 00:00:19.522
+The important question is whether the quality improvement justifies the added latency, cost, and operational complexity.
+
+00:00:19.522 --> 00:00:28.462
+The operational cost grows too: larger models can mean more G P U's, slower startup, more complex serving,
+
+00:00:28.462 --> 00:00:30.452
+and higher latency under load.

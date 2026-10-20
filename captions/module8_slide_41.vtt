@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.212
+Consistency is often valuable for extraction, structured output, grading, and grounded RAG.
+
+00:00:07.212 --> 00:00:11.422
+Creative tasks may intentionally allow more variation.
+
+00:00:11.422 --> 00:00:19.722
+But there is an important qualification: consistency does not mean that every model should always use greedy decoding.
+
+00:00:19.722 --> 00:00:25.077
+Some modern checkpoints, especially models with dedicated reasoning modes,
+
+00:00:25.077 --> 00:00:28.567
+publish specific recommended sampling settings.
+
+00:00:28.567 --> 00:00:34.532
+Treat generation settings as part of the model configuration and application design.
+
+00:00:34.532 --> 00:00:40.573
+Read the model card and test the settings instead of applying one recipe to every checkpoint.

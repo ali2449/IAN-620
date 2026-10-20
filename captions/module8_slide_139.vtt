@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.552
+A grounded prompt can explicitly require use of the supplied context, citations after factual claims,
+
+00:00:07.552 --> 00:00:10.867
+and a clear abstention when the evidence is missing.
+
+00:00:10.867 --> 00:00:12.942
+Those instructions help, but they are not guarantees.
+
+00:00:12.942 --> 00:00:21.837
+The final application should still evaluate whether the answer is supported by the retrieved sources.
+
+00:00:21.837 --> 00:00:26.272
+The abstention rule is just as important as the citation rule.
+
+00:00:26.272 --> 00:00:31.830
+A grounded system should be allowed to say that the provided evidence does not contain the answer.

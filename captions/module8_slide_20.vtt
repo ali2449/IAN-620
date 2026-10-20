@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.137
+Weights and hidden states are easy to confuse, so keep them separate.
+
+00:00:04.137 --> 00:00:06.872
+Weights are learned model parameters.
+
+00:00:06.872 --> 00:00:10.382
+Training changes them, and the checkpoint stores them.
+
+00:00:10.382 --> 00:00:15.172
+During ordinary inference, those weights normally stay fixed.
+
+00:00:15.172 --> 00:00:20.797
+Hidden states are temporary vectors created while the current prompt moves through the model.
+
+00:00:20.797 --> 00:00:26.720
+They are recomputed for every new input and change from one Transformer layer to the next.
+
+00:00:27.524 --> 00:00:31.471
+A useful summary is: training learns the weights.
+
+00:00:31.471 --> 00:00:36.989
+Inference uses those fixed weights to compute new hidden states for the current prompt.

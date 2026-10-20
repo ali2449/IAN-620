@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.467
+Adversarial testing should cover the whole application.
+
+00:00:03.467 --> 00:00:11.842
+Test prompt injection, attempts to expose sensitive data, jailbreak behavior, and unsafe tool arguments.
+
+00:00:11.842 --> 00:00:19.022
+When a failure is found, record the input, the expected safe behavior, and the mitigation so the case can remain in the
+
+00:00:19.022 --> 00:00:25.262
+evaluation set. Each discovered failure should become a regression test.
+
+00:00:25.262 --> 00:00:31.840
+That way, a future prompt or model update does not silently reintroduce the same vulnerability.

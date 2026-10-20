@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.222
+The best way to learn these systems is to run something small, change one factor, and observe what happens.
+
+00:00:07.222 --> 00:00:14.002
+When a result changes, ask what caused the change and whether it actually improved the task.
+
+00:00:14.002 --> 00:00:18.367
+That habit is more useful than memorizing terminology.
+
+00:00:18.367 --> 00:00:26.402
+For example, if you raise temperature and the answer changes, do not stop at “it became more creative.” Look at what
+
+00:00:26.402 --> 00:00:31.765
+happened to the token probabilities and whether that change helped the task.

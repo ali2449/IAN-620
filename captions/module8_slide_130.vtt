@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.009 --> 00:00:04.662
+An L L M adds uncertainty, latency, cost, and a larger security surface.
+
+00:00:04.662 --> 00:00:12.067
+Exact calculations are often better handled by deterministic code, simple lookups by a database,
+
+00:00:12.067 --> 00:00:18.032
+and fixed business rules by normal validation logic.
+
+00:00:18.032 --> 00:00:24.702
+Use an L L M when flexible language understanding or generation creates real value.
+
+00:00:24.702 --> 00:00:32.022
+Choosing not to use an L L M can be a strong engineering decision when deterministic software solves the problem more
+
+00:00:32.022 --> 00:00:33.528
+reliably.

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.112
+The tokenizer playground gives a quick visual preview of how text can be split into pieces.
+
+00:00:06.112 --> 00:00:15.407
+The I D's in the browser demo are only examples, so use the Python tokenizer when you want the real checkpoint-specific
+
+00:00:15.407 --> 00:00:23.177
+tokens. Try punctuation, technical words, U R L's, or code and watch how the pieces change.
+
+00:00:23.177 --> 00:00:31.937
+Try a normal sentence first, then something unusual like an email address, a U R L, or a Python variable.
+
+00:00:31.937 --> 00:00:35.483
+The differences make tokenization much more intuitive.

@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.857
+The next question is not simply, which model is biggest?
+
+00:00:03.857 --> 00:00:09.737
+The better question is, what problem are we solving, how will we measure success,
+
+00:00:09.737 --> 00:00:13.228
+and what is the smallest model that satisfies the requirement?
+
+00:00:13.848 --> 00:00:21.270
+We will connect model size to quality, memory, quantization, latency, hardware, and deployment.

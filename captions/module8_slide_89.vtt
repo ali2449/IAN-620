@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.024 --> 00:00:04.402
+A practical prompt is easier to debug when its parts are explicit.
+
+00:00:04.402 --> 00:00:12.347
+Separate the system role, the task, the context, the constraints, and the required output format.
+
+00:00:12.347 --> 00:00:18.202
+Clear structure makes it easier to identify what should change when the output is wrong.
+
+00:00:18.202 --> 00:00:22.657
+If the output is wrong, this structure tells you where to look.
+
+00:00:22.657 --> 00:00:31.384
+Was the task unclear, was the context incomplete, were the constraints missing, or was the output format underspecified?

@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.587
+A neural network does not normally calculate one connection at a time.
+
+00:00:04.587 --> 00:00:12.492
+It stores many weights inside matrices and applies them efficiently with matrix multiplication.
+
+00:00:12.492 --> 00:00:15.547
+The Python example uses pie torch.
+
+00:00:15.547 --> 00:00:18.752
+The input vector contains two values.
+
+00:00:18.752 --> 00:00:23.632
+W is a small weight matrix, and b is the bias vector.
+
+00:00:23.632 --> 00:00:33.060
+The expression X multiplied by W plus b produces the next representation, and Re L U applies the activation.
+
+00:00:33.718 --> 00:00:36.045
+Now compare the diagram on the right.
+
+00:00:36.045 --> 00:00:41.300
+A tiny neural network transforms numeric input with learned weights.
+
+00:00:41.300 --> 00:00:49.835
+An L L M does the same broad kind of numerical transformation at a much larger scale, using embedding weights,
+
+00:00:49.835 --> 00:00:53.489
+attention, feed-forward layers, and many Transformer blocks.

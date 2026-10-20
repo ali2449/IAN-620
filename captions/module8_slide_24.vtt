@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.377
+Now scale the small neural-network idea up to a decoder-only L L M.
+
+00:00:05.377 --> 00:00:10.297
+Token I D's first use learned embedding weights to create vectors.
+
+00:00:10.297 --> 00:00:17.972
+The model also needs information about token order, because the same words in a different order can mean something
+
+00:00:17.972 --> 00:00:23.787
+different. Modern models use positional methods such as rotary position information.
+
+00:00:23.787 --> 00:00:26.394
+We do not need the full mathematics here.
+
+00:00:26.844 --> 00:00:30.891
+The representations then pass through many Transformer blocks.
+
+00:00:30.891 --> 00:00:36.036
+Attention and feed-forward layers repeatedly update the hidden states.
+
+00:00:36.036 --> 00:00:42.727
+The final hidden state is projected through learned output weights to produce vocabulary log its.

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.582
+Generation is a loop.
+
+00:00:01.582 --> 00:00:08.967
+Start with “The user submitted the request.” The model predicts a token, perhaps “today,” and appends it.
+
+00:00:08.967 --> 00:00:14.192
+The new sequence becomes the input for the next prediction.
+
+00:00:14.192 --> 00:00:20.682
+The next selected token might be “before,” and then another token such as “noon.”
+
+00:00:20.682 --> 00:00:27.606
+This is autoregressive generation. Every token changes the context for the token that comes after it.

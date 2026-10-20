@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.622
+There is no universal industry definition of a small, medium, or large language model.
+
+00:00:06.622 --> 00:00:09.947
+The ranges here are teaching shorthand.
+
+00:00:09.947 --> 00:00:15.512
+Below roughly four billion parameters is a useful small-model category.
+
+00:00:15.512 --> 00:00:20.102
+Around four to fourteen billion is a practical medium range.
+
+00:00:20.102 --> 00:00:24.802
+Roughly fifteen to forty billion represents heavier local models,
+
+00:00:24.802 --> 00:00:32.912
+and still larger models or mixture-of-experts systems often require distributed or managed infrastructure.
+
+00:00:32.912 --> 00:00:41.157
+The exact deployment fit depends on architecture, active parameters, quantization, context length, and hardware.
+
+00:00:41.157 --> 00:00:45.440
+Parameter count is only the first estimate.

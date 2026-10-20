@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.022
+Before using any checkpoint, read its model card.
+
+00:00:04.022 --> 00:00:11.347
+Check the intended use, license, architecture, context length, chat format, recommended inference code,
+
+00:00:11.347 --> 00:00:18.922
+and known limitations. A model name alone is not enough to make a reliable deployment decision.
+
+00:00:18.922 --> 00:00:25.797
+The model card is where you verify details that may otherwise be guessed incorrectly,
+
+00:00:25.797 --> 00:00:29.241
+such as context length or the correct chat format.

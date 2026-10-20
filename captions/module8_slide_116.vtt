@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.967
+Fine-tuning is useful when you have a stable behavior you want the model to learn repeatedly and prompting or rag does
+
+00:00:08.967 --> 00:00:10.382
+not solve it reliably.
+
+00:00:10.382 --> 00:00:17.027
+Examples include specialized classification, a consistent response format, or a domain-specific behavior.
+
+00:00:17.027 --> 00:00:21.622
+Frequently changing facts are usually better handled through retrieval.
+
+00:00:21.622 --> 00:00:27.722
+A useful test is to ask whether the missing capability is behavior or knowledge.
+
+00:00:27.722 --> 00:00:34.671
+Fine-tuning is better suited to stable behavior; rag is better suited to changing external knowledge.

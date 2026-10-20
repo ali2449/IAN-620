@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.025 --> 00:00:03.297
+A practical selection process starts small.
+
+00:00:03.297 --> 00:00:11.122
+Test the small model, improve the prompt, add rag if the problem is missing knowledge, and test again.
+
+00:00:11.122 --> 00:00:19.102
+Move to a medium or large model only when the evaluation set shows that capability is still the limiting factor.
+
+00:00:19.102 --> 00:00:23.192
+This ladder helps avoid expensive overengineering.
+
+00:00:23.192 --> 00:00:29.695
+Each step asks whether the current system already meets the requirement before adding more complexity.

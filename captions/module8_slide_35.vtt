@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.677
+Temperature reshapes the token probability distribution before sampling.
+
+00:00:04.677 --> 00:00:13.617
+Lower values make high-probability tokens more dominant, while higher values flatten the distribution and allow more
+
+00:00:13.617 --> 00:00:18.772
+variation. Temperature changes selection behavior, not what the model has learned.
+
+00:00:18.772 --> 00:00:22.732
+At a low temperature, the distribution becomes sharper.
+
+00:00:22.732 --> 00:00:29.811
+At a high temperature, smaller candidates receive more relative probability and are more likely to be sampled.

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.597
+The final part places the L L M inside a real application boundary.
+
+00:00:04.597 --> 00:00:11.567
+The model can read untrusted text, request tools, and influence application behavior,
+
+00:00:11.567 --> 00:00:14.969
+so software controls around the model become essential.
+
+00:00:15.662 --> 00:00:20.534
+We will finish by distinguishing ordinary tool calling from an agentic loop,
+
+00:00:20.534 --> 00:00:23.553
+which prepares the transition to Agentic rag.

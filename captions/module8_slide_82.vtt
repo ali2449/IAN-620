@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.082
+The bar chart gives a fast estimate for a seven-billion-parameter dense model.
+
+00:00:05.082 --> 00:00:10.002
+At F P thirty-two, raw weights are about twenty-eight gigabytes.
+
+00:00:10.002 --> 00:00:13.727
+At F P sixteen, about fourteen gigabytes.
+
+00:00:13.727 --> 00:00:19.890
+Eight-bit weights are roughly seven gigabytes, and four-bit weights are roughly three and a half gigabytes.
+
+00:00:20.474 --> 00:00:23.856
+These numbers describe raw weight storage only.
+
+00:00:23.856 --> 00:00:31.161
+Real inference needs additional memory for the K V cache, temporary buffers, framework overhead,
+
+00:00:31.161 --> 00:00:32.999
+and other runtime structures.

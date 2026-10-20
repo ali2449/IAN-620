@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.507
+Temperature and top P solve different problems.
+
+00:00:03.507 --> 00:00:11.562
+Temperature reshapes the entire probability distribution, while top P keeps only enough high-probability tokens to reach
+
+00:00:11.562 --> 00:00:15.032
+a chosen cumulative probability threshold.
+
+00:00:15.032 --> 00:00:20.012
+Comparing them on the same distribution makes that distinction much clearer.
+
+00:00:20.012 --> 00:00:25.932
+This is why the two settings should not be described as interchangeable creativity controls.
+
+00:00:25.932 --> 00:00:30.960
+One reshapes probabilities; the other removes the low-probability tail.

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.017
+Quantization can make a model practical on hardware that could not hold the full-precision weights.
+
+00:00:06.017 --> 00:00:13.012
+This is one reason local experimentation with medium-sized models is possible on consumer hardware.
+
+00:00:13.012 --> 00:00:21.512
+Always evaluate the quantized model because memory savings are useful only if task quality remains acceptable.
+
+00:00:21.512 --> 00:00:27.297
+Quantization is especially important when the goal is local deployment rather than training,
+
+00:00:27.297 --> 00:00:31.036
+because inference often tolerates reduced precision well.

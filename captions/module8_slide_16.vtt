@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.732
+Token embeddings and sentence embeddings are both vectors, but they solve different problems.
+
+00:00:05.732 --> 00:00:13.572
+On the left, each individual token begins with its own vector and then moves through the Transformer layers.
+
+00:00:13.572 --> 00:00:19.767
+Those token representations become context dependent as the model processes the sequence.
+
+00:00:20.217 --> 00:00:26.184
+On the right, a sentence embedding represents an entire sentence or chunk with one vector.
+
+00:00:26.184 --> 00:00:30.194
+That is useful for semantic similarity and retrieval.
+
+00:00:30.194 --> 00:00:37.509
+So token embeddings support language-model computation, while sentence embeddings are commonly used for search and RAG
+
+00:00:37.509 --> 00:00:38.665
+retrieval.

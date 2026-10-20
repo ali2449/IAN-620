@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.192
+Many local inference servers provide an A P I that follows the same general shape as familiar chat-completions
+
+00:00:08.192 --> 00:00:16.412
+interfaces. This lets application code send messages over H T T P while the server handles model loading and generation.
+
+00:00:16.412 --> 00:00:20.447
+It also makes it easier to replace the inference engine later.
+
+00:00:20.447 --> 00:00:26.942
+That compatibility can make application code portable because the client interface stays similar even when the
+
+00:00:26.942 --> 00:00:29.713
+underlying local model changes.

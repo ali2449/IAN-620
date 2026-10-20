@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.362
+Mixture-of-experts models separate total capacity from active computation.
+
+00:00:05.362 --> 00:00:13.427
+The server may store many expert parameters, while a router sends each token through only a subset of those experts.
+
+00:00:13.427 --> 00:00:20.387
+Active parameters affect per-token compute, but total weights still matter for memory and serving.
+
+00:00:20.387 --> 00:00:26.707
+For example, a model may store many experts but route each token through only two of them.
+
+00:00:26.707 --> 00:00:34.192
+Compute per token can be lower than the total parameter count suggests, while memory still has to account for the stored
+
+00:00:34.192 --> 00:00:34.647
+experts.

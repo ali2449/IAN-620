@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.042
+Another language model can help score relevance, style, or groundedness at scale.
+
+00:00:06.042 --> 00:00:11.597
+That can be useful, but the judge can also be biased or inconsistent.
+
+00:00:11.597 --> 00:00:19.167
+Calibrate automated judging against a smaller set of human-reviewed examples before trusting the scores.
+
+00:00:19.167 --> 00:00:25.482
+If the judge disagrees with human reviewers on important cases, the automated score should not be treated as
+
+00:00:25.482 --> 00:00:27.201
+authoritative.

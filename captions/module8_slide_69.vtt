@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.377
+Model family and access method are different questions.
+
+00:00:03.377 --> 00:00:12.382
+Hosted A P I-first families include Open A I G P T models, Claude from Anthropic, and Gemini from Google.
+
+00:00:12.382 --> 00:00:21.762
+Your application sends requests to provider infrastructure and does not download those hosted model weights.
+
+00:00:21.762 --> 00:00:31.102
+Open-weight and hybrid ecosystems include q w e n, Llama, mee strahl, Gemma, DeepSeek, and G P T oss from Open A I.
+
+00:00:31.102 --> 00:00:38.939
+Specific checkpoints can be downloaded and self-hosted, while many are also available through hosting providers.
+
+00:00:39.480 --> 00:00:42.962
+Notice that one organization can support both patterns.
+
+00:00:42.962 --> 00:00:51.687
+Open A I offers hosted G P T models and separately publishes G P T oss open-weight models.
+
+00:00:51.687 --> 00:00:56.467
+Also remember that open-weight does not automatically mean every dataset, source component,
+
+00:00:56.467 --> 00:01:00.537
+or license condition is unrestricted.
+
+00:01:00.537 --> 00:01:04.064
+Always inspect the exact model card and license.

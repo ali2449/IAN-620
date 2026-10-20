@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.617
+Full fine-tuning and low rah differ mainly in how many parameters are updated.
+
+00:00:05.617 --> 00:00:12.952
+Full fine-tuning computes gradients across the base model and changes a very large number of weights.
+
+00:00:12.952 --> 00:00:21.112
+Low rah keeps the base model frozen and adds small trainable low-rank adapter matrices to selected layers.
+
+00:00:21.112 --> 00:00:28.652
+Conceptually, the final transformation combines the frozen base behavior with a small learned adjustment.
+
+00:00:28.652 --> 00:00:33.102
+That is why low rah can be much more practical on limited hardware.

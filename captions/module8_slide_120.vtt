@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.342
+Supervised instruction tuning usually pairs a request with the response you want the model to learn.
+
+00:00:06.342 --> 00:00:15.067
+For chat models, the data often uses system, user, and assistant messages that match the model's conversation format.
+
+00:00:15.067 --> 00:00:20.862
+Consistent formatting is as important in training data as it is during inference.
+
+00:00:20.862 --> 00:00:24.302
+The quality of these examples matters greatly.
+
+00:00:24.302 --> 00:00:29.580
+If the target answers are inconsistent, the adapter learns that inconsistency.

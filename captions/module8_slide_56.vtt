@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.892
+There is no single correct execution path.
+
+00:00:02.892 --> 00:00:10.852
+A C P U may be enough for a very small or heavily quantized model, Apple Silicon can run many local models with
+
+00:00:10.852 --> 00:00:19.077
+optimized runtimes, a consumer G P U can handle small or medium checkpoints, and a server or hosted A P I may be the
+
+00:00:19.077 --> 00:00:22.142
+better choice for larger workloads.
+
+00:00:22.142 --> 00:00:29.133
+The easiest choice is often the one that meets your latency and privacy needs with the least operational complexity.

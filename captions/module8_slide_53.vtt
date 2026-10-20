@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.732
+A chat checkpoint should receive the message structure it was trained to expect.
+
+00:00:04.732 --> 00:00:11.792
+We create system and user messages, then let the tokenizer apply the model's own chat template.
+
+00:00:11.792 --> 00:00:19.692
+For q w e n three, we explicitly set enable thinking to false in this general-purpose example.
+
+00:00:19.692 --> 00:00:28.167
+That keeps the response concise and avoids mixing a model-specific reasoning mode into the basic chat workflow.
+
+00:00:28.167 --> 00:00:35.868
+The important habit is to use the checkpoint's own chat template instead of manually guessing its special-token format.

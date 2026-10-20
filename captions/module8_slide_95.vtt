@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.632
+Once the model returns jay son, parse it and validate the values.
+
+00:00:04.632 --> 00:00:13.167
+The code first checks that the category belongs to the allowed category set and that urgency belongs to the allowed
+
+00:00:13.167 --> 00:00:16.252
+urgency set. This is an important software boundary.
+
+00:00:16.252 --> 00:00:22.102
+Asking for jay son is not the same thing as receiving trustworthy application data.
+
+00:00:22.102 --> 00:00:24.806
+Parse first, validate second.

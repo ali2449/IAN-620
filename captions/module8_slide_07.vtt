@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.012 --> 00:00:04.547
+Part one builds the mental model we will reuse throughout the module.
+
+00:00:04.547 --> 00:00:12.447
+We begin with learned numerical weights and temporary hidden states, then connect those ideas to token embeddings,
+
+00:00:12.447 --> 00:00:16.702
+Transformer blocks, log its, soft max, and next-token generation.
+
+00:00:16.702 --> 00:00:27.597
+By the end of this part, you should be able to explain how fixed learned weights transform a prompt into changing hidden
+
+00:00:27.597 --> 00:00:30.934
+states and finally into probabilities for the next token.
