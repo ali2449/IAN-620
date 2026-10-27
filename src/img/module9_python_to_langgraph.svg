@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+<title id="title">Plain Python to LangGraph translation</title>
+<desc id="desc">A side-by-side mapping from plain Python state, loops, conditionals, function calls, and break statements to LangGraph state, graph cycles, conditional edges, nodes, and END.</desc>
+<defs>
+  <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+  <style>
+    .bg{fill:#fff}.left{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.2}.right{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.2}.mid{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.line{stroke:#64748b;stroke-width:2.6;fill:none;marker-end:url(#a)}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}.code{font-family:Consolas,monospace;fill:#0f172a}
+  </style>
+</defs>
+<rect class="bg" width="1200" height="660"/>
+<text class="t" x="60" y="58" font-size="34" font-weight="700">LangGraph is a translation of control flow you already know</text>
+<text class="m" x="60" y="94" font-size="20">Read each row horizontally: the behavior stays the same while the representation changes.</text>
+
+<rect class="left" x="60" y="130" rx="16" width="430" height="74"/>
+<text class="t" x="85" y="160" font-size="18" font-weight="700">Plain Python state</text>
+<text class="code" x="85" y="187" font-size="16">state = {"question": q, "documents": [], ...}</text>
+<path class="line" d="M500 167 L690 167"/>
+<rect class="right" x="710" y="130" rx="16" width="430" height="74"/>
+<text class="t" x="735" y="160" font-size="18" font-weight="700">Typed graph state</text>
+<text class="code" x="735" y="187" font-size="16">class RAGState(TypedDict): ...</text>
+
+<rect class="left" x="60" y="226" rx="16" width="430" height="74"/>
+<text class="t" x="85" y="256" font-size="18" font-weight="700">Loop</text>
+<text class="code" x="85" y="283" font-size="16">while steps &lt; MAX_STEPS:</text>
+<path class="line" d="M500 263 L690 263"/>
+<rect class="right" x="710" y="226" rx="16" width="430" height="74"/>
+<text class="t" x="735" y="256" font-size="18" font-weight="700">Cycle in the graph</text>
+<text class="code" x="735" y="283" font-size="16">rewrite → retrieve → grade</text>
+
+<rect class="left" x="60" y="322" rx="16" width="430" height="74"/>
+<text class="t" x="85" y="352" font-size="18" font-weight="700">Function call</text>
+<text class="code" x="85" y="379" font-size="16">documents = retrieve(query)</text>
+<path class="line" d="M500 359 L690 359"/>
+<rect class="right" x="710" y="322" rx="16" width="430" height="74"/>
+<text class="t" x="735" y="352" font-size="18" font-weight="700">Node</text>
+<text class="code" x="735" y="379" font-size="16">builder.add_node("retrieve", retrieve_node)</text>
+
+<rect class="left" x="60" y="418" rx="16" width="430" height="74"/>
+<text class="t" x="85" y="448" font-size="18" font-weight="700">Conditional</text>
+<text class="code" x="85" y="475" font-size="16">if score &gt;= THRESHOLD:</text>
+<path class="line" d="M500 455 L690 455"/>
+<rect class="right" x="710" y="418" rx="16" width="430" height="74"/>
+<text class="t" x="735" y="448" font-size="18" font-weight="700">Conditional edge</text>
+<text class="code" x="735" y="475" font-size="16">grade → generate OR rewrite</text>
+
+<rect class="left" x="60" y="514" rx="16" width="430" height="74"/>
+<text class="t" x="85" y="544" font-size="18" font-weight="700">Stop</text>
+<text class="code" x="85" y="571" font-size="16">break</text>
+<path class="line" d="M500 551 L690 551"/>
+<rect class="right" x="710" y="514" rx="16" width="430" height="74"/>
+<text class="t" x="735" y="544" font-size="18" font-weight="700">Graph termination</text>
+<text class="code" x="735" y="571" font-size="16">END</text>
+
+<text class="m" x="600" y="630" text-anchor="middle" font-size="18">If a learner can point to the Python line, they should be able to point to the matching graph node or edge.</text>
+</svg>
