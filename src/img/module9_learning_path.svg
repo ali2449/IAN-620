@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Module 9 learning path</title>
+<desc id="desc">The same Agentic RAG loop is learned first as a concept, then as plain Python, then through a small LangChain bridge, and finally as a LangGraph workflow.</desc>
+<defs>
+  <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+  <style>
+    .bg{fill:#fff}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2.2}.accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.4}.good{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.4}.bridge{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2.4}.line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#a)}.dash{stroke:#2563eb;stroke-width:2.5;fill:none;stroke-dasharray:8 7}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+  </style>
+</defs>
+<rect class="bg" width="1200" height="620"/>
+<text class="t" x="60" y="62" font-size="34" font-weight="700">One workflow, learned in layers</text>
+<text class="m" x="60" y="98" font-size="20">Do not learn four different systems. Re-express the same retrieve → grade → rewrite → generate loop with increasing structure.</text>
+
+<rect class="accent" x="60" y="165" rx="18" width="235" height="150"/>
+<text class="t" x="177" y="205" text-anchor="middle" font-size="22" font-weight="700">1 · Mental model</text>
+<text class="m" x="177" y="242" text-anchor="middle" font-size="17">state</text>
+<text class="m" x="177" y="270" text-anchor="middle" font-size="17">decision</text>
+<text class="m" x="177" y="298" text-anchor="middle" font-size="17">stop condition</text>
+
+<path class="line" d="M295 240 L355 240"/>
+
+<rect class="good" x="370" y="165" rx="18" width="235" height="150"/>
+<text class="t" x="487" y="205" text-anchor="middle" font-size="22" font-weight="700">2 · Plain Python</text>
+<text class="m" x="487" y="242" text-anchor="middle" font-size="17">while</text>
+<text class="m" x="487" y="270" text-anchor="middle" font-size="17">if / else</text>
+<text class="m" x="487" y="298" text-anchor="middle" font-size="17">break</text>
+
+<path class="line" d="M605 240 L665 240"/>
+
+<rect class="bridge" x="680" y="165" rx="18" width="205" height="150"/>
+<text class="t" x="782" y="205" text-anchor="middle" font-size="22" font-weight="700">3 · Bridge</text>
+<text class="m" x="782" y="242" text-anchor="middle" font-size="17">@tool</text>
+<text class="m" x="782" y="270" text-anchor="middle" font-size="17">retriever</text>
+<text class="m" x="782" y="298" text-anchor="middle" font-size="17">bind_tools()</text>
+
+<path class="line" d="M885 240 L945 240"/>
+
+<rect class="accent" x="960" y="165" rx="18" width="180" height="150"/>
+<text class="t" x="1050" y="205" text-anchor="middle" font-size="22" font-weight="700">4 · LangGraph</text>
+<text class="m" x="1050" y="242" text-anchor="middle" font-size="17">state</text>
+<text class="m" x="1050" y="270" text-anchor="middle" font-size="17">nodes</text>
+<text class="m" x="1050" y="298" text-anchor="middle" font-size="17">conditional edges</text>
+
+<path class="dash" d="M175 395 C300 350 430 350 490 395 C560 445 675 445 780 395 C885 345 985 355 1050 395"/>
+<text class="t" x="600" y="405" text-anchor="middle" font-size="20" font-weight="700">Same control logic throughout</text>
+
+<rect class="box" x="120" y="465" rx="16" width="960" height="92"/>
+<text class="t" x="600" y="500" text-anchor="middle" font-size="21" font-weight="700">Question → retrieve → grade → generate OR rewrite → retrieve again → stop</text>
+<text class="m" x="600" y="535" text-anchor="middle" font-size="17">The framework changes the representation. It does not invent the reasoning pattern.</text>
+</svg>
