@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<title id="title">Roles of local model, Chroma, LangChain, LangGraph, and DuckDuckGo</title>
+<desc id="desc">A layered architecture showing the model, data and tools, LangChain integration layer, LangGraph orchestration layer, and the application.</desc>
+<style>
+.bg{fill:#fff}.layer{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.4}.purple{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2.4}.green{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.4}.orange{fill:#fff7ed;stroke:#ea580c;stroke-width:2.4}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+</style>
+<rect class="bg" width="1200" height="680"/>
+<text class="t" x="60" y="60" font-size="34" font-weight="700">Why use LangChain and LangGraph?</text>
+<text class="m" x="60" y="98" font-size="20">They solve different layers of the same application. Chroma, the model, and search remain separate components.</text>
+
+<rect class="accent" x="85" y="145" rx="18" width="1030" height="88"/>
+<text class="t" x="600" y="179" text-anchor="middle" font-size="22" font-weight="700">Application</text>
+<text class="m" x="600" y="208" text-anchor="middle" font-size="17">support assistant · research tool · workflow · user interface</text>
+
+<rect class="purple" x="85" y="265" rx="18" width="1030" height="105"/>
+<text class="t" x="600" y="300" text-anchor="middle" font-size="22" font-weight="700">LangGraph — orchestration and control</text>
+<text class="m" x="600" y="330" text-anchor="middle" font-size="17">state · nodes · edges · loops · checkpoints · human approval · persistence</text>
+<text class="m" x="600" y="354" text-anchor="middle" font-size="15">Use when you need explicit control over a multi-step or long-running agent.</text>
+
+<rect class="green" x="85" y="402" rx="18" width="1030" height="105"/>
+<text class="t" x="600" y="437" text-anchor="middle" font-size="22" font-weight="700">LangChain — common interfaces and integrations</text>
+<text class="m" x="600" y="467" text-anchor="middle" font-size="17">models · prompts · Documents · retrievers · tools · agents · provider integrations</text>
+<text class="m" x="600" y="491" text-anchor="middle" font-size="15">Use it to avoid rewriting adapters for every model, vector store, and tool.</text>
+
+<rect class="layer" x="85" y="540" rx="16" width="220" height="90"/>
+<text class="t" x="195" y="575" text-anchor="middle" font-size="19" font-weight="700">Local LLM</text>
+<text class="m" x="195" y="604" text-anchor="middle" font-size="15">Qwen3 · generation</text>
+
+<rect class="layer" x="335" y="540" rx="16" width="220" height="90"/>
+<text class="t" x="445" y="575" text-anchor="middle" font-size="19" font-weight="700">Chroma</text>
+<text class="m" x="445" y="604" text-anchor="middle" font-size="15">vectors · retrieval</text>
+
+<rect class="layer" x="585" y="540" rx="16" width="220" height="90"/>
+<text class="t" x="695" y="575" text-anchor="middle" font-size="19" font-weight="700">DuckDuckGo</text>
+<text class="m" x="695" y="604" text-anchor="middle" font-size="15">public web search</text>
+
+<rect class="orange" x="835" y="540" rx="16" width="280" height="90"/>
+<text class="t" x="975" y="575" text-anchor="middle" font-size="19" font-weight="700">Your Python functions / APIs</text>
+<text class="m" x="975" y="604" text-anchor="middle" font-size="15">business rules · SQL · services</text>
+</svg>
