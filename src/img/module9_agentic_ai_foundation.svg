@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<title id="title">Agentic AI control loop</title>
+<desc id="desc">Agentic AI maintains state, chooses an approved action, uses a tool, observes the result, updates state, and repeats until a stop condition is reached.</desc>
+<defs>
+ <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+ <style>
+ .bg{fill:#fff}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2.2}.accent{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.4}.good{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.4}.warn{fill:#fff7ed;stroke:#ea580c;stroke-width:2.4}.line{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#a)}.loop{stroke:#2563eb;stroke-width:3;fill:none;stroke-dasharray:8 7;marker-end:url(#a)}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+ </style>
+</defs>
+<rect class="bg" width="1200" height="680"/>
+<text class="t" x="60" y="60" font-size="34" font-weight="700">Agentic AI = model + state + tools + feedback + stop conditions</text>
+<text class="m" x="60" y="98" font-size="20">The model is one component. The agentic behavior comes from the control loop around it.</text>
+
+<rect class="box" x="70" y="165" rx="16" width="170" height="82"/>
+<text class="t" x="155" y="200" text-anchor="middle" font-size="20" font-weight="700">Goal / request</text>
+<text class="m" x="155" y="226" text-anchor="middle" font-size="15">what needs to happen?</text>
+<path class="line" d="M240 206 L305 206"/>
+
+<rect class="accent" x="320" y="150" rx="16" width="195" height="112"/>
+<text class="t" x="418" y="188" text-anchor="middle" font-size="21" font-weight="700">State</text>
+<text class="m" x="418" y="217" text-anchor="middle" font-size="16">goal · context · memory</text>
+<text class="m" x="418" y="242" text-anchor="middle" font-size="16">tool results · step count</text>
+<path class="line" d="M515 206 L580 206"/>
+
+<rect class="accent" x="595" y="150" rx="16" width="210" height="112"/>
+<text class="t" x="700" y="188" text-anchor="middle" font-size="21" font-weight="700">Decide</text>
+<text class="m" x="700" y="217" text-anchor="middle" font-size="16">answer?</text>
+<text class="m" x="700" y="242" text-anchor="middle" font-size="16">call tool? ask? stop?</text>
+
+<path class="line" d="M700 262 L700 332"/>
+<rect class="box" x="590" y="347" rx="16" width="220" height="92"/>
+<text class="t" x="700" y="385" text-anchor="middle" font-size="20" font-weight="700">Act</text>
+<text class="m" x="700" y="414" text-anchor="middle" font-size="16">retriever · API · SQL · web</text>
+
+<path class="line" d="M810 393 L880 393"/>
+<rect class="warn" x="895" y="347" rx="16" width="220" height="92"/>
+<text class="t" x="1005" y="385" text-anchor="middle" font-size="20" font-weight="700">Observe result</text>
+<text class="m" x="1005" y="414" text-anchor="middle" font-size="16">evidence · error · status</text>
+
+<path class="loop" d="M895 417 C830 510 500 515 420 275"/>
+<text class="m" x="585" y="505" font-size="16">update state and decide again</text>
+
+<rect class="good" x="895" y="520" rx="16" width="220" height="82"/>
+<text class="t" x="1005" y="555" text-anchor="middle" font-size="20" font-weight="700">Stop / return</text>
+<text class="m" x="1005" y="582" text-anchor="middle" font-size="15">success · safe failure · human</text>
+<path class="line" d="M1005 439 L1005 505"/>
+
+<rect class="box" x="70" y="520" rx="14" width="430" height="82"/>
+<text class="t" x="90" y="552" font-size="18" font-weight="700">Important</text>
+<text class="m" x="90" y="578" font-size="16">A single prompt-response call is not an agentic loop.</text>
+</svg>
