@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Tool selection guide for agent projects</title>
+<desc id="desc">A decision guide maps information needs to deterministic code, retrieval, databases, web search, or action tools with permissions.</desc>
+<defs>
+<marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+<style>
+.bg{fill:#fff}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.blue{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.4}.green{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.4}.orange{fill:#fff7ed;stroke:#ea580c;stroke-width:2.4}.purple{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2.4}.line{stroke:#64748b;stroke-width:2.8;fill:none;marker-end:url(#a)}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}.lab{font-family:Arial,Helvetica,sans-serif;fill:#475569;font-size:15px;font-weight:700}
+</style></defs>
+<rect class="bg" width="1200" height="700"/>
+<text class="t" x="60" y="58" font-size="34" font-weight="700">Choose a tool from the information need</text>
+<text class="m" x="60" y="96" font-size="20">Do not start with a list of cool tools. Start with what the task actually needs to know or do.</text>
+
+<rect class="blue" x="450" y="135" rx="18" width="300" height="86"/>
+<text class="t" x="600" y="171" text-anchor="middle" font-size="21" font-weight="700">What does this step need?</text>
+<text class="m" x="600" y="199" text-anchor="middle" font-size="16">information · calculation · action</text>
+
+<path class="line" d="M520 221 L285 300"/>
+<path class="line" d="M575 221 L480 300"/>
+<path class="line" d="M625 221 L720 300"/>
+<path class="line" d="M680 221 L915 300"/>
+
+<rect class="box" x="90" y="310" rx="16" width="235" height="115"/>
+<text class="t" x="208" y="346" text-anchor="middle" font-size="19" font-weight="700">Exact rule / calculation?</text>
+<text class="m" x="208" y="375" text-anchor="middle" font-size="15">known logic · arithmetic</text>
+<text class="m" x="208" y="398" text-anchor="middle" font-size="15">validation · formatting</text>
+
+<rect class="green" x="370" y="310" rx="16" width="235" height="115"/>
+<text class="t" x="488" y="346" text-anchor="middle" font-size="19" font-weight="700">Internal knowledge?</text>
+<text class="m" x="488" y="375" text-anchor="middle" font-size="15">documents · policies</text>
+<text class="m" x="488" y="398" text-anchor="middle" font-size="15">semantic retrieval</text>
+
+<rect class="purple" x="650" y="310" rx="16" width="235" height="115"/>
+<text class="t" x="768" y="346" text-anchor="middle" font-size="19" font-weight="700">Exact structured fact?</text>
+<text class="m" x="768" y="375" text-anchor="middle" font-size="15">database · API</text>
+<text class="m" x="768" y="398" text-anchor="middle" font-size="15">order · inventory · metrics</text>
+
+<rect class="orange" x="930" y="310" rx="16" width="235" height="115"/>
+<text class="t" x="1048" y="346" text-anchor="middle" font-size="19" font-weight="700">Current public info?</text>
+<text class="m" x="1048" y="375" text-anchor="middle" font-size="15">web · news · docs</text>
+<text class="m" x="1048" y="398" text-anchor="middle" font-size="15">fresh external evidence</text>
+
+<path class="line" d="M208 425 L208 500"/>
+<path class="line" d="M488 425 L488 500"/>
+<path class="line" d="M768 425 L768 500"/>
+<path class="line" d="M1048 425 L1048 500"/>
+
+<rect class="box" x="90" y="515" rx="16" width="235" height="92"/>
+<text class="t" x="208" y="550" text-anchor="middle" font-size="19" font-weight="700">Python function</text>
+<text class="m" x="208" y="578" text-anchor="middle" font-size="15">deterministic first</text>
+
+<rect class="green" x="370" y="515" rx="16" width="235" height="92"/>
+<text class="t" x="488" y="550" text-anchor="middle" font-size="19" font-weight="700">Retriever / RAG tool</text>
+<text class="m" x="488" y="578" text-anchor="middle" font-size="15">Chroma · vector DB</text>
+
+<rect class="purple" x="650" y="515" rx="16" width="235" height="92"/>
+<text class="t" x="768" y="550" text-anchor="middle" font-size="19" font-weight="700">SQL / API tool</text>
+<text class="m" x="768" y="578" text-anchor="middle" font-size="15">validated arguments</text>
+
+<rect class="orange" x="930" y="515" rx="16" width="235" height="92"/>
+<text class="t" x="1048" y="550" text-anchor="middle" font-size="19" font-weight="700">Web-search tool</text>
+<text class="m" x="1048" y="578" text-anchor="middle" font-size="15">freshness + source checks</text>
+
+<text class="m" x="60" y="658" font-size="17">If a tool changes real-world state—send, write, delete, purchase, approve—add authorization and often human approval.</text>
+</svg>
