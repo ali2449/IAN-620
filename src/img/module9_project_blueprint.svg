@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">Practical agent project blueprint</title>
+<desc id="desc">A project architecture connects user input, a controller and state, planner/router, permission-aware tool registry, retrieval and structured tools, evaluator/refinement loop, final answer, and observability.</desc>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker></defs>
+<style>
+.bg{fill:#fff}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.blue{fill:#eaf2ff;stroke:#2563eb;stroke-width:2.4}.green{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.4}.orange{fill:#fff7ed;stroke:#ea580c;stroke-width:2.4}.purple{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2.4}.line{stroke:#64748b;stroke-width:2.8;fill:none;marker-end:url(#a)}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+</style>
+<rect class="bg" width="1200" height="720"/>
+<text class="t" x="60" y="58" font-size="34" font-weight="700">A practical blueprint for student agent projects</text>
+<text class="m" x="60" y="96" font-size="20">Keep the controller small, tool contracts narrow, evidence explicit, and revision bounded.</text>
+
+<rect class="box" x="55" y="155" rx="16" width="170" height="85"/>
+<text class="t" x="140" y="190" text-anchor="middle" font-size="19" font-weight="700">User / UI</text>
+<text class="m" x="140" y="217" text-anchor="middle" font-size="15">goal + constraints</text>
+<path class="line" d="M225 198 L300 198"/>
+
+<rect class="blue" x="315" y="140" rx="16" width="235" height="115"/>
+<text class="t" x="432" y="176" text-anchor="middle" font-size="20" font-weight="700">Controller + state</text>
+<text class="m" x="432" y="204" text-anchor="middle" font-size="15">goal · plan · evidence</text>
+<text class="m" x="432" y="228" text-anchor="middle" font-size="15">steps · draft · critique</text>
+<path class="line" d="M550 198 L625 198"/>
+
+<rect class="blue" x="640" y="140" rx="16" width="210" height="115"/>
+<text class="t" x="745" y="176" text-anchor="middle" font-size="20" font-weight="700">Planner / router</text>
+<text class="m" x="745" y="204" text-anchor="middle" font-size="15">what information?</text>
+<text class="m" x="745" y="228" text-anchor="middle" font-size="15">which approved tool?</text>
+<path class="line" d="M850 198 L925 198"/>
+
+<rect class="orange" x="940" y="140" rx="16" width="210" height="115"/>
+<text class="t" x="1045" y="176" text-anchor="middle" font-size="20" font-weight="700">Tool gate</text>
+<text class="m" x="1045" y="204" text-anchor="middle" font-size="15">permissions · schema</text>
+<text class="m" x="1045" y="228" text-anchor="middle" font-size="15">timeouts · limits</text>
+
+<path class="line" d="M1045 255 L1045 330"/>
+
+<rect class="green" x="850" y="345" rx="16" width="190" height="100"/>
+<text class="t" x="945" y="382" text-anchor="middle" font-size="19" font-weight="700">Retriever / RAG</text>
+<text class="m" x="945" y="410" text-anchor="middle" font-size="15">Chroma · docs</text>
+
+<rect class="purple" x="620" y="345" rx="16" width="190" height="100"/>
+<text class="t" x="715" y="382" text-anchor="middle" font-size="19" font-weight="700">SQL / API</text>
+<text class="m" x="715" y="410" text-anchor="middle" font-size="15">structured facts</text>
+
+<rect class="box" x="390" y="345" rx="16" width="190" height="100"/>
+<text class="t" x="485" y="382" text-anchor="middle" font-size="19" font-weight="700">Web search</text>
+<text class="m" x="485" y="410" text-anchor="middle" font-size="15">current public info</text>
+
+<rect class="box" x="160" y="345" rx="16" width="190" height="100"/>
+<text class="t" x="255" y="382" text-anchor="middle" font-size="19" font-weight="700">Python tools</text>
+<text class="m" x="255" y="410" text-anchor="middle" font-size="15">rules · math · validation</text>
+
+<path class="line" d="M255 445 L255 515"/>
+<path class="line" d="M485 445 L485 515"/>
+<path class="line" d="M715 445 L715 515"/>
+<path class="line" d="M945 445 L945 515"/>
+
+<rect class="blue" x="300" y="530" rx="16" width="350" height="105"/>
+<text class="t" x="475" y="566" text-anchor="middle" font-size="20" font-weight="700">Draft / synthesize</text>
+<text class="m" x="475" y="595" text-anchor="middle" font-size="15">use only collected evidence</text>
+
+<rect class="orange" x="700" y="530" rx="16" width="300" height="105"/>
+<text class="t" x="850" y="566" text-anchor="middle" font-size="20" font-weight="700">Evaluate / refine</text>
+<text class="m" x="850" y="595" text-anchor="middle" font-size="15">criteria · citations · completeness</text>
+
+<path class="line" d="M650 582 L685 582"/>
+<path class="line" d="M1000 582 L1080 582"/>
+
+<rect class="green" x="1080" y="530" rx="16" width="95" height="105"/>
+<text class="t" x="1127" y="570" text-anchor="middle" font-size="17" font-weight="700">Final</text>
+<text class="m" x="1127" y="597" text-anchor="middle" font-size="13">or human</text>
+
+<text class="m" x="60" y="684" font-size="17">Across every layer: log tool name, arguments, evidence IDs, outcome, latency, errors, and stop reason.</text>
+</svg>
