@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">Strict grader loop trap</title>
+<desc id="desc">A comparison between an overly strict binary grader that repeatedly rejects evidence and a bounded evidence policy that accepts sufficiently relevant evidence or stops safely after a limited number of attempts.</desc>
+<defs>
+  <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker>
+  <style>
+    .bg{fill:#fff}.bad{fill:#fff7ed;stroke:#ea580c;stroke-width:2.4}.good{fill:#f0fdf4;stroke:#16a34a;stroke-width:2.4}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.line{stroke:#64748b;stroke-width:2.8;fill:none;marker-end:url(#a)}.loopbad{stroke:#ea580c;stroke-width:3;fill:none;stroke-dasharray:8 7;marker-end:url(#a)}.loopgood{stroke:#16a34a;stroke-width:3;fill:none;stroke-dasharray:8 7;marker-end:url(#a)}.t{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.m{font-family:Arial,Helvetica,sans-serif;fill:#475569}
+  </style>
+</defs>
+<rect class="bg" width="1200" height="650"/>
+<text class="t" x="60" y="60" font-size="34" font-weight="700">The beginner trap: a grader that rejects everything</text>
+<text class="m" x="60" y="98" font-size="20">The loop is not always the problem. Sometimes the grading policy makes success impossible.</text>
+
+<text class="t" x="80" y="150" font-size="22" font-weight="700">Failure pattern</text>
+<rect class="box" x="80" y="180" rx="14" width="170" height="76"/><text class="t" x="165" y="215" text-anchor="middle" font-size="19" font-weight="700">Retrieve</text><text class="m" x="165" y="241" text-anchor="middle" font-size="15">useful evidence</text>
+<path class="line" d="M250 218 L315 218"/>
+<rect class="bad" x="330" y="180" rx="14" width="220" height="76"/><text class="t" x="440" y="215" text-anchor="middle" font-size="19" font-weight="700">Binary grader</text><text class="m" x="440" y="241" text-anchor="middle" font-size="15">demands a perfect match</text>
+<path class="line" d="M550 218 L615 218"/>
+<rect class="bad" x="630" y="180" rx="14" width="180" height="76"/><text class="t" x="720" y="215" text-anchor="middle" font-size="19" font-weight="700">Reject</text><text class="m" x="720" y="241" text-anchor="middle" font-size="15">rewrite again</text>
+<path class="loopbad" d="M720 256 C720 330 165 330 165 270"/>
+<text class="m" x="335" y="332" font-size="17">same pattern repeats until max steps / recursion limit</text>
+
+<text class="t" x="80" y="400" font-size="22" font-weight="700">Safer teaching policy</text>
+<rect class="box" x="80" y="430" rx="14" width="170" height="82"/><text class="t" x="165" y="466" text-anchor="middle" font-size="19" font-weight="700">Retrieve</text><text class="m" x="165" y="492" text-anchor="middle" font-size="15">candidate evidence</text>
+<path class="line" d="M250 471 L315 471"/>
+<rect class="good" x="330" y="430" rx="14" width="230" height="82"/><text class="t" x="445" y="466" text-anchor="middle" font-size="19" font-weight="700">Score evidence</text><text class="m" x="445" y="492" text-anchor="middle" font-size="15">relevance + sufficiency</text>
+<path class="line" d="M560 471 L625 471"/>
+<rect class="good" x="640" y="420" rx="14" width="210" height="102"/><text class="t" x="745" y="457" text-anchor="middle" font-size="19" font-weight="700">Enough?</text><text class="m" x="745" y="484" text-anchor="middle" font-size="15">score ≥ threshold</text><text class="m" x="745" y="507" text-anchor="middle" font-size="15">→ generate</text>
+<path class="line" d="M850 471 L915 471"/>
+<rect class="box" x="930" y="430" rx="14" width="190" height="82"/><text class="t" x="1025" y="466" text-anchor="middle" font-size="19" font-weight="700">Otherwise</text><text class="m" x="1025" y="492" text-anchor="middle" font-size="15">rewrite once or stop</text>
+<path class="loopgood" d="M1025 512 C1025 575 165 575 165 526"/>
+<text class="m" x="600" y="620" text-anchor="middle" font-size="17">The threshold is application-specific. The hard limit is non-negotiable.</text>
+</svg>
