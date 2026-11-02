@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.492
+Step four is grading evidence.
+
+00:00:02.492 --> 00:00:05.617
+The example grader is intentionally simple.
+
+00:00:05.617 --> 00:00:12.122
+It looks for signals related to returns, days, and delivery, and then produces a score.
+
+00:00:12.122 --> 00:00:17.130
+This is useful for teaching because you can see exactly why the score changes.
+
+00:00:17.717 --> 00:00:25.529
+In a real project, you may replace this with a reranker, a classifier, structured L L M output,
+
+00:00:25.529 --> 00:00:30.979
+or domain-specific rules. The important part is the interface.
+
+00:00:30.979 --> 00:00:36.074
+The controller calls grade documents and receives a predictable result.
+
+00:00:36.074 --> 00:00:39.227
+The internal implementation can improve later.
+
+00:00:39.907 --> 00:00:46.809
+Make evidence quality observable. If a grade fails, you should be able to inspect why.
+
+00:00:46.809 --> 00:00:51.173
+A mysterious yes or no result makes debugging much harder.

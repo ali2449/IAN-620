@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.007
+This blueprint brings the project pieces together.
+
+00:00:03.007 --> 00:00:07.882
+The user sends a goal and constraints.
+
+00:00:07.882 --> 00:00:11.167
+The controller owns shared state, budgets, routes, and stopping policy.
+
+00:00:11.167 --> 00:00:18.432
+A planner or router identifies what information is needed and which approved capability can provide it.
+
+00:00:18.432 --> 00:00:24.889
+A tool gate enforces schemas, permissions, timeouts, and approval requirements.
+
+00:00:25.386 --> 00:00:33.948
+Below that are specialized tools: Python functions for deterministic work, web search for fresh public information,
+
+00:00:33.948 --> 00:00:40.918
+S Q L or A P I tools for structured facts, and retrieval for internal documents.
+
+00:00:40.918 --> 00:00:45.523
+The collected evidence goes to a synthesis or drafting step.
+
+00:00:45.523 --> 00:00:53.242
+Then an evaluator checks explicit criteria and requests targeted refinement only when necessary.
+
+00:00:53.692 --> 00:00:57.364
+Across the whole architecture, keep observability.
+
+00:00:57.364 --> 00:01:07.249
+Record tool names, validated arguments, source I D's, outcomes, latency, errors, and the reason the workflow stopped.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.992
+Grade evidence along several dimensions.
+
+00:00:02.992 --> 00:00:07.972
+Relevance asks whether the evidence addresses the user's information need.
+
+00:00:07.972 --> 00:00:13.752
+Sufficiency asks whether there is enough information to answer the complete question.
+
+00:00:13.752 --> 00:00:20.167
+Authority asks whether the source is approved and trustworthy for this kind of claim.
+
+00:00:20.167 --> 00:00:24.164
+Freshness asks whether the source is current enough.
+
+00:00:24.779 --> 00:00:33.091
+For our return example, a forum post about returns may be relevant, but it is not an authoritative company policy.
+
+00:00:33.091 --> 00:00:39.091
+An old company policy may be authoritative in origin but no longer current.
+
+00:00:39.091 --> 00:00:44.836
+A current return policy may still be insufficient without the order date.
+
+00:00:44.836 --> 00:00:49.606
+A simple binary grade can be useful when teaching the basic loop.
+
+00:00:49.606 --> 00:00:53.329
+But a structured grade gives more information when debugging.
+
+00:00:53.779 --> 00:00:57.541
+The key question is not just, is this document good?
+
+00:00:57.541 --> 00:00:59.376
+It is, good for what decision?

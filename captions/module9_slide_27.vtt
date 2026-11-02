@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.057
+A strong controller mixes deterministic rules with model-assisted judgment.
+
+00:00:05.057 --> 00:00:14.392
+Use normal code for order I D extraction, permissions, date comparisons, known categories, and exact thresholds.
+
+00:00:14.392 --> 00:00:21.592
+Use model judgment for ambiguous intent, semantic classification, evidence interpretation,
+
+00:00:21.592 --> 00:00:24.042
+or flexible language transformation.
+
+00:00:24.613 --> 00:00:26.614
+Here is a simple example.
+
+00:00:26.614 --> 00:00:33.084
+A regular expression extracts order number one zero four two from the user's text.
+
+00:00:33.084 --> 00:00:40.749
+Then a semantic classifier decides whether the user wants return eligibility, refund status,
+
+00:00:40.749 --> 00:00:43.784
+or a general policy explanation.
+
+00:00:43.784 --> 00:00:46.414
+The first task is exact.
+
+00:00:46.414 --> 00:00:48.819
+The second task involves meaning.
+
+00:00:49.300 --> 00:00:55.882
+This hybrid approach gives the model work it is good at while keeping hard constraints in software.
+
+00:00:55.882 --> 00:00:59.340
+It also reduces unnecessary model calls.

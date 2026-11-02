@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.367
+Multi-source workflows can execute tools sequentially, in parallel, or conditionally.
+
+00:00:06.367 --> 00:00:11.712
+Use sequential execution when the second tool needs a value from the first.
+
+00:00:11.712 --> 00:00:17.507
+For example, first identify an account, then request that account's history.
+
+00:00:17.507 --> 00:00:21.507
+Use parallel execution when the tools are independent.
+
+00:00:21.507 --> 00:00:26.015
+Policy search and order lookup may be able to run at the same time.
+
+00:00:26.662 --> 00:00:32.429
+Use conditional execution when the second source is only needed if the first is insufficient.
+
+00:00:32.429 --> 00:00:41.189
+For example, search an internal knowledge base first, and use public web search only if the application explicitly
+
+00:00:41.189 --> 00:00:45.133
+permits it and the task really requires current external information.
+
+00:00:45.583 --> 00:00:51.410
+A useful project question is: does tool B depend on tool A's output?
+
+00:00:51.410 --> 00:00:55.975
+If not, parallel execution may reduce latency.
+
+00:00:55.975 --> 00:00:59.289
+If yes, keep the dependency explicit.

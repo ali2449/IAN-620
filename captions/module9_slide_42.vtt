@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.582
+Manage tools as a small registry rather than handing every tool to the model.
+
+00:00:06.582 --> 00:00:12.767
+For each tool, store useful metadata: what kind of capability it provides, whether it is read-only,
+
+00:00:12.767 --> 00:00:17.378
+a rough cost or latency class, and whether it requires approval.
+
+00:00:18.061 --> 00:00:23.468
+Consider three tools. Search knowledge is read-only and low risk.
+
+00:00:23.468 --> 00:00:30.488
+Get order is also read-only, but it accesses structured customer data and needs authorization.
+
+00:00:30.488 --> 00:00:38.523
+Issue refund changes real-world state, so it should be treated very differently and probably require approval.
+
+00:00:38.523 --> 00:00:45.046
+A registry lets your controller filter which tools are even available for a particular task and user.
+
+00:00:45.670 --> 00:00:48.262
+Tool descriptions help the model choose.
+
+00:00:48.262 --> 00:00:55.207
+But permissions, approval, timeouts, and cost limits must be enforced outside the model.
+
+00:00:55.207 --> 00:01:02.002
+Also log tool name, validated arguments, duration, outcome, and error type.
+
+00:01:02.002 --> 00:01:03.784
+Do not log secrets.

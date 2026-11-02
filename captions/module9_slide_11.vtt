@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.842
+State is the working record of the workflow.
+
+00:00:02.842 --> 00:00:08.247
+Suppose the user asks, can I return order one zero four two?
+
+00:00:08.247 --> 00:00:11.182
+The state might keep the original question.
+
+00:00:11.182 --> 00:00:17.182
+It may also keep a route indicating that we need both policy evidence and order data.
+
+00:00:17.182 --> 00:00:22.207
+After retrieval, the state contains the relevant policy chunks.
+
+00:00:22.207 --> 00:00:26.417
+After the order tool runs, it contains the delivery date.
+
+00:00:26.417 --> 00:00:30.041
+The step counter tells us how many actions have happened.
+
+00:00:30.712 --> 00:00:35.134
+Why save these values? Because later steps need them.
+
+00:00:35.134 --> 00:00:39.349
+The final generation step needs the policy and order data.
+
+00:00:39.349 --> 00:00:42.144
+The stopping logic needs the step count.
+
+00:00:42.144 --> 00:00:45.954
+Citation validation needs source identifiers.
+
+00:00:45.954 --> 00:00:53.164
+A common project mistake is storing everything, including huge prompts and temporary strings.
+
+00:00:53.164 --> 00:00:57.640
+That makes state harder to debug and may make persistence expensive.
+
+00:00:58.236 --> 00:01:05.498
+A simple rule is: if another step genuinely needs the value later, state is a reasonable place for it.
+
+00:01:05.498 --> 00:01:10.251
+If the value is only temporary inside one function, keep it local.

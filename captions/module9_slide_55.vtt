@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.567
+A useful routing trace should be short and factual.
+
+00:00:03.567 --> 00:00:08.847
+For one run, you might record: route equals policy and order.
+
+00:00:08.847 --> 00:00:11.752
+Policy search returned three chunks.
+
+00:00:11.752 --> 00:00:16.062
+Order lookup says delivered on September twenty ninth.
+
+00:00:16.062 --> 00:00:21.034
+Evidence is sufficient. Next action is generate answer.
+
+00:00:21.664 --> 00:00:24.816
+That trace is enough to understand the trajectory.
+
+00:00:24.816 --> 00:00:33.906
+Good trace fields include the action, validated arguments, source I D's, a score or result summary, latency, errors,
+
+00:00:33.906 --> 00:00:40.956
+and the next route. Do not store secrets or unnecessary personal information.
+
+00:00:40.956 --> 00:00:45.276
+Do not dump huge raw tool responses into logs.
+
+00:00:45.276 --> 00:00:48.464
+And do not depend on hidden private reasoning.
+
+00:00:49.188 --> 00:00:53.545
+A concise trace is valuable for grading student projects too.
+
+00:00:53.545 --> 00:00:58.282
+It lets you show not just the final answer, but how the system got there.

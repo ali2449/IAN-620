@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.432
+Agent decisions should be structured.
+
+00:00:02.432 --> 00:00:11.002
+If the controller only needs to know the next route, do not ask the model for a long paragraph explaining what it feels
+
+00:00:11.002 --> 00:00:11.382
+like doing.
+
+00:00:11.382 --> 00:00:19.887
+A weak output might say, I think perhaps we should search the policy because the user seems to be asking about returns.
+
+00:00:19.887 --> 00:00:23.980
+That is difficult for application code to interpret reliably.
+
+00:00:24.430 --> 00:00:32.227
+A better result is a small object with a route and, if useful, a short visible reason.
+
+00:00:32.227 --> 00:00:39.167
+For example: route equals policy search; reason equals the question asks about return rules.
+
+00:00:39.167 --> 00:00:43.651
+This is easier to validate, log, test, and route.
+
+00:00:44.306 --> 00:00:48.083
+Also remember that an L L M is not always necessary.
+
+00:00:48.083 --> 00:00:52.668
+If a normal if statement can make the decision correctly, use it.
+
+00:00:52.668 --> 00:00:59.248
+Structured model decisions are most useful when the user's language is ambiguous enough to justify semantic
+
+00:00:59.248 --> 00:01:00.284
+interpretation.

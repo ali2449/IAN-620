@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.637
+Checkpoint question.
+
+00:00:01.637 --> 00:00:09.937
+The first retrieval returns two highly relevant policy chunks, and together they fully answer the user's question.
+
+00:00:09.937 --> 00:00:15.154
+What should happen next? You should proceed to grounded generation.
+
+00:00:15.667 --> 00:00:19.849
+Do not rewrite the query just because a rewrite node exists.
+
+00:00:19.849 --> 00:00:25.549
+Do not call every other available tool just because the agent has access to them.
+
+00:00:25.549 --> 00:00:30.432
+A strong agent does the minimum work needed to reach a reliable result.
+
+00:00:30.889 --> 00:00:36.325
+The correct answer is: proceed to generation using the evidence you already have.

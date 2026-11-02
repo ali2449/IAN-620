@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.847
+Before reading the node implementations, look at the graph shape.
+
+00:00:03.847 --> 00:00:07.887
+The graph begins at retrieve, then moves to grade.
+
+00:00:07.887 --> 00:00:11.367
+From grade, there are three possible routes.
+
+00:00:11.367 --> 00:00:13.892
+Good evidence goes to generate.
+
+00:00:13.892 --> 00:00:17.502
+Weak evidence with budget remaining goes to rewrite.
+
+00:00:17.502 --> 00:00:20.832
+A stop condition goes directly to end.
+
+00:00:20.832 --> 00:00:24.762
+After rewrite, execution returns to retrieve.
+
+00:00:24.762 --> 00:00:27.495
+After generate, execution ends.
+
+00:00:28.062 --> 00:00:32.754
+This picture tells you most of the architecture before you read any function body.
+
+00:00:32.754 --> 00:00:36.279
+That is why I recommend drawing the topology first.
+
+00:00:36.279 --> 00:00:40.255
+It separates workflow design from implementation details.
+
+00:00:40.712 --> 00:00:43.654
+Also notice the explicit stop route.
+
+00:00:43.654 --> 00:00:50.908
+A bounded correction loop should have a normal application-level way to stop, not only a recursion-limit error.

@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.187
+Why can an agent loop forever?
+
+00:00:02.187 --> 00:00:05.532
+One common cause is an impossible grader.
+
+00:00:05.532 --> 00:00:14.387
+Suppose retrieval repeatedly returns useful policy text, but the grader is so strict that it rejects every document.
+
+00:00:14.387 --> 00:00:18.735
+The graph keeps rewriting and retrieving until it reaches the limit.
+
+00:00:19.442 --> 00:00:27.284
+Before redesigning the graph, log the current query, returned source I D's, grade, threshold, selected route,
+
+00:00:27.284 --> 00:00:35.009
+and step count. If useful evidence is always rejected, fix the grading policy.
+
+00:00:35.009 --> 00:00:43.715
+If the rewrite barely changes the query and the same chunks return, detect no progress and stop or change strategy.
+
+00:00:44.310 --> 00:00:46.957
+The graph may be working exactly as written.
+
+00:00:46.957 --> 00:00:49.734
+The problem can be the decision rule inside it.

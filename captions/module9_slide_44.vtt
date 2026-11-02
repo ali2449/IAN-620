@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.127
+Now we separate routing from query rewriting.
+
+00:00:03.127 --> 00:00:06.162
+Routing answers: where should we look?
+
+00:00:06.162 --> 00:00:10.192
+Query rewriting answers: what should we search for?
+
+00:00:10.192 --> 00:00:13.309
+These are related, but they are different decisions.
+
+00:00:13.838 --> 00:00:18.741
+Suppose a user asks, can I return order one zero four two?
+
+00:00:18.741 --> 00:00:24.151
+Routing may decide that we need both the policy source and the order database.
+
+00:00:24.151 --> 00:00:31.425
+Then the policy search query may be rewritten as return eligibility deadline after delivery.
+
+00:00:31.425 --> 00:00:34.111
+The route selected the evidence source.
+
+00:00:34.111 --> 00:00:37.656
+The rewrite improved the search expression for that source.
+
+00:00:38.106 --> 00:00:42.213
+The goal is to use the smallest useful sequence of actions.
+
+00:00:42.213 --> 00:00:48.227
+Do not rewrite, reroute, and call extra tools unless the task actually needs them.

@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.142
+Step two is structured lookup.
+
+00:00:02.142 --> 00:00:06.792
+A vector database is not the best tool for an exact order record.
+
+00:00:06.792 --> 00:00:13.317
+If you know the order I D, use a direct database or A P I lookup.
+
+00:00:13.317 --> 00:00:18.487
+For example, the get order function receives an order I D, checks the structured data source,
+
+00:00:18.487 --> 00:00:25.952
+and returns a predictable object such as found true, the order I D, delivery date, and status.
+
+00:00:26.662 --> 00:00:34.054
+This is an important project design rule: tool choice should follow the shape of the data.
+
+00:00:34.054 --> 00:00:40.664
+Use semantic retrieval for unstructured text such as policies, papers, manuals, or notes.
+
+00:00:40.664 --> 00:00:50.084
+Use S Q L or an A P I for exact structured facts such as account balances, order dates, inventory quantities,
+
+00:00:50.084 --> 00:00:51.551
+or appointment times.
+
+00:00:52.038 --> 00:00:58.742
+Do not force every information source into a vector database just because the project includes rag.

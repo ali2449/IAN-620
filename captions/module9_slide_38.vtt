@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.887
+Top K controls how many chunks retrieval returns.
+
+00:00:03.887 --> 00:00:09.552
+It is tempting to let the model choose any number, but this is often unnecessary.
+
+00:00:09.552 --> 00:00:15.167
+A tested application default such as three or four chunks may be more reliable.
+
+00:00:15.662 --> 00:00:19.764
+If K is too small, you may miss needed evidence.
+
+00:00:19.764 --> 00:00:27.559
+If it is too large, you may add irrelevant text, increase context size, increase latency, and make grading harder.
+
+00:00:27.559 --> 00:00:32.534
+The right value should come from evaluation.
+
+00:00:32.534 --> 00:00:36.224
+For some projects, three chunks may work well.
+
+00:00:36.224 --> 00:00:39.622
+For others, you may need five or a reranker.
+
+00:00:40.097 --> 00:00:45.039
+If you decide to expose top K to the agent, keep the range narrow.
+
+00:00:45.039 --> 00:00:51.779
+For example, allow values from one to eight instead of allowing fifty or one hundred.
+
+00:00:51.779 --> 00:00:58.550
+Retrieval parameters are application policy, not automatically something the agent should control.

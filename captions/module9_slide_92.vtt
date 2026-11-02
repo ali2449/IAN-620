@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.932
+Node functions are still ordinary Python.
+
+00:00:02.932 --> 00:00:09.787
+The retrieve node reads state, retrieves documents, and returns only the fields it changes:
+
+00:00:09.787 --> 00:00:13.382
+the new documents and an increased step count.
+
+00:00:13.382 --> 00:00:17.903
+The routing function grades the evidence and then applies the correction budget.
+
+00:00:18.583 --> 00:00:22.490
+If the score passes the threshold, return generate.
+
+00:00:22.490 --> 00:00:28.085
+If the score is weak but the maximum step count has been reached, return stop.
+
+00:00:28.085 --> 00:00:30.581
+Otherwise, return rewrite.
+
+00:00:31.145 --> 00:00:34.452
+This is the same policy we wrote in plain Python.
+
+00:00:34.452 --> 00:00:37.412
+Lang Graph has not changed the algorithm.
+
+00:00:37.412 --> 00:00:40.067
+It has made the transitions explicit.
+
+00:00:40.067 --> 00:00:45.522
+Good evidence generates. Weak evidence corrects only while budget remains.
+
+00:00:45.522 --> 00:00:47.694
+Exhausted budget stops.

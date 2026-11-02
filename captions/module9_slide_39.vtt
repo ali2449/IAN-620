@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.137
+Metadata filters can make retrieval more precise before semantic similarity is even calculated.
+
+00:00:07.137 --> 00:00:11.982
+Suppose the knowledge base contains policies from several departments.
+
+00:00:11.982 --> 00:00:18.631
+If you already know the user belongs to retail, you can filter to retail documents before searching.
+
+00:00:19.107 --> 00:00:26.709
+Good filters come from reliable information: department, document type, current version, tenant, user scope,
+
+00:00:26.709 --> 00:00:29.644
+or another known attribute. Risky filters come from guesses.
+
+00:00:29.644 --> 00:00:39.039
+If the model incorrectly guesses a department from ambiguous wording, it may silently remove the correct evidence from
+
+00:00:39.039 --> 00:00:47.069
+the search space. For example, searching refund deadline with a verified retail filter may help.
+
+00:00:47.069 --> 00:00:51.144
+Inventing a filter because the user used a vague word can hurt.
+
+00:00:51.718 --> 00:00:57.544
+Use metadata filtering when the metadata is trustworthy and the rule is justified.
+
+00:00:57.544 --> 00:01:01.517
+It is often cheaper and more reliable than another model call.

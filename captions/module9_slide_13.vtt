@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.010 --> 00:00:05.242
+We will use one example repeatedly so the architecture stays easy to follow.
+
+00:00:05.242 --> 00:00:10.907
+The user asks: order one zero four two was delivered twenty days ago.
+
+00:00:10.907 --> 00:00:13.947
+Can I still return it and get a refund?
+
+00:00:13.947 --> 00:00:16.602
+There are two kinds of information here.
+
+00:00:16.602 --> 00:00:19.042
+First, we need policy knowledge.
+
+00:00:19.042 --> 00:00:21.282
+What is the normal return window?
+
+00:00:21.282 --> 00:00:28.121
+Are there exceptions? That information is likely in unstructured documents and is a good fit for retrieval.
+
+00:00:28.737 --> 00:00:31.399
+Second, we need order facts.
+
+00:00:31.399 --> 00:00:34.149
+What was the authoritative delivery date?
+
+00:00:34.149 --> 00:00:36.399
+What is the order status?
+
+00:00:36.399 --> 00:00:41.684
+That information is structured and belongs in a database or A P I lookup.
+
+00:00:41.684 --> 00:00:43.903
+The final answer depends on both.
+
+00:00:44.475 --> 00:00:49.397
+This is a strong agentic example because one source is not enough.
+
+00:00:49.397 --> 00:00:56.308
+It also shows why tool choice should match the type of data rather than using vector search for everything.

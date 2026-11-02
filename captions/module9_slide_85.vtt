@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.787
+For the environment, install only what the project actually needs.
+
+00:00:04.787 --> 00:00:10.492
+If you are studying orchestration only, Lang Chain and Lang Graph may be enough.
+
+00:00:10.492 --> 00:00:19.212
+If you are running the full Module 9 lab, you also need the integrations for Hugging Face models, Chroma,
+
+00:00:19.212 --> 00:00:26.945
+community tools, sentence transformers, Transformers, Accelerate, Duck Duck Go search, and the Chroma database package.
+
+00:00:27.538 --> 00:00:30.545
+Why separate the minimal and full environments?
+
+00:00:30.545 --> 00:00:36.435
+Because Lang Graph itself does not require a vector database or local language model.
+
+00:00:36.435 --> 00:00:40.060
+Those are capabilities you may plug into the graph.
+
+00:00:40.060 --> 00:00:46.070
+For a student project, smaller environments are easier to reproduce and debug.
+
+00:00:46.070 --> 00:00:50.409
+Do not install twenty libraries because one tutorial used them.
+
+00:00:51.536 --> 00:00:58.320
+Start from your architecture. Then install the integrations that correspond to the tools and models you actually chose.

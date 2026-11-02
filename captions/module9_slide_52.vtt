@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.057
+A retrieval grader should answer a narrow question about the evidence.
+
+00:00:04.057 --> 00:00:07.767
+Is the evidence relevant to the user's information need?
+
+00:00:07.767 --> 00:00:11.102
+Is it sufficient to answer the complete question?
+
+00:00:11.102 --> 00:00:14.347
+Is the source authoritative for this claim?
+
+00:00:14.347 --> 00:00:15.925
+Is it current enough?
+
+00:00:16.512 --> 00:00:19.414
+The grader should not generate the final answer.
+
+00:00:19.414 --> 00:00:25.124
+Keeping grading separate lets you evaluate retrieval independently from generation.
+
+00:00:25.124 --> 00:00:29.819
+You can start with a Boolean result, such as relevant or not relevant.
+
+00:00:29.819 --> 00:00:34.502
+But a score or structured result often gives more debugging information.
+
+00:00:35.006 --> 00:00:39.824
+For example, a document may be highly relevant but incomplete.
+
+00:00:39.824 --> 00:00:48.339
+If your grader only says false, you may not know whether retrieval failed completely or whether one additional fact is
+
+00:00:48.339 --> 00:00:52.083
+missing. That distinction becomes very important in agentic rag.

@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.967
+A classic rag workflow might retrieve a return policy that says standard returns are accepted within fourteen days of
+
+00:00:08.967 --> 00:00:13.162
+delivery. Then the language model generates an answer from that policy.
+
+00:00:13.162 --> 00:00:17.137
+That may sound reasonable, but notice what is missing.
+
+00:00:17.137 --> 00:00:21.250
+The workflow may never verify the actual order record.
+
+00:00:21.851 --> 00:00:27.283
+If the user says the order was delivered twenty days ago, should we trust that value?
+
+00:00:27.283 --> 00:00:29.708
+In some applications, maybe.
+
+00:00:29.708 --> 00:00:36.378
+In a real support system, the authoritative delivery date should probably come from the order database.
+
+00:00:36.378 --> 00:00:39.623
+This is a useful lesson for project design.
+
+00:00:39.623 --> 00:00:46.816
+Retrieval can give you relevant general knowledge, but some questions also require exact structured facts.
+
+00:00:47.395 --> 00:00:51.987
+A strong system asks not only, did I retrieve relevant text?
+
+00:00:51.987 --> 00:00:57.427
+It also asks, do I have every fact needed to answer this specific case?

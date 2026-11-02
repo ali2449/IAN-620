@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.272
+For the first graph, an in-memory vector store keeps the example simple.
+
+00:00:05.272 --> 00:00:12.412
+We create the vector store from documents and embeddings, then convert it to a retriever with as retriever.
+
+00:00:12.412 --> 00:00:14.982
+We also set top K to three.
+
+00:00:15.738 --> 00:00:18.165
+The benefit is conceptual clarity.
+
+00:00:18.165 --> 00:00:26.690
+We can focus on state, nodes, edges, and routing without also teaching database persistence at the same time.
+
+00:00:26.690 --> 00:00:35.358
+Later, the in-memory store can be replaced by Chroma, P G vector, Redis, or another managed vector database.
+
+00:00:36.035 --> 00:00:43.967
+As long as the rest of the workflow sees the same retriever interface, the control logic can remain almost unchanged.
+
+00:00:43.967 --> 00:00:48.073
+This is another example of why stable interfaces are useful.

@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.587
+Correct retrieval does not guarantee correct generation.
+
+00:00:03.587 --> 00:00:10.472
+Even if the right evidence is present, the model may misread it, omit part of it, cite the wrong source,
+
+00:00:10.472 --> 00:00:14.157
+or perform an action it is not authorized to perform.
+
+00:00:14.157 --> 00:00:17.274
+That is why generation should also be validated.
+
+00:00:17.724 --> 00:00:22.821
+Grounding validation asks whether factual claims are supported by the evidence.
+
+00:00:22.821 --> 00:00:30.296
+Citation validation asks whether the cited source I D's actually match supplied evidence.
+
+00:00:30.296 --> 00:00:35.016
+Format validation checks whether required fields are present.
+
+00:00:35.016 --> 00:00:39.961
+Business-rule validation checks boundaries that should not depend on the model.
+
+00:00:40.522 --> 00:00:48.078
+For example, the model may correctly explain a refund policy but should not automatically issue a refund unless the
+
+00:00:48.078 --> 00:00:51.427
+workflow has explicit authorization for that action.

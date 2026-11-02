@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.132
+Keep retriever inputs narrow and typed.
+
+00:00:03.132 --> 00:00:12.987
+A search tool might need only three values: the query, a small top K value, and perhaps an approved department filter.
+
+00:00:12.987 --> 00:00:17.777
+Avoid passing one giant arbitrary dictionary of arguments.
+
+00:00:17.777 --> 00:00:23.534
+That makes validation harder and gives the model too many ways to produce malformed input.
+
+00:00:24.097 --> 00:00:31.648
+For example, you might define query as a non-empty string, top K as an integer between one and ten,
+
+00:00:31.648 --> 00:00:35.468
+and department as an optional approved category.
+
+00:00:35.468 --> 00:00:41.228
+Typed schemas improve reliability because the model knows what fields exist,
+
+00:00:41.228 --> 00:00:45.971
+and the application can reject invalid values before touching the database.
+
+00:00:46.639 --> 00:00:52.583
+A small input schema is easier to generate, easier to test, and safer to execute.

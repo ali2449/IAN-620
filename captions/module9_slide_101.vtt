@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.237
+Refine the input before spending more reasoning.
+
+00:00:03.237 --> 00:00:11.672
+Many weak agent results begin with a poor representation of the original request.
+
+00:00:11.672 --> 00:00:19.032
+First, normalize. Extract reliable entities such as order I D's, dates, product names, or constraints.
+
+00:00:19.032 --> 00:00:27.372
+Second, clarify. If a required fact is genuinely missing, ask the user rather than guessing.
+
+00:00:27.372 --> 00:00:36.346
+Third, rewrite. Create tool-specific wording that improves search or A P I use while preserving the original goal.
+
+00:00:36.822 --> 00:00:41.194
+Keep both the original question and the refined query in state.
+
+00:00:41.194 --> 00:00:46.309
+For example, the user says, can I still send this back?
+
+00:00:46.309 --> 00:00:49.499
+The original question stays unchanged.
+
+00:00:49.499 --> 00:00:55.252
+The refined search query may become standard return eligibility deadline after delivery.
+
+00:00:55.744 --> 00:00:58.396
+The refined query serves the tool.
+
+00:00:58.396 --> 00:01:03.332
+The original question still controls what the final answer must address.

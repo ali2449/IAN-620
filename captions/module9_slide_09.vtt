@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.402
+Classic rag and agentic rag can use exactly the same vector database.
+
+00:00:05.402 --> 00:00:09.092
+The difference is not Chroma versus another database.
+
+00:00:09.092 --> 00:00:11.522
+The difference is control flow.
+
+00:00:11.522 --> 00:00:16.587
+In classic rag, a question usually triggers retrieval once.
+
+00:00:16.587 --> 00:00:21.747
+The retrieved context is sent to the model, and the model generates an answer.
+
+00:00:22.373 --> 00:00:27.315
+In agentic rag, the system can inspect retrieval before generation.
+
+00:00:27.315 --> 00:00:31.730
+If the evidence is weak, it may rewrite the search query.
+
+00:00:31.730 --> 00:00:37.225
+If the question requires an exact database fact, it may call another tool.
+
+00:00:37.225 --> 00:00:41.520
+If the evidence is complete, it can generate immediately.
+
+00:00:41.520 --> 00:00:47.335
+For example, a classic rag system might retrieve a return policy and answer.
+
+00:00:47.335 --> 00:00:54.155
+An agentic rag system might retrieve the policy, notice that the user's actual delivery date is missing,
+
+00:00:54.155 --> 00:00:57.167
+call an order lookup tool, and then answer.
+
+00:00:57.982 --> 00:01:03.051
+So remember: same retrieval technology, different control strategy.

@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.567
+Prompt chaining means one step's output becomes another step's input.
+
+00:00:04.567 --> 00:00:08.242
+Start with the question and create a short plan.
+
+00:00:08.242 --> 00:00:10.942
+Use that plan to gather evidence.
+
+00:00:10.942 --> 00:00:13.742
+Use the evidence to create a draft.
+
+00:00:13.742 --> 00:00:16.857
+Send the draft and evidence to an evaluator.
+
+00:00:16.857 --> 00:00:22.670
+If the evaluator reports a specific problem, send that critique to a revision step.
+
+00:00:23.151 --> 00:00:29.108
+The important design principle is that each step receives only the information it needs.
+
+00:00:29.108 --> 00:00:32.068
+The tool selector needs the plan.
+
+00:00:32.068 --> 00:00:34.623
+The generator needs the evidence.
+
+00:00:34.623 --> 00:00:39.083
+The reviser needs the draft plus concise feedback.
+
+00:00:39.083 --> 00:00:43.943
+The evaluator needs the question, evidence, and current draft.
+
+00:00:44.566 --> 00:00:49.038
+Because these artifacts are explicit, you can test them independently.
+
+00:00:49.038 --> 00:00:56.763
+If the final answer is poor, you can inspect whether the plan, evidence, draft, or critique caused the problem.

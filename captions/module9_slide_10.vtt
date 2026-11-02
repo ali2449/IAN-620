@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.902
+Four ideas make agentic rag easier to understand: state, decision, observation, and boundary.
+
+00:00:07.902 --> 00:00:12.042
+State is what the application needs to remember between steps.
+
+00:00:12.042 --> 00:00:21.847
+It might include the original question, a refined query, retrieved documents, tool results, a step counter,
+
+00:00:21.847 --> 00:00:23.332
+a draft answer, or a status.
+
+00:00:23.332 --> 00:00:34.008
+A decision is one allowed next action, such as retrieve, rewrite, call another source, generate, ask the user, or stop.
+
+00:00:34.738 --> 00:00:37.961
+An observation is what the previous action returned.
+
+00:00:37.961 --> 00:00:46.386
+That could be three retrieved chunks, one order record, a web result, a validation result, or an error.
+
+00:00:46.386 --> 00:00:51.635
+A boundary defines what the system is allowed to do.
+
+00:00:51.635 --> 00:00:58.011
+Maximum steps, approved tools, permissions, timeouts, and human approval belong here.
+
+00:00:58.011 --> 00:01:06.091
+For example, a retriever may return useful policy text, but the grader observes that the order date is missing.
+
+00:01:06.091 --> 00:01:09.270
+The next decision becomes order lookup.
+
+00:01:09.840 --> 00:01:13.952
+The important point is that state is not hidden model reasoning.
+
+00:01:13.952 --> 00:01:18.487
+It is the application's visible, inspectable working record.

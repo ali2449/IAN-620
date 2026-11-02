@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.602
+Now we treat retrieval as a tool.
+
+00:00:02.602 --> 00:00:09.122
+From the controller's point of view, retrieval should have a clear input and output contract.
+
+00:00:09.122 --> 00:00:13.557
+The input might be a search query plus optional filters.
+
+00:00:13.557 --> 00:00:19.854
+The output should be evidence objects containing text, scores, and source metadata.
+
+00:00:20.486 --> 00:00:23.468
+This makes retrieval explicit and inspectable.
+
+00:00:23.468 --> 00:00:26.618
+It can be logged, tested, graded, and reused.
+
+00:00:26.618 --> 00:00:35.253
+The important design idea is that the agent does not need to know how the vector database works internally.
+
+00:00:35.253 --> 00:00:38.358
+It only needs a reliable retrieval interface.
+
+00:00:38.977 --> 00:00:45.784
+That separation lets you improve or replace the storage layer later without rewriting the rest of the workflow.

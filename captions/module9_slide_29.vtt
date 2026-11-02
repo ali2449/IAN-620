@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.977
+A bad agent can repeat the same failure.
+
+00:00:02.977 --> 00:00:06.152
+Imagine the first search query is refund.
+
+00:00:06.152 --> 00:00:08.987
+The retriever returns weak evidence.
+
+00:00:08.987 --> 00:00:14.082
+The rewrite step produces exactly the same word, refund.
+
+00:00:14.082 --> 00:00:21.403
+The next search returns the same chunks, the grader rejects them again, and the process repeats.
+
+00:00:21.853 --> 00:00:24.010
+That is not meaningful reflection.
+
+00:00:24.010 --> 00:00:28.875
+Nothing changed. A good controller should detect no progress.
+
+00:00:28.875 --> 00:00:33.560
+If the query did not change, change strategy or stop.
+
+00:00:33.560 --> 00:00:40.565
+If the same document I D's keep returning, try another source, filter, or retriever.
+
+00:00:40.565 --> 00:00:45.053
+If useful evidence is always rejected, inspect the grader.
+
+00:00:45.603 --> 00:00:51.155
+Every retry should create information gain or change the search strategy.
+
+00:00:51.155 --> 00:00:55.110
+Otherwise, another loop is simply extra cost.

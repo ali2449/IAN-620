@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.127
+Step one is retrieval, and retrieval should look like a normal function.
+
+00:00:05.127 --> 00:00:08.047
+The controller gives the retriever a query.
+
+00:00:08.047 --> 00:00:10.672
+The retriever returns documents.
+
+00:00:10.672 --> 00:00:18.602
+Then we convert those results into evidence objects containing the text and important metadata such as source I D and
+
+00:00:18.602 --> 00:00:19.228
+title.
+
+00:00:19.875 --> 00:00:25.917
+The controller should not care whether the implementation uses Chroma, an in-memory vector store,
+
+00:00:25.917 --> 00:00:33.658
+or another approved system. That means the storage technology can change while the rest of the workflow stays stable.
+
+00:00:34.414 --> 00:00:40.911
+The important interface is simple: query goes in, provenance-rich evidence comes out.
+
+00:00:40.911 --> 00:00:47.782
+Keep that contract clean, because grading, citation, and debugging will all depend on it.

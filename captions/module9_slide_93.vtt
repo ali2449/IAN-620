@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.122
+The assembled graph is a declarative version of the same bounded algorithm.
+
+00:00:07.122 --> 00:00:10.912
+The normal path is start, retrieve, grade, generate, end.
+
+00:00:10.912 --> 00:00:17.537
+The corrective path is retrieve, grade, rewrite, then retrieve again.
+
+00:00:17.537 --> 00:00:26.951
+And there is a safe failure path: grade, stop, end when evidence remains weak and the correction budget is exhausted.
+
+00:00:27.610 --> 00:00:29.907
+That safe stop is important.
+
+00:00:29.907 --> 00:00:35.622
+The graph should not force generation from evidence it already judged insufficient.
+
+00:00:35.622 --> 00:00:42.142
+The advantage of the graph representation is that transitions are easier to inspect and extend.
+
+00:00:42.836 --> 00:00:51.118
+Later, you can add persistence, streaming, checkpoints, human approval, or another tool without hiding the control flow
+
+00:00:51.118 --> 00:00:53.493
+inside one large while loop.

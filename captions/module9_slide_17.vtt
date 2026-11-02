@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.932
+Agentic rag is worth the extra complexity when the workflow genuinely needs to react to results.
+
+00:00:06.932 --> 00:00:13.652
+Good examples include multi-source questions, vague user wording, missing evidence, conditional tool use,
+
+00:00:13.652 --> 00:00:19.436
+or situations where the first retrieval often needs correction.
+
+00:00:20.126 --> 00:00:28.107
+It is probably unnecessary when one stable knowledge base answers most questions reliably with one retrieval pass.
+
+00:00:28.107 --> 00:00:34.348
+A simple frequently asked questions assistant may work very well with classic rag.
+
+00:00:34.348 --> 00:00:43.803
+Before adding an agent, ask one design question: does the system need to inspect a result before choosing the next step?
+
+00:00:43.803 --> 00:00:48.358
+If the answer is no, a fixed pipeline is probably simpler.
+
+00:00:49.120 --> 00:00:56.182
+Remember that every extra decision adds latency, cost, testing work, and more possible failure modes.
+
+00:00:56.182 --> 00:00:58.869
+Complexity should solve a real problem.

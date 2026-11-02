@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.127
+Do not treat a model's self-reported confidence as truth.
+
+00:00:04.127 --> 00:00:10.432
+A language model can say confidence zero point nine six and still be wrong.
+
+00:00:10.432 --> 00:00:15.293
+The number may look precise, but it is not automatically calibrated.
+
+00:00:15.747 --> 00:00:18.619
+A better strategy is evaluation.
+
+00:00:18.619 --> 00:00:26.834
+Constrain the decision schema, create labeled examples, and measure how often the route or grade is correct.
+
+00:00:26.834 --> 00:00:31.539
+If you use a threshold, calibrate it on a validation set.
+
+00:00:31.539 --> 00:00:36.929
+For example, suppose a grader gives relevance scores from zero to one.
+
+00:00:36.929 --> 00:00:41.509
+Do not simply choose zero point eight because it sounds high.
+
+00:00:41.509 --> 00:00:46.098
+Test what happens to real questions above and below different thresholds.
+
+00:00:46.549 --> 00:00:52.631
+Confidence should come from measured behavior, not from the model describing how confident it feels.

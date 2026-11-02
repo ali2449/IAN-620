@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.772
+This architecture diagram helps separate responsibilities.
+
+00:00:03.772 --> 00:00:06.722
+At the bottom are the actual capabilities.
+
+00:00:06.722 --> 00:00:10.742
+A local Q W E N model generates language.
+
+00:00:10.742 --> 00:00:13.607
+Chroma stores and retrieves vectors.
+
+00:00:13.607 --> 00:00:16.847
+Duck Duck Go can provide public web search.
+
+00:00:16.847 --> 00:00:21.393
+S Q L or an A P I can return exact structured facts.
+
+00:00:22.011 --> 00:00:26.133
+Lang Chain sits above those components as an integration layer.
+
+00:00:26.133 --> 00:00:32.803
+It provides common ways to represent documents, retrievers, tools, prompts, and models.
+
+00:00:32.803 --> 00:00:38.468
+Lang Graph sits above that as the orchestration layer.
+
+00:00:38.468 --> 00:00:42.898
+It controls shared state and transitions between steps.
+
+00:00:42.898 --> 00:00:46.423
+Then your actual application sits at the top.
+
+00:00:46.423 --> 00:00:53.994
+That might be a support assistant, a research assistant, a health information workflow, or a class project.
+
+00:00:54.444 --> 00:00:56.966
+This separation is useful when debugging.
+
+00:00:56.966 --> 00:01:00.381
+If retrieval is wrong, inspect the retriever.
+
+00:01:00.381 --> 00:01:03.886
+If tool selection is wrong, inspect routing.
+
+00:01:03.886 --> 00:01:07.726
+If the graph loops, inspect state and edges.
+
+00:01:07.726 --> 00:01:11.283
+Do not blame the language model for every failure in the system.

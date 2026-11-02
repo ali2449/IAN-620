@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.802
+A useful mental model is observe, decide, act, and observe again.
+
+00:00:05.802 --> 00:00:08.757
+First, observe the current state.
+
+00:00:08.757 --> 00:00:10.622
+What do we already know?
+
+00:00:10.622 --> 00:00:12.537
+What evidence do we have?
+
+00:00:12.537 --> 00:00:17.977
+What is still missing? Second, decide what should happen next.
+
+00:00:17.977 --> 00:00:23.117
+This decision should usually be small and structured.
+
+00:00:23.117 --> 00:00:31.156
+Third, perform the action. Call a retriever, database, calculator, web search, or another approved capability.
+
+00:00:31.653 --> 00:00:34.190
+Then observe the result and update state.
+
+00:00:34.190 --> 00:00:37.085
+If the goal is satisfied, stop.
+
+00:00:37.085 --> 00:00:40.370
+If not, choose the next action.
+
+00:00:40.370 --> 00:00:48.050
+For example, after a policy search, the workflow may observe that the return window is fourteen days.
+
+00:00:48.050 --> 00:00:51.895
+But it still does not know when the user's order was delivered.
+
+00:00:51.895 --> 00:00:56.992
+That observation changes the next action from generate to order lookup.
+
+00:00:57.638 --> 00:00:59.670
+The application owns the loop.
+
+00:00:59.670 --> 00:01:07.678
+The model may help with a decision, but software must enforce allowed actions, permissions, and maximum steps.

@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.427
+Lang Graph solves a different problem.
+
+00:00:02.427 --> 00:00:04.852
+It focuses on orchestration.
+
+00:00:04.852 --> 00:00:12.807
+Use Lang Graph when state, branches, loops, persistence, or human checkpoints need to be explicit.
+
+00:00:12.807 --> 00:00:19.172
+In a graph, a node performs a step, state carries information between steps,
+
+00:00:19.172 --> 00:00:22.512
+and edges define where execution can go next.
+
+00:00:22.987 --> 00:00:30.683
+For example, imagine a retrieval workflow with four nodes: retrieve, grade, rewrite, and generate.
+
+00:00:30.683 --> 00:00:36.993
+If the evidence is good, the grade node routes to generate.
+
+00:00:36.993 --> 00:00:42.803
+If the evidence is weak, it routes to rewrite, and then back to retrieve.
+
+00:00:42.803 --> 00:00:47.608
+That cycle is easy to see and inspect as a graph.
+
+00:00:47.608 --> 00:00:52.383
+Lang Graph also becomes useful for longer-running systems.
+
+00:00:52.383 --> 00:01:00.806
+You may want to save checkpoints, pause for human approval, resume later, or stream progress to a user interface.
+
+00:01:01.256 --> 00:01:04.463
+Lang Chain and Lang Graph often work together.
+
+00:01:04.463 --> 00:01:08.843
+Lang Chain can provide the model, retriever, and tools.
+
+00:01:08.843 --> 00:01:14.280
+Lang Graph can control how those components are connected and when each one runs.

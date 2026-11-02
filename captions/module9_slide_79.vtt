@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.742
+Now put the pieces together in one plain Python controller.
+
+00:00:03.742 --> 00:00:12.042
+State begins with the original question, the current search query, an empty document list, a step count of zero,
+
+00:00:12.042 --> 00:00:14.522
+and a route that says retrieve.
+
+00:00:14.522 --> 00:00:18.817
+The while loop runs only while the step count is below the maximum.
+
+00:00:19.445 --> 00:00:22.467
+Each pass retrieves documents and grades them.
+
+00:00:22.467 --> 00:00:30.327
+If the grade reaches the required threshold, the controller changes the route to generate and breaks out of the
+
+00:00:30.327 --> 00:00:35.247
+correction loop. If the evidence is weak, it rewrites the query and tries again.
+
+00:00:35.247 --> 00:00:42.908
+If the loop ends without reaching the generate route, the controller returns a safe result such as not enough evidence.
+
+00:00:43.358 --> 00:00:50.384
+This is the agentic behavior in its simplest form: state plus a bounded loop plus conditional next-step decisions.

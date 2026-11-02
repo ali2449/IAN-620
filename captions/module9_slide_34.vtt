@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.727
+Return evidence objects, not bare strings.
+
+00:00:03.727 --> 00:00:10.632
+A good evidence object includes the text, a stable source I D, perhaps a chunk I D, a score,
+
+00:00:10.632 --> 00:00:14.606
+and useful metadata such as an effective date.
+
+00:00:15.311 --> 00:00:17.053
+Why keep all of this?
+
+00:00:17.053 --> 00:00:19.393
+Because later steps need it.
+
+00:00:19.393 --> 00:00:21.733
+The grader may need the score.
+
+00:00:21.733 --> 00:00:25.753
+The final answer may need the source I D for citation.
+
+00:00:25.753 --> 00:00:28.743
+Freshness checks may need an effective date.
+
+00:00:28.743 --> 00:00:32.158
+Debugging may need the exact chunk identifier.
+
+00:00:32.158 --> 00:00:36.840
+If you reduce everything to plain text too early, you lose provenance.
+
+00:00:37.502 --> 00:00:44.449
+For project work, think of every retrieved chunk as a small record, not just a sentence.
+
+00:00:44.449 --> 00:00:49.116
+Keep the metadata with the text until final validation is complete.

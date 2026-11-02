@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.857
+Sometimes no answer is the correct system outcome.
+
+00:00:03.857 --> 00:00:10.177
+A reliable workflow should be willing to say that it could not verify something from approved evidence.
+
+00:00:10.177 --> 00:00:16.467
+For example: I could not verify the return exception from the available policy sources.
+
+00:00:16.467 --> 00:00:19.226
+Please contact support for confirmation.
+
+00:00:19.882 --> 00:00:25.784
+That may feel less impressive than producing a detailed answer, but it is more trustworthy.
+
+00:00:25.784 --> 00:00:30.904
+The success criterion is not that the model always says something substantive.
+
+00:00:30.904 --> 00:00:34.740
+The success criterion is that the system behaves correctly.
+
+00:00:35.539 --> 00:00:41.411
+This becomes especially important in projects involving policy, health, finance,
+
+00:00:41.411 --> 00:00:45.706
+or any other domain where unsupported claims can cause harm.
+
+00:00:45.706 --> 00:00:50.086
+A safe no-answer result is a feature, not a failure.

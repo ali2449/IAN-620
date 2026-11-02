@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.757
+Test the individual pieces before testing the whole agent.
+
+00:00:03.757 --> 00:00:07.117
+First, test retrieval with a known query.
+
+00:00:07.117 --> 00:00:12.602
+If the expected document is missing, the problem is retrieval or indexing.
+
+00:00:12.602 --> 00:00:15.967
+Test the grader with evidence you know should pass.
+
+00:00:15.967 --> 00:00:20.232
+If it fails, the problem is the grading rule or threshold.
+
+00:00:20.232 --> 00:00:26.770
+Test query rewriting. Make sure the rewritten query actually changes when correction is needed.
+
+00:00:27.524 --> 00:00:30.156
+Test generation with a fixed evidence set.
+
+00:00:30.156 --> 00:00:32.826
+Check whether the model stays grounded.
+
+00:00:32.826 --> 00:00:37.831
+Only after those components work should you test the full controller trajectory.
+
+00:00:37.831 --> 00:00:40.426
+This approach localizes failures.
+
+00:00:40.939 --> 00:00:47.501
+If the full agent fails but every component works independently, then the problem is likely orchestration:
+
+00:00:47.501 --> 00:00:52.155
+wrong state updates, wrong route, or wrong stopping logic.

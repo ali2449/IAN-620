@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.967
+Routing should begin with the information need.
+
+00:00:02.967 --> 00:00:06.442
+Do not ask the router which answer sounds likely.
+
+00:00:06.442 --> 00:00:08.942
+Ask what evidence is required.
+
+00:00:08.942 --> 00:00:14.292
+If the question is, what is the return deadline, route to policy search.
+
+00:00:14.292 --> 00:00:21.142
+If the question is, when was order one zero four two delivered, route to order lookup.
+
+00:00:21.142 --> 00:00:26.984
+If the question is, can order one zero four two still be returned, we need both.
+
+00:00:27.696 --> 00:00:30.218
+Some requests need no tool.
+
+00:00:30.218 --> 00:00:35.578
+If the user simply says thank you, the workflow can answer directly.
+
+00:00:35.578 --> 00:00:40.218
+A router also does not always need one exclusive route.
+
+00:00:40.218 --> 00:00:46.004
+State can record needs policy equals true and needs order equals true.
+
+00:00:46.627 --> 00:00:50.994
+For a project, design routes around evidence requirements.
+
+00:00:50.994 --> 00:00:57.349
+That makes the routing decision easier to evaluate because you can label which sources each test question actually
+
+00:00:57.349 --> 00:00:58.998
+needs.

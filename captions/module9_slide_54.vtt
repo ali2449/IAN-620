@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.857
+Relevant evidence can still be insufficient.
+
+00:00:02.857 --> 00:00:07.392
+Suppose the policy says returns are allowed within fourteen days.
+
+00:00:07.392 --> 00:00:13.382
+That is highly relevant to the question, can order one zero four two be returned?
+
+00:00:13.382 --> 00:00:15.487
+But it is not sufficient.
+
+00:00:15.487 --> 00:00:18.204
+We still need the authoritative delivery date.
+
+00:00:18.664 --> 00:00:21.601
+This distinction prevents a common rag mistake.
+
+00:00:21.601 --> 00:00:27.801
+A system retrieves text on the right topic and assumes it has everything needed to answer.
+
+00:00:27.801 --> 00:00:35.051
+Ask two separate questions: does this evidence discuss the correct topic, and does it contain enough facts to support
+
+00:00:35.051 --> 00:00:37.034
+the actual decision?
+
+00:00:37.597 --> 00:00:43.769
+For multi-source projects, sufficiency is often more important than simple relevance.
+
+00:00:43.769 --> 00:00:50.639
+The workflow should know when it needs one more tool rather than trying to make the current evidence do more than it
+
+00:00:50.639 --> 00:00:51.209
+can.

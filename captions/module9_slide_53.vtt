@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.687
+A structured grader result can directly support routing.
+
+00:00:04.687 --> 00:00:12.147
+For example, the grader might return: relevant is true, sufficient is false, reason code is missing order date,
+
+00:00:12.147 --> 00:00:14.810
+and next action is order lookup.
+
+00:00:15.315 --> 00:00:17.737
+The reason code is especially useful.
+
+00:00:17.737 --> 00:00:26.327
+Instead of a long paragraph, use a controlled label such as missing order date, stale source, wrong department,
+
+00:00:26.327 --> 00:00:32.937
+or no relevant evidence. Then your controller can map those labels to targeted actions.
+
+00:00:32.937 --> 00:00:37.997
+For example, missing order date means call the order tool.
+
+00:00:37.997 --> 00:00:42.642
+Stale policy means retrieve the current policy version.
+
+00:00:42.642 --> 00:00:46.517
+No relevant evidence may mean rewrite the query.
+
+00:00:46.971 --> 00:00:52.304
+Structured grader output turns evaluation into actionable control information.

@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.837
+The first retrieval should be treated as evidence to inspect, not evidence to trust automatically.
+
+00:00:06.837 --> 00:00:10.617
+If the evidence is good, generate and validate.
+
+00:00:10.617 --> 00:00:13.357
+There is no reason to add another loop.
+
+00:00:13.357 --> 00:00:19.802
+If the evidence is weak, change the query or retrieval strategy and then grade again.
+
+00:00:19.802 --> 00:00:25.588
+If the evidence is unavailable, reroute, ask the user, or stop safely.
+
+00:00:26.158 --> 00:00:31.919
+For example, imagine a policy search finds no current return policy.
+
+00:00:31.919 --> 00:00:36.839
+The wrong response is to keep asking the model until it invents something.
+
+00:00:36.839 --> 00:00:44.134
+The correct response may be to check an approved alternate source or say that the policy could not be verified.
+
+00:00:45.342 --> 00:00:51.608
+The purpose of correction is reliability, not forcing the workflow to eventually produce an answer.

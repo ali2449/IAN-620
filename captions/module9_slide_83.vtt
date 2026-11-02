@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.092
+Now we bridge from plain Python into Lang Chain and then Lang Graph.
+
+00:00:05.092 --> 00:00:09.332
+The important idea is translation, not replacement.
+
+00:00:09.332 --> 00:00:12.732
+A Python dictionary becomes graph state.
+
+00:00:12.732 --> 00:00:15.557
+A normal function becomes a node.
+
+00:00:15.557 --> 00:00:19.377
+An if or else decision becomes a conditional edge.
+
+00:00:19.377 --> 00:00:23.092
+A while loop becomes a cycle between nodes.
+
+00:00:23.092 --> 00:00:26.023
+A break becomes a transition to end.
+
+00:00:26.845 --> 00:00:31.652
+Lang Chain helps standardize models, retrievers, and tools.
+
+00:00:31.652 --> 00:00:36.509
+Lang Graph gives us an explicit graph representation of the controller.
+
+00:00:36.999 --> 00:00:43.098
+If the plain Python version is clear, the framework should feel familiar rather than magical.

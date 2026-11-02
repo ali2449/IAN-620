@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.987
+Stop conditions are part of the algorithm, not an afterthought.
+
+00:00:03.987 --> 00:00:10.862
+A successful stop might be evidence is sufficient, the answer has been generated, and validation passed.
+
+00:00:10.862 --> 00:00:15.587
+A safe failure stop might be no approved evidence exists.
+
+00:00:15.587 --> 00:00:18.953
+A budget stop might be maximum steps reached.
+
+00:00:19.449 --> 00:00:25.651
+If a tool fails temporarily, the policy may allow one or two bounded retries.
+
+00:00:25.651 --> 00:00:32.376
+If a high-impact action is requested, the workflow may stop and wait for human approval.
+
+00:00:32.376 --> 00:00:37.561
+For example, an assistant can explain that a refund appears appropriate,
+
+00:00:37.561 --> 00:00:43.181
+but issuing the refund may require an authorized human or a separate approval rule.
+
+00:00:43.791 --> 00:00:49.153
+If you cannot describe how your workflow stops, the workflow is not finished.
+
+00:00:49.153 --> 00:00:51.827
+Every loop needs a reachable exit.

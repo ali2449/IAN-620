@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.592
+Citation validation is mostly a mapping problem.
+
+00:00:03.592 --> 00:00:08.007
+The workflow already knows which source I D's were retrieved.
+
+00:00:08.007 --> 00:00:14.137
+After generation, extract or collect the source I D's that appear in the answer.
+
+00:00:14.137 --> 00:00:16.210
+Then compare the two sets.
+
+00:00:16.693 --> 00:00:22.215
+If the answer cites a source that was never supplied, reject or repair the answer.
+
+00:00:22.215 --> 00:00:28.540
+This simple check catches an important class of hallucination: invented citations.
+
+00:00:28.540 --> 00:00:34.340
+Of course, a valid source I D does not prove that the claim is fully supported.
+
+00:00:34.340 --> 00:00:40.442
+A stronger validator can also check whether the cited chunk actually contains evidence for the claim.
+
+00:00:41.034 --> 00:00:48.236
+But the first rule is easy and valuable: a citation should never refer to evidence the model did not receive.

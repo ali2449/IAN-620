@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.542
+Now translate familiar Python control flow into Lang Graph.
+
+00:00:04.542 --> 00:00:08.827
+A Python dictionary becomes typed graph state.
+
+00:00:08.827 --> 00:00:11.457
+A function becomes a node.
+
+00:00:11.457 --> 00:00:16.437
+An if or else branch becomes a conditional edge or a command.
+
+00:00:16.437 --> 00:00:20.302
+A while loop becomes a cycle between nodes.
+
+00:00:20.302 --> 00:00:23.128
+A break becomes a transition to end.
+
+00:00:23.824 --> 00:00:30.226
+This translation is important because Lang Graph is not introducing a completely different programming concept.
+
+00:00:30.226 --> 00:00:34.111
+It is making the control flow explicit and inspectable.
+
+00:00:34.111 --> 00:00:41.656
+For example, instead of a while loop that calls retrieve, grade, and rewrite, you may have three nodes connected in a
+
+00:00:41.656 --> 00:00:42.925
+cycle.
+
+00:00:43.705 --> 00:00:49.394
+If you can point to the matching Python idea, you understand the graph at the right level.

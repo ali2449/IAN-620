@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.397
+Before we focus on agentic rag, we need a broader idea: agentic A I.
+
+00:00:06.397 --> 00:00:09.842
+An L L M by itself is not an agent.
+
+00:00:09.842 --> 00:00:16.852
+If I send one prompt to a model and receive one answer, that is simply a model call.
+
+00:00:16.852 --> 00:00:24.767
+Agentic behavior appears when software around the model keeps track of state, chooses among approved actions,
+
+00:00:24.767 --> 00:00:31.028
+observes the result of an action, updates what it knows, and decides what should happen next.
+
+00:00:31.575 --> 00:00:33.547
+Think about a travel assistant.
+
+00:00:33.547 --> 00:00:39.532
+A normal model might answer a question from its training data.
+
+00:00:39.532 --> 00:00:45.897
+An agentic system could first check the destination, then search current flight information, then compare options,
+
+00:00:45.897 --> 00:00:48.752
+and then stop when it has enough evidence.
+
+00:00:48.752 --> 00:00:53.082
+The important part is the controlled sequence of decisions.
+
+00:00:53.082 --> 00:00:56.662
+Our learning order is deliberate.
+
+00:00:56.662 --> 00:00:58.582
+First, understand the agent loop.
+
+00:00:58.582 --> 00:01:02.567
+Then understand tools and state.
+
+00:01:02.567 --> 00:01:05.932
+After that, compare classic rag with agentic rag.
+
+00:01:05.932 --> 00:01:10.868
+Finally, use Lang Chain and Lang Graph to organize the same ideas.
+
+00:01:11.318 --> 00:01:19.600
+By the end, you should be able to explain why a workflow is agentic, what belongs in state, when a tool is appropriate,
+
+00:01:19.600 --> 00:01:21.620
+and how to stop a loop safely.

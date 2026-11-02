@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.712
+Start with the simplest architecture that solves the problem.
+
+00:00:03.712 --> 00:00:08.777
+If every step is already known, use a fixed Python workflow.
+
+00:00:08.777 --> 00:00:15.102
+It will usually be easier to test, faster to run, and easier to explain.
+
+00:00:15.102 --> 00:00:21.187
+If the main problem is finding information in documents, classic rag may be enough.
+
+00:00:21.766 --> 00:00:30.178
+Use an agent when the next action genuinely depends on runtime observations and several approved tools may be needed.
+
+00:00:30.178 --> 00:00:37.773
+Use agentic rag when retrieval itself can fail, require grading, need query rewriting,
+
+00:00:37.773 --> 00:00:41.073
+or require evidence from multiple sources.
+
+00:00:41.073 --> 00:00:50.313
+Use Lang Graph when state, branching, loops, persistence, approval, or resumable execution need to be explicit.
+
+00:00:50.763 --> 00:00:54.845
+Do not choose architecture because one framework is fashionable.
+
+00:00:54.845 --> 00:00:59.809
+Choose it because the uncertainty in the workflow requires that level of control.

@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.722
+Not every decision should be delegated to a language model.
+
+00:00:05.722 --> 00:00:07.952
+Some decisions are exact. A step counter is exact.
+
+00:00:07.952 --> 00:00:12.502
+Permission checks are exact. Arithmetic is exact.
+
+00:00:12.502 --> 00:00:16.692
+Date comparisons can usually be handled with normal code.
+
+00:00:16.692 --> 00:00:24.667
+Other decisions involve meaning. Does this user question ask for policy information, order information, or both?
+
+00:00:24.667 --> 00:00:30.607
+Is a retrieved paragraph actually relevant to the user's intent?
+
+00:00:30.607 --> 00:00:33.444
+These may benefit from semantic methods.
+
+00:00:33.894 --> 00:00:38.916
+For example, suppose a user asks, can I send it back?
+
+00:00:38.916 --> 00:00:45.906
+There may be no word return in the question, but a language model or semantic classifier can still understand the
+
+00:00:45.906 --> 00:00:53.006
+intent. At the same time, if the user is not authorized to view another customer's order,
+
+00:00:53.006 --> 00:00:55.398
+that must not be left to model judgment.
+
+00:00:56.084 --> 00:00:58.166
+A good controller is hybrid.
+
+00:00:58.166 --> 00:01:02.671
+Use ordinary software for hard boundaries and exact logic.
+
+00:01:02.671 --> 00:01:06.770
+Use model judgment only for ambiguous language tasks.

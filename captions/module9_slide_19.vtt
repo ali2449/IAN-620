@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.017
+Now we move into state, decisions, and stopping conditions.
+
+00:00:05.017 --> 00:00:12.252
+A reliable agent should feel like a controlled state machine, not an open-ended conversation where the model can keep
+
+00:00:12.252 --> 00:00:18.162
+trying tools forever. State is the working memory for the current run.
+
+00:00:18.162 --> 00:00:22.467
+Decisions are structured choices among allowed routes.
+
+00:00:22.467 --> 00:00:28.174
+Stop conditions define when the workflow is complete or when it must give up safely.
+
+00:00:28.905 --> 00:00:31.057
+These three ideas are connected.
+
+00:00:31.057 --> 00:00:35.527
+Without state, the system does not know what has already happened.
+
+00:00:35.527 --> 00:00:39.982
+Without structured decisions, routing becomes unpredictable.
+
+00:00:39.982 --> 00:00:43.622
+Without stop conditions, the system may loop.
+
+00:00:43.622 --> 00:00:50.752
+For your own project, try drawing these three boxes before writing code: what do I need to remember,
+
+00:00:50.752 --> 00:00:54.506
+what choices are allowed, and what conditions end the run?
+
+00:00:54.977 --> 00:00:59.975
+If you can answer those clearly, the implementation usually becomes much easier.

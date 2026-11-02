@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.222
+Do not rewrite every query automatically.
+
+00:00:03.222 --> 00:00:05.777
+Rewriting is a corrective action.
+
+00:00:05.777 --> 00:00:09.142
+First, try the user's original wording.
+
+00:00:09.142 --> 00:00:11.362
+Retrieve evidence and grade it.
+
+00:00:11.362 --> 00:00:15.562
+If the evidence is already strong, proceed to generation.
+
+00:00:15.562 --> 00:00:19.490
+Rewriting a good query may actually make retrieval worse.
+
+00:00:19.954 --> 00:00:23.546
+If evidence is weak, then rewrite and try again.
+
+00:00:23.546 --> 00:00:26.926
+Before another rewrite, ask three questions.
+
+00:00:26.926 --> 00:00:29.351
+Did the query actually change?
+
+00:00:29.351 --> 00:00:32.391
+Did the retrieved source I D's change?
+
+00:00:32.391 --> 00:00:36.121
+Is the missing fact even available in this source?
+
+00:00:36.121 --> 00:00:41.921
+If the same query keeps returning the same chunks, another rewrite may not help.
+
+00:00:41.921 --> 00:00:44.029
+Maybe you need a different source.
+
+00:00:44.479 --> 00:00:47.701
+Correction should respond to a diagnosed problem.
+
+00:00:47.701 --> 00:00:51.942
+Do not add a loop just because the architecture diagram has one.

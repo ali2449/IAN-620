@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.932
+Query rewriting should improve retrieval without changing the user's goal.
+
+00:00:06.932 --> 00:00:09.137
+Suppose the user says, can I still send it back?
+
+00:00:09.137 --> 00:00:19.012
+That wording may be natural for a person, but the knowledge base may use terms such as return eligibility,
+
+00:00:19.012 --> 00:00:20.667
+return deadline, or delivery date.
+
+00:00:20.667 --> 00:00:28.348
+A useful retrieval rewrite could be: standard return eligibility deadline after delivery.
+
+00:00:28.999 --> 00:00:30.801
+Notice what we did not do.
+
+00:00:30.801 --> 00:00:36.076
+We did not rewrite the question as, the customer is eligible for a refund.
+
+00:00:36.076 --> 00:00:38.191
+That would invent the answer.
+
+00:00:38.191 --> 00:00:41.931
+Keep the original user question unchanged in state.
+
+00:00:41.931 --> 00:00:44.273
+Store the refined query separately.
+
+00:00:44.915 --> 00:00:49.892
+This separation is important because the refined query is optimized for a tool.
+
+00:00:49.892 --> 00:00:54.059
+The original question is still the source of truth for the final answer.

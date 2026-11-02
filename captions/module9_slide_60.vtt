@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.567
+This plain Python loop is the heart of corrective rag.
+
+00:00:03.567 --> 00:00:06.662
+Start with the original question as the query.
+
+00:00:06.662 --> 00:00:14.792
+Retrieve documents. Grade them. If the score is above the tested threshold, stop correcting and move forward.
+
+00:00:14.792 --> 00:00:21.514
+If the evidence is weak, rewrite the query and try again, but only while the step budget remains.
+
+00:00:22.104 --> 00:00:28.296
+Read the logic in plain English: retrieve, grade, generate if good enough,
+
+00:00:28.296 --> 00:00:32.536
+otherwise change something and retrieve again.
+
+00:00:32.536 --> 00:00:35.621
+The phrase change something matters.
+
+00:00:35.621 --> 00:00:43.496
+A useful retry may change the query, a metadata filter, the source, or the retrieval strategy.
+
+00:00:43.496 --> 00:00:48.977
+Calling the same retriever with the same query three times is not reflection.
+
+00:00:49.726 --> 00:00:54.413
+If one retrieval pass is consistently enough, use classic rag.
+
+00:00:54.413 --> 00:00:58.796
+The loop exists only because retrieval sometimes needs correction.

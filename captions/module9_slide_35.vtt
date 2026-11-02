@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.912
+Chroma fits behind the retrieval function.
+
+00:00:02.912 --> 00:00:09.617
+Module 7 already covered how a vector database stores embeddings and finds similar chunks.
+
+00:00:09.617 --> 00:00:14.072
+Agentic rag does not require you to rebuild that logic.
+
+00:00:14.072 --> 00:00:17.862
+The agent calls something like search policy.
+
+00:00:17.862 --> 00:00:23.622
+That function sends a query to Chroma and receives the top evidence objects.
+
+00:00:23.622 --> 00:00:28.142
+The evidence goes into state, and the controller decides what to do next.
+
+00:00:28.905 --> 00:00:37.017
+This is a useful architecture rule: orchestration should call a tested retriever rather than duplicating vector-database
+
+00:00:37.017 --> 00:00:45.305
+code inside graph nodes. If you later move from Chroma to another vector store, keep the same retrieval contract.
+
+00:00:45.938 --> 00:00:51.618
+The orchestration layer should organize capabilities, not reimplement them.

@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.942
+Let us finish with a practical build order.
+
+00:00:03.942 --> 00:00:08.147
+First, create one reliable tool and test it independently.
+
+00:00:08.147 --> 00:00:14.372
+If the project needs document knowledge, build a working classic rag pipeline.
+
+00:00:14.372 --> 00:00:18.902
+Add a router only when multiple paths really exist.
+
+00:00:18.902 --> 00:00:23.962
+Add grading only when retrieval can fail in a way that matters.
+
+00:00:23.962 --> 00:00:31.352
+Add evaluator and revision steps only when clear quality criteria justify another pass.
+
+00:00:31.352 --> 00:00:34.899
+Add human approval for consequential actions.
+
+00:00:35.794 --> 00:00:37.711
+Measure the system as you build.
+
+00:00:37.711 --> 00:00:47.561
+Look at tool accuracy, retrieval hit rate, number of steps, latency, evaluator pass rate, and final answer quality.
+
+00:00:47.561 --> 00:00:54.091
+You also have companion notebooks for the Module 9 lab, a complete Lang Chain tutorial,
+
+00:00:54.091 --> 00:00:56.328
+and a complete Lang Graph tutorial.
+
+00:00:56.787 --> 00:01:04.969
+The final principle is simple: more intelligence should mean better use of state, evidence, tools, feedback,
+
+00:01:04.969 --> 00:01:10.034
+and stopping conditions. It should not simply mean more model calls.
+
+00:01:10.034 --> 00:01:15.061
+Build small. Observe everything. Add autonomy deliberately.

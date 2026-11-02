@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.507
+Each step should behave like a normal function with a clear contract.
+
+00:00:04.507 --> 00:00:12.547
+In ordinary Python, you may pass a state dictionary into a function and return the entire updated dictionary.
+
+00:00:12.547 --> 00:00:17.687
+In Lang Graph, nodes commonly return only the fields that changed.
+
+00:00:17.687 --> 00:00:23.245
+For example, an increment step may simply return a new value for the steps field.
+
+00:00:23.834 --> 00:00:26.221
+Why are partial updates useful?
+
+00:00:26.221 --> 00:00:29.831
+Because the graph already owns the current state.
+
+00:00:29.831 --> 00:00:33.561
+A node does not need to reconstruct every field.
+
+00:00:33.561 --> 00:00:40.846
+Smaller updates make node behavior easier to test, and they work better with reducers and persistence.
+
+00:00:40.846 --> 00:00:47.401
+Imagine a retrieval node. Its job might be to update documents and the step count.
+
+00:00:47.401 --> 00:00:51.799
+It does not need to rewrite the original question or every other field.
+
+00:00:52.487 --> 00:00:57.480
+This gives each node a narrow responsibility, which makes debugging much easier.

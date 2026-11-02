@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.737
+Choose tools from the information need, not from the list of integrations you happen to know.
+
+00:00:05.737 --> 00:00:08.552
+Ask what the workflow is missing.
+
+00:00:08.552 --> 00:00:13.142
+If the task is exact and deterministic, use normal Python.
+
+00:00:13.142 --> 00:00:19.147
+If you need meaning-based information from internal documents, use retrieval or rag.
+
+00:00:19.147 --> 00:00:24.937
+If you need an exact structured fact, use S Q L or an A P I.
+
+00:00:24.937 --> 00:00:29.027
+If you need current public information, use web search.
+
+00:00:29.862 --> 00:00:33.063
+For example, what is our return policy?
+
+00:00:33.063 --> 00:00:35.788
+That is internal document retrieval.
+
+00:00:35.788 --> 00:00:39.248
+What is order one zero four two's status?
+
+00:00:39.248 --> 00:00:41.858
+That is a structured database lookup.
+
+00:00:41.858 --> 00:00:44.143
+What is today's exchange rate?
+
+00:00:44.143 --> 00:00:47.308
+That may require a current external source.
+
+00:00:47.308 --> 00:00:49.898
+How many days are between two dates?
+
+00:00:49.898 --> 00:00:51.648
+That is normal code.
+
+00:00:52.319 --> 00:00:55.391
+The best tool is not the most advanced tool.
+
+00:00:55.391 --> 00:01:00.854
+It is the narrowest capability that correctly supplies the missing information or action.

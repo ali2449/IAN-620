@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.023 --> 00:00:05.982
+A practical router can mix deterministic extraction and semantic classification.
+
+00:00:05.982 --> 00:00:09.647
+Suppose the user's sentence contains an order number.
+
+00:00:09.647 --> 00:00:15.432
+Extract that I D with a regular expression or another reliable parser.
+
+00:00:15.432 --> 00:00:19.142
+Then separately classify the information need.
+
+00:00:19.142 --> 00:00:24.918
+Does this request need policy information, order information, or both?
+
+00:00:25.469 --> 00:00:34.631
+This is better than asking one model call to invent every field when some fields are easy to extract exactly.
+
+00:00:34.631 --> 00:00:39.501
+For example, order one zero four two can be extracted deterministically.
+
+00:00:39.501 --> 00:00:48.554
+But the sentence, am I still allowed to send this back, may need semantic interpretation to map to return eligibility.
+
+00:00:49.046 --> 00:00:51.733
+Use normal code for what is exact.
+
+00:00:51.733 --> 00:00:55.468
+Use model judgment for what is genuinely ambiguous.

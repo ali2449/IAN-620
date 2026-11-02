@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.972
+Start the Lang Graph state with only four fields: question, documents, steps, and route.
+
+00:00:06.972 --> 00:00:15.836
+Those four are enough to demonstrate shared state, retrieval output, step counting, and routing.
+
+00:00:16.502 --> 00:00:20.419
+Later, add query when query rewriting exists.
+
+00:00:20.419 --> 00:00:23.279
+Add score when grading exists.
+
+00:00:23.279 --> 00:00:26.379
+Add answer when generation exists.
+
+00:00:26.379 --> 00:00:29.539
+Add trace when observability is needed.
+
+00:00:29.539 --> 00:00:32.589
+Avoid turning state into a log dump.
+
+00:00:32.589 --> 00:00:36.469
+Large temporary prompts do not need to be persisted.
+
+00:00:36.469 --> 00:00:40.097
+Secrets definitely should not be stored in graph state.
+
+00:00:40.590 --> 00:00:44.122
+Minimal state makes the first graph easier to understand.
+
+00:00:44.122 --> 00:00:49.072
+Expand state only when the next node has a real reason to consume the new field.

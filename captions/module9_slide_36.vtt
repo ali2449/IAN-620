@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.047
+Tool descriptions matter because the model may use them to decide which tool is appropriate.
+
+00:00:08.047 --> 00:00:10.062
+A good tool name is specific.
+
+00:00:10.062 --> 00:00:14.062
+Search policies is much clearer than search.
+
+00:00:14.062 --> 00:00:19.412
+A good description also explains when to use the tool and when not to use it.
+
+00:00:19.412 --> 00:00:28.392
+For example: search approved internal policy documents for return, refund, warranty, shipping, and account rules.
+
+00:00:28.392 --> 00:00:31.293
+Do not use for live order status.
+
+00:00:31.743 --> 00:00:35.840
+Compare that with: search for useful information.
+
+00:00:35.840 --> 00:00:43.015
+That description overlaps with almost every search tool and gives the model very little guidance.
+
+00:00:43.015 --> 00:00:51.772
+Use verb plus object names when possible: search policies, get order, calculate tax, search web.
+
+00:00:52.222 --> 00:00:58.460
+Clear names and descriptions improve routing before you change the model or add another agent.

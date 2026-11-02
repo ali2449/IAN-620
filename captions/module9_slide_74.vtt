@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.722
+Step three is routing, but only when more than one source is possible.
+
+00:00:04.722 --> 00:00:12.477
+For teaching, a simple rule can check whether the word order appears and then route to both policy and order data.
+
+00:00:12.477 --> 00:00:15.317
+That makes the idea easy to see.
+
+00:00:15.317 --> 00:00:19.325
+But do not confuse a teaching rule with a production router.
+
+00:00:19.873 --> 00:00:28.740
+A real project might extract order I D's deterministically, then use structured model output only for ambiguous intent.
+
+00:00:28.740 --> 00:00:35.510
+For example, if the user says, where is my package, the route may be order tracking.
+
+00:00:35.510 --> 00:00:40.955
+If the user says, what are your shipping rules, the route may be policy retrieval.
+
+00:00:41.548 --> 00:00:44.180
+Start with the simplest reliable rule.
+
+00:00:44.180 --> 00:00:49.471
+Add semantic routing only when keyword or deterministic logic is not enough.

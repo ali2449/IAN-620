@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.492
+Checkpoint question. What makes the plain Python workflow agentic?
+
+00:00:05.492 --> 00:00:08.107
+It is not the vector database.
+
+00:00:08.107 --> 00:00:11.757
+A vector database can exist in classic rag.
+
+00:00:11.757 --> 00:00:15.892
+It is not using the largest possible language model.
+
+00:00:15.892 --> 00:00:21.065
+The agentic behavior comes from state plus conditional next-step decisions.
+
+00:00:21.515 --> 00:00:29.872
+The workflow remembers what has happened, inspects the result, and chooses whether to generate, rewrite, retrieve again,
+
+00:00:29.872 --> 00:00:35.754
+or stop. So the correct answer is: state plus conditional decisions.

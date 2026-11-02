@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.462
+Step five is query rewriting.
+
+00:00:02.462 --> 00:00:07.937
+The rewrite should improve search language without changing the user's intent.
+
+00:00:07.937 --> 00:00:12.602
+For example, a user may ask, can I send it back?
+
+00:00:12.602 --> 00:00:19.083
+A better search query could be return eligibility deadline after delivery refund policy.
+
+00:00:19.624 --> 00:00:26.026
+That adds vocabulary that may exist in policy documents, but it does not invent an answer.
+
+00:00:26.026 --> 00:00:31.351
+A bad rewrite would say, customer qualifies for a refund.
+
+00:00:31.351 --> 00:00:34.116
+That is no longer a search query.
+
+00:00:34.116 --> 00:00:38.489
+It has turned an uncertain question into an unsupported conclusion.
+
+00:00:39.493 --> 00:00:41.855
+Keep the original question in state.
+
+00:00:41.855 --> 00:00:44.675
+Store the rewritten query separately.
+
+00:00:44.675 --> 00:00:51.050
+The original question controls the final task; the rewritten query only helps retrieval.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.477
+Preserve provenance all the way through the workflow.
+
+00:00:03.477 --> 00:00:07.812
+The retriever should return source identifiers and metadata.
+
+00:00:07.812 --> 00:00:09.907
+The grader should keep them.
+
+00:00:09.907 --> 00:00:11.942
+The prompt can include them.
+
+00:00:11.942 --> 00:00:14.477
+The final answer can cite them.
+
+00:00:14.477 --> 00:00:20.871
+Then a validation step can confirm that every citation maps to evidence that was actually retrieved.
+
+00:00:21.340 --> 00:00:30.247
+Useful fields include a stable source I D, chunk I D, source path or U R L, and version or effective date.
+
+00:00:30.247 --> 00:00:37.267
+For example, if two policy documents disagree, the effective date may tell you which one is current.
+
+00:00:37.845 --> 00:00:44.932
+A common mistake is turning rich evidence objects into one large plain string immediately after retrieval.
+
+00:00:44.932 --> 00:00:48.467
+That makes later citation and debugging harder.
+
+00:00:48.467 --> 00:00:51.832
+Keep the evidence structure as long as possible.
+
+00:00:51.832 --> 00:00:56.490
+Format it into text only when a specific model prompt needs text.

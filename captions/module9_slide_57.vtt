@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.617
+Now we focus on corrective rag.
+
+00:00:02.617 --> 00:00:08.227
+The loop has three broad actions: retrieve, judge, and correct.
+
+00:00:08.227 --> 00:00:11.442
+First, retrieve candidate evidence.
+
+00:00:11.442 --> 00:00:18.107
+Second, judge whether that evidence is relevant, sufficient, authoritative, and current enough.
+
+00:00:18.107 --> 00:00:21.357
+Third, correct only if necessary.
+
+00:00:21.357 --> 00:00:28.672
+Correction may mean rewriting the query, selecting another source, applying a filter, asking the user,
+
+00:00:28.672 --> 00:00:30.227
+or stopping safely.
+
+00:00:30.711 --> 00:00:35.153
+Retrieval quality is not one simple yes or no property.
+
+00:00:35.153 --> 00:00:38.443
+A source can be relevant but incomplete.
+
+00:00:38.443 --> 00:00:41.118
+It can be complete but outdated.
+
+00:00:41.118 --> 00:00:44.545
+It can be current but not authoritative for the decision.
+
+00:00:44.995 --> 00:00:52.597
+Corrective rag becomes useful when we can diagnose the specific retrieval problem and choose an appropriate correction
+
+00:00:52.597 --> 00:00:54.807
+rather than blindly retrying.

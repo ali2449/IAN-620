@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.667
+Tool calls are model-generated application input, so validate them before they reach a database, vector store, A P I,
+
+00:00:07.667 --> 00:00:14.522
+or file system. Suppose the model asks for a query and top K.
+
+00:00:14.522 --> 00:00:17.767
+First, remove unnecessary whitespace. Make sure the query is not empty.
+
+00:00:17.767 --> 00:00:23.067
+Put a sensible maximum on its length.
+
+00:00:23.067 --> 00:00:28.306
+Convert top K to an integer and make sure it stays inside an allowed range.
+
+00:00:28.899 --> 00:00:31.681
+Validation is not only about syntax.
+
+00:00:31.681 --> 00:00:34.006
+Authorization matters too.
+
+00:00:34.006 --> 00:00:40.991
+A perfectly valid order I D may still belong to data the current user is not allowed to access.
+
+00:00:40.991 --> 00:00:47.921
+For example, a support agent might be allowed to retrieve orders only for the authenticated customer.
+
+00:00:47.921 --> 00:00:50.810
+The model cannot override that boundary.
+
+00:00:51.271 --> 00:00:59.633
+Treat model-generated arguments the same way you would treat input coming from an external user: validate type, range,
+
+00:00:59.633 --> 00:01:03.129
+permissions, and allowed scope before execution.

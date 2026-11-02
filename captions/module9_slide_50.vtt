@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.932
+Constrain the rewrite task.
+
+00:00:01.932 --> 00:00:10.532
+A good rewrite prompt can be very short: rewrite the user question as one concise search query for company policy
+
+00:00:10.532 --> 00:00:12.602
+documents. Preserve the original meaning.
+
+00:00:12.602 --> 00:00:14.517
+Do not answer the question.
+
+00:00:14.517 --> 00:00:17.481
+Do not invent dates or policy details.
+
+00:00:17.980 --> 00:00:23.097
+Why be so specific? Because the rewrite step has one job.
+
+00:00:23.097 --> 00:00:25.597
+It is not a general reasoning step.
+
+00:00:25.597 --> 00:00:28.377
+It should produce better search language.
+
+00:00:28.377 --> 00:00:36.192
+If you ask the model to explain, summarize, and search all at once, the output becomes harder to validate and may
+
+00:00:36.192 --> 00:00:39.096
+include facts that were never retrieved.
+
+00:00:39.753 --> 00:00:46.120
+For your project, define the output shape of each model call as narrowly as possible.
+
+00:00:46.120 --> 00:00:49.270
+A query rewriter should return a query.
+
+00:00:49.270 --> 00:00:51.620
+A router should return a route.
+
+00:00:51.620 --> 00:00:54.140
+A grader should return a grade.
+
+00:00:54.140 --> 00:00:56.692
+This keeps the workflow modular.

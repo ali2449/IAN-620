@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.312
+Step seven is validation before the answer leaves the workflow.
+
+00:00:04.312 --> 00:00:10.002
+Check grounding. Are factual claims supported by supplied evidence?
+
+00:00:10.002 --> 00:00:16.562
+Check citations. Do the source I D's actually exist in the retrieved evidence?
+
+00:00:16.562 --> 00:00:22.932
+Check format. If the application expects specific fields, are they present?
+
+00:00:22.932 --> 00:00:31.103
+Check authorization. Did the model recommend an action, or did it try to perform something the workflow did not permit?
+
+00:00:31.682 --> 00:00:40.382
+For example, a support assistant may say, based on the policy, this order appears outside the standard return window.
+
+00:00:40.382 --> 00:00:43.212
+That is an informational statement.
+
+00:00:43.212 --> 00:00:49.979
+Actually issuing a refund is a different capability and may require permission and human approval.
+
+00:00:50.573 --> 00:00:52.465
+Generation is not the end.
+
+00:00:52.465 --> 00:00:55.020
+Validation is part of the application.

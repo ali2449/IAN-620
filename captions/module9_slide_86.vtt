@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.632
+The first bridge is turning retrieval into a model-visible tool.
+
+00:00:04.632 --> 00:00:09.887
+The tool decorator adds metadata around an ordinary Python function.
+
+00:00:09.887 --> 00:00:15.987
+The function still receives a query, calls the retriever, and returns results.
+
+00:00:15.987 --> 00:00:22.252
+What changes is that the workflow now has a standard tool description and argument schema that a compatible model can
+
+00:00:22.252 --> 00:00:24.622
+understand.
+
+00:00:25.468 --> 00:00:27.080
+The docstring matters.
+
+00:00:27.080 --> 00:00:33.700
+Search the approved return-policy knowledge base is much more informative than simply saying search.
+
+00:00:33.700 --> 00:00:40.292
+A tool description should tell the model what capability exists and when that capability is appropriate.
+
+00:00:41.129 --> 00:00:46.476
+Remember that exposing a tool does not mean the model should always use it.
+
+00:00:46.476 --> 00:00:51.554
+Routing, permissions, and workflow stage still determine whether a tool call is appropriate.

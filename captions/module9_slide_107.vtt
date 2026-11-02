@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.672
+Before you call your project an agent project, you should be able to answer a short design checklist.
+
+00:00:06.672 --> 00:00:09.412
+What is the concrete user goal?
+
+00:00:09.412 --> 00:00:14.682
+Why does this project need an agent rather than a fixed workflow?
+
+00:00:14.682 --> 00:00:18.317
+What unique capability does each tool provide?
+
+00:00:18.317 --> 00:00:21.482
+What information must stay in state?
+
+00:00:21.482 --> 00:00:28.118
+What can be refined if something fails: the query, evidence, draft, or plan?
+
+00:00:28.569 --> 00:00:30.511
+How does the workflow stop?
+
+00:00:30.511 --> 00:00:36.101
+What are the success criteria and hard limits?
+
+00:00:36.101 --> 00:00:37.531
+How will you evaluate it?
+
+00:00:37.531 --> 00:00:44.181
+Tool choice, retrieval quality, trajectory, and final answer should be considered separately.
+
+00:00:44.181 --> 00:00:54.004
+Which actions need approval? Anything that writes, deletes, sends, purchases, or approves should receive extra scrutiny.
+
+00:00:54.638 --> 00:01:03.635
+Before coding, try to write the goal, architecture, tool list, state fields, and stop conditions on one page.
+
+00:01:03.635 --> 00:01:07.920
+If that design is unclear, adding more agents will not fix it.

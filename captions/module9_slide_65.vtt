@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.832
+Reranking can sometimes improve retrieval without adding another agent loop.
+
+00:00:04.832 --> 00:00:08.237
+A vector search might return ten candidates.
+
+00:00:08.237 --> 00:00:12.237
+The relevant chunk is present, but it is ranked seventh.
+
+00:00:12.237 --> 00:00:16.964
+A reranker can reorder those candidates and place the best three at the top.
+
+00:00:17.464 --> 00:00:23.226
+That is different from a retrieval failure where the needed evidence was never in the candidate set.
+
+00:00:23.226 --> 00:00:28.751
+If the correct chunk was retrieved but ranked poorly, reranking is a good tool.
+
+00:00:28.751 --> 00:00:36.656
+If the correct evidence was never retrieved, you may need query rewriting, another source, a different filter,
+
+00:00:36.656 --> 00:00:38.591
+or a different embedding strategy.
+
+00:00:39.130 --> 00:00:42.422
+Diagnose the failure before choosing the correction.
+
+00:00:42.422 --> 00:00:47.482
+Retrieved but ranked poorly and never retrieved are two different problems.

@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.292
+Once you define possible routes, limit the model to those allowed values.
+
+00:00:05.292 --> 00:00:13.042
+Suppose the valid routes are policy search, order lookup, policy and order, and answer directly.
+
+00:00:13.042 --> 00:00:19.888
+If the model returns something else, the application should reject it rather than guessing what the model meant.
+
+00:00:20.478 --> 00:00:24.985
+In Python, you can validate the returned string against a set.
+
+00:00:24.985 --> 00:00:33.060
+With typed structured output, you can define a literal or enum so the allowed choices are part of the schema.
+
+00:00:33.060 --> 00:00:38.525
+This converts open-ended model language into a finite state-machine decision.
+
+00:00:38.525 --> 00:00:47.325
+For example, if the model returns search everything, but that route is not allowed, the controller should not improvise.
+
+00:00:47.325 --> 00:00:49.766
+It should treat the output as invalid.
+
+00:00:50.484 --> 00:00:55.815
+Finite choices improve reliability, testability, and security.

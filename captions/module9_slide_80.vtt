@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.207
+Read the controller as a trajectory, not only as source code.
+
+00:00:04.207 --> 00:00:10.322
+Step one retrieves with the original query and gets a weak policy match.
+
+00:00:10.322 --> 00:00:15.272
+Step two grades that evidence at zero point five, below the threshold.
+
+00:00:15.272 --> 00:00:19.330
+Step three rewrites the query using better policy terms.
+
+00:00:19.882 --> 00:00:24.744
+Step four retrieves again and now finds the fourteen-day return rule.
+
+00:00:24.744 --> 00:00:30.539
+Step five grades the new evidence at one point zero and routes to generation.
+
+00:00:30.539 --> 00:00:35.690
+Step six returns the answer, evidence, and trace, then stops.
+
+00:00:36.142 --> 00:00:42.079
+A trajectory is useful because it lets you explain the run without reading every line of code.
+
+00:00:42.079 --> 00:00:48.914
+For a project demo, showing a short trajectory often communicates the architecture better than showing a giant code
+
+00:00:48.914 --> 00:00:49.635
+cell.

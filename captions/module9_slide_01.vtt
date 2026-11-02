@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.607
+Welcome to Module 9. Up to this point, you have already seen how retrieval augmented generation, or rag,
+
+00:00:06.607 --> 00:00:11.732
+can bring external evidence into a language model workflow.
+
+00:00:11.732 --> 00:00:17.842
+You have also worked with language models, tools, vector databases, and validation.
+
+00:00:17.842 --> 00:00:23.913
+Now we are going to connect those pieces and give the workflow more control over what happens next.
+
+00:00:24.521 --> 00:00:26.348
+The central idea is simple.
+
+00:00:26.348 --> 00:00:30.873
+Traditional rag usually retrieves once and then generates.
+
+00:00:30.873 --> 00:00:38.648
+Agentic rag can inspect what it retrieved, decide whether the evidence is enough, change the search if needed,
+
+00:00:38.648 --> 00:00:44.063
+call another approved tool, and stop when a clear condition is satisfied.
+
+00:00:44.063 --> 00:00:47.098
+We will also use a hands-on notebook.
+
+00:00:47.098 --> 00:00:57.238
+It includes a small local Q W E N model, Chroma, Lang Chain tools, Duck Duck Go search, and a custom Lang Graph agent.
+
+00:00:57.238 --> 00:01:01.674
+The core lab can run without a paid language model A P I key.
+
+00:01:02.458 --> 00:01:09.570
+As you work through the module, keep one question in mind: does this task genuinely need another decision,
+
+00:01:09.570 --> 00:01:12.965
+or would a simpler fixed workflow be better?
+
+00:01:12.965 --> 00:01:16.723
+That question will help you design stronger projects later.

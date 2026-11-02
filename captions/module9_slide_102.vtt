@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.025 --> 00:00:08.242
+When people say they want the agent to think more, a practical design is to add explicit passes that can be inspected
+
+00:00:08.242 --> 00:00:11.662
+and tested. Do not depend on hidden chain-of-thought.
+
+00:00:11.662 --> 00:00:16.047
+Instead, create visible intermediate artifacts.
+
+00:00:16.047 --> 00:00:22.193
+For example: refined query, plan, evidence, draft, critique, and revision count.
+
+00:00:22.736 --> 00:00:28.628
+A planning step can identify what evidence is required and which tools may be useful.
+
+00:00:28.628 --> 00:00:32.088
+A drafting step uses the gathered evidence.
+
+00:00:32.088 --> 00:00:41.633
+An evaluator checks explicit criteria such as grounding, completeness, citation quality, or required format.
+
+00:00:41.633 --> 00:00:46.967
+A revision step receives the evaluator feedback and produces a better draft.
+
+00:00:47.492 --> 00:00:52.774
+This gives you deliberate multi-step processing without requiring hidden reasoning.
+
+00:00:52.774 --> 00:00:59.398
+It also makes the project easier to debug because every important artifact is visible in state.

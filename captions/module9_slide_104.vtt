@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.797
+The evaluator-optimizer pattern is a useful way to add bounded reflection.
+
+00:00:05.797 --> 00:00:08.497
+One component creates an output.
+
+00:00:08.497 --> 00:00:12.872
+Another component evaluates it against clear criteria.
+
+00:00:12.872 --> 00:00:17.797
+The evaluator should return structured feedback.
+
+00:00:17.797 --> 00:00:25.427
+For example: grounded is true, complete is false, citations are okay, and the missing item is order status.
+
+00:00:25.982 --> 00:00:28.794
+The controller then chooses the correction.
+
+00:00:28.794 --> 00:00:33.019
+If evidence is missing, call the appropriate tool.
+
+00:00:33.019 --> 00:00:39.624
+If evidence is complete but the wording is weak, revise the answer without retrieving again.
+
+00:00:39.624 --> 00:00:43.104
+If all criteria pass, stop.
+
+00:00:43.104 --> 00:00:50.340
+If the maximum revision count is reached, stop safely even if the evaluator is still dissatisfied.
+
+00:00:50.839 --> 00:00:53.976
+Reflection should be bounded and targeted.
+
+00:00:53.976 --> 00:01:01.214
+More passes are useful only when they can change the information, evidence, or quality of the output.

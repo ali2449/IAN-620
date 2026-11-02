@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.177
+Keep an action trace. A useful trace records what the system actually did, not hidden private reasoning.
+
+00:00:08.177 --> 00:00:17.392
+For each step, you can store the action name, validated tool arguments, source identifiers, a short result summary,
+
+00:00:17.392 --> 00:00:20.895
+latency, status, and the next route.
+
+00:00:21.513 --> 00:00:28.899
+For example: step two, action policy search, query return deadline, three results, status okay.
+
+00:00:28.899 --> 00:00:35.444
+This is enough to reproduce behavior and diagnose failures.
+
+00:00:35.444 --> 00:00:42.629
+Do not log secrets, unnecessary personal data, or huge unfiltered tool payloads.
+
+00:00:42.629 --> 00:00:47.932
+Also, there is no need to store a model's private chain of thought.
+
+00:00:48.515 --> 00:00:54.057
+For a student project, a clean action trace is extremely useful during your demo.
+
+00:00:54.057 --> 00:00:58.687
+You can show what tool was called and why the workflow moved to the next step.

@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.602
+Evidence can conflict.
+
+00:00:01.602 --> 00:00:09.437
+Suppose one policy says the return window is fourteen days, while another says thirty days during a holiday period.
+
+00:00:09.437 --> 00:00:14.058
+The system should not silently choose the chunk that gives the easiest answer.
+
+00:00:14.626 --> 00:00:19.053
+Instead, inspect metadata. Which policy is current?
+
+00:00:19.053 --> 00:00:22.403
+Does the holiday exception apply to the purchase date?
+
+00:00:22.403 --> 00:00:25.028
+Which source has higher authority?
+
+00:00:25.028 --> 00:00:27.883
+Is one document an older version?
+
+00:00:27.883 --> 00:00:32.161
+This is where provenance and structured metadata become very important.
+
+00:00:32.611 --> 00:00:39.933
+Resolve source conflicts before asking the language model to synthesize the final answer whenever possible.
+
+00:00:39.933 --> 00:00:46.498
+The model is better at explaining a resolved policy than deciding which business rule is legally or operationally
+
+00:00:46.498 --> 00:00:48.659
+authoritative.

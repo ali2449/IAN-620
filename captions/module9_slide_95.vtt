@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.652
+Checkpoint question.
+
+00:00:01.652 --> 00:00:10.767
+What is the Lang Graph equivalent of a Python statement that says: if the score passes the threshold, generate;
+
+00:00:10.767 --> 00:00:16.292
+otherwise, rewrite? The answer is a conditional edge.
+
+00:00:16.292 --> 00:00:19.422
+A vector store handles retrieval.
+
+00:00:19.422 --> 00:00:22.782
+The tool decorator exposes a capability.
+
+00:00:22.782 --> 00:00:25.690
+Neither one represents the branch itself.
+
+00:00:26.672 --> 00:00:31.704
+Conditional edges are how graph topology expresses if and else behavior.
+
+00:00:31.704 --> 00:00:35.346
+So the correct answer is: a conditional edge.

@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.047
+Now compare the agentic version.
+
+00:00:02.047 --> 00:00:04.807
+The workflow first routes the request.
+
+00:00:04.807 --> 00:00:09.502
+It recognizes that we need both policy search and order lookup.
+
+00:00:09.502 --> 00:00:16.142
+It retrieves the return policy, then obtains the order's delivery date from the structured system.
+
+00:00:16.142 --> 00:00:20.524
+After that, it checks whether the combined evidence is complete.
+
+00:00:21.261 --> 00:00:27.798
+If the policy is present and the order record is present, the system can generate a grounded answer.
+
+00:00:27.798 --> 00:00:33.728
+Then it validates citations and any important business constraints before stopping.
+
+00:00:33.728 --> 00:00:38.913
+This sequence is more reliable because each step has a clear purpose.
+
+00:00:39.418 --> 00:00:42.950
+Notice that the language model does not need to do everything.
+
+00:00:42.950 --> 00:00:48.135
+Retrieval finds documents. The database provides exact facts.
+
+00:00:48.135 --> 00:00:50.785
+Normal code can compare dates.
+
+00:00:50.785 --> 00:00:55.985
+The model can focus on interpreting language and composing a clear final answer.

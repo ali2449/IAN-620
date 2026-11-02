@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.572
+Lang Chain is useful because it gives us common interfaces for many A I application components.
+
+00:00:06.572 --> 00:00:10.282
+You can absolutely build everything with normal Python.
+
+00:00:10.282 --> 00:00:18.282
+But as a project grows, you may have one model library, another vector database library, a document loader,
+
+00:00:18.282 --> 00:00:21.882
+several tools, and different prompt formats.
+
+00:00:21.882 --> 00:00:27.158
+Without a common interface, you often write adapter code between all of them.
+
+00:00:27.618 --> 00:00:30.925
+Lang Chain standardizes many of those connections.
+
+00:00:30.925 --> 00:00:34.610
+A document can be represented with a Document object.
+
+00:00:34.610 --> 00:00:37.435
+A retriever often supports invoke.
+
+00:00:37.435 --> 00:00:41.145
+Tools have names, descriptions, and schemas.
+
+00:00:41.145 --> 00:00:43.995
+Chat models use message objects.
+
+00:00:43.995 --> 00:00:49.825
+This makes it easier to replace one component without redesigning the whole application.
+
+00:00:49.825 --> 00:00:57.850
+For example, if your controller expects a retriever, you may be able to switch from an in-memory vector store to Chroma
+
+00:00:57.850 --> 00:01:00.573
+without changing the high-level control logic.
+
+00:01:01.249 --> 00:01:05.006
+Lang Chain is optional. Learn the architecture first.
+
+00:01:05.006 --> 00:01:11.344
+Use the library because it reduces integration work, not because the project must contain a framework.

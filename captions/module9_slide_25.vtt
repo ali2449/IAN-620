@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.972
+Use two kinds of safeguards for loops.
+
+00:00:02.972 --> 00:00:09.712
+First, define an application-level limit such as max steps equals three.
+
+00:00:09.712 --> 00:00:13.297
+This is part of your business or workflow policy.
+
+00:00:13.297 --> 00:00:17.687
+For example, allow at most two query rewrites.
+
+00:00:17.687 --> 00:00:22.723
+Second, use Lang Graph's recursion limit as a runtime safety net.
+
+00:00:23.324 --> 00:00:25.206
+These are not the same thing.
+
+00:00:25.206 --> 00:00:30.036
+Max steps expresses what your application considers reasonable.
+
+00:00:30.036 --> 00:00:36.921
+The recursion limit protects you if routing logic accidentally creates a cycle you did not expect.
+
+00:00:36.921 --> 00:00:43.656
+A healthy workflow should normally stop because its own success or failure conditions are reached.
+
+00:00:43.656 --> 00:00:49.579
+The recursion limit should be the emergency brake, not the main way the agent stops.
+
+00:00:50.096 --> 00:00:59.793
+Useful stop reasons include evidence sufficient, answer validated, no approved evidence, user clarification required,
+
+00:00:59.793 --> 00:01:01.809
+or maximum budget reached.

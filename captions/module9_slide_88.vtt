@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.617
+The next bridge is bind tools.
+
+00:00:02.617 --> 00:00:08.282
+Binding tools tells the chat model which approved tool schemas exist.
+
+00:00:08.282 --> 00:00:14.282
+The model can then request one of those tools if its integration supports tool calling.
+
+00:00:14.282 --> 00:00:16.700
+But binding is not permission.
+
+00:00:17.211 --> 00:00:21.328
+The application still decides whether a requested tool can run.
+
+00:00:21.328 --> 00:00:25.768
+It validates arguments. It checks the user's authorization.
+
+00:00:25.768 --> 00:00:28.148
+It handles retries and errors.
+
+00:00:28.148 --> 00:00:34.243
+It controls side effects. For example, a model might request an order lookup.
+
+00:00:34.243 --> 00:00:39.037
+Your code should still verify that the current user is allowed to access that order.
+
+00:00:39.675 --> 00:00:42.787
+Think of bind tools as showing the model the menu.
+
+00:00:42.787 --> 00:00:48.128
+The application is still the security guard, the cashier, and the execution engine.

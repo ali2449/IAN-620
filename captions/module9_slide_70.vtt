@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.912
+Now we build one complete agentic rag loop with plain Python.
+
+00:00:04.912 --> 00:00:13.632
+This is important because frameworks become much easier once you can see the basic while loop, if statement,
+
+00:00:13.632 --> 00:00:15.492
+function calls, and break condition.
+
+00:00:15.492 --> 00:00:24.717
+The sequence is straightforward: retrieve evidence, grade it, rewrite only when needed, then generate and stop.
+
+00:00:25.213 --> 00:00:32.900
+You should be able to explain every branch without saying, the agent decides somehow.
+
+00:00:32.900 --> 00:00:36.030
+For example, if the grade passes, we generate.
+
+00:00:36.030 --> 00:00:40.460
+If it fails and budget remains, we rewrite.
+
+00:00:40.460 --> 00:00:43.999
+If the budget is exhausted, we stop safely.
+
+00:00:44.576 --> 00:00:50.893
+Use Lang Chain or Lang Graph later when their common interfaces, persistence, streaming, branching,
+
+00:00:50.893 --> 00:00:56.905
+or observability reduce the infrastructure you would otherwise have to write yourself.

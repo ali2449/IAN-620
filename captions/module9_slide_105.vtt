@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.812
+Agentic rag should correct the layer that actually failed.
+
+00:00:03.812 --> 00:00:07.012
+If the query is vague, rewrite the query.
+
+00:00:07.012 --> 00:00:11.332
+If the wrong source was selected, reroute to a different tool.
+
+00:00:11.332 --> 00:00:15.997
+If the evidence is relevant but incomplete, retrieve another source.
+
+00:00:15.997 --> 00:00:23.443
+If the evidence is already good but the answer is weak, revise generation without paying for another retrieval pass.
+
+00:00:23.987 --> 00:00:29.744
+If a tool fails temporarily, use a bounded retry or approved fallback.
+
+00:00:29.744 --> 00:00:37.177
+If an authoritative fact simply does not exist in the available sources, stop safely or ask the user.
+
+00:00:37.834 --> 00:00:40.646
+This is a very important project principle.
+
+00:00:40.646 --> 00:00:45.461
+Do not repeat the entire workflow because one layer failed.
+
+00:00:45.461 --> 00:00:49.881
+Diagnose the failure and correct only that layer.
+
+00:00:49.881 --> 00:00:55.009
+More model calls cannot create an authoritative fact that does not exist.

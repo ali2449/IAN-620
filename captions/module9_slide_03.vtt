@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.572
+A useful definition of agentic A I is a bounded decision loop.
+
+00:00:04.572 --> 00:00:07.752
+The system begins with a goal or request.
+
+00:00:07.752 --> 00:00:15.502
+It keeps a visible working state, such as the user question, evidence already collected, the current step number,
+
+00:00:15.502 --> 00:00:20.632
+and any important constraints. It then chooses an approved action.
+
+00:00:20.632 --> 00:00:28.549
+That action might be retrieval, a database lookup, a calculation, a web search, or generation.
+
+00:00:28.999 --> 00:00:33.011
+After the action runs, the result becomes an observation.
+
+00:00:33.011 --> 00:00:36.636
+The system updates state and decides again.
+
+00:00:36.636 --> 00:00:40.711
+This cycle can repeat, but it must be bounded.
+
+00:00:40.711 --> 00:00:47.021
+There should always be a success condition, a failure condition, or a human handoff.
+
+00:00:47.021 --> 00:00:51.606
+For example, imagine a support agent checking a refund.
+
+00:00:51.606 --> 00:00:59.641
+It may retrieve the refund policy, observe that the policy alone is not enough, look up the actual order date,
+
+00:00:59.641 --> 00:01:02.898
+compare that date with the policy, and then stop.
+
+00:01:03.411 --> 00:01:05.468
+Notice what makes this agentic.
+
+00:01:05.468 --> 00:01:08.473
+It is not simply using a powerful model.
+
+00:01:08.473 --> 00:01:14.131
+The important behavior is repeated state update and controlled choice of the next action.

@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.957
+Keep router output small and structured.
+
+00:00:02.957 --> 00:00:10.257
+A router might return three things: a route, a policy search query, and an order I D.
+
+00:00:10.257 --> 00:00:13.396
+That is enough to execute the next actions.
+
+00:00:13.846 --> 00:00:16.798
+The router does not need to write the final answer.
+
+00:00:16.798 --> 00:00:22.948
+It does not need to produce a paragraph of explanation.
+
+00:00:22.948 --> 00:00:27.668
+Its job is to transform a user request into machine-readable execution instructions.
+
+00:00:27.668 --> 00:00:32.618
+For example, route equals policy and order.
+
+00:00:32.618 --> 00:00:35.303
+Policy query equals return deadline after delivery.
+
+00:00:35.303 --> 00:00:39.019
+Order I D equals one zero four two.
+
+00:00:39.660 --> 00:00:46.892
+This separation improves testing. You can evaluate routing without also evaluating answer quality.
+
+00:00:46.892 --> 00:00:52.916
+If the wrong source is selected, you know the router failed before generation even begins.

@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.912
+Checkpoint question. Your agent retrieves useful chunks, but it rewrites the query on every run until the step limit.
+
+00:00:08.912 --> 00:00:11.352
+What should you inspect first?
+
+00:00:11.352 --> 00:00:14.127
+Not the size of the vector database.
+
+00:00:14.127 --> 00:00:18.486
+Not model temperature. Inspect the grader and its threshold.
+
+00:00:19.444 --> 00:00:26.736
+If the grader never allows the generate route, the workflow will keep correcting even when evidence is already useful.
+
+00:00:26.736 --> 00:00:32.911
+The correct answer is: inspect the grader and its threshold before changing the architecture.

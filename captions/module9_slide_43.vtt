@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.267
+Checkpoint question. What should a retrieval tool return?
+
+00:00:04.267 --> 00:00:10.562
+The best answer is text chunks together with source identifiers and useful metadata.
+
+00:00:10.562 --> 00:00:15.362
+Returning only a generated final answer hides the evidence layer.
+
+00:00:15.362 --> 00:00:20.439
+Returning private reasoning is unnecessary and not useful for application control.
+
+00:00:21.250 --> 00:00:29.382
+Evidence objects give later steps what they need for grading, citation, validation, and debugging.
+
+00:00:29.382 --> 00:00:35.869
+So the correct choice is: text chunks with source identifiers and useful metadata.

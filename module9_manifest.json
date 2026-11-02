@@ -1,0 +1,1104 @@
+{
+  "module": "module9",
+  "generation_version": "ian620_safe_v4_exact_reference_text_seed1234",
+  "filename_prefix": "module9",
+  "source_file": "IAN_620_Module_9_Audio_Narration.txt",
+  "reference_audio": "/home/ali/breeze-tts/voice_reference/course_instructor_consistent_v4.wav",
+  "reference_text_version": "course_instructor_consistent_v4_exact_transcript",
+  "reference_text": "Welcome to the course. We will work through each concept carefully, connect the\nideas step by step, and use practical examples to make technical topics easier\nto understand. When we introduce a new method, focus first on the problem it\nsolves and why it is useful. For example, in machine learning, features are the\ninformation we give the model, while the target is what we want it to predict.\nNow consider a simple question: what changes when the data contains missing\nvalues? We will think through the reason and then look at the code. In Python,\nwe can inspect the data, run one small step at a time, and explain what the\nresult means. The goal is to understand the logic, not simply memorize syntax.",
+  "subtitle_method": "tts_break_section_generation",
+  "generation_boundary": "[tts-break]",
+  "instruction_mode": "disabled_to_prevent_spoken_prompt_leakage",
+  "spoken_instruction_sent_to_breeze": false,
+  "audio_settings": {
+    "speech_speed": 0.93,
+    "speed_method": "ffmpeg_atempo_before_vtt_alignment"
+  },
+  "caption_settings": {
+    "max_words": 24,
+    "max_chars": 120,
+    "tts_break_pause_seconds": 0.45
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "title": "Agentic RAG: Retrieval That Can Decide What to Do Next",
+      "transcript": "Welcome to Module 9. Up to this point, you have already seen how retrieval augmented generation, or rag, can bring external evidence into a language model workflow. You have also worked with language models, tools, vector databases, and validation. Now we are going to connect those pieces and give the workflow more control over what happens next.\n\n[tts-break]\n\nThe central idea is simple. Traditional rag usually retrieves once and then generates. Agentic rag can inspect what it retrieved, decide whether the evidence is enough, change the search if needed, call another approved tool, and stop when a clear condition is satisfied.\n\nWe will also use a hands-on notebook. It includes a small local Q W E N model, Chroma, Lang Chain tools, Duck Duck Go search, and a custom Lang Graph agent. The core lab can run without a paid language model A P I key.\n\n[tts-break]\n\nAs you work through the module, keep one question in mind: does this task genuinely need another decision, or would a simpler fixed workflow be better? That question will help you design stronger projects later.",
+      "wav": "wav/module9_slide_01.wav",
+      "audio": "audio/module9_slide_01.mp3",
+      "captions": "audio/module9_slide_01.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 2,
+      "title": "Start with Agentic AI Before Agentic RAG",
+      "transcript": "Before we focus on agentic rag, we need a broader idea: agentic A I.\n\nAn L L M by itself is not an agent. If I send one prompt to a model and receive one answer, that is simply a model call. Agentic behavior appears when software around the model keeps track of state, chooses among approved actions, observes the result of an action, updates what it knows, and decides what should happen next.\n\n[tts-break]\n\nThink about a travel assistant. A normal model might answer a question from its training data. An agentic system could first check the destination, then search current flight information, then compare options, and then stop when it has enough evidence. The important part is the controlled sequence of decisions.\n\nOur learning order is deliberate. First, understand the agent loop. Then understand tools and state. After that, compare classic rag with agentic rag. Finally, use Lang Chain and Lang Graph to organize the same ideas.\n\n[tts-break]\n\nBy the end, you should be able to explain why a workflow is agentic, what belongs in state, when a tool is appropriate, and how to stop a loop safely.",
+      "wav": "wav/module9_slide_02.wav",
+      "audio": "audio/module9_slide_02.mp3",
+      "captions": "audio/module9_slide_02.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 3,
+      "title": "What Is Agentic AI?",
+      "transcript": "A useful definition of agentic A I is a bounded decision loop.\n\nThe system begins with a goal or request. It keeps a visible working state, such as the user question, evidence already collected, the current step number, and any important constraints. It then chooses an approved action. That action might be retrieval, a database lookup, a calculation, a web search, or generation.\n\n[tts-break]\n\nAfter the action runs, the result becomes an observation. The system updates state and decides again. This cycle can repeat, but it must be bounded. There should always be a success condition, a failure condition, or a human handoff.\n\nFor example, imagine a support agent checking a refund. It may retrieve the refund policy, observe that the policy alone is not enough, look up the actual order date, compare that date with the policy, and then stop.\n\n[tts-break]\n\nNotice what makes this agentic. It is not simply using a powerful model. The important behavior is repeated state update and controlled choice of the next action.",
+      "wav": "wav/module9_slide_03.wav",
+      "audio": "audio/module9_slide_03.mp3",
+      "captions": "audio/module9_slide_03.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 4,
+      "title": "LLM Call, Workflow, Agent, RAG, and Agentic RAG",
+      "transcript": "These terms are often mixed together, so let us separate them.\n\nAn L L M call is the simplest case: one input goes to a model and one response comes back.\n\nA workflow is a fixed sequence. For example, extract a value, validate it, and save it. The steps are already known.\n\n[tts-break]\n\nClassic rag is also usually a fixed workflow. We retrieve relevant documents, add them to the prompt, and generate an answer.\n\nAn agent is different because the next step can depend on the current state or the result of a previous step. It might decide to call a tool, ask for clarification, generate, or stop.\n\nAgentic rag is a specific kind of agentic workflow where retrieval is inside that decision loop. The system can retrieve, grade the evidence, rewrite the query, try another source, or generate.\n\n[tts-break]\n\nKeeping these architectures separate helps you avoid unnecessary complexity. Do not call every workflow an agent just because an L L M appears somewhere inside it.",
+      "wav": "wav/module9_slide_04.wav",
+      "audio": "audio/module9_slide_04.mp3",
+      "captions": "audio/module9_slide_04.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 5,
+      "title": "Why Not Use an Agent for Everything?",
+      "transcript": "It is tempting to use an agent for every project, but that usually makes the system harder to build and harder to test.\n\nUse normal software when the next step is already known. If a business rule says a value must be between zero and one hundred, write a normal validation rule. If a user is not authorized to access a record, enforce that in application code. If the workflow is always step one, step two, step three, you may not need an agent at all.\n\n[tts-break]\n\nUse an agent when the next step genuinely depends on what was just observed. Maybe several approved tools could help. Maybe retrieval sometimes fails and needs correction. Maybe the wording is ambiguous enough that semantic judgment is useful.\n\nFor example, calculating sales tax is deterministic. A normal function is appropriate. Deciding whether a user question needs a policy document, an order database, or both may require routing.\n\n[tts-break]\n\nA good design principle is this: deterministic decisions should stay deterministic. Use model-driven decisions only where flexible language understanding adds real value.",
+      "wav": "wav/module9_slide_05.wav",
+      "audio": "audio/module9_slide_05.mp3",
+      "captions": "audio/module9_slide_05.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 6,
+      "title": "Why Use LangChain?",
+      "transcript": "Lang Chain is useful because it gives us common interfaces for many A I application components.\n\nYou can absolutely build everything with normal Python. But as a project grows, you may have one model library, another vector database library, a document loader, several tools, and different prompt formats. Without a common interface, you often write adapter code between all of them.\n\n[tts-break]\n\nLang Chain standardizes many of those connections. A document can be represented with a Document object. A retriever often supports invoke. Tools have names, descriptions, and schemas. Chat models use message objects. This makes it easier to replace one component without redesigning the whole application.\n\nFor example, if your controller expects a retriever, you may be able to switch from an in-memory vector store to Chroma without changing the high-level control logic.\n\n[tts-break]\n\nLang Chain is optional. Learn the architecture first. Use the library because it reduces integration work, not because the project must contain a framework.",
+      "wav": "wav/module9_slide_06.wav",
+      "audio": "audio/module9_slide_06.mp3",
+      "captions": "audio/module9_slide_06.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 7,
+      "title": "Why Use LangGraph?",
+      "transcript": "Lang Graph solves a different problem. It focuses on orchestration.\n\nUse Lang Graph when state, branches, loops, persistence, or human checkpoints need to be explicit. In a graph, a node performs a step, state carries information between steps, and edges define where execution can go next.\n\n[tts-break]\n\nFor example, imagine a retrieval workflow with four nodes: retrieve, grade, rewrite, and generate. If the evidence is good, the grade node routes to generate. If the evidence is weak, it routes to rewrite, and then back to retrieve. That cycle is easy to see and inspect as a graph.\n\nLang Graph also becomes useful for longer-running systems. You may want to save checkpoints, pause for human approval, resume later, or stream progress to a user interface.\n\n[tts-break]\n\nLang Chain and Lang Graph often work together. Lang Chain can provide the model, retriever, and tools. Lang Graph can control how those components are connected and when each one runs.",
+      "wav": "wav/module9_slide_07.wav",
+      "audio": "audio/module9_slide_07.mp3",
+      "captions": "audio/module9_slide_07.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 8,
+      "title": "How the Module 9 Technology Stack Fits Together",
+      "transcript": "This architecture diagram helps separate responsibilities.\n\nAt the bottom are the actual capabilities. A local Q W E N model generates language. Chroma stores and retrieves vectors. Duck Duck Go can provide public web search. S Q L or an A P I can return exact structured facts.\n\n[tts-break]\n\nLang Chain sits above those components as an integration layer. It provides common ways to represent documents, retrievers, tools, prompts, and models.\n\nLang Graph sits above that as the orchestration layer. It controls shared state and transitions between steps.\n\nThen your actual application sits at the top. That might be a support assistant, a research assistant, a health information workflow, or a class project.\n\n[tts-break]\n\nThis separation is useful when debugging. If retrieval is wrong, inspect the retriever. If tool selection is wrong, inspect routing. If the graph loops, inspect state and edges. Do not blame the language model for every failure in the system.",
+      "wav": "wav/module9_slide_08.wav",
+      "audio": "audio/module9_slide_08.mp3",
+      "captions": "audio/module9_slide_08.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 9,
+      "title": "Classic RAG vs. Agentic RAG",
+      "transcript": "Classic rag and agentic rag can use exactly the same vector database.\n\nThe difference is not Chroma versus another database. The difference is control flow.\n\nIn classic rag, a question usually triggers retrieval once. The retrieved context is sent to the model, and the model generates an answer.\n\n[tts-break]\n\nIn agentic rag, the system can inspect retrieval before generation. If the evidence is weak, it may rewrite the search query. If the question requires an exact database fact, it may call another tool. If the evidence is complete, it can generate immediately.\n\nFor example, a classic rag system might retrieve a return policy and answer. An agentic rag system might retrieve the policy, notice that the user's actual delivery date is missing, call an order lookup tool, and then answer.\n\n[tts-break]\n\nSo remember: same retrieval technology, different control strategy.",
+      "wav": "wav/module9_slide_09.wav",
+      "audio": "audio/module9_slide_09.mp3",
+      "captions": "audio/module9_slide_09.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 10,
+      "title": "What Makes Agentic RAG Agentic?",
+      "transcript": "Four ideas make agentic rag easier to understand: state, decision, observation, and boundary.\n\nState is what the application needs to remember between steps. It might include the original question, a refined query, retrieved documents, tool results, a step counter, a draft answer, or a status.\n\nA decision is one allowed next action, such as retrieve, rewrite, call another source, generate, ask the user, or stop.\n\n[tts-break]\n\nAn observation is what the previous action returned. That could be three retrieved chunks, one order record, a web result, a validation result, or an error.\n\nA boundary defines what the system is allowed to do. Maximum steps, approved tools, permissions, timeouts, and human approval belong here.\n\nFor example, a retriever may return useful policy text, but the grader observes that the order date is missing. The next decision becomes order lookup.\n\n[tts-break]\n\nThe important point is that state is not hidden model reasoning. It is the application's visible, inspectable working record.",
+      "wav": "wav/module9_slide_10.wav",
+      "audio": "audio/module9_slide_10.mp3",
+      "captions": "audio/module9_slide_10.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 11,
+      "title": "State Is the Working Record of the Workflow",
+      "transcript": "State is the working record of the workflow.\n\nSuppose the user asks, can I return order one zero four two? The state might keep the original question. It may also keep a route indicating that we need both policy evidence and order data. After retrieval, the state contains the relevant policy chunks. After the order tool runs, it contains the delivery date. The step counter tells us how many actions have happened.\n\n[tts-break]\n\nWhy save these values? Because later steps need them. The final generation step needs the policy and order data. The stopping logic needs the step count. Citation validation needs source identifiers.\n\nA common project mistake is storing everything, including huge prompts and temporary strings. That makes state harder to debug and may make persistence expensive.\n\n[tts-break]\n\nA simple rule is: if another step genuinely needs the value later, state is a reasonable place for it. If the value is only temporary inside one function, keep it local.",
+      "wav": "wav/module9_slide_11.wav",
+      "audio": "audio/module9_slide_11.mp3",
+      "captions": "audio/module9_slide_11.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 12,
+      "title": "Observe → Decide → Act → Observe",
+      "transcript": "A useful mental model is observe, decide, act, and observe again.\n\nFirst, observe the current state. What do we already know? What evidence do we have? What is still missing?\n\nSecond, decide what should happen next. This decision should usually be small and structured.\n\nThird, perform the action. Call a retriever, database, calculator, web search, or another approved capability.\n\n[tts-break]\n\nThen observe the result and update state. If the goal is satisfied, stop. If not, choose the next action.\n\nFor example, after a policy search, the workflow may observe that the return window is fourteen days. But it still does not know when the user's order was delivered. That observation changes the next action from generate to order lookup.\n\n[tts-break]\n\nThe application owns the loop. The model may help with a decision, but software must enforce allowed actions, permissions, and maximum steps.",
+      "wav": "wav/module9_slide_12.wav",
+      "audio": "audio/module9_slide_12.mp3",
+      "captions": "audio/module9_slide_12.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 13,
+      "title": "Central Example: Refund After 20 Days",
+      "transcript": "We will use one example repeatedly so the architecture stays easy to follow.\n\nThe user asks: order one zero four two was delivered twenty days ago. Can I still return it and get a refund?\n\nThere are two kinds of information here.\n\nFirst, we need policy knowledge. What is the normal return window? Are there exceptions? That information is likely in unstructured documents and is a good fit for retrieval.\n\n[tts-break]\n\nSecond, we need order facts. What was the authoritative delivery date? What is the order status? That information is structured and belongs in a database or A P I lookup.\n\nThe final answer depends on both.\n\n[tts-break]\n\nThis is a strong agentic example because one source is not enough. It also shows why tool choice should match the type of data rather than using vector search for everything.",
+      "wav": "wav/module9_slide_13.wav",
+      "audio": "audio/module9_slide_13.mp3",
+      "captions": "audio/module9_slide_13.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 14,
+      "title": "Classic RAG Trace for the Example",
+      "transcript": "A classic rag workflow might retrieve a return policy that says standard returns are accepted within fourteen days of delivery. Then the language model generates an answer from that policy.\n\nThat may sound reasonable, but notice what is missing. The workflow may never verify the actual order record.\n\n[tts-break]\n\nIf the user says the order was delivered twenty days ago, should we trust that value? In some applications, maybe. In a real support system, the authoritative delivery date should probably come from the order database.\n\nThis is a useful lesson for project design. Retrieval can give you relevant general knowledge, but some questions also require exact structured facts.\n\n[tts-break]\n\nA strong system asks not only, did I retrieve relevant text? It also asks, do I have every fact needed to answer this specific case?",
+      "wav": "wav/module9_slide_14.wav",
+      "audio": "audio/module9_slide_14.mp3",
+      "captions": "audio/module9_slide_14.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 15,
+      "title": "Agentic RAG Trace for the Same Example",
+      "transcript": "Now compare the agentic version.\n\nThe workflow first routes the request. It recognizes that we need both policy search and order lookup. It retrieves the return policy, then obtains the order's delivery date from the structured system.\n\nAfter that, it checks whether the combined evidence is complete.\n\n[tts-break]\n\nIf the policy is present and the order record is present, the system can generate a grounded answer. Then it validates citations and any important business constraints before stopping.\n\nThis sequence is more reliable because each step has a clear purpose.\n\n[tts-break]\n\nNotice that the language model does not need to do everything. Retrieval finds documents. The database provides exact facts. Normal code can compare dates. The model can focus on interpreting language and composing a clear final answer.",
+      "wav": "wav/module9_slide_15.wav",
+      "audio": "audio/module9_slide_15.mp3",
+      "captions": "audio/module9_slide_15.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 16,
+      "title": "Not Every Choice Belongs to the LLM",
+      "transcript": "Not every decision should be delegated to a language model.\n\nSome decisions are exact. A step counter is exact. Permission checks are exact. Arithmetic is exact. Date comparisons can usually be handled with normal code.\n\nOther decisions involve meaning. Does this user question ask for policy information, order information, or both? Is a retrieved paragraph actually relevant to the user's intent? These may benefit from semantic methods.\n\n[tts-break]\n\nFor example, suppose a user asks, can I send it back? There may be no word return in the question, but a language model or semantic classifier can still understand the intent.\n\nAt the same time, if the user is not authorized to view another customer's order, that must not be left to model judgment.\n\n[tts-break]\n\nA good controller is hybrid. Use ordinary software for hard boundaries and exact logic. Use model judgment only for ambiguous language tasks.",
+      "wav": "wav/module9_slide_16.wav",
+      "audio": "audio/module9_slide_16.mp3",
+      "captions": "audio/module9_slide_16.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 17,
+      "title": "When Agentic RAG Is Worth the Complexity",
+      "transcript": "Agentic rag is worth the extra complexity when the workflow genuinely needs to react to results.\n\nGood examples include multi-source questions, vague user wording, missing evidence, conditional tool use, or situations where the first retrieval often needs correction.\n\n[tts-break]\n\nIt is probably unnecessary when one stable knowledge base answers most questions reliably with one retrieval pass. A simple frequently asked questions assistant may work very well with classic rag.\n\nBefore adding an agent, ask one design question: does the system need to inspect a result before choosing the next step?\n\nIf the answer is no, a fixed pipeline is probably simpler.\n\n[tts-break]\n\nRemember that every extra decision adds latency, cost, testing work, and more possible failure modes. Complexity should solve a real problem.",
+      "wav": "wav/module9_slide_17.wav",
+      "audio": "audio/module9_slide_17.mp3",
+      "captions": "audio/module9_slide_17.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 18,
+      "title": "Part 1 Checkpoint",
+      "transcript": "Here is a quick checkpoint.\n\nWhich workflow is genuinely agentic?\n\nOption one retrieves once and immediately generates. That is classic rag.\n\nOption two decides which source is needed, retrieves, grades the evidence, may retry or reroute, and then generates. That is agentic because the next action depends on the current state and observations.\n\nOption three simply uses a larger language model. Model size alone does not make the workflow agentic.\n\n[tts-break]\n\nThe correct answer is the second workflow.\n\nThe important idea is conditional control. The system can change what it does next based on what just happened.",
+      "wav": "wav/module9_slide_18.wav",
+      "audio": "audio/module9_slide_18.mp3",
+      "captions": "audio/module9_slide_18.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 19,
+      "title": "Part 2 — State, Decisions, and Stop Conditions",
+      "transcript": "Now we move into state, decisions, and stopping conditions.\n\nA reliable agent should feel like a controlled state machine, not an open-ended conversation where the model can keep trying tools forever.\n\nState is the working memory for the current run. Decisions are structured choices among allowed routes. Stop conditions define when the workflow is complete or when it must give up safely.\n\n[tts-break]\n\nThese three ideas are connected. Without state, the system does not know what has already happened. Without structured decisions, routing becomes unpredictable. Without stop conditions, the system may loop.\n\nFor your own project, try drawing these three boxes before writing code: what do I need to remember, what choices are allowed, and what conditions end the run?\n\n[tts-break]\n\nIf you can answer those clearly, the implementation usually becomes much easier.",
+      "wav": "wav/module9_slide_19.wav",
+      "audio": "audio/module9_slide_19.mp3",
+      "captions": "audio/module9_slide_19.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 20,
+      "title": "Start with the Smallest Useful State",
+      "transcript": "Start with the smallest useful state.\n\nFor the first learning build, four fields are enough: the question, retrieved documents, a step count, and the current route.\n\nDo not add a query field until you actually implement query rewriting. Do not add a score until you actually grade evidence. Do not add a draft until a generation step exists.\n\n[tts-break]\n\nThis matters because a large state object can hide the workflow. Students sometimes create fifteen fields before the first node works, then spend most of their time moving values around.\n\nA better approach is incremental. Build the simplest loop. When a new node needs a value from an earlier step, add that field.\n\nFor example, when you add an evaluator later, then it makes sense to add a critique field and a revision count.\n\n[tts-break]\n\nState should reflect the architecture you actually have, not the architecture you might build someday.",
+      "wav": "wav/module9_slide_20.wav",
+      "audio": "audio/module9_slide_20.mp3",
+      "captions": "audio/module9_slide_20.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 21,
+      "title": "Functions Read State and Return Updates",
+      "transcript": "Each step should behave like a normal function with a clear contract.\n\nIn ordinary Python, you may pass a state dictionary into a function and return the entire updated dictionary. In Lang Graph, nodes commonly return only the fields that changed.\n\nFor example, an increment step may simply return a new value for the steps field.\n\n[tts-break]\n\nWhy are partial updates useful? Because the graph already owns the current state. A node does not need to reconstruct every field. Smaller updates make node behavior easier to test, and they work better with reducers and persistence.\n\nImagine a retrieval node. Its job might be to update documents and the step count. It does not need to rewrite the original question or every other field.\n\n[tts-break]\n\nThis gives each node a narrow responsibility, which makes debugging much easier.",
+      "wav": "wav/module9_slide_21.wav",
+      "audio": "audio/module9_slide_21.mp3",
+      "captions": "audio/module9_slide_21.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 22,
+      "title": "Agent Decisions Should Be Structured",
+      "transcript": "Agent decisions should be structured.\n\nIf the controller only needs to know the next route, do not ask the model for a long paragraph explaining what it feels like doing.\n\nA weak output might say, I think perhaps we should search the policy because the user seems to be asking about returns. That is difficult for application code to interpret reliably.\n\n[tts-break]\n\nA better result is a small object with a route and, if useful, a short visible reason. For example: route equals policy search; reason equals the question asks about return rules.\n\nThis is easier to validate, log, test, and route.\n\n[tts-break]\n\nAlso remember that an L L M is not always necessary. If a normal if statement can make the decision correctly, use it. Structured model decisions are most useful when the user's language is ambiguous enough to justify semantic interpretation.",
+      "wav": "wav/module9_slide_22.wav",
+      "audio": "audio/module9_slide_22.mp3",
+      "captions": "audio/module9_slide_22.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 23,
+      "title": "Limit Decisions to Allowed Values",
+      "transcript": "Once you define possible routes, limit the model to those allowed values.\n\nSuppose the valid routes are policy search, order lookup, policy and order, and answer directly. If the model returns something else, the application should reject it rather than guessing what the model meant.\n\n[tts-break]\n\nIn Python, you can validate the returned string against a set. With typed structured output, you can define a literal or enum so the allowed choices are part of the schema.\n\nThis converts open-ended model language into a finite state-machine decision.\n\nFor example, if the model returns search everything, but that route is not allowed, the controller should not improvise. It should treat the output as invalid.\n\n[tts-break]\n\nFinite choices improve reliability, testability, and security.",
+      "wav": "wav/module9_slide_23.wav",
+      "audio": "audio/module9_slide_23.mp3",
+      "captions": "audio/module9_slide_23.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 24,
+      "title": "Stop Conditions Are Part of the Algorithm",
+      "transcript": "Stop conditions are part of the algorithm, not an afterthought.\n\nA successful stop might be evidence is sufficient, the answer has been generated, and validation passed.\n\nA safe failure stop might be no approved evidence exists.\n\nA budget stop might be maximum steps reached.\n\n[tts-break]\n\nIf a tool fails temporarily, the policy may allow one or two bounded retries. If a high-impact action is requested, the workflow may stop and wait for human approval.\n\nFor example, an assistant can explain that a refund appears appropriate, but issuing the refund may require an authorized human or a separate approval rule.\n\n[tts-break]\n\nIf you cannot describe how your workflow stops, the workflow is not finished. Every loop needs a reachable exit.",
+      "wav": "wav/module9_slide_24.wav",
+      "audio": "audio/module9_slide_24.mp3",
+      "captions": "audio/module9_slide_24.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 25,
+      "title": "Bound the Loop in Plain Python and LangGraph",
+      "transcript": "Use two kinds of safeguards for loops.\n\nFirst, define an application-level limit such as max steps equals three. This is part of your business or workflow policy. For example, allow at most two query rewrites.\n\nSecond, use Lang Graph's recursion limit as a runtime safety net.\n\n[tts-break]\n\nThese are not the same thing. Max steps expresses what your application considers reasonable. The recursion limit protects you if routing logic accidentally creates a cycle you did not expect.\n\nA healthy workflow should normally stop because its own success or failure conditions are reached. The recursion limit should be the emergency brake, not the main way the agent stops.\n\n[tts-break]\n\nUseful stop reasons include evidence sufficient, answer validated, no approved evidence, user clarification required, or maximum budget reached.",
+      "wav": "wav/module9_slide_25.wav",
+      "audio": "audio/module9_slide_25.mp3",
+      "captions": "audio/module9_slide_25.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 26,
+      "title": "Do Not Treat LLM Confidence as Truth",
+      "transcript": "Do not treat a model's self-reported confidence as truth.\n\nA language model can say confidence zero point nine six and still be wrong. The number may look precise, but it is not automatically calibrated.\n\n[tts-break]\n\nA better strategy is evaluation. Constrain the decision schema, create labeled examples, and measure how often the route or grade is correct. If you use a threshold, calibrate it on a validation set.\n\nFor example, suppose a grader gives relevance scores from zero to one. Do not simply choose zero point eight because it sounds high. Test what happens to real questions above and below different thresholds.\n\n[tts-break]\n\nConfidence should come from measured behavior, not from the model describing how confident it feels.",
+      "wav": "wav/module9_slide_26.wav",
+      "audio": "audio/module9_slide_26.mp3",
+      "captions": "audio/module9_slide_26.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 27,
+      "title": "Use Deterministic Rules Before LLM Judgment",
+      "transcript": "A strong controller mixes deterministic rules with model-assisted judgment.\n\nUse normal code for order I D extraction, permissions, date comparisons, known categories, and exact thresholds.\n\nUse model judgment for ambiguous intent, semantic classification, evidence interpretation, or flexible language transformation.\n\n[tts-break]\n\nHere is a simple example. A regular expression extracts order number one zero four two from the user's text. Then a semantic classifier decides whether the user wants return eligibility, refund status, or a general policy explanation.\n\nThe first task is exact. The second task involves meaning.\n\n[tts-break]\n\nThis hybrid approach gives the model work it is good at while keeping hard constraints in software. It also reduces unnecessary model calls.",
+      "wav": "wav/module9_slide_27.wav",
+      "audio": "audio/module9_slide_27.mp3",
+      "captions": "audio/module9_slide_27.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 28,
+      "title": "Keep an Action Trace",
+      "transcript": "Keep an action trace.\n\nA useful trace records what the system actually did, not hidden private reasoning.\n\nFor each step, you can store the action name, validated tool arguments, source identifiers, a short result summary, latency, status, and the next route.\n\n[tts-break]\n\nFor example: step two, action policy search, query return deadline, three results, status okay.\n\nThis is enough to reproduce behavior and diagnose failures.\n\nDo not log secrets, unnecessary personal data, or huge unfiltered tool payloads. Also, there is no need to store a model's private chain of thought.\n\n[tts-break]\n\nFor a student project, a clean action trace is extremely useful during your demo. You can show what tool was called and why the workflow moved to the next step.",
+      "wav": "wav/module9_slide_28.wav",
+      "audio": "audio/module9_slide_28.mp3",
+      "captions": "audio/module9_slide_28.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 29,
+      "title": "A Bad Agent Can Repeat the Same Failure",
+      "transcript": "A bad agent can repeat the same failure.\n\nImagine the first search query is refund. The retriever returns weak evidence. The rewrite step produces exactly the same word, refund. The next search returns the same chunks, the grader rejects them again, and the process repeats.\n\n[tts-break]\n\nThat is not meaningful reflection. Nothing changed.\n\nA good controller should detect no progress. If the query did not change, change strategy or stop. If the same document I D's keep returning, try another source, filter, or retriever. If useful evidence is always rejected, inspect the grader.\n\n[tts-break]\n\nEvery retry should create information gain or change the search strategy. Otherwise, another loop is simply extra cost.",
+      "wav": "wav/module9_slide_29.wav",
+      "audio": "audio/module9_slide_29.mp3",
+      "captions": "audio/module9_slide_29.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 30,
+      "title": "Part 2 Checkpoint",
+      "transcript": "Checkpoint question.\n\nWhich rule should be enforced directly by application code?\n\nThe maximum number of tool steps should definitely be enforced by software. That is a hard safety and budget boundary.\n\nWhether a question is about policy or an order may involve language interpretation and can sometimes use a router.\n\nWhether a paragraph is semantically relevant may use a reranker, classifier, or model grader.\n\n[tts-break]\n\nSo the correct answer is: never execute more than the allowed number of tool steps.\n\nHard limits should not depend on the model deciding to obey them.",
+      "wav": "wav/module9_slide_30.wav",
+      "audio": "audio/module9_slide_30.mp3",
+      "captions": "audio/module9_slide_30.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 31,
+      "title": "Part 3 — Retrieval as a Tool",
+      "transcript": "Now we treat retrieval as a tool.\n\nFrom the controller's point of view, retrieval should have a clear input and output contract. The input might be a search query plus optional filters. The output should be evidence objects containing text, scores, and source metadata.\n\n[tts-break]\n\nThis makes retrieval explicit and inspectable. It can be logged, tested, graded, and reused.\n\nThe important design idea is that the agent does not need to know how the vector database works internally. It only needs a reliable retrieval interface.\n\n[tts-break]\n\nThat separation lets you improve or replace the storage layer later without rewriting the rest of the workflow.",
+      "wav": "wav/module9_slide_31.wav",
+      "audio": "audio/module9_slide_31.mp3",
+      "captions": "audio/module9_slide_31.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 32,
+      "title": "Retrieval Is Just a Function from the Controller's View",
+      "transcript": "From the controller's perspective, retrieval is just a function.\n\nYou give it a query and perhaps a top K value. It returns evidence.\n\nBehind that function, you might use Chroma, P G vector, Elasticsearch, or a hosted vector service. The controller should not care.\n\n[tts-break]\n\nThis is an example of abstraction. The storage technology is hidden behind a stable contract.\n\nSuppose your first project uses Chroma locally. Later, a company deploys the same workflow with a managed vector database. If the retrieval function still accepts the same inputs and returns the same evidence structure, the graph does not need to change.\n\n[tts-break]\n\nDesign the interface first. Keep infrastructure details inside the tool.",
+      "wav": "wav/module9_slide_32.wav",
+      "audio": "audio/module9_slide_32.mp3",
+      "captions": "audio/module9_slide_32.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 33,
+      "title": "Keep Retriever Inputs Narrow and Typed",
+      "transcript": "Keep retriever inputs narrow and typed.\n\nA search tool might need only three values: the query, a small top K value, and perhaps an approved department filter.\n\nAvoid passing one giant arbitrary dictionary of arguments. That makes validation harder and gives the model too many ways to produce malformed input.\n\n[tts-break]\n\nFor example, you might define query as a non-empty string, top K as an integer between one and ten, and department as an optional approved category.\n\nTyped schemas improve reliability because the model knows what fields exist, and the application can reject invalid values before touching the database.\n\n[tts-break]\n\nA small input schema is easier to generate, easier to test, and safer to execute.",
+      "wav": "wav/module9_slide_33.wav",
+      "audio": "audio/module9_slide_33.mp3",
+      "captions": "audio/module9_slide_33.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 34,
+      "title": "Return Evidence Objects, Not Bare Strings",
+      "transcript": "Return evidence objects, not bare strings.\n\nA good evidence object includes the text, a stable source I D, perhaps a chunk I D, a score, and useful metadata such as an effective date.\n\n[tts-break]\n\nWhy keep all of this? Because later steps need it. The grader may need the score. The final answer may need the source I D for citation. Freshness checks may need an effective date. Debugging may need the exact chunk identifier.\n\nIf you reduce everything to plain text too early, you lose provenance.\n\n[tts-break]\n\nFor project work, think of every retrieved chunk as a small record, not just a sentence. Keep the metadata with the text until final validation is complete.",
+      "wav": "wav/module9_slide_34.wav",
+      "audio": "audio/module9_slide_34.mp3",
+      "captions": "audio/module9_slide_34.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 35,
+      "title": "Where Chroma Fits",
+      "transcript": "Chroma fits behind the retrieval function.\n\nModule 7 already covered how a vector database stores embeddings and finds similar chunks. Agentic rag does not require you to rebuild that logic.\n\nThe agent calls something like search policy. That function sends a query to Chroma and receives the top evidence objects. The evidence goes into state, and the controller decides what to do next.\n\n[tts-break]\n\nThis is a useful architecture rule: orchestration should call a tested retriever rather than duplicating vector-database code inside graph nodes.\n\nIf you later move from Chroma to another vector store, keep the same retrieval contract.\n\n[tts-break]\n\nThe orchestration layer should organize capabilities, not reimplement them.",
+      "wav": "wav/module9_slide_35.wav",
+      "audio": "audio/module9_slide_35.mp3",
+      "captions": "audio/module9_slide_35.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 36,
+      "title": "Describe the Retrieval Tool Clearly",
+      "transcript": "Tool descriptions matter because the model may use them to decide which tool is appropriate.\n\nA good tool name is specific. Search policies is much clearer than search.\n\nA good description also explains when to use the tool and when not to use it. For example: search approved internal policy documents for return, refund, warranty, shipping, and account rules. Do not use for live order status.\n\n[tts-break]\n\nCompare that with: search for useful information. That description overlaps with almost every search tool and gives the model very little guidance.\n\nUse verb plus object names when possible: search policies, get order, calculate tax, search web.\n\n[tts-break]\n\nClear names and descriptions improve routing before you change the model or add another agent.",
+      "wav": "wav/module9_slide_36.wav",
+      "audio": "audio/module9_slide_36.mp3",
+      "captions": "audio/module9_slide_36.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 37,
+      "title": "Validate Tool Arguments Before Retrieval",
+      "transcript": "Tool calls are model-generated application input, so validate them before they reach a database, vector store, A P I, or file system.\n\nSuppose the model asks for a query and top K. First, remove unnecessary whitespace. Make sure the query is not empty. Put a sensible maximum on its length. Convert top K to an integer and make sure it stays inside an allowed range.\n\n[tts-break]\n\nValidation is not only about syntax. Authorization matters too. A perfectly valid order I D may still belong to data the current user is not allowed to access.\n\nFor example, a support agent might be allowed to retrieve orders only for the authenticated customer. The model cannot override that boundary.\n\n[tts-break]\n\nTreat model-generated arguments the same way you would treat input coming from an external user: validate type, range, permissions, and allowed scope before execution.",
+      "wav": "wav/module9_slide_37.wav",
+      "audio": "audio/module9_slide_37.mp3",
+      "captions": "audio/module9_slide_37.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 38,
+      "title": "Top-k Can Be a Retrieval Policy, Not an Agent Guess",
+      "transcript": "Top K controls how many chunks retrieval returns.\n\nIt is tempting to let the model choose any number, but this is often unnecessary. A tested application default such as three or four chunks may be more reliable.\n\n[tts-break]\n\nIf K is too small, you may miss needed evidence. If it is too large, you may add irrelevant text, increase context size, increase latency, and make grading harder.\n\nThe right value should come from evaluation. For some projects, three chunks may work well. For others, you may need five or a reranker.\n\n[tts-break]\n\nIf you decide to expose top K to the agent, keep the range narrow. For example, allow values from one to eight instead of allowing fifty or one hundred.\n\nRetrieval parameters are application policy, not automatically something the agent should control.",
+      "wav": "wav/module9_slide_38.wav",
+      "audio": "audio/module9_slide_38.mp3",
+      "captions": "audio/module9_slide_38.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 39,
+      "title": "Metadata Filters Can Reduce the Search Space",
+      "transcript": "Metadata filters can make retrieval more precise before semantic similarity is even calculated.\n\nSuppose the knowledge base contains policies from several departments. If you already know the user belongs to retail, you can filter to retail documents before searching.\n\n[tts-break]\n\nGood filters come from reliable information: department, document type, current version, tenant, user scope, or another known attribute.\n\nRisky filters come from guesses. If the model incorrectly guesses a department from ambiguous wording, it may silently remove the correct evidence from the search space.\n\nFor example, searching refund deadline with a verified retail filter may help. Inventing a filter because the user used a vague word can hurt.\n\n[tts-break]\n\nUse metadata filtering when the metadata is trustworthy and the rule is justified. It is often cheaper and more reliable than another model call.",
+      "wav": "wav/module9_slide_39.wav",
+      "audio": "audio/module9_slide_39.mp3",
+      "captions": "audio/module9_slide_39.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 40,
+      "title": "Preserve Provenance Through Every Step",
+      "transcript": "Preserve provenance all the way through the workflow.\n\nThe retriever should return source identifiers and metadata. The grader should keep them. The prompt can include them. The final answer can cite them. Then a validation step can confirm that every citation maps to evidence that was actually retrieved.\n\n[tts-break]\n\nUseful fields include a stable source I D, chunk I D, source path or U R L, and version or effective date.\n\nFor example, if two policy documents disagree, the effective date may tell you which one is current.\n\n[tts-break]\n\nA common mistake is turning rich evidence objects into one large plain string immediately after retrieval. That makes later citation and debugging harder.\n\nKeep the evidence structure as long as possible. Format it into text only when a specific model prompt needs text.",
+      "wav": "wav/module9_slide_40.wav",
+      "audio": "audio/module9_slide_40.mp3",
+      "captions": "audio/module9_slide_40.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 41,
+      "title": "Choose Tools from the Information Need",
+      "transcript": "Choose tools from the information need, not from the list of integrations you happen to know.\n\nAsk what the workflow is missing.\n\nIf the task is exact and deterministic, use normal Python. If you need meaning-based information from internal documents, use retrieval or rag. If you need an exact structured fact, use S Q L or an A P I. If you need current public information, use web search.\n\n[tts-break]\n\nFor example, what is our return policy? That is internal document retrieval.\n\nWhat is order one zero four two's status? That is a structured database lookup.\n\nWhat is today's exchange rate? That may require a current external source.\n\nHow many days are between two dates? That is normal code.\n\n[tts-break]\n\nThe best tool is not the most advanced tool. It is the narrowest capability that correctly supplies the missing information or action.",
+      "wav": "wav/module9_slide_41.wav",
+      "audio": "audio/module9_slide_41.mp3",
+      "captions": "audio/module9_slide_41.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 42,
+      "title": "Manage Tools as a Small Registry",
+      "transcript": "Manage tools as a small registry rather than handing every tool to the model.\n\nFor each tool, store useful metadata: what kind of capability it provides, whether it is read-only, a rough cost or latency class, and whether it requires approval.\n\n[tts-break]\n\nConsider three tools. Search knowledge is read-only and low risk. Get order is also read-only, but it accesses structured customer data and needs authorization. Issue refund changes real-world state, so it should be treated very differently and probably require approval.\n\nA registry lets your controller filter which tools are even available for a particular task and user.\n\n[tts-break]\n\nTool descriptions help the model choose. But permissions, approval, timeouts, and cost limits must be enforced outside the model.\n\nAlso log tool name, validated arguments, duration, outcome, and error type. Do not log secrets.",
+      "wav": "wav/module9_slide_42.wav",
+      "audio": "audio/module9_slide_42.mp3",
+      "captions": "audio/module9_slide_42.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 43,
+      "title": "Part 3 Checkpoint",
+      "transcript": "Checkpoint question.\n\nWhat should a retrieval tool return?\n\nThe best answer is text chunks together with source identifiers and useful metadata.\n\nReturning only a generated final answer hides the evidence layer. Returning private reasoning is unnecessary and not useful for application control.\n\n[tts-break]\n\nEvidence objects give later steps what they need for grading, citation, validation, and debugging.\n\nSo the correct choice is: text chunks with source identifiers and useful metadata.",
+      "wav": "wav/module9_slide_43.wav",
+      "audio": "audio/module9_slide_43.mp3",
+      "captions": "audio/module9_slide_43.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 44,
+      "title": "Part 4 — Routing and Query Rewriting",
+      "transcript": "Now we separate routing from query rewriting.\n\nRouting answers: where should we look?\n\nQuery rewriting answers: what should we search for?\n\nThese are related, but they are different decisions.\n\n[tts-break]\n\nSuppose a user asks, can I return order one zero four two? Routing may decide that we need both the policy source and the order database.\n\nThen the policy search query may be rewritten as return eligibility deadline after delivery.\n\nThe route selected the evidence source. The rewrite improved the search expression for that source.\n\n[tts-break]\n\nThe goal is to use the smallest useful sequence of actions. Do not rewrite, reroute, and call extra tools unless the task actually needs them.",
+      "wav": "wav/module9_slide_44.wav",
+      "audio": "audio/module9_slide_44.mp3",
+      "captions": "audio/module9_slide_44.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 45,
+      "title": "Routing Starts from the Information Need",
+      "transcript": "Routing should begin with the information need.\n\nDo not ask the router which answer sounds likely. Ask what evidence is required.\n\nIf the question is, what is the return deadline, route to policy search.\n\nIf the question is, when was order one zero four two delivered, route to order lookup.\n\nIf the question is, can order one zero four two still be returned, we need both.\n\n[tts-break]\n\nSome requests need no tool. If the user simply says thank you, the workflow can answer directly.\n\nA router also does not always need one exclusive route. State can record needs policy equals true and needs order equals true.\n\n[tts-break]\n\nFor a project, design routes around evidence requirements. That makes the routing decision easier to evaluate because you can label which sources each test question actually needs.",
+      "wav": "wav/module9_slide_45.wav",
+      "audio": "audio/module9_slide_45.mp3",
+      "captions": "audio/module9_slide_45.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 46,
+      "title": "Make Router Output Small and Structured",
+      "transcript": "Keep router output small and structured.\n\nA router might return three things: a route, a policy search query, and an order I D.\n\nThat is enough to execute the next actions.\n\n[tts-break]\n\nThe router does not need to write the final answer. It does not need to produce a paragraph of explanation. Its job is to transform a user request into machine-readable execution instructions.\n\nFor example, route equals policy and order. Policy query equals return deadline after delivery. Order I D equals one zero four two.\n\n[tts-break]\n\nThis separation improves testing. You can evaluate routing without also evaluating answer quality. If the wrong source is selected, you know the router failed before generation even begins.",
+      "wav": "wav/module9_slide_46.wav",
+      "audio": "audio/module9_slide_46.mp3",
+      "captions": "audio/module9_slide_46.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 47,
+      "title": "A Plain-Python Router Can Mix Rules and an LLM",
+      "transcript": "A practical router can mix deterministic extraction and semantic classification.\n\nSuppose the user's sentence contains an order number. Extract that I D with a regular expression or another reliable parser.\n\nThen separately classify the information need. Does this request need policy information, order information, or both?\n\n[tts-break]\n\nThis is better than asking one model call to invent every field when some fields are easy to extract exactly.\n\nFor example, order one zero four two can be extracted deterministically. But the sentence, am I still allowed to send this back, may need semantic interpretation to map to return eligibility.\n\n[tts-break]\n\nUse normal code for what is exact. Use model judgment for what is genuinely ambiguous.",
+      "wav": "wav/module9_slide_47.wav",
+      "audio": "audio/module9_slide_47.mp3",
+      "captions": "audio/module9_slide_47.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 48,
+      "title": "Multi-Source Routing",
+      "transcript": "Multi-source workflows can execute tools sequentially, in parallel, or conditionally.\n\nUse sequential execution when the second tool needs a value from the first. For example, first identify an account, then request that account's history.\n\nUse parallel execution when the tools are independent. Policy search and order lookup may be able to run at the same time.\n\n[tts-break]\n\nUse conditional execution when the second source is only needed if the first is insufficient. For example, search an internal knowledge base first, and use public web search only if the application explicitly permits it and the task really requires current external information.\n\n[tts-break]\n\nA useful project question is: does tool B depend on tool A's output? If not, parallel execution may reduce latency. If yes, keep the dependency explicit.",
+      "wav": "wav/module9_slide_48.wav",
+      "audio": "audio/module9_slide_48.mp3",
+      "captions": "audio/module9_slide_48.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 49,
+      "title": "Query Rewriting Repairs Retrieval, Not the User's Goal",
+      "transcript": "Query rewriting should improve retrieval without changing the user's goal.\n\nSuppose the user says, can I still send it back?\n\nThat wording may be natural for a person, but the knowledge base may use terms such as return eligibility, return deadline, or delivery date. A useful retrieval rewrite could be: standard return eligibility deadline after delivery.\n\n[tts-break]\n\nNotice what we did not do. We did not rewrite the question as, the customer is eligible for a refund. That would invent the answer.\n\nKeep the original user question unchanged in state. Store the refined query separately.\n\n[tts-break]\n\nThis separation is important because the refined query is optimized for a tool. The original question is still the source of truth for the final answer.",
+      "wav": "wav/module9_slide_49.wav",
+      "audio": "audio/module9_slide_49.mp3",
+      "captions": "audio/module9_slide_49.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 50,
+      "title": "Constrain the Rewrite Task",
+      "transcript": "Constrain the rewrite task.\n\nA good rewrite prompt can be very short: rewrite the user question as one concise search query for company policy documents. Preserve the original meaning. Do not answer the question. Do not invent dates or policy details.\n\n[tts-break]\n\nWhy be so specific?\n\nBecause the rewrite step has one job. It is not a general reasoning step. It should produce better search language.\n\nIf you ask the model to explain, summarize, and search all at once, the output becomes harder to validate and may include facts that were never retrieved.\n\n[tts-break]\n\nFor your project, define the output shape of each model call as narrowly as possible. A query rewriter should return a query. A router should return a route. A grader should return a grade. This keeps the workflow modular.",
+      "wav": "wav/module9_slide_50.wav",
+      "audio": "audio/module9_slide_50.mp3",
+      "captions": "audio/module9_slide_50.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 51,
+      "title": "Do Not Rewrite Before You Know It Is Needed",
+      "transcript": "Do not rewrite every query automatically.\n\nRewriting is a corrective action. First, try the user's original wording. Retrieve evidence and grade it.\n\nIf the evidence is already strong, proceed to generation. Rewriting a good query may actually make retrieval worse.\n\n[tts-break]\n\nIf evidence is weak, then rewrite and try again.\n\nBefore another rewrite, ask three questions. Did the query actually change? Did the retrieved source I D's change? Is the missing fact even available in this source?\n\nIf the same query keeps returning the same chunks, another rewrite may not help. Maybe you need a different source.\n\n[tts-break]\n\nCorrection should respond to a diagnosed problem. Do not add a loop just because the architecture diagram has one.",
+      "wav": "wav/module9_slide_51.wav",
+      "audio": "audio/module9_slide_51.mp3",
+      "captions": "audio/module9_slide_51.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 52,
+      "title": "A Retrieval Grader Answers a Narrow Question",
+      "transcript": "A retrieval grader should answer a narrow question about the evidence.\n\nIs the evidence relevant to the user's information need?\n\nIs it sufficient to answer the complete question?\n\nIs the source authoritative for this claim?\n\nIs it current enough?\n\n[tts-break]\n\nThe grader should not generate the final answer. Keeping grading separate lets you evaluate retrieval independently from generation.\n\nYou can start with a Boolean result, such as relevant or not relevant. But a score or structured result often gives more debugging information.\n\n[tts-break]\n\nFor example, a document may be highly relevant but incomplete. If your grader only says false, you may not know whether retrieval failed completely or whether one additional fact is missing.\n\nThat distinction becomes very important in agentic rag.",
+      "wav": "wav/module9_slide_52.wav",
+      "audio": "audio/module9_slide_52.mp3",
+      "captions": "audio/module9_slide_52.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 53,
+      "title": "Use a Structured Grader Result",
+      "transcript": "A structured grader result can directly support routing.\n\nFor example, the grader might return: relevant is true, sufficient is false, reason code is missing order date, and next action is order lookup.\n\n[tts-break]\n\nThe reason code is especially useful. Instead of a long paragraph, use a controlled label such as missing order date, stale source, wrong department, or no relevant evidence.\n\nThen your controller can map those labels to targeted actions.\n\nFor example, missing order date means call the order tool. Stale policy means retrieve the current policy version. No relevant evidence may mean rewrite the query.\n\n[tts-break]\n\nStructured grader output turns evaluation into actionable control information.",
+      "wav": "wav/module9_slide_53.wav",
+      "audio": "audio/module9_slide_53.mp3",
+      "captions": "audio/module9_slide_53.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 54,
+      "title": "Relevant Evidence Can Still Be Insufficient",
+      "transcript": "Relevant evidence can still be insufficient.\n\nSuppose the policy says returns are allowed within fourteen days. That is highly relevant to the question, can order one zero four two be returned?\n\nBut it is not sufficient. We still need the authoritative delivery date.\n\n[tts-break]\n\nThis distinction prevents a common rag mistake. A system retrieves text on the right topic and assumes it has everything needed to answer.\n\nAsk two separate questions: does this evidence discuss the correct topic, and does it contain enough facts to support the actual decision?\n\n[tts-break]\n\nFor multi-source projects, sufficiency is often more important than simple relevance. The workflow should know when it needs one more tool rather than trying to make the current evidence do more than it can.",
+      "wav": "wav/module9_slide_54.wav",
+      "audio": "audio/module9_slide_54.mp3",
+      "captions": "audio/module9_slide_54.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 55,
+      "title": "A Useful Routing Trace Is Short",
+      "transcript": "A useful routing trace should be short and factual.\n\nFor one run, you might record: route equals policy and order. Policy search returned three chunks. Order lookup says delivered on September twenty ninth. Evidence is sufficient. Next action is generate answer.\n\n[tts-break]\n\nThat trace is enough to understand the trajectory.\n\nGood trace fields include the action, validated arguments, source I D's, a score or result summary, latency, errors, and the next route.\n\nDo not store secrets or unnecessary personal information. Do not dump huge raw tool responses into logs. And do not depend on hidden private reasoning.\n\n[tts-break]\n\nA concise trace is valuable for grading student projects too. It lets you show not just the final answer, but how the system got there.",
+      "wav": "wav/module9_slide_55.wav",
+      "audio": "audio/module9_slide_55.mp3",
+      "captions": "audio/module9_slide_55.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 56,
+      "title": "Part 4 Checkpoint",
+      "transcript": "Checkpoint question.\n\nThe first retrieval returns two highly relevant policy chunks, and together they fully answer the user's question.\n\nWhat should happen next?\n\nYou should proceed to grounded generation.\n\n[tts-break]\n\nDo not rewrite the query just because a rewrite node exists. Do not call every other available tool just because the agent has access to them.\n\nA strong agent does the minimum work needed to reach a reliable result.\n\n[tts-break]\n\nThe correct answer is: proceed to generation using the evidence you already have.",
+      "wav": "wav/module9_slide_56.wav",
+      "audio": "audio/module9_slide_56.mp3",
+      "captions": "audio/module9_slide_56.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 57,
+      "title": "Part 5 — Grade, Correct, and Stop",
+      "transcript": "Now we focus on corrective rag.\n\nThe loop has three broad actions: retrieve, judge, and correct.\n\nFirst, retrieve candidate evidence.\n\nSecond, judge whether that evidence is relevant, sufficient, authoritative, and current enough.\n\nThird, correct only if necessary. Correction may mean rewriting the query, selecting another source, applying a filter, asking the user, or stopping safely.\n\n[tts-break]\n\nRetrieval quality is not one simple yes or no property. A source can be relevant but incomplete. It can be complete but outdated. It can be current but not authoritative for the decision.\n\n[tts-break]\n\nCorrective rag becomes useful when we can diagnose the specific retrieval problem and choose an appropriate correction rather than blindly retrying.",
+      "wav": "wav/module9_slide_57.wav",
+      "audio": "audio/module9_slide_57.mp3",
+      "captions": "audio/module9_slide_57.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 58,
+      "title": "Corrective RAG in One Picture",
+      "transcript": "The first retrieval should be treated as evidence to inspect, not evidence to trust automatically.\n\nIf the evidence is good, generate and validate. There is no reason to add another loop.\n\nIf the evidence is weak, change the query or retrieval strategy and then grade again.\n\nIf the evidence is unavailable, reroute, ask the user, or stop safely.\n\n[tts-break]\n\nFor example, imagine a policy search finds no current return policy. The wrong response is to keep asking the model until it invents something. The correct response may be to check an approved alternate source or say that the policy could not be verified.\n\n[tts-break]\n\nThe purpose of correction is reliability, not forcing the workflow to eventually produce an answer.",
+      "wav": "wav/module9_slide_58.wav",
+      "audio": "audio/module9_slide_58.mp3",
+      "captions": "audio/module9_slide_58.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 59,
+      "title": "Grade Evidence with More Than One Question",
+      "transcript": "Grade evidence along several dimensions.\n\nRelevance asks whether the evidence addresses the user's information need.\n\nSufficiency asks whether there is enough information to answer the complete question.\n\nAuthority asks whether the source is approved and trustworthy for this kind of claim.\n\nFreshness asks whether the source is current enough.\n\n[tts-break]\n\nFor our return example, a forum post about returns may be relevant, but it is not an authoritative company policy. An old company policy may be authoritative in origin but no longer current. A current return policy may still be insufficient without the order date.\n\nA simple binary grade can be useful when teaching the basic loop. But a structured grade gives more information when debugging.\n\n[tts-break]\n\nThe key question is not just, is this document good? It is, good for what decision?",
+      "wav": "wav/module9_slide_59.wav",
+      "audio": "audio/module9_slide_59.mp3",
+      "captions": "audio/module9_slide_59.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 60,
+      "title": "Corrective RAG as an Explicit Python Loop",
+      "transcript": "This plain Python loop is the heart of corrective rag.\n\nStart with the original question as the query. Retrieve documents. Grade them. If the score is above the tested threshold, stop correcting and move forward.\n\nIf the evidence is weak, rewrite the query and try again, but only while the step budget remains.\n\n[tts-break]\n\nRead the logic in plain English: retrieve, grade, generate if good enough, otherwise change something and retrieve again.\n\nThe phrase change something matters. A useful retry may change the query, a metadata filter, the source, or the retrieval strategy.\n\nCalling the same retriever with the same query three times is not reflection.\n\n[tts-break]\n\nIf one retrieval pass is consistently enough, use classic rag. The loop exists only because retrieval sometimes needs correction.",
+      "wav": "wav/module9_slide_60.wav",
+      "audio": "audio/module9_slide_60.mp3",
+      "captions": "audio/module9_slide_60.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 61,
+      "title": "No Answer Can Be the Correct Outcome",
+      "transcript": "Sometimes no answer is the correct system outcome.\n\nA reliable workflow should be willing to say that it could not verify something from approved evidence.\n\nFor example: I could not verify the return exception from the available policy sources. Please contact support for confirmation.\n\n[tts-break]\n\nThat may feel less impressive than producing a detailed answer, but it is more trustworthy.\n\nThe success criterion is not that the model always says something substantive. The success criterion is that the system behaves correctly.\n\n[tts-break]\n\nThis becomes especially important in projects involving policy, health, finance, or any other domain where unsupported claims can cause harm. A safe no-answer result is a feature, not a failure.",
+      "wav": "wav/module9_slide_61.wav",
+      "audio": "audio/module9_slide_61.mp3",
+      "captions": "audio/module9_slide_61.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 62,
+      "title": "Validate the Generated Answer Too",
+      "transcript": "Correct retrieval does not guarantee correct generation.\n\nEven if the right evidence is present, the model may misread it, omit part of it, cite the wrong source, or perform an action it is not authorized to perform.\n\nThat is why generation should also be validated.\n\n[tts-break]\n\nGrounding validation asks whether factual claims are supported by the evidence.\n\nCitation validation asks whether the cited source I D's actually match supplied evidence.\n\nFormat validation checks whether required fields are present.\n\nBusiness-rule validation checks boundaries that should not depend on the model.\n\n[tts-break]\n\nFor example, the model may correctly explain a refund policy but should not automatically issue a refund unless the workflow has explicit authorization for that action.",
+      "wav": "wav/module9_slide_62.wav",
+      "audio": "audio/module9_slide_62.mp3",
+      "captions": "audio/module9_slide_62.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 63,
+      "title": "Citation Validation Is a Mapping Problem",
+      "transcript": "Citation validation is mostly a mapping problem.\n\nThe workflow already knows which source I D's were retrieved. After generation, extract or collect the source I D's that appear in the answer.\n\nThen compare the two sets.\n\n[tts-break]\n\nIf the answer cites a source that was never supplied, reject or repair the answer.\n\nThis simple check catches an important class of hallucination: invented citations.\n\nOf course, a valid source I D does not prove that the claim is fully supported. A stronger validator can also check whether the cited chunk actually contains evidence for the claim.\n\n[tts-break]\n\nBut the first rule is easy and valuable: a citation should never refer to evidence the model did not receive.",
+      "wav": "wav/module9_slide_63.wav",
+      "audio": "audio/module9_slide_63.mp3",
+      "captions": "audio/module9_slide_63.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 64,
+      "title": "Evidence Can Conflict",
+      "transcript": "Evidence can conflict.\n\nSuppose one policy says the return window is fourteen days, while another says thirty days during a holiday period.\n\nThe system should not silently choose the chunk that gives the easiest answer.\n\n[tts-break]\n\nInstead, inspect metadata. Which policy is current? Does the holiday exception apply to the purchase date? Which source has higher authority? Is one document an older version?\n\nThis is where provenance and structured metadata become very important.\n\n[tts-break]\n\nResolve source conflicts before asking the language model to synthesize the final answer whenever possible. The model is better at explaining a resolved policy than deciding which business rule is legally or operationally authoritative.",
+      "wav": "wav/module9_slide_64.wav",
+      "audio": "audio/module9_slide_64.mp3",
+      "captions": "audio/module9_slide_64.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 65,
+      "title": "Reranking Can Reduce Agent Work",
+      "transcript": "Reranking can sometimes improve retrieval without adding another agent loop.\n\nA vector search might return ten candidates. The relevant chunk is present, but it is ranked seventh. A reranker can reorder those candidates and place the best three at the top.\n\n[tts-break]\n\nThat is different from a retrieval failure where the needed evidence was never in the candidate set.\n\nIf the correct chunk was retrieved but ranked poorly, reranking is a good tool.\n\nIf the correct evidence was never retrieved, you may need query rewriting, another source, a different filter, or a different embedding strategy.\n\n[tts-break]\n\nDiagnose the failure before choosing the correction. Retrieved but ranked poorly and never retrieved are two different problems.",
+      "wav": "wav/module9_slide_65.wav",
+      "audio": "audio/module9_slide_65.mp3",
+      "captions": "audio/module9_slide_65.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 66,
+      "title": "Fallback Is a Policy Decision",
+      "transcript": "Fallback is a policy decision.\n\nIf the preferred source fails, the workflow should not automatically search anywhere it can find.\n\nFallbacks should be ordered by authority, permission, freshness, and cost.\n\n[tts-break]\n\nFor a structured order fact, an internal S Q L system may be the first source. If live external data is required, an approved A P I may be next. Public web search should be used only when the application explicitly allows public evidence for the task.\n\nIf no approved source can answer, stop safely.\n\n[tts-break]\n\nNever silently replace an authoritative internal policy source with public web results. Those sources may have different rules, different dates, or may refer to another organization entirely.",
+      "wav": "wav/module9_slide_66.wav",
+      "audio": "audio/module9_slide_66.mp3",
+      "captions": "audio/module9_slide_66.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 67,
+      "title": "A Retry Must Change Something",
+      "transcript": "A retry must change something.\n\nAttempt one should usually use the user's original wording.\n\nIf that fails, attempt two may rewrite the query with clearer vocabulary or more specific terms.\n\nIf that still fails, attempt three may change a filter, retrieval strategy, or approved source.\n\nThen stop safely.\n\n[tts-break]\n\nThink of retries as controlled experiments. Each attempt should test a different hypothesis about why the previous retrieval failed.\n\nIf the only change is calling the exact same function again with the exact same inputs, you are not learning anything new.\n\n[tts-break]\n\nA good trace should make those differences obvious: original query, rewritten query, alternate source, and final stop reason.",
+      "wav": "wav/module9_slide_67.wav",
+      "audio": "audio/module9_slide_67.mp3",
+      "captions": "audio/module9_slide_67.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 68,
+      "title": "Why an Agent Can Loop Forever",
+      "transcript": "Why can an agent loop forever?\n\nOne common cause is an impossible grader.\n\nSuppose retrieval repeatedly returns useful policy text, but the grader is so strict that it rejects every document. The graph keeps rewriting and retrieving until it reaches the limit.\n\n[tts-break]\n\nBefore redesigning the graph, log the current query, returned source I D's, grade, threshold, selected route, and step count.\n\nIf useful evidence is always rejected, fix the grading policy.\n\nIf the rewrite barely changes the query and the same chunks return, detect no progress and stop or change strategy.\n\n[tts-break]\n\nThe graph may be working exactly as written. The problem can be the decision rule inside it.",
+      "wav": "wav/module9_slide_68.wav",
+      "audio": "audio/module9_slide_68.mp3",
+      "captions": "audio/module9_slide_68.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 69,
+      "title": "Part 5 Checkpoint",
+      "transcript": "Checkpoint question.\n\nYour agent retrieves useful chunks, but it rewrites the query on every run until the step limit.\n\nWhat should you inspect first?\n\nNot the size of the vector database. Not model temperature.\n\nInspect the grader and its threshold.\n\n[tts-break]\n\nIf the grader never allows the generate route, the workflow will keep correcting even when evidence is already useful.\n\nThe correct answer is: inspect the grader and its threshold before changing the architecture.",
+      "wav": "wav/module9_slide_69.wav",
+      "audio": "audio/module9_slide_69.mp3",
+      "captions": "audio/module9_slide_69.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 70,
+      "title": "Part 6 — Build One Complete Agentic RAG Loop in Plain Python",
+      "transcript": "Now we build one complete agentic rag loop with plain Python.\n\nThis is important because frameworks become much easier once you can see the basic while loop, if statement, function calls, and break condition.\n\nThe sequence is straightforward: retrieve evidence, grade it, rewrite only when needed, then generate and stop.\n\n[tts-break]\n\nYou should be able to explain every branch without saying, the agent decides somehow.\n\nFor example, if the grade passes, we generate. If it fails and budget remains, we rewrite. If the budget is exhausted, we stop safely.\n\n[tts-break]\n\nUse Lang Chain or Lang Graph later when their common interfaces, persistence, streaming, branching, or observability reduce the infrastructure you would otherwise have to write yourself.",
+      "wav": "wav/module9_slide_70.wav",
+      "audio": "audio/module9_slide_70.mp3",
+      "captions": "audio/module9_slide_70.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 71,
+      "title": "One Scenario for the Entire Build",
+      "transcript": "We will use one question for the entire build.\n\nOrder one zero four two was delivered twenty days ago. Can I still return it?\n\nThe policy source contains the general return rule. The order source contains the authoritative delivery information.\n\n[tts-break]\n\nThat gives each function a clear job.\n\nThe retriever finds the policy.\n\nThe order tool returns structured facts.\n\nThe grader checks whether evidence is sufficient.\n\nThe generator combines approved evidence into a final answer.\n\n[tts-break]\n\nUsing one scenario throughout a tutorial reduces cognitive load. You can see how the architecture changes without also learning a new problem on every slide.",
+      "wav": "wav/module9_slide_71.wav",
+      "audio": "audio/module9_slide_71.mp3",
+      "captions": "audio/module9_slide_71.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 72,
+      "title": "Step 1 — Retrieval Is a Normal Function",
+      "transcript": "Step one is retrieval, and retrieval should look like a normal function.\n\nThe controller gives the retriever a query. The retriever returns documents. Then we convert those results into evidence objects containing the text and important metadata such as source I D and title.\n\n[tts-break]\n\nThe controller should not care whether the implementation uses Chroma, an in-memory vector store, or another approved system.\n\nThat means the storage technology can change while the rest of the workflow stays stable.\n\n[tts-break]\n\nThe important interface is simple: query goes in, provenance-rich evidence comes out. Keep that contract clean, because grading, citation, and debugging will all depend on it.",
+      "wav": "wav/module9_slide_72.wav",
+      "audio": "audio/module9_slide_72.mp3",
+      "captions": "audio/module9_slide_72.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 73,
+      "title": "Step 2 — Keep Structured Facts in a Structured Tool",
+      "transcript": "Step two is structured lookup.\n\nA vector database is not the best tool for an exact order record. If you know the order I D, use a direct database or A P I lookup.\n\nFor example, the get order function receives an order I D, checks the structured data source, and returns a predictable object such as found true, the order I D, delivery date, and status.\n\n[tts-break]\n\nThis is an important project design rule: tool choice should follow the shape of the data.\n\nUse semantic retrieval for unstructured text such as policies, papers, manuals, or notes.\n\nUse S Q L or an A P I for exact structured facts such as account balances, order dates, inventory quantities, or appointment times.\n\n[tts-break]\n\nDo not force every information source into a vector database just because the project includes rag.",
+      "wav": "wav/module9_slide_73.wav",
+      "audio": "audio/module9_slide_73.mp3",
+      "captions": "audio/module9_slide_73.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 74,
+      "title": "Step 3 — Route Only When Multiple Sources Are Possible",
+      "transcript": "Step three is routing, but only when more than one source is possible.\n\nFor teaching, a simple rule can check whether the word order appears and then route to both policy and order data. That makes the idea easy to see.\n\nBut do not confuse a teaching rule with a production router.\n\n[tts-break]\n\nA real project might extract order I D's deterministically, then use structured model output only for ambiguous intent.\n\nFor example, if the user says, where is my package, the route may be order tracking. If the user says, what are your shipping rules, the route may be policy retrieval.\n\n[tts-break]\n\nStart with the simplest reliable rule. Add semantic routing only when keyword or deterministic logic is not enough.",
+      "wav": "wav/module9_slide_74.wav",
+      "audio": "audio/module9_slide_74.mp3",
+      "captions": "audio/module9_slide_74.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 75,
+      "title": "Step 4 — Make Evidence Quality Observable",
+      "transcript": "Step four is grading evidence.\n\nThe example grader is intentionally simple. It looks for signals related to returns, days, and delivery, and then produces a score.\n\nThis is useful for teaching because you can see exactly why the score changes.\n\n[tts-break]\n\nIn a real project, you may replace this with a reranker, a classifier, structured L L M output, or domain-specific rules.\n\nThe important part is the interface. The controller calls grade documents and receives a predictable result. The internal implementation can improve later.\n\n[tts-break]\n\nMake evidence quality observable. If a grade fails, you should be able to inspect why. A mysterious yes or no result makes debugging much harder.",
+      "wav": "wav/module9_slide_75.wav",
+      "audio": "audio/module9_slide_75.mp3",
+      "captions": "audio/module9_slide_75.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 76,
+      "title": "Step 5 — Rewrite the Search Query, Not the User's Intent",
+      "transcript": "Step five is query rewriting.\n\nThe rewrite should improve search language without changing the user's intent.\n\nFor example, a user may ask, can I send it back? A better search query could be return eligibility deadline after delivery refund policy.\n\n[tts-break]\n\nThat adds vocabulary that may exist in policy documents, but it does not invent an answer.\n\nA bad rewrite would say, customer qualifies for a refund. That is no longer a search query. It has turned an uncertain question into an unsupported conclusion.\n\n[tts-break]\n\nKeep the original question in state. Store the rewritten query separately. The original question controls the final task; the rewritten query only helps retrieval.",
+      "wav": "wav/module9_slide_76.wav",
+      "audio": "audio/module9_slide_76.mp3",
+      "captions": "audio/module9_slide_76.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 77,
+      "title": "Step 6 — Generate Only from Approved Evidence",
+      "transcript": "Step six is generation from approved evidence.\n\nThe prompt should clearly separate instructions, policy evidence, structured order facts, and the user's question.\n\nThis reduces ambiguity.\n\n[tts-break]\n\nFor example, tell the model to use only the supplied evidence and to say when the evidence is insufficient. Then provide the policy context with source identifiers. Provide the order record separately. Finally, include the original question.\n\nWhy separate these sections?\n\nBecause the model can more easily distinguish instructions from evidence and distinguish general policy from customer-specific facts.\n\n[tts-break]\n\nA good prompt does not replace validation, but it creates a cleaner contract for grounded generation.",
+      "wav": "wav/module9_slide_77.wav",
+      "audio": "audio/module9_slide_77.mp3",
+      "captions": "audio/module9_slide_77.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 78,
+      "title": "Step 7 — Validate Before Returning",
+      "transcript": "Step seven is validation before the answer leaves the workflow.\n\nCheck grounding. Are factual claims supported by supplied evidence?\n\nCheck citations. Do the source I D's actually exist in the retrieved evidence?\n\nCheck format. If the application expects specific fields, are they present?\n\nCheck authorization. Did the model recommend an action, or did it try to perform something the workflow did not permit?\n\n[tts-break]\n\nFor example, a support assistant may say, based on the policy, this order appears outside the standard return window. That is an informational statement.\n\nActually issuing a refund is a different capability and may require permission and human approval.\n\n[tts-break]\n\nGeneration is not the end. Validation is part of the application.",
+      "wav": "wav/module9_slide_78.wav",
+      "audio": "audio/module9_slide_78.mp3",
+      "captions": "audio/module9_slide_78.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 79,
+      "title": "The Complete Plain-Python Controller",
+      "transcript": "Now put the pieces together in one plain Python controller.\n\nState begins with the original question, the current search query, an empty document list, a step count of zero, and a route that says retrieve.\n\nThe while loop runs only while the step count is below the maximum.\n\n[tts-break]\n\nEach pass retrieves documents and grades them. If the grade reaches the required threshold, the controller changes the route to generate and breaks out of the correction loop.\n\nIf the evidence is weak, it rewrites the query and tries again.\n\nIf the loop ends without reaching the generate route, the controller returns a safe result such as not enough evidence.\n\n[tts-break]\n\nThis is the agentic behavior in its simplest form: state plus a bounded loop plus conditional next-step decisions.",
+      "wav": "wav/module9_slide_79.wav",
+      "audio": "audio/module9_slide_79.mp3",
+      "captions": "audio/module9_slide_79.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 80,
+      "title": "Read the Controller as a Trajectory",
+      "transcript": "Read the controller as a trajectory, not only as source code.\n\nStep one retrieves with the original query and gets a weak policy match.\n\nStep two grades that evidence at zero point five, below the threshold.\n\nStep three rewrites the query using better policy terms.\n\n[tts-break]\n\nStep four retrieves again and now finds the fourteen-day return rule.\n\nStep five grades the new evidence at one point zero and routes to generation.\n\nStep six returns the answer, evidence, and trace, then stops.\n\n[tts-break]\n\nA trajectory is useful because it lets you explain the run without reading every line of code. For a project demo, showing a short trajectory often communicates the architecture better than showing a giant code cell.",
+      "wav": "wav/module9_slide_80.wav",
+      "audio": "audio/module9_slide_80.mp3",
+      "captions": "audio/module9_slide_80.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 81,
+      "title": "Test the Pieces Before the Whole Agent",
+      "transcript": "Test the individual pieces before testing the whole agent.\n\nFirst, test retrieval with a known query. If the expected document is missing, the problem is retrieval or indexing.\n\nTest the grader with evidence you know should pass. If it fails, the problem is the grading rule or threshold.\n\nTest query rewriting. Make sure the rewritten query actually changes when correction is needed.\n\n[tts-break]\n\nTest generation with a fixed evidence set. Check whether the model stays grounded.\n\nOnly after those components work should you test the full controller trajectory.\n\nThis approach localizes failures.\n\n[tts-break]\n\nIf the full agent fails but every component works independently, then the problem is likely orchestration: wrong state updates, wrong route, or wrong stopping logic.",
+      "wav": "wav/module9_slide_81.wav",
+      "audio": "audio/module9_slide_81.mp3",
+      "captions": "audio/module9_slide_81.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 82,
+      "title": "Part 6 Checkpoint",
+      "transcript": "Checkpoint question.\n\nWhat makes the plain Python workflow agentic?\n\nIt is not the vector database. A vector database can exist in classic rag.\n\nIt is not using the largest possible language model.\n\nThe agentic behavior comes from state plus conditional next-step decisions.\n\n[tts-break]\n\nThe workflow remembers what has happened, inspects the result, and chooses whether to generate, rewrite, retrieve again, or stop.\n\nSo the correct answer is: state plus conditional decisions.",
+      "wav": "wav/module9_slide_82.wav",
+      "audio": "audio/module9_slide_82.mp3",
+      "captions": "audio/module9_slide_82.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 83,
+      "title": "Part 7 — Bridge to LangChain, Then Translate the Same Loop into LangGraph",
+      "transcript": "Now we bridge from plain Python into Lang Chain and then Lang Graph.\n\nThe important idea is translation, not replacement.\n\nA Python dictionary becomes graph state.\n\nA normal function becomes a node.\n\nAn if or else decision becomes a conditional edge.\n\nA while loop becomes a cycle between nodes.\n\nA break becomes a transition to end.\n\n[tts-break]\n\nLang Chain helps standardize models, retrievers, and tools.\n\nLang Graph gives us an explicit graph representation of the controller.\n\n[tts-break]\n\nIf the plain Python version is clear, the framework should feel familiar rather than magical.",
+      "wav": "wav/module9_slide_83.wav",
+      "audio": "audio/module9_slide_83.mp3",
+      "captions": "audio/module9_slide_83.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 84,
+      "title": "Why Add a Small LangChain Bridge?",
+      "transcript": "Before building the graph, three Lang Chain ideas are useful.\n\nFirst, the tool decorator turns an ordinary Python function into a documented tool with a name, description, and argument schema.\n\nSecond, as retriever gives a vector store a common retrieval interface. The workflow can call retriever dot invoke with a query.\n\nThird, bind tools gives a compatible chat model the schemas of approved tools.\n\n[tts-break]\n\nThese are integration features, not a new architecture.\n\nThe retrieval function is still a function. The vector database is still a vector database. Binding a tool does not execute it and does not grant permission.\n\n[tts-break]\n\nThe application still owns validation, authorization, execution, retries, and side effects. Lang Chain makes components easier to connect; it does not remove application responsibility.",
+      "wav": "wav/module9_slide_84.wav",
+      "audio": "audio/module9_slide_84.mp3",
+      "captions": "audio/module9_slide_84.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 85,
+      "title": "Module 9 Environment",
+      "transcript": "For the environment, install only what the project actually needs.\n\nIf you are studying orchestration only, Lang Chain and Lang Graph may be enough.\n\nIf you are running the full Module 9 lab, you also need the integrations for Hugging Face models, Chroma, community tools, sentence transformers, Transformers, Accelerate, Duck Duck Go search, and the Chroma database package.\n\n[tts-break]\n\nWhy separate the minimal and full environments?\n\nBecause Lang Graph itself does not require a vector database or local language model. Those are capabilities you may plug into the graph.\n\nFor a student project, smaller environments are easier to reproduce and debug. Do not install twenty libraries because one tutorial used them.\n\n[tts-break]\n\nStart from your architecture. Then install the integrations that correspond to the tools and models you actually chose.",
+      "wav": "wav/module9_slide_85.wav",
+      "audio": "audio/module9_slide_85.mp3",
+      "captions": "audio/module9_slide_85.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 86,
+      "title": "Bridge 1 — Turn Retrieval into a Tool",
+      "transcript": "The first bridge is turning retrieval into a model-visible tool.\n\nThe tool decorator adds metadata around an ordinary Python function.\n\nThe function still receives a query, calls the retriever, and returns results. What changes is that the workflow now has a standard tool description and argument schema that a compatible model can understand.\n\n[tts-break]\n\nThe docstring matters. Search the approved return-policy knowledge base is much more informative than simply saying search.\n\nA tool description should tell the model what capability exists and when that capability is appropriate.\n\n[tts-break]\n\nRemember that exposing a tool does not mean the model should always use it. Routing, permissions, and workflow stage still determine whether a tool call is appropriate.",
+      "wav": "wav/module9_slide_86.wav",
+      "audio": "audio/module9_slide_86.mp3",
+      "captions": "audio/module9_slide_86.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 87,
+      "title": "Bridge 2 — Build a Small In-Memory Retriever",
+      "transcript": "For the first graph, an in-memory vector store keeps the example simple.\n\nWe create the vector store from documents and embeddings, then convert it to a retriever with as retriever. We also set top K to three.\n\n[tts-break]\n\nThe benefit is conceptual clarity. We can focus on state, nodes, edges, and routing without also teaching database persistence at the same time.\n\nLater, the in-memory store can be replaced by Chroma, P G vector, Redis, or another managed vector database.\n\n[tts-break]\n\nAs long as the rest of the workflow sees the same retriever interface, the control logic can remain almost unchanged. This is another example of why stable interfaces are useful.",
+      "wav": "wav/module9_slide_87.wav",
+      "audio": "audio/module9_slide_87.mp3",
+      "captions": "audio/module9_slide_87.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 88,
+      "title": "Bridge 3 — Tell the Model Which Tools Exist",
+      "transcript": "The next bridge is bind tools.\n\nBinding tools tells the chat model which approved tool schemas exist. The model can then request one of those tools if its integration supports tool calling.\n\nBut binding is not permission.\n\n[tts-break]\n\nThe application still decides whether a requested tool can run. It validates arguments. It checks the user's authorization. It handles retries and errors. It controls side effects.\n\nFor example, a model might request an order lookup. Your code should still verify that the current user is allowed to access that order.\n\n[tts-break]\n\nThink of bind tools as showing the model the menu. The application is still the security guard, the cashier, and the execution engine.",
+      "wav": "wav/module9_slide_88.wav",
+      "audio": "audio/module9_slide_88.mp3",
+      "captions": "audio/module9_slide_88.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 89,
+      "title": "Plain Python → LangGraph Translation",
+      "transcript": "Now translate familiar Python control flow into Lang Graph.\n\nA Python dictionary becomes typed graph state.\n\nA function becomes a node.\n\nAn if or else branch becomes a conditional edge or a command.\n\nA while loop becomes a cycle between nodes.\n\nA break becomes a transition to end.\n\n[tts-break]\n\nThis translation is important because Lang Graph is not introducing a completely different programming concept. It is making the control flow explicit and inspectable.\n\nFor example, instead of a while loop that calls retrieve, grade, and rewrite, you may have three nodes connected in a cycle.\n\n[tts-break]\n\nIf you can point to the matching Python idea, you understand the graph at the right level.",
+      "wav": "wav/module9_slide_89.wav",
+      "audio": "audio/module9_slide_89.mp3",
+      "captions": "audio/module9_slide_89.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 90,
+      "title": "Start LangGraph with Four Fields",
+      "transcript": "Start the Lang Graph state with only four fields: question, documents, steps, and route.\n\nThose four are enough to demonstrate shared state, retrieval output, step counting, and routing.\n\n[tts-break]\n\nLater, add query when query rewriting exists. Add score when grading exists. Add answer when generation exists. Add trace when observability is needed.\n\nAvoid turning state into a log dump. Large temporary prompts do not need to be persisted. Secrets definitely should not be stored in graph state.\n\n[tts-break]\n\nMinimal state makes the first graph easier to understand. Expand state only when the next node has a real reason to consume the new field.",
+      "wav": "wav/module9_slide_90.wav",
+      "audio": "audio/module9_slide_90.mp3",
+      "captions": "audio/module9_slide_90.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 91,
+      "title": "See the Whole Graph Before the Node Bodies",
+      "transcript": "Before reading the node implementations, look at the graph shape.\n\nThe graph begins at retrieve, then moves to grade.\n\nFrom grade, there are three possible routes. Good evidence goes to generate. Weak evidence with budget remaining goes to rewrite. A stop condition goes directly to end.\n\nAfter rewrite, execution returns to retrieve. After generate, execution ends.\n\n[tts-break]\n\nThis picture tells you most of the architecture before you read any function body.\n\nThat is why I recommend drawing the topology first. It separates workflow design from implementation details.\n\n[tts-break]\n\nAlso notice the explicit stop route. A bounded correction loop should have a normal application-level way to stop, not only a recursion-limit error.",
+      "wav": "wav/module9_slide_91.wav",
+      "audio": "audio/module9_slide_91.mp3",
+      "captions": "audio/module9_slide_91.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 92,
+      "title": "Node Functions Are Still Ordinary Python",
+      "transcript": "Node functions are still ordinary Python.\n\nThe retrieve node reads state, retrieves documents, and returns only the fields it changes: the new documents and an increased step count.\n\nThe routing function grades the evidence and then applies the correction budget.\n\n[tts-break]\n\nIf the score passes the threshold, return generate.\n\nIf the score is weak but the maximum step count has been reached, return stop.\n\nOtherwise, return rewrite.\n\n[tts-break]\n\nThis is the same policy we wrote in plain Python. Lang Graph has not changed the algorithm. It has made the transitions explicit.\n\nGood evidence generates. Weak evidence corrects only while budget remains. Exhausted budget stops.",
+      "wav": "wav/module9_slide_92.wav",
+      "audio": "audio/module9_slide_92.mp3",
+      "captions": "audio/module9_slide_92.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 93,
+      "title": "Assemble the Corrective RAG Graph",
+      "transcript": "The assembled graph is a declarative version of the same bounded algorithm.\n\nThe normal path is start, retrieve, grade, generate, end.\n\nThe corrective path is retrieve, grade, rewrite, then retrieve again.\n\nAnd there is a safe failure path: grade, stop, end when evidence remains weak and the correction budget is exhausted.\n\n[tts-break]\n\nThat safe stop is important. The graph should not force generation from evidence it already judged insufficient.\n\nThe advantage of the graph representation is that transitions are easier to inspect and extend.\n\n[tts-break]\n\nLater, you can add persistence, streaming, checkpoints, human approval, or another tool without hiding the control flow inside one large while loop.",
+      "wav": "wav/module9_slide_93.wav",
+      "audio": "audio/module9_slide_93.mp3",
+      "captions": "audio/module9_slide_93.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 94,
+      "title": "Debug the Graph with State, Scores, and Hard Limits",
+      "transcript": "When a graph behaves badly, debug one layer at a time.\n\nLog the current query, retrieved document I D's, grade or score, selected route, and step count.\n\nInspect what each node received and the partial update it returned.\n\n[tts-break]\n\nThen inspect the router. Can every intended route actually be returned? Do the route labels exactly match the graph mapping?\n\nIf the graph loops, ask whether each cycle changes state meaningfully. Does the rewritten query change? Do different documents return?\n\nKeep the recursion limit as a hard safety net.\n\n[tts-break]\n\nBut do not use the recursion limit as your main stopping policy. A well-designed workflow should reach an explicit generate or stop condition on its own.",
+      "wav": "wav/module9_slide_94.wav",
+      "audio": "audio/module9_slide_94.mp3",
+      "captions": "audio/module9_slide_94.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 95,
+      "title": "Part 7 Checkpoint",
+      "transcript": "Checkpoint question.\n\nWhat is the Lang Graph equivalent of a Python statement that says: if the score passes the threshold, generate; otherwise, rewrite?\n\nThe answer is a conditional edge.\n\nA vector store handles retrieval. The tool decorator exposes a capability. Neither one represents the branch itself.\n\n[tts-break]\n\nConditional edges are how graph topology expresses if and else behavior.\n\nSo the correct answer is: a conditional edge.",
+      "wav": "wav/module9_slide_95.wav",
+      "audio": "audio/module9_slide_95.mp3",
+      "captions": "audio/module9_slide_95.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 96,
+      "title": "Part 8 — Design an Agentic Project Students Can Actually Build",
+      "transcript": "The final part of the module is about designing a project students can actually build.\n\nAt this point, framework syntax is less important than architecture decisions.\n\nFirst, choose the simplest architecture that solves the task.\n\nSecond, select tools based on specific information or action needs.\n\nThird, add refinement only where another pass can genuinely improve the result.\n\n[tts-break]\n\nA strong project is not the one with the largest number of agents, tools, or model calls.\n\nA strong project can explain why each tool exists, why each state field exists, why a loop is needed, and exactly what condition ends that loop.\n\n[tts-break]\n\nThink of complexity as something you earn by demonstrating a need for it.",
+      "wav": "wav/module9_slide_96.wav",
+      "audio": "audio/module9_slide_96.mp3",
+      "captions": "audio/module9_slide_96.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 97,
+      "title": "Start with the Simplest Architecture That Solves the Task",
+      "transcript": "Start with the simplest architecture that solves the problem.\n\nIf every step is already known, use a fixed Python workflow. It will usually be easier to test, faster to run, and easier to explain.\n\nIf the main problem is finding information in documents, classic rag may be enough.\n\n[tts-break]\n\nUse an agent when the next action genuinely depends on runtime observations and several approved tools may be needed.\n\nUse agentic rag when retrieval itself can fail, require grading, need query rewriting, or require evidence from multiple sources.\n\nUse Lang Graph when state, branching, loops, persistence, approval, or resumable execution need to be explicit.\n\n[tts-break]\n\nDo not choose architecture because one framework is fashionable. Choose it because the uncertainty in the workflow requires that level of control.",
+      "wav": "wav/module9_slide_97.wav",
+      "audio": "audio/module9_slide_97.mp3",
+      "captions": "audio/module9_slide_97.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 98,
+      "title": "A Practical Tool-Selection Decision Tree",
+      "transcript": "This tool-selection decision tree is designed for your own project.\n\nBegin with the question: what capability is missing right now?\n\nIf you need a deterministic calculation or rule, use Python.\n\nIf you need internal unstructured knowledge, use retrieval or rag.\n\nIf you need an exact structured fact, use S Q L or an A P I.\n\nIf you need fresh public information, use web search.\n\n[tts-break]\n\nA common bad design is giving the agent three tools called search one, search two, and lookup, when all three appear to do nearly the same thing.\n\nThe model then has no clear basis for choosing among them.\n\n[tts-break]\n\nEach tool should represent one distinct capability. If two tools overlap heavily, either clarify their descriptions or reconsider whether both are necessary.",
+      "wav": "wav/module9_slide_98.wav",
+      "audio": "audio/module9_slide_98.mp3",
+      "captions": "audio/module9_slide_98.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 99,
+      "title": "Give Every Tool a Narrow Contract",
+      "transcript": "Every tool should have a narrow contract.\n\nStart with the name. Use a verb plus an object, such as search policies or get order.\n\nThen write a description that tells the model when to use the tool and when not to use it.\n\nKeep the input schema small and typed.\n\nReturn structured results with provenance whenever possible.\n\n[tts-break]\n\nAlso classify side effects. Is this tool read-only, or can it change real-world state?\n\nFinally, define policy around the tool: timeout, retry behavior, cost limits, permissions, and approval requirements.\n\nFor example, search policy may be read-only and low risk. Send payment or delete record should be treated much more carefully.\n\n[tts-break]\n\nBy default, expose the smallest set of tools needed for the current task. A smaller menu usually improves routing and reduces risk.",
+      "wav": "wav/module9_slide_99.wav",
+      "audio": "audio/module9_slide_99.mp3",
+      "captions": "audio/module9_slide_99.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 100,
+      "title": "Expose Tools Dynamically Instead of Giving Every Tool Every Time",
+      "transcript": "Do not give every tool to the model on every turn.\n\nYou can dynamically narrow the tool set based on the task, the user, or the current workflow stage.\n\nFor example, every support question may get access to the knowledge-base search tool. If the request references an order, also expose get order. If the user explicitly needs current public information, perhaps expose web search.\n\n[tts-break]\n\nThen apply authorization. Even if a tool is relevant, the user may not be allowed to use it.\n\nYou can also change tools by stage. A planning stage might have only read-only tools. An execution stage might expose an action tool only after approval.\n\n[tts-break]\n\nDynamic tool selection makes the agent's decision easier because it chooses from a relevant subset rather than the entire application toolbox.",
+      "wav": "wav/module9_slide_100.wav",
+      "audio": "audio/module9_slide_100.mp3",
+      "captions": "audio/module9_slide_100.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 101,
+      "title": "Refine the Input Before Spending More Reasoning",
+      "transcript": "Refine the input before spending more reasoning.\n\nMany weak agent results begin with a poor representation of the original request.\n\nFirst, normalize. Extract reliable entities such as order I D's, dates, product names, or constraints.\n\nSecond, clarify. If a required fact is genuinely missing, ask the user rather than guessing.\n\nThird, rewrite. Create tool-specific wording that improves search or A P I use while preserving the original goal.\n\n[tts-break]\n\nKeep both the original question and the refined query in state.\n\nFor example, the user says, can I still send this back? The original question stays unchanged. The refined search query may become standard return eligibility deadline after delivery.\n\n[tts-break]\n\nThe refined query serves the tool. The original question still controls what the final answer must address.",
+      "wav": "wav/module9_slide_101.wav",
+      "audio": "audio/module9_slide_101.mp3",
+      "captions": "audio/module9_slide_101.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 102,
+      "title": "Add “More Thinking” as Explicit Passes",
+      "transcript": "When people say they want the agent to think more, a practical design is to add explicit passes that can be inspected and tested.\n\nDo not depend on hidden chain-of-thought. Instead, create visible intermediate artifacts.\n\nFor example: refined query, plan, evidence, draft, critique, and revision count.\n\n[tts-break]\n\nA planning step can identify what evidence is required and which tools may be useful.\n\nA drafting step uses the gathered evidence.\n\nAn evaluator checks explicit criteria such as grounding, completeness, citation quality, or required format.\n\nA revision step receives the evaluator feedback and produces a better draft.\n\n[tts-break]\n\nThis gives you deliberate multi-step processing without requiring hidden reasoning. It also makes the project easier to debug because every important artifact is visible in state.",
+      "wav": "wav/module9_slide_102.wav",
+      "audio": "audio/module9_slide_102.mp3",
+      "captions": "audio/module9_slide_102.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 103,
+      "title": "Reuse One Output as the Next Step's Input",
+      "transcript": "Prompt chaining means one step's output becomes another step's input.\n\nStart with the question and create a short plan.\n\nUse that plan to gather evidence.\n\nUse the evidence to create a draft.\n\nSend the draft and evidence to an evaluator.\n\nIf the evaluator reports a specific problem, send that critique to a revision step.\n\n[tts-break]\n\nThe important design principle is that each step receives only the information it needs.\n\nThe tool selector needs the plan.\n\nThe generator needs the evidence.\n\nThe reviser needs the draft plus concise feedback.\n\nThe evaluator needs the question, evidence, and current draft.\n\n[tts-break]\n\nBecause these artifacts are explicit, you can test them independently. If the final answer is poor, you can inspect whether the plan, evidence, draft, or critique caused the problem.",
+      "wav": "wav/module9_slide_103.wav",
+      "audio": "audio/module9_slide_103.mp3",
+      "captions": "audio/module9_slide_103.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 104,
+      "title": "Evaluator → Optimizer: A Bounded Reflection Pattern",
+      "transcript": "The evaluator-optimizer pattern is a useful way to add bounded reflection.\n\nOne component creates an output. Another component evaluates it against clear criteria.\n\nThe evaluator should return structured feedback.\n\nFor example: grounded is true, complete is false, citations are okay, and the missing item is order status.\n\n[tts-break]\n\nThe controller then chooses the correction.\n\nIf evidence is missing, call the appropriate tool.\n\nIf evidence is complete but the wording is weak, revise the answer without retrieving again.\n\nIf all criteria pass, stop.\n\nIf the maximum revision count is reached, stop safely even if the evaluator is still dissatisfied.\n\n[tts-break]\n\nReflection should be bounded and targeted. More passes are useful only when they can change the information, evidence, or quality of the output.",
+      "wav": "wav/module9_slide_104.wav",
+      "audio": "audio/module9_slide_104.mp3",
+      "captions": "audio/module9_slide_104.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 105,
+      "title": "Agentic RAG Should Correct the Right Layer",
+      "transcript": "Agentic rag should correct the layer that actually failed.\n\nIf the query is vague, rewrite the query.\n\nIf the wrong source was selected, reroute to a different tool.\n\nIf the evidence is relevant but incomplete, retrieve another source.\n\nIf the evidence is already good but the answer is weak, revise generation without paying for another retrieval pass.\n\n[tts-break]\n\nIf a tool fails temporarily, use a bounded retry or approved fallback.\n\nIf an authoritative fact simply does not exist in the available sources, stop safely or ask the user.\n\n[tts-break]\n\nThis is a very important project principle. Do not repeat the entire workflow because one layer failed. Diagnose the failure and correct only that layer.\n\nMore model calls cannot create an authoritative fact that does not exist.",
+      "wav": "wav/module9_slide_105.wav",
+      "audio": "audio/module9_slide_105.mp3",
+      "captions": "audio/module9_slide_105.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 106,
+      "title": "A Reusable Blueprint for Student Projects",
+      "transcript": "This blueprint brings the project pieces together.\n\nThe user sends a goal and constraints.\n\nThe controller owns shared state, budgets, routes, and stopping policy.\n\nA planner or router identifies what information is needed and which approved capability can provide it.\n\nA tool gate enforces schemas, permissions, timeouts, and approval requirements.\n\n[tts-break]\n\nBelow that are specialized tools: Python functions for deterministic work, web search for fresh public information, S Q L or A P I tools for structured facts, and retrieval for internal documents.\n\nThe collected evidence goes to a synthesis or drafting step.\n\nThen an evaluator checks explicit criteria and requests targeted refinement only when necessary.\n\n[tts-break]\n\nAcross the whole architecture, keep observability. Record tool names, validated arguments, source I D's, outcomes, latency, errors, and the reason the workflow stopped.",
+      "wav": "wav/module9_slide_106.wav",
+      "audio": "audio/module9_slide_106.mp3",
+      "captions": "audio/module9_slide_106.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 107,
+      "title": "Before You Call It an Agent Project",
+      "transcript": "Before you call your project an agent project, you should be able to answer a short design checklist.\n\nWhat is the concrete user goal?\n\nWhy does this project need an agent rather than a fixed workflow?\n\nWhat unique capability does each tool provide?\n\nWhat information must stay in state?\n\nWhat can be refined if something fails: the query, evidence, draft, or plan?\n\n[tts-break]\n\nHow does the workflow stop? What are the success criteria and hard limits?\n\nHow will you evaluate it? Tool choice, retrieval quality, trajectory, and final answer should be considered separately.\n\nWhich actions need approval? Anything that writes, deletes, sends, purchases, or approves should receive extra scrutiny.\n\n[tts-break]\n\nBefore coding, try to write the goal, architecture, tool list, state fields, and stop conditions on one page. If that design is unclear, adding more agents will not fix it.",
+      "wav": "wav/module9_slide_107.wav",
+      "audio": "audio/module9_slide_107.mp3",
+      "captions": "audio/module9_slide_107.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    },
+    {
+      "slide": 108,
+      "title": "Build Small, Observe Everything, Add Autonomy Deliberately",
+      "transcript": "Let us finish with a practical build order.\n\nFirst, create one reliable tool and test it independently.\n\nIf the project needs document knowledge, build a working classic rag pipeline.\n\nAdd a router only when multiple paths really exist.\n\nAdd grading only when retrieval can fail in a way that matters.\n\nAdd evaluator and revision steps only when clear quality criteria justify another pass.\n\nAdd human approval for consequential actions.\n\n[tts-break]\n\nMeasure the system as you build. Look at tool accuracy, retrieval hit rate, number of steps, latency, evaluator pass rate, and final answer quality.\n\nYou also have companion notebooks for the Module 9 lab, a complete Lang Chain tutorial, and a complete Lang Graph tutorial.\n\n[tts-break]\n\nThe final principle is simple: more intelligence should mean better use of state, evidence, tools, feedback, and stopping conditions. It should not simply mean more model calls.\n\nBuild small. Observe everything. Add autonomy deliberately.",
+      "wav": "wav/module9_slide_108.wav",
+      "audio": "audio/module9_slide_108.mp3",
+      "captions": "audio/module9_slide_108.vtt",
+      "sync_method": "tts_break_section_generation",
+      "speech_speed": 0.93
+    }
+  ]
+}

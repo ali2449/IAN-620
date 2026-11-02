@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.397
+A retry must change something.
+
+00:00:02.397 --> 00:00:06.652
+Attempt one should usually use the user's original wording.
+
+00:00:06.652 --> 00:00:13.512
+If that fails, attempt two may rewrite the query with clearer vocabulary or more specific terms.
+
+00:00:13.512 --> 00:00:21.087
+If that still fails, attempt three may change a filter, retrieval strategy, or approved source.
+
+00:00:21.087 --> 00:00:22.791
+Then stop safely.
+
+00:00:23.319 --> 00:00:26.261
+Think of retries as controlled experiments.
+
+00:00:26.261 --> 00:00:32.001
+Each attempt should test a different hypothesis about why the previous retrieval failed.
+
+00:00:32.001 --> 00:00:37.946
+If the only change is calling the exact same function again with the exact same inputs,
+
+00:00:37.946 --> 00:00:40.120
+you are not learning anything new.
+
+00:00:41.036 --> 00:00:48.698
+A good trace should make those differences obvious: original query, rewritten query, alternate source,
+
+00:00:48.698 --> 00:00:50.558
+and final stop reason.

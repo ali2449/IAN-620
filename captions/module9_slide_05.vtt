@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.662
+It is tempting to use an agent for every project, but that usually makes the system harder to build and harder to test.
+
+00:00:07.662 --> 00:00:11.967
+Use normal software when the next step is already known.
+
+00:00:11.967 --> 00:00:19.192
+If a business rule says a value must be between zero and one hundred, write a normal validation rule.
+
+00:00:19.192 --> 00:00:25.602
+If a user is not authorized to access a record, enforce that in application code.
+
+00:00:25.602 --> 00:00:32.097
+If the workflow is always step one, step two, step three, you may not need an agent at all.
+
+00:00:32.599 --> 00:00:37.631
+Use an agent when the next step genuinely depends on what was just observed.
+
+00:00:37.631 --> 00:00:40.731
+Maybe several approved tools could help.
+
+00:00:40.731 --> 00:00:44.676
+Maybe retrieval sometimes fails and needs correction.
+
+00:00:44.676 --> 00:00:49.556
+Maybe the wording is ambiguous enough that semantic judgment is useful.
+
+00:00:49.556 --> 00:00:54.126
+For example, calculating sales tax is deterministic.
+
+00:00:54.126 --> 00:00:56.451
+A normal function is appropriate.
+
+00:00:56.451 --> 00:01:03.898
+Deciding whether a user question needs a policy document, an order database, or both may require routing.
+
+00:01:04.348 --> 00:01:10.475
+A good design principle is this: deterministic decisions should stay deterministic.
+
+00:01:10.475 --> 00:01:16.409
+Use model-driven decisions only where flexible language understanding adds real value.

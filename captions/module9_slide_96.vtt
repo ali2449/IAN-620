@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.447
+The final part of the module is about designing a project students can actually build.
+
+00:00:06.447 --> 00:00:11.902
+At this point, framework syntax is less important than architecture decisions.
+
+00:00:11.902 --> 00:00:16.777
+First, choose the simplest architecture that solves the task.
+
+00:00:16.777 --> 00:00:21.307
+Second, select tools based on specific information or action needs.
+
+00:00:21.307 --> 00:00:26.986
+Third, add refinement only where another pass can genuinely improve the result.
+
+00:00:27.610 --> 00:00:33.362
+A strong project is not the one with the largest number of agents, tools, or model calls.
+
+00:00:33.362 --> 00:00:41.962
+A strong project can explain why each tool exists, why each state field exists, why a loop is needed,
+
+00:00:41.962 --> 00:00:44.750
+and exactly what condition ends that loop.
+
+00:00:45.326 --> 00:00:49.496
+Think of complexity as something you earn by demonstrating a need for it.

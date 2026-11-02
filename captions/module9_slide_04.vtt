@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.177
+These terms are often mixed together, so let us separate them.
+
+00:00:04.177 --> 00:00:11.707
+An L L M call is the simplest case: one input goes to a model and one response comes back.
+
+00:00:11.707 --> 00:00:14.742
+A workflow is a fixed sequence.
+
+00:00:14.742 --> 00:00:19.202
+For example, extract a value, validate it, and save it.
+
+00:00:19.202 --> 00:00:21.225
+The steps are already known.
+
+00:00:21.846 --> 00:00:25.428
+Classic rag is also usually a fixed workflow.
+
+00:00:25.428 --> 00:00:31.098
+We retrieve relevant documents, add them to the prompt, and generate an answer.
+
+00:00:31.098 --> 00:00:41.103
+An agent is different because the next step can depend on the current state or the result of a previous step.
+
+00:00:41.103 --> 00:00:45.318
+It might decide to call a tool, ask for clarification, generate, or stop.
+
+00:00:45.318 --> 00:00:53.008
+Agentic rag is a specific kind of agentic workflow where retrieval is inside that decision loop.
+
+00:00:53.008 --> 00:01:00.224
+The system can retrieve, grade the evidence, rewrite the query, try another source, or generate.
+
+00:01:00.819 --> 00:01:05.636
+Keeping these architectures separate helps you avoid unnecessary complexity.
+
+00:01:05.636 --> 00:01:11.172
+Do not call every workflow an agent just because an L L M appears somewhere inside it.

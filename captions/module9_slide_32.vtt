@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.962
+From the controller's perspective, retrieval is just a function.
+
+00:00:03.962 --> 00:00:07.497
+You give it a query and perhaps a top K value.
+
+00:00:07.497 --> 00:00:17.357
+It returns evidence. Behind that function, you might use Chroma, P G vector, Elasticsearch, or a hosted vector service.
+
+00:00:17.357 --> 00:00:19.309
+The controller should not care.
+
+00:00:19.782 --> 00:00:22.109
+This is an example of abstraction.
+
+00:00:22.109 --> 00:00:26.354
+The storage technology is hidden behind a stable contract.
+
+00:00:26.354 --> 00:00:29.989
+Suppose your first project uses Chroma locally.
+
+00:00:29.989 --> 00:00:35.509
+Later, a company deploys the same workflow with a managed vector database.
+
+00:00:35.509 --> 00:00:41.789
+If the retrieval function still accepts the same inputs and returns the same evidence structure,
+
+00:00:41.789 --> 00:00:43.894
+the graph does not need to change.
+
+00:00:44.392 --> 00:00:49.732
+Design the interface first. Keep infrastructure details inside the tool.

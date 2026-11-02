@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.502
+Start with the smallest useful state.
+
+00:00:02.502 --> 00:00:10.257
+For the first learning build, four fields are enough: the question, retrieved documents, a step count,
+
+00:00:10.257 --> 00:00:16.917
+and the current route. Do not add a query field until you actually implement query rewriting.
+
+00:00:16.917 --> 00:00:21.022
+Do not add a score until you actually grade evidence.
+
+00:00:21.022 --> 00:00:24.832
+Do not add a draft until a generation step exists.
+
+00:00:25.545 --> 00:00:29.457
+This matters because a large state object can hide the workflow.
+
+00:00:29.457 --> 00:00:37.977
+Students sometimes create fifteen fields before the first node works, then spend most of their time moving values
+
+00:00:37.977 --> 00:00:40.692
+around. A better approach is incremental.
+
+00:00:40.692 --> 00:00:47.772
+Build the simplest loop. When a new node needs a value from an earlier step, add that field.
+
+00:00:47.772 --> 00:00:55.234
+For example, when you add an evaluator later, then it makes sense to add a critique field and a revision count.
+
+00:00:55.750 --> 00:01:02.184
+State should reflect the architecture you actually have, not the architecture you might build someday.

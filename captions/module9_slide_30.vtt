@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.412
+Checkpoint question. Which rule should be enforced directly by application code?
+
+00:00:06.412 --> 00:00:11.782
+The maximum number of tool steps should definitely be enforced by software.
+
+00:00:11.782 --> 00:00:15.522
+That is a hard safety and budget boundary.
+
+00:00:15.522 --> 00:00:24.292
+Whether a question is about policy or an order may involve language interpretation and can sometimes use a router.
+
+00:00:24.292 --> 00:00:31.903
+Whether a paragraph is semantically relevant may use a reranker, classifier, or model grader.
+
+00:00:32.353 --> 00:00:37.945
+So the correct answer is: never execute more than the allowed number of tool steps.
+
+00:00:37.945 --> 00:00:42.120
+Hard limits should not depend on the model deciding to obey them.

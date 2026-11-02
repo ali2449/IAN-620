@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.512
+Before building the graph, three Lang Chain ideas are useful.
+
+00:00:05.512 --> 00:00:12.762
+First, the tool decorator turns an ordinary Python function into a documented tool with a name, description,
+
+00:00:12.762 --> 00:00:20.907
+and argument schema. Second, as retriever gives a vector store a common retrieval interface.
+
+00:00:20.907 --> 00:00:25.332
+The workflow can call retriever dot invoke with a query.
+
+00:00:25.332 --> 00:00:31.524
+Third, bind tools gives a compatible chat model the schemas of approved tools.
+
+00:00:31.996 --> 00:00:35.908
+These are integration features, not a new architecture.
+
+00:00:35.908 --> 00:00:38.883
+The retrieval function is still a function.
+
+00:00:38.883 --> 00:00:42.373
+The vector database is still a vector database.
+
+00:00:42.373 --> 00:00:46.672
+Binding a tool does not execute it and does not grant permission.
+
+00:00:47.312 --> 00:00:53.989
+The application still owns validation, authorization, execution, retries, and side effects.
+
+00:00:53.989 --> 00:01:02.439
+Lang Chain makes components easier to connect; it does not remove application responsibility.

@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.357
+Fallback is a policy decision.
+
+00:00:02.357 --> 00:00:09.187
+If the preferred source fails, the workflow should not automatically search anywhere it can find.
+
+00:00:09.187 --> 00:00:15.100
+Fallbacks should be ordered by authority, permission, freshness, and cost.
+
+00:00:15.552 --> 00:00:21.214
+For a structured order fact, an internal S Q L system may be the first source.
+
+00:00:21.214 --> 00:00:27.194
+If live external data is required, an approved A P I may be next.
+
+00:00:27.194 --> 00:00:34.119
+Public web search should be used only when the application explicitly allows public evidence for the task.
+
+00:00:34.119 --> 00:00:37.854
+If no approved source can answer, stop safely.
+
+00:00:38.344 --> 00:00:44.161
+Never silently replace an authoritative internal policy source with public web results.
+
+00:00:44.161 --> 00:00:51.276
+Those sources may have different rules, different dates, or may refer to another organization entirely.
